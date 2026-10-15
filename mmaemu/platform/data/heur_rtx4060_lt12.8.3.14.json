@@ -2339,7 +2339,7 @@
  "sources": [
   {
    "id": "heur.lt_heuristic_12_8_3_14",
-   "path": "/data/quant/tcemu_ada_truth/data/heur/lt_heuristic_12_8_3_14.npz",
+   "path": "$MMAEMU_TRUTH_DIR/data/heur/lt_heuristic_12_8_3_14.npz",
    "sha256": "992aa95cd5f0d351809128e928047fddbde8c188686b64d67636fc492f76c3c9"
   },
   {

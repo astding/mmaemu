@@ -2,7 +2,7 @@ hw_mini coverage (mmaemu-hwmini/1, built 2026-10-12 22:55:15)
 cases 4680; hw_error cases 113; split/accumulation combinations 239; estimated reference MACs 0.55 G; bytes 18511479
 in-scope recordings missing: none
 
-NOTE discrimination chains: truth fastacc /data/quant/tcemu_ada_truth/build/lib/libfastref3.so
+NOTE discrimination chains: truth fastacc $MMAEMU_TRUTH_DIR/build/lib/libfastref3.so
 NOTE ws2:r4.unverified_split_combos: 309 combinations, one output of one recorded case each (the most discriminating position)
 recording                                    kind  status             incl     of     values  selectors / n/a
 c2.L_cancel                                  mma   in_scope              1      8        128  one:1

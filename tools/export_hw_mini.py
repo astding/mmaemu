@@ -47,6 +47,16 @@ import numpy as np  # noqa: E402
 
 FORMAT = "mmaemu-hwmini/1"
 REPO = Path(__file__).resolve().parents[1]
+
+
+def _repo_rel(p: Path) -> str:
+    """repo-relative for a path in the repository (no host path in the test data), the path itself otherwise."""
+    try:
+        return Path(p).resolve().relative_to(REPO).as_posix()
+    except ValueError:
+        return str(p)
+
+
 ONE = 0x3F800000
 FP8 = ("e4m3", "e5m2")
 ITEM = {"uint8": 1, "uint16": 2, "uint32": 4, "int64": 8, "uint64": 8, "int32": 4, "int16": 2, "int8": 1}
@@ -92,6 +102,19 @@ def load_fastref_readonly(fastacc) -> str:
     lib.chain_gemm_avx.argtypes = [ctypes.c_void_p, ctypes.c_void_p] + [ctypes.c_int] * 10 + [ctypes.c_void_p]
     fastacc._lib = lib
     return str(path)
+
+
+def portable_path(p: Path, var: str) -> str:
+    """`$VAR/<relative path>` for a path under the directory named by the environment variable `var`, so that no
+    host path enters the committed test data; the path itself otherwise."""
+    root = os.environ.get(var)
+    try:
+        rel = Path(p).resolve().relative_to(Path(root).resolve()) if root else None
+    except ValueError:
+        rel = None
+    if rel is None:
+        return str(p)
+    return f"${var}" if rel == Path(".") else f"${var}/{rel.as_posix()}"
 
 
 def sha256_file(p: Path) -> str:
@@ -290,7 +313,8 @@ class Exporter:
         except Exception as e:  # noqa: BLE001 -- optional speed-up only
             self.notes.append(f"fastacc unavailable for the discrimination model ({type(e).__name__}: {e}); torch model")
             return None
-        self.notes.append(f"discrimination chains: truth fastacc {fastacc_info}")
+        info = str(fastacc_info).replace(str(self.truth), portable_path(self.truth, "MMAEMU_TRUTH_DIR"))
+        self.notes.append(f"discrimination chains: truth fastacc {info}")
 
         def chain(a, b, fa, fb):
             r = np.empty(a.shape[0], np.float32)
@@ -864,8 +888,8 @@ class Exporter:
         manifest_sha = sha256_file(self.truth / "manifest.json")
         index = OrderedDict(
             format=FORMAT, created_by="tools/export_hw_mini.py", truth_manifest_sha256=manifest_sha,
-            sources=[dict(name="truth", root=str(self.truth), manifest_sha256=manifest_sha)]
-            + ([dict(name="ws2", root=str(self.ws2),
+            sources=[dict(name="truth", root=portable_path(self.truth, "MMAEMU_TRUTH_DIR"), manifest_sha256=manifest_sha)]
+            + ([dict(name="ws2", root=_repo_rel(self.ws2),
                      manifest_sha256=sha256_file(self.ws2 / "manifest.json") if (self.ws2 / "manifest.json").exists()
                      else None)] if self.ws2 and self.ws2.exists() else []),
             selection=dict(c2_vectors=self.args.c2_vectors, epilogue_mn=self.args.epilogue_mn,

@@ -334,7 +334,7 @@ If you use mmaemu, please cite it ([CITATION.cff](https://github.com/astding/mma
 
 ```bibtex
 @software{mmaemu,
-  author  = {astding},
+  author  = {Ding, Xun},
   title   = {mmaemu: bit-accurate emulation of {NVIDIA} tensor-core {FP8} {GEMM} numerics},
   version = {0.1.0},
   year    = {2026},

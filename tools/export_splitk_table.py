@@ -67,11 +67,13 @@ def deterministic_npz(arrays: dict) -> bytes:
 
 
 def _rel(p: Path) -> str:
-    """repo-relative for files in the repo (stable across worktrees), absolute otherwise (the truth dir)."""
+    """repo-relative for files in the repo (stable across worktrees), $MMAEMU_TRUTH_DIR-relative for the truth (no
+    host path in the package data)."""
+    p = Path(p).resolve()
     try:
-        return str(Path(p).resolve().relative_to(common.REPO))
+        return str(p.relative_to(common.REPO))
     except ValueError:
-        return str(p)
+        return "$MMAEMU_TRUTH_DIR/" + str(p.relative_to(Path(common.TRUTH).resolve()))
 
 
 def truth_manifest_sha256() -> str:

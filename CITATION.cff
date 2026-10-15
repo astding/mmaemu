@@ -11,7 +11,10 @@ abstract: >-
   with FP8 tensor cores can be recomputed on other devices. Version 0.1 models one reference platform
   (RTX 4060, sm_89, cuBLASLt 12.8.3.14) and is validated against hardware recordings of that GPU.
 authors:
-  - alias: astding
+  - given-names: Xun
+    family-names: Ding
+    alias: astding
+    orcid: "https://orcid.org/0000-0001-7719-7268"
 version: 0.1.0
 license: Apache-2.0
 repository-code: "https://github.com/astding/mmaemu"

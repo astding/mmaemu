@@ -1,6 +1,6 @@
 {
  "format": "mmaemu-epilogue-hw/1",
- "truth_dir": "/data/quant/tcemu_ada_truth",
+ "truth_dir": "$MMAEMU_TRUTH_DIR",
  "truth_manifest_sha256": "be1270ed64432a1311ab5e2c98ccb69028f72e3424ad4c6148d4cd468fba6695",
  "truth_ids": {
   "epilogue.c1_4_hw_underflow": {

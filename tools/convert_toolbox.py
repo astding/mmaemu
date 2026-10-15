@@ -37,6 +37,19 @@ TIES_PT = "verify-c1-claims-5/fix/data/epilogue_ties_rtx4060.pt"     # relative 
 EPILOGUE_HW_IDS = ("epilogue.c1_4_hw_underflow", "epilogue.zero_nan_v2_a1_5", "epilogue.c1_4_hw_zero_scale")
 
 
+def portable_path(p: Path, var: str) -> str:
+    """`$VAR/<relative path>` for a path under the directory named by the environment variable `var`, so that no
+    host path enters the committed test data; the path itself otherwise."""
+    root = os.environ.get(var)
+    try:
+        rel = Path(p).resolve().relative_to(Path(root).resolve()) if root else None
+    except ValueError:
+        rel = None
+    if rel is None:
+        return str(p)
+    return f"${var}" if rel == Path(".") else f"${var}/{rel.as_posix()}"
+
+
 def sha256_file(p: Path) -> str:
     h = hashlib.sha256()
     with open(p, "rb") as f:
@@ -143,8 +156,9 @@ def cmd_epilogue_ties(args) -> int:
     _save_npz(out / "epilogue_ties_rtx4060.npz", arrays)
     meta = {
         "format": "mmaemu-epilogue-ties/1",
-        "source": str(pt), "source_sha256": sha256_file(pt),
-        "producer": str(pt.parent.parent / "record_epilogue_ties.py"),   # the recorder next to the audit's data/
+        "source": portable_path(pt, "MMAEMU_AUDIT_DIR"), "source_sha256": sha256_file(pt),
+        # the recorder next to the audit's data/
+        "producer": portable_path(pt.parent.parent / "record_epilogue_ties.py", "MMAEMU_AUDIT_DIR"),
         "env": rec["env"],
         "layout": "b: uint8 E4M3 codes [768, 1920] (column operand, torch._scaled_mm(a, b.t(), ...)); per case: a "
                   "uint8 E4M3 codes [rows, 1920] (the selected rows of the 16384-row hardware call), out = hardware "
@@ -200,7 +214,7 @@ def cmd_epilogue_hw(args) -> int:
     rec_meta = {e["id"]: e for e in man["recordings"]}
     meta = {
         "format": "mmaemu-epilogue-hw/1",
-        "truth_dir": str(truth), "truth_manifest_sha256": sha256_file(truth / "manifest.json"),
+        "truth_dir": portable_path(truth, "MMAEMU_TRUTH_DIR"), "truth_manifest_sha256": sha256_file(truth / "manifest.json"),
         "truth_ids": {rid: {"json": rec_meta[rid]["json"],
                             "json_sha256": sha256_file(truth / rec_meta[rid]["json"])} for rid in EPILOGUE_HW_IDS},
         "hardware": "NVIDIA GeForce RTX 4060 (sm_89, 24 SMs), cuBLASLt 12.8.3.14, torch 2.7.1+cu128",

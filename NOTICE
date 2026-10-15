@@ -1,5 +1,5 @@
 mmaemu
-Copyright 2026 astding and the mmaemu contributors
+Copyright 2026 Xun Ding and the mmaemu contributors
 
 mmaemu emulates the numerics of NVIDIA tensor-core FP8 GEMMs (cuBLAS FP8 GEMM / torch._scaled_mm).
 It is licensed under the Apache License, Version 2.0 (see LICENSE).

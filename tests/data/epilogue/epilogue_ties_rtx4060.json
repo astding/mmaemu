@@ -1,8 +1,8 @@
 {
  "format": "mmaemu-epilogue-ties/1",
- "source": "/data/quant/tcemu_audit/work/verify-c1-claims-5/fix/data/epilogue_ties_rtx4060.pt",
+ "source": "$MMAEMU_AUDIT_DIR/verify-c1-claims-5/fix/data/epilogue_ties_rtx4060.pt",
  "source_sha256": "1f81b02d9b0f70d2ce90f68eedcf3f2278b22dcb8a1063b9d3e17bf5aabb6868",
- "producer": "/data/quant/tcemu_audit/work/verify-c1-claims-5/fix/record_epilogue_ties.py",
+ "producer": "$MMAEMU_AUDIT_DIR/verify-c1-claims-5/fix/record_epilogue_ties.py",
  "env": {
   "gpu": "NVIDIA GeForce RTX 4060",
   "capability": [

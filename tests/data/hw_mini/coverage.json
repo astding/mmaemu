@@ -2400,7 +2400,7 @@
  "n_combos": 239,
  "missing_in_scope": [],
  "notes": [
-  "discrimination chains: truth fastacc /data/quant/tcemu_ada_truth/build/lib/libfastref3.so",
+  "discrimination chains: truth fastacc $MMAEMU_TRUTH_DIR/build/lib/libfastref3.so",
   "ws2:r4.unverified_split_combos: 309 combinations, one output of one recorded case each (the most discriminating position)"
  ],
  "discrimination": [
