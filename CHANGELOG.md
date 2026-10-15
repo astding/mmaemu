@@ -22,14 +22,16 @@ release).
 - Epilogue as the hardware computes it: alpha = fp32(scale_a * scale_b), fma(acc, alpha, +0), double rounding to
   bf16/fp16, fp8 outputs with `scale_result` and saturation, canonical NaN.
 - Backends: the float64 reference model (CPU or GPU); CUDA kernels v1 and v4 (IEEE-exact) and, gated by per-device
-  self-tests and validated on sm_89 only, v9 and tc3 (each only if it passed its acceptance at the release-candidate
-  freeze; otherwise it follows in 0.1.x). Kernels ship as prebuilt fatbins loaded through the CUDA driver API, with
+  self-tests and validated on sm_89 only, v9 and tc3 (both passed their acceptance thresholds on the RTX 4060,
+  T6). Kernels ship as prebuilt fatbins loaded through the CUDA driver API, with
   NVRTC and the reference model as fallbacks: no nvcc, CUDA toolkit or compiler needed.
 - `python -m mmaemu info | selftest | explain`.
 
 ### Validated hardware
 
 - RTX 4060 (sm_89): the reference platform; T2 (the replay of all 173 hardware recordings through mmaemu) passes.
+  On the release fatbins T3 (every kernel available), T3p (live `torch._scaled_mm` against mmaemu's reference),
+  the GPU mutation matrix and T6 pass.
 - RTX 5070 Ti (sm_120): kernels v1 and v4 validated (T3 on the release fatbins, device independence, GPU mutation
   matrix, wheel without nvcc); `validated_on` of v1 and v4 is {sm_89, sm_120}. v9 is opt-in there; tc3 ships no
   sm_120 binary.

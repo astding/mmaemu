@@ -53,14 +53,15 @@ custom op, a compiled CPU backend.
   correct but slow. The CUDA kernels cover E4M3 x E4M3 with the `ada` preset.
 - The CUDA kernels run on Linux x86_64 (WSL2 included). Elsewhere the reference backend is used.
 - The kernels v1 and v4 are IEEE-exact by construction and must pass a smoke self-test on each device. The fast
-  kernels v9 and tc3 (shipped only if they passed acceptance at the release freeze) rely on properties of the
+  kernels v9 and tc3 (both passed acceptance on the RTX 4060, T6) rely on properties of the
   fp16/bf16 tensor cores; they are validated on sm_89 only, are
   auto-selected only there (or with `MMAEMU_ALLOW_GATED_KERNELS=1` after their gates pass), and tc3 ships no
   binary for capabilities other than sm_80/86/89.
 - Multi-GPU use is untested (the per-context module cache is tested with a second context on one GPU).
 - The release fatbins are built with CUDA 12.8; sm_100/sm_120 binaries need a driver that supports them (R570 or
   newer, by NVIDIA's documentation, not measured here). Without a usable binary mmaemu falls back to NVRTC (if
-  `libnvrtc` is found) and then to the reference backend, with one `BackendFallbackWarning` each.
+  `libnvrtc` is found) and then to the reference backend, with one `BackendFallbackWarning` that names the failed
+  kernels.
 - Performance: emulation is far slower than native FP8 tensor cores. See [performance.md](performance.md).
 
 ## Version drift

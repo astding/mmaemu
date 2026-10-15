@@ -20,26 +20,55 @@ computed from it. The kernel benchmark (`tools/bench_kernels.py` in the reposito
 - measures performance on locally built release-flag fatbins only. NVRTC-compiled kernels are checked for equal
   bits; their speed is recorded but not used for thresholds.
 
-## Expected throughput on the RTX 4060 (Evo 2 1B projection, M = 2048, K = 1920, N = 5760)
+## Release measurements on the RTX 4060 (T6)
 
-The audit measured the prototype kernels with CUDA events under sustained load (TMAC/s). The v0.1 kernels are
-ports of these prototypes, and v0.1 accepts them only above the thresholds below.
+T6 ran on 2026-10-14 on the profile device with the frozen release fatbins of da9edd4, loaded as users get them
+(source `fatbin`; the image sha256 of every kernel equals the release manifest). The host and its software are
+recorded in `log:docs/validation_logs/2026-10-14/rtx4060-host/README.md`, the reports in
+`log:docs/validation_logs/2026-10-14/t6-rtx-4060-sm89/README.md`. Every timed kernel's output was first checked
+bitwise against v1 (v1 against the CPU reference) at every M: 0 mismatches.
 
-| Implementation | Audit measurement (prototype) | v0.1 acceptance threshold | Notes |
-|---|---|---|---|
-| native `torch._scaled_mm` (fast accumulation) | about 30-32 | (reference) | the hardware being emulated |
-| v1 (CUDA cores, IEEE-exact) | 0.51-0.53; about 0.66 with the shared-memory decode table | >= 0.60 with the shared-memory table, else >= 0.48 | portable floor, sm_75 and newer |
-| v4 (CUDA cores, IEEE-defined instructions only) | 1.30-1.38 | >= 1.25 | sm_80 and newer |
-| v9 (bf16 tensor cores for exponents, gated) | 1.55-1.58 | >= 1.45 | relies on the "window" property; validated on sm_89 |
-| tc3 (fp16 tensor-core "dummy accumulator", gated) | 2.94-3.02 | >= 2.8 | Ada/Ampere fp16 HMMA only (sm_80/86/89 binaries); validated on sm_89 |
-| float64 reference, CPU (8 threads) | 116-181 MMAC/s | none | for validation and small problems |
+![Emulated FP8 GEMM throughput on the RTX 4060, release fatbins](images/kernel_throughput_rtx4060.png)
 
-The release measurements of the v0.1 kernels, at M in {16, 64, 256, 1024, 2048, 8192} for the Evo 2 1B, 7B and 40B
-shapes with Gaussian, adversarial and real Evo 2 data, are committed under `docs/validation_logs/` (T6) before
-the release; until then the table above shows audit measurements of the prototypes, not of the shipped binaries.
+Sustained TMAC/s at M = 2048 for the Evo 2 shapes, Gaussian data (MAC per clock per SM in parentheses):
 
-Small M runs well below these rates: at M = 16 the prototype v1 reached about a quarter of its M = 2048 rate,
-because there is too little parallel work for 24 SMs.
+| Implementation | 1B (K 1920, N 5760) | 7B (K 4096, N 12288) | 40B (K 8192, N 24576) | v0.1 acceptance threshold | Audit (prototype, 1B) |
+|---|---:|---:|---:|---:|---|
+| native `torch._scaled_mm` (fast accumulation; not exact) | 29.8 | 30.4 | 30.5 | (reference) | about 30-32 |
+| tc3 (fp16 tensor-core "dummy accumulator", gated; sm_80/86/89 binaries) | 2.94 (49.0) | 2.93 (49.7) | 2.94 (50.1) | >= 2.8 | 2.94-3.02 |
+| v9 (bf16 tensor cores for exponents, gated) | 1.53 (26.7) | 1.54 (27.2) | 1.54 (27.1) | >= 1.45 | 1.55-1.58 |
+| v4 (CUDA cores, IEEE-defined instructions only; sm_80+) | 1.34 (22.3) | 1.36 (22.8) | 1.37 (23.2) | >= 1.25 | 1.30-1.38 |
+| v1 (CUDA cores, IEEE-exact; sm_75+) | 0.63 (10.4) | 0.63 (10.4) | 0.63 (10.5) | >= 0.60 with the shared-memory decode table (shipped), else >= 0.48 | 0.51-0.53; about 0.66 with the shared-memory table |
+| float64 reference, CPU (8 threads) | | | | none | 116-181 MMAC/s |
+
+- Every kernel is above its threshold on every shape. On the 1B shape tc3 (at the low end) and v4 lie inside the
+  audit's ranges of the prototypes; v9 is 1-3% and v1 about 5% below them. The shipped v1 is the DEC1 variant,
+  which measured 0.636 on the same GPU in development (backends.md, "v1 variant decision").
+- Native FP8 reaches 29.8-30.5 TMAC/s at M = 2048, about 500 MAC/clk/SM, as in the audit on the recording host
+  (30-32). From M = 256 on, the emulated GEMM with tc3 is about 10x slower than native (16-17x at M = 16 and 64).
+  The test host's PCIe Gen3 x8 link does not enter: the operands stay on the GPU.
+- The GPU runs at its 115 W power limit throughout: the clock-event reason "SW power cap" appears in every
+  measurement, the SM clock averages 2.36-2.58 GHz at M >= 256, and the driver's power average is 109-115 W.
+  MAC/clk/SM divides out the clock, so it is the figure to compare across hosts.
+- The data does not change the speed: with the adversarial generator of the self-test, every kernel is within 1%
+  of its Gaussian rate at every M and shape (ratios 0.990-1.006). The speed on real Evo 2 operands was not timed
+  separately; their bits are checked by T3 (device independence: the full accumulators of all 21 Evo 2 1B
+  projections, for every kernel).
+
+Throughput against M, Evo 2 1B shape:
+
+| M | tc3 | v9 | v4 | v1 | native | native / tc3 |
+|---:|---:|---:|---:|---:|---:|---:|
+| 16 | 0.378 | 0.384 | 0.172 | 0.149 | 6.17 | 16x |
+| 64 | 1.475 | 1.429 | 0.666 | 0.586 | 24.4 | 17x |
+| 256 | 2.831 | 1.524 | 1.273 | 0.626 | 28.2 | 10x |
+| 1024 | 2.936 | 1.532 | 1.341 | 0.630 | 29.8 | 10x |
+| 2048 | 2.941 | 1.535 | 1.340 | 0.630 | 29.8 | 10x |
+| 8192 | 2.928 | 1.535 | 1.343 | 0.630 | 29.9 | 10x |
+
+Small M has too little parallel work for 24 SMs: at M = 16 every kernel runs at an eighth to a quarter of its
+M = 2048 rate, and v9 is as fast as tc3 there (0.384 against 0.378 TMAC/s). AUTO does not depend on M and selects
+tc3 at every size; from M = 256 on tc3 is about 1.9x faster than v9.
 
 ## Selection
 
@@ -50,7 +79,13 @@ unavailable; `python -m mmaemu selftest --force` re-runs the gates.
 ## What this means end to end
 
 For Evo 2 1B on the RTX 4060 the audit measured the emulated FP8 projections as the dominant cost of an emulated
-forward pass with the prototype v1 kernel (about 95% of the extra time over native, paired measurement). With the
-faster kernels the emulated forward pass is expected to take roughly 1.5-2x the native time instead of about 3.6x
-(an estimate from the kernel rates, not a measurement). On the CPU the float64 reference is practical for tests
-and single projections, not for whole models.
+forward pass with the prototype v1 kernel: about 95% of the extra time over native, and about 3.6x the native time
+in all (paired measurement). With tc3, about 10x slower than the native GEMM (T6 above), the emulated forward
+pass on the RTX 4060 is expected to take roughly 1.5-2x the native time. That is an estimate from the kernel rates;
+it was not measured.
+
+The measured end-to-end figure is from the RTX 5070 Ti, where AUTO selects v4: an 8,192-bp Evo 2 1B forward pass
+takes about 1.0 s with mmaemu against 0.45 s natively (host timer; [evo2.md](evo2.md)). It is a different GPU and
+kernel from the estimate above.
+
+On the CPU the float64 reference is practical for tests and single projections, not for whole models.

@@ -11,7 +11,7 @@ readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE", "LICENSES/*"]
 requires-python = ">=3.10"
-authors = [{ name = "Xun Ding" }]
+authors = [{ name = "Xun Ding", email = "dxun1@alumni.jh.edu" }]
 keywords = ["fp8", "tensor core", "gemm", "emulation", "cublas", "scaled_mm", "reproducibility", "numerics"]
 classifiers = [
     "Development Status :: 3 - Alpha",

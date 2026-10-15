@@ -1,0 +1,6 @@
+....                                                                     [100%]
+4 passed, 3744 deselected in 37.97s
+tests/test_live_cublas.py::test_live_parity
+tests/test_profiles.py::test_matches_the_reference_gpu_live
+tests/test_splitk_table.py::test_live_requery_of_500_random_rows
+tests/test_splitk_table.py::test_live_query_step_resolves_unknown_shapes

@@ -1,0 +1,5 @@
+................ssss..........                                           [100%]
+=========================== short test summary info ============================
+SKIPPED [2] tests/test_fast_kernels.py:170: audit data absent (set MMAEMU_AUDIT_DIR; needs vperf-p3-tensorcore-exact-1/data/ref2)
+SKIPPED [2] tests/test_fast_kernels.py:190: audit data absent (set MMAEMU_AUDIT_DIR; needs p2-int-mixed/data/cases.pt)
+26 passed, 4 skipped in 43.97s

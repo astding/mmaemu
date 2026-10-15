@@ -233,13 +233,24 @@ def _child_env(fatbins, cache, **kw):
     return e
 
 
+def _auto_kernel() -> str:
+    """The kernel AUTO selects on this device when nothing is forced (docs/backends.md, priority tc3 > v9 > v4 > v1):
+    tc3 where the gated kernels are validated (sm_89), v4 elsewhere (tc3 and v9 are skipped by design there)."""
+    try:
+        from mmaemu.backends.cuda.fast import specs
+    except ImportError:
+        return "cuda:v4"
+    return "cuda:tc3" if tuple(torch.cuda.get_device_capability(0)) in specs.TC3.validated_on else "cuda:v4"
+
+
 def test_fallback_ladder(fatbins, tmp_path, expected_shas):
-    """MMAEMU_TEST_FORCE_FAIL=fatbin -> NVRTC; =fatbin,nvrtc -> reference; exactly one BackendFallbackWarning each
-    (two calls); bits unchanged (B5)."""
+    """MMAEMU_TEST_FORCE_FAIL=fatbin -> the same kernel from NVRTC; =fatbin,nvrtc -> reference; exactly one
+    BackendFallbackWarning each (two calls); bits unchanged (B5)."""
+    top = _auto_kernel()
     base = run_child(ACCUMULATE_TWICE, _child_env(fatbins, tmp_path / "c0"))
-    assert base["backend"] == "cuda:v4" and base["source"] == "fatbin" and base["warnings"] == []
+    assert base["backend"] == top and base["source"] == "fatbin" and base["warnings"] == [], base
     nv = run_child(ACCUMULATE_TWICE, _child_env(fatbins, tmp_path / "c1", MMAEMU_TEST_FORCE_FAIL="fatbin"))
-    assert nv["backend"] == "cuda:v4" and nv["source"] == "nvrtc" and len(nv["warnings"]) == 1, nv
+    assert nv["backend"] == top and nv["source"] == "nvrtc" and len(nv["warnings"]) == 1, nv
     ref = run_child(ACCUMULATE_TWICE, _child_env(fatbins, tmp_path / "c2", MMAEMU_TEST_FORCE_FAIL="fatbin,nvrtc"))
     assert ref["backend"] == "reference" and len(ref["warnings"]) == 1, ref
     for r in (base, nv, ref):

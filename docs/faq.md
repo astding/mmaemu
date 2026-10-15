@@ -22,7 +22,7 @@ fits to published test vectors, not platform models ([limitations.md](limitation
 
 | GPU | Role | Result |
 |---|---|---|
-| RTX 4060 (sm_89) | reference platform: the hardware recordings come from it | all 173 recordings reproduced (T2) |
+| RTX 4060 (sm_89) | reference platform: the hardware recordings come from it | all 173 recordings reproduced (T2); every kernel passes T3 and T6 there, and live `torch._scaled_mm` equals mmaemu's reference bit for bit (T3p) |
 | RTX 5070 Ti (sm_120) | kernels v1 and v4 validated (T3, device independence, wheel without nvcc) | bitwise equal to the CPU reference |
 | H100 PCIe (sm_90) | T3 on the release kernels; Evo 2 fixed inputs | passed; not yet in the kernels' validated set |
 | CPU (x86_64) | the float64 reference model | the oracle the kernels are compared with |
@@ -30,8 +30,9 @@ fits to published test vectors, not platform models ([limitations.md](limitation
 See [validation.md](validation.md) for the logs.
 
 **How fast is it?**
-Much slower than native FP8. On an RTX 5070 Ti the emulated Evo 2 1B projection runs at about 4 TMAC/s with the
-default kernel (v4), and an Evo 2 1B forward pass over 8,192 bp takes about 1.0 s with mmaemu against 0.45 s
+Much slower than native FP8. On the RTX 4060 the emulated Evo 2 1B projection runs at 2.94 TMAC/s with the
+default kernel there (tc3), against 29.8 TMAC/s for native FP8. On an RTX 5070 Ti it runs at about 4 TMAC/s with
+the default kernel (v4), and an Evo 2 1B forward pass over 8,192 bp takes about 1.0 s with mmaemu against 0.45 s
 natively. The CPU reference model reaches about 0.1-0.2 TMAC/s with 8 threads: fine for tests and single layers,
 too slow for whole models. See [performance.md](performance.md).
 

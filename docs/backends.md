@@ -46,6 +46,8 @@ overrides it. Accepted values are `"auto"`, `"reference"`, `"cuda"` and `"cuda:<
    The next kernel is tried. If none is left, `"auto"` uses the reference backend and `"cuda"` raises.
 5. One `BackendFallbackWarning` is emitted per (device, reason) and process. It is emitted when a kernel failed, or
    when the selected kernel was compiled with NVRTC because its fatbin was unusable. By-design skips never warn.
+   The failures of one selection form one reason: a single warning names every kernel that failed and the backend
+   that is used instead.
 
 `status(device=None)` returns `{name: BackendStatus}` for every discovered kernel and `reference`. A kernel is
 `available` only after it was loaded *and* passed its gates on that device. `validated_here` means the capability is

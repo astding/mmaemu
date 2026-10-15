@@ -11,8 +11,9 @@ returns the same bits on the CPU or on another CUDA GPU.
 
 > **Status: v0.1.0, alpha, not yet released.** One reference platform (RTX 4060, cuBLASLt 12.8.3.14) is modelled
 > and validated against 173 recordings of its hardware. Read the [scope](#scope-and-limitations-of-v01) before
-> relying on a result. Still open before the 0.1.0 release: the GPU tiers T3, T3p, T6 and T7 on the RTX 4060
-> itself with the release kernels ([release checklist](https://github.com/astding/mmaemu/blob/master/docs/release.md)).
+> relying on a result. The GPU tiers have passed on the RTX 4060 itself with the release kernels (conformance T3,
+> live parity T3p, mutation matrix T4, performance T6). Still open before the 0.1.0 release: T7, the check of the built
+> wheel on that GPU ([release checklist](https://github.com/astding/mmaemu/blob/master/docs/release.md)).
 
 ![Evo 2 1B on the upstream test prompts: the RTX 5070 Ti with mmaemu matches the official result](https://github.com/astding/mmaemu/blob/master/docs/images/evo2_upstream_test.png?raw=true)
 
@@ -129,7 +130,7 @@ small (mean \|Δ\| 6e-4 on the RTX 4060), which is why even two official GPUs ag
 
 | Platform | What ran | Result |
 |---|---|---|
-| RTX 4060 (Ada, sm_89, 24 SMs) | the hardware recordings: 173 recordings, 2.5 billion output values (instruction level, cuBLAS GEMMs, epilogue, special values, split-K, Evo 2 projections) | the reference; T2 replays all 173 through mmaemu on the CPU: PASS, 173 of 173 |
+| RTX 4060 (Ada, sm_89, 24 SMs) | the hardware recordings: 173 recordings, 2.5 billion output values (instruction level, cuBLAS GEMMs, epilogue, special values, split-K, Evo 2 projections); T3, T3p, GPU mutation matrix and T6 on the release kernels | the reference; T2 replays all 173 through mmaemu on the CPU: PASS, 173 of 173. T3 and the full Evo 2 accumulators pass with every kernel (tc3, v9, v4, v1); T3p: live `torch._scaled_mm` equals mmaemu's reference bit for bit; T6: every kernel above its speed threshold |
 | RTX 5070 Ti (Blackwell, sm_120, 70 SMs) | T3 GPU suite on the release kernels; device independence; GPU mutation matrix; wheel installed without nvcc | all pass; v1 and v4 validated (bitwise equal to the CPU reference); gated v9 opt-in; no tc3 binary for sm_120 |
 | H100 PCIe (Hopper, sm_90, 114 SMs) | T3 on the release kernels; Evo 2 fixed inputs (21 projections) | all pass; 21 of 21 bitwise equal to the RTX 4060; sm_90 not yet in the validated set (the full device-independence suite did not run there) |
 | CPU (x86_64) | T0 + T1 in CI on Python 3.10-3.13 x torch 2.6.0, 2.7.1 and the latest; CPU mutation matrix (T4) | all pass; 43 mutants killed, 2 equivalent, identity controls survive |
@@ -139,8 +140,21 @@ Details, with a reference to the log or recording behind every number:
 
 ### Speed
 
-Exact emulation costs more than native FP8. Sustained throughput of the CUDA kernels on the RTX 5070 Ti (M = 2048,
-CUDA events, development build with the release flags):
+Exact emulation costs more than native FP8. On the RTX 4060, the reference GPU, the release kernels sustain
+(T6: CUDA events, M = 2048, at the card's 115 W power limit):
+
+![Emulated FP8 GEMM throughput on the RTX 4060, release fatbins](https://github.com/astding/mmaemu/blob/master/docs/images/kernel_throughput_rtx4060.png?raw=true)
+
+| Kernel | Evo 2 1B (K 1920, N 5760) | 7B (K 4096, N 12288) | 40B (K 8192, N 24576) |
+|---|---:|---:|---:|
+| native `torch._scaled_mm` (fast accumulation; not exact) | 29.8 TMAC/s | 30.4 TMAC/s | 30.5 TMAC/s |
+| `cuda:tc3` (gated; AUTO's choice on sm_89) | 2.94 TMAC/s | 2.93 TMAC/s | 2.94 TMAC/s |
+| `cuda:v9` (gated) | 1.53 TMAC/s | 1.54 TMAC/s | 1.54 TMAC/s |
+| `cuda:v4` (IEEE-exact, sm_80+) | 1.34 TMAC/s | 1.36 TMAC/s | 1.37 TMAC/s |
+| `cuda:v1` (IEEE-exact, sm_75+) | 0.63 TMAC/s | 0.63 TMAC/s | 0.63 TMAC/s |
+
+The exact GEMM with tc3 runs at about a tenth of the native rate there. On the RTX 5070 Ti (development build with
+the release flags, M = 2048, CUDA events) the IEEE-exact kernels are faster, and tc3 has no binary:
 
 ![Emulated FP8 GEMM throughput on the RTX 5070 Ti](https://github.com/astding/mmaemu/blob/master/docs/images/kernel_throughput.png?raw=true)
 
@@ -151,9 +165,8 @@ CUDA events, development build with the release flags):
 | `cuda:v9` (gated, opt-in on sm_120) | 4.82 TMAC/s | 5.15 TMAC/s | 5.11 TMAC/s |
 
 End to end on the RTX 5070 Ti, an Evo 2 1B forward pass over 8,192 bp takes about 1.0 s with mmaemu and 0.45 s
-with native FP8, and scoring the 935 BRCA1 windows takes about 15 and 7 minutes (host timer). For
-comparison, the audit measured native FP8 on the RTX 4060 at about 31 TMAC/s
-([performance](https://github.com/astding/mmaemu/blob/master/docs/performance.md)).
+with native FP8, and scoring the 935 BRCA1 windows takes about 15 and 7 minutes (host timer). Method, MAC per
+clock, small-M rates and the logs: [performance](https://github.com/astding/mmaemu/blob/master/docs/performance.md).
 
 ## What mmaemu is for
 
@@ -423,3 +436,12 @@ Its instruction model, kernels and test vectors are derived from the MATLAB Tens
 (https://github.com/north-numerical-computing/MATLAB-tensor-core) by Faizan A. Khattak and Mantas Mikaitis, under
 the BSD 2-Clause License; see [NOTICE](https://github.com/astding/mmaemu/blob/master/NOTICE) and
 [LICENSES/](https://github.com/astding/mmaemu/tree/master/LICENSES).
+
+## Affiliation
+
+mmaemu is an independent project by Xun Ding, developed on personal time with personal equipment and resources. It is
+not affiliated with, funded by or endorsed by the author's employer. It is also not affiliated with NVIDIA or the Arc
+Institute; NVIDIA, GeForce and CUDA are trademarks of NVIDIA Corporation, and Evo 2 is developed by the Arc Institute
+and its collaborators.
+
+Contact: Xun Ding, dxun1@alumni.jh.edu. Bug reports and questions: [GitHub issues](https://github.com/astding/mmaemu/issues).

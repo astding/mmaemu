@@ -18,7 +18,8 @@ and it differs between GPU generations. Their numerics are therefore **hardware-
   tc3 > v9 > v4 > v1 > reference.
 
 Neither kernel is release-blocking. If one has not passed acceptance at the release-candidate freeze, its
-`KernelSpec` is left out of the release fatbin.
+`KernelSpec` is left out of the release fatbin. For 0.1.0 both passed on the RTX 4060 (T6,
+[performance.md](performance.md)).
 
 Files:
 
@@ -256,7 +257,8 @@ of `verify-p3-tensorcore-exact-1/scripts/sim_gate.py` `hmma_gen`.
   host's load, the third-process re-run took up to 1.46 s.
 - **Forced failure:** `MMAEMU_TEST_FORCE_FAIL=design_a` selects `cuda:v9` with exactly one
   `BackendFallbackWarning` over two `select()` calls. With `design_a,window` there are two warnings and neither
-  fast kernel is selected.
+  fast kernel is selected. (This was the prototype registry. The integrated registry reports both failed gates in
+  one warning and selects v4; see [backends.md](backends.md).)
 - **Unvalidated capability:** with `torch.cuda.get_device_capability` monkeypatched to (8, 6), neither fast kernel
   is selected. With `MMAEMU_ALLOW_GATED_KERNELS=1`, tc3 is selected.
 - **Verdict cache:** a second process hits it in 0.9 ms (tc3) and 0.4 ms (v9). No gate function ran, and

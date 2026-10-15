@@ -1,0 +1,20 @@
+......F......                                                            [100%]
+=================================== FAILURES ===================================
+_____________________________ test_fallback_ladder _____________________________
+
+fatbins = PosixPath('~/mmaemu-4060/src/mmaemu/backends/cuda/bin')
+tmp_path = PosixPath('/tmp/pytest-of-USER/pytest-1/test_fallback_ladder0')
+expected_shas = {'fast': '6d1d236809fd38d629a2cd0966e85a14de54ad77aadeec450806dc49327b40aa', 'slow': '9d8cd45f8d5e1d57d6de38b54313d6f27103260e154416977b58730d688ca3e3'}
+
+    def test_fallback_ladder(fatbins, tmp_path, expected_shas):
+        """MMAEMU_TEST_FORCE_FAIL=fatbin -> NVRTC; =fatbin,nvrtc -> reference; exactly one BackendFallbackWarning each
+        (two calls); bits unchanged (B5)."""
+        base = run_child(ACCUMULATE_TWICE, _child_env(fatbins, tmp_path / "c0"))
+>       assert base["backend"] == "cuda:v4" and base["source"] == "fatbin" and base["warnings"] == []
+E       AssertionError: assert ('cuda:tc3' == 'cuda:v4'
+E         
+E         - cuda:v4
+E         + cuda:tc3)
+
+tests/test_cuda_runtime.py:240: AssertionError
+1 failed, 12 passed in 97.74s (0:01:37)

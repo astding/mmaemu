@@ -8,6 +8,7 @@ Inputs:
   docs/validation_logs/2026-10-14/evo2-h100-sm90/     the official-path baseline on an H100 (comparison_vs_ada.json)
   examples/data/evo2_1b_ada_rtx4060_te.npz            the official-path reference on the RTX 4060
   docs/validation_logs/2026-10-13-sm120/performance-*.json   kernel throughput on the RTX 5070 Ti
+  docs/validation_logs/2026-10-14/t6-rtx-4060-sm89/          T6: the release kernels and native FP8 on the RTX 4060
 """
 from __future__ import annotations
 
@@ -184,6 +185,59 @@ def fig_throughput(out: Path):
     plt.close(fig)
 
 
+def fig_throughput_rtx4060(out: Path):
+    """T6 on the profile device: the release kernels against native torch._scaled_mm (gauss40 data)."""
+    t6 = LOGS / "2026-10-14" / "t6-rtx-4060-sm89"
+    shapes = [("1b", "1B\nK 1920, N 5760"), ("7b", "7B\nK 4096, N 12288"), ("40b", "40B\nK 8192, N 24576")]
+    kernels = ["v1", "v4", "v9", "tc3"]
+    colors = {"v1": "#8ecae6", "v4": "#219ebc", "v9": "#023047", "tc3": "#2a9d8f", "native": "#e76f51"}
+    threshold = {"v1": 0.60, "v4": 1.25, "v9": 1.45, "tc3": 2.8}
+    vals = {}
+    for s, _ in shapes:
+        d = json.loads((t6 / f"performance-{s}-gauss40.json").read_text())
+        for r in d["results"]:
+            if "kernel" in r:
+                vals[(s, r["kernel"], r["M"])] = r["tmac_s_median"]
+    for r in json.loads((t6 / "native-fp8.json").read_text())["results"]:
+        vals[(r["shape"], "native", r["M"])] = r["tmac_s_median"]
+    Ms = sorted({M for (s, _, M) in vals if s == "1b"})
+    fig, axes = plt.subplots(1, 2, figsize=(11.5, 4.4), gridspec_kw={"width_ratios": [1, 1.15]})
+    ax = axes[0]
+    for kern in ["native"] + kernels[::-1]:
+        v = [vals[("1b", kern, M)] for M in Ms]
+        label = "native torch._scaled_mm (not exact)" if kern == "native" else f"cuda:{kern}"
+        ax.plot(Ms, v, marker="o", ms=4, color=colors[kern], ls="--" if kern == "native" else "-", label=label)
+    ax.set_xscale("log", base=2)
+    ax.set_yscale("log")
+    ax.set_xticks(Ms, [str(M) for M in Ms])
+    ax.set_xlabel("M (rows of the activation), Evo 2 1B projection")
+    ax.set_ylabel("TMAC/s (CUDA events, sustained)")
+    ax.set_title("Throughput against M", loc="left", fontsize=10.5)
+    ax.legend(fontsize=8, loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=3)
+    ax = axes[1]
+    x = np.arange(len(shapes))
+    w = 0.2
+    for k, kern in enumerate(kernels):
+        v = [vals[(s, kern, 2048)] for s, _ in shapes]
+        xs = x + (k - 1.5) * w
+        ax.bar(xs, v, w, color=colors[kern], label=f"cuda:{kern}")
+        ax.hlines([threshold[kern]] * len(xs), xs - w / 2, xs + w / 2, color="#d62828", lw=1.2)
+        for xi, vi in zip(xs, v):
+            ax.text(xi, vi + 0.05, f"{vi:.2f}", ha="center", fontsize=7.5)
+    ax.plot([], [], color="#d62828", lw=1.2, label="v0.1 acceptance threshold")
+    ax.set_xticks(x, [label for _, label in shapes], fontsize=8.5)
+    ax.set_ylabel("TMAC/s at M = 2048")
+    ax.set_ylim(0, max(vals[(s, k, 2048)] for s, _ in shapes for k in kernels) * 1.25)
+    ax.set_title("Release kernels at M = 2048", loc="left", fontsize=10.5)
+    ax.legend(fontsize=8, loc="upper left", ncol=3)
+    ax.grid(axis="x", visible=False)
+    fig.suptitle("Emulated FP8 GEMM on the RTX 4060 (the reference GPU), release fatbins", x=0.01, ha="left",
+                 fontsize=11)
+    fig.tight_layout()
+    fig.savefig(out)
+    plt.close(fig)
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--evo2-dir", type=Path, default=LOGS / "2026-10-14" / "evo2-rtx-5070-ti")
@@ -198,6 +252,7 @@ def main(argv=None) -> int:
     fig_windows(win, args.out / "evo2_windows.png")
     fig_brca1(res, args.evo2_dir, args.h100_dir, ref, args.out / "evo2_brca1.png")
     fig_throughput(args.out / "kernel_throughput.png")
+    fig_throughput_rtx4060(args.out / "kernel_throughput_rtx4060.png")
     for p in sorted(args.out.glob("*.png")):
         print(p.relative_to(ROOT) if p.is_relative_to(ROOT) else p)
     return 0

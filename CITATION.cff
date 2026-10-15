@@ -13,6 +13,8 @@ abstract: >-
 authors:
   - given-names: Xun
     family-names: Ding
+    affiliation: "Independent researcher"
+    email: dxun1@alumni.jh.edu
     alias: astding
     orcid: "https://orcid.org/0000-0001-7719-7268"
 version: 0.1.0

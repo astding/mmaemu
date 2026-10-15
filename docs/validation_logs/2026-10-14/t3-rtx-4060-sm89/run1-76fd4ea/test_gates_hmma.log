@@ -1,0 +1,26 @@
+.F..                                                                     [100%]
+=================================== FAILURES ===================================
+___________________ test_forced_gate_failure_falls_back_once ___________________
+
+tmp_path = PosixPath('/tmp/pytest-of-USER/pytest-2/test_forced_gate_failure_falls0')
+
+    @pytest.mark.gpu
+    def test_forced_gate_failure_falls_back_once(tmp_path):
+        dev = _cuda()
+        cc, arch = _arch(dev)
+        if tuple(cc) not in specs.TC3.validated_on:
+            pytest.skip("tc3 is only auto-selected on validated capabilities")
+        env = {"MMAEMU_CACHE_DIR": str(tmp_path / "cache")}
+        base = _py(_SELECT.format(patch=""), env)
+        assert base["b1"] == base["b2"] == "cuda:tc3" and base["fallback_warnings"] == [], base
+        forced = _py(_SELECT.format(patch=""), dict(env, MMAEMU_TEST_FORCE_FAIL="design_a"))
+        assert forced["b1"] == forced["b2"] == "cuda:v9", forced
+        assert len(forced["fallback_warnings"]) == 1 and "design_a" in forced["fallback_warnings"][0], forced
+        both = _py(_SELECT.format(patch=""), dict(env, MMAEMU_TEST_FORCE_FAIL="design_a,window"))
+>       assert both["b1"] not in ("cuda:tc3", "cuda:v9") and len(both["fallback_warnings"]) == 2, both
+E       AssertionError: {'b1': 'cuda:v4', 'b2': 'cuda:v4', 'fallback_warnings': ["mmaemu on cuda:0: cuda:tc3 (gate 'design_a' failed: forced by MMAEMU_TEST_FORCE_FAIL); cuda:v9 (gate 'window' failed: forced by MMAEMU_TEST_FORCE_FAIL); using cuda:v4 (fatbin)"]}
+E       assert ('cuda:v4' not in ('cuda:tc3', 'cuda:v9') and 1 == 2)
+E        +  where 1 = len(["mmaemu on cuda:0: cuda:tc3 (gate 'design_a' failed: forced by MMAEMU_TEST_FORCE_FAIL); cuda:v9 (gate 'window' failed: forced by MMAEMU_TEST_FORCE_FAIL); using cuda:v4 (fatbin)"])
+
+tests/test_gates_hmma.py:345: AssertionError
+1 failed, 3 passed, 17 deselected in 32.06s

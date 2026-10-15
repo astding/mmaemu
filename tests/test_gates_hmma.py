@@ -342,7 +342,9 @@ def test_forced_gate_failure_falls_back_once(tmp_path):
     assert forced["b1"] == forced["b2"] == "cuda:v9", forced
     assert len(forced["fallback_warnings"]) == 1 and "design_a" in forced["fallback_warnings"][0], forced
     both = _py(_SELECT.format(patch=""), dict(env, MMAEMU_TEST_FORCE_FAIL="design_a,window"))
-    assert both["b1"] not in ("cuda:tc3", "cuda:v9") and len(both["fallback_warnings"]) == 2, both
+    # one selection's failures form one warning that names both gates (docs/backends.md, rule 5)
+    assert both["b1"] == both["b2"] == "cuda:v4" and len(both["fallback_warnings"]) == 1, both
+    assert "design_a" in both["fallback_warnings"][0] and "window" in both["fallback_warnings"][0], both
 
 
 _PATCH_CC = "torch.cuda.get_device_capability = lambda *a, **k: (8, 6)"

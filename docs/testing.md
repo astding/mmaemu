@@ -37,8 +37,10 @@ T0, T1, T3 and T4 run without them (the truth-marked tests in T3 skip).
 | T1s slow | nightly / manual | `python -m pytest -q -m slow tests` | < 1 h |
 | T2 full truth replay | before a release, maintainer only (needs the truth) | `python tools/replay_truth.py --out docs/validation_logs/<date> --compare $MMAEMU_TRUTH_DIR/replay/replay_fixed.json` | about 80 min on CPU |
 | T3 GPU | any CUDA device | `tools/run_gpu_tests.sh` (one locked run per test file) | < 10 min per run |
-| T3p profile device | RTX 4060 only | `$GPU timeout 600 python -m pytest -q tests/test_live_cublas.py` | < 10 min |
+| T3p profile device | RTX 4060 only | `$GPU timeout 600 python -m pytest -q -m profile_device tests` (live `torch._scaled_mm` parity, the profile match, live split-K table queries) | < 10 min |
 | T4 mutation | weekly (CPU), before a release (GPU) | `python tools/mutants/run.py --tier cpu`; `$GPU timeout 600 python tools/mutants/run.py --tier gpu` | < 20 min CPU |
+| T6 performance | before a release, RTX 4060 | `$GPU timeout 3000 python tools/bench_kernels.py --kernels v1,v4,v9,tc3 --shape <1b, 7b, 40b> --M 16,64,256,1024,2048,8192 --data <gauss40, adversarial> --out <json>` ([performance.md](performance.md)) | about 4 min per shape and data set |
+| T7 release wheel | before a release, on the GPU | `$GPU timeout 600 python tools/validate_release.py dist/mmaemu-<version>-py3-none-any.whl` ([release.md](release.md)) | |
 
 T0 + T1 together are what CI runs: `python -m pytest -q tests -m "not gpu and not slow and not truth"`.
 
