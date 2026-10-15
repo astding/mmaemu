@@ -1,0 +1,28 @@
+{
+ "e4m3": {
+  "n_models": 16,
+  "pool": 12232,
+  "selected": 434,
+  "classes_pool": 4,
+  "classes_shuffled": 4,
+  "classes_selected": 4,
+  "largest_classes": [
+   4,
+   4,
+   4,
+   4
+  ]
+ },
+ "e5m2": {
+  "n_models": 16,
+  "pool": 12212,
+  "selected": 413,
+  "classes_pool": 2,
+  "classes_shuffled": 2,
+  "classes_selected": 2,
+  "largest_classes": [
+   8,
+   8
+  ]
+ }
+}

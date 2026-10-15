@@ -1,0 +1,318 @@
+{
+ "format": "tcemu_ada_truth/1",
+ "layout": "data/<group>/<name>.json + .npz (written with tcemu_ada_truth.format.RecordingWriter, root=<this dir>/data); load with tcemu_ada_truth.loader.load(id, root=<this dir>)",
+ "recordings": [
+  {
+   "files": [
+    {
+     "bytes": 5488623,
+     "file": "data/r1/api_parity_grid.json",
+     "sha256": "47070302952f6870e91aeedff35531d4a3859347803ddd815ab3a2eea26552ce"
+    },
+    {
+     "bytes": 2465862,
+     "file": "data/r1/api_parity_grid.npz",
+     "sha256": "97b6d89fa0541b56ffa9b2149e4074d6fc72b61e84bbd3e951aca719ed35442f"
+    }
+   ],
+   "group": "r1",
+   "id": "r1.api_parity_grid",
+   "json": "data/r1/api_parity_grid.json",
+   "kind": "gemm",
+   "level": "torch._scaled_mm",
+   "n_cases": 1357,
+   "n_hw_error": 9325,
+   "n_outputs": 10352,
+   "stats": {
+    "n_cases": 1357,
+    "n_inputs_generated": 0,
+    "n_inputs_stored": 2865,
+    "n_output_values": 136288,
+    "n_output_values_stored": 136288,
+    "n_outputs": 10352,
+    "n_outputs_hash_only": 0,
+    "n_outputs_stored": 1027
+   },
+   "title": "R1: torch._scaled_mm API parity grid on the RTX 4060 (raise / no-raise, error class + message, output bits, per-call cuBLASLt config)"
+  },
+  {
+   "files": [
+    {
+     "bytes": 347599,
+     "file": "data/r2/fp8out_live_verify.json",
+     "sha256": "0f8d5a4d91a7889f885eef9d3bd0aa9a4367c11de20abf5a822af0316ac1721e"
+    },
+    {
+     "bytes": 2191750,
+     "file": "data/r2/fp8out_live_verify.npz",
+     "sha256": "c4af74c8cc6e58565d5b4ca095be360d41538b08678f5ea36575170cb367e105"
+    }
+   ],
+   "group": "r2",
+   "id": "r2.fp8out_live_verify",
+   "json": "data/r2/fp8out_live_verify.json",
+   "kind": "gemm",
+   "level": "torch._scaled_mm",
+   "n_cases": 112,
+   "n_hw_error": 0,
+   "n_outputs": 112,
+   "stats": {
+    "n_cases": 112,
+    "n_inputs_generated": 0,
+    "n_inputs_stored": 224,
+    "n_output_values": 477670,
+    "n_output_values_stored": 477670,
+    "n_outputs": 112,
+    "n_outputs_hash_only": 0,
+    "n_outputs_stored": 112
+   },
+   "title": "R2-verify: 100 random fp8-output heuristic rows (R2) re-run live through torch._scaled_mm (scale_result passed on half of them) + critic gap 17 (e4m3 out at 224x176x80 and 176x224x80), bits + logged cuBLASLt config"
+  },
+  {
+   "files": [
+    {
+     "bytes": 4690,
+     "file": "data/r2/lt_heur_fp8out_12_8_3_14.json",
+     "sha256": "03228197e282e61a21f92b44a20324c861bdb59d6f61f8cb16cd6a9f9b9810e0"
+    },
+    {
+     "bytes": 1525766,
+     "file": "data/r2/lt_heur_fp8out_12_8_3_14.npz",
+     "sha256": "e325504bf649591e19e81b451f369e48bba446bb9ccdea38fedf6f9a46a442f9"
+    }
+   ],
+   "group": "r2",
+   "id": "r2.lt_heur_fp8out_12_8_3_14",
+   "json": "data/r2/lt_heur_fp8out_12_8_3_14.json",
+   "kind": "table",
+   "level": "cublasLt.heuristic",
+   "n_cases": 0,
+   "n_hw_error": 0,
+   "n_outputs": 0,
+   "stats": {
+    "n_cases": 0,
+    "n_inputs_generated": 0,
+    "n_inputs_stored": 0,
+    "n_output_values": 0,
+    "n_output_values_stored": 0,
+    "n_outputs": 0,
+    "n_outputs_hash_only": 0,
+    "n_outputs_stored": 0
+   },
+   "title": "cuBLASLt 12.8.3.14 heuristic choices for fp8-output torch._scaled_mm descriptors on the RTX 4060 (R2)"
+  },
+  {
+   "files": [
+    {
+     "bytes": 4737,
+     "file": "data/r2/lt_heur_mixed_allsettings_12_8_3_14.json",
+     "sha256": "60b62ee2b15128c665edfd5fc36a9b254c9f90dd862b083dd03b1baf8986b94b"
+    },
+    {
+     "bytes": 651704,
+     "file": "data/r2/lt_heur_mixed_allsettings_12_8_3_14.npz",
+     "sha256": "0df50769f5435f83837ae04dec6b95849cf9d9231a7e137cead2bfcec75d2ceb"
+    }
+   ],
+   "group": "r2",
+   "id": "r2.lt_heur_mixed_allsettings_12_8_3_14",
+   "json": "data/r2/lt_heur_mixed_allsettings_12_8_3_14.json",
+   "kind": "table",
+   "level": "cublasLt.heuristic",
+   "n_cases": 0,
+   "n_hw_error": 0,
+   "n_outputs": 0,
+   "stats": {
+    "n_cases": 0,
+    "n_inputs_generated": 0,
+    "n_inputs_stored": 0,
+    "n_output_values": 0,
+    "n_output_values_stored": 0,
+    "n_outputs": 0,
+    "n_outputs_hash_only": 0,
+    "n_outputs_stored": 0
+   },
+   "title": "cuBLASLt 12.8.3.14 heuristic choices, mixed e4m3/e5m2 inputs with fp32/bf16/fp16 outputs at every workspace x alignment setting (R2x)"
+  },
+  {
+   "files": [
+    {
+     "bytes": 4676,
+     "file": "data/r2/lt_heur_smallk_12_8_3_14.json",
+     "sha256": "010d8b5e3edad684f6b74942050c3e87c100097171e62d8fcfa7bfb9558c62f6"
+    },
+    {
+     "bytes": 187346,
+     "file": "data/r2/lt_heur_smallk_12_8_3_14.npz",
+     "sha256": "7d6f273eef3f6d8b77079ba24d3f95c13adfbcca908b41d3515460575385edb5"
+    }
+   ],
+   "group": "r2",
+   "id": "r2.lt_heur_smallk_12_8_3_14",
+   "json": "data/r2/lt_heur_smallk_12_8_3_14.json",
+   "kind": "table",
+   "level": "cublasLt.heuristic",
+   "n_cases": 0,
+   "n_hw_error": 0,
+   "n_outputs": 0,
+   "stats": {
+    "n_cases": 0,
+    "n_inputs_generated": 0,
+    "n_inputs_stored": 0,
+    "n_output_values": 0,
+    "n_output_values_stored": 0,
+    "n_outputs": 0,
+    "n_outputs_hash_only": 0,
+    "n_outputs_stored": 0
+   },
+   "title": "cuBLASLt 12.8.3.14 heuristic choices, e4m3xe4m3 small-K shape set at the 48 main settings (R2x)"
+  },
+  {
+   "files": [
+    {
+     "bytes": 4738,
+     "file": "data/r3/lt_heur_evo2_small_m_12_8_3_14.json",
+     "sha256": "902a012923c77b16fb73f48cfa6b043fd542ae12da6fe1a590650c37c268bafd"
+    },
+    {
+     "bytes": 58126,
+     "file": "data/r3/lt_heur_evo2_small_m_12_8_3_14.npz",
+     "sha256": "5749bc762d674f4427bc58e2654179b07903208c3b703d92cd2baa315965f85d"
+    }
+   ],
+   "group": "r3",
+   "id": "r3.lt_heur_evo2_small_m_12_8_3_14",
+   "json": "data/r3/lt_heur_evo2_small_m_12_8_3_14.json",
+   "kind": "table",
+   "level": "cublasLt.heuristic",
+   "n_cases": 0,
+   "n_hw_error": 0,
+   "n_outputs": 0,
+   "stats": {
+    "n_cases": 0,
+    "n_inputs_generated": 0,
+    "n_inputs_stored": 0,
+    "n_output_values": 0,
+    "n_output_values_stored": 0,
+    "n_outputs": 0,
+    "n_outputs_hash_only": 0,
+    "n_outputs_stored": 0
+   },
+   "title": "cuBLASLt 12.8.3.14 heuristic choices for the Evo 2 projection shapes at M = 1..256 (every integer) x the 72 settings of heur.lt_heuristic_12_8_3_14 (R3)"
+  },
+  {
+   "files": [
+    {
+     "bytes": 1666729,
+     "file": "data/r4/unverified_split_combos.json",
+     "sha256": "67984f06b5ca5accb487ca79a822e3b2d81ebc2487ec3e2eb396017b7efd0b68"
+    },
+    {
+     "bytes": 10891043,
+     "file": "data/r4/unverified_split_combos.npz",
+     "sha256": "3c9043308ff7fad220c93f8bff14273a373488f0a963c061d8aa862316529183"
+    },
+    {
+     "bytes": 3928098,
+     "file": "data/r4/unverified_split_combos.part1.npz",
+     "sha256": "e20f0865f5a3aa04face894cd07c44c3e7cee675fae29150d6b4acf7d546d3f9"
+    }
+   ],
+   "group": "r4",
+   "id": "r4.unverified_split_combos",
+   "json": "data/r4/unverified_split_combos.json",
+   "kind": "gemm",
+   "level": "torch._scaled_mm",
+   "n_cases": 465,
+   "n_hw_error": 0,
+   "n_outputs": 465,
+   "stats": {
+    "n_cases": 465,
+    "n_inputs_generated": 0,
+    "n_inputs_stored": 930,
+    "n_output_values": 3576,
+    "n_output_values_stored": 3576,
+    "n_outputs": 465,
+    "n_outputs_hash_only": 0,
+    "n_outputs_stored": 465
+   },
+   "title": "R4: torch._scaled_mm on the smallest torch-reachable table row of every split-K combination (fast, S, scheme, out, fmt pair) without a hardware replay (156 of the truth table incl. the 3 S=29 ones, on randn*40 and split-structured adversarial data; + 153 combinations that only the WS2 R2/R2x rows add, adversarial data), bits + logged cuBLASLt config"
+  },
+  {
+   "files": [
+    {
+     "bytes": 1006967,
+     "file": "data/r5/autosplit_in_envelope.json",
+     "sha256": "2325e19097803e5d0f0c4cc1245e9fe431ce717b46dd987dd16f8c3dd5c6452b"
+    },
+    {
+     "bytes": 6318894,
+     "file": "data/r5/autosplit_in_envelope.npz",
+     "sha256": "9ee038932f0c416656969e7432531fdc48ef5f9adc4ccef30b36122e3d520675"
+    }
+   ],
+   "group": "r5",
+   "id": "r5.autosplit_in_envelope",
+   "json": "data/r5/autosplit_in_envelope.json",
+   "kind": "gemm",
+   "level": "torch._scaled_mm",
+   "n_cases": 300,
+   "n_hw_error": 0,
+   "n_outputs": 300,
+   "stats": {
+    "n_cases": 300,
+    "n_inputs_generated": 0,
+    "n_inputs_stored": 600,
+    "n_output_values": 9110,
+    "n_output_values_stored": 9110,
+    "n_outputs": 300,
+    "n_outputs_hash_only": 0,
+    "n_outputs_stored": 300
+   },
+   "title": "R5: 300 random in-envelope table shapes at the torch default workspace (1 MiB, no alignment preference), mixed out dtype / fast / format pair, bits + logged cuBLASLt config"
+  },
+  {
+   "files": [
+    {
+     "bytes": 376914,
+     "file": "data/r6/zero_dims.json",
+     "sha256": "77c9dcdf29811404faab998090919b86afc30236f77b40e0da25ceb8f3d24593"
+    },
+    {
+     "bytes": 119279,
+     "file": "data/r6/zero_dims.npz",
+     "sha256": "c38f64b2c5519d1c6f0d81385a27fa008d2672ad6fecea767a5d168eaa593efc"
+    }
+   ],
+   "group": "r6",
+   "id": "r6.zero_dims",
+   "json": "data/r6/zero_dims.json",
+   "kind": "gemm",
+   "level": "torch._scaled_mm",
+   "n_cases": 98,
+   "n_hw_error": 70,
+   "n_outputs": 350,
+   "stats": {
+    "n_cases": 98,
+    "n_inputs_generated": 0,
+    "n_inputs_stored": 196,
+    "n_output_values": 25600,
+    "n_output_values_stored": 25600,
+    "n_outputs": 350,
+    "n_outputs_hash_only": 0,
+    "n_outputs_stored": 280
+   },
+   "title": "R6: zero-dimension torch._scaled_mm GEMMs on the RTX 4060 (M/N/K = 0 with real scales, every out dtype and format pair; K = 0 with special scales)"
+  }
+ ],
+ "title": "mmaemu WS2 pre-swap recordings on the RTX 4060 (sm_89), 2026-10",
+ "totals": {
+  "bytes": 37243541,
+  "cases": 2332,
+  "files": 19,
+  "hw_error_outputs": 9395,
+  "outputs": 11579,
+  "outputs_stored": 2184,
+  "recordings": 9
+ }
+}

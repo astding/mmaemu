@@ -1,0 +1,53 @@
+{
+ "device": "NVIDIA GeForce RTX 5070 Ti",
+ "gauss": {
+  "n_outputs": 262144,
+  "hw_eq_soft_ada_bitwise": 212100,
+  "hw_eq_soft_b200": 262144,
+  "soft1_eq_python_model": 262144,
+  "soft2_eq_python_model": 262144,
+  "soft3_eq_python_model": 262144,
+  "soft4_eq_python_model": 262144
+ },
+ "wide": {
+  "n_outputs": 262144,
+  "hw_eq_soft_ada_bitwise": 199353,
+  "hw_eq_soft_b200": 262144,
+  "soft1_eq_python_model": 262144,
+  "soft2_eq_python_model": 262144,
+  "soft3_eq_python_model": 262144,
+  "soft4_eq_python_model": 262144
+ },
+ "e4m3": {
+  "n_outputs": 262144,
+  "hw_eq_soft_ada_bitwise": 245548,
+  "hw_eq_soft_b200": 262144,
+  "soft1_eq_python_model": 262144,
+  "soft2_eq_python_model": 262144,
+  "soft3_eq_python_model": 262144,
+  "soft4_eq_python_model": 262144
+ },
+ "designB": {
+  "n_outputs": 262144,
+  "hw_eq_soft_ada_bitwise": 138150,
+  "hw_eq_soft_b200": 262144,
+  "soft1_eq_python_model": 262144,
+  "soft2_eq_python_model": 262144,
+  "soft3_eq_python_model": 262144,
+  "soft4_eq_python_model": 262144,
+  "property_holds_hw": 262144,
+  "property_holds_soft_ada": 138150,
+  "property_holds_soft_b200": 262144,
+  "property_holds_soft_latec": 159678,
+  "property_holds_soft_F26": 147600
+ },
+ "xenc": {
+  "n_outputs": 262144,
+  "hw_eq_soft_ada_bitwise": 261669,
+  "hw_eq_soft_b200": 262144,
+  "soft1_eq_python_model": 262144,
+  "soft2_eq_python_model": 262144,
+  "soft3_eq_python_model": 262144,
+  "soft4_eq_python_model": 262144
+ }
+}

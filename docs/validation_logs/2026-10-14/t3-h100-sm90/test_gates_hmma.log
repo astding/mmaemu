@@ -1,0 +1,6 @@
+.sss                                                                     [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_gates_hmma.py:337: tc3 is only auto-selected on validated capabilities
+SKIPPED [1] tests/test_gates_hmma.py:356: the opt-in path is exercised on a device where the gates pass
+SKIPPED [1] tests/test_gates_hmma.py:399: needs a device where both gates pass
+1 passed, 3 skipped, 17 deselected in 2.49s

@@ -1,0 +1,497 @@
+{
+  "gpu": "NVIDIA H100 PCIe",
+  "capability": [
+    9,
+    0
+  ],
+  "torch": "2.7.1+cu128",
+  "cuda": "12.8",
+  "rows": [
+    {
+      "backend": "cuda:v1",
+      "call": 0,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "e8f449f70cd2d660706840bd9290eb6de27adfd87bbb20ed6fb42e8b0f378177",
+      "bf16_sha256": "d135bccc9c8db5d7e28aa242b3c133d14b3c98f180f8a2419af1be23a869fba3",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 1,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "44dbfcd6a03962eb71598136a170bca82af952837b77a974423bae9b174f88d1",
+      "bf16_sha256": "cd341b7894736249aa3953747198e1c90731be6e12e317431ba98ba543663228",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 2,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "8b97ff711c29d970edc863d89c1a9b558b8a464afa5256f33602aef2e2da4b32",
+      "bf16_sha256": "dfe532f42ca91726caac4bb3b0c4775758cfa8660da6d835194f1d05a62f4a08",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 3,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "92f4c7d19ed8ba4c10e43d061fd952af0514b69bb1c4c96d1bcb9d030d114a03",
+      "bf16_sha256": "8b676fc79b66e02d01921724b0201fb2c51c7243dbd1d5a1db8f0d7cb8cb81d8",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 4,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "2f515d0b6755066375d770b7b613ad44907ef5c6b9bb84440f0a1b3acc8a1f26",
+      "bf16_sha256": "aa55667b05a33c396873f6c77a9cbb41813e8439670a9c2158dcb5bfeffc30d5",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 5,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "f0a21905886c268f1627981a32cf43934169590dd0b7dc1c18b8d97f109f04fd",
+      "bf16_sha256": "3e72573726a9ae15763aa5f7005a2ba7ac883c3a5c6a1d9834558292901a02cc",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 6,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "48ec4893e9eb4c9f888ca9533888784bd98aa24a325c0b0c71be422dc7fa2828",
+      "bf16_sha256": "852add77f8cdb7a136c8317f8e339ecbd3845b269e421bf7a3711e2a22a77997",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 7,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "5b231f97d01519f62478ff56e84989e79de87058bc833503bb7564c78689de66",
+      "bf16_sha256": "2e0352e26762ce7b594d768e09aa1b9ae9a94b7b4e7ce460cced856e22ddcc86",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 8,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "772551079907d9f6457611e34b35c9cd34856ce797b5d08a9dd8d1b8c6c10a62",
+      "bf16_sha256": "9c483307a8513df617c39b8fa6d7fd200b5265929bfffcd59e3dd7aaba73fde2",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 9,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "6e5fe40fa65d9363c1dec1bfba14fc5606bbe728713ff8f78f6fdda5e98d2d2b",
+      "bf16_sha256": "412a827fe153d130fddd3fc12f5c766beec9c56dc268e0278a58fe4c0afd25a6",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 10,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "6cf137686053c99799765844c42ff78920420a955f0d13bd51de52356af9876e",
+      "bf16_sha256": "4bb3202be4513f78d4ab8f02067225d1ae36edb25dba758f8696744415d93b3a",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 11,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "7dc4e157979e67ab88812ec1259edf6f73f4e8f05ac667a80d657a8eb2d77017",
+      "bf16_sha256": "826a63f805c9ebed78258d33ee2f07ce827044f6e64b4534fb55bc96b2192ac9",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 12,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "e467f542fa6cda56e7a8843c0634ae30c7185e37732c9a9d0f8926a39a81b367",
+      "bf16_sha256": "9017477e63ea2802bfb4ff7ef937fb01f88590efb6252e163f9cb6a6afb53f87",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 13,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "b4f7b2c50d056bc5a1553644e5c7103d90a0b0cc54013d19389cc3f788b3fc89",
+      "bf16_sha256": "ab8a61057811a3b1aed54dcbaa9b72008f601ee17f00ec1ca6175a15a712cec3",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 14,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "1fc83087837bd7fe486d2713fbaa3a19eff5032190be038c4e7cc6b919b24457",
+      "bf16_sha256": "80021aacf78d36103073babe91ef105039e57f4137276428218b3ec4ead6ab9d",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 15,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "eb9f0f040c54a8e019846206d3c84b23db9b4287100fb3663c1779ccdbc205de",
+      "bf16_sha256": "54e6336441afd8faaacd8326c82eeb45ca0898a730d9e1de32e5177931b5f1dd",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 16,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "4218ffeab4e0f96b2a98164a85bfaa0eb01ab54bdc8308d390e1c5a52f950b0b",
+      "bf16_sha256": "35074644c926957ff8f7a661185b74c91b73c1d56fd37c08b1f20d35d1f0f20f",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 17,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "b59577704f3ff85968d563442ace4cff08a115de477175a70b481c6e788ae184",
+      "bf16_sha256": "588cedfad6708f323735a4cfcaab06d11717d898e90fa8efd569a58e63bbc69e",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 18,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "763c512bb0b11d37da9e7ef0a2c2196772924267e547f05a6e85c036b5d7b5ed",
+      "bf16_sha256": "87e3baefcd89765ddab578c4cc8c98eb65d0d952bd994c4cca87e83d0ba8a075",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 19,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "3aee3b7bbdb1318ebdbfdebdcbaa6703ca793a508f435d4d3f0f32239b0c5eb6",
+      "bf16_sha256": "e7b4e0943e18772d8b097517c2793ac1eebc7dbb0403e0af46ef3e3434400893",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v1",
+      "call": 20,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "52ea37cd7a82bfde8d194c5e39ccbf836792c6b8daa2663da0b6f8e161c17171",
+      "bf16_sha256": "8bd9a50cf4f6f97d409eb4a1d78f246d2ee6d3242c8ed9854b9a02f32c4d9fb0",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 0,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "e8f449f70cd2d660706840bd9290eb6de27adfd87bbb20ed6fb42e8b0f378177",
+      "bf16_sha256": "d135bccc9c8db5d7e28aa242b3c133d14b3c98f180f8a2419af1be23a869fba3",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 1,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "44dbfcd6a03962eb71598136a170bca82af952837b77a974423bae9b174f88d1",
+      "bf16_sha256": "cd341b7894736249aa3953747198e1c90731be6e12e317431ba98ba543663228",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 2,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "8b97ff711c29d970edc863d89c1a9b558b8a464afa5256f33602aef2e2da4b32",
+      "bf16_sha256": "dfe532f42ca91726caac4bb3b0c4775758cfa8660da6d835194f1d05a62f4a08",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 3,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "92f4c7d19ed8ba4c10e43d061fd952af0514b69bb1c4c96d1bcb9d030d114a03",
+      "bf16_sha256": "8b676fc79b66e02d01921724b0201fb2c51c7243dbd1d5a1db8f0d7cb8cb81d8",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 4,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "2f515d0b6755066375d770b7b613ad44907ef5c6b9bb84440f0a1b3acc8a1f26",
+      "bf16_sha256": "aa55667b05a33c396873f6c77a9cbb41813e8439670a9c2158dcb5bfeffc30d5",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 5,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "f0a21905886c268f1627981a32cf43934169590dd0b7dc1c18b8d97f109f04fd",
+      "bf16_sha256": "3e72573726a9ae15763aa5f7005a2ba7ac883c3a5c6a1d9834558292901a02cc",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 6,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "48ec4893e9eb4c9f888ca9533888784bd98aa24a325c0b0c71be422dc7fa2828",
+      "bf16_sha256": "852add77f8cdb7a136c8317f8e339ecbd3845b269e421bf7a3711e2a22a77997",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 7,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "5b231f97d01519f62478ff56e84989e79de87058bc833503bb7564c78689de66",
+      "bf16_sha256": "2e0352e26762ce7b594d768e09aa1b9ae9a94b7b4e7ce460cced856e22ddcc86",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 8,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "772551079907d9f6457611e34b35c9cd34856ce797b5d08a9dd8d1b8c6c10a62",
+      "bf16_sha256": "9c483307a8513df617c39b8fa6d7fd200b5265929bfffcd59e3dd7aaba73fde2",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 9,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "6e5fe40fa65d9363c1dec1bfba14fc5606bbe728713ff8f78f6fdda5e98d2d2b",
+      "bf16_sha256": "412a827fe153d130fddd3fc12f5c766beec9c56dc268e0278a58fe4c0afd25a6",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 10,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "6cf137686053c99799765844c42ff78920420a955f0d13bd51de52356af9876e",
+      "bf16_sha256": "4bb3202be4513f78d4ab8f02067225d1ae36edb25dba758f8696744415d93b3a",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 11,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "7dc4e157979e67ab88812ec1259edf6f73f4e8f05ac667a80d657a8eb2d77017",
+      "bf16_sha256": "826a63f805c9ebed78258d33ee2f07ce827044f6e64b4534fb55bc96b2192ac9",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 12,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "e467f542fa6cda56e7a8843c0634ae30c7185e37732c9a9d0f8926a39a81b367",
+      "bf16_sha256": "9017477e63ea2802bfb4ff7ef937fb01f88590efb6252e163f9cb6a6afb53f87",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 13,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "b4f7b2c50d056bc5a1553644e5c7103d90a0b0cc54013d19389cc3f788b3fc89",
+      "bf16_sha256": "ab8a61057811a3b1aed54dcbaa9b72008f601ee17f00ec1ca6175a15a712cec3",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 14,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "1fc83087837bd7fe486d2713fbaa3a19eff5032190be038c4e7cc6b919b24457",
+      "bf16_sha256": "80021aacf78d36103073babe91ef105039e57f4137276428218b3ec4ead6ab9d",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 15,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "eb9f0f040c54a8e019846206d3c84b23db9b4287100fb3663c1779ccdbc205de",
+      "bf16_sha256": "54e6336441afd8faaacd8326c82eeb45ca0898a730d9e1de32e5177931b5f1dd",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 16,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "4218ffeab4e0f96b2a98164a85bfaa0eb01ab54bdc8308d390e1c5a52f950b0b",
+      "bf16_sha256": "35074644c926957ff8f7a661185b74c91b73c1d56fd37c08b1f20d35d1f0f20f",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 17,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "b59577704f3ff85968d563442ace4cff08a115de477175a70b481c6e788ae184",
+      "bf16_sha256": "588cedfad6708f323735a4cfcaab06d11717d898e90fa8efd569a58e63bbc69e",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 18,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "763c512bb0b11d37da9e7ef0a2c2196772924267e547f05a6e85c036b5d7b5ed",
+      "bf16_sha256": "87e3baefcd89765ddab578c4cc8c98eb65d0d952bd994c4cca87e83d0ba8a075",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 19,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "3aee3b7bbdb1318ebdbfdebdcbaa6703ca793a508f435d4d3f0f32239b0c5eb6",
+      "bf16_sha256": "e7b4e0943e18772d8b097517c2793ac1eebc7dbb0403e0af46ef3e3434400893",
+      "status": "PASS"
+    },
+    {
+      "backend": "cuda:v4",
+      "call": 20,
+      "accumulator_matches_ada": true,
+      "bf16_matches_ada": true,
+      "accumulator_sha256": "52ea37cd7a82bfde8d194c5e39ccbf836792c6b8daa2663da0b6f8e161c17171",
+      "bf16_sha256": "8bd9a50cf4f6f97d409eb4a1d78f246d2ee6d3242c8ed9854b9a02f32c4d9fb0",
+      "status": "PASS"
+    }
+  ],
+  "native_observations": [
+    {
+      "call": 0,
+      "matches_ada": false,
+      "differing_values": 296542
+    },
+    {
+      "call": 1,
+      "matches_ada": false,
+      "differing_values": 378996
+    },
+    {
+      "call": 2,
+      "matches_ada": false,
+      "differing_values": 571318
+    },
+    {
+      "call": 3,
+      "matches_ada": false,
+      "differing_values": 539265
+    },
+    {
+      "call": 4,
+      "matches_ada": false,
+      "differing_values": 703403
+    },
+    {
+      "call": 5,
+      "matches_ada": false,
+      "differing_values": 663997
+    },
+    {
+      "call": 6,
+      "matches_ada": false,
+      "differing_values": 581197
+    },
+    {
+      "call": 7,
+      "matches_ada": false,
+      "differing_values": 758793
+    },
+    {
+      "call": 8,
+      "matches_ada": false,
+      "differing_values": 691585
+    },
+    {
+      "call": 9,
+      "matches_ada": false,
+      "differing_values": 688095
+    },
+    {
+      "call": 10,
+      "matches_ada": false,
+      "differing_values": 861988
+    },
+    {
+      "call": 11,
+      "matches_ada": false,
+      "differing_values": 795902
+    },
+    {
+      "call": 12,
+      "matches_ada": false,
+      "differing_values": 698480
+    },
+    {
+      "call": 13,
+      "matches_ada": false,
+      "differing_values": 852463
+    },
+    {
+      "call": 14,
+      "matches_ada": false,
+      "differing_values": 763793
+    },
+    {
+      "call": 15,
+      "matches_ada": false,
+      "differing_values": 561409
+    },
+    {
+      "call": 16,
+      "matches_ada": false,
+      "differing_values": 628736
+    },
+    {
+      "call": 17,
+      "matches_ada": false,
+      "differing_values": 640103
+    },
+    {
+      "call": 18,
+      "matches_ada": false,
+      "differing_values": 571867
+    },
+    {
+      "call": 19,
+      "matches_ada": false,
+      "differing_values": 634777
+    },
+    {
+      "call": 20,
+      "matches_ada": false,
+      "differing_values": 458399
+    }
+  ],
+  "status": "PASS"
+}

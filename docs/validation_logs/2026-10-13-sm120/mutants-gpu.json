@@ -1,0 +1,226 @@
+{
+  "format": "mmaemu-mutants/1",
+  "tier": "gpu",
+  "date": "2026-10-13 08:33:35",
+  "repo_commit": "1f9ced16bbafef40e4787e026518d695ca42bcc4+dirty",
+  "mmaemu_file": "/data/quant/stsc/research/mmaemu-dev/mmaemu/__init__.py",
+  "mmaemu_version": "0.1.0.dev0",
+  "python": "3.12.2",
+  "argv": [
+    "tools/mutants/run.py",
+    "--tier",
+    "gpu",
+    "--threads",
+    "4",
+    "--timeout",
+    "180",
+    "--out",
+    "build/resume-logs/mutants-gpu-complete.json"
+  ],
+  "package_src": null,
+  "source_tree": null,
+  "seconds": 150.6,
+  "verdict": "PASS",
+  "problems": [],
+  "counts": {
+    "survived": 1,
+    "killed": 7
+  },
+  "mutants": [
+    {
+      "name": "kernel_identity",
+      "group": "identity",
+      "tier": "gpu",
+      "source": "/data/quant/tcemu_audit/work/verify-a3-integration-review-5/build.py",
+      "description": "committed fatbins removed: the shipped sources are compiled by NVRTC (must survive)",
+      "rc": 0,
+      "killed_by": [],
+      "pytest_summary": [
+        "96 passed, 187 skipped, 2520 deselected, 5 warnings in 130.55s (0:02:10)"
+      ],
+      "tests": [
+        "tools/mutants/test_gpu.py",
+        "tests/test_kernels_ieee.py",
+        "tests/test_fast_kernels.py",
+        "tests/test_cuda_runtime.py",
+        "tests/test_hw_mini.py"
+      ],
+      "marker": "gpu",
+      "status": "survived",
+      "seconds": 131.5
+    },
+    {
+      "name": "kernel_rn",
+      "group": "kernel",
+      "tier": "gpu",
+      "source": "/data/quant/tcemu_audit/work/verify-a3-integration-review-5/build.py",
+      "description": "trunc_to rounds to nearest",
+      "rc": 1,
+      "killed_by": [
+        "tools/mutants/test_gpu.py::test_mutated_nvrtc_conformance"
+      ],
+      "pytest_summary": [
+        "1 failed, 2520 deselected in 1.53s"
+      ],
+      "tests": [
+        "tools/mutants/test_gpu.py",
+        "tests/test_kernels_ieee.py",
+        "tests/test_fast_kernels.py",
+        "tests/test_cuda_runtime.py",
+        "tests/test_hw_mini.py"
+      ],
+      "marker": "gpu",
+      "status": "killed",
+      "seconds": 2.2
+    },
+    {
+      "name": "kernel_noacc",
+      "group": "kernel",
+      "tier": "gpu",
+      "source": "/data/quant/tcemu_audit/work/verify-a3-integration-review-5/build.py",
+      "description": "the accumulator does not take part in the block alignment",
+      "rc": 1,
+      "killed_by": [
+        "tools/mutants/test_gpu.py::test_mutated_nvrtc_conformance"
+      ],
+      "pytest_summary": [
+        "1 failed, 2520 deselected in 1.51s"
+      ],
+      "tests": [
+        "tools/mutants/test_gpu.py",
+        "tests/test_kernels_ieee.py",
+        "tests/test_fast_kernels.py",
+        "tests/test_cuda_runtime.py",
+        "tests/test_hw_mini.py"
+      ],
+      "marker": "gpu",
+      "status": "killed",
+      "seconds": 2.1
+    },
+    {
+      "name": "kernel_rowtile",
+      "group": "kernel",
+      "tier": "gpu",
+      "source": "/data/quant/tcemu_audit/work/verify-a3-integration-review-5/build.py",
+      "description": "outputs of thread blocks with blockIdx.y > 0 perturbed by one ulp",
+      "rc": 1,
+      "killed_by": [
+        "tools/mutants/test_gpu.py::test_mutated_nvrtc_conformance"
+      ],
+      "pytest_summary": [
+        "1 failed, 2520 deselected in 1.57s"
+      ],
+      "tests": [
+        "tools/mutants/test_gpu.py",
+        "tests/test_kernels_ieee.py",
+        "tests/test_fast_kernels.py",
+        "tests/test_cuda_runtime.py",
+        "tests/test_hw_mini.py"
+      ],
+      "marker": "gpu",
+      "status": "killed",
+      "seconds": 2.2
+    },
+    {
+      "name": "kernel_floor",
+      "group": "kernel",
+      "tier": "gpu",
+      "source": "/data/quant/tcemu_audit/work/verify-a3-integration-review-5/build.py",
+      "description": "tail row tiles never launched",
+      "rc": 1,
+      "killed_by": [
+        "tools/mutants/test_gpu.py::test_mutated_nvrtc_conformance"
+      ],
+      "pytest_summary": [
+        "1 failed, 2520 deselected in 1.49s"
+      ],
+      "tests": [
+        "tools/mutants/test_gpu.py",
+        "tests/test_kernels_ieee.py",
+        "tests/test_fast_kernels.py",
+        "tests/test_cuda_runtime.py",
+        "tests/test_hw_mini.py"
+      ],
+      "marker": "gpu",
+      "status": "killed",
+      "seconds": 2.1
+    },
+    {
+      "name": "kernel_nan_as_zero",
+      "group": "kernel",
+      "tier": "gpu",
+      "source": "audit B2",
+      "description": "NaN codes decoded as 0 (B2) -- reached only if execute_plan's sanitisation is bypassed",
+      "rc": 1,
+      "killed_by": [
+        "tools/mutants/test_gpu.py::test_mutated_nan_propagation"
+      ],
+      "pytest_summary": [
+        "1 failed, 1 passed, 2520 deselected, 1 warning in 3.02s"
+      ],
+      "tests": [
+        "tools/mutants/test_gpu.py",
+        "tests/test_kernels_ieee.py",
+        "tests/test_fast_kernels.py",
+        "tests/test_cuda_runtime.py",
+        "tests/test_hw_mini.py"
+      ],
+      "marker": "gpu",
+      "status": "killed",
+      "seconds": 4.0
+    },
+    {
+      "name": "kernel_zero_lut",
+      "group": "kernel",
+      "tier": "gpu",
+      "source": "audit B3",
+      "description": "__constant__ decode table all zeros",
+      "rc": 1,
+      "killed_by": [
+        "tools/mutants/test_gpu.py::test_mutated_nvrtc_conformance"
+      ],
+      "pytest_summary": [
+        "1 failed, 2520 deselected in 1.60s"
+      ],
+      "tests": [
+        "tools/mutants/test_gpu.py",
+        "tests/test_kernels_ieee.py",
+        "tests/test_fast_kernels.py",
+        "tests/test_cuda_runtime.py",
+        "tests/test_hw_mini.py"
+      ],
+      "marker": "gpu",
+      "status": "killed",
+      "seconds": 2.3
+    },
+    {
+      "name": "kernel_fmad_true",
+      "group": "kernel",
+      "tier": "gpu",
+      "source": "SPEC \u00a78 (--fmad=false pinned)",
+      "description": "kernels compiled with --fmad=true",
+      "rc": 1,
+      "killed_by": [
+        "tools/mutants/test_gpu.py::test_pinned_arithmetic_options"
+      ],
+      "pytest_summary": [
+        "1 failed, 2 passed, 2520 deselected, 1 warning in 2.91s"
+      ],
+      "tests": [
+        "tools/mutants/test_gpu.py",
+        "tests/test_kernels_ieee.py",
+        "tests/test_fast_kernels.py",
+        "tests/test_cuda_runtime.py",
+        "tests/test_hw_mini.py"
+      ],
+      "marker": "gpu",
+      "status": "killed",
+      "seconds": 3.9
+    }
+  ],
+  "component_runs": [
+    "build/resume-logs/mutants-gpu-complete.json",
+    "build/resume-logs/mutants-gpu-nan.json"
+  ],
+  "note": "Combined executed results: full GPU matrix plus targeted NaN rerun after correcting its edit anchor. All unchanged results retained; the earlier anchor error is superseded only by the successful actual rerun."
+}

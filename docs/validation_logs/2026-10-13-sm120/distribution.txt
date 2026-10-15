@@ -1,0 +1,62 @@
+PASS exactly one wheel and one sdist: mmaemu-0.1.0.dev0-py3-none-any.whl, mmaemu-0.1.0.dev0.tar.gz
+PASS wheel file name mmaemu-<ver>-py3-none-any.whl: mmaemu-0.1.0.dev0-py3-none-any.whl
+PASS wheel size <= 25.0 MB: 0.43 MB
+PASS wheel holds only mmaemu/ and its dist-info
+PASS wheel has no bytecode or compiled extensions
+PASS wheel has mmaemu/__init__.py
+PASS wheel has mmaemu/_version.py
+PASS wheel has mmaemu/__main__.py
+PASS wheel has mmaemu/diagnostics.py
+PASS wheel has mmaemu/py.typed
+PASS wheel version == mmaemu/_version.py: file name 0.1.0.dev0, _version.py 0.1.0.dev0
+PASS wheel Metadata-Version >= 2.4 (PEP 639): 2.5
+PASS wheel Name: mmaemu
+PASS wheel Version: 0.1.0.dev0
+PASS wheel License-Expression: Apache-2.0
+PASS wheel License-File entries: LICENSE, LICENSES/BSD-2-Clause-MATLAB-tensor-core.txt, NOTICE
+PASS wheel no 'License ::' classifier next to the expression
+PASS wheel Requires-Python: >=3.10
+PASS wheel Requires-Dist torch, numpy: numpy; torch>=2.5
+PASS wheel is pure (Root-Is-Purelib, py3-none-any): true py3-none-any
+PASS wheel dist-info has licence file LICENSE: mmaemu-0.1.0.dev0.dist-info/licenses/LICENSE (== source tree)
+PASS wheel dist-info has licence file NOTICE: mmaemu-0.1.0.dev0.dist-info/licenses/NOTICE (== source tree)
+PASS wheel dist-info has licence file LICENSES/BSD-2-Clause-MATLAB-tensor-core.txt: mmaemu-0.1.0.dev0.dist-info/licenses/LICENSES/BSD-2-Clause-MATLAB-tensor-core.txt (== source tree)
+PASS wheel has every source-tree file of mmaemu/
+PASS wheel has no mmaemu/ file absent from the source tree
+PASS wheel has the kernel sources (csrc): 7 files
+PASS wheel has the platform data: 3 files
+NOTE wheel has no fatbins (allowed by --allow-missing-fatbins): NVRTC fallback only
+PASS wheel bin/ has no files without a manifest
+PASS sdist file name mmaemu-<ver>.tar.gz: mmaemu-0.1.0.dev0.tar.gz
+PASS sdist entries are under mmaemu-0.1.0.dev0/
+PASS sdist has pyproject.toml
+PASS sdist has README.md
+PASS sdist has CHANGELOG.md
+PASS sdist has CITATION.cff
+PASS sdist has PKG-INFO
+PASS sdist has LICENSE
+PASS sdist has NOTICE
+PASS sdist has LICENSES/BSD-2-Clause-MATLAB-tensor-core.txt
+PASS sdist LICENSE == source tree
+PASS sdist NOTICE == source tree
+PASS sdist LICENSES/BSD-2-Clause-MATLAB-tensor-core.txt == source tree
+PASS sdist Metadata-Version >= 2.4 (PEP 639): 2.5
+PASS sdist Name: mmaemu
+PASS sdist Version: 0.1.0.dev0
+PASS sdist License-Expression: Apache-2.0
+PASS sdist License-File entries: LICENSE, LICENSES/BSD-2-Clause-MATLAB-tensor-core.txt, NOTICE
+PASS sdist no 'License ::' classifier next to the expression
+PASS sdist Requires-Python: >=3.10
+PASS sdist Requires-Dist torch, numpy: numpy; torch>=2.5
+PASS sdist version == mmaemu/_version.py: file name 0.1.0.dev0, _version.py 0.1.0.dev0
+PASS sdist has no fatbins/cubins
+PASS sdist has no bin/, recordings/, results/, docs/, tools/ or bench/
+PASS sdist has no bytecode
+PASS sdist has every source-tree file of mmaemu/ (without bin/): 44 files
+PASS sdist has no mmaemu/ (without bin/) file absent from the source tree
+PASS sdist has every source-tree file of tests/: 51 files
+PASS sdist has no tests/ file absent from the source tree
+PASS sdist has the toolbox licence next to the test vectors: tests/data/toolbox/LICENCE.MATLAB-tensor-core
+PASS distribution version == source tree mmaemu/_version.py: ['0.1.0.dev0'] vs 0.1.0.dev0
+
+check_dist: 60 checks, 0 failed

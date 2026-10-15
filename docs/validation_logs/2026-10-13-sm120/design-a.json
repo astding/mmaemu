@@ -1,0 +1,53 @@
+{
+  "name": "design_a",
+  "passed": false,
+  "reason": "design_a.property: 2392/16384 probe outputs violate the dummy-accumulator property (the fp16 HMMA is not an 8-term F=24 design-A device; tc3 would be inexact)",
+  "details": {
+    "device": "NVIDIA GeForce RTX 5070 Ti",
+    "cc": [
+      12,
+      0
+    ],
+    "gate_version": "1",
+    "kernel": "tc3",
+    "property": {
+      "outputs": 16384,
+      "signs": 2,
+      "mismatches": 2392,
+      "first": {
+        "tile": 0,
+        "row": 0,
+        "col": 0,
+        "E": 13,
+        "a": [
+          32.0,
+          7.5,
+          2.75,
+          144.0,
+          5.5,
+          -2.0,
+          7.0,
+          -5.0
+        ],
+        "b": [
+          -48.0,
+          -1.625,
+          -15.0,
+          80.0,
+          -7.0,
+          -11.0,
+          -26.0,
+          6.5
+        ],
+        "rp": 16786916.0,
+        "rn": -16767516.0,
+        "got": 9700.0,
+        "want": 9701.0
+      },
+      "tiles": 128,
+      "seconds": 0.1544
+    }
+  },
+  "seconds": 0.5072738500020932,
+  "cached": false
+}

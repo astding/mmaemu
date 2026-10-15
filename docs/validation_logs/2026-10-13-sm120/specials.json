@@ -1,0 +1,3909 @@
+{
+ "env": {
+  "gpu": "NVIDIA GeForce RTX 5070 Ti",
+  "torch": "2.7.1+cu128",
+  "cuda": "12.8"
+ },
+ "rows": [
+  {
+   "probe": "Z1 zero acc (A row 0 all +0), scale_a=-1",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z1 zero acc (A row 0 all +0), scale_a=-1",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z1 zero acc (A row 0 all +0), scale_a=-1",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z1 zero acc (A row 0 all +0), scale_a=-1",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z1 zero acc (A row 0 all +0), scale_a=-1",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z1 zero acc (A row 0 all +0), scale_a=-1",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z1b zero acc, scale_b=-1",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z1b zero acc, scale_b=-1",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z1b zero acc, scale_b=-1",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z1b zero acc, scale_b=-1",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z1b zero acc, scale_b=-1",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z1b zero acc, scale_b=-1",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z2 all products -0 (A +0, B negative), scales +1",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z2 all products -0 (A +0, B negative), scales +1",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z2 all products -0 (A +0, B negative), scales +1",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z2 all products -0 (A +0, B negative), scales +1",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z2 all products -0 (A +0, B negative), scales +1",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z2 all products -0 (A +0, B negative), scales +1",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z3 A row of -0 bytes (0x80), B positive",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z3 A row of -0 bytes (0x80), B positive",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z3 A row of -0 bytes (0x80), B positive",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z3 A row of -0 bytes (0x80), B positive",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z3 A row of -0 bytes (0x80), B positive",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z3 A row of -0 bytes (0x80), B positive",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z4 exact cancellation 1*1 + 1*(-1)",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z4 exact cancellation 1*1 + 1*(-1)",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z4 exact cancellation 1*1 + 1*(-1)",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z4 exact cancellation 1*1 + 1*(-1)",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z4 exact cancellation 1*1 + 1*(-1)",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z4 exact cancellation 1*1 + 1*(-1)",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z4b exact cancellation across blocks (k=0 and k=16)",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z4b exact cancellation across blocks (k=0 and k=16)",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z4b exact cancellation across blocks (k=0 and k=16)",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z4b exact cancellation across blocks (k=0 and k=16)",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z4b exact cancellation across blocks (k=0 and k=16)",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z4b exact cancellation across blocks (k=0 and k=16)",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z4c cancellation then negative scale",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z4c cancellation then negative scale",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z4c cancellation then negative scale",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z4c cancellation then negative scale",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z4c cancellation then negative scale",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "Z4c cancellation then negative scale",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U1 acc=2^-18, alpha=2^-120 -> 2^-138 (fp32 subnormal output)",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "2.8698592549372254e-42",
+    "-2.8698592549372254e-42"
+   ],
+   "hw_bits": [
+    "00000800",
+    "80000800"
+   ],
+   "model_cpu_bits": [
+    "00000800",
+    "80000800"
+   ],
+   "model_gpu_bits": [
+    "00000800",
+    "80000800"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U1 acc=2^-18, alpha=2^-120 -> 2^-138 (fp32 subnormal output)",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "2.8698592549372254e-42",
+    "-2.8698592549372254e-42"
+   ],
+   "hw_bits": [
+    "00000800",
+    "80000800"
+   ],
+   "model_cpu_bits": [
+    "00000800",
+    "80000800"
+   ],
+   "model_gpu_bits": [
+    "00000800",
+    "80000800"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U1 acc=2^-18, alpha=2^-120 -> 2^-138 (fp32 subnormal output)",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "-0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U1 acc=2^-18, alpha=2^-120 -> 2^-138 (fp32 subnormal output)",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "-0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U1 acc=2^-18, alpha=2^-120 -> 2^-138 (fp32 subnormal output)",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "-0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U1 acc=2^-18, alpha=2^-120 -> 2^-138 (fp32 subnormal output)",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "-0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U2 acc=1, alpha=fp32(2^-70*2^-60)=2^-130 (subnormal alpha)",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "7.346839692639297e-40",
+    "-7.346839692639297e-40"
+   ],
+   "hw_bits": [
+    "00080000",
+    "80080000"
+   ],
+   "model_cpu_bits": [
+    "00080000",
+    "80080000"
+   ],
+   "model_gpu_bits": [
+    "00080000",
+    "80080000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U2 acc=1, alpha=fp32(2^-70*2^-60)=2^-130 (subnormal alpha)",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "7.346839692639297e-40",
+    "-7.346839692639297e-40"
+   ],
+   "hw_bits": [
+    "00080000",
+    "80080000"
+   ],
+   "model_cpu_bits": [
+    "00080000",
+    "80080000"
+   ],
+   "model_gpu_bits": [
+    "00080000",
+    "80080000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U2 acc=1, alpha=fp32(2^-70*2^-60)=2^-130 (subnormal alpha)",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "7.346839692639297e-40",
+    "-7.346839692639297e-40"
+   ],
+   "hw_bits": [
+    "0008",
+    "8008"
+   ],
+   "model_cpu_bits": [
+    "0008",
+    "8008"
+   ],
+   "model_gpu_bits": [
+    "0008",
+    "8008"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U2 acc=1, alpha=fp32(2^-70*2^-60)=2^-130 (subnormal alpha)",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "7.346839692639297e-40",
+    "-7.346839692639297e-40"
+   ],
+   "hw_bits": [
+    "0008",
+    "8008"
+   ],
+   "model_cpu_bits": [
+    "0008",
+    "8008"
+   ],
+   "model_gpu_bits": [
+    "0008",
+    "8008"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U2 acc=1, alpha=fp32(2^-70*2^-60)=2^-130 (subnormal alpha)",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "-0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U2 acc=1, alpha=fp32(2^-70*2^-60)=2^-130 (subnormal alpha)",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "-0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U3 acc=3, alpha=2^-148 -> 3*2^-148 (subnormal, exact)",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "8.407790785948902e-45",
+    "-8.407790785948902e-45"
+   ],
+   "hw_bits": [
+    "00000006",
+    "80000006"
+   ],
+   "model_cpu_bits": [
+    "00000006",
+    "80000006"
+   ],
+   "model_gpu_bits": [
+    "00000006",
+    "80000006"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U3 acc=3, alpha=2^-148 -> 3*2^-148 (subnormal, exact)",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "8.407790785948902e-45",
+    "-8.407790785948902e-45"
+   ],
+   "hw_bits": [
+    "00000006",
+    "80000006"
+   ],
+   "model_cpu_bits": [
+    "00000006",
+    "80000006"
+   ],
+   "model_gpu_bits": [
+    "00000006",
+    "80000006"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U3 acc=3, alpha=2^-148 -> 3*2^-148 (subnormal, exact)",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "-0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U3 acc=3, alpha=2^-148 -> 3*2^-148 (subnormal, exact)",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "-0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U3 acc=3, alpha=2^-148 -> 3*2^-148 (subnormal, exact)",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "-0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U3 acc=3, alpha=2^-148 -> 3*2^-148 (subnormal, exact)",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "-0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "8000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U4 acc=3, alpha=2^-150 -> rounds (alpha itself rounds to 0 or 2^-149)",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U4 acc=3, alpha=2^-150 -> rounds (alpha itself rounds to 0 or 2^-149)",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "00000000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U4 acc=3, alpha=2^-150 -> rounds (alpha itself rounds to 0 or 2^-149)",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U4 acc=3, alpha=2^-150 -> rounds (alpha itself rounds to 0 or 2^-149)",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U4 acc=3, alpha=2^-150 -> rounds (alpha itself rounds to 0 or 2^-149)",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U4 acc=3, alpha=2^-150 -> rounds (alpha itself rounds to 0 or 2^-149)",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "0000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U5 acc=-2^-18, alpha=2^-140 -> underflow to -0",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "-0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "80000000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "80000000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "80000000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U5 acc=-2^-18, alpha=2^-140 -> underflow to -0",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "-0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "80000000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "80000000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "80000000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U5 acc=-2^-18, alpha=2^-140 -> underflow to -0",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "-0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "8000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "8000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "8000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U5 acc=-2^-18, alpha=2^-140 -> underflow to -0",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "-0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "8000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "8000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "8000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U5 acc=-2^-18, alpha=2^-140 -> underflow to -0",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "-0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "8000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "8000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "8000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U5 acc=-2^-18, alpha=2^-140 -> underflow to -0",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "-0.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "8000",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "8000",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "8000",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U6 acc=1, alpha=2^-20 -> fp16 subnormal output",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "9.5367431640625e-07",
+    "-9.5367431640625e-07"
+   ],
+   "hw_bits": [
+    "35800000",
+    "B5800000"
+   ],
+   "model_cpu_bits": [
+    "35800000",
+    "B5800000"
+   ],
+   "model_gpu_bits": [
+    "35800000",
+    "B5800000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U6 acc=1, alpha=2^-20 -> fp16 subnormal output",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "9.5367431640625e-07",
+    "-9.5367431640625e-07"
+   ],
+   "hw_bits": [
+    "35800000",
+    "B5800000"
+   ],
+   "model_cpu_bits": [
+    "35800000",
+    "B5800000"
+   ],
+   "model_gpu_bits": [
+    "35800000",
+    "B5800000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U6 acc=1, alpha=2^-20 -> fp16 subnormal output",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "9.5367431640625e-07",
+    "-9.5367431640625e-07"
+   ],
+   "hw_bits": [
+    "3580",
+    "B580"
+   ],
+   "model_cpu_bits": [
+    "3580",
+    "B580"
+   ],
+   "model_gpu_bits": [
+    "3580",
+    "B580"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U6 acc=1, alpha=2^-20 -> fp16 subnormal output",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "9.5367431640625e-07",
+    "-9.5367431640625e-07"
+   ],
+   "hw_bits": [
+    "3580",
+    "B580"
+   ],
+   "model_cpu_bits": [
+    "3580",
+    "B580"
+   ],
+   "model_gpu_bits": [
+    "3580",
+    "B580"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U6 acc=1, alpha=2^-20 -> fp16 subnormal output",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "9.5367431640625e-07",
+    "-9.5367431640625e-07"
+   ],
+   "hw_bits": [
+    "0010",
+    "8010"
+   ],
+   "model_cpu_bits": [
+    "0010",
+    "8010"
+   ],
+   "model_gpu_bits": [
+    "0010",
+    "8010"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U6 acc=1, alpha=2^-20 -> fp16 subnormal output",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "9.5367431640625e-07",
+    "-9.5367431640625e-07"
+   ],
+   "hw_bits": [
+    "0010",
+    "8010"
+   ],
+   "model_cpu_bits": [
+    "0010",
+    "8010"
+   ],
+   "model_gpu_bits": [
+    "0010",
+    "8010"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U7 acc=3, alpha=2^-26 -> fp16 underflow (3*2^-26 < 2^-24)",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "4.470348358154297e-08",
+    "-4.470348358154297e-08"
+   ],
+   "hw_bits": [
+    "33400000",
+    "B3400000"
+   ],
+   "model_cpu_bits": [
+    "33400000",
+    "B3400000"
+   ],
+   "model_gpu_bits": [
+    "33400000",
+    "B3400000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U7 acc=3, alpha=2^-26 -> fp16 underflow (3*2^-26 < 2^-24)",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "4.470348358154297e-08",
+    "-4.470348358154297e-08"
+   ],
+   "hw_bits": [
+    "33400000",
+    "B3400000"
+   ],
+   "model_cpu_bits": [
+    "33400000",
+    "B3400000"
+   ],
+   "model_gpu_bits": [
+    "33400000",
+    "B3400000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U7 acc=3, alpha=2^-26 -> fp16 underflow (3*2^-26 < 2^-24)",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "4.470348358154297e-08",
+    "-4.470348358154297e-08"
+   ],
+   "hw_bits": [
+    "3340",
+    "B340"
+   ],
+   "model_cpu_bits": [
+    "3340",
+    "B340"
+   ],
+   "model_gpu_bits": [
+    "3340",
+    "B340"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U7 acc=3, alpha=2^-26 -> fp16 underflow (3*2^-26 < 2^-24)",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "4.470348358154297e-08",
+    "-4.470348358154297e-08"
+   ],
+   "hw_bits": [
+    "3340",
+    "B340"
+   ],
+   "model_cpu_bits": [
+    "3340",
+    "B340"
+   ],
+   "model_gpu_bits": [
+    "3340",
+    "B340"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U7 acc=3, alpha=2^-26 -> fp16 underflow (3*2^-26 < 2^-24)",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "5.960464477539063e-08",
+    "-5.960464477539063e-08"
+   ],
+   "hw_bits": [
+    "0001",
+    "8001"
+   ],
+   "model_cpu_bits": [
+    "0001",
+    "8001"
+   ],
+   "model_gpu_bits": [
+    "0001",
+    "8001"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "U7 acc=3, alpha=2^-26 -> fp16 underflow (3*2^-26 < 2^-24)",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "5.960464477539063e-08",
+    "-5.960464477539063e-08"
+   ],
+   "hw_bits": [
+    "0001",
+    "8001"
+   ],
+   "model_cpu_bits": [
+    "0001",
+    "8001"
+   ],
+   "model_gpu_bits": [
+    "0001",
+    "8001"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "O1 acc=448*448*32 = 6.4e6 -> fp16 overflow",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "6422528.0",
+    "-6422528.0"
+   ],
+   "hw_bits": [
+    "4AC40000",
+    "CAC40000"
+   ],
+   "model_cpu_bits": [
+    "4AC40000",
+    "CAC40000"
+   ],
+   "model_gpu_bits": [
+    "4AC40000",
+    "CAC40000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "O1 acc=448*448*32 = 6.4e6 -> fp16 overflow",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "6422528.0",
+    "-6422528.0"
+   ],
+   "hw_bits": [
+    "4AC40000",
+    "CAC40000"
+   ],
+   "model_cpu_bits": [
+    "4AC40000",
+    "CAC40000"
+   ],
+   "model_gpu_bits": [
+    "4AC40000",
+    "CAC40000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "O1 acc=448*448*32 = 6.4e6 -> fp16 overflow",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "6422528.0",
+    "-6422528.0"
+   ],
+   "hw_bits": [
+    "4AC4",
+    "CAC4"
+   ],
+   "model_cpu_bits": [
+    "4AC4",
+    "CAC4"
+   ],
+   "model_gpu_bits": [
+    "4AC4",
+    "CAC4"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "O1 acc=448*448*32 = 6.4e6 -> fp16 overflow",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "6422528.0",
+    "-6422528.0"
+   ],
+   "hw_bits": [
+    "4AC4",
+    "CAC4"
+   ],
+   "model_cpu_bits": [
+    "4AC4",
+    "CAC4"
+   ],
+   "model_gpu_bits": [
+    "4AC4",
+    "CAC4"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "O1 acc=448*448*32 = 6.4e6 -> fp16 overflow",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "inf",
+    "-inf"
+   ],
+   "hw_bits": [
+    "7C00",
+    "FC00"
+   ],
+   "model_cpu_bits": [
+    "7C00",
+    "FC00"
+   ],
+   "model_gpu_bits": [
+    "7C00",
+    "FC00"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "O1 acc=448*448*32 = 6.4e6 -> fp16 overflow",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "inf",
+    "-inf"
+   ],
+   "hw_bits": [
+    "7C00",
+    "FC00"
+   ],
+   "model_cpu_bits": [
+    "7C00",
+    "FC00"
+   ],
+   "model_gpu_bits": [
+    "7C00",
+    "FC00"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "O2 acc=448*448, alpha=2^100 -> fp32 overflow",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "2.5442254606820655e+35",
+    "-2.5442254606820655e+35"
+   ],
+   "hw_bits": [
+    "7A440000",
+    "FA440000"
+   ],
+   "model_cpu_bits": [
+    "7A440000",
+    "FA440000"
+   ],
+   "model_gpu_bits": [
+    "7A440000",
+    "FA440000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "O2 acc=448*448, alpha=2^100 -> fp32 overflow",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "2.5442254606820655e+35",
+    "-2.5442254606820655e+35"
+   ],
+   "hw_bits": [
+    "7A440000",
+    "FA440000"
+   ],
+   "model_cpu_bits": [
+    "7A440000",
+    "FA440000"
+   ],
+   "model_gpu_bits": [
+    "7A440000",
+    "FA440000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "O2 acc=448*448, alpha=2^100 -> fp32 overflow",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "2.5442254606820655e+35",
+    "-2.5442254606820655e+35"
+   ],
+   "hw_bits": [
+    "7A44",
+    "FA44"
+   ],
+   "model_cpu_bits": [
+    "7A44",
+    "FA44"
+   ],
+   "model_gpu_bits": [
+    "7A44",
+    "FA44"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "O2 acc=448*448, alpha=2^100 -> fp32 overflow",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "2.5442254606820655e+35",
+    "-2.5442254606820655e+35"
+   ],
+   "hw_bits": [
+    "7A44",
+    "FA44"
+   ],
+   "model_cpu_bits": [
+    "7A44",
+    "FA44"
+   ],
+   "model_gpu_bits": [
+    "7A44",
+    "FA44"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "O2 acc=448*448, alpha=2^100 -> fp32 overflow",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "inf",
+    "-inf"
+   ],
+   "hw_bits": [
+    "7C00",
+    "FC00"
+   ],
+   "model_cpu_bits": [
+    "7C00",
+    "FC00"
+   ],
+   "model_gpu_bits": [
+    "7C00",
+    "FC00"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "O2 acc=448*448, alpha=2^100 -> fp32 overflow",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "inf",
+    "-inf"
+   ],
+   "hw_bits": [
+    "7C00",
+    "FC00"
+   ],
+   "model_cpu_bits": [
+    "7C00",
+    "FC00"
+   ],
+   "model_gpu_bits": [
+    "7C00",
+    "FC00"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "O3 alpha = fp32(2^80*2^80) = inf, acc=0 and acc=1",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "nan",
+    "inf"
+   ],
+   "hw_bits": [
+    "7FFFFFFF",
+    "7F800000"
+   ],
+   "model_cpu_bits": [
+    "7FFFFFFF",
+    "7F800000"
+   ],
+   "model_gpu_bits": [
+    "7FFFFFFF",
+    "7F800000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "O3 alpha = fp32(2^80*2^80) = inf, acc=0 and acc=1",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "nan",
+    "inf"
+   ],
+   "hw_bits": [
+    "7FFFFFFF",
+    "7F800000"
+   ],
+   "model_cpu_bits": [
+    "7FFFFFFF",
+    "7F800000"
+   ],
+   "model_gpu_bits": [
+    "7FFFFFFF",
+    "7F800000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "O3 alpha = fp32(2^80*2^80) = inf, acc=0 and acc=1",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "nan",
+    "inf"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7F80"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7F80"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7F80"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "O3 alpha = fp32(2^80*2^80) = inf, acc=0 and acc=1",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "nan",
+    "inf"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7F80"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7F80"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7F80"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "O3 alpha = fp32(2^80*2^80) = inf, acc=0 and acc=1",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "nan",
+    "inf"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7C00"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7C00"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7C00"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "O3 alpha = fp32(2^80*2^80) = inf, acc=0 and acc=1",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "nan",
+    "inf"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7C00"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7C00"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7C00"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "E1 e5m2 57344 x e4m3 448 (x32)",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "822083584.0",
+    "-822083584.0"
+   ],
+   "hw_bits": [
+    "4E440000",
+    "CE440000"
+   ],
+   "model_cpu_bits": [
+    "4E440000",
+    "CE440000"
+   ],
+   "model_gpu_bits": [
+    "4E440000",
+    "CE440000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "E1 e5m2 57344 x e4m3 448 (x32)",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "822083584.0",
+    "-822083584.0"
+   ],
+   "hw_bits": [
+    "4E440000",
+    "CE440000"
+   ],
+   "model_cpu_bits": [
+    "4E440000",
+    "CE440000"
+   ],
+   "model_gpu_bits": [
+    "4E440000",
+    "CE440000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "E1 e5m2 57344 x e4m3 448 (x32)",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "822083584.0",
+    "-822083584.0"
+   ],
+   "hw_bits": [
+    "4E44",
+    "CE44"
+   ],
+   "model_cpu_bits": [
+    "4E44",
+    "CE44"
+   ],
+   "model_gpu_bits": [
+    "4E44",
+    "CE44"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "E1 e5m2 57344 x e4m3 448 (x32)",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "822083584.0",
+    "-822083584.0"
+   ],
+   "hw_bits": [
+    "4E44",
+    "CE44"
+   ],
+   "model_cpu_bits": [
+    "4E44",
+    "CE44"
+   ],
+   "model_gpu_bits": [
+    "4E44",
+    "CE44"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "E1 e5m2 57344 x e4m3 448 (x32)",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "inf",
+    "-inf"
+   ],
+   "hw_bits": [
+    "7C00",
+    "FC00"
+   ],
+   "model_cpu_bits": [
+    "7C00",
+    "FC00"
+   ],
+   "model_gpu_bits": [
+    "7C00",
+    "FC00"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "E1 e5m2 57344 x e4m3 448 (x32)",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "inf",
+    "-inf"
+   ],
+   "hw_bits": [
+    "7C00",
+    "FC00"
+   ],
+   "model_cpu_bits": [
+    "7C00",
+    "FC00"
+   ],
+   "model_gpu_bits": [
+    "7C00",
+    "FC00"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "E2 e5m2 57344 x e4m3 448 mixed with small terms",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "25690110.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "4BC3FFFF",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "4BC40000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "4BC40000",
+    "00000000"
+   ],
+   "torch_equal_full": false,
+   "nanaware_value_equal": false,
+   "bits_equal_cpu": false,
+   "bits_equal_gpu": false,
+   "bits_equal_nan_masked": false
+  },
+  {
+   "probe": "E2 e5m2 57344 x e4m3 448 mixed with small terms",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "25690110.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "4BC3FFFF",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "4BC40000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "4BC40000",
+    "00000000"
+   ],
+   "torch_equal_full": false,
+   "nanaware_value_equal": false,
+   "bits_equal_cpu": false,
+   "bits_equal_gpu": false,
+   "bits_equal_nan_masked": false
+  },
+  {
+   "probe": "E2 e5m2 57344 x e4m3 448 mixed with small terms",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "25690112.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "4BC4",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "4BC4",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "4BC4",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "E2 e5m2 57344 x e4m3 448 mixed with small terms",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "25690112.0",
+    "0.0"
+   ],
+   "hw_bits": [
+    "4BC4",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "4BC4",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "4BC4",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "E2 e5m2 57344 x e4m3 448 mixed with small terms",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "inf",
+    "0.0"
+   ],
+   "hw_bits": [
+    "7C00",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "7C00",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "7C00",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "E2 e5m2 57344 x e4m3 448 mixed with small terms",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "inf",
+    "0.0"
+   ],
+   "hw_bits": [
+    "7C00",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "7C00",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "7C00",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "E3 e5m2 subnormals 2^-16, 3*2^-16 x e4m3 subnormal 2^-9",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "5.960464477539062e-07",
+    "0.0"
+   ],
+   "hw_bits": [
+    "35200000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "35200000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "35200000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "E3 e5m2 subnormals 2^-16, 3*2^-16 x e4m3 subnormal 2^-9",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "5.960464477539062e-07",
+    "0.0"
+   ],
+   "hw_bits": [
+    "35200000",
+    "00000000"
+   ],
+   "model_cpu_bits": [
+    "35200000",
+    "00000000"
+   ],
+   "model_gpu_bits": [
+    "35200000",
+    "00000000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "E3 e5m2 subnormals 2^-16, 3*2^-16 x e4m3 subnormal 2^-9",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "5.960464477539062e-07",
+    "0.0"
+   ],
+   "hw_bits": [
+    "3520",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "3520",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "3520",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "E3 e5m2 subnormals 2^-16, 3*2^-16 x e4m3 subnormal 2^-9",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "5.960464477539062e-07",
+    "0.0"
+   ],
+   "hw_bits": [
+    "3520",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "3520",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "3520",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "E3 e5m2 subnormals 2^-16, 3*2^-16 x e4m3 subnormal 2^-9",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "5.960464477539062e-07",
+    "0.0"
+   ],
+   "hw_bits": [
+    "000A",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "000A",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "000A",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "E3 e5m2 subnormals 2^-16, 3*2^-16 x e4m3 subnormal 2^-9",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "5.960464477539062e-07",
+    "0.0"
+   ],
+   "hw_bits": [
+    "000A",
+    "0000"
+   ],
+   "model_cpu_bits": [
+    "000A",
+    "0000"
+   ],
+   "model_gpu_bits": [
+    "000A",
+    "0000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N1 e4m3 NaN 0x7F in A",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "nan",
+    "nan"
+   ],
+   "hw_bits": [
+    "7FFFFFFF",
+    "7FFFFFFF"
+   ],
+   "model_cpu_bits": [
+    "7FFFFFFF",
+    "7FFFFFFF"
+   ],
+   "model_gpu_bits": [
+    "7FFFFFFF",
+    "7FFFFFFF"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N1 e4m3 NaN 0x7F in A",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "nan",
+    "nan"
+   ],
+   "hw_bits": [
+    "7FFFFFFF",
+    "7FFFFFFF"
+   ],
+   "model_cpu_bits": [
+    "7FFFFFFF",
+    "7FFFFFFF"
+   ],
+   "model_gpu_bits": [
+    "7FFFFFFF",
+    "7FFFFFFF"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N1 e4m3 NaN 0x7F in A",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "nan",
+    "nan"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N1 e4m3 NaN 0x7F in A",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "nan",
+    "nan"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N1 e4m3 NaN 0x7F in A",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "nan",
+    "nan"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N1 e4m3 NaN 0x7F in A",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "nan",
+    "nan"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N2 e4m3 NaN 0xFF (negative NaN) in A",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "nan",
+    "nan"
+   ],
+   "hw_bits": [
+    "7FFFFFFF",
+    "7FFFFFFF"
+   ],
+   "model_cpu_bits": [
+    "7FFFFFFF",
+    "7FFFFFFF"
+   ],
+   "model_gpu_bits": [
+    "7FFFFFFF",
+    "7FFFFFFF"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N2 e4m3 NaN 0xFF (negative NaN) in A",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "nan",
+    "nan"
+   ],
+   "hw_bits": [
+    "7FFFFFFF",
+    "7FFFFFFF"
+   ],
+   "model_cpu_bits": [
+    "7FFFFFFF",
+    "7FFFFFFF"
+   ],
+   "model_gpu_bits": [
+    "7FFFFFFF",
+    "7FFFFFFF"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N2 e4m3 NaN 0xFF (negative NaN) in A",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "nan",
+    "nan"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N2 e4m3 NaN 0xFF (negative NaN) in A",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "nan",
+    "nan"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N2 e4m3 NaN 0xFF (negative NaN) in A",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "nan",
+    "nan"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N2 e4m3 NaN 0xFF (negative NaN) in A",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "nan",
+    "nan"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7FFF"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N3 e5m2 +inf x 0 (NaN) and +inf x 1",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "nan",
+    "inf"
+   ],
+   "hw_bits": [
+    "7FFFFFFF",
+    "7F800000"
+   ],
+   "model_cpu_bits": [
+    "7FFFFFFF",
+    "7F800000"
+   ],
+   "model_gpu_bits": [
+    "7FFFFFFF",
+    "7F800000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N3 e5m2 +inf x 0 (NaN) and +inf x 1",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "nan",
+    "inf"
+   ],
+   "hw_bits": [
+    "7FFFFFFF",
+    "7F800000"
+   ],
+   "model_cpu_bits": [
+    "7FFFFFFF",
+    "7F800000"
+   ],
+   "model_gpu_bits": [
+    "7FFFFFFF",
+    "7F800000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N3 e5m2 +inf x 0 (NaN) and +inf x 1",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "nan",
+    "inf"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7F80"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7F80"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7F80"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N3 e5m2 +inf x 0 (NaN) and +inf x 1",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "nan",
+    "inf"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7F80"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7F80"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7F80"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N3 e5m2 +inf x 0 (NaN) and +inf x 1",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "nan",
+    "inf"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7C00"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7C00"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7C00"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N3 e5m2 +inf x 0 (NaN) and +inf x 1",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "nan",
+    "inf"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7C00"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7C00"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7C00"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N4 e5m2 +inf and -inf in one dot",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "nan",
+    "inf"
+   ],
+   "hw_bits": [
+    "7FFFFFFF",
+    "7F800000"
+   ],
+   "model_cpu_bits": [
+    "7FFFFFFF",
+    "7F800000"
+   ],
+   "model_gpu_bits": [
+    "7FFFFFFF",
+    "7F800000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N4 e5m2 +inf and -inf in one dot",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "nan",
+    "inf"
+   ],
+   "hw_bits": [
+    "7FFFFFFF",
+    "7F800000"
+   ],
+   "model_cpu_bits": [
+    "7FFFFFFF",
+    "7F800000"
+   ],
+   "model_gpu_bits": [
+    "7FFFFFFF",
+    "7F800000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N4 e5m2 +inf and -inf in one dot",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "nan",
+    "inf"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7F80"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7F80"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7F80"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N4 e5m2 +inf and -inf in one dot",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "nan",
+    "inf"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7F80"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7F80"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7F80"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N4 e5m2 +inf and -inf in one dot",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "nan",
+    "inf"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7C00"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7C00"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7C00"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N4 e5m2 +inf and -inf in one dot",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "nan",
+    "inf"
+   ],
+   "hw_bits": [
+    "7FFF",
+    "7C00"
+   ],
+   "model_cpu_bits": [
+    "7FFF",
+    "7C00"
+   ],
+   "model_gpu_bits": [
+    "7FFF",
+    "7C00"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N5 e5m2 -inf x 1, scale_a=-1",
+   "out": "float32",
+   "fast": true,
+   "hw": [
+    "inf",
+    "inf"
+   ],
+   "hw_bits": [
+    "7F800000",
+    "7F800000"
+   ],
+   "model_cpu_bits": [
+    "7F800000",
+    "7F800000"
+   ],
+   "model_gpu_bits": [
+    "7F800000",
+    "7F800000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N5 e5m2 -inf x 1, scale_a=-1",
+   "out": "float32",
+   "fast": false,
+   "hw": [
+    "inf",
+    "inf"
+   ],
+   "hw_bits": [
+    "7F800000",
+    "7F800000"
+   ],
+   "model_cpu_bits": [
+    "7F800000",
+    "7F800000"
+   ],
+   "model_gpu_bits": [
+    "7F800000",
+    "7F800000"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N5 e5m2 -inf x 1, scale_a=-1",
+   "out": "bfloat16",
+   "fast": true,
+   "hw": [
+    "inf",
+    "inf"
+   ],
+   "hw_bits": [
+    "7F80",
+    "7F80"
+   ],
+   "model_cpu_bits": [
+    "7F80",
+    "7F80"
+   ],
+   "model_gpu_bits": [
+    "7F80",
+    "7F80"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N5 e5m2 -inf x 1, scale_a=-1",
+   "out": "bfloat16",
+   "fast": false,
+   "hw": [
+    "inf",
+    "inf"
+   ],
+   "hw_bits": [
+    "7F80",
+    "7F80"
+   ],
+   "model_cpu_bits": [
+    "7F80",
+    "7F80"
+   ],
+   "model_gpu_bits": [
+    "7F80",
+    "7F80"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N5 e5m2 -inf x 1, scale_a=-1",
+   "out": "float16",
+   "fast": true,
+   "hw": [
+    "inf",
+    "inf"
+   ],
+   "hw_bits": [
+    "7C00",
+    "7C00"
+   ],
+   "model_cpu_bits": [
+    "7C00",
+    "7C00"
+   ],
+   "model_gpu_bits": [
+    "7C00",
+    "7C00"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  },
+  {
+   "probe": "N5 e5m2 -inf x 1, scale_a=-1",
+   "out": "float16",
+   "fast": false,
+   "hw": [
+    "inf",
+    "inf"
+   ],
+   "hw_bits": [
+    "7C00",
+    "7C00"
+   ],
+   "model_cpu_bits": [
+    "7C00",
+    "7C00"
+   ],
+   "model_gpu_bits": [
+    "7C00",
+    "7C00"
+   ],
+   "torch_equal_full": true,
+   "nanaware_value_equal": true,
+   "bits_equal_cpu": true,
+   "bits_equal_gpu": true,
+   "bits_equal_nan_masked": true
+  }
+ ]
+}

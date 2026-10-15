@@ -1,0 +1,10 @@
+{
+ "canary_fail": 0,
+ "config_differs": [],
+ "config_equal": 465,
+ "errors": 0,
+ "inputs_cpu_eq_gpu": 465,
+ "n": 465,
+ "no_log": 0,
+ "ws_logged_equal": 465
+}

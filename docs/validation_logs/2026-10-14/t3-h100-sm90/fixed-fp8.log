@@ -1,0 +1,6 @@
+~/mmaemu-gh200/mmaemu/mmaemu/api.py:114: BackendFallbackWarning: mmaemu on cuda:0: cuda:v1 compiled with NVRTC (fatbin unusable: no fatbin manifest in ~/mmaemu-gh200/mmaemu/mmaemu/backends/cuda/bin); using cuda:v1 (nvrtc)
+  be = select(req, backend)
+{"backend": "cuda:v1", "passing_calls": 21}
+~/mmaemu-gh200/mmaemu/mmaemu/api.py:114: BackendFallbackWarning: mmaemu on cuda:0: cuda:v4 compiled with NVRTC (fatbin unusable: no fatbin manifest in ~/mmaemu-gh200/mmaemu/mmaemu/backends/cuda/bin); using cuda:v4 (nvrtc)
+  be = select(req, backend)
+{"backend": "cuda:v4", "passing_calls": 21}

@@ -1,0 +1,481 @@
+{
+ "env": {
+  "gpu": "NVIDIA GeForce RTX 4060",
+  "capability": [
+   8,
+   9
+  ],
+  "torch": "2.7.1+cu128",
+  "cuda": "12.8",
+  "cublas": "12.8.3.14",
+  "shape": [
+   16384,
+   1920,
+   768
+  ],
+  "kernels": {
+   "fast=True,torch.bfloat16": [
+    "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize64x128x64_stage4_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas"
+   ],
+   "fast=False,torch.bfloat16": [
+    "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize128x64x64_stage4_warpsize2x2x1_tensor16x8x32_algo2_execute_kernel__5x_cublas"
+   ],
+   "fast=True,torch.float16": [
+    "sm89_xmma_gemm_e4m3f16_e4m3f32_f32_tn_n_tilesize64x128x64_stage4_warpsize2x2x1_tensor16x8x32_bias_f16_execute_kernel__5x_cublas"
+   ],
+   "fast=False,torch.float16": [
+    "sm89_xmma_gemm_e4m3f16_e4m3f32_f32_tn_n_tilesize64x128x64_stage4_warpsize2x2x1_tensor16x8x32_bias_f16_algo2_execute_kernel__5x_cublas"
+   ]
+  }
+ },
+ "cases": [
+  {
+   "kind": "single",
+   "out_dtype": "bfloat16",
+   "fast": true,
+   "sa_bits": 1017882718,
+   "sb_bits": 982626695
+  },
+  {
+   "kind": "single",
+   "out_dtype": "bfloat16",
+   "fast": false,
+   "sa_bits": 1017882718,
+   "sb_bits": 982626695
+  },
+  {
+   "kind": "single",
+   "out_dtype": "bfloat16",
+   "fast": true,
+   "sa_bits": 1009346037,
+   "sb_bits": 986952137
+  },
+  {
+   "kind": "single",
+   "out_dtype": "bfloat16",
+   "fast": false,
+   "sa_bits": 1009346037,
+   "sb_bits": 986952137
+  },
+  {
+   "kind": "single",
+   "out_dtype": "bfloat16",
+   "fast": true,
+   "sa_bits": 1025219900,
+   "sb_bits": 991039865
+  },
+  {
+   "kind": "single",
+   "out_dtype": "bfloat16",
+   "fast": false,
+   "sa_bits": 1025219900,
+   "sb_bits": 991039865
+  },
+  {
+   "kind": "single",
+   "out_dtype": "bfloat16",
+   "fast": true,
+   "sa_bits": 1018339561,
+   "sb_bits": 984814598
+  },
+  {
+   "kind": "single",
+   "out_dtype": "bfloat16",
+   "fast": false,
+   "sa_bits": 1018339561,
+   "sb_bits": 984814598
+  },
+  {
+   "kind": "single",
+   "out_dtype": "bfloat16",
+   "fast": true,
+   "sa_bits": 997689912,
+   "sb_bits": 988760772
+  },
+  {
+   "kind": "single",
+   "out_dtype": "bfloat16",
+   "fast": false,
+   "sa_bits": 997689912,
+   "sb_bits": 988760772
+  },
+  {
+   "kind": "single",
+   "out_dtype": "bfloat16",
+   "fast": true,
+   "sa_bits": 1014286312,
+   "sb_bits": 988385666
+  },
+  {
+   "kind": "single",
+   "out_dtype": "bfloat16",
+   "fast": false,
+   "sa_bits": 1014286312,
+   "sb_bits": 988385666
+  },
+  {
+   "kind": "single",
+   "out_dtype": "bfloat16",
+   "fast": true,
+   "sa_bits": 1019149634,
+   "sb_bits": 966332151
+  },
+  {
+   "kind": "single",
+   "out_dtype": "bfloat16",
+   "fast": false,
+   "sa_bits": 1019149634,
+   "sb_bits": 966332151
+  },
+  {
+   "kind": "single",
+   "out_dtype": "bfloat16",
+   "fast": true,
+   "sa_bits": 1015747338,
+   "sb_bits": 991973101
+  },
+  {
+   "kind": "single",
+   "out_dtype": "bfloat16",
+   "fast": false,
+   "sa_bits": 1015747338,
+   "sb_bits": 991973101
+  },
+  {
+   "kind": "single",
+   "out_dtype": "float16",
+   "fast": true,
+   "sa_bits": 1027845572,
+   "sb_bits": 988662325
+  },
+  {
+   "kind": "single",
+   "out_dtype": "float16",
+   "fast": false,
+   "sa_bits": 1027845572,
+   "sb_bits": 988662325
+  },
+  {
+   "kind": "single",
+   "out_dtype": "float16",
+   "fast": true,
+   "sa_bits": 1025135447,
+   "sb_bits": 971538989
+  },
+  {
+   "kind": "single",
+   "out_dtype": "float16",
+   "fast": false,
+   "sa_bits": 1025135447,
+   "sb_bits": 971538989
+  },
+  {
+   "kind": "single",
+   "out_dtype": "float16",
+   "fast": true,
+   "sa_bits": 1027377602,
+   "sb_bits": 990651438
+  },
+  {
+   "kind": "single",
+   "out_dtype": "float16",
+   "fast": false,
+   "sa_bits": 1027377602,
+   "sb_bits": 990651438
+  },
+  {
+   "kind": "single",
+   "out_dtype": "float16",
+   "fast": true,
+   "sa_bits": 1013283217,
+   "sb_bits": 980877528
+  },
+  {
+   "kind": "single",
+   "out_dtype": "float16",
+   "fast": false,
+   "sa_bits": 1013283217,
+   "sb_bits": 980877528
+  },
+  {
+   "kind": "single",
+   "out_dtype": "float16",
+   "fast": true,
+   "sa_bits": 1026480818,
+   "sb_bits": 978791391
+  },
+  {
+   "kind": "single",
+   "out_dtype": "float16",
+   "fast": false,
+   "sa_bits": 1026480818,
+   "sb_bits": 978791391
+  },
+  {
+   "kind": "single",
+   "out_dtype": "float16",
+   "fast": true,
+   "sa_bits": 1024986026,
+   "sb_bits": 991034673
+  },
+  {
+   "kind": "single",
+   "out_dtype": "float16",
+   "fast": false,
+   "sa_bits": 1024986026,
+   "sb_bits": 991034673
+  },
+  {
+   "kind": "single",
+   "out_dtype": "float16",
+   "fast": true,
+   "sa_bits": 1019539852,
+   "sb_bits": 987388617
+  },
+  {
+   "kind": "single",
+   "out_dtype": "float16",
+   "fast": false,
+   "sa_bits": 1019539852,
+   "sb_bits": 987388617
+  },
+  {
+   "kind": "single",
+   "out_dtype": "float16",
+   "fast": true,
+   "sa_bits": 1011842238,
+   "sb_bits": 993611291
+  },
+  {
+   "kind": "single",
+   "out_dtype": "float16",
+   "fast": false,
+   "sa_bits": 1011842238,
+   "sb_bits": 993611291
+  },
+  {
+   "kind": "order",
+   "out_dtype": "bfloat16",
+   "fast": true,
+   "sa_bits": 1026494717,
+   "sb_bits": 987907206
+  },
+  {
+   "kind": "order",
+   "out_dtype": "bfloat16",
+   "fast": false,
+   "sa_bits": 1026494717,
+   "sb_bits": 987907206
+  },
+  {
+   "kind": "order",
+   "out_dtype": "bfloat16",
+   "fast": true,
+   "sa_bits": 1005934582,
+   "sb_bits": 990426115
+  },
+  {
+   "kind": "order",
+   "out_dtype": "bfloat16",
+   "fast": false,
+   "sa_bits": 1005934582,
+   "sb_bits": 990426115
+  },
+  {
+   "kind": "order",
+   "out_dtype": "bfloat16",
+   "fast": true,
+   "sa_bits": 1023555198,
+   "sb_bits": 991506233
+  },
+  {
+   "kind": "order",
+   "out_dtype": "bfloat16",
+   "fast": false,
+   "sa_bits": 1023555198,
+   "sb_bits": 991506233
+  },
+  {
+   "kind": "order",
+   "out_dtype": "bfloat16",
+   "fast": true,
+   "sa_bits": 1018116340,
+   "sb_bits": 967259434
+  },
+  {
+   "kind": "order",
+   "out_dtype": "bfloat16",
+   "fast": false,
+   "sa_bits": 1018116340,
+   "sb_bits": 967259434
+  },
+  {
+   "kind": "order",
+   "out_dtype": "bfloat16",
+   "fast": true,
+   "sa_bits": 1024231038,
+   "sb_bits": 983237258
+  },
+  {
+   "kind": "order",
+   "out_dtype": "bfloat16",
+   "fast": false,
+   "sa_bits": 1024231038,
+   "sb_bits": 983237258
+  },
+  {
+   "kind": "order",
+   "out_dtype": "bfloat16",
+   "fast": true,
+   "sa_bits": 1028007785,
+   "sb_bits": 974717919
+  },
+  {
+   "kind": "order",
+   "out_dtype": "bfloat16",
+   "fast": false,
+   "sa_bits": 1028007785,
+   "sb_bits": 974717919
+  },
+  {
+   "kind": "order",
+   "out_dtype": "bfloat16",
+   "fast": true,
+   "sa_bits": 1023618789,
+   "sb_bits": 989789275
+  },
+  {
+   "kind": "order",
+   "out_dtype": "bfloat16",
+   "fast": false,
+   "sa_bits": 1023618789,
+   "sb_bits": 989789275
+  },
+  {
+   "kind": "order",
+   "out_dtype": "bfloat16",
+   "fast": true,
+   "sa_bits": 1003124655,
+   "sb_bits": 992570060
+  },
+  {
+   "kind": "order",
+   "out_dtype": "bfloat16",
+   "fast": false,
+   "sa_bits": 1003124655,
+   "sb_bits": 992570060
+  },
+  {
+   "kind": "order",
+   "out_dtype": "float16",
+   "fast": true,
+   "sa_bits": 1017617814,
+   "sb_bits": 967625475
+  },
+  {
+   "kind": "order",
+   "out_dtype": "float16",
+   "fast": false,
+   "sa_bits": 1017617814,
+   "sb_bits": 967625475
+  },
+  {
+   "kind": "order",
+   "out_dtype": "float16",
+   "fast": true,
+   "sa_bits": 1003669974,
+   "sb_bits": 991967353
+  },
+  {
+   "kind": "order",
+   "out_dtype": "float16",
+   "fast": false,
+   "sa_bits": 1003669974,
+   "sb_bits": 991967353
+  },
+  {
+   "kind": "order",
+   "out_dtype": "float16",
+   "fast": true,
+   "sa_bits": 1018726204,
+   "sb_bits": 991413804
+  },
+  {
+   "kind": "order",
+   "out_dtype": "float16",
+   "fast": false,
+   "sa_bits": 1018726204,
+   "sb_bits": 991413804
+  },
+  {
+   "kind": "order",
+   "out_dtype": "float16",
+   "fast": true,
+   "sa_bits": 1025662321,
+   "sb_bits": 991818576
+  },
+  {
+   "kind": "order",
+   "out_dtype": "float16",
+   "fast": false,
+   "sa_bits": 1025662321,
+   "sb_bits": 991818576
+  },
+  {
+   "kind": "order",
+   "out_dtype": "float16",
+   "fast": true,
+   "sa_bits": 1007628308,
+   "sb_bits": 983936594
+  },
+  {
+   "kind": "order",
+   "out_dtype": "float16",
+   "fast": false,
+   "sa_bits": 1007628308,
+   "sb_bits": 983936594
+  },
+  {
+   "kind": "order",
+   "out_dtype": "float16",
+   "fast": true,
+   "sa_bits": 1012113934,
+   "sb_bits": 969040433
+  },
+  {
+   "kind": "order",
+   "out_dtype": "float16",
+   "fast": false,
+   "sa_bits": 1012113934,
+   "sb_bits": 969040433
+  },
+  {
+   "kind": "order",
+   "out_dtype": "float16",
+   "fast": true,
+   "sa_bits": 999589538,
+   "sb_bits": 993003512
+  },
+  {
+   "kind": "order",
+   "out_dtype": "float16",
+   "fast": false,
+   "sa_bits": 999589538,
+   "sb_bits": 993003512
+  },
+  {
+   "kind": "order",
+   "out_dtype": "float16",
+   "fast": true,
+   "sa_bits": 987304456,
+   "sb_bits": 994625713
+  },
+  {
+   "kind": "order",
+   "out_dtype": "float16",
+   "fast": false,
+   "sa_bits": 987304456,
+   "sb_bits": 994625713
+  }
+ ]
+}

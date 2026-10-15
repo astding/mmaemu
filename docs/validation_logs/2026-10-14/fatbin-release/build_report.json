@@ -1,0 +1,435 @@
+{
+ "nvcc": "~/anaconda3/bin/nvcc",
+ "nvcc_version": "12.8.61",
+ "cuobjdump": "/data/quant/stsc/research/round4/probe/.venv/lib/python3.12/site-packages/triton/backends/nvidia/bin/cuobjdump",
+ "release": true,
+ "modules": {
+  "tc3": {
+   "command": "nvcc -fatbin -O3 --fmad=false -Xptxas -v -I. -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -o tc3.fatbin tc3.cu",
+   "ptxas": [
+    {
+     "entry": "mmaemu_tc3_e4m3e4m3",
+     "arch": "sm_80",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 175
+    },
+    {
+     "entry": "mmaemu_tc3_e4m3e4m3",
+     "arch": "sm_86",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 175
+    },
+    {
+     "entry": "mmaemu_tc3_e4m3e4m3",
+     "arch": "sm_89",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 175
+    }
+   ],
+   "spill_bytes": 0,
+   "compiler_warnings": [],
+   "forbidden_ptx": {},
+   "cuobjdump": {
+    "elf": [
+     80,
+     86,
+     89
+    ],
+    "ptx": [],
+    "ok": true
+   },
+   "entries_missing": []
+  },
+  "v9": {
+   "command": "nvcc -fatbin -O3 --fmad=false -Xptxas -v -I. -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -gencode arch=compute_90,code=sm_90 -gencode arch=compute_100,code=sm_100 -gencode arch=compute_120,code=sm_120 -o v9.fatbin v9.cu",
+   "ptxas": [
+    {
+     "entry": "mmaemu_v9_e4m3e4m3",
+     "arch": "sm_80",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 218
+    },
+    {
+     "entry": "mmaemu_v9_e4m3e4m3",
+     "arch": "sm_86",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 218
+    },
+    {
+     "entry": "mmaemu_v9_e4m3e4m3",
+     "arch": "sm_89",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 220
+    },
+    {
+     "entry": "mmaemu_v9_e4m3e4m3",
+     "arch": "sm_90",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 220
+    },
+    {
+     "entry": "mmaemu_v9_e4m3e4m3",
+     "arch": "sm_100",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 229
+    },
+    {
+     "entry": "mmaemu_v9_e4m3e4m3",
+     "arch": "sm_120",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 229
+    }
+   ],
+   "spill_bytes": 0,
+   "compiler_warnings": [],
+   "forbidden_ptx": {},
+   "cuobjdump": {
+    "elf": [
+     80,
+     86,
+     89,
+     90,
+     100,
+     120
+    ],
+    "ptx": [],
+    "ok": true
+   },
+   "entries_missing": []
+  },
+  "v4": {
+   "command": "nvcc -fatbin -O3 --fmad=false -Xptxas -v -I. -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -gencode arch=compute_90,code=sm_90 -gencode arch=compute_100,code=sm_100 -gencode arch=compute_120,code=sm_120 -gencode arch=compute_80,code=compute_80 -o v4.fatbin v4.cu",
+   "ptxas": [
+    {
+     "entry": "mmaemu_v4_e4m3e4m3",
+     "arch": "sm_80",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 248
+    },
+    {
+     "entry": "mmaemu_v4_e4m3e4m3",
+     "arch": "sm_86",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 248
+    },
+    {
+     "entry": "mmaemu_v4_e4m3e4m3",
+     "arch": "sm_89",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 248
+    },
+    {
+     "entry": "mmaemu_v4_e4m3e4m3",
+     "arch": "sm_90",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 246
+    },
+    {
+     "entry": "mmaemu_v4_e4m3e4m3",
+     "arch": "sm_100",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 255
+    },
+    {
+     "entry": "mmaemu_v4_e4m3e4m3",
+     "arch": "sm_120",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 246
+    }
+   ],
+   "spill_bytes": 0,
+   "compiler_warnings": [],
+   "forbidden_ptx": {},
+   "cuobjdump": {
+    "elf": [
+     80,
+     86,
+     89,
+     90,
+     100,
+     120
+    ],
+    "ptx": [
+     80
+    ],
+    "ok": true
+   },
+   "entries_missing": []
+  },
+  "v1": {
+   "command": "nvcc -fatbin -O3 --fmad=false -Xptxas -v -I. -gencode arch=compute_75,code=sm_75 -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -gencode arch=compute_90,code=sm_90 -gencode arch=compute_100,code=sm_100 -gencode arch=compute_120,code=sm_120 -gencode arch=compute_75,code=compute_75 -o v1.fatbin v1.cu",
+   "ptxas": [
+    {
+     "entry": "mmaemu_v1_e4m3e4m3",
+     "arch": "sm_75",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 64
+    },
+    {
+     "entry": "mmaemu_v1_e4m3e4m3",
+     "arch": "sm_80",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 64
+    },
+    {
+     "entry": "mmaemu_v1_e4m3e4m3",
+     "arch": "sm_86",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 64
+    },
+    {
+     "entry": "mmaemu_v1_e4m3e4m3",
+     "arch": "sm_89",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 64
+    },
+    {
+     "entry": "mmaemu_v1_e4m3e4m3",
+     "arch": "sm_90",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 64
+    },
+    {
+     "entry": "mmaemu_v1_e4m3e4m3",
+     "arch": "sm_100",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 71
+    },
+    {
+     "entry": "mmaemu_v1_e4m3e4m3",
+     "arch": "sm_120",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 72
+    }
+   ],
+   "spill_bytes": 0,
+   "compiler_warnings": [],
+   "forbidden_ptx": {},
+   "cuobjdump": {
+    "elf": [
+     75,
+     80,
+     86,
+     89,
+     90,
+     100,
+     120
+    ],
+    "ptx": [
+     75
+    ],
+    "ok": true
+   },
+   "entries_missing": []
+  },
+  "probes": {
+   "command": "nvcc -fatbin -O3 --fmad=false -Xptxas -v -I. -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -gencode arch=compute_90,code=sm_90 -gencode arch=compute_100,code=sm_100 -gencode arch=compute_120,code=sm_120 -o probes.fatbin probes.cu",
+   "ptxas": [
+    {
+     "entry": "mmaemu_probe_mma_bf16_raw",
+     "arch": "sm_80",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 20
+    },
+    {
+     "entry": "mmaemu_probe_epass_raw",
+     "arch": "sm_80",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 26
+    },
+    {
+     "entry": "mmaemu_probe_hmma_f16_k8",
+     "arch": "sm_80",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 22
+    },
+    {
+     "entry": "mmaemu_probe_mma_bf16_raw",
+     "arch": "sm_86",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 20
+    },
+    {
+     "entry": "mmaemu_probe_epass_raw",
+     "arch": "sm_86",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 26
+    },
+    {
+     "entry": "mmaemu_probe_hmma_f16_k8",
+     "arch": "sm_86",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 22
+    },
+    {
+     "entry": "mmaemu_probe_mma_bf16_raw",
+     "arch": "sm_89",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 20
+    },
+    {
+     "entry": "mmaemu_probe_epass_raw",
+     "arch": "sm_89",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 26
+    },
+    {
+     "entry": "mmaemu_probe_hmma_f16_k8",
+     "arch": "sm_89",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 22
+    },
+    {
+     "entry": "mmaemu_probe_mma_bf16_raw",
+     "arch": "sm_90",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 20
+    },
+    {
+     "entry": "mmaemu_probe_epass_raw",
+     "arch": "sm_90",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 30
+    },
+    {
+     "entry": "mmaemu_probe_hmma_f16_k8",
+     "arch": "sm_90",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 22
+    },
+    {
+     "entry": "mmaemu_probe_mma_bf16_raw",
+     "arch": "sm_100",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 20
+    },
+    {
+     "entry": "mmaemu_probe_epass_raw",
+     "arch": "sm_100",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 28
+    },
+    {
+     "entry": "mmaemu_probe_hmma_f16_k8",
+     "arch": "sm_100",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 32
+    },
+    {
+     "entry": "mmaemu_probe_mma_bf16_raw",
+     "arch": "sm_120",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 20
+    },
+    {
+     "entry": "mmaemu_probe_epass_raw",
+     "arch": "sm_120",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 30
+    },
+    {
+     "entry": "mmaemu_probe_hmma_f16_k8",
+     "arch": "sm_120",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 30
+    }
+   ],
+   "spill_bytes": 0,
+   "compiler_warnings": [],
+   "forbidden_ptx": {},
+   "cuobjdump": {
+    "elf": [
+     80,
+     86,
+     89,
+     90,
+     100,
+     120
+    ],
+    "ptx": [],
+    "ok": true
+   },
+   "entries_missing": []
+  }
+ }
+}

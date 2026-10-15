@@ -1,0 +1,354 @@
+{
+  "env": {
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "arch": "sm_120",
+    "sm_count": 70,
+    "driver": "610.88",
+    "cuda": "12.8",
+    "cublaslt": "12.8.3.14",
+    "cublaslt_lib": "/data/quant/stsc/research/round4/probe/.venv/lib/python3.12/site-packages/nvidia/cublas/lib/libcublasLt.so.12",
+    "torch": "2.7.1+cu128",
+    "python": "3.12.2",
+    "os": "Linux 5.15.167.4-microsoft-standard-WSL2",
+    "cublas": "12.8.3.14",
+    "nvidia_smi": "NVIDIA GeForce RTX 5070 Ti, 610.88, 210 MHz, 38"
+  },
+  "preset": "ada",
+  "out_dtype": "bf16",
+  "rows": [
+    {
+      "model": "1b",
+      "shape": [
+        16,
+        5760,
+        1920
+      ],
+      "scale_a": 0.009513410739600658,
+      "scale_b": 0.004164181649684906,
+      "outputs": 92160,
+      "mismatches": 17709,
+      "bitwise_equal": false,
+      "cublaslt": {
+        "algo": 35,
+        "tile": "MATMUL_TILE_64x32",
+        "stages": "MATMUL_STAGES_64x5",
+        "tile_id": 13,
+        "stages_id": 17,
+        "numSplitsK": 1,
+        "customOption": 0,
+        "reductionScheme": null,
+        "ctaSwizzling": 0,
+        "workspace_bytes": 1048576,
+        "lt_algo_string": "algoId=35 tile=MATMUL_TILE_64x32 stages=MATMUL_STAGES_64x5",
+        "d_scale": false,
+        "Cdesc_type": "R_16BF",
+        "Ddesc_type": "R_16BF",
+        "source": "CUBLASLT_LOG_LEVEL=2 trace of this call (logger callback)"
+      },
+      "splitk": {
+        "S": 1,
+        "source": "logged cuBLASLt config (CUBLASLT_LOG_LEVEL=2)"
+      },
+      "kernel_names": [
+        "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize32x64x64_stage5_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas"
+      ]
+    },
+    {
+      "model": "1b",
+      "shape": [
+        48,
+        5760,
+        1920
+      ],
+      "scale_a": 0.009513410739600658,
+      "scale_b": 0.004164181649684906,
+      "outputs": 276480,
+      "mismatches": 52906,
+      "bitwise_equal": false,
+      "cublaslt": {
+        "algo": 35,
+        "tile": "MATMUL_TILE_64x32",
+        "stages": "MATMUL_STAGES_64x5",
+        "tile_id": 13,
+        "stages_id": 17,
+        "numSplitsK": 1,
+        "customOption": 0,
+        "reductionScheme": null,
+        "ctaSwizzling": 0,
+        "workspace_bytes": 1048576,
+        "lt_algo_string": "algoId=35 tile=MATMUL_TILE_64x32 stages=MATMUL_STAGES_64x5",
+        "d_scale": false,
+        "Cdesc_type": "R_16BF",
+        "Ddesc_type": "R_16BF",
+        "source": "CUBLASLT_LOG_LEVEL=2 trace of this call (logger callback)"
+      },
+      "splitk": {
+        "S": 1,
+        "source": "logged cuBLASLt config (CUBLASLT_LOG_LEVEL=2)"
+      },
+      "kernel_names": [
+        "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize32x64x64_stage5_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas"
+      ]
+    },
+    {
+      "model": "1b",
+      "shape": [
+        128,
+        5760,
+        1920
+      ],
+      "scale_a": 0.009513410739600658,
+      "scale_b": 0.004164181649684906,
+      "outputs": 737280,
+      "mismatches": 141300,
+      "bitwise_equal": false,
+      "cublaslt": {
+        "algo": 35,
+        "tile": "MATMUL_TILE_128x64",
+        "stages": "MATMUL_STAGES_64x4",
+        "tile_id": 18,
+        "stages_id": 16,
+        "numSplitsK": 1,
+        "customOption": 0,
+        "reductionScheme": null,
+        "ctaSwizzling": 1,
+        "workspace_bytes": 1048576,
+        "lt_algo_string": "algoId=35 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1",
+        "d_scale": false,
+        "Cdesc_type": "R_16BF",
+        "Ddesc_type": "R_16BF",
+        "source": "CUBLASLT_LOG_LEVEL=2 trace of this call (logger callback)"
+      },
+      "splitk": {
+        "S": 1,
+        "source": "logged cuBLASLt config (CUBLASLT_LOG_LEVEL=2)"
+      },
+      "kernel_names": [
+        "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize64x128x64_stage4_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas"
+      ]
+    },
+    {
+      "model": "7b",
+      "shape": [
+        16,
+        12288,
+        4096
+      ],
+      "scale_a": 0.009513410739600658,
+      "scale_b": 0.004164181649684906,
+      "outputs": 196608,
+      "mismatches": 54925,
+      "bitwise_equal": false,
+      "cublaslt": {
+        "algo": 35,
+        "tile": "MATMUL_TILE_64x32",
+        "stages": "MATMUL_STAGES_64x5",
+        "tile_id": 13,
+        "stages_id": 17,
+        "numSplitsK": 1,
+        "customOption": 0,
+        "reductionScheme": null,
+        "ctaSwizzling": 0,
+        "workspace_bytes": 1048576,
+        "lt_algo_string": "algoId=35 tile=MATMUL_TILE_64x32 stages=MATMUL_STAGES_64x5",
+        "d_scale": false,
+        "Cdesc_type": "R_16BF",
+        "Ddesc_type": "R_16BF",
+        "source": "CUBLASLT_LOG_LEVEL=2 trace of this call (logger callback)"
+      },
+      "splitk": {
+        "S": 1,
+        "source": "logged cuBLASLt config (CUBLASLT_LOG_LEVEL=2)"
+      },
+      "kernel_names": [
+        "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize32x64x64_stage5_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas"
+      ]
+    },
+    {
+      "model": "7b",
+      "shape": [
+        48,
+        12288,
+        4096
+      ],
+      "scale_a": 0.009513410739600658,
+      "scale_b": 0.004164181649684906,
+      "outputs": 589824,
+      "mismatches": 162981,
+      "bitwise_equal": false,
+      "cublaslt": {
+        "algo": 35,
+        "tile": "MATMUL_TILE_64x64",
+        "stages": "MATMUL_STAGES_64x4",
+        "tile_id": 15,
+        "stages_id": 16,
+        "numSplitsK": 1,
+        "customOption": 0,
+        "reductionScheme": null,
+        "ctaSwizzling": 0,
+        "workspace_bytes": 1048576,
+        "lt_algo_string": "algoId=35 tile=MATMUL_TILE_64x64 stages=MATMUL_STAGES_64x4",
+        "d_scale": false,
+        "Cdesc_type": "R_16BF",
+        "Ddesc_type": "R_16BF",
+        "source": "CUBLASLT_LOG_LEVEL=2 trace of this call (logger callback)"
+      },
+      "splitk": {
+        "S": 1,
+        "source": "logged cuBLASLt config (CUBLASLT_LOG_LEVEL=2)"
+      },
+      "kernel_names": [
+        "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize64x64x64_stage4_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas"
+      ]
+    },
+    {
+      "model": "7b",
+      "shape": [
+        128,
+        12288,
+        4096
+      ],
+      "scale_a": 0.009513410739600658,
+      "scale_b": 0.004164181649684906,
+      "outputs": 1572864,
+      "mismatches": 435926,
+      "bitwise_equal": false,
+      "cublaslt": {
+        "algo": 35,
+        "tile": "MATMUL_TILE_128x128",
+        "stages": "MATMUL_STAGES_64x3",
+        "tile_id": 20,
+        "stages_id": 15,
+        "numSplitsK": 1,
+        "customOption": 0,
+        "reductionScheme": null,
+        "ctaSwizzling": 0,
+        "workspace_bytes": 1048576,
+        "lt_algo_string": "algoId=35 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3",
+        "d_scale": false,
+        "Cdesc_type": "R_16BF",
+        "Ddesc_type": "R_16BF",
+        "source": "CUBLASLT_LOG_LEVEL=2 trace of this call (logger callback)"
+      },
+      "splitk": {
+        "S": 1,
+        "source": "logged cuBLASLt config (CUBLASLT_LOG_LEVEL=2)"
+      },
+      "kernel_names": [
+        "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize128x128x64_stage3_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas"
+      ]
+    },
+    {
+      "model": "40b",
+      "shape": [
+        16,
+        24576,
+        8192
+      ],
+      "scale_a": 0.009513410739600658,
+      "scale_b": 0.004164181649684906,
+      "outputs": 393216,
+      "mismatches": 148589,
+      "bitwise_equal": false,
+      "cublaslt": {
+        "algo": 35,
+        "tile": "MATMUL_TILE_64x64",
+        "stages": "MATMUL_STAGES_64x6",
+        "tile_id": 15,
+        "stages_id": 18,
+        "numSplitsK": 1,
+        "customOption": 0,
+        "reductionScheme": null,
+        "ctaSwizzling": 1,
+        "workspace_bytes": 1048576,
+        "lt_algo_string": "algoId=35 tile=MATMUL_TILE_64x64 stages=MATMUL_STAGES_64x6 ctaSwizzling=1",
+        "d_scale": false,
+        "Cdesc_type": "R_16BF",
+        "Ddesc_type": "R_16BF",
+        "source": "CUBLASLT_LOG_LEVEL=2 trace of this call (logger callback)"
+      },
+      "splitk": {
+        "S": 1,
+        "source": "logged cuBLASLt config (CUBLASLT_LOG_LEVEL=2)"
+      },
+      "kernel_names": [
+        "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize64x64x64_stage6_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas"
+      ]
+    },
+    {
+      "model": "40b",
+      "shape": [
+        48,
+        24576,
+        8192
+      ],
+      "scale_a": 0.009513410739600658,
+      "scale_b": 0.004164181649684906,
+      "outputs": 1179648,
+      "mismatches": 444269,
+      "bitwise_equal": false,
+      "cublaslt": {
+        "algo": 35,
+        "tile": "MATMUL_TILE_128x128",
+        "stages": "MATMUL_STAGES_64x3",
+        "tile_id": 20,
+        "stages_id": 15,
+        "numSplitsK": 1,
+        "customOption": 0,
+        "reductionScheme": null,
+        "ctaSwizzling": 0,
+        "workspace_bytes": 1048576,
+        "lt_algo_string": "algoId=35 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3",
+        "d_scale": false,
+        "Cdesc_type": "R_16BF",
+        "Ddesc_type": "R_16BF",
+        "source": "CUBLASLT_LOG_LEVEL=2 trace of this call (logger callback)"
+      },
+      "splitk": {
+        "S": 1,
+        "source": "logged cuBLASLt config (CUBLASLT_LOG_LEVEL=2)"
+      },
+      "kernel_names": [
+        "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize128x128x64_stage3_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas"
+      ]
+    },
+    {
+      "model": "40b",
+      "shape": [
+        128,
+        24576,
+        8192
+      ],
+      "scale_a": 0.009513410739600658,
+      "scale_b": 0.004164181649684906,
+      "outputs": 3145728,
+      "mismatches": 1187097,
+      "bitwise_equal": false,
+      "cublaslt": {
+        "algo": 35,
+        "tile": "MATMUL_TILE_128x128",
+        "stages": "MATMUL_STAGES_64x3",
+        "tile_id": 20,
+        "stages_id": 15,
+        "numSplitsK": 1,
+        "customOption": 0,
+        "reductionScheme": null,
+        "ctaSwizzling": 0,
+        "workspace_bytes": 1048576,
+        "lt_algo_string": "algoId=35 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3",
+        "d_scale": false,
+        "Cdesc_type": "R_16BF",
+        "Ddesc_type": "R_16BF",
+        "source": "CUBLASLT_LOG_LEVEL=2 trace of this call (logger callback)"
+      },
+      "splitk": {
+        "S": 1,
+        "source": "logged cuBLASLt config (CUBLASLT_LOG_LEVEL=2)"
+      },
+      "kernel_names": [
+        "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize128x128x64_stage3_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas"
+      ]
+    }
+  ],
+  "verdict": "MISMATCH"
+}

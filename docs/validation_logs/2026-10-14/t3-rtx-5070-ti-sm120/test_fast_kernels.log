@@ -1,0 +1,6 @@
+........ssssssss........................................................ [ 39%]
+.....................sssssssssssssssssssssssssssssssssssssssssssssssssss [ 79%]
+ssssssssssssssssssssssssss.s.s.s.s.s.s                                   [100%]
+=========================== short test summary info ============================
+SKIPPED [91] tests/test_fast_kernels.py:69: no tc3 binary for sm_120 (SASS (80, 86, 89))
+91 passed, 91 skipped in 18.15s

@@ -1,0 +1,92 @@
+{
+ "gpu": "NVIDIA GeForce RTX 4060",
+ "capability": [
+  8,
+  9
+ ],
+ "sm_count": 24,
+ "cuda": "12.8",
+ "torch": "2.7.1+cu128",
+ "sets": [
+  {
+   "vectors": "Ada/E4M3",
+   "n": 5000,
+   "equals_recorded_on_that_gpu": 5000,
+   "equals_preset_ada": 5000,
+   "equals_preset_hopper": 3940,
+   "equals_preset_blackwell": 1
+  },
+  {
+   "vectors": "Ada/E5M2",
+   "n": 5000,
+   "equals_recorded_on_that_gpu": 5000,
+   "equals_preset_ada": 5000,
+   "equals_preset_hopper": 4283,
+   "equals_preset_blackwell": 2
+  },
+  {
+   "vectors": "B200/E4M3",
+   "n": 5000,
+   "equals_recorded_on_that_gpu": 3,
+   "equals_preset_ada": 5000,
+   "equals_preset_hopper": 3958,
+   "equals_preset_blackwell": 3
+  },
+  {
+   "vectors": "B200/E5M2",
+   "n": 5000,
+   "equals_recorded_on_that_gpu": 3,
+   "equals_preset_ada": 5000,
+   "equals_preset_hopper": 4254,
+   "equals_preset_blackwell": 3
+  },
+  {
+   "vectors": "H100/E4M3",
+   "n": 5000,
+   "equals_recorded_on_that_gpu": 4186,
+   "equals_preset_ada": 5000,
+   "equals_preset_hopper": 4186,
+   "equals_preset_blackwell": 1847
+  },
+  {
+   "vectors": "H100/E5M2",
+   "n": 5000,
+   "equals_recorded_on_that_gpu": 4622,
+   "equals_preset_ada": 5000,
+   "equals_preset_hopper": 4622,
+   "equals_preset_blackwell": 3119
+  },
+  {
+   "vectors": "H200/E4M3",
+   "n": 5000,
+   "equals_recorded_on_that_gpu": 4186,
+   "equals_preset_ada": 5000,
+   "equals_preset_hopper": 4186,
+   "equals_preset_blackwell": 1847
+  },
+  {
+   "vectors": "H200/E5M2",
+   "n": 5000,
+   "equals_recorded_on_that_gpu": 4622,
+   "equals_preset_ada": 5000,
+   "equals_preset_hopper": 4622,
+   "equals_preset_blackwell": 3119
+  },
+  {
+   "vectors": "L40S/E4M3",
+   "n": 5000,
+   "equals_recorded_on_that_gpu": 5000,
+   "equals_preset_ada": 5000,
+   "equals_preset_hopper": 3940,
+   "equals_preset_blackwell": 1
+  },
+  {
+   "vectors": "L40S/E5M2",
+   "n": 5000,
+   "equals_recorded_on_that_gpu": 5000,
+   "equals_preset_ada": 5000,
+   "equals_preset_hopper": 4283,
+   "equals_preset_blackwell": 2
+  }
+ ]
+}

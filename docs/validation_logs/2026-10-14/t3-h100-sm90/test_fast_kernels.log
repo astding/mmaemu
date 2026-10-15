@@ -1,0 +1,7 @@
+........ssssssssssss.s.s.s.sss                                           [100%]
+=========================== short test summary info ============================
+SKIPPED [12] tests/test_fast_kernels.py:69: no tc3 binary for sm_90 (SASS (80, 86, 89))
+SKIPPED [2] tests/test_fast_kernels.py:170: audit data absent (set MMAEMU_AUDIT_DIR; needs vperf-p3-tensorcore-exact-1/data/ref2)
+SKIPPED [2] tests/test_fast_kernels.py:190: audit data absent (set MMAEMU_AUDIT_DIR; needs p2-int-mixed/data/cases.pt)
+SKIPPED [2] tests/conftest.py:104: hardware ground truth unavailable: MMAEMU_TRUTH_DIR is not set
+12 passed, 18 skipped in 10.98s

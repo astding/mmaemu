@@ -1,0 +1,1015 @@
+{
+ "format": "mmaemu-bringup-provenance/1",
+ "note": "vendored for docs/runbooks/sm120_bringup.md by tools/bringup/vendor_kits.py; origin files are read-only audit artefacts",
+ "files": [
+  {
+   "path": "kits/c6/run_kit.py",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/run_kit.py",
+   "origin_sha256": "d11466e85821cee31f9810a86c01416cddb3301bdc93b973e4244dcb41d0d2e6",
+   "vendored_sha256": "201e138cccd5b742d058b749d4be60608bfbee3c2635b685d23921fc04150f83",
+   "modified": true,
+   "changes": [
+    "output/cache dirs + gz reader",
+    "build dir -> cache",
+    "gz reader",
+    "gz reader",
+    "measured bits -> $BRINGUP_OUT",
+    "gz reader",
+    "gz reader",
+    "compare raw bits, including signed zero and NaN payloads"
+   ]
+  },
+  {
+   "path": "kits/c6/run_cublas_kit.py",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/run_cublas_kit.py",
+   "origin_sha256": "2e54f0c343907577e203a072cd6462228cb8b053c26b24554eb48955db110791",
+   "vendored_sha256": "ebb10e84421cab9ad30c4d083d085f2998751ef0dba6629b0c8b1780aeac63c2",
+   "modified": true,
+   "changes": [
+    "output dir + gz reader",
+    "gz reader",
+    "gz reader",
+    "gz reader",
+    "measured bits -> $BRINGUP_OUT",
+    "compare raw bits, including signed zero and NaN payloads"
+   ]
+  },
+  {
+   "path": "kits/c6/family.py",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/family.py",
+   "origin_sha256": "4d34f741262f922d2742939ac8e252efbdec856e5a559ba283a6ddc34964d895",
+   "vendored_sha256": "4d34f741262f922d2742939ac8e252efbdec856e5a559ba283a6ddc34964d895",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/c6/mma_probe_kit.cu",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/mma_probe_kit.cu",
+   "origin_sha256": "acfe7723f1d267b4944a88ceed8d57d31645ef37edfe5811c7ce4bb11b6ba139",
+   "vendored_sha256": "acfe7723f1d267b4944a88ceed8d57d31645ef37edfe5811c7ce4bb11b6ba139",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/c6/README.md",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/README.md",
+   "origin_sha256": "5e895dce61f1e49d7dbab315efe0a10c403c2e6a46444848e4860055652ed856",
+   "vendored_sha256": "5e895dce61f1e49d7dbab315efe0a10c403c2e6a46444848e4860055652ed856",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/interleave/interleave_probe.py",
+   "origin": "/data/quant/tcemu_audit/work/verify-c6-paper-identifiability-1/models/interleave_probe.py",
+   "origin_sha256": "d742e3c36646e96c4991e633f2612ff72ae802b8f6c7a58eb427ecabfe478dd4",
+   "vendored_sha256": "1970c6468340d1a62ee095df36e9527386e364256da9be9a9cc513cd2dd63cee",
+   "modified": true,
+   "changes": [
+    "tcemu -> compat (mmaemu)",
+    "label",
+    "canonical preset name"
+   ]
+  },
+  {
+   "path": "kits/interleave/models.py",
+   "origin": "/data/quant/tcemu_audit/work/verify-c6-paper-identifiability-1/models/models.py",
+   "origin_sha256": "612ffefb982c266b1aab850348672460e096c020e672b075b1493ccc39308096",
+   "vendored_sha256": "612ffefb982c266b1aab850348672460e096c020e672b075b1493ccc39308096",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/interleave/interleave_probe.txt",
+   "origin": "/data/quant/tcemu_audit/work/verify-c6-paper-identifiability-1/models/interleave_probe.txt",
+   "origin_sha256": "3a016f6655be612780f5a2a9e1d1c5280f2638b2e5247770077b69aa173180b5",
+   "vendored_sha256": "3a016f6655be612780f5a2a9e1d1c5280f2638b2e5247770077b69aa173180b5",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/window/hw_collect.py",
+   "origin": "/data/quant/tcemu_audit/work/verify-p2-int-mixed-3/hw_collect.py",
+   "origin_sha256": "3b6cae692e468cd78697bb6e043fc2135c98d0ee053bce0987e870b2a0a6555b",
+   "vendored_sha256": "1ffac16dd351af7245b132c47bee6b779b0b8ad46f7db691550910ce12707b6d",
+   "modified": true,
+   "changes": [
+    "output helper",
+    "results -> $BRINGUP_OUT",
+    "results -> $BRINGUP_OUT"
+   ]
+  },
+  {
+   "path": "kits/window/analyse.py",
+   "origin": "/data/quant/tcemu_audit/work/verify-p2-int-mixed-3/analyse.py",
+   "origin_sha256": "da4bb7eb05b5109f25d72e277c30f90094486833ebb6e33ce1a31c4c4b1d551d",
+   "vendored_sha256": "70180b4a92aebe400e6609526a813bbd87b36099fcf8c92c557f986d9ef4515a",
+   "modified": true,
+   "changes": [
+    "output helper",
+    "results <- $BRINGUP_OUT",
+    "results <- $BRINGUP_OUT",
+    "results -> $BRINGUP_OUT",
+    "results -> $BRINGUP_OUT"
+   ]
+  },
+  {
+   "path": "kits/window/build.py",
+   "origin": "/data/quant/tcemu_audit/work/verify-p2-int-mixed-3/build.py",
+   "origin_sha256": "e03a6cb8064ea1d5f3df925019aaaa8b25e48dfe0084e7bcbb2c9a111f76bc2f",
+   "vendored_sha256": "a26c7a196bfe34d6beb3689c8d910a75e102399f91234a8c3d227a74d35d2971",
+   "modified": true,
+   "changes": [
+    "cache helper",
+    "build dir -> cache"
+   ]
+  },
+  {
+   "path": "kits/window/vectors.py",
+   "origin": "/data/quant/tcemu_audit/work/verify-p2-int-mixed-3/vectors.py",
+   "origin_sha256": "6644fe28b439a936fd3fabfdcb856471e0344b0b6d7fd3498e763718e39e99ce",
+   "vendored_sha256": "6644fe28b439a936fd3fabfdcb856471e0344b0b6d7fd3498e763718e39e99ce",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/window/tc_models.py",
+   "origin": "/data/quant/tcemu_audit/work/verify-p2-int-mixed-3/tc_models.py",
+   "origin_sha256": "32a2e41755dc0ba6a1cfa935d8eedcb642612ece42bb8f017087f42cb1385941",
+   "vendored_sha256": "32a2e41755dc0ba6a1cfa935d8eedcb642612ece42bb8f017087f42cb1385941",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/window/test_prims.py",
+   "origin": "/data/quant/tcemu_audit/work/verify-p2-int-mixed-3/test_prims.py",
+   "origin_sha256": "bfe8e680c71b3ad53846b933b1f67343c20f84ac5588b878bd123ffcbf0b39e2",
+   "vendored_sha256": "e6efcc863e9ab23ceb272ee424b591cdbc7672313ca1643f2d3d4c4cf9b75ef6",
+   "modified": true,
+   "changes": [
+    "output helper",
+    "results -> $BRINGUP_OUT",
+    "compare raw bits, including signed zero and NaN payloads",
+    "defer CUDA build while importing CPU vector generators",
+    "build only for probe execution"
+   ]
+  },
+  {
+   "path": "kits/window/test_prims8.py",
+   "origin": "/data/quant/tcemu_audit/work/verify-p2-int-mixed-3/test_prims8.py",
+   "origin_sha256": "3f002f7efe610002c8a3263817e18d7d23e9a24f52913e5205cba8a830853fda",
+   "vendored_sha256": "8489be487772bf6ec1ce8f48f091f617c31beb4011b4b5ae44ed0a7fa13c2f99",
+   "modified": true,
+   "changes": [
+    "output helper",
+    "results -> $BRINGUP_OUT",
+    "defer CUDA build while importing CPU vector generators",
+    "build only for probe execution"
+   ]
+  },
+  {
+   "path": "kits/window/epass_raw.cu",
+   "origin": "/data/quant/tcemu_audit/work/verify-p2-int-mixed-3/epass_raw.cu",
+   "origin_sha256": "1a8d205b59ae652a872eb035f6160ad9f38d157cce7a850bdeab9ee2f42637e0",
+   "vendored_sha256": "1a8d205b59ae652a872eb035f6160ad9f38d157cce7a850bdeab9ee2f42637e0",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/window/v2_common.cuh",
+   "origin": "/data/quant/tcemu_audit/work/verify-p2-int-mixed-3/v2_common.cuh",
+   "origin_sha256": "e44ff8b9e34e5246bd5c11cdc313d04cbfbf8056f1007f069d5fb21ca0dfa277",
+   "vendored_sha256": "e44ff8b9e34e5246bd5c11cdc313d04cbfbf8056f1007f069d5fb21ca0dfa277",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/window/expected_sm89/analyse_hw.json",
+   "origin": "/data/quant/tcemu_audit/work/verify-p2-int-mixed-3/results/analyse_hw.json",
+   "origin_sha256": "b9cf59fd8d0a9ce0eeada0d8b9a7fadbac82d5863d79ced4274475870774e9dd",
+   "vendored_sha256": "b9cf59fd8d0a9ce0eeada0d8b9a7fadbac82d5863d79ced4274475870774e9dd",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/b3soft/scripts/b3soft.py",
+   "origin": "/data/quant/tcemu_audit/work/verify-p3-tensorcore-exact-0/scripts/b3soft.py",
+   "origin_sha256": "e0571eaf43802caee80e7d7a8af65b2f89089cbcf1d4477fc8f2c1838eba8d77",
+   "vendored_sha256": "2de5e3510169c86cf2bcaec3176a2a33b61e1463ba4f1e0bfd1f7a832184e993",
+   "modified": true,
+   "changes": [
+    "audit paths -> kit dir / $BRINGUP_OUT / $BRINGUP_CACHE; p3 scripts not vendored",
+    "build dir -> cache",
+    "logs -> $BRINGUP_OUT",
+    "gemm mode disabled",
+    "compare raw bits, including signed zero and NaN payloads",
+    "detect the active device architecture for b3soft probes"
+   ]
+  },
+  {
+   "path": "kits/b3soft/csrc/b3soft.cu",
+   "origin": "/data/quant/tcemu_audit/work/verify-p3-tensorcore-exact-0/csrc/b3soft.cu",
+   "origin_sha256": "3486e68b536cb5141e4bd84bbe08488c663af8e513fe872bcd62d4f58de331b0",
+   "vendored_sha256": "3486e68b536cb5141e4bd84bbe08488c663af8e513fe872bcd62d4f58de331b0",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/zero_specials/scripts/zero_specials.py",
+   "origin": "/data/quant/tcemu_audit/work/verify-a3-integration-review-7/scripts/zero_specials.py",
+   "origin_sha256": "3c6462f363acb60db101998e6fbf4f2ed3ba2a449027f514c38d9103282d819b",
+   "vendored_sha256": "af05ac970b10b03270d86252829cbd9c4b4c4fe103d44c9ba4fbb1710fbf9d32",
+   "modified": true,
+   "changes": [
+    "tcemu -> compat (mmaemu)",
+    "results -> $BRINGUP_OUT",
+    "compare raw bits, including signed zero and NaN payloads"
+   ]
+  },
+  {
+   "path": "kits/zero_specials/expected_sm89/zero_specials.json",
+   "origin": "/data/quant/tcemu_audit/work/verify-a3-integration-review-7/results/zero_specials.json",
+   "origin_sha256": "14cd228befe75bea97b113abf64c6548a65df2c1254e5acb54f9396556d6d6ff",
+   "vendored_sha256": "14cd228befe75bea97b113abf64c6548a65df2c1254e5acb54f9396556d6d6ff",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/epilogue_ties/record_epilogue_ties.py",
+   "origin": "/data/quant/tcemu_audit/work/verify-c1-claims-5/fix/record_epilogue_ties.py",
+   "origin_sha256": "7c5ea192cae0463ffa49290f911449aa63964a2bade2cf6d5eb8ae25a0fdaf36",
+   "vendored_sha256": "2307d58284e753ec6364e22715b98a3090142f3d5374423d4c225571df592e6a",
+   "modified": true,
+   "changes": [
+    "required output path",
+    "compare raw bits, including signed zero and NaN payloads"
+   ]
+  },
+  {
+   "path": "kits/epilogue_ties/test_epilogue_ties.py",
+   "origin": "/data/quant/tcemu_audit/work/verify-c1-claims-5/fix/test_epilogue_ties.py",
+   "origin_sha256": "4f223e6d51051185de18ebc7cc56ccd6629c4a1473f3e21d90fa350628340bbb",
+   "vendored_sha256": "845643ea6b2c709d3543f736a0ba1d7569b8b9e980d415c9b7a9e46091aaec0f",
+   "modified": true,
+   "changes": [
+    "tcemu -> compat (mmaemu)",
+    "compare raw bits, including signed zero and NaN payloads"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_sm120/E4M3/a_MM_sm120_E4M3.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_sm120/E4M3/a_MM_sm120_E4M3.txt",
+   "origin_sha256": "9e668675b043aa11b50648a46f4d32d733de6a40b522d80e9ec6234b83ce5687",
+   "vendored_sha256": "a8917bc322ebeb0c8ec6ffae6b2452398c4f00b751147d9249488591bd4d60bb",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_sm120/E4M3/b_MM_sm120_E4M3.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_sm120/E4M3/b_MM_sm120_E4M3.txt",
+   "origin_sha256": "1e11bf8beac788ac903c9663443fd2d8c55dfad20eaeed232cab4120fde439a8",
+   "vendored_sha256": "9f08dc42673e4adb3d2754def9c073a86f7d178c325e1be4b27492e492ff23ae",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_sm120/E4M3/c_MM_sm120_fp32.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_sm120/E4M3/c_MM_sm120_fp32.txt",
+   "origin_sha256": "26911584ae4272d9c47a9f1c19909ba06db74c5737a6d93515b88ef061b166c3",
+   "vendored_sha256": "48dcc950f78aadffe2dab8631bd6e598723ca811a23a7c63f412d1c774f14b62",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_sm120/E4M3/classes_MM_sm120_E4M3.json.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_sm120/E4M3/classes_MM_sm120_E4M3.json",
+   "origin_sha256": "50898e6c8ba1f5ba084e7c50bd47b231b62a5f7c6b03ec3a80041e4e6def4925",
+   "vendored_sha256": "b1a3d15832bde79baf2b4ba67de91a9efe6cabc1978b4794e7149ededde1ad4b",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_sm120/E4M3/d_MM_sm120_sm89.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_sm120/E4M3/d_MM_sm120_sm89.txt",
+   "origin_sha256": "63c1339f721caa2131685bcc36b2073372a0eb67ec1d4d4463dc9ae7a4830824",
+   "vendored_sha256": "ba97d01c26e636b3350d4fbe50f89b465306ad87c65bad0b1dd08e8e72b174bb",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_sm120/E4M3/pred_MM_sm120_E4M3.npz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_sm120/E4M3/pred_MM_sm120_E4M3.npz",
+   "origin_sha256": "ad8a811fdcb37d8b7f82d2bb3c49dca88b0456ae6c0e7f393cf32540fb2e2101",
+   "vendored_sha256": "ad8a811fdcb37d8b7f82d2bb3c49dca88b0456ae6c0e7f393cf32540fb2e2101",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/c6/sets/MM_sm120/E4M3/tags_MM_sm120_E4M3.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_sm120/E4M3/tags_MM_sm120_E4M3.txt",
+   "origin_sha256": "13b74288f42b6178e83ad7f31996efea693e21e902141b739a3dc7a6e2731a15",
+   "vendored_sha256": "af6e71b18ca0da8982fcd812e5eb7af2512af01bd60099429821bc078b25f089",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_sm120/E5M2/a_MM_sm120_E5M2.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_sm120/E5M2/a_MM_sm120_E5M2.txt",
+   "origin_sha256": "20c40268eda8373e20bfc1449395122becd3f946d473b40462148555adef4f2e",
+   "vendored_sha256": "9a7e173f99820a3d4063863dc9039a6ccb97a0cc57b6980a1ba82fb907ec4ae5",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_sm120/E5M2/b_MM_sm120_E5M2.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_sm120/E5M2/b_MM_sm120_E5M2.txt",
+   "origin_sha256": "d3b621217db588bb2a4c3b09f37b9cdd807623e67131914a87ac165057438b34",
+   "vendored_sha256": "cd7ead612e394b7e3aba334494b3730c21a5d07163535b609a1b81b7172fdbe1",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_sm120/E5M2/c_MM_sm120_fp32.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_sm120/E5M2/c_MM_sm120_fp32.txt",
+   "origin_sha256": "a60db1119c5870d72c0a8c5b8d80f2d217d1de4764e00892035e3cb60cedb9fe",
+   "vendored_sha256": "db07e37ce8b8d9058f8b5dc1e5004b53d64e2adfc6b8c6628474070dd941ea40",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_sm120/E5M2/classes_MM_sm120_E5M2.json.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_sm120/E5M2/classes_MM_sm120_E5M2.json",
+   "origin_sha256": "41daa28f4cea37b15630a5c72b0e27bdc86cdcf1da91341839156c077d4d572d",
+   "vendored_sha256": "294dd2e6ff98540fe8c9eb3d31720a68972b0b7afacd80f89f72f4ebb75f6a54",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_sm120/E5M2/d_MM_sm120_sm89.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_sm120/E5M2/d_MM_sm120_sm89.txt",
+   "origin_sha256": "a1a756caaecb63bbd5d0613879421d167a9fdd00d80d2942eb270a80156d5b0b",
+   "vendored_sha256": "6a12f36ed41c694bc61ba06617071ce1950f273fa948ddb33da8675e45294f55",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_sm120/E5M2/pred_MM_sm120_E5M2.npz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_sm120/E5M2/pred_MM_sm120_E5M2.npz",
+   "origin_sha256": "dde92153f62741b8e169ccbb6074fb8f6b218fb6c33753c5e8bb1e618609d74b",
+   "vendored_sha256": "dde92153f62741b8e169ccbb6074fb8f6b218fb6c33753c5e8bb1e618609d74b",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/c6/sets/MM_sm120/E5M2/tags_MM_sm120_E5M2.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_sm120/E5M2/tags_MM_sm120_E5M2.txt",
+   "origin_sha256": "fd0ef49c32422417cddd68033deb956fb4f7cafcf86980aedb9e9202aaa65025",
+   "vendored_sha256": "e65b79df5e97b96369e88c223ef1e2a831f2a99822d409db0a583f5096c16f9e",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_sm120/summary.json",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_sm120/summary.json",
+   "origin_sha256": "687d09457601ad5d5067442a4a94e4ba7535d1dc1899124710ca5a97aa21d3e3",
+   "vendored_sha256": "687d09457601ad5d5067442a4a94e4ba7535d1dc1899124710ca5a97aa21d3e3",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/c6/sets/MM_ada/E4M3/a_MM_ada_E4M3.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_ada/E4M3/a_MM_ada_E4M3.txt",
+   "origin_sha256": "a43abf95f579a4aaf1248b920acb27f2ae12988951fbeefe918dae3354150b2c",
+   "vendored_sha256": "cd61a05582ae9acae4dec0b3a185e1d75acbce990a26520dadce32ff62084f6e",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_ada/E4M3/b_MM_ada_E4M3.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_ada/E4M3/b_MM_ada_E4M3.txt",
+   "origin_sha256": "eee9bdec732098d20feac4989da68919605245c1c0933ee6f638779f436c307f",
+   "vendored_sha256": "b8f94f9a1aef6b81338be56617b837b0d58e75570f67a9e8d9ea5ece0c625536",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_ada/E4M3/c_MM_ada_fp32.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_ada/E4M3/c_MM_ada_fp32.txt",
+   "origin_sha256": "9b2b33d891bf6e90e3e0af250868d91aa8456d00c2a47e5b3898a08d7061a8cd",
+   "vendored_sha256": "b344c6f0936f8e0cf5ab640c76a8c2adb8a43feb81306314061acd6007920c0f",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_ada/E4M3/classes_MM_ada_E4M3.json",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_ada/E4M3/classes_MM_ada_E4M3.json",
+   "origin_sha256": "efaafb66f280744a4abbc002c31c27138610f8b19bc0d4695cc6da24590a7908",
+   "vendored_sha256": "efaafb66f280744a4abbc002c31c27138610f8b19bc0d4695cc6da24590a7908",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/c6/sets/MM_ada/E4M3/d_MM_ada_fp32.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_ada/E4M3/d_MM_ada_fp32.txt",
+   "origin_sha256": "da7b6b9dbbdb5849929dbffc32cbd822216b5c74fcda96c8a27bdfd669a5c7ce",
+   "vendored_sha256": "f8e61d162b62558016bd5eaddcb2adc9f01bb8309cb98795ad2e3c1bc4cb9e3c",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_ada/E4M3/d_MM_ada_sm89.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_ada/E4M3/d_MM_ada_sm89.txt",
+   "origin_sha256": "da7b6b9dbbdb5849929dbffc32cbd822216b5c74fcda96c8a27bdfd669a5c7ce",
+   "vendored_sha256": "f8e61d162b62558016bd5eaddcb2adc9f01bb8309cb98795ad2e3c1bc4cb9e3c",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_ada/E4M3/pred_MM_ada_E4M3.npz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_ada/E4M3/pred_MM_ada_E4M3.npz",
+   "origin_sha256": "9b4394d5ffafcebb6742b29f222d7416ff4b443b177c354fc3b7c77e5dd77bcd",
+   "vendored_sha256": "9b4394d5ffafcebb6742b29f222d7416ff4b443b177c354fc3b7c77e5dd77bcd",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/c6/sets/MM_ada/E4M3/tags_MM_ada_E4M3.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_ada/E4M3/tags_MM_ada_E4M3.txt",
+   "origin_sha256": "2771675f6eb7d589b90078c204ea8c00b1802330e9b2632e2d1d93b7e50240f9",
+   "vendored_sha256": "78a7cd0e682e6d253c3fa9c4f1ae98effb0f78cc9a99b20c00b6dd570d8eb74d",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_ada/E5M2/a_MM_ada_E5M2.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_ada/E5M2/a_MM_ada_E5M2.txt",
+   "origin_sha256": "a78ae559fd22e4d29c2463fbab12e66ca2606dc7c8cffeb6cff3ff5d7c0c2a55",
+   "vendored_sha256": "264cb28fdc2f387c243524c8d04a27ca00681ad620e181670a767c260e01a161",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_ada/E5M2/b_MM_ada_E5M2.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_ada/E5M2/b_MM_ada_E5M2.txt",
+   "origin_sha256": "e75d7a049fbbbdf1ee8007bb6369cd6ab3d22a16b2fb379d66b766c32837c964",
+   "vendored_sha256": "3c10d38fb99bf428eed452aecb306ca0f6a4a311dcc4c79d3550597bfc5efbd4",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_ada/E5M2/c_MM_ada_fp32.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_ada/E5M2/c_MM_ada_fp32.txt",
+   "origin_sha256": "42cea9f7accea8a5b8d78215908628be04d0c914350d0b02ef8835b62d461bda",
+   "vendored_sha256": "80ed753a5c482da754cb9d549e8dbf83ccd8514f7c7aab1cb9f8c9d74f49a715",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_ada/E5M2/classes_MM_ada_E5M2.json",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_ada/E5M2/classes_MM_ada_E5M2.json",
+   "origin_sha256": "0fa4f35eac43dd9c958a889ccbd33af95667f18e69d2c64828f5b147d7ef1960",
+   "vendored_sha256": "0fa4f35eac43dd9c958a889ccbd33af95667f18e69d2c64828f5b147d7ef1960",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/c6/sets/MM_ada/E5M2/d_MM_ada_fp32.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_ada/E5M2/d_MM_ada_fp32.txt",
+   "origin_sha256": "72896c85df0119972fd13356a546b78ec44eaec6d54c5d545df5a93faf8bb460",
+   "vendored_sha256": "984eeb78835e5c43036005ea88cefbf7c53a06e8b094c0dfa1ecc8b169d6fea6",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_ada/E5M2/d_MM_ada_sm89.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_ada/E5M2/d_MM_ada_sm89.txt",
+   "origin_sha256": "72896c85df0119972fd13356a546b78ec44eaec6d54c5d545df5a93faf8bb460",
+   "vendored_sha256": "984eeb78835e5c43036005ea88cefbf7c53a06e8b094c0dfa1ecc8b169d6fea6",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_ada/E5M2/pred_MM_ada_E5M2.npz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_ada/E5M2/pred_MM_ada_E5M2.npz",
+   "origin_sha256": "8e66f1a7f15c401b7be9d4051c33e0ab9d0214ba9a24f14b98cf626947db1716",
+   "vendored_sha256": "8e66f1a7f15c401b7be9d4051c33e0ab9d0214ba9a24f14b98cf626947db1716",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/c6/sets/MM_ada/E5M2/tags_MM_ada_E5M2.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_ada/E5M2/tags_MM_ada_E5M2.txt",
+   "origin_sha256": "04020a26f3c953c36df80fb67ab3832cd857cdb738eb20780f0f363742e884c3",
+   "vendored_sha256": "a61ee01639af809ec39d1558ae53b2d49bcc27da0175071bc9aaa0ffacd2708e",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_ada/summary.json",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_ada/summary.json",
+   "origin_sha256": "73e6ca3985a500690670463963ea435aab67681c0db01c8ab9afaceb7706b36e",
+   "vendored_sha256": "73e6ca3985a500690670463963ea435aab67681c0db01c8ab9afaceb7706b36e",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/c6/sets/TBX_B200/E4M3/a_TBX_B200_E4M3.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_B200/E4M3/a_TBX_B200_E4M3.txt",
+   "origin_sha256": "76a6115878a4662fb486d90a6765e24564ed436a173ed1260d5d53112e8a976c",
+   "vendored_sha256": "dd8fe8b2366915a22fc3343a5dcc13b5a68e64b65c913c44d82db678a5e6ec6f",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_B200/E4M3/b_TBX_B200_E4M3.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_B200/E4M3/b_TBX_B200_E4M3.txt",
+   "origin_sha256": "f35d75720651ab777b10399abea59f060cde011a898065b5c3045ea171cc669d",
+   "vendored_sha256": "25cd83665fd56b20617c131bc81c5d509de8cdb50d430ad9b574936e8e551635",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_B200/E4M3/c_TBX_B200_fp32.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_B200/E4M3/c_TBX_B200_fp32.txt",
+   "origin_sha256": "1ff20a31004589bfd484b3334cab1efdddb032e6f0fb884d246b8503d23a0e59",
+   "vendored_sha256": "2132ccff96f4a494556beaada0a90139b0977ddf2a8b7ef726fe2ccfb703d9ee",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_B200/E4M3/d_TBX_B200_recorded_fp32.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_B200/E4M3/d_TBX_B200_recorded_fp32.txt",
+   "origin_sha256": "7213f29b8334449a5e9e26ec1140a093a92c901279917f44aab1f0f5b23ac030",
+   "vendored_sha256": "6ee0c58dae5c847bba253c38771deefaa6c6bf95d80030053c0f386d0cb85f0a",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_B200/E4M3/d_TBX_B200_sm89.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_B200/E4M3/d_TBX_B200_sm89.txt",
+   "origin_sha256": "047db25142b36d91ded780ce7d13c768d5481f822af464f97c68865ec4b9bb84",
+   "vendored_sha256": "bd164cdb9cc1e8dc56fedaec7e0dcb1a6318a13c6f12b7c8d89d10361302ac25",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_B200/E4M3/pred_TBX_B200_E4M3.npz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_B200/E4M3/pred_TBX_B200_E4M3.npz",
+   "origin_sha256": "71ad62455ee833f2568e273823c79f195b6fd4d235d6218687b5f5861954b65c",
+   "vendored_sha256": "71ad62455ee833f2568e273823c79f195b6fd4d235d6218687b5f5861954b65c",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/c6/sets/TBX_B200/E4M3/tags_TBX_B200_E4M3.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_B200/E4M3/tags_TBX_B200_E4M3.txt",
+   "origin_sha256": "bfb1b52213430e9d11f4094ed2ac077cd3aebf3f207b424b1f0a1accd6934bce",
+   "vendored_sha256": "8f84ff94f293a37333f10c843f634f5318d521f49699ccdda36ca6297339e4fe",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_B200/E5M2/a_TBX_B200_E5M2.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_B200/E5M2/a_TBX_B200_E5M2.txt",
+   "origin_sha256": "229abb5f9e0f1dfdae18ab467bccc38547749b3286128f99ba134573b443ee1f",
+   "vendored_sha256": "8fb698f31109844da1904fcddc51d1e615facd7e5e1609c3bf5944138385435b",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_B200/E5M2/b_TBX_B200_E5M2.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_B200/E5M2/b_TBX_B200_E5M2.txt",
+   "origin_sha256": "dc105fe914100f96ba77b18ec88014bde43b4f5be0bc105e337d2e6bd51eeb35",
+   "vendored_sha256": "fcd67d8576ed427989d8ff04c81f48457dbe24572ed0ff28716381755de54b6f",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_B200/E5M2/c_TBX_B200_fp32.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_B200/E5M2/c_TBX_B200_fp32.txt",
+   "origin_sha256": "97b4b8782c9256fda537336e569319e541d20b823dc646e10bc90bbb4344d5af",
+   "vendored_sha256": "515d08823d6545b2c624a345936eb5c55dabda8810177772024e5d4d8464f1e4",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_B200/E5M2/d_TBX_B200_recorded_fp32.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_B200/E5M2/d_TBX_B200_recorded_fp32.txt",
+   "origin_sha256": "bfb758780a1759715151a660375a4f8846e0baa6441910aa4ac1af692e28f365",
+   "vendored_sha256": "0cc9cc114dbed81c1924ec44105c238938c3b2643bfb897cb68de1dd6f46a057",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_B200/E5M2/d_TBX_B200_sm89.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_B200/E5M2/d_TBX_B200_sm89.txt",
+   "origin_sha256": "d398256ada10c27a6815a22bc75050abff6287d8a4342b8df079d71fff41d38b",
+   "vendored_sha256": "208274e1b36e5dd83979d8c41f4961447589cf554927553b27da352ed980c7d5",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_B200/E5M2/pred_TBX_B200_E5M2.npz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_B200/E5M2/pred_TBX_B200_E5M2.npz",
+   "origin_sha256": "ea69bdf6409fcbe6bb268688c651731b9e2b2991cb1d6afbb652545bac933be5",
+   "vendored_sha256": "ea69bdf6409fcbe6bb268688c651731b9e2b2991cb1d6afbb652545bac933be5",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/c6/sets/TBX_B200/E5M2/tags_TBX_B200_E5M2.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_B200/E5M2/tags_TBX_B200_E5M2.txt",
+   "origin_sha256": "bfb1b52213430e9d11f4094ed2ac077cd3aebf3f207b424b1f0a1accd6934bce",
+   "vendored_sha256": "8f84ff94f293a37333f10c843f634f5318d521f49699ccdda36ca6297339e4fe",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_H100c0/E4M3/a_TBX_H100c0_E4M3.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_H100c0/E4M3/a_TBX_H100c0_E4M3.txt",
+   "origin_sha256": "76a6115878a4662fb486d90a6765e24564ed436a173ed1260d5d53112e8a976c",
+   "vendored_sha256": "dd8fe8b2366915a22fc3343a5dcc13b5a68e64b65c913c44d82db678a5e6ec6f",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_H100c0/E4M3/b_TBX_H100c0_E4M3.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_H100c0/E4M3/b_TBX_H100c0_E4M3.txt",
+   "origin_sha256": "f35d75720651ab777b10399abea59f060cde011a898065b5c3045ea171cc669d",
+   "vendored_sha256": "25cd83665fd56b20617c131bc81c5d509de8cdb50d430ad9b574936e8e551635",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_H100c0/E4M3/c_TBX_H100c0_fp32.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_H100c0/E4M3/c_TBX_H100c0_fp32.txt",
+   "origin_sha256": "2e9fe6da0fe505f224f8c7a04151c9bef405c68dfe0b18d1cfdb8f3602b81448",
+   "vendored_sha256": "935fe1afa99e419e31835244c5d6578f3ab2110317a44167b8bb3f35e78cd175",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_H100c0/E4M3/d_TBX_H100c0_recorded_fp32.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_H100c0/E4M3/d_TBX_H100c0_recorded_fp32.txt",
+   "origin_sha256": "7c6c32232e823f7b196cf8f86b70ad6009ae89962d2ae8297f0089fe6d7fceca",
+   "vendored_sha256": "04fc221ea6a95d0cd2392e478ff1b419c23a47aefdc55260755ff6592b2312b5",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_H100c0/E4M3/d_TBX_H100c0_sm89.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_H100c0/E4M3/d_TBX_H100c0_sm89.txt",
+   "origin_sha256": "708f84e537d4b3509b12ffed5ce96dbc06ea6c61791bc9ff9b8115d83321b381",
+   "vendored_sha256": "e4b84044e0a3011133eebfbebffdbf964f6f74750c7c805f8f8781117bb39639",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_H100c0/E4M3/pred_TBX_H100c0_E4M3.npz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_H100c0/E4M3/pred_TBX_H100c0_E4M3.npz",
+   "origin_sha256": "2b13eec4cd90d1379d64cdc81a936bcb3df32962369a2eee512273cfc67292ee",
+   "vendored_sha256": "2b13eec4cd90d1379d64cdc81a936bcb3df32962369a2eee512273cfc67292ee",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/c6/sets/TBX_H100c0/E4M3/tags_TBX_H100c0_E4M3.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_H100c0/E4M3/tags_TBX_H100c0_E4M3.txt",
+   "origin_sha256": "1b42a76b6a09bc5e5c9cfaf22f64ee7040e673f0afa15ce2395c20fdfaec410b",
+   "vendored_sha256": "9a9ebb858c0243d1020c6214679d061ac7a559397307966298f915048076bfe6",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_H100c0/E5M2/a_TBX_H100c0_E5M2.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_H100c0/E5M2/a_TBX_H100c0_E5M2.txt",
+   "origin_sha256": "229abb5f9e0f1dfdae18ab467bccc38547749b3286128f99ba134573b443ee1f",
+   "vendored_sha256": "8fb698f31109844da1904fcddc51d1e615facd7e5e1609c3bf5944138385435b",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_H100c0/E5M2/b_TBX_H100c0_E5M2.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_H100c0/E5M2/b_TBX_H100c0_E5M2.txt",
+   "origin_sha256": "dc105fe914100f96ba77b18ec88014bde43b4f5be0bc105e337d2e6bd51eeb35",
+   "vendored_sha256": "fcd67d8576ed427989d8ff04c81f48457dbe24572ed0ff28716381755de54b6f",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_H100c0/E5M2/c_TBX_H100c0_fp32.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_H100c0/E5M2/c_TBX_H100c0_fp32.txt",
+   "origin_sha256": "2e9fe6da0fe505f224f8c7a04151c9bef405c68dfe0b18d1cfdb8f3602b81448",
+   "vendored_sha256": "935fe1afa99e419e31835244c5d6578f3ab2110317a44167b8bb3f35e78cd175",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_H100c0/E5M2/d_TBX_H100c0_recorded_fp32.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_H100c0/E5M2/d_TBX_H100c0_recorded_fp32.txt",
+   "origin_sha256": "cfd7f2b4be78f0891ec00ad2e93cfd885887da25f5253f9f03ed63fcf8501d93",
+   "vendored_sha256": "37b06adbb9f81aa7be1d8b54463612dffb3e06f5e8a77933a9d090c101c93928",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_H100c0/E5M2/d_TBX_H100c0_sm89.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_H100c0/E5M2/d_TBX_H100c0_sm89.txt",
+   "origin_sha256": "e5657e7b4c216ee4de284868db01cbb6c22c61d98af9ccde9808bace40552213",
+   "vendored_sha256": "c4139026b482ecabe321d8d62c9c55ae9baf9b59496a1ec7125c81c26a2b3315",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/TBX_H100c0/E5M2/pred_TBX_H100c0_E5M2.npz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_H100c0/E5M2/pred_TBX_H100c0_E5M2.npz",
+   "origin_sha256": "5aade8ae968996a57755ebfe4a5a56481e3accb758f2b04cc2d1b0e4265196d0",
+   "vendored_sha256": "5aade8ae968996a57755ebfe4a5a56481e3accb758f2b04cc2d1b0e4265196d0",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/c6/sets/TBX_H100c0/E5M2/tags_TBX_H100c0_E5M2.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/TBX_H100c0/E5M2/tags_TBX_H100c0_E5M2.txt",
+   "origin_sha256": "1b42a76b6a09bc5e5c9cfaf22f64ee7040e673f0afa15ce2395c20fdfaec410b",
+   "vendored_sha256": "9a9ebb858c0243d1020c6214679d061ac7a559397307966298f915048076bfe6",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_cublas64_sm120/E4M3/a_MM_cublas64_sm120_E4M3.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_cublas64_sm120/E4M3/a_MM_cublas64_sm120_E4M3.txt",
+   "origin_sha256": "fea0195c3a17073568d5fd0c96a97916116ee09114a474bb2e696bac8cff3619",
+   "vendored_sha256": "7bc740bbade216e3ba4c9f0181af15ccf967fa5762f3279a86ca17f0318c6891",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_cublas64_sm120/E4M3/b_MM_cublas64_sm120_E4M3.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_cublas64_sm120/E4M3/b_MM_cublas64_sm120_E4M3.txt",
+   "origin_sha256": "02fcbfd671f12f2671d485831a1202d7407cf489f3bddf7564fb904771f5ef51",
+   "vendored_sha256": "57caa97d7db749813cd3fdc9427f8c18fe96e73a4830b9f5f5018f806f738c32",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_cublas64_sm120/E4M3/c_MM_cublas64_sm120_fp32.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_cublas64_sm120/E4M3/c_MM_cublas64_sm120_fp32.txt",
+   "origin_sha256": "08b26ec98706a23ae74264cd735187a76c9550b042c148ce0f11fe38a9c1808c",
+   "vendored_sha256": "16c37769ed674ec4bad33e599f93f040bd8af7c0b6dd0e1198e7e34eca288046",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_cublas64_sm120/E4M3/cgen_MM_cublas64_sm120_E4M3.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_cublas64_sm120/E4M3/cgen_MM_cublas64_sm120_E4M3.txt",
+   "origin_sha256": "79bdf07fdc2a6d20047e5cc2ffd610a54ace1815e302592e63e79d17fd9547c4",
+   "vendored_sha256": "269f865d55ae61546d05c47ea8c3a2a523634bf3ae83c4579c75d7e26128295c",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_cublas64_sm120/E4M3/classes_MM_cublas64_sm120_E4M3.json.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_cublas64_sm120/E4M3/classes_MM_cublas64_sm120_E4M3.json",
+   "origin_sha256": "a335d58f02ad3f97aeca053c166bd4831c09dfed356d884f64940a2db1c182ba",
+   "vendored_sha256": "6717b9994efff1d97a24f7de5444cd19d1148f234e3b2d2256fa88b715fcb47c",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_cublas64_sm120/E4M3/pred_MM_cublas64_sm120_E4M3.npz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_cublas64_sm120/E4M3/pred_MM_cublas64_sm120_E4M3.npz",
+   "origin_sha256": "0a7eefb20f90fed047e7a354e656209c478c399e5a1cf8512f40e56158289493",
+   "vendored_sha256": "0a7eefb20f90fed047e7a354e656209c478c399e5a1cf8512f40e56158289493",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/c6/sets/MM_cublas64_sm120/E4M3/tags_MM_cublas64_sm120_E4M3.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_cublas64_sm120/E4M3/tags_MM_cublas64_sm120_E4M3.txt",
+   "origin_sha256": "ced57258070b4e2636b6c26aecf34ef6c4db04631ef4ce7511d40a86c1e98443",
+   "vendored_sha256": "89a735a0185fb9cb63961ed83635d14a43423ec7e5d4651cb5e1dbd8a7dbfd6f",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_cublas64_sm120/E5M2/a_MM_cublas64_sm120_E5M2.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_cublas64_sm120/E5M2/a_MM_cublas64_sm120_E5M2.txt",
+   "origin_sha256": "13b3b1aa97564058228706cc883d4ebcce6924b893041d8358b0a2d55d9643ba",
+   "vendored_sha256": "0966f74b1565410c6caffe06a0d780e53d32c66a457d6d8a860a652c7640a947",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_cublas64_sm120/E5M2/b_MM_cublas64_sm120_E5M2.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_cublas64_sm120/E5M2/b_MM_cublas64_sm120_E5M2.txt",
+   "origin_sha256": "d38db85e2268624fed7945b6aa59f9a6e4c5ff6129afe81510c100d029d69deb",
+   "vendored_sha256": "a1f3bbe242f2183d245b2d06e38f3ee76a5c443c2e727367a90573e2ce74b93d",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_cublas64_sm120/E5M2/c_MM_cublas64_sm120_fp32.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_cublas64_sm120/E5M2/c_MM_cublas64_sm120_fp32.txt",
+   "origin_sha256": "b128db8db87c137a5eb5831fe20eb90df96a9845fdeac946504f140d9b4ab435",
+   "vendored_sha256": "87de987b29e3693e8f171c4ff20df0bad1b4f585c8041aa20e7447b6b4f2ddd1",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_cublas64_sm120/E5M2/cgen_MM_cublas64_sm120_E5M2.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_cublas64_sm120/E5M2/cgen_MM_cublas64_sm120_E5M2.txt",
+   "origin_sha256": "a406ad54e936ae1a97e3636c3619ad8770fb19c885196872666068197c8d289f",
+   "vendored_sha256": "bc0df986c6e832972e442d3d9e44cdd586b36ea1181d8038dce1373776ad84cb",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_cublas64_sm120/E5M2/classes_MM_cublas64_sm120_E5M2.json.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_cublas64_sm120/E5M2/classes_MM_cublas64_sm120_E5M2.json",
+   "origin_sha256": "174559d0fece26d348d518b9c25b89a7f1209e73feae70e39b202c06af2596f9",
+   "vendored_sha256": "87a7607c0000a34bd48d9be098f5a1cf8f2cb336751f330e7dff86e617666152",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_cublas64_sm120/E5M2/pred_MM_cublas64_sm120_E5M2.npz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_cublas64_sm120/E5M2/pred_MM_cublas64_sm120_E5M2.npz",
+   "origin_sha256": "d1495512a945d33baa780d3bb55968ba0efad4f05f78b5d2c9eeb2d8732c3e2f",
+   "vendored_sha256": "d1495512a945d33baa780d3bb55968ba0efad4f05f78b5d2c9eeb2d8732c3e2f",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/c6/sets/MM_cublas64_sm120/E5M2/tags_MM_cublas64_sm120_E5M2.txt.gz",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_cublas64_sm120/E5M2/tags_MM_cublas64_sm120_E5M2.txt",
+   "origin_sha256": "df41a79ec87d5b480696b73675bcce75c3c72b16d8f883e74594c95b059f6947",
+   "vendored_sha256": "1a7733ee5c6fee6d8a4a114b55d06f89f152a106eb24909b3b4440f59c5ff4f9",
+   "modified": true,
+   "changes": [
+    "gzip (mtime 0); read through _open()"
+   ]
+  },
+  {
+   "path": "kits/c6/sets/MM_cublas64_sm120/summary.json",
+   "origin": "/data/quant/tcemu_audit/work/c6-paper-identifiability/kit/sets/MM_cublas64_sm120/summary.json",
+   "origin_sha256": "2fea9414ee8f33d08af9af69d9b915d165461ce39b0b8db2b24a735d9612897f",
+   "vendored_sha256": "2fea9414ee8f33d08af9af69d9b915d165461ce39b0b8db2b24a735d9612897f",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/epilogue_ties/ada_rtx4060.npz",
+   "origin": "/data/quant/tcemu_audit/work/verify-c1-claims-5/fix/data/epilogue_ties_rtx4060.pt",
+   "origin_sha256": "1f81b02d9b0f70d2ce90f68eedcf3f2278b22dcb8a1063b9d3e17bf5aabb6868",
+   "vendored_sha256": "d9cb9f0617dedb47d45300d74fe9764f5bbdce39d4ce8f1dc00300a71e91afe8",
+   "modified": true,
+   "changes": [
+    "converted from the pickled .pt (uint bit patterns, no pickle)"
+   ]
+  },
+  {
+   "path": "kits/epilogue_ties/ada_rtx4060.json",
+   "origin": "/data/quant/tcemu_audit/work/verify-c1-claims-5/fix/data/epilogue_ties_rtx4060.pt",
+   "origin_sha256": "1f81b02d9b0f70d2ce90f68eedcf3f2278b22dcb8a1063b9d3e17bf5aabb6868",
+   "vendored_sha256": "d5ec593c21e0fa316c72feaf03446565c42465a3876b4745e2f182e6b66178f0",
+   "modified": true,
+   "changes": [
+    "converted from the pickled .pt (uint bit patterns, no pickle)"
+   ]
+  },
+  {
+   "path": "kits/window/prims.cu",
+   "origin": "/data/quant/tcemu_audit/work/verify-p2-int-mixed-3/prims.cu",
+   "origin_sha256": "f434cd68dc468699e5e7eebadc36ee0134cbe06f55445434f26acc6bad587dec",
+   "vendored_sha256": "f434cd68dc468699e5e7eebadc36ee0134cbe06f55445434f26acc6bad587dec",
+   "modified": false,
+   "changes": []
+  },
+  {
+   "path": "kits/window/prims8.cu",
+   "origin": "/data/quant/tcemu_audit/work/verify-p2-int-mixed-3/prims8.cu",
+   "origin_sha256": "8f8b90992ba63206bf38aee07506e1e97dc1c82fefd6dd08b8b3110de5434800",
+   "vendored_sha256": "8f8b90992ba63206bf38aee07506e1e97dc1c82fefd6dd08b8b3110de5434800",
+   "modified": false,
+   "changes": []
+  }
+ ]
+}

@@ -1,0 +1,101 @@
+{
+  "format": "mmaemu-bringup/1",
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "arch": "sm_120",
+    "sm_count": 70,
+    "driver": "610.88",
+    "cuda": "12.8",
+    "cublaslt": "12.8.3.14",
+    "cublaslt_lib": "/data/quant/stsc/research/round4/probe/.venv/lib/python3.12/site-packages/nvidia/cublas/lib/libcublasLt.so.12",
+    "torch": "2.7.1+cu128",
+    "python": "3.12.2",
+    "os": "Linux 5.15.167.4-microsoft-standard-WSL2",
+    "cublas": "12.8.3.14",
+    "nvidia_smi": "NVIDIA GeForce RTX 5070 Ti, 610.88, 555 MHz, 38",
+    "nvcc": "~/anaconda3/bin/nvcc"
+  },
+  "dry_run": false,
+  "inherited_lock": false,
+  "stages": [
+    {
+      "gate": "G8",
+      "status": "RECORDED",
+      "commands": [
+        {
+          "name": "compile-window",
+          "command": [
+            "/data/quant/stsc/research/round4/probe/.venv/bin/python",
+            "tools/bringup/kits/window/build.py",
+            "epass_raw"
+          ],
+          "gpu": false,
+          "returncode": 0,
+          "seconds": 32.73,
+          "log": "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g8/G8/compile-window.log"
+        },
+        {
+          "name": "window",
+          "command": [
+            "/data/quant/stsc/research/round4/probe/.venv/bin/python",
+            "tools/bringup/kits/window/hw_collect.py"
+          ],
+          "gpu": true,
+          "returncode": 0,
+          "seconds": 14.64,
+          "log": "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g8/G8/window.log"
+        },
+        {
+          "name": "analysis",
+          "command": [
+            "/data/quant/stsc/research/round4/probe/.venv/bin/python",
+            "tools/bringup/kits/window/analyse.py",
+            "hw"
+          ],
+          "gpu": false,
+          "returncode": 0,
+          "seconds": 8.51,
+          "log": "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g8/G8/analysis.log"
+        },
+        {
+          "name": "design-a",
+          "command": [
+            "/data/quant/stsc/research/round4/probe/.venv/bin/python",
+            "-c",
+            "import json,torch; from dataclasses import asdict; from mmaemu.backends.cuda.fast import gates,specs; print(json.dumps(asdict(gates.design_a(specs.TC3,torch.device('cuda',0))),default=str))"
+          ],
+          "gpu": true,
+          "returncode": 0,
+          "seconds": 1.37,
+          "log": "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g8/G8/design-a.log"
+        },
+        {
+          "name": "compile-b3soft",
+          "command": [
+            "/data/quant/stsc/research/round4/probe/.venv/bin/python",
+            "tools/bringup/kits/b3soft/scripts/b3soft.py",
+            "build",
+            "120"
+          ],
+          "gpu": false,
+          "returncode": 0,
+          "seconds": 35.38,
+          "log": "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g8/G8/compile-b3soft.log"
+        },
+        {
+          "name": "b3soft",
+          "command": [
+            "/data/quant/stsc/research/round4/probe/.venv/bin/python",
+            "tools/bringup/kits/b3soft/scripts/b3soft.py",
+            "probe"
+          ],
+          "gpu": true,
+          "returncode": 0,
+          "seconds": 2.99,
+          "log": "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g8/G8/b3soft.log"
+        }
+      ]
+    }
+  ],
+  "verdict": "PASS"
+}

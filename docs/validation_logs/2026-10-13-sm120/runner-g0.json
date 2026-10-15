@@ -1,0 +1,55 @@
+{
+  "format": "mmaemu-bringup/1",
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "arch": "sm_120",
+    "sm_count": 70,
+    "driver": "610.88",
+    "cuda": "12.8",
+    "cublaslt": "12.8.3.14",
+    "cublaslt_lib": "/data/quant/stsc/research/round4/probe/.venv/lib/python3.12/site-packages/nvidia/cublas/lib/libcublasLt.so.12",
+    "torch": "2.7.1+cu128",
+    "python": "3.12.2",
+    "os": "Linux 5.15.167.4-microsoft-standard-WSL2",
+    "cublas": "12.8.3.14",
+    "nvidia_smi": "NVIDIA GeForce RTX 5070 Ti, 610.88, 442 MHz, 36",
+    "nvcc": "~/anaconda3/bin/nvcc"
+  },
+  "dry_run": false,
+  "inherited_lock": false,
+  "stages": [
+    {
+      "gate": "G0",
+      "status": "PASS",
+      "commands": [
+        {
+          "name": "info",
+          "command": [
+            "/data/quant/stsc/research/round4/probe/.venv/bin/python",
+            "-m",
+            "mmaemu",
+            "info",
+            "--json",
+            "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g0-final/G0/info.json"
+          ],
+          "gpu": true,
+          "returncode": 0,
+          "seconds": 1.45,
+          "log": "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g0-final/G0/info.log"
+        },
+        {
+          "name": "hostclock",
+          "command": [
+            "/data/quant/stsc/research/round4/probe/.venv/bin/python",
+            "tools/hostclock.py"
+          ],
+          "gpu": false,
+          "returncode": 0,
+          "seconds": 10.02,
+          "log": "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g0-final/G0/hostclock.log"
+        }
+      ]
+    }
+  ],
+  "verdict": "PASS"
+}

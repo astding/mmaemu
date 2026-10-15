@@ -1,0 +1,178 @@
+{
+ "device": "NVIDIA GeForce RTX 5070 Ti",
+ "cc": [
+  12,
+  0
+ ],
+ "sms": 70,
+ "torch": "2.7.1+cu128",
+ "shape": "7b",
+ "K": 4096,
+ "N": 12288,
+ "data": "gauss40",
+ "timer": "events",
+ "warmup_s": 1.5,
+ "window_s": 1.0,
+ "rounds": 3,
+ "hostclock": {
+  "adjtimex_rc": 0,
+  "tick_us": 9877,
+  "freq": -762250,
+  "raw_s": 2.025001960999816,
+  "perf_counter_s": 2.0000717840002835,
+  "ratio_perf_over_raw": 0.9876888134038034,
+  "tolerance": 0.002,
+  "ok": false
+ },
+ "kernels": {
+  "v1": {
+   "source": "fatbin",
+   "image_sha256": "7ae5f051d40c5d4b7a207e58b087d2ad0e22a1446870b6de173e0694047bd7af",
+   "fatbin_dir": "/data/quant/stsc/research/mmaemu-dev/build/fatbin"
+  },
+  "v4": {
+   "source": "fatbin",
+   "image_sha256": "9982d386b04ef2dbaa4c65ce5bc8a18489d2a9ace0ce9e84175b0f647e5cd80b",
+   "fatbin_dir": "/data/quant/stsc/research/mmaemu-dev/build/fatbin"
+  },
+  "v9": {
+   "source": "fatbin",
+   "image_sha256": "bca69d0a845013cf65f6d4c82300eac98101ebed4b0f45973a4b338dab09ffba",
+   "fatbin_dir": "/data/quant/stsc/research/mmaemu-dev/build/fatbin"
+  }
+ },
+ "results": [
+  {
+   "kernel": "v1",
+   "M": 2048,
+   "N": 12288,
+   "K": 4096,
+   "data": "gauss40",
+   "source": "fatbin",
+   "tmac_s_median": 1.971313910874141,
+   "tmac_s_min": 1.968234899550419,
+   "tmac_s_max": 1.9731578312167253,
+   "windows": 3,
+   "window_s": [
+    1.0474,
+    1.0458,
+    1.0448
+   ],
+   "launches": [
+    20,
+    20,
+    20
+   ],
+   "per_gemm_ms_median": 52.289599609375,
+   "smi": {
+    "n": 15,
+    "sm_mhz_mean": 2707.0,
+    "sm_mhz_min": 2707.0,
+    "sm_mhz_max": 2707.0,
+    "power_w_mean": 269.514,
+    "throttle": [
+     "0x0000000000000000"
+    ],
+    "temp_c_max": 66.0
+   },
+   "mac_per_clk_per_sm": 10.403260915479134,
+   "exactness": {
+    "vs": "cpu reference",
+    "outputs": 16384,
+    "mismatches": 0
+   }
+  },
+  {
+   "kernel": "v4",
+   "M": 2048,
+   "N": 12288,
+   "K": 4096,
+   "data": "gauss40",
+   "source": "fatbin",
+   "tmac_s_median": 4.3143821955150985,
+   "tmac_s_min": 4.310321343347064,
+   "tmac_s_max": 4.321978948712935,
+   "windows": 3,
+   "window_s": [
+    1.0274,
+    1.0256,
+    1.0283
+   ],
+   "launches": [
+    43,
+    43,
+    43
+   ],
+   "per_gemm_ms_median": 23.891999000726745,
+   "smi": {
+    "n": 16,
+    "sm_mhz_mean": 2707.0,
+    "sm_mhz_min": 2707.0,
+    "sm_mhz_max": 2707.0,
+    "power_w_mean": 253.459375,
+    "throttle": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ],
+    "temp_c_max": 65.0
+   },
+   "mac_per_clk_per_sm": 22.768389864980204,
+   "exactness": {
+    "vs": "v1 (full output)",
+    "outputs": 25165824,
+    "mismatches": 0
+   }
+  },
+  {
+   "kernel": "v9",
+   "M": 2048,
+   "N": 12288,
+   "K": 4096,
+   "data": "gauss40",
+   "source": "fatbin",
+   "tmac_s_median": 5.154792039939035,
+   "tmac_s_min": 5.1400428200999775,
+   "tmac_s_max": 5.157167691106262,
+   "windows": 3,
+   "window_s": [
+    1.0198,
+    1.0228,
+    1.0194
+   ],
+   "launches": [
+    51,
+    51,
+    51
+   ],
+   "per_gemm_ms_median": 19.996774710860908,
+   "smi": {
+    "n": 15,
+    "sm_mhz_mean": 2707.0,
+    "sm_mhz_min": 2707.0,
+    "sm_mhz_max": 2707.0,
+    "power_w_mean": 267.516,
+    "throttle": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ],
+    "temp_c_max": 66.0
+   },
+   "mac_per_clk_per_sm": 27.203504353470024,
+   "exactness": {
+    "vs": "v1 (full output)",
+    "outputs": 25165824,
+    "mismatches": 0
+   }
+  }
+ ],
+ "power_samples": {
+  "2048": {
+   "power_limit": "300.00 W",
+   "Duration": "2.47 sec",
+   "Number of Samples": "119",
+   "Max": "298.31 W",
+   "Min": "51.10 W",
+   "Avg": "231.36 W"
+  }
+ }
+}

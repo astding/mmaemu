@@ -1,0 +1,116 @@
+{
+ "stage": "windows",
+ "model": "evo2_1b_base",
+ "fp8_projection_modules": 21,
+ "load_s": 1.3,
+ "env": {
+  "gpu": "NVIDIA H100 PCIe",
+  "capability": [
+   9,
+   0
+  ],
+  "sm_count": 114,
+  "nvidia_smi": "570.148.08, 1755 MHz, 350.00 W",
+  "versions": {
+   "python": "3.12.15",
+   "torch": "2.7.1+cu128",
+   "cuda": "12.8",
+   "transformer_engine": "2.3.0",
+   "transformer_engine_cu12": "2.3.0",
+   "transformer_engine_torch": "2.3.0",
+   "evo2": "0.6.0",
+   "vtx": "1.1.0",
+   "flash-attn": "2.8.0.post2",
+   "nvidia-cublas-cu12": "12.8.3.14",
+   "nvidia-cudnn-cu12": "9.7.1.26",
+   "triton": "3.3.1"
+  },
+  "env": {
+   "CUBLASLT_WORKSPACE_SIZE": null,
+   "CUBLAS_WORKSPACE_CONFIG": null,
+   "CUBLASLT_LOG_LEVEL": "2",
+   "NVTE_DISABLE_NVRTC": "1",
+   "HF_HOME": "(the host's Hugging Face cache)"
+  }
+ },
+ "windows": [
+  {
+   "window": "p0",
+   "bp": 6538,
+   "logits_dtype": "torch.bfloat16",
+   "logits_shape": [
+    6538,
+    512
+   ],
+   "logits_sha256": "71e7d0138ced2c5145a10531166d86331f95474125658031f3554fd83880d2e4",
+   "cuda_event_s": 0.918,
+   "rerun_bit_identical": true,
+   "rerun_cuda_event_s": 0.176
+  },
+  {
+   "window": "p1",
+   "bp": 7056,
+   "logits_dtype": "torch.bfloat16",
+   "logits_shape": [
+    7056,
+    512
+   ],
+   "logits_sha256": "7482608e78944fa973547f9395c1fc5e1dd22f7ba12f0111b37d72ba5e012c75",
+   "cuda_event_s": 0.15,
+   "rerun_bit_identical": true,
+   "rerun_cuda_event_s": 0.127
+  },
+  {
+   "window": "p2",
+   "bp": 6160,
+   "logits_dtype": "torch.bfloat16",
+   "logits_shape": [
+    6160,
+    512
+   ],
+   "logits_sha256": "c9c5ac3372310e4696fa631627eeb914a0471c107f585427043b16c164f493f7",
+   "cuda_event_s": 0.13,
+   "rerun_bit_identical": true,
+   "rerun_cuda_event_s": 0.112
+  },
+  {
+   "window": "p3",
+   "bp": 7616,
+   "logits_dtype": "torch.bfloat16",
+   "logits_shape": [
+    7616,
+    512
+   ],
+   "logits_sha256": "9cbe18f0c856a0a0bed5d68ecd3236404dacc0c7c42156d1dd80d72adbd4b9a0",
+   "cuda_event_s": 0.171,
+   "rerun_bit_identical": true,
+   "rerun_cuda_event_s": 0.153
+  },
+  {
+   "window": "w8k",
+   "bp": 8192,
+   "logits_dtype": "torch.bfloat16",
+   "logits_shape": [
+    8192,
+    512
+   ],
+   "logits_sha256": "bb41d083d1cdf86a8bd12dd1d404308ca6f7eb52cbe2c6083484abd2e18516c9",
+   "cuda_event_s": 0.155,
+   "rerun_bit_identical": true,
+   "rerun_cuda_event_s": 0.142
+  },
+  {
+   "window": "w2k",
+   "bp": 2048,
+   "logits_dtype": "torch.bfloat16",
+   "logits_shape": [
+    2048,
+    512
+   ],
+   "logits_sha256": "c896b0bf2d9291208e02dd31c0344bf55e6de329cfd01ff2edfbad44ce98228f",
+   "cuda_event_s": 0.062,
+   "rerun_bit_identical": true,
+   "rerun_cuda_event_s": 0.038
+  }
+ ]
+}

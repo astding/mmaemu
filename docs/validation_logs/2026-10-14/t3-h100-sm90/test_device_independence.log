@@ -1,0 +1,5 @@
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 52%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss       [100%]
+=========================== short test summary info ============================
+SKIPPED [138] tests/conftest.py:104: hardware ground truth unavailable: MMAEMU_TRUTH_DIR is not set
+138 skipped in 1.95s

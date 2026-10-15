@@ -1,0 +1,99 @@
+[build-system]
+# hatchling >= 1.27 writes PEP 639 licence metadata (License-Expression, dist-info/licenses/).
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mmaemu"
+dynamic = ["version"]
+description = "Bit-accurate emulation of NVIDIA tensor-core FP8 GEMM numerics (cuBLAS FP8 GEMM / torch._scaled_mm), validated against RTX 4060 hardware recordings"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE", "LICENSES/*"]
+requires-python = ">=3.10"
+authors = [{ name = "astding" }]
+keywords = ["fp8", "tensor core", "gemm", "emulation", "cublas", "scaled_mm", "reproducibility", "numerics"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+# torch floor: the lowest torch of the CI matrix whose T0+T1 pass. torch 2.5.1 fails them (its CPU backend has no
+# float8 cat / fill kernels), so the matrix is {2.6.0, 2.7.1, latest} and the floor is 2.6.
+dependencies = ["torch>=2.6", "numpy"]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.urls]
+Source = "https://github.com/astding/mmaemu"
+Issues = "https://github.com/astding/mmaemu/issues"
+Changelog = "https://github.com/astding/mmaemu/blob/master/CHANGELOG.md"
+
+[tool.hatch.version]
+path = "mmaemu/_version.py"
+
+# Wheel: the package directory only. Everything inside it ships, including the package data
+#   mmaemu/platform/data/*        split-K tables
+#   mmaemu/backends/cuda/csrc/*   kernel sources for the NVRTC fallback
+#   mmaemu/backends/cuda/bin/*    release fatbins + manifest.json (committed by the maintainer at the RC freeze)
+#   mmaemu/py.typed
+# The licence files go to dist-info/licenses/ through `license-files`.
+[tool.hatch.build.targets.wheel]
+packages = ["mmaemu"]
+exclude = ["__pycache__", "*.pyc"]
+# Build fatbins even if a local ignore rule would hide them (they are committed at release; see .gitignore).
+artifacts = ["mmaemu/backends/cuda/bin/*"]
+
+# sdist: sources, tests (with their data and the toolbox licence) and the licence/metadata files.
+# No fatbins (bin/), no recordings/, results/, docs/*_logs, tools/ or bench/.
+[tool.hatch.build.targets.sdist]
+include = [
+    "/mmaemu",
+    "/tests",
+    "/LICENSE",
+    "/NOTICE",
+    "/LICENSES",
+    "/README.md",
+    "/CHANGELOG.md",
+    "/CITATION.cff",
+    "/pyproject.toml",
+]
+exclude = [
+    "/mmaemu/backends/cuda/bin",
+    "/recordings",
+    "/results",
+    "/docs/validation_logs",
+    "/docs/release_logs",
+    "__pycache__",
+    "*.pyc",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "gpu: needs a CUDA device; run under the GPU lock, $MMAEMU_GPU_LOCK (T3)",
+    "slow: long-running tier (T1s)",
+    "truth: needs the hardware ground truth (MMAEMU_TRUTH_DIR)",
+    "profile_device: runs only on the device of a platform profile (T3p)",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+extend-exclude = ["tools/bringup/kits", "recordings", "results"]
+
+[tool.ruff.lint]
+# Explicit rule set, so that the CI result does not depend on the default rules of the pinned ruff version:
+# syntax errors and pyflakes (undefined names, unused imports/variables, ...). Style is not enforced, because the
+# numerics code keeps the compact style of the audited prototype (several statements per line).
+select = ["E9", "F"]

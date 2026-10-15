@@ -1,0 +1,9 @@
+kernel_identity                    identity  survived     146.4s 
+kernel_rn                          kernel    killed         2.4s tools/mutants/test_gpu.py::test_mutated_nvrtc_conformance
+kernel_noacc                       kernel    killed         2.4s tools/mutants/test_gpu.py::test_mutated_nvrtc_conformance
+kernel_rowtile                     kernel    killed         2.4s tools/mutants/test_gpu.py::test_mutated_nvrtc_conformance
+kernel_floor                       kernel    killed         2.3s tools/mutants/test_gpu.py::test_mutated_nvrtc_conformance
+kernel_nan_as_zero                 kernel    killed         4.2s tools/mutants/test_gpu.py::test_mutated_nan_propagation
+kernel_zero_lut                    kernel    killed         2.3s tools/mutants/test_gpu.py::test_mutated_nvrtc_conformance
+kernel_fmad_true                   kernel    killed         4.2s tools/mutants/test_gpu.py::test_pinned_arithmetic_options
+PASS: {'killed': 7, 'survived': 1, 'equivalent': 0, 'blocked': 0, 'error': 0} -> docs/validation_logs/2026-10-14/t4/mutants-gpu.json

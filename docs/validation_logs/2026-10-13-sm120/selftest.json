@@ -1,0 +1,148 @@
+{
+ "format": "mmaemu-selftest/1",
+ "force": true,
+ "kernels_requested": "all",
+ "mmaemu": "0.1.0.dev0",
+ "device": {
+  "torch": "2.7.1+cu128",
+  "torch_cuda_build": "12.8",
+  "cuda_available": true,
+  "device_count": 1,
+  "device_index": 0,
+  "name": "NVIDIA GeForce RTX 5070 Ti",
+  "capability": [
+   12,
+   0
+  ],
+  "sm_count": 70,
+  "total_memory_mib": 16303,
+  "uuid": "befd488e-0a9c-e50a-8dd2-803fc0f5089e",
+  "cuda_driver_api_version": 13030,
+  "display_driver": "610.88",
+  "cublaslt_version": "12.8.3.14",
+  "nvrtc_version": [
+   12,
+   8
+  ]
+ },
+ "kernel_discovery_notes": [],
+ "kernels": {
+  "tc3": {
+   "required": false,
+   "why": "gated kernel not validated on this capability: a rejection only means it is not auto-selected",
+   "passed": false,
+   "gates": [
+    {
+     "name": "load",
+     "passed": false,
+     "reason": "kernel module 'tc3' has no binary for sm_120 (supported SASS (80, 86, 89), PTX None); NVRTC cannot extend the kernel's supported architectures",
+     "details": {},
+     "seconds": 0.0,
+     "cached": false
+    }
+   ]
+  },
+  "v9": {
+   "required": false,
+   "why": "gated kernel not validated on this capability: a rejection only means it is not auto-selected",
+   "passed": true,
+   "gates": [
+    {
+     "name": "smoke",
+     "passed": true,
+     "reason": "",
+     "details": {
+      "outputs": 4224,
+      "mismatches": 0,
+      "first_mismatch": null
+     },
+     "seconds": 0.017060854006558657,
+     "cached": false
+    },
+    {
+     "name": "window",
+     "passed": true,
+     "reason": "",
+     "details": {
+      "device": "NVIDIA GeForce RTX 5070 Ti",
+      "cc": [
+       12,
+       0
+      ],
+      "gate_version": "1",
+      "kernel": "v9",
+      "epass": {
+       "outputs": 974848,
+       "ratio_min": 1.0,
+       "ratio_max": 17.0,
+       "offset_hist": {
+        "0": 413937,
+        "1": 207080,
+        "2": 121945,
+        "3": 195013,
+        "4": 36873
+       },
+       "ratio_violations": 0,
+       "offset_violations": 0,
+       "mapping_violations": 0,
+       "seconds": 0.1413
+      },
+      "gemm": {
+       "bell_48x40x256": 0,
+       "allcodes_48x40x256": 0,
+       "tiny_48x40x256": 0,
+       "bell_17x9x80": 0,
+       "allcodes_17x9x80": 0,
+       "tiny_17x9x80": 0,
+       "bell_130x136x1936": 0,
+       "mixed_130x136x1936": 0,
+       "seconds": 0.0225
+      }
+     },
+     "seconds": 0.16381193499546498,
+     "cached": false
+    }
+   ]
+  },
+  "v4": {
+   "required": true,
+   "why": "IEEE-exact kernel: must pass on every supported device",
+   "passed": true,
+   "gates": [
+    {
+     "name": "smoke",
+     "passed": true,
+     "reason": "",
+     "details": {
+      "outputs": 4224,
+      "mismatches": 0,
+      "first_mismatch": null
+     },
+     "seconds": 0.0006426659965654835,
+     "cached": false
+    }
+   ]
+  },
+  "v1": {
+   "required": true,
+   "why": "IEEE-exact kernel: must pass on every supported device",
+   "passed": true,
+   "gates": [
+    {
+     "name": "smoke",
+     "passed": true,
+     "reason": "",
+     "details": {
+      "outputs": 4224,
+      "mismatches": 0,
+      "first_mismatch": null
+     },
+     "seconds": 0.0004047089969390072,
+     "cached": false
+    }
+   ]
+  }
+ },
+ "verdict": "PASS",
+ "reason": "every required kernel passed its gates"
+}

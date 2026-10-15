@@ -1,0 +1,52 @@
+mmaemu
+Copyright 2026 astding and the mmaemu contributors
+
+mmaemu emulates the numerics of NVIDIA tensor-core FP8 GEMMs (cuBLAS FP8 GEMM / torch._scaled_mm).
+It is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Third-party material
+--------------------
+
+Parts of mmaemu are translated and adapted from the MATLAB Tensor Core toolbox
+(https://github.com/north-numerical-computing/MATLAB-tensor-core), Copyright (c) 2025, Faizan A. Khattak
+and Mantas Mikaitis, distributed under the BSD 2-Clause License. That licence is reproduced below and in
+LICENSES/BSD-2-Clause-MATLAB-tensor-core.txt. Reference: F. A. Khattak, M. Mikaitis, "Accurate Models of
+NVIDIA Tensor Cores", arXiv:2512.07004.
+
+Files derived from the toolbox:
+- mmaemu/model/chain.py: the tensor-core block multiply-accumulate model (block alignment, truncation and
+  normalisation of the inner product), translated from the toolbox's MATLAB models; the preset parameters in
+  mmaemu/model/presets.py come from the same models.
+- mmaemu/backends/cuda/csrc/ (the CUDA kernels, *.cu and *.cuh): GPU implementations of the same model.
+- tests/data/toolbox/: validation vectors from the toolbox (converted to .npz; SOURCES.json lists the original
+  files), with the toolbox licence next to them.
+- tools/bringup/kits/ (repository only, not part of the wheel or the sdist): probe sets built from the toolbox
+  validation vectors.
+
+The wheel and the sdist carry this NOTICE and LICENSES/BSD-2-Clause-MATLAB-tensor-core.txt.
+
+BSD 2-Clause License
+
+Copyright (c) 2025, Faizan A. Khattak and Mantas Mikaitis
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

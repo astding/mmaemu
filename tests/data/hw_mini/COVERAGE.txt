@@ -1,0 +1,430 @@
+hw_mini coverage (mmaemu-hwmini/1, built 2026-10-12 22:55:15)
+cases 4680; hw_error cases 113; split/accumulation combinations 239; estimated reference MACs 0.55 G; bytes 18511479
+in-scope recordings missing: none
+
+NOTE discrimination chains: truth fastacc /data/quant/tcemu_ada_truth/build/lib/libfastref3.so
+NOTE ws2:r4.unverified_split_combos: 309 combinations, one output of one recorded case each (the most discriminating position)
+recording                                    kind  status             incl     of     values  selectors / n/a
+c2.L_cancel                                  mma   in_scope              1      8        128  one:1
+c2.L_heavy                                   mma   in_scope              1      8        128  one:1
+c2.L_mixed                                   mma   in_scope              1      8        128  one:1
+c2.L_window                                  mma   in_scope              1      8        128  one:1
+c2.R_alternating                             mma   in_scope              1     32        512  one:1
+c2.R_cancel                                  mma   in_scope              1     40        512  one:1
+c2.R_equal                                   mma   in_scope              1     32        512  one:1
+c2.R_heavy                                   mma   in_scope              1     40        512  one:1
+c2.R_maxmag                                  mma   in_scope              1     32        512  one:1
+c2.R_mixed                                   mma   in_scope              1     40        512  one:1
+c2.R_sparse                                  mma   in_scope              1     32        512  one:1
+c2.R_subnormal                               mma   in_scope              1     32        512  one:1
+c2.R_uniform                                 mma   in_scope              1     40        512  one:1
+c2.R_window                                  mma   in_scope              1     40        512  one:1
+c2.S16_alternating                           mma   in_scope              4      4       4096  c2fam:4
+c2.S16_cancel                                mma   in_scope              4      4       4096  c2fam:4
+c2.S16_equal                                 mma   in_scope              4      4       4096  c2fam:4
+c2.S16_heavy                                 mma   in_scope              4      4       4096  c2fam:4
+c2.S16_maxmag                                mma   in_scope              4      4       4096  c2fam:4
+c2.S16_mixed                                 mma   in_scope              4      4       4096  c2fam:4
+c2.S16_sparse                                mma   in_scope              4      4       4096  c2fam:4
+c2.S16_subnormal                             mma   in_scope              4      4       4096  c2fam:4
+c2.S16_uniform                               mma   in_scope              4      4       4096  c2fam:4
+c2.S16_window                                mma   in_scope              4      4       4096  c2fam:4
+c2.S16_zeros                                 mma   in_scope              4      4     524288  c2fam:4
+c2.T_cfeat                                   mma   in_scope              4      8       4096  c2fam:4
+c2.T_halves                                  mma   in_scope              2      4       4096  c2fam:2
+c2.T_maxcarry                                mma   in_scope              4      8       4096  c2fam:4
+c2.T_overflow                                mma   in_scope              4      8       1024  c2fam:4
+c2.T_phantom                                 mma   in_scope              4      8       4096  c2fam:4
+c2.T_shift                                   mma   in_scope              4      8       4096  c2fam:4
+c2.T_signmag                                 mma   in_scope              4      8       4096  c2fam:4
+c2.T_subnormal                               mma   in_scope              4      8       4096  c2fam:4
+c2.T_ties                                    mma   in_scope              4      8       4096  c2fam:4
+c2.T_zeros                                   mma   in_scope              4      8       4096  c2fam:4
+c2.conly_exhaustive                          table table                 0      0          0
+c2.conly_exhaustive_rerec                    mma   in_scope              1      4        512  one:1
+c2.conly_sample                              mma   in_scope              1      2        512  one:1
+c2.s0_toolbox_vectors_rerec                  mma   in_scope              1     20        512  one:1
+c2.v4_conly_exp0                             mma   in_scope              1     16        512  one:1
+c2.v4_cpass                                  mma   in_scope              1      4        512  one:1
+c2.v4_ieee                                   mma   in_scope              1      4        512  one:1
+c2.v4_phantom                                mma   in_scope              1      4        512  one:1
+c2.v4_sub                                    mma   in_scope              1      4        512  one:1
+c2.v7_gemm_subnormal                         gemm  in_scope              1      6         64  one:1
+c3.fp8proj_native                            gemm  in_scope              1      1         64  one:1
+c3.gemm_boundary                             gemm  in_scope              1    141         64  one:1
+c3.gemm_fp8out                               gemm  in_scope             28     56          0  hw_error:28
+c3.gemm_struct                               gemm  in_scope             20    144         20  combo:20
+c3.gemm_table                                gemm  in_scope             21   1080    1179651  combo:3,extra:18
+c3.instr_f16acc                              mma   out_of_scope          0      2          0    n/a: FP8 mma with fp16 accumulator (2)
+c3.instr_specials                            mma   in_scope              1     20          2  one:1
+c3.minimal_repros                            gemm  in_scope              1     12          0  hw_error:1
+c3.v0_epi_bulk                               gemm  in_scope              1    340         64  one:1
+c3.v0_epi_prefill                            gemm  in_scope              1     96          1  combo:1
+c3.v0_epi_probe                              gemm  in_scope              1    138          1  combo:1
+c3.v0_kern_zero_sign_rerec                   gemm  in_scope              1      4         64  one:1
+c3.v0_mixed_probe_rerec                      gemm  in_scope              9     60          9  combo:9
+c3.v1_nan_cublas                             gemm  in_scope              1     12         64  one:1
+c3.v2_nan_cublas                             gemm  in_scope              1      7         64  one:1
+c3.v3_order_probe                            gemm  in_scope              1      2         64  one:1
+c3.v3_slow_splitk                            gemm  in_scope              1    132         64  one:1
+c4.V1                                        gemm  in_scope              6   1832          6  combo:6
+c4.V2L                                       gemm  in_scope              1    252         64  one:1  n/a: split-K configuration not recorded (139); split-K S=6 with unknown reduction scheme (1); split-K S=8 with unknown reduction scheme (7); split-K S=2 with unknown reduction scheme (2); hardware rejected a cuBLASLt configuration (config validity not modelled) (6)
+c4.V2R                                       gemm  scope_out_only        1    208          0  scope:1  n/a: torch 2.7.1 row-wise stride bug (C4-F11) (16)
+c4.V3                                        gemm  in_scope             85   4706         84  combo:84,scope:1
+c4.V4                                        gemm  in_scope              1    160          1  combo:1
+c4.V5WS0                                     gemm  in_scope              1    616         64  one:1
+c4.V6                                        gemm  in_scope              1    450         64  one:1
+c4.V7                                        gemm  in_scope              1    105         64  one:1
+c4.epi                                       gemm  in_scope              2   2390         64  one:1,scope:1
+c4.epi2                                      gemm  in_scope              2    651         64  one:1,scope:1
+c4.kmap_default                              table table                 0      0          0
+c4.kmap_options                              table table                 0      0          0
+c4.kmap_smtarget                             table table                 0      0          0
+c4.kmap_workspace                            table table                 0      0          0
+c4.misc                                      gemm  in_scope              1     36         64  one:1
+c4.summary                                   table table                 0      0          0
+c4.v0_kernel_facts                           table table                 0      0          0
+c4.v1_kernel_sweeps                          table table                 0      0          0
+c4.v2_cublaslt_logs                          table table                 0      0          0
+c4.v3_kmaps                                  table table                 0      0          0
+c4.v3_te_linear                              gemm  in_scope              2    122          2  combo:2
+c4.v5_rerec                                  gemm  in_scope              3     37          0  hw_error:1,scope:2
+c4.verify0                                   gemm  in_scope              1     69         64  one:1
+c4.verify1                                   gemm  in_scope              1    268          1  combo:1
+c4.verify2                                   gemm  in_scope             10    165         10  combo:10
+c4.verify3                                   gemm  in_scope              6    653          6  combo:6
+c4.verify4_fp8out                            gemm  in_scope              2   3622          0  hw_error:2
+c4.verify6_rowwise                           gemm  scope_out_only        1     52          0  scope:1  n/a: torch 2.7.1 row-wise stride bug (C4-F11) (2)
+c4.verify8_tests                             gemm  in_scope              1     39         64  one:1
+c5.det1_determinism                          gemm  in_scope              1      7         16  one:1
+c5.det2_determinism                          gemm  in_scope              1      8         16  one:1
+c5.full_check                                gemm  in_scope              1    108          1  combo:1
+c5.heuristic_raw                             table table                 0      0          0
+c5.heuristic_table                           table table                 0      0          0
+c5.j1_cublaslt                               gemm  in_scope              1     10         16  one:1  n/a: raw cuBLASLt workspace dump (not a GEMM result) (5)
+c5.j2_cublaslt                               gemm  in_scope              3     68          3  combo:3
+c5.j3_cublaslt                               gemm  in_scope              5    248          5  combo:5  n/a: hardware rejected a cuBLASLt configuration (config validity not modelled) (70)
+c5.j5_cublaslt                               gemm  in_scope             11    198         11  combo:11
+c5.j6_cublaslt                               gemm  in_scope              8     94          8  combo:8
+c5.j7_cublaslt                               gemm  in_scope              1      4          8  one:1
+c5.tree_probes                               gemm  in_scope              1     12         16  one:1
+c5.v0_dense                                  gemm  in_scope              1     25         16  one:1
+c5.v0_ownership_probes                       gemm  in_scope              1    628         16  one:1
+c5.v0_reduce_probes                          gemm  in_scope              1    139         16  one:1
+c5.v1_heuristic_shapes                       gemm  in_scope              1    147         64  one:1
+c5.v1_workspace_env                          gemm  in_scope              1     50         64  one:1
+c5.v2_forced_probes                          gemm  in_scope             34    223         34  combo:34  n/a: raw cuBLASLt workspace dump (not a GEMM result) (6)
+c5.v2_torch_probes                           gemm  in_scope              1     69         64  one:1
+c5.v3_slow_forced                            gemm  in_scope              6     97          6  combo:6  n/a: hardware rejected a cuBLASLt configuration (config validity not modelled) (10)
+c5.v3_slow_heuristic                         gemm  in_scope              1     20         64  one:1
+c5.v4_heuristic_ctypes                       table table                 0      0          0
+c5.v4_te_demo                                gemm  in_scope              3     18          3  combo:3
+c5.v4_torch_demo                             gemm  in_scope              7    180          7  combo:7
+c5.v5_recorded_rerun                         gemm  in_scope              1     37          1  combo:1
+c6.interleave_probe_kit_sm89                 mma   in_scope              1      2        512  one:1
+c6.kit_MM_ada_sm89                           mma   in_scope              1      2        413  one:1
+c6.kit_MM_cublas64_cublas_sm89               gemm  in_scope              1      4         64  one:1
+c6.kit_MM_cublas64_sm120_cublas_sm89         gemm  in_scope              1      4         64  one:1
+c6.kit_MM_sm120_sm89                         mma   in_scope              1      2        512  one:1
+c6.kit_MM_sm90mma_sm89                       mma   in_scope              1      2        461  one:1
+c6.kit_TBX_B200_sm89                         mma   in_scope              1      2        512  one:1
+c6.kit_TBX_H100c0_sm89                       mma   in_scope              1      2        512  one:1
+c6.zero_sign_mma_4060                        mma   in_scope              1      1          9  one:1
+emulator.tcemu_kernels_fixed_inputs          gemm  in_scope              1     24         64  one:1
+epilogue.a1_s02_gemm                         gemm  in_scope             67     67       4032  epilogue:63,hw_error:4
+epilogue.a1_s02_mma                          mma   in_scope              1      2        108  one:1
+epilogue.a1_s09_gemm                         gemm  in_scope             70     70       4224  epilogue:66,hw_error:4
+epilogue.a1_s09_mma                          mma   in_scope              1      2        108  one:1
+epilogue.c1_4_hw_out_buffer                  gemm  in_scope             36     36     294912  epilogue:36
+epilogue.c1_4_hw_underflow                   gemm  in_scope            168    168     172032  epilogue:168
+epilogue.c1_4_hw_zero_scale                  gemm  in_scope             36     36     294912  epilogue:36
+epilogue.c6_6_probes_rerecorded              gemm  in_scope             55     55     130048  epilogue:55
+epilogue.fp8out_v01_a1_2                     gemm  in_scope            752    748     148365  combo:13,epilogue:680,hw_error:59
+epilogue.fp8out_v03_a1_2                     gemm  in_scope            124    124      30208  epilogue:124
+epilogue.signed_zero_mma_c6_6                mma   in_scope              1      2         20  one:1
+epilogue.signed_zero_mma_v4_a1_5             mma   in_scope              1      1         44  one:1
+epilogue.tie_cases_a3_7                      gemm  in_scope            240    240        240  epilogue:240
+epilogue.ties_double_rounding_c1_5           gemm  in_scope             64     64       4096  epilogue:64
+epilogue.zero_nan_v2_a1_5                    gemm  in_scope             60     60      15360  epilogue:60
+epilogue.zero_sign_v01b_a1_1                 gemm  in_scope            613    616      38272  epilogue:598,hw_error:14,scope:1
+epilogue.zero_specials_a3_7                  gemm  in_scope            150    150        300  epilogue:150
+evo2.evo2_1b_w2k                             gemm  in_scope              9    102      36864  evo2:9
+heur.lt_heuristic_12_8_3_14                  table table                 0      0          0
+heur.lt_heuristic_versions                   table table                 0      0          0
+hmma.b3soft_probe_bf16_rerec                 mma   out_of_scope          0     10          0    n/a: HMMA bf16/fp16 (not FP8) (10)
+hmma.p1k1_bf16_swap                          mma   out_of_scope          0     12          0    n/a: HMMA bf16/fp16 (not FP8) (12)
+hmma.p1k1_bf16_v5c                           mma   out_of_scope          0     12          0    n/a: HMMA bf16/fp16 (not FP8) (12)
+hmma.p1k1_bf16_x121                          mma   out_of_scope          0     12          0    n/a: HMMA bf16/fp16 (not FP8) (12)
+hmma.p2v3_bf16_families                      mma   out_of_scope          0      5          0    n/a: HMMA bf16/fp16 (not FP8) (5)
+hmma.p2v3_epass                              mma   out_of_scope          0      2          0    n/a: HMMA bf16/fp16 (not FP8) (2)
+hmma.p3_hmma_probe_fp16_rerec                mma   out_of_scope          0     16          0    n/a: HMMA bf16/fp16 (not FP8) (16)
+misc.api_defaults_va1_3                      gemm  in_scope              1     28          1  combo:1
+misc.c1_4_hw_splitk                          gemm  in_scope              1     16          8  one:1
+misc.c1_4_hw_zero_rows                       gemm  in_scope              1    324          1  combo:1
+misc.e5m2_ranges_va1_4                       gemm  in_scope              1      8         64  one:1
+misc.evo2_7b_shape_c1_2                      gemm  in_scope              1      3         16  one:1
+misc.kunit_isolation_c1_0                    gemm  in_scope              1   4282         64  one:1
+misc.outdtype_splitk_va1_0                   gemm  in_scope              1     36         64  one:1
+misc.random_run1_c1_0                        gemm  in_scope              1     26         64  one:1
+misc.random_run2_c1_0                        gemm  in_scope              1      9          1  combo:1
+misc.random_run2_ws4096_c1_0                 gemm  in_scope              1      3         16  one:1
+misc.random_run4_ws0_c1_0                    gemm  in_scope              1      6         64  one:1
+misc.reduction_order3_c1_0                   gemm  in_scope              1    252          8  one:1
+misc.reduction_order_c1_0                    gemm  in_scope              1    132         64  one:1
+misc.repeat_runs_c1_8                        gemm  in_scope              1     14         64  one:1
+misc.rowwise_c1_8                            gemm  scope_out_only        1      3          0  scope:1
+misc.slow_accum_sweep_a1_s05                 gemm  in_scope              1     28         64  one:1
+misc.slow_splitk_grid_va1_0                  gemm  in_scope              1    500         64  one:1
+misc.slow_splitk_probe_va1_0                 gemm  in_scope              1     64         64  one:1
+misc.splitk_probe_c1_6                       gemm  in_scope              1     80         64  one:1
+misc.tcemu_tests_recorded_hw                 gemm  in_scope             16     16       2048  project:16
+ws2:r1.api_parity_grid                       gemm  in_scope          10352  10352     124000  ws2_r1:1357  n/a: FixedModel rejects but hardware ran: cuBLAS 12.8.3 / sm_89 rejects e4m3 x e4m3 -> e5m2 (44); hardware rejected a cuBLASLt configuration (config validity not modelled) (6391)
+ws2:r2.fp8out_live_verify                    gemm  in_scope              4    112        256  ws2_one:4
+ws2:r2.lt_heur_fp8out_12_8_3_14              table table                 0      0          0
+ws2:r2.lt_heur_mixed_allsettings_12_8_3_14   table table                 0      0          0
+ws2:r2.lt_heur_smallk_12_8_3_14              table table                 0      0          0
+ws2:r3.lt_heur_evo2_small_m_12_8_3_14        table table                 0      0          0
+ws2:r4.unverified_split_combos               gemm  in_scope            309    465        309  ws2_r4:309
+ws2:r5.autosplit_in_envelope                 gemm  in_scope              4    300        232  ws2_one:4
+ws2:r6.zero_dims                             gemm  in_scope            350    350      25600  ws2_r6:98  n/a: FixedModel rejects but hardware ran: cuBLAS 12.8.3 / sm_89 rejects e4m3 x e4m3 -> e5m2 (14)
+
+combinations (fast, S, scheme, out_dtype, fmt_a, fmt_b) -> recording/case/output (M, N, K):
+  (False, 1, 'none', 'bfloat16', 'e4m3', 'e4m3'): c4.V3/v3_880/out (3, 16, 16)
+  (False, 1, 'none', 'float32', 'e4m3', 'e4m3'): c4.V3/v3_1444/out (1, 1024, 16)
+  (False, 3, 'pairwise', 'float32', 'e4m3', 'e4m3'): c4.V3/v3_1366/out (3, 16, 16)
+  (True, 1, 'none', 'bfloat16', 'e4m3', 'e4m3'): c4.V1/v1_0/out (1, 16, 16)
+  (True, 1, 'none', 'bfloat16', 'e4m3', 'e5m2'): c4.V3/v3_1862/out (3, 16, 16)
+  (True, 1, 'none', 'bfloat16', 'e5m2', 'e4m3'): c4.V3/v3_2310/out (3, 16, 16)
+  (True, 1, 'none', 'float16', 'e4m3', 'e4m3'): c4.V3/v3_0/out (3, 16, 16)
+  (True, 1, 'none', 'float32', 'e4m3', 'e4m3'): c4.V1/v1_1040/out (1, 16, 16)
+  (True, 1, 'none', 'float32', 'e4m3', 'e5m2'): c4.V3/v3_2758/out (3, 16, 16)
+  (True, 1, 'none', 'float8_e4m3fn', 'e4m3', 'e4m3'): c4.V3/v3_440/out (3, 16, 16)
+  (True, 2, 'serial', 'bfloat16', 'e4m3', 'e4m3'): c4.V1/v1_627/out (176, 224, 16)
+  (True, 2, 'serial', 'bfloat16', 'e4m3', 'e5m2'): c4.verify1/main:3/out (224, 176, 16)
+  (False, 1, 'none', 'bfloat16', 'e4m3', 'e5m2'): c3.v0_mixed_probe_rerec/e4m3xe5m2_p0/bfloat16_slow (16, 16, 32)
+  (False, 1, 'none', 'bfloat16', 'e5m2', 'e4m3'): c3.v0_mixed_probe_rerec/e5m2xe4m3_p0/bfloat16_slow (16, 16, 32)
+  (False, 1, 'none', 'float16', 'e4m3', 'e4m3'): c3.v0_epi_prefill/q0/fill7_float16_slow (16, 16, 32)
+  (False, 1, 'none', 'float16', 'e4m3', 'e5m2'): c3.v0_mixed_probe_rerec/e4m3xe5m2_p0/float16_slow (16, 16, 32)
+  (False, 1, 'none', 'float16', 'e5m2', 'e4m3'): c3.gemm_table/e5m2xe4m3/s00_float16_slow (256, 256, 32)
+  (False, 1, 'none', 'float32', 'e4m3', 'e5m2'): c3.gemm_table/e4m3xe5m2/s00_float32_slow (256, 256, 32)
+  (False, 1, 'none', 'float32', 'e5m2', 'e4m3'): c3.gemm_table/e5m2xe4m3/s00_float32_slow (256, 256, 32)
+  (False, 3, 'pairwise', 'float16', 'e4m3', 'e4m3'): c3.v0_epi_probe/p00/float16_slow (16, 16, 32)
+  (False, 3, 'pairwise', 'float16', 'e5m2', 'e4m3'): c3.v0_mixed_probe_rerec/e5m2xe4m3_p0/float16_slow (16, 16, 32)
+  (False, 3, 'pairwise', 'float32', 'e4m3', 'e5m2'): c3.v0_mixed_probe_rerec/e4m3xe5m2_p0/float32_slow (16, 16, 32)
+  (False, 3, 'pairwise', 'float32', 'e5m2', 'e4m3'): c3.v0_mixed_probe_rerec/e5m2xe4m3_p0/float32_slow (16, 16, 32)
+  (False, 3, 'pairwise', 'float8_e4m3fn', 'e4m3', 'e4m3'): epilogue.fp8out_v01_a1_2/P2_000/P2_e4m3_t1.0000000150474662e+30_slow (16, 16, 32)
+  (False, 3, 'pairwise', 'float8_e4m3fn', 'e4m3', 'e5m2'): epilogue.fp8out_v01_a1_2/P2_082/P2_e4m3_t1.0000000150474662e+30_slow (16, 16, 32)
+  (False, 3, 'pairwise', 'float8_e4m3fn', 'e5m2', 'e4m3'): epilogue.fp8out_v01_a1_2/P2_164/P2_e4m3_t1.0000000150474662e+30_slow (16, 16, 32)
+  (False, 3, 'pairwise', 'float8_e5m2', 'e4m3', 'e5m2'): epilogue.fp8out_v01_a1_2/P2_082/P2_e5m2_t1.0000000150474662e+30_slow (16, 16, 32)
+  (False, 3, 'pairwise', 'float8_e5m2', 'e5m2', 'e4m3'): epilogue.fp8out_v01_a1_2/P2_164/P2_e5m2_t1.0000000150474662e+30_slow (16, 16, 32)
+  (True, 1, 'none', 'float16', 'e4m3', 'e5m2'): c3.v0_mixed_probe_rerec/e4m3xe5m2_p0/float16_fast (16, 16, 32)
+  (True, 1, 'none', 'float16', 'e5m2', 'e4m3'): c3.v0_mixed_probe_rerec/e5m2xe4m3_p0/float16_fast (16, 16, 32)
+  (True, 1, 'none', 'float32', 'e5m2', 'e4m3'): c3.v0_mixed_probe_rerec/e5m2xe4m3_p0/float32_fast (16, 16, 32)
+  (True, 1, 'none', 'float8_e4m3fn', 'e4m3', 'e5m2'): epilogue.fp8out_v01_a1_2/P2_082/P2_e4m3_t1.0000000150474662e+30_fast (16, 16, 32)
+  (True, 1, 'none', 'float8_e4m3fn', 'e5m2', 'e4m3'): epilogue.fp8out_v01_a1_2/P2_164/P2_e4m3_t1.0000000150474662e+30_fast (16, 16, 32)
+  (True, 1, 'none', 'float8_e5m2', 'e4m3', 'e5m2'): epilogue.fp8out_v01_a1_2/P2_082/P2_e5m2_t1.0000000150474662e+30_fast (16, 16, 32)
+  (True, 1, 'none', 'float8_e5m2', 'e5m2', 'e4m3'): epilogue.fp8out_v01_a1_2/P2_164/P2_e5m2_t1.0000000150474662e+30_fast (16, 16, 32)
+  (False, 3, 'pairwise', 'float16', 'e4m3', 'e5m2'): misc.c1_4_hw_zero_rows/16x64x16#3/16x64x16_float16_slow_101 (16, 16, 64)
+  (True, 2, 'serial', 'bfloat16', 'e5m2', 'e4m3'): c4.V3/v3_2622/out (176, 240, 64)
+  (False, 1, 'none', 'float8_e4m3fn', 'e4m3', 'e4m3'): misc.api_defaults_va1_3/64x128x256/default_all (64, 256, 128)
+  (True, 4, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/uneven_0_34.3/out (16, 96, 320)
+  (True, 4, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/uneven_0_34.4/out (16, 96, 320)
+  (True, 5, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/uneven_0_34.9/out (32, 96, 384)
+  (True, 5, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/uneven_0_34.10/out (32, 96, 384)
+  (True, 6, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/uneven_0_34.15/out (64, 96, 448)
+  (True, 6, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/uneven_0_34.16/out (64, 96, 448)
+  (True, 8, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/uneven_0_34.21/out (176, 96, 576)
+  (True, 8, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/uneven_0_34.22/out (176, 96, 576)
+  (True, 9, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/uneven_0_34.27/out (256, 96, 640)
+  (True, 9, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/uneven_0_34.28/out (256, 96, 640)
+  (False, 1, 'none', 'float8_e4m3fn', 'e4m3', 'e5m2'): epilogue.fp8out_v01_a1_2/P5_1/P5_float8_e4m3fn_sa0.000244140625_sb1.0_slow (64, 256, 1920)
+  (False, 1, 'none', 'float8_e4m3fn', 'e5m2', 'e4m3'): epilogue.fp8out_v01_a1_2/P5_2/P5_float8_e4m3fn_sa0.000244140625_sb1.0_slow (64, 256, 1920)
+  (False, 1, 'none', 'float8_e5m2', 'e4m3', 'e5m2'): epilogue.fp8out_v01_a1_2/P5_1/P5_float8_e5m2_sa0.000244140625_sb1.0_slow (64, 256, 1920)
+  (False, 1, 'none', 'float8_e5m2', 'e5m2', 'e4m3'): epilogue.fp8out_v01_a1_2/P5_2/P5_float8_e5m2_sa0.000244140625_sb1.0_slow (64, 256, 1920)
+  (False, 3, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c5.v4_torch_demo/96x128x1920/ws32M.bfloat16.slow (96, 128, 1920)
+  (True, 3, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c5.v4_te_demo/96x128x1920/torch (96, 128, 1920)
+  (True, 3, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.v5_recorded_rerun/v5.randn40-16x1920x128/ws_4096.float32 (16, 128, 1920)
+  (True, 3, 'pairwise', 'float32', 'e4m3', 'e5m2'): c4.V3/v3_2884/out (24, 64, 1920)
+  (True, 3, 'pairwise', 'float32', 'e5m2', 'e4m3'): c4.V3/v3_3414/out (24, 64, 1920)
+  (True, 2, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c5.v4_torch_demo/48x192x2048/carve12.bfloat16.fast (48, 192, 2048)
+  (True, 3, 'pairwise', 'bfloat16', 'e4m3', 'e5m2'): c4.V3/v3_1882/out (64, 16, 2048)
+  (True, 3, 'pairwise', 'bfloat16', 'e5m2', 'e4m3'): c4.V3/v3_2330/out (64, 16, 2048)
+  (False, 2, 'serial', 'float32', 'e4m3', 'e4m3'): c4.verify2/large:L_1x512x4096_fp32_slow_gauss_S2c2/out (1, 512, 4096)
+  (True, 2, 'pairwise', 'bfloat16', 'e4m3', 'e5m2'): c4.V3/v3_2008/out (160, 112, 3072)
+  (True, 2, 'pairwise', 'bfloat16', 'e5m2', 'e4m3'): c4.V3/v3_2456/out (160, 112, 3072)
+  (True, 3, 'pairwise', 'float16', 'e4m3', 'e4m3'): c4.V3/v3_20/out (32, 32, 3072)
+  (True, 3, 'pairwise', 'float8_e4m3fn', 'e4m3', 'e4m3'): c4.V3/v3_460/out (32, 32, 3072)
+  (False, 2, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c4.verify2/large:L_1024x16x4096_bf16_slow_gauss_S2c1/out (1024, 16, 4096)
+  (False, 2, 'serial', 'bfloat16', 'e4m3', 'e4m3'): c4.verify2/large:L_1x768x4096_bf16_slow_gauss_S2c2/out (1, 768, 4096)
+  (False, 3, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v3_slow_forced/s4.77/out (16, 64, 8256)
+  (False, 6, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): misc.random_run2_c1_0/04_32x32x4096_slow/slow_bfloat16 (32, 32, 4096)
+  (True, 2, 'serial', 'float16', 'e4m3', 'e4m3'): c4.V3/v3_126/out (96, 192, 4096)
+  (True, 2, 'serial', 'float32', 'e4m3', 'e4m3'): c4.verify3/s149/C20 (208, 16, 8192)
+  (True, 2, 'serial', 'float32', 'e4m3', 'e5m2'): c4.V3/v3_2918/out (208, 80, 4096)
+  (True, 2, 'serial', 'float32', 'e5m2', 'e4m3'): c5.j6_cublaslt/20/out (16, 768, 4096)
+  (True, 2, 'serial', 'float8_e4m3fn', 'e4m3', 'e4m3'): c4.V3/v3_566/out (96, 192, 4096)
+  (True, 20, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_big_0_9.1/out (1200, 96, 4096)
+  (True, 20, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_big_0_9.0/out (1200, 96, 4096)
+  (True, 24, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_big_0_9.4/out (1200, 96, 4096)
+  (True, 24, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_big_0_9.3/out (1200, 96, 4096)
+  (True, 3, 'serial', 'bfloat16', 'e4m3', 'e4m3'): c4.v3_te_linear/53/te_CUBLASLT_WORKSPACE_SIZE=0 (240, 208, 4096)
+  (True, 3, 'serial', 'float16', 'e4m3', 'e4m3'): c4.V3/v3_250/out (208, 80, 4096)
+  (True, 3, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_core_0_54.0/out (16, 96, 8192)
+  (True, 3, 'serial', 'float32', 'e4m3', 'e5m2'): c4.V3/v3_3086/out (112, 224, 4096)
+  (True, 3, 'serial', 'float32', 'e5m2', 'e4m3'): c5.j6_cublaslt/13/out (48, 512, 4096)
+  (True, 3, 'serial', 'float8_e4m3fn', 'e4m3', 'e4m3'): c4.V3/v3_690/out (208, 80, 4096)
+  (True, 32, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_big_0_9.7/out (1200, 96, 4096)
+  (True, 32, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_big_0_9.6/out (1200, 96, 4096)
+  (True, 4, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c5.j6_cublaslt/66/out (256, 512, 4096)
+  (True, 4, 'pairwise', 'float16', 'e4m3', 'e4m3'): c4.V3/v3_204/out (48, 160, 4096)
+  (True, 4, 'pairwise', 'float8_e4m3fn', 'e4m3', 'e4m3'): c4.V3/v3_644/out (48, 160, 4096)
+  (True, 4, 'serial', 'bfloat16', 'e4m3', 'e4m3'): c4.verify3/s118/C20 (48, 48, 8192)
+  (False, 3, 'serial', 'bfloat16', 'e4m3', 'e4m3'): c4.V3/v3_1258/out (48, 512, 5760)
+  (False, 6, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.v4_torch_demo/16x96x5760/ws32M.float32.slow (16, 96, 5760)
+  (False, 8, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.j6_cublaslt/9/out (16, 64, 5760)
+  (True, 10, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c5.v4_te_demo/16x96x5760/torch (16, 96, 5760)
+  (True, 6, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c5.v4_torch_demo/16x96x5760/carve12.bfloat16.fast (16, 96, 5760)
+  (True, 6, 'pairwise', 'float16', 'e4m3', 'e4m3'): c5.v4_torch_demo/16x96x5760/carve12.float16.fast (16, 96, 5760)
+  (True, 7, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.v4_torch_demo/16x96x5760/ws1M.float32.fast (16, 96, 5760)
+  (True, 7, 'pairwise', 'float32', 'e4m3', 'e5m2'): c4.V3/v3_3106/out (16, 112, 5760)
+  (True, 7, 'pairwise', 'float32', 'e5m2', 'e4m3'): c4.V3/v3_3636/out (16, 112, 5760)
+  (True, 8, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c5.v4_te_demo/16x96x5760/te (16, 96, 5760)
+  (True, 8, 'pairwise', 'float16', 'e4m3', 'e4m3'): c5.v4_torch_demo/16x96x5760/ws32M.float16.fast (16, 96, 5760)
+  (False, 2, 'pairwise', 'float32', 'e4m3', 'e4m3'): c4.V3/v3_1620/out (192, 256, 6144)
+  (False, 7, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.v3_slow_forced/s4.91/out (16, 64, 8256)
+  (True, 10, 'pairwise', 'float32', 'e4m3', 'e4m3'): c4.V1/v1_1172/out (16, 32, 6144)
+  (True, 10, 'pairwise', 'float32', 'e4m3', 'e5m2'): c4.V3/v3_2858/out (16, 32, 6144)
+  (True, 10, 'pairwise', 'float32', 'e5m2', 'e4m3'): c4.V3/v3_3388/out (16, 32, 6144)
+  (True, 2, 'pairwise', 'float16', 'e4m3', 'e4m3'): c4.V3/v3_224/out (2, 1024, 8192)
+  (True, 2, 'pairwise', 'float32', 'e4m3', 'e4m3'): c4.V1/v1_1601/out (48, 528, 6144)
+  (True, 2, 'pairwise', 'float32', 'e4m3', 'e5m2'): c4.V3/v3_3036/out (144, 224, 6144)
+  (True, 2, 'pairwise', 'float32', 'e5m2', 'e4m3'): c4.V3/v3_3566/out (144, 224, 6144)
+  (True, 2, 'pairwise', 'float8_e4m3fn', 'e4m3', 'e4m3'): c4.V3/v3_664/out (2, 1024, 8192)
+  (True, 3, 'serial', 'bfloat16', 'e4m3', 'e5m2'): c4.V3/v3_2134/out (112, 256, 6144)
+  (True, 3, 'serial', 'bfloat16', 'e5m2', 'e4m3'): c4.V3/v3_2582/out (112, 256, 6144)
+  (True, 5, 'pairwise', 'float32', 'e4m3', 'e5m2'): c4.V3/v3_3074/out (192, 144, 6144)
+  (True, 5, 'pairwise', 'float32', 'e5m2', 'e4m3'): c4.V3/v3_3604/out (192, 144, 6144)
+  (True, 6, 'pairwise', 'float32', 'e4m3', 'e5m2'): c4.V3/v3_2904/out (48, 96, 6144)
+  (True, 6, 'pairwise', 'float32', 'e5m2', 'e4m3'): c4.V3/v3_3434/out (48, 96, 6144)
+  (True, 4, 'serial', 'bfloat16', 'e4m3', 'e5m2'): c4.V3/v3_1948/out (48, 272, 6160)
+  (True, 4, 'serial', 'bfloat16', 'e5m2', 'e4m3'): c4.V3/v3_2396/out (48, 272, 6160)
+  (True, 4, 'serial', 'float32', 'e4m3', 'e5m2'): c4.V3/v3_2818/out (48, 272, 6160)
+  (True, 4, 'serial', 'float32', 'e5m2', 'e4m3'): c4.V3/v3_3348/out (48, 272, 6160)
+  (False, 10, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.j5_cublaslt/59/out (64, 96, 8192)
+  (False, 10, 'serial', 'float32', 'e4m3', 'e4m3'): c5.j5_cublaslt/57/out (64, 96, 8192)
+  (False, 11, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.j5_cublaslt/65/out (64, 96, 8192)
+  (False, 11, 'serial', 'float32', 'e4m3', 'e4m3'): c5.j5_cublaslt/63/out (64, 96, 8192)
+  (False, 12, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c4.verify2/large:L_1x80x8192_bf16_slow_gauss_S12c1/out (1, 80, 8192)
+  (False, 12, 'pairwise', 'bfloat16', 'e4m3', 'e5m2'): c3.gemm_struct/16x8192x128_e4m3xe5m2/neg_bfloat16_slow (16, 128, 8192)
+  (False, 12, 'pairwise', 'bfloat16', 'e5m2', 'e4m3'): c3.gemm_struct/16x8192x128_e5m2xe4m3/neg_bfloat16_slow (16, 128, 8192)
+  (False, 12, 'pairwise', 'float16', 'e4m3', 'e4m3'): c3.gemm_struct/16x8192x128_e4m3xe4m3/neg_float16_slow (16, 128, 8192)
+  (False, 12, 'pairwise', 'float16', 'e4m3', 'e5m2'): c3.gemm_struct/16x8192x128_e4m3xe5m2/neg_float16_slow (16, 128, 8192)
+  (False, 12, 'pairwise', 'float16', 'e5m2', 'e4m3'): c3.gemm_struct/16x8192x128_e5m2xe4m3/neg_float16_slow (16, 128, 8192)
+  (False, 12, 'pairwise', 'float32', 'e4m3', 'e4m3'): c4.verify2/large:L_1x80x8192_fp32_slow_gauss_S12c1/out (1, 80, 8192)
+  (False, 12, 'serial', 'float32', 'e4m3', 'e4m3'): c5.j5_cublaslt/69/out (64, 96, 8192)
+  (False, 13, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.j5_cublaslt/77/out (64, 96, 8192)
+  (False, 13, 'serial', 'float32', 'e4m3', 'e4m3'): c5.j5_cublaslt/75/out (64, 96, 8192)
+  (False, 14, 'pairwise', 'float32', 'e4m3', 'e4m3'): c4.V3/v3_1700/out (16, 16, 8192)
+  (False, 14, 'serial', 'float32', 'e4m3', 'e4m3'): c5.j5_cublaslt/81/out (64, 96, 8192)
+  (False, 15, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.j5_cublaslt/89/out (64, 96, 8192)
+  (False, 15, 'serial', 'float32', 'e4m3', 'e4m3'): c5.j5_cublaslt/87/out (64, 96, 8192)
+  (False, 16, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_var_0_60.52/out (1680, 96, 8192)
+  (False, 16, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_var_0_60.47/out (1680, 96, 8192)
+  (False, 24, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c4.verify2/large:L_1x16x8192_bf16_slow_gauss_S24c1/out (1, 16, 8192)
+  (False, 24, 'pairwise', 'float32', 'e4m3', 'e4m3'): c4.verify2/large:L_1x16x8192_fp32_slow_gauss_S24c1/out (1, 16, 8192)
+  (False, 4, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c4.verify2/large:L_1x384x8192_bf16_slow_gauss_S4c1/out (1, 384, 8192)
+  (False, 4, 'pairwise', 'float32', 'e4m3', 'e4m3'): c4.verify2/large:L_1x384x8192_fp32_slow_gauss_S4c1/out (1, 384, 8192)
+  (False, 4, 'serial', 'bfloat16', 'e4m3', 'e4m3'): c4.V3/v3_952/out (80, 144, 8192)
+  (False, 4, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v3_slow_forced/s4.81/out (16, 64, 8256)
+  (False, 5, 'pairwise', 'float16', 'e4m3', 'e4m3'): c5.v3_slow_forced/s4.75/out (64, 96, 8192)
+  (False, 5, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_var_0_60.7/out (32, 96, 8192)
+  (False, 5, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_var_0_60.12/out (32, 96, 8192)
+  (False, 6, 'pairwise', 'bfloat16', 'e4m3', 'e5m2'): c3.gemm_struct/64x8192x96_e4m3xe5m2/neg_bfloat16_slow (64, 96, 8192)
+  (False, 6, 'pairwise', 'bfloat16', 'e5m2', 'e4m3'): c3.gemm_struct/64x8192x96_e5m2xe4m3/neg_bfloat16_slow (64, 96, 8192)
+  (False, 6, 'pairwise', 'float16', 'e4m3', 'e4m3'): c3.gemm_struct/64x8192x96_e4m3xe4m3/neg_float16_slow (64, 96, 8192)
+  (False, 6, 'pairwise', 'float16', 'e4m3', 'e5m2'): c3.gemm_struct/64x8192x96_e4m3xe5m2/neg_float16_slow (64, 96, 8192)
+  (False, 6, 'pairwise', 'float16', 'e5m2', 'e4m3'): c3.gemm_struct/64x8192x96_e5m2xe4m3/neg_float16_slow (64, 96, 8192)
+  (False, 6, 'pairwise', 'float32', 'e4m3', 'e5m2'): c3.gemm_struct/64x8192x96_e4m3xe5m2/neg_float32_slow (64, 96, 8192)
+  (False, 6, 'pairwise', 'float32', 'e5m2', 'e4m3'): c3.gemm_struct/64x8192x96_e5m2xe4m3/neg_float32_slow (64, 96, 8192)
+  (False, 6, 'serial', 'bfloat16', 'e4m3', 'e4m3'): c5.v3_slow_forced/s4.74/out (64, 96, 8192)
+  (False, 6, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_var_0_60.17/out (64, 96, 8192)
+  (False, 7, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v3_slow_forced/s4.89/out (16, 64, 8256)
+  (False, 8, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c4.verify2/large:L_1x160x8192_bf16_slow_gauss_S8c1/out (1, 160, 8192)
+  (False, 8, 'pairwise', 'float32', 'e4m3', 'e5m2'): c3.gemm_struct/16x8192x128_e4m3xe5m2/neg_float32_slow (16, 128, 8192)
+  (False, 8, 'pairwise', 'float32', 'e5m2', 'e4m3'): c3.gemm_struct/16x8192x128_e5m2xe4m3/neg_float32_slow (16, 128, 8192)
+  (False, 8, 'serial', 'float32', 'e4m3', 'e4m3'): c5.j5_cublaslt/45/out (64, 96, 8192)
+  (False, 9, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_var_0_60.37/out (256, 96, 8192)
+  (False, 9, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_var_0_60.32/out (256, 96, 8192)
+  (True, 10, 'pairwise', 'bfloat16', 'e4m3', 'e5m2'): c4.V3/v3_1902/out (2, 128, 8192)
+  (True, 10, 'pairwise', 'bfloat16', 'e5m2', 'e4m3'): c4.V3/v3_2350/out (2, 128, 8192)
+  (True, 10, 'pairwise', 'float16', 'e4m3', 'e4m3'): c4.V3/v3_40/out (16, 16, 8192)
+  (True, 10, 'pairwise', 'float8_e4m3fn', 'e4m3', 'e4m3'): c4.V3/v3_480/out (16, 16, 8192)
+  (True, 10, 'serial', 'float32', 'e4m3', 'e4m3'): c5.j3_cublaslt/13253/out (64, 96, 8192)
+  (True, 11, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.j2_cublaslt/12/out (64, 96, 8192)
+  (True, 11, 'serial', 'float32', 'e4m3', 'e4m3'): c5.j3_cublaslt/13259/out (64, 96, 8192)
+  (True, 12, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c4.V1/v1_330/out (3, 128, 8192)
+  (True, 12, 'pairwise', 'bfloat16', 'e4m3', 'e5m2'): c4.V3/v3_2094/out (16, 96, 8192)
+  (True, 12, 'pairwise', 'bfloat16', 'e5m2', 'e4m3'): c4.V3/v3_2542/out (16, 96, 8192)
+  (True, 12, 'pairwise', 'float32', 'e4m3', 'e4m3'): c4.verify3/s117/W4096 (48, 16, 12288)
+  (True, 12, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_core_0_54.21/out (672, 96, 8192)
+  (True, 13, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.j2_cublaslt/16/out (64, 96, 8192)
+  (True, 13, 'serial', 'float32', 'e4m3', 'e4m3'): c5.j3_cublaslt/13271/out (64, 96, 8192)
+  (True, 14, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c4.v3_te_linear/1/te_CUBLASLT_WORKSPACE_SIZE=0 (16, 16, 8192)
+  (True, 14, 'pairwise', 'float32', 'e4m3', 'e4m3'): c4.verify3/s15/W4096 (16, 16, 12288)
+  (True, 14, 'serial', 'float32', 'e4m3', 'e4m3'): c5.j3_cublaslt/13277/out (64, 96, 8192)
+  (True, 15, 'pairwise', 'float32', 'e4m3', 'e4m3'): c5.j2_cublaslt/20/out (64, 96, 8192)
+  (True, 15, 'serial', 'float32', 'e4m3', 'e4m3'): c5.j3_cublaslt/13283/out (64, 96, 8192)
+  (True, 16, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_var_0_60.51/out (1680, 96, 8192)
+  (True, 16, 'pairwise', 'float32', 'e4m3', 'e4m3'): c4.verify3/s15/D (16, 16, 12288)
+  (True, 16, 'serial', 'bfloat16', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_var_0_60.46/out (1680, 96, 8192)
+  (True, 16, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_core_0_54.24/out (1680, 96, 8192)
+  (True, 4, 'pairwise', 'bfloat16', 'e4m3', 'e5m2'): c4.V3/v3_2074/out (48, 176, 8192)
+  (True, 4, 'pairwise', 'bfloat16', 'e5m2', 'e4m3'): c4.V3/v3_2522/out (48, 176, 8192)
+  (True, 4, 'pairwise', 'float32', 'e4m3', 'e5m2'): c4.V3/v3_3018/out (2, 128, 8192)
+  (True, 4, 'pairwise', 'float32', 'e5m2', 'e4m3'): c4.V3/v3_3548/out (2, 128, 8192)
+  (True, 4, 'serial', 'float16', 'e4m3', 'e4m3'): c4.V3/v3_408/out (129, 128, 8192)
+  (True, 4, 'serial', 'float8_e4m3fn', 'e4m3', 'e4m3'): c4.V3/v3_848/out (129, 128, 8192)
+  (True, 5, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_var_0_60.6/out (32, 96, 8192)
+  (True, 5, 'serial', 'bfloat16', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_var_0_60.11/out (32, 96, 8192)
+  (True, 6, 'pairwise', 'bfloat16', 'e4m3', 'e5m2'): c4.V3/v3_1982/out (4, 16, 8192)
+  (True, 6, 'pairwise', 'bfloat16', 'e5m2', 'e4m3'): c4.V3/v3_2430/out (4, 16, 8192)
+  (True, 6, 'pairwise', 'float16', 'e4m3', 'e5m2'): c3.gemm_struct/16x8192x128_e4m3xe5m2/neg_float16_fast (16, 128, 8192)
+  (True, 6, 'pairwise', 'float16', 'e5m2', 'e4m3'): c3.gemm_struct/16x8192x128_e5m2xe4m3/neg_float16_fast (16, 128, 8192)
+  (True, 6, 'pairwise', 'float8_e4m3fn', 'e4m3', 'e4m3'): c4.V3/v3_546/out (4, 16, 8192)
+  (True, 6, 'serial', 'bfloat16', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_var_0_60.16/out (64, 96, 8192)
+  (True, 7, 'serial', 'float32', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_core_0_54.12/out (112, 96, 8192)
+  (True, 8, 'pairwise', 'bfloat16', 'e4m3', 'e5m2'): c3.gemm_struct/16x8192x128_e4m3xe5m2/neg_bfloat16_fast (16, 128, 8192)
+  (True, 8, 'pairwise', 'bfloat16', 'e5m2', 'e4m3'): c3.gemm_struct/16x8192x128_e5m2xe4m3/neg_bfloat16_fast (16, 128, 8192)
+  (True, 8, 'pairwise', 'float32', 'e4m3', 'e5m2'): c3.gemm_struct/16x8192x128_e4m3xe5m2/neg_float32_fast (16, 128, 8192)
+  (True, 8, 'pairwise', 'float32', 'e5m2', 'e4m3'): c3.gemm_struct/16x8192x128_e5m2xe4m3/neg_float32_fast (16, 128, 8192)
+  (True, 9, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_var_0_60.36/out (256, 96, 8192)
+  (True, 9, 'pairwise', 'float32', 'e4m3', 'e5m2'): c4.V3/v3_2798/out (16, 16, 8192)
+  (True, 9, 'pairwise', 'float32', 'e5m2', 'e4m3'): c4.V3/v3_3328/out (16, 16, 8192)
+  (True, 9, 'serial', 'bfloat16', 'e4m3', 'e4m3'): c5.v2_forced_probes/tri_var_0_60.31/out (256, 96, 8192)
+  (True, 8, 'pairwise', 'float8_e4m3fn', 'e4m3', 'e4m3'): c4.V3/v3_586/out (80, 16, 10240)
+  (False, 16, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c4.V3/v3_1214/out (32, 32, 12288)
+  (False, 5, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c4.V3/v3_1190/out (64, 528, 12288)
+  (False, 5, 'serial', 'bfloat16', 'e4m3', 'e4m3'): c5.j6_cublaslt/78/out (192, 192, 12288)
+  (True, 10, 'serial', 'bfloat16', 'e4m3', 'e4m3'): c5.j6_cublaslt/69/out (1024, 192, 12288)
+  (True, 14, 'pairwise', 'bfloat16', 'e4m3', 'e5m2'): c4.V3/v3_2192/out (32, 32, 12288)
+  (True, 14, 'pairwise', 'bfloat16', 'e5m2', 'e4m3'): c4.V3/v3_2640/out (32, 32, 12288)
+  (True, 5, 'serial', 'float32', 'e5m2', 'e4m3'): c5.j6_cublaslt/62/out (192, 192, 12288)
+  (True, 6, 'serial', 'float32', 'e4m3', 'e5m2'): c4.V3/v3_2784/out (80, 112, 12288)
+  (True, 6, 'serial', 'float32', 'e5m2', 'e4m3'): c4.V3/v3_3314/out (80, 112, 12288)
+  (True, 8, 'serial', 'bfloat16', 'e4m3', 'e4m3'): c4.V4/v4_80/out (784, 112, 12288)
+  (True, 8, 'serial', 'float32', 'e4m3', 'e5m2'): c4.V3/v3_2998/out (48, 192, 12288)
+  (True, 8, 'serial', 'float32', 'e5m2', 'e4m3'): c4.V3/v3_3528/out (48, 192, 12288)
+  (True, 8, 'serial', 'bfloat16', 'e4m3', 'e5m2'): c4.V3/v3_2298/out (784, 112, 12304)
+  (True, 8, 'serial', 'bfloat16', 'e5m2', 'e4m3'): c4.V3/v3_2746/out (784, 112, 12304)
+  (True, 12, 'serial', 'float32', 'e4m3', 'e5m2'): c5.full_check/107/out (64, 128, 16384)
+  (True, 12, 'serial', 'float32', 'e5m2', 'e4m3'): c5.j6_cublaslt/14/out (48, 128, 16384)
+  (True, 14, 'pairwise', 'float16', 'e4m3', 'e4m3'): c4.V3/v3_296/out (32, 16, 16384)
+  (True, 14, 'pairwise', 'float8_e4m3fn', 'e4m3', 'e4m3'): c4.V3/v3_736/out (32, 16, 16384)
+  (True, 16, 'pairwise', 'float32', 'e4m3', 'e5m2'): c4.V3/v3_3144/out (32, 16, 16384)
+  (True, 16, 'pairwise', 'float32', 'e5m2', 'e4m3'): c4.V3/v3_3674/out (32, 16, 16384)
+  (True, 5, 'serial', 'float32', 'e4m3', 'e5m2'): c4.V3/v3_3080/out (192, 144, 16384)
+  (True, 6, 'serial', 'float16', 'e4m3', 'e4m3'): c4.V3/v3_60/out (48, 240, 16384)
+  (True, 6, 'serial', 'float8_e4m3fn', 'e4m3', 'e4m3'): c4.V3/v3_500/out (48, 240, 16384)
+  (True, 7, 'pairwise', 'float16', 'e4m3', 'e4m3'): c4.V3/v3_290/out (96, 64, 16384)
+  (True, 7, 'pairwise', 'float8_e4m3fn', 'e4m3', 'e4m3'): c4.V3/v3_730/out (96, 64, 16384)
+  (True, 24, 'pairwise', 'bfloat16', 'e4m3', 'e4m3'): c4.verify3/r4/D (3, 32, 32768)

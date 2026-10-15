@@ -1,0 +1,121 @@
+{
+ "description": "Reference outputs of the official Evo 2 1B path (evo2 0.6.0 + Transformer Engine 2.3.0 FP8) on an NVIDIA GeForce RTX 4060, for examples/evo2_blackwell.ipynb.",
+ "hardware": {
+  "gpu": "NVIDIA GeForce RTX 4060",
+  "capability": [
+   8,
+   9
+  ],
+  "sm_count": 24,
+  "driver": "572.16",
+  "torch": "2.7.1+cu128",
+  "cublaslt": "12.8.3.14",
+  "transformer_engine": "2.3.0",
+  "evo2": "0.6.0",
+  "vtx": "1.1.0"
+ },
+ "windows": {
+  "p0": {
+   "bp": 6538,
+   "mean_next_logprob": -0.22533518075942993,
+   "logits_sha256": "62ee11418c7327fb4d23d5d20f8e4a0b18d46e3525d63fede5842f1a228b35b8"
+  },
+  "p1": {
+   "bp": 7056,
+   "mean_next_logprob": -0.7801355719566345,
+   "logits_sha256": "0e4146b39950ca17cd72649b74eec0ba4b6bb73ae70c10e71ab8a6f99a531b48"
+  },
+  "p2": {
+   "bp": 6160,
+   "mean_next_logprob": -0.5599954724311829,
+   "logits_sha256": "7ae702e2f5e5f77c6636b8e0c9138b71ed8c3887bbca75efb026176c3dd136c6"
+  },
+  "p3": {
+   "bp": 7616,
+   "mean_next_logprob": -0.4443177282810211,
+   "logits_sha256": "9d2856c85b63a1956b38cf2683d737e7811dc5752b64418f3ebecc380f03dfdf"
+  },
+  "w8k": {
+   "bp": 8192,
+   "mean_next_logprob": -0.3840143382549286,
+   "logits_sha256": "1a5e4136c8b8531c2263bd6f630adc1dccb4cbaf330649e3b76764637a7acdbb"
+  },
+  "w2k": {
+   "bp": 2048,
+   "mean_next_logprob": -0.20100508630275726,
+   "logits_sha256": "e0afe6c6c63c45001a923b2e70f61dcacd07e3b35fecaaf65555d9397a218c69"
+  }
+ },
+ "arrays": {
+  "<w>/ids": "token ids (CharLevelTokenizer(512): the ASCII code of each base), int16",
+  "<w>/acgt": "log-probabilities of A, C, G, T at every position (log_softmax over the 512-token vocabulary of the bf16 logits, in fp32), [L, 4]",
+  "<w>/next": "log-probability of the true next token at positions 0..L-2, [L-1]",
+  "brca1/rs, brca1/vs": "upstream score_sequences (mean next-token log-likelihood) of the 435 unique reference windows and of the 500 variant windows",
+  "brca1/pos, ref, alt, lof": "the 500 variants (hg19 chr17 position, alleles, LOF class) in sample order"
+ },
+ "windows_source": "p0..p3: the four prompts of evo2/test/data/prompts.csv; w8k: the first 8,192 bp of their concatenation; w2k: its first 2,048 bp",
+ "brca1": {
+  "source": "Findlay et al. 2018, Supplementary Table (41586_2018_461_MOESM3_ESM.xlsx), via the upstream evo2 BRCA1 notebook",
+  "subset": "pandas DataFrame.sample(n=500, random_state=0) of all variants",
+  "window_bp": 8192,
+  "auroc": 0.7378,
+  "recorded": "2026-10-10"
+ },
+ "projection0_w2k": {
+  "truth_id": "evo2.evo2_1b_w2k",
+  "what": "block 0 FP8 input projection on window w2k: E4M3 input [2048, 1920], E4M3 weight [5760, 1920], bf16 output [2048, 5760] (sha256 of the raw bytes)",
+  "input_sha256": "3eefa6cf9ac2b2fb39cb4835803e2804f16d91b98cb2b035023374be9d4ad0a8",
+  "weight_sha256": "dd0f5ee3fa80a3c0c1f55c6a25b2777a3f7297fc702588c6d26cdb3974f96eac",
+  "output_te_sha256": "d135bccc9c8db5d7e28aa242b3c133d14b3c98f180f8a2419af1be23a869fba3",
+  "output_scaled_mm_sha256": "d135bccc9c8db5d7e28aa242b3c133d14b3c98f180f8a2419af1be23a869fba3"
+ },
+ "h100_official_te": {
+  "description": "The same official path (evo2 0.6.0 + TE 2.3.0 FP8, same checkpoint and token ids) on an NVIDIA H100 PCIe, compared with the RTX 4060 reference above: how far two GPUs running the official path are apart.",
+  "hardware": {
+   "gpu": "NVIDIA H100 PCIe",
+   "capability": [
+    9,
+    0
+   ],
+   "sm_count": 114,
+   "driver": "570.148.08",
+   "torch": "2.7.1+cu128",
+   "cublaslt": "12.8.3.14",
+   "transformer_engine": "2.3.0"
+  },
+  "recorded": "2026-10-14",
+  "windows": {
+   "p0": {
+    "mean_abs_dlogp_acgt": 0.03745900094509125,
+    "acgt_argmax_agree": 0.9981645941734314,
+    "mean_next_logprob": -0.2252940833568573
+   },
+   "p1": {
+    "mean_abs_dlogp_acgt": 0.03911399468779564,
+    "acgt_argmax_agree": 0.9893707633018494,
+    "mean_next_logprob": -0.7805887460708618
+   },
+   "p2": {
+    "mean_abs_dlogp_acgt": 0.03991471976041794,
+    "acgt_argmax_agree": 0.9904220700263977,
+    "mean_next_logprob": -0.5603066682815552
+   },
+   "p3": {
+    "mean_abs_dlogp_acgt": 0.046384453773498535,
+    "acgt_argmax_agree": 0.9947478771209717,
+    "mean_next_logprob": -0.44413328170776367
+   },
+   "w8k": {
+    "mean_abs_dlogp_acgt": 0.035109035670757294,
+    "acgt_argmax_agree": 0.9957275390625,
+    "mean_next_logprob": -0.3841516673564911
+   },
+   "w2k": {
+    "mean_abs_dlogp_acgt": 0.04851425439119339,
+    "acgt_argmax_agree": 0.99609375,
+    "mean_next_logprob": -0.2018955498933792
+   }
+  },
+  "brca1_auroc": 0.7332
+ }
+}

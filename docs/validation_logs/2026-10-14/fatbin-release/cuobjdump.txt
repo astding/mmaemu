@@ -1,0 +1,42 @@
+== tc3.fatbin
+ELF file    1: tc3.1.sm_80.cubin
+ELF file    2: tc3.2.sm_86.cubin
+ELF file    3: tc3.3.sm_89.cubin
+cuobjdump info    : No PTX file found to extract from '/data/quant/mmaemu_work/wt/release/mmaemu/backends/cuda/bin/tc3.fatbin'. You may try with -all option.
+
+== v9.fatbin
+ELF file    1: v9.1.sm_80.cubin
+ELF file    2: v9.2.sm_86.cubin
+ELF file    3: v9.3.sm_89.cubin
+ELF file    4: v9.4.sm_90.cubin
+ELF file    5: v9.5.sm_100.cubin
+ELF file    6: v9.6.sm_120.cubin
+cuobjdump info    : No PTX file found to extract from '/data/quant/mmaemu_work/wt/release/mmaemu/backends/cuda/bin/v9.fatbin'. You may try with -all option.
+
+== v4.fatbin
+PTX file    1: v4.1.sm_80.ptx
+ELF file    1: v4.1.sm_80.cubin
+ELF file    2: v4.2.sm_86.cubin
+ELF file    3: v4.3.sm_89.cubin
+ELF file    4: v4.4.sm_90.cubin
+ELF file    5: v4.5.sm_100.cubin
+ELF file    6: v4.6.sm_120.cubin
+
+== v1.fatbin
+PTX file    1: v1.1.sm_75.ptx
+ELF file    1: v1.1.sm_75.cubin
+ELF file    2: v1.2.sm_80.cubin
+ELF file    3: v1.3.sm_86.cubin
+ELF file    4: v1.4.sm_89.cubin
+ELF file    5: v1.5.sm_90.cubin
+ELF file    6: v1.6.sm_100.cubin
+ELF file    7: v1.7.sm_120.cubin
+
+== probes.fatbin
+ELF file    1: probes.1.sm_80.cubin
+ELF file    2: probes.2.sm_86.cubin
+ELF file    3: probes.3.sm_89.cubin
+ELF file    4: probes.4.sm_90.cubin
+ELF file    5: probes.5.sm_100.cubin
+ELF file    6: probes.6.sm_120.cubin
+cuobjdump info    : No PTX file found to extract from '/data/quant/mmaemu_work/wt/release/mmaemu/backends/cuda/bin/probes.fatbin'. You may try with -all option.

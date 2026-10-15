@@ -1,0 +1,71 @@
+cff-version: 1.2.0
+message: >-
+  If you use mmaemu, please cite it as below. Please also cite the tensor-core models it builds on:
+  F. A. Khattak and M. Mikaitis, "Accurate Models of NVIDIA Tensor Cores", ACM Transactions on Architecture and
+  Code Optimization 23(3), 2026, doi:10.1145/3830409 (arXiv:2512.07004).
+type: software
+title: "mmaemu: bit-accurate emulation of NVIDIA tensor-core FP8 GEMM numerics"
+abstract: >-
+  mmaemu reproduces, bit for bit, the FP8 GEMM numerics of a reference GPU (block accumulation, split-K
+  reductions and the epilogue of cuBLAS FP8 GEMMs as called by torch._scaled_mm), so that results computed
+  with FP8 tensor cores can be recomputed on other devices. Version 0.1 models one reference platform
+  (RTX 4060, sm_89, cuBLASLt 12.8.3.14) and is validated against hardware recordings of that GPU.
+authors:
+  - alias: astding
+version: 0.1.0
+license: Apache-2.0
+repository-code: "https://github.com/astding/mmaemu"
+keywords:
+  - FP8
+  - tensor cores
+  - GEMM
+  - emulation
+  - reproducibility
+references:
+  - type: article
+    title: "Accurate Models of NVIDIA Tensor Cores"
+    authors:
+      - family-names: Khattak
+        given-names: Faizan A.
+      - family-names: Mikaitis
+        given-names: Mantas
+    journal: "ACM Transactions on Architecture and Code Optimization"
+    volume: 23
+    issue: 3
+    start: 1
+    end: 25
+    year: 2026
+    doi: "10.1145/3830409"
+    identifiers:
+      - type: doi
+        value: "10.1145/3830409"
+      - type: other
+        value: "arXiv:2512.07004"
+        description: arXiv identifier (preprint, 2025)
+    url: "https://doi.org/10.1145/3830409"
+  - type: software
+    title: "MATLAB Tensor Core toolbox"
+    authors:
+      - family-names: Khattak
+        given-names: Faizan A.
+      - family-names: Mikaitis
+        given-names: Mantas
+    license: BSD-2-Clause
+    repository-code: "https://github.com/north-numerical-computing/MATLAB-tensor-core"
+    year: 2025
+  - type: article
+    title: "Numerical behavior of NVIDIA tensor cores"
+    authors:
+      - family-names: Fasi
+        given-names: Massimiliano
+      - family-names: Higham
+        given-names: Nicholas J.
+      - family-names: Mikaitis
+        given-names: Mantas
+      - family-names: Pranesh
+        given-names: Srikara
+    journal: "PeerJ Computer Science"
+    volume: 7
+    start: e330
+    year: 2021
+    doi: "10.7717/peerj-cs.330"

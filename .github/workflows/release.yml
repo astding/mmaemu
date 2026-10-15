@@ -1,0 +1,106 @@
+# Release (docs/release.md). A pushed tag v<version> builds, checks and publishes to PyPI by
+# trusted publishing (OIDC; no token secrets). workflow_dispatch runs the build job only and never publishes.
+#
+# The fatbins are NOT built here: they are built and GPU-validated locally by the maintainer at the release-candidate
+# freeze (tools/build_fatbin.py --release, T3 + T7) and committed. This workflow only proves that the committed
+# binaries are current (source hashes) and intact (manifest sha256), then packages exactly those bytes.
+#
+# Maintainer-only setup (docs/release.md): PyPI trusted publisher (project mmaemu, owner astding, repository mmaemu,
+# workflow release.yml, environment pypi); required reviewers on the GitHub environment "pypi"; protected v* tags.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONDONTWRITEBYTECODE: "1"
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+
+jobs:
+  build:
+    name: build and check the distributions
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: install build tools (+ CPU torch, in case tools/build_fatbin.py imports the kernel specs)
+        run: |
+          python -m pip install build==1.6.1 twine==7.0.0 packaging
+          python -m pip install torch==2.7.1 numpy --index-url https://download.pytorch.org/whl/cpu
+      - name: committed fatbins are current (build_fatbin --check; source hashes only, no nvcc, never rebuilt)
+        run: python tools/build_fatbin.py --check
+      - name: committed fatbins match the manifest sha256
+        run: python tools/check_dist.py --verify-manifest
+      - name: tag == version (mmaemu/_version.py)
+        if: github.event_name == 'push'
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          ver="$(python - <<'PY'
+          import pathlib, re
+          text = pathlib.Path("mmaemu/_version.py").read_text()
+          print(re.search(r"""^__version__\s*(?::\s*str\s*)?=\s*["']([^"']+)["']""", text, re.MULTILINE).group(1))
+          PY
+          )"
+          echo "tag ${TAG}, mmaemu/_version.py ${ver}"
+          if [ "${TAG}" != "v${ver}" ]; then
+            echo "::error::tag ${TAG} does not match mmaemu/_version.py (${ver})"
+            exit 1
+          fi
+      # --sdist --wheel: both from the tree (a bare `python -m build` would build the wheel from the sdist, which has
+      # no fatbins by design).
+      - name: build wheel and sdist
+        run: python -m build --sdist --wheel
+      - name: twine check --strict
+        run: twine check --strict dist/*
+      - name: check_dist --require-fatbins
+        env:
+          TAG: ${{ github.event_name == 'push' && github.ref_name || '' }}
+        run: |
+          if [ -n "${TAG}" ]; then
+            python tools/check_dist.py dist/* --require-fatbins --tag "${TAG}"
+          else
+            python tools/check_dist.py dist/* --require-fatbins
+          fi
+      - name: SHA256SUMS (kept outside dist/ so the upload holds distributions only)
+        run: |
+          mkdir -p meta
+          (cd dist && sha256sum -- *) | tee meta/SHA256SUMS
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: dist
+          path: dist/
+          if-no-files-found: error
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: release-meta
+          path: meta/SHA256SUMS
+          if-no-files-found: error
+
+  publish:
+    name: publish to PyPI (trusted publishing)
+    needs: build
+    # Only for a pushed v* tag; workflow_dispatch never publishes.
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-24.04
+    environment:
+      name: pypi
+      url: https://pypi.org/project/mmaemu/
+    permissions:
+      id-token: write  # OIDC token for PyPI trusted publishing; granted to this job only
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333  # v8.0.2
+        with:
+          name: dist
+          path: dist/
+      - name: publish
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33  # v1.14.2

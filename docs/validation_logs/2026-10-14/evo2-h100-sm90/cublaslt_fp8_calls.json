@@ -1,0 +1,91 @@
+{
+ "source": "CUBLASLT_LOG_LEVEL=2 log of the windows stage (936 KB, not committed): every cublasLtMatmul call with E4M3 inputs",
+ "total_fp8_calls": 252,
+ "expected": "21 projections x 6 windows x 2 runs = 252",
+ "calls": [
+  {
+   "calls": 42,
+   "K": 1920,
+   "N": 5760,
+   "M_padded": 2048,
+   "a_type": "R_8F_E4M3",
+   "b_type": "R_8F_E4M3",
+   "d_type": "R_16BF",
+   "algo_id": 66,
+   "tile": "MATMUL_TILE_192x192",
+   "custom_option": 4,
+   "workspace_bytes": 33554432,
+   "fast_accumulation": 1
+  },
+  {
+   "calls": 42,
+   "K": 1920,
+   "N": 5760,
+   "M_padded": 6160,
+   "a_type": "R_8F_E4M3",
+   "b_type": "R_8F_E4M3",
+   "d_type": "R_16BF",
+   "algo_id": 66,
+   "tile": "MATMUL_TILE_192x208",
+   "custom_option": 5,
+   "workspace_bytes": 33554432,
+   "fast_accumulation": 1
+  },
+  {
+   "calls": 42,
+   "K": 1920,
+   "N": 5760,
+   "M_padded": 6544,
+   "a_type": "R_8F_E4M3",
+   "b_type": "R_8F_E4M3",
+   "d_type": "R_16BF",
+   "algo_id": 66,
+   "tile": "MATMUL_TILE_192x176",
+   "custom_option": 7,
+   "workspace_bytes": 33554432,
+   "fast_accumulation": 1
+  },
+  {
+   "calls": 42,
+   "K": 1920,
+   "N": 5760,
+   "M_padded": 7056,
+   "a_type": "R_8F_E4M3",
+   "b_type": "R_8F_E4M3",
+   "d_type": "R_16BF",
+   "algo_id": 66,
+   "tile": "MATMUL_TILE_192x208",
+   "custom_option": 5,
+   "workspace_bytes": 33554432,
+   "fast_accumulation": 1
+  },
+  {
+   "calls": 42,
+   "K": 1920,
+   "N": 5760,
+   "M_padded": 7616,
+   "a_type": "R_8F_E4M3",
+   "b_type": "R_8F_E4M3",
+   "d_type": "R_16BF",
+   "algo_id": 66,
+   "tile": "MATMUL_TILE_192x192",
+   "custom_option": 6,
+   "workspace_bytes": 33554432,
+   "fast_accumulation": 1
+  },
+  {
+   "calls": 42,
+   "K": 1920,
+   "N": 5760,
+   "M_padded": 8192,
+   "a_type": "R_8F_E4M3",
+   "b_type": "R_8F_E4M3",
+   "d_type": "R_16BF",
+   "algo_id": 66,
+   "tile": "MATMUL_TILE_128x256",
+   "custom_option": 6,
+   "workspace_bytes": 33554432,
+   "fast_accumulation": 1
+  }
+ ]
+}

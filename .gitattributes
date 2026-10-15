@@ -1,0 +1,9 @@
+# Binary payloads: never diff, merge or normalise line endings.
+*.fatbin binary
+*.cubin binary
+*.npz binary
+*.npy binary
+*.pt binary
+# Scripts keep LF endings.
+*.sh text eol=lf
+*.py text eol=lf

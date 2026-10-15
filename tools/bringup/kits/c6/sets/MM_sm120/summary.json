@@ -1,0 +1,42 @@
+{
+ "e4m3": {
+  "n_models": 12881,
+  "pool": 12232,
+  "selected": 951,
+  "classes_pool": 6897,
+  "classes_shuffled": 6897,
+  "classes_selected": 6897,
+  "largest_classes": [
+   32,
+   32,
+   32,
+   32,
+   32,
+   32,
+   32,
+   32,
+   32,
+   32
+  ]
+ },
+ "e5m2": {
+  "n_models": 12881,
+  "pool": 12212,
+  "selected": 928,
+  "classes_pool": 7670,
+  "classes_shuffled": 7670,
+  "classes_selected": 7670,
+  "largest_classes": [
+   32,
+   32,
+   32,
+   32,
+   32,
+   32,
+   32,
+   32,
+   32,
+   32
+  ]
+ }
+}

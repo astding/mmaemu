@@ -1,0 +1,164 @@
+# CPU-only CI (docs/testing.md). No GPU jobs and no publishing: GitHub-hosted runners have no GPU, so the GPU tiers
+# (T3, T3p, T5, T6, T7) run locally on the maintainer's GPU host under a GPU lock (docs/release.md).
+name: ci
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHONDONTWRITEBYTECODE: "1"
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  CUDA_VISIBLE_DEVICES: ""
+  TORCH_CPU_INDEX: https://download.pytorch.org/whl/cpu
+  # T0 + T1: everything that runs on a CPU without the hardware ground truth.
+  CPU_TIERS: not gpu and not slow and not truth and not profile_device
+
+jobs:
+  lint:
+    name: lint (ruff, actionlint, docs, fatbin staleness, banned patterns, workflow policy)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: install lint tools (+ CPU torch, in case tools/build_fatbin.py imports the kernel specs)
+        run: |
+          python -m pip install ruff==0.17.0 actionlint-py==1.7.12.25 pyyaml==6.0.3
+          python -m pip install torch==2.7.1 numpy --index-url "$TORCH_CPU_INDEX"
+      - name: ruff
+        run: ruff check .
+      - name: actionlint
+        run: actionlint -color
+      - name: docs (forbidden wording, evidence references, audit scope rows)
+        run: python tools/check_docs.py
+      - name: committed fatbins are current (source hashes only, no nvcc)
+        run: |
+          if [ -f mmaemu/backends/cuda/bin/manifest.json ]; then
+            python tools/build_fatbin.py --check
+            python tools/check_dist.py --verify-manifest
+          else
+            echo "::notice::no committed fatbins yet (they are committed at the release-candidate freeze)"
+          fi
+      - name: banned patterns
+        run: |
+          status=0
+          # Bit claims go through mmaemu.testing.assert_bitwise_equal (+0 != -0, NaN payloads), never torch.equal.
+          if grep -rnE 'torch[.]equal[(]' tests tools; then
+            echo "::error::torch.equal( is banned in tests/ and tools/: use mmaemu.testing.assert_bitwise_equal"
+            status=1
+          fi
+          # Kernel timing uses CUDA events (perf_counter runs 6-10% fast on the WSL2 reference host).
+          if [ ! -f tools/bench_kernels.py ]; then
+            echo "::error::tools/bench_kernels.py is missing"
+            status=1
+          elif grep -nE 'perf_counter' tools/bench_kernels.py; then
+            echo "::error::perf_counter is banned in tools/bench_kernels.py: use CUDA events"
+            status=1
+          fi
+          exit "$status"
+      - name: release/ci workflow policy review
+        run: python tests/test_packaging.py --review-workflows
+
+  test:
+    name: T0+T1 py${{ matrix.python }} torch ${{ matrix.torch }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10", "3.11", "3.12", "3.13"]
+        torch: ["2.6.0", "2.7.1", "latest"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: ${{ matrix.python }}
+      - name: install CPU torch ${{ matrix.torch }}, numpy, pytest
+        env:
+          TORCH_VERSION: ${{ matrix.torch }}
+        run: |
+          if [ "$TORCH_VERSION" = latest ]; then spec=torch; else spec="torch==$TORCH_VERSION"; fi
+          python -m pip install "$spec" --index-url "$TORCH_CPU_INDEX"
+          python -m pip install numpy pytest
+          python -c "import torch, numpy; print('torch', torch.__version__, 'numpy', numpy.__version__)"
+      - name: T0 + T1 (source tree)
+        run: python -m pytest -q -p no:cacheprovider tests -m "$CPU_TIERS" --durations=20
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+  nvrtc:
+    name: NVRTC compile of every kernel source x arch (no GPU)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: install CPU torch, numpy, pytest and NVRTC 12.8
+        run: |
+          python -m pip install torch==2.7.1 --index-url "$TORCH_CPU_INDEX"
+          python -m pip install numpy pytest "nvidia-cuda-nvrtc-cu12==12.8.*"
+      - name: NVRTC compile test
+        run: python -m pytest -q -p no:cacheprovider tests/test_nvrtc_compile.py
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+  dist:
+    name: build, check_dist, fresh-venv install + T0/T1 against the wheel
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: install build tools
+        run: python -m pip install build==1.6.1 twine==7.0.0 packaging
+      # --sdist --wheel builds both from the tree. A bare `python -m build` builds the wheel from the sdist, which
+      # (by design) has no fatbins.
+      - name: build wheel and sdist
+        run: python -m build --sdist --wheel
+      - name: twine check --strict
+        run: twine check --strict dist/*
+      - name: check_dist
+        run: |
+          if [ -f mmaemu/backends/cuda/bin/manifest.json ]; then flag=--require-fatbins; else flag=--allow-missing-fatbins; fi
+          python tools/check_dist.py dist/* "$flag"
+      - name: the sdist builds a wheel (sources only; the NVRTC/reference path)
+        run: |
+          python -m pip wheel --no-deps -w "$RUNNER_TEMP/sdist-wheel" dist/*.tar.gz
+          python tools/check_dist.py "$RUNNER_TEMP"/sdist-wheel/*.whl dist/*.tar.gz --from-sdist
+      - name: fresh venv with CPU torch + the wheel
+        run: |
+          python -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/python" -m pip install torch==2.7.1 --index-url "$TORCH_CPU_INDEX"
+          "$RUNNER_TEMP/venv/bin/python" -m pip install dist/*.whl pytest
+      - name: python -m mmaemu info (installed wheel)
+        working-directory: ${{ runner.temp }}
+        run: |
+          "$RUNNER_TEMP/venv/bin/python" -m mmaemu info
+      - name: T0 + T1 from the source tree against the installed wheel
+        working-directory: ${{ runner.temp }}
+        env:
+          MMAEMU_EXPECT_INSTALLED: "1"
+        run: |
+          "$RUNNER_TEMP/venv/bin/python" -m pytest -q -p no:cacheprovider "$GITHUB_WORKSPACE/tests" -m "$CPU_TIERS"

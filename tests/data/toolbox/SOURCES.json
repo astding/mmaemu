@@ -1,0 +1,625 @@
+{
+ "format": "mmaemu-toolbox-vectors/1",
+ "origin": "https://github.com/north-numerical-computing/MATLAB-tensor-core (validation vectors)",
+ "licence": "BSD-2-Clause, Copyright (c) 2025 Faizan A. Khattak and Mantas Mikaitis (LICENCE.MATLAB-tensor-core)",
+ "layout": "a, b: uint32 fp32 bit patterns [5000, 32] holding FP8 values; c, d: uint32 fp32 bits [5000]; d = MMA(a, b) + c as recorded by the toolbox authors on each GPU (H100/H200 recorded with c = 0)",
+ "npz_sha256": "ad04412a02ac5110cf692254cc4e5000ee02720999e376de890c3e0834c37cd1",
+ "arrays": {
+  "s0753ad13785f186e": {
+   "shape": [
+    5000
+   ],
+   "sha256": "75af9df323607717ffb877f18a20c5518eef79d2df44d76612e9c1bd8405b850"
+  },
+  "s1ff20a31004589bf": {
+   "shape": [
+    5000
+   ],
+   "sha256": "56c7176948fa6e65d3c573d4cf7de41e10b11952fc1b21853f8ec4b76486c00e"
+  },
+  "s229abb5f9e0f1dfd": {
+   "shape": [
+    5000,
+    32
+   ],
+   "sha256": "3ee2db09e40484b8fd46d7d1073eb35cb1c3bb20077619729d07e08e059c1324"
+  },
+  "s367af6ea87401170": {
+   "shape": [
+    5000
+   ],
+   "sha256": "fe75fb6e80d4d5929e60848e29a961c3480d5141fa7c8249a575fc8d7b338d22"
+  },
+  "s369fb2d8fd05edbb": {
+   "shape": [
+    5000
+   ],
+   "sha256": "ba61276debaf65f630e90d14e460b48d1236db3f0f6a0fc18d0511b476a6b8f3"
+  },
+  "s42fc38b55f4cfaf7": {
+   "shape": [
+    5000
+   ],
+   "sha256": "ee73e3a4b82cebeb8ce6dacee1cb7ed34665f8da8ca5e4292ae62da65cdc234f"
+  },
+  "s4f9a239d4a69c795": {
+   "shape": [
+    5000
+   ],
+   "sha256": "1df086a6ac33fb784e8888d915ba64dec18ffdb8ac7cc58c055ad1d2d57f338d"
+  },
+  "s572b0bc93636d4bd": {
+   "shape": [
+    5000
+   ],
+   "sha256": "7bf2a3eec1d21bbc3d261e5f963420d589356831a106f681f1d5839890a79855"
+  },
+  "s5fe4258b96b4bd99": {
+   "shape": [
+    5000
+   ],
+   "sha256": "38be39be440ce9de1524d5457ef6abbf8080c26408d5a8445906b1bd752b2fdf"
+  },
+  "s7213f29b8334449a": {
+   "shape": [
+    5000
+   ],
+   "sha256": "939116caa70f6da4deb30aee0f0dbd1699893b117b8b54e4e6c74f6be18e12da"
+  },
+  "s76a6115878a4662f": {
+   "shape": [
+    5000,
+    32
+   ],
+   "sha256": "6a47afa83428aee4333a6ecb51a6e5186964914b64459e60ac0b31f89844c44f"
+  },
+  "s7c6c32232e823f7b": {
+   "shape": [
+    5000
+   ],
+   "sha256": "7f15f6a4ea163b2957beacccb69fa50ee8c84daced4abd0fcd256e6eeaebc7da"
+  },
+  "s97b4b8782c9256fd": {
+   "shape": [
+    5000
+   ],
+   "sha256": "437239082ec9af167c3358728dcc73c359d29dc3db55b1f0580c605ac88172ab"
+  },
+  "sbfb758780a175971": {
+   "shape": [
+    5000
+   ],
+   "sha256": "e671d599d5d1fe85e55bb3d7ebcdd1e5fd984c501872242da8bc8578402ba7cc"
+  },
+  "scfd7f2b4be78f089": {
+   "shape": [
+    5000
+   ],
+   "sha256": "7fbfe90d0855ce51336bf3b09eae4cbe15f44d2d2b7761834cebbc6705c11dbd"
+  },
+  "sd8f977b6b039ad92": {
+   "shape": [
+    5000
+   ],
+   "sha256": "50754599cdfe66c690240d0bc7d26f1a9f0c42546431a0fec0f03b8717f62ca5"
+  },
+  "sdc105fe914100f96": {
+   "shape": [
+    5000,
+    32
+   ],
+   "sha256": "b3ed0ce7e87a992c17839650b33ae8e198a0d540778e94b78adf8282bd3e317f"
+  },
+  "sf35d75720651ab77": {
+   "shape": [
+    5000,
+    32
+   ],
+   "sha256": "f592828c989a6c0df17ac9e19e79d4a65db76a755cd06214e35b1c09f6a852ad"
+  }
+ },
+ "sets": [
+  {
+   "gpu": "Ada",
+   "fmt": "e4m3",
+   "a": "s76a6115878a4662f",
+   "b": "sf35d75720651ab77",
+   "c": "s5fe4258b96b4bd99",
+   "d": "s367af6ea87401170"
+  },
+  {
+   "gpu": "Ada",
+   "fmt": "e5m2",
+   "a": "s229abb5f9e0f1dfd",
+   "b": "sdc105fe914100f96",
+   "c": "s369fb2d8fd05edbb",
+   "d": "s572b0bc93636d4bd"
+  },
+  {
+   "gpu": "L40S",
+   "fmt": "e4m3",
+   "a": "s76a6115878a4662f",
+   "b": "sf35d75720651ab77",
+   "c": "s5fe4258b96b4bd99",
+   "d": "s367af6ea87401170"
+  },
+  {
+   "gpu": "L40S",
+   "fmt": "e5m2",
+   "a": "s229abb5f9e0f1dfd",
+   "b": "sdc105fe914100f96",
+   "c": "s369fb2d8fd05edbb",
+   "d": "s572b0bc93636d4bd"
+  },
+  {
+   "gpu": "H100",
+   "fmt": "e4m3",
+   "a": "s76a6115878a4662f",
+   "b": "sf35d75720651ab77",
+   "c": "s0753ad13785f186e",
+   "d": "s7c6c32232e823f7b"
+  },
+  {
+   "gpu": "H100",
+   "fmt": "e5m2",
+   "a": "s229abb5f9e0f1dfd",
+   "b": "sdc105fe914100f96",
+   "c": "s42fc38b55f4cfaf7",
+   "d": "scfd7f2b4be78f089"
+  },
+  {
+   "gpu": "H200",
+   "fmt": "e4m3",
+   "a": "s76a6115878a4662f",
+   "b": "sf35d75720651ab77",
+   "c": "s4f9a239d4a69c795",
+   "d": "s7c6c32232e823f7b"
+  },
+  {
+   "gpu": "H200",
+   "fmt": "e5m2",
+   "a": "s229abb5f9e0f1dfd",
+   "b": "sdc105fe914100f96",
+   "c": "sd8f977b6b039ad92",
+   "d": "scfd7f2b4be78f089"
+  },
+  {
+   "gpu": "B200",
+   "fmt": "e4m3",
+   "a": "s76a6115878a4662f",
+   "b": "sf35d75720651ab77",
+   "c": "s1ff20a31004589bf",
+   "d": "s7213f29b8334449a"
+  },
+  {
+   "gpu": "B200",
+   "fmt": "e5m2",
+   "a": "s229abb5f9e0f1dfd",
+   "b": "sdc105fe914100f96",
+   "c": "s97b4b8782c9256fd",
+   "d": "sbfb758780a175971"
+  }
+ ],
+ "sources": [
+  {
+   "path": "tests/data/Ada/E4M3/a_Ada_E4M3.txt",
+   "sha256": "76a6115878a4662fb486d90a6765e24564ed436a173ed1260d5d53112e8a976c",
+   "key": "s76a6115878a4662f",
+   "role": "a",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/Ada/E4M3/b_Ada_E4M3.txt",
+   "sha256": "f35d75720651ab777b10399abea59f060cde011a898065b5c3045ea171cc669d",
+   "key": "sf35d75720651ab77",
+   "role": "b",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/Ada/E4M3/c_Ada_fp32.txt",
+   "sha256": "5fe4258b96b4bd99f720796bcbfa39f3f3b4fd45eb5f3c47756914c0fb73552b",
+   "key": "s5fe4258b96b4bd99",
+   "role": "c",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/Ada/E4M3/d_Ada_fp32.txt",
+   "sha256": "367af6ea87401170fc811aeaf61ca0ac6fb9c8d6d07b3c39bf5aac819cfdff11",
+   "key": "s367af6ea87401170",
+   "role": "d",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/Ada/E5M2/a_Ada_E5M2.txt",
+   "sha256": "229abb5f9e0f1dfdae18ab467bccc38547749b3286128f99ba134573b443ee1f",
+   "key": "s229abb5f9e0f1dfd",
+   "role": "a",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/Ada/E5M2/b_Ada_E5M2.txt",
+   "sha256": "dc105fe914100f96ba77b18ec88014bde43b4f5be0bc105e337d2e6bd51eeb35",
+   "key": "sdc105fe914100f96",
+   "role": "b",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/Ada/E5M2/c_Ada_fp32.txt",
+   "sha256": "369fb2d8fd05edbbd4c0e4fcb547be29608218e90e5a807a5a27be753912d0b1",
+   "key": "s369fb2d8fd05edbb",
+   "role": "c",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/Ada/E5M2/d_Ada_fp32.txt",
+   "sha256": "572b0bc93636d4bd6883c05637ae50285c01e9b6ff6764f7b21b6cc9993f5630",
+   "key": "s572b0bc93636d4bd",
+   "role": "d",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/L40S/E4M3/a_L40S_E4M3.txt",
+   "sha256": "76a6115878a4662fb486d90a6765e24564ed436a173ed1260d5d53112e8a976c",
+   "key": "s76a6115878a4662f",
+   "role": "a",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/L40S/E4M3/b_L40S_E4M3.txt",
+   "sha256": "f35d75720651ab777b10399abea59f060cde011a898065b5c3045ea171cc669d",
+   "key": "sf35d75720651ab77",
+   "role": "b",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/L40S/E4M3/c_L40S_fp32.txt",
+   "sha256": "5fe4258b96b4bd99f720796bcbfa39f3f3b4fd45eb5f3c47756914c0fb73552b",
+   "key": "s5fe4258b96b4bd99",
+   "role": "c",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/L40S/E4M3/d_L40S_fp32.txt",
+   "sha256": "367af6ea87401170fc811aeaf61ca0ac6fb9c8d6d07b3c39bf5aac819cfdff11",
+   "key": "s367af6ea87401170",
+   "role": "d",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/L40S/E5M2/a_L40S_E5M2.txt",
+   "sha256": "229abb5f9e0f1dfdae18ab467bccc38547749b3286128f99ba134573b443ee1f",
+   "key": "s229abb5f9e0f1dfd",
+   "role": "a",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/L40S/E5M2/b_L40S_E5M2.txt",
+   "sha256": "dc105fe914100f96ba77b18ec88014bde43b4f5be0bc105e337d2e6bd51eeb35",
+   "key": "sdc105fe914100f96",
+   "role": "b",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/L40S/E5M2/c_L40S_fp32.txt",
+   "sha256": "369fb2d8fd05edbbd4c0e4fcb547be29608218e90e5a807a5a27be753912d0b1",
+   "key": "s369fb2d8fd05edbb",
+   "role": "c",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/L40S/E5M2/d_L40S_fp32.txt",
+   "sha256": "572b0bc93636d4bd6883c05637ae50285c01e9b6ff6764f7b21b6cc9993f5630",
+   "key": "s572b0bc93636d4bd",
+   "role": "d",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/H100/E4M3/a_H100_E4M3.txt",
+   "sha256": "76a6115878a4662fb486d90a6765e24564ed436a173ed1260d5d53112e8a976c",
+   "key": "s76a6115878a4662f",
+   "role": "a",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/H100/E4M3/b_H100_E4M3.txt",
+   "sha256": "f35d75720651ab777b10399abea59f060cde011a898065b5c3045ea171cc669d",
+   "key": "sf35d75720651ab77",
+   "role": "b",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/H100/E4M3/c_H100_fp32.txt",
+   "sha256": "0753ad13785f186e3980c29c97ade105814f7f016234f743523efbcefbcecee5",
+   "key": "s0753ad13785f186e",
+   "role": "c",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/H100/E4M3/d_H100_fp32.txt",
+   "sha256": "7c6c32232e823f7b196cf8f86b70ad6009ae89962d2ae8297f0089fe6d7fceca",
+   "key": "s7c6c32232e823f7b",
+   "role": "d",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/H100/E5M2/a_H100_E5M2.txt",
+   "sha256": "229abb5f9e0f1dfdae18ab467bccc38547749b3286128f99ba134573b443ee1f",
+   "key": "s229abb5f9e0f1dfd",
+   "role": "a",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/H100/E5M2/b_H100_E5M2.txt",
+   "sha256": "dc105fe914100f96ba77b18ec88014bde43b4f5be0bc105e337d2e6bd51eeb35",
+   "key": "sdc105fe914100f96",
+   "role": "b",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/H100/E5M2/c_H100_fp32.txt",
+   "sha256": "42fc38b55f4cfaf72b967d42de729b493b64163551c3eaa329a59d29ea5d31bb",
+   "key": "s42fc38b55f4cfaf7",
+   "role": "c",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/H100/E5M2/d_H100_fp32.txt",
+   "sha256": "cfd7f2b4be78f0891ec00ad2e93cfd885887da25f5253f9f03ed63fcf8501d93",
+   "key": "scfd7f2b4be78f089",
+   "role": "d",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/H200/E4M3/a_H200_E4M3.txt",
+   "sha256": "76a6115878a4662fb486d90a6765e24564ed436a173ed1260d5d53112e8a976c",
+   "key": "s76a6115878a4662f",
+   "role": "a",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/H200/E4M3/b_H200_E4M3.txt",
+   "sha256": "f35d75720651ab777b10399abea59f060cde011a898065b5c3045ea171cc669d",
+   "key": "sf35d75720651ab77",
+   "role": "b",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/H200/E4M3/c_H200_fp32.txt",
+   "sha256": "4f9a239d4a69c79571b83d23b3508e86f4d1648d9f0c0fb569748253dfd5d4cc",
+   "key": "s4f9a239d4a69c795",
+   "role": "c",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/H200/E4M3/d_H200_fp32.txt",
+   "sha256": "7c6c32232e823f7b196cf8f86b70ad6009ae89962d2ae8297f0089fe6d7fceca",
+   "key": "s7c6c32232e823f7b",
+   "role": "d",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/H200/E5M2/a_H200_E5M2.txt",
+   "sha256": "229abb5f9e0f1dfdae18ab467bccc38547749b3286128f99ba134573b443ee1f",
+   "key": "s229abb5f9e0f1dfd",
+   "role": "a",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/H200/E5M2/b_H200_E5M2.txt",
+   "sha256": "dc105fe914100f96ba77b18ec88014bde43b4f5be0bc105e337d2e6bd51eeb35",
+   "key": "sdc105fe914100f96",
+   "role": "b",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/H200/E5M2/c_H200_fp32.txt",
+   "sha256": "d8f977b6b039ad926eab590648cf0b0e0ed3a2c83170894cd077df12afe21325",
+   "key": "sd8f977b6b039ad92",
+   "role": "c",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/H200/E5M2/d_H200_fp32.txt",
+   "sha256": "cfd7f2b4be78f0891ec00ad2e93cfd885887da25f5253f9f03ed63fcf8501d93",
+   "key": "scfd7f2b4be78f089",
+   "role": "d",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/B200/E4M3/a_B200_E4M3.txt",
+   "sha256": "76a6115878a4662fb486d90a6765e24564ed436a173ed1260d5d53112e8a976c",
+   "key": "s76a6115878a4662f",
+   "role": "a",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/B200/E4M3/b_B200_E4M3.txt",
+   "sha256": "f35d75720651ab777b10399abea59f060cde011a898065b5c3045ea171cc669d",
+   "key": "sf35d75720651ab77",
+   "role": "b",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/B200/E4M3/c_B200_fp32.txt",
+   "sha256": "1ff20a31004589bfd484b3334cab1efdddb032e6f0fb884d246b8503d23a0e59",
+   "key": "s1ff20a31004589bf",
+   "role": "c",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/B200/E4M3/d_B200_fp32.txt",
+   "sha256": "7213f29b8334449a5e9e26ec1140a093a92c901279917f44aab1f0f5b23ac030",
+   "key": "s7213f29b8334449a",
+   "role": "d",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/B200/E5M2/a_B200_E5M2.txt",
+   "sha256": "229abb5f9e0f1dfdae18ab467bccc38547749b3286128f99ba134573b443ee1f",
+   "key": "s229abb5f9e0f1dfd",
+   "role": "a",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/B200/E5M2/b_B200_E5M2.txt",
+   "sha256": "dc105fe914100f96ba77b18ec88014bde43b4f5be0bc105e337d2e6bd51eeb35",
+   "key": "sdc105fe914100f96",
+   "role": "b",
+   "shape": [
+    5000,
+    32
+   ],
+   "format": "hex fp32 per element"
+  },
+  {
+   "path": "tests/data/B200/E5M2/c_B200_fp32.txt",
+   "sha256": "97b4b8782c9256fda537336e569319e541d20b823dc646e10bc90bbb4344d5af",
+   "key": "s97b4b8782c9256fd",
+   "role": "c",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  },
+  {
+   "path": "tests/data/B200/E5M2/d_B200_fp32.txt",
+   "sha256": "bfb758780a1759715151a660375a4f8846e0baa6441910aa4ac1af692e28f365",
+   "key": "sbfb758780a175971",
+   "role": "d",
+   "shape": [
+    5000
+   ],
+   "format": "binary-string fp32"
+  }
+ ]
+}

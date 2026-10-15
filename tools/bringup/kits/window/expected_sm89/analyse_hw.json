@@ -1,0 +1,76 @@
+{
+ "epass_prims8": {
+  "outputs": 2509952,
+  "v9_map_fail_raw": 0,
+  "v9_map_fail_hi": 0,
+  "dfield_hist": {
+   "0": 1665059,
+   "1": 291193,
+   "2": 26317,
+   "3": 16611,
+   "4": 510772
+  },
+  "min_ratio_d_over_2pow": 1.0,
+  "max_ratio_d_over_2pow": 17.0,
+  "hw_vs[A100/A2/A30/L40S/Ada (NFMA=8, neab=1, rz, emin_align=-132)]_bit_mismatches": 0,
+  "hw_vs[H100/H200/B200/RTX PRO 6000 (NFMA=16, neab=2, rz, emin_align=-133)]_bit_mismatches": 34034,
+  "hw_vs[exact then rz]_bit_mismatches": 34034
+ },
+ "epass_structural": {
+  "outputs": 942080,
+  "v9_map_fail_raw": 0,
+  "v9_map_fail_hi": 0,
+  "dfield_hist": {
+   "0": 398549,
+   "1": 200500,
+   "2": 118961,
+   "3": 194496,
+   "4": 29574
+  },
+  "min_ratio_d_over_2pow": 1.0,
+  "max_ratio_d_over_2pow": 17.0,
+  "hw_vs[A100/A2/A30/L40S/Ada (NFMA=8, neab=1, rz, emin_align=-132)]_bit_mismatches": 0,
+  "hw_vs[H100/H200/B200/RTX PRO 6000 (NFMA=16, neab=2, rz, emin_align=-133)]_bit_mismatches": 15172,
+  "hw_vs[exact then rz]_bit_mismatches": 15172
+ },
+ "bf16_random": {
+  "outputs": 524288,
+  "hw_vs[A100/A2/A30/L40S/Ada (NFMA=8, neab=1, rz, emin_align=-132)]_value_mismatches": 0,
+  "hw_vs[A100/A2/A30/L40S/Ada (NFMA=8, neab=1, rz, emin_align=-132)]_bit_mismatches": 0,
+  "hw_vs[H100/H200/B200/RTX PRO 6000 (NFMA=16, neab=2, rz, emin_align=-133)]_value_mismatches": 160438,
+  "hw_vs[H100/H200/B200/RTX PRO 6000 (NFMA=16, neab=2, rz, emin_align=-133)]_bit_mismatches": 160438,
+  "hw_vs_float64_sum_rounded_to_fp32_value_mismatches": 261832
+ },
+ "bf16_truncation": {
+  "outputs": 524288,
+  "hw_vs[A100/A2/A30/L40S/Ada (NFMA=8, neab=1, rz, emin_align=-132)]_value_mismatches": 0,
+  "hw_vs[A100/A2/A30/L40S/Ada (NFMA=8, neab=1, rz, emin_align=-132)]_bit_mismatches": 0,
+  "hw_vs[H100/H200/B200/RTX PRO 6000 (NFMA=16, neab=2, rz, emin_align=-133)]_value_mismatches": 189310,
+  "hw_vs[H100/H200/B200/RTX PRO 6000 (NFMA=16, neab=2, rz, emin_align=-133)]_bit_mismatches": 189310,
+  "hw_vs_float64_sum_rounded_to_fp32_value_mismatches": 284403
+ },
+ "bf16_carry": {
+  "outputs": 524288,
+  "hw_vs[A100/A2/A30/L40S/Ada (NFMA=8, neab=1, rz, emin_align=-132)]_value_mismatches": 0,
+  "hw_vs[A100/A2/A30/L40S/Ada (NFMA=8, neab=1, rz, emin_align=-132)]_bit_mismatches": 0,
+  "hw_vs[H100/H200/B200/RTX PRO 6000 (NFMA=16, neab=2, rz, emin_align=-133)]_value_mismatches": 0,
+  "hw_vs[H100/H200/B200/RTX PRO 6000 (NFMA=16, neab=2, rz, emin_align=-133)]_bit_mismatches": 0,
+  "hw_vs_float64_sum_rounded_to_fp32_value_mismatches": 261537
+ },
+ "bf16_chunk": {
+  "outputs": 524288,
+  "hw_vs[A100/A2/A30/L40S/Ada (NFMA=8, neab=1, rz, emin_align=-132)]_value_mismatches": 0,
+  "hw_vs[A100/A2/A30/L40S/Ada (NFMA=8, neab=1, rz, emin_align=-132)]_bit_mismatches": 0,
+  "hw_vs[H100/H200/B200/RTX PRO 6000 (NFMA=16, neab=2, rz, emin_align=-133)]_value_mismatches": 164048,
+  "hw_vs[H100/H200/B200/RTX PRO 6000 (NFMA=16, neab=2, rz, emin_align=-133)]_bit_mismatches": 164048,
+  "hw_vs_float64_sum_rounded_to_fp32_value_mismatches": 245686
+ },
+ "bf16_pow2": {
+  "outputs": 524288,
+  "hw_vs[A100/A2/A30/L40S/Ada (NFMA=8, neab=1, rz, emin_align=-132)]_value_mismatches": 0,
+  "hw_vs[A100/A2/A30/L40S/Ada (NFMA=8, neab=1, rz, emin_align=-132)]_bit_mismatches": 0,
+  "hw_vs[H100/H200/B200/RTX PRO 6000 (NFMA=16, neab=2, rz, emin_align=-133)]_value_mismatches": 97397,
+  "hw_vs[H100/H200/B200/RTX PRO 6000 (NFMA=16, neab=2, rz, emin_align=-133)]_bit_mismatches": 97397,
+  "hw_vs_float64_sum_rounded_to_fp32_value_mismatches": 118692
+ }
+}

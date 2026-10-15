@@ -1,0 +1,352 @@
+{
+ "format": "mmaemu-info/1",
+ "problems": [],
+ "mmaemu": {
+  "version": "0.1.0.dev0",
+  "location": "/data/quant/stsc/research/mmaemu-dev/mmaemu"
+ },
+ "python": {
+  "version": "3.12.2",
+  "executable": "/data/quant/stsc/research/round4/probe/.venv/bin/python",
+  "platform": "Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.39"
+ },
+ "env": {
+  "MMAEMU_CACHE_DIR": "/data/quant/stsc/research/mmaemu-dev/build/mmaemu-cache",
+  "MMAEMU_FATBIN_DIR": "/data/quant/stsc/research/mmaemu-dev/build/fatbin"
+ },
+ "device": {
+  "torch": "2.7.1+cu128",
+  "torch_cuda_build": "12.8",
+  "cuda_available": true,
+  "device_count": 1,
+  "device_index": 0,
+  "name": "NVIDIA GeForce RTX 5070 Ti",
+  "capability": [
+   12,
+   0
+  ],
+  "sm_count": 70,
+  "total_memory_mib": 16303,
+  "uuid": "befd488e-0a9c-e50a-8dd2-803fc0f5089e",
+  "cuda_driver_api_version": 13030,
+  "display_driver": "610.88",
+  "cublaslt_version": "12.8.3.14",
+  "nvrtc_version": [
+   12,
+   8
+  ]
+ },
+ "presets": [
+  {
+   "name": "ada",
+   "maturity": "validated",
+   "validated_scope": "Ada (sm_89) FP8 mma.sync m16n8k32, validated bit for bit on an RTX 4060"
+  },
+  {
+   "name": "b200_mma_sync",
+   "maturity": "experimental",
+   "validated_scope": "fits the toolbox B200 mma.sync (HMMA-rewrite) vectors; NOT a model of sm_120 / RTX 5070 Ti; NOT B200 cuBLAS",
+   "aliases": [
+    "blackwell"
+   ]
+  },
+  {
+   "name": "hopper",
+   "maturity": "experimental",
+   "validated_scope": "instruction level only, toolbox H100/H200 vectors with c = 0; how c enters and all GEMM-level behaviour are not validated"
+  }
+ ],
+ "default_profile": "ada-rtx4060-torch",
+ "profiles": [
+  {
+   "name": "ada-rtx4060-torch",
+   "preset": "ada",
+   "gpu_name": "NVIDIA GeForce RTX 4060",
+   "capability": [
+    8,
+    9
+   ],
+   "sm_count": 24,
+   "cublaslt_version": "12.8.3.14",
+   "caller": "torch._scaled_mm",
+   "torch_version": "2.7.1+cu128",
+   "workspace_bytes": 1048576,
+   "align": null,
+   "splitk_table": "heur_rtx4060_lt12.8.3.14",
+   "maturity": "validated",
+   "splitk_maturity": "validated",
+   "matches_device": false
+  },
+  {
+   "name": "ada-rtx4060-te",
+   "preset": "ada",
+   "gpu_name": "NVIDIA GeForce RTX 4060",
+   "capability": [
+    8,
+    9
+   ],
+   "sm_count": 24,
+   "cublaslt_version": "12.8.3.14",
+   "caller": "transformer_engine",
+   "torch_version": "2.7.1+cu128",
+   "workspace_bytes": 4194304,
+   "align": 256,
+   "splitk_table": "heur_rtx4060_lt12.8.3.14",
+   "maturity": "validated",
+   "splitk_maturity": "experimental",
+   "matches_device": false
+  },
+  {
+   "name": "ada-rtx4060-ws0",
+   "preset": "ada",
+   "gpu_name": "NVIDIA GeForce RTX 4060",
+   "capability": [
+    8,
+    9
+   ],
+   "sm_count": 24,
+   "cublaslt_version": "12.8.3.14",
+   "caller": "torch._scaled_mm",
+   "torch_version": "2.7.1+cu128",
+   "workspace_bytes": 0,
+   "align": null,
+   "splitk_table": "heur_rtx4060_lt12.8.3.14",
+   "maturity": "validated",
+   "splitk_maturity": "validated",
+   "matches_device": false
+  },
+  {
+   "name": "hopper-experimental",
+   "preset": "hopper",
+   "gpu_name": null,
+   "capability": [
+    9,
+    0
+   ],
+   "sm_count": null,
+   "cublaslt_version": null,
+   "caller": "torch._scaled_mm",
+   "torch_version": null,
+   "workspace_bytes": null,
+   "align": null,
+   "splitk_table": null,
+   "maturity": "experimental",
+   "splitk_maturity": "none",
+   "matches_device": false
+  },
+  {
+   "name": "b200-mma-sync-experimental",
+   "preset": "b200_mma_sync",
+   "gpu_name": null,
+   "capability": [
+    10,
+    0
+   ],
+   "sm_count": null,
+   "cublaslt_version": null,
+   "caller": "torch._scaled_mm",
+   "torch_version": null,
+   "workspace_bytes": null,
+   "align": null,
+   "splitk_table": null,
+   "maturity": "experimental",
+   "splitk_maturity": "none",
+   "matches_device": false
+  }
+ ],
+ "tables": [
+  {
+   "name": "heur_rtx4060_lt12.8.3.14",
+   "files": [
+    {
+     "file": "heur_rtx4060_lt12.8.3.14.json",
+     "bytes": 33301,
+     "sha256": "2cc7ae958bbe05d2c0e41fe6ac8a97e11283b0b185d55d2f33ad96684f3a5291"
+    },
+    {
+     "file": "heur_rtx4060_lt12.8.3.14.npz",
+     "bytes": 236342,
+     "sha256": "304203efc0f1d75b9faa5ac466577f6f8a12dd8ae43cc4cd41027e5cf5276c6f"
+    }
+   ],
+   "rows": 1228448
+  },
+  {
+   "name": "(other package data)",
+   "files": [
+    {
+     "file": "verified_split_combos.json"
+    }
+   ]
+  }
+ ],
+ "backends": {
+  "cuda:tc3": {
+   "name": "cuda:tc3",
+   "available": false,
+   "source": null,
+   "validated_here": false,
+   "gates": [],
+   "reason": "no binary for sm_120 (SASS (80, 86, 89), PTX None)"
+  },
+  "cuda:v9": {
+   "name": "cuda:v9",
+   "available": false,
+   "source": null,
+   "validated_here": false,
+   "gates": [],
+   "reason": "gated kernel not validated on sm_120 (validated on ['sm_89']; MMAEMU_ALLOW_GATED_KERNELS=1 to try)"
+  },
+  "cuda:v4": {
+   "name": "cuda:v4",
+   "available": true,
+   "source": "fatbin",
+   "validated_here": true,
+   "gates": [
+    {
+     "name": "smoke",
+     "passed": true,
+     "reason": "",
+     "details": {
+      "outputs": 4224,
+      "mismatches": 0,
+      "first_mismatch": null
+     },
+     "seconds": 0.0005776879988843575,
+     "cached": true
+    }
+   ],
+   "reason": ""
+  },
+  "cuda:v1": {
+   "name": "cuda:v1",
+   "available": true,
+   "source": "fatbin",
+   "validated_here": true,
+   "gates": [
+    {
+     "name": "smoke",
+     "passed": true,
+     "reason": "",
+     "details": {
+      "outputs": 4224,
+      "mismatches": 0,
+      "first_mismatch": null
+     },
+     "seconds": 0.0008953420037869364,
+     "cached": true
+    }
+   ],
+   "reason": ""
+  },
+  "reference": {
+   "name": "reference",
+   "available": true,
+   "source": "torch",
+   "validated_here": true,
+   "gates": [],
+   "reason": "float64 model on the tensors' device"
+  }
+ },
+ "kernels": {
+  "tc3": {
+   "gated": true,
+   "validated_on": [
+    [
+     8,
+     9
+    ]
+   ],
+   "sass_archs": [
+    80,
+    86,
+    89
+   ],
+   "ptx_arch": null,
+   "min_cc": [
+    8,
+    0
+   ]
+  },
+  "v1": {
+   "gated": false,
+   "validated_on": [
+    [
+     12,
+     0
+    ],
+    [
+     8,
+     9
+    ]
+   ],
+   "sass_archs": [
+    75,
+    80,
+    86,
+    89,
+    90,
+    100,
+    120
+   ],
+   "ptx_arch": 75,
+   "min_cc": [
+    7,
+    5
+   ]
+  },
+  "v4": {
+   "gated": false,
+   "validated_on": [
+    [
+     12,
+     0
+    ],
+    [
+     8,
+     9
+    ]
+   ],
+   "sass_archs": [
+    80,
+    86,
+    89,
+    90,
+    100,
+    120
+   ],
+   "ptx_arch": 80,
+   "min_cc": [
+    8,
+    0
+   ]
+  },
+  "v9": {
+   "gated": true,
+   "validated_on": [
+    [
+     8,
+     9
+    ]
+   ],
+   "sass_archs": [
+    80,
+    86,
+    89,
+    90,
+    100,
+    120
+   ],
+   "ptx_arch": null,
+   "min_cc": [
+    8,
+    0
+   ]
+  }
+ },
+ "kernel_discovery_notes": [],
+ "fatbins": {
+  "present": false,
+  "note": "no release fatbins in this installation: kernels load through NVRTC (if libnvrtc is found) or the reference backend is used"
+ }
+}

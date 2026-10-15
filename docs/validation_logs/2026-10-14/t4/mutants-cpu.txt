@@ -1,0 +1,51 @@
+identity_epilogue                  identity  survived      69.3s 
+identity_execute                   identity  survived      69.5s 
+identity_plan                      identity  survived      71.9s 
+control_sign_flip                  control   killed         4.0s tests/test_api.py::test_b6_repro_fp8_out[fa0-od0]
+sub_true_exp                       model     killed        54.2s tests/test_hw_mini.py::test_case[c2.S16_alternating/e5m2xe4m3/hw_k16@c2fam]
+phantom_zero                       model     killed        58.4s tests/test_hw_mini.py::test_case[c2.S16_mixed/e4m3xe5m2/hw_k16@c2fam]
+identity_api                       identity  survived      68.6s 
+identity_chain                     identity  survived     147.3s 
+c_pass                             model     killed        70.6s tests/test_hw_mini.py::test_case[c2.S16_sparse/e4m3xe4m3/hw_k16@c2fam]
+ieee_zero                          model     killed        69.0s tests/test_hw_mini.py::test_case[c2.S16_zeros/e4m3xe4m3/hw_k16]
+m1_off                             model     killed        63.2s tests/test_hw_mini.py::test_case[c2.S16_zeros/e4m3xe4m3/hw_k16]
+frac12                             model     killed        25.3s tests/test_epilogue.py::test_epilogue_tie[16]
+nfma32                             model     killed        44.2s tests/test_epilogue.py::test_epilogue_hw_extract[2-0]
+frac14                             model     killed        57.4s tests/test_epilogue.py::test_epilogue_hw_extract[2-0]
+frac_out23                         model     killed        54.9s tests/test_epilogue.py::test_epilogue_hw_extract[2-0]
+min_exp_-126                       model     equivalent   177.1s 
+align_rne                          model     killed        47.2s tests/test_epilogue.py::test_epilogue_hw_extract[2-0]
+norm_rne                           model     killed        48.8s tests/test_epilogue.py::test_epilogue_hw_extract[2-0]
+rival_exact_rn                     model     killed         3.6s tests/test_api.py::test_b6_repro_api_defaults_behaviour
+min_exp_-140                       model     equivalent   159.4s 
+rival_fp32_fma_seq                 model     killed         4.2s tests/test_api.py::test_b6_repro_api_defaults_behaviour
+c_exact                            model     killed        51.4s tests/test_epilogue.py::test_epilogue_hw_extract[2-0]
+split_contiguous                   plan      killed        22.0s tests/test_hw_mini.py::test_case[misc.tcemu_tests_recorded_hw/2]
+ed_noclamp                         model     killed        53.9s tests/test_hw_mini.py::test_case[c2.S16_sparse/e4m3xe4m3/hw_k16@c2fam]
+scheme_swapped                     plan      killed        34.2s tests/test_hw_mini.py::test_case[c5.v2_forced_probes/uneven_0_34.3]
+slow_chunk64                       plan      killed        22.0s tests/test_hw_mini.py::test_case[misc.tcemu_tests_recorded_hw/0]
+slow_chunk256                      plan      killed        21.3s tests/test_hw_mini.py::test_case[misc.tcemu_tests_recorded_hw/0]
+slow_restart_global_tiles          plan      killed        22.1s tests/test_hw_mini.py::test_case[misc.tcemu_tests_recorded_hw/2]
+fast_restart2048                   plan      killed        26.2s tests/test_hw_mini.py::test_case[epilogue.fp8out_v01_a1_2/P5_3]
+fast_restart1024                   plan      killed        18.5s tests/test_epilogue.py::test_epilogue_tie[0]
+fast_restart4096                   plan      killed        33.5s tests/test_hw_mini.py::test_case[epilogue.zero_sign_v01b_a1_1/256x8192x24576]
+slow_chunk_sum_reversed            plan      killed        34.4s tests/test_hw_mini.py::test_case[c5.v3_slow_forced/s4.77]
+slow_sum_fp64                      plan      killed        34.8s tests/test_hw_mini.py::test_case[c5.v3_slow_forced/s4.77]
+slow_sum_pairwise                  plan      killed        33.4s tests/test_hw_mini.py::test_case[c5.v3_slow_forced/s4.77]
+slow_tail_head                     plan      killed        60.1s tests/test_plan.py::test_slow_unsplit_chunks_of_128
+epi_single_round                   epilogue  killed        14.9s tests/test_epilogue.py::test_epilogue_tie[0]
+alpha_before_reduction             plan      killed        16.5s tests/test_epilogue.py::test_epilogue_hw_extract[0-3]
+fp8_saturation_off                 epilogue  killed         4.1s tests/test_api.py::test_b6_repro_fp8_out[fa0-od0]
+epi_sa_then_sb                     epilogue  killed        15.9s tests/test_epilogue.py::test_epilogue_tie[22]
+epi_fp32_mul_add0                  epilogue  killed        17.5s tests/test_epilogue.py::test_epilogue_hw_extract[0-0]
+scale_result_on_bf16               epilogue  killed        18.4s tests/test_epilogue.py::test_scale_result_fp8_only_and_before_saturation
+nan_negpayload                     epilogue  killed         4.2s tests/test_api.py::test_b6_repro_fp8_out_specials
+scale_result_after_sat             epilogue  killed        18.1s tests/test_epilogue.py::test_scale_result_fp8_only_and_before_saturation
+zero_flip                          epilogue  killed         3.9s tests/test_api.py::test_accepted_layouts_and_shapes
+api_default_fast_accum             api       killed         3.9s tests/test_api.py::test_b6_repro_api_defaults_behaviour
+api_default_out_fp32               api       killed         4.0s tests/test_api.py::test_accepted_layouts_and_shapes
+api_positional_bias_dropped        api       killed         3.9s tests/test_api.py::test_type_errors
+nan_payload_kept                   epilogue  killed        17.6s tests/test_epilogue.py::test_epilogue_hw_extract[3-4]
+api_e4m3_e4m3_to_e5m2_allowed      api       killed         3.6s tests/test_api.py::test_rejections[e4m3
+zero_plus                          epilogue  killed        15.9s tests/test_epilogue.py::test_epilogue_hw_extract[0-0]
+PASS: {'killed': 43, 'survived': 5, 'equivalent': 2, 'blocked': 0, 'error': 0} -> docs/validation_logs/2026-10-14/t4/mutants-cpu.json

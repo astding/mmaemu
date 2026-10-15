@@ -1,0 +1,95 @@
+{
+ "flags": [
+  "-O3",
+  "--fmad=false"
+ ],
+ "format": "mmaemu-fatbin/1",
+ "modules": {
+  "probes": {
+   "entries": [
+    "mmaemu_probe_hmma_f16_k8",
+    "mmaemu_probe_epass_raw",
+    "mmaemu_probe_mma_bf16_raw"
+   ],
+   "file": "probes.fatbin",
+   "ptx_arch": null,
+   "sass_archs": [
+    80,
+    86,
+    89,
+    90,
+    100,
+    120
+   ],
+   "sha256": "b96703f291b3530c57625776b3ba6c6b98da3bc5b68ef45c57f0450580eb63e4",
+   "source_sha256": "92dd5c9f11c94b417a0b5a79633965bdcbad0dcb90453621c5ba934a882b858d"
+  },
+  "tc3": {
+   "entries": [
+    "mmaemu_tc3_e4m3e4m3"
+   ],
+   "file": "tc3.fatbin",
+   "ptx_arch": null,
+   "sass_archs": [
+    80,
+    86,
+    89
+   ],
+   "sha256": "e8da5876ef01f2973d2a5d3d8dde4cc463023300de4052af68efd420b5e205b7",
+   "source_sha256": "b9cae538cc027c14b873f28c23abe1494643498d5bb766f4ecd6bde0f6477355"
+  },
+  "v1": {
+   "entries": [
+    "mmaemu_v1_e4m3e4m3"
+   ],
+   "file": "v1.fatbin",
+   "ptx_arch": 75,
+   "sass_archs": [
+    75,
+    80,
+    86,
+    89,
+    90,
+    100,
+    120
+   ],
+   "sha256": "96900cc2d5ce3410bcf91edcb5a0ef8b50b0ac9e3027492ce45d7c241abd723e",
+   "source_sha256": "c4dd4a77de4d9289998e4903d2c079e67429fc01574da26c16cbe0d06ae6ea6a"
+  },
+  "v4": {
+   "entries": [
+    "mmaemu_v4_e4m3e4m3"
+   ],
+   "file": "v4.fatbin",
+   "ptx_arch": 80,
+   "sass_archs": [
+    80,
+    86,
+    89,
+    90,
+    100,
+    120
+   ],
+   "sha256": "42e7ada5c3afeef1bd419616ccdb9cc2b8d39700b3800bbdb52c106fba6e0815",
+   "source_sha256": "7598cb1b68831ac94d15b0ec4c78800dffcb2ea716c0233d442eb6c1d456839f"
+  },
+  "v9": {
+   "entries": [
+    "mmaemu_v9_e4m3e4m3"
+   ],
+   "file": "v9.fatbin",
+   "ptx_arch": null,
+   "sass_archs": [
+    80,
+    86,
+    89,
+    90,
+    100,
+    120
+   ],
+   "sha256": "bca69d0a845013cf65f6d4c82300eac98101ebed4b0f45973a4b338dab09ffba",
+   "source_sha256": "946cfb1c9a1d73430fdfe5172c29fb159bf63822ed028e9757ea975926a170f9"
+  }
+ },
+ "nvcc": "12.8.61"
+}

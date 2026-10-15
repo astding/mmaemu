@@ -1,0 +1,160 @@
+{
+  "format": "mmaemu-bringup/1",
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "arch": "sm_120",
+    "sm_count": 70,
+    "driver": "610.88",
+    "cuda": "12.8",
+    "cublaslt": "12.8.3.14",
+    "cublaslt_lib": "/data/quant/stsc/research/round4/probe/.venv/lib/python3.12/site-packages/nvidia/cublas/lib/libcublasLt.so.12",
+    "torch": "2.7.1+cu128",
+    "python": "3.12.2",
+    "os": "Linux 5.15.167.4-microsoft-standard-WSL2",
+    "cublas": "12.8.3.14",
+    "nvidia_smi": "NVIDIA GeForce RTX 5070 Ti, 610.88, 420 MHz, 38",
+    "nvcc": "~/anaconda3/bin/nvcc"
+  },
+  "dry_run": false,
+  "inherited_lock": false,
+  "stages": [
+    {
+      "gate": "G9",
+      "status": "RECORDED",
+      "commands": [
+        {
+          "name": "gemm-truth",
+          "command": [
+            "/data/quant/stsc/research/round4/probe/.venv/bin/python",
+            "-m",
+            "pytest",
+            "-q",
+            "-p",
+            "no:cacheprovider",
+            "tests/test_device_independence.py"
+          ],
+          "gpu": true,
+          "returncode": 0,
+          "seconds": 10.9,
+          "log": "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g9/G9/gemm-truth.log"
+        },
+        {
+          "name": "native",
+          "command": [
+            "/data/quant/stsc/research/round4/probe/.venv/bin/python",
+            "/data/quant/mmaemu_work/wt/ws7-evo2/benchmarks/bench.py",
+            "--model",
+            "evo2_1b_base",
+            "--device",
+            "gpu",
+            "--source",
+            "blocks",
+            "--fp8-mode",
+            "native",
+            "--windows",
+            "all",
+            "--threads",
+            "4",
+            "--out",
+            "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g9/G9/native"
+          ],
+          "gpu": true,
+          "returncode": 0,
+          "seconds": 10.31,
+          "log": "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g9/G9/native.log"
+        },
+        {
+          "name": "emulate",
+          "command": [
+            "/data/quant/stsc/research/round4/probe/.venv/bin/python",
+            "/data/quant/mmaemu_work/wt/ws7-evo2/benchmarks/bench.py",
+            "--model",
+            "evo2_1b_base",
+            "--device",
+            "gpu",
+            "--source",
+            "blocks",
+            "--fp8-mode",
+            "emulate",
+            "--windows",
+            "all",
+            "--threads",
+            "4",
+            "--out",
+            "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g9/G9/emulate"
+          ],
+          "gpu": true,
+          "returncode": 0,
+          "seconds": 13.58,
+          "log": "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g9/G9/emulate.log"
+        },
+        {
+          "name": "compat",
+          "command": [
+            "/data/quant/stsc/research/round4/probe/.venv/bin/python",
+            "/data/quant/mmaemu_work/wt/ws7-evo2/benchmarks/bench.py",
+            "--model",
+            "evo2_1b_base",
+            "--device",
+            "gpu",
+            "--source",
+            "blocks",
+            "--fp8-mode",
+            "compat",
+            "--windows",
+            "all",
+            "--threads",
+            "4",
+            "--out",
+            "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g9/G9/compat"
+          ],
+          "gpu": true,
+          "returncode": 0,
+          "seconds": 8.86,
+          "log": "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g9/G9/compat.log"
+        },
+        {
+          "name": "auto",
+          "command": [
+            "/data/quant/stsc/research/round4/probe/.venv/bin/python",
+            "/data/quant/mmaemu_work/wt/ws7-evo2/benchmarks/bench.py",
+            "--model",
+            "evo2_1b_base",
+            "--device",
+            "gpu",
+            "--source",
+            "blocks",
+            "--fp8-mode",
+            "auto",
+            "--windows",
+            "all",
+            "--threads",
+            "4",
+            "--out",
+            "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g9/G9/auto"
+          ],
+          "gpu": true,
+          "returncode": 0,
+          "seconds": 13.41,
+          "log": "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g9/G9/auto.log"
+        },
+        {
+          "name": "golden-comparison",
+          "command": [
+            "/data/quant/stsc/research/round4/probe/.venv/bin/python",
+            "-c",
+            "import json,sys,numpy as np; from pathlib import Path; sys.path.insert(0,sys.argv[1]); from compare import compare; golden=Path(sys.argv[2]); root=Path(sys.argv[3]); G=np.load(golden); rows={}; \nfor mode in ('native','emulate','compat','auto'):\n p=next((root/mode).glob('*.npz')); T=np.load(p); assert set(G.files)==set(T.files);\n for k in G.files:\n  assert G[k].shape==T[k].shape and G[k].dtype==T[k].dtype, (mode,k);\n  if k.endswith('/ids'): assert np.array_equal(G[k],T[k]), (mode,k);\n rows[mode]=compare(golden,p,strict=False,log=lambda _:None);\n(root/'golden-comparison.json').write_text(json.dumps(rows,indent=2));\n",
+            "/data/quant/mmaemu_work/wt/ws7-evo2/benchmarks",
+            "/data/quant/evo2_ada_goldens/data/evo2_1b_base_real-te-fp8.npz",
+            "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g9/G9"
+          ],
+          "gpu": false,
+          "returncode": 0,
+          "seconds": 3.42,
+          "log": "/data/quant/stsc/research/mmaemu-dev/build/resume-logs/runner-g9/G9/golden-comparison.log"
+        }
+      ]
+    }
+  ],
+  "verdict": "PASS"
+}

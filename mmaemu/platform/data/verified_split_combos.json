@@ -1,0 +1,6987 @@
+{
+ "combos": [
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "c4.verify2",
+    "c4.verify3",
+    "c5.j6_cublaslt",
+    "c5.v2_torch_probes"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "c4.verify2",
+    "c5.j5_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.v3_slow_forced",
+    "misc.random_run1_c1_0",
+    "misc.reduction_order_c1_0"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "c4.verify2",
+    "c5.j6_cublaslt"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "c4.verify2",
+    "c5.j5_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.v3_slow_forced"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "c4.verify2",
+    "c4.verify3",
+    "c5.j3_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.v4_torch_demo",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c3.gemm_struct",
+    "c3.v0_epi_probe",
+    "c3.v3_slow_splitk",
+    "epilogue.c1_4_hw_underflow",
+    "epilogue.c6_6_probes_rerecorded",
+    "epilogue.tie_cases_a3_7",
+    "epilogue.zero_nan_v2_a1_5",
+    "epilogue.zero_specials_a3_7",
+    "misc.c1_4_hw_zero_rows",
+    "misc.outdtype_splitk_va1_0",
+    "rtx4060_2026-10:r1.api_parity_grid",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c3.gemm_struct",
+    "c3.v3_slow_splitk",
+    "misc.c1_4_hw_zero_rows",
+    "rtx4060_2026-10:r1.api_parity_grid",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c3.gemm_struct",
+    "c3.v0_mixed_probe_rerec",
+    "c3.v3_slow_splitk",
+    "epilogue.c1_4_hw_underflow",
+    "epilogue.c6_6_probes_rerecorded",
+    "epilogue.zero_nan_v2_a1_5",
+    "epilogue.zero_specials_a3_7",
+    "misc.c1_4_hw_zero_rows",
+    "rtx4060_2026-10:r1.api_parity_grid",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c3.gemm_struct",
+    "c3.v0_epi_probe",
+    "c3.v3_order_probe",
+    "c3.v3_slow_splitk",
+    "c4.V3",
+    "c4.V7",
+    "c4.verify1",
+    "c4.verify2",
+    "c5.j3_cublaslt",
+    "c5.j5_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.v3_slow_forced",
+    "c5.v3_slow_heuristic",
+    "c5.v4_torch_demo",
+    "epilogue.c1_4_hw_underflow",
+    "epilogue.c6_6_probes_rerecorded",
+    "epilogue.fp8out_v01_a1_2",
+    "epilogue.zero_nan_v2_a1_5",
+    "epilogue.zero_specials_a3_7",
+    "misc.c1_4_hw_zero_rows",
+    "misc.kunit_isolation_c1_0",
+    "misc.outdtype_splitk_va1_0",
+    "misc.random_run1_c1_0",
+    "misc.random_run2_c1_0",
+    "misc.reduction_order_c1_0",
+    "misc.repeat_runs_c1_8",
+    "misc.slow_accum_sweep_a1_s05",
+    "misc.slow_splitk_grid_va1_0",
+    "misc.slow_splitk_probe_va1_0",
+    "misc.splitk_probe_c1_6",
+    "rtx4060_2026-10:r1.api_parity_grid",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c3.gemm_struct",
+    "c3.v0_mixed_probe_rerec",
+    "c3.v3_slow_splitk",
+    "epilogue.fp8out_v01_a1_2",
+    "misc.c1_4_hw_zero_rows",
+    "rtx4060_2026-10:r1.api_parity_grid",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c3.gemm_struct",
+    "c3.v0_mixed_probe_rerec",
+    "c3.v3_slow_splitk",
+    "epilogue.c1_4_hw_underflow",
+    "epilogue.c6_6_probes_rerecorded",
+    "epilogue.fp8out_v01_a1_2",
+    "epilogue.zero_nan_v2_a1_5",
+    "epilogue.zero_specials_a3_7",
+    "misc.c1_4_hw_zero_rows",
+    "misc.splitk_probe_c1_6",
+    "rtx4060_2026-10:r1.api_parity_grid",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "epilogue.fp8out_v01_a1_2",
+    "rtx4060_2026-10:r1.api_parity_grid",
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "epilogue.fp8out_v01_a1_2",
+    "rtx4060_2026-10:r1.api_parity_grid",
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "epilogue.fp8out_v01_a1_2",
+    "rtx4060_2026-10:r1.api_parity_grid",
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "epilogue.fp8out_v01_a1_2",
+    "rtx4060_2026-10:r1.api_parity_grid",
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "epilogue.fp8out_v01_a1_2",
+    "rtx4060_2026-10:r1.api_parity_grid",
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "c4.verify2",
+    "c4.verify3",
+    "c5.j6_cublaslt",
+    "c5.v2_torch_probes",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "c4.verify2",
+    "c4.verify3",
+    "c5.j5_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.v0_ownership_probes",
+    "c5.v0_reduce_probes",
+    "c5.v3_slow_forced",
+    "misc.random_run1_c1_0",
+    "misc.repeat_runs_c1_8"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "c4.verify2",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "c4.verify2",
+    "c5.j5_cublaslt",
+    "c5.v3_slow_forced"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "c4.verify2",
+    "c5.j3_cublaslt",
+    "c5.j6_cublaslt"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "c4.verify2",
+    "c4.verify3",
+    "c5.j3_cublaslt",
+    "c5.j5_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.v3_slow_forced",
+    "c5.v3_slow_heuristic"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c5.v3_slow_forced"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.verify2",
+    "c5.j5_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.v2_forced_probes",
+    "c5.v3_slow_forced"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "c5.j6_cublaslt",
+    "c5.v2_torch_probes"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "c4.verify2",
+    "c5.j5_cublaslt",
+    "c5.v2_forced_probes",
+    "c5.v3_slow_forced"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c3.gemm_struct",
+    "c3.v0_epi_bulk",
+    "c4.V3",
+    "c4.verify2",
+    "c4.verify3",
+    "c5.j3_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.j7_cublaslt",
+    "c5.v2_torch_probes",
+    "c5.v3_slow_heuristic",
+    "c5.v4_torch_demo",
+    "epilogue.zero_sign_v01b_a1_1",
+    "misc.c1_4_hw_splitk",
+    "misc.random_run2_c1_0",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c3.gemm_struct",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c3.gemm_struct",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c3.gemm_struct",
+    "c3.v0_epi_bulk",
+    "c5.v3_slow_heuristic",
+    "epilogue.zero_sign_v01b_a1_1"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c3.gemm_struct"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c3.gemm_struct",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c3.gemm_struct",
+    "c3.v0_epi_bulk",
+    "c4.V3",
+    "c4.verify2",
+    "c4.verify3",
+    "c5.j3_cublaslt",
+    "c5.j5_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.v0_dense",
+    "c5.v0_ownership_probes",
+    "c5.v0_reduce_probes",
+    "c5.v2_forced_probes",
+    "c5.v2_torch_probes",
+    "c5.v3_slow_forced",
+    "c5.v3_slow_heuristic",
+    "c5.v4_torch_demo",
+    "epilogue.zero_sign_v01b_a1_1",
+    "misc.c1_4_hw_splitk",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c3.gemm_struct",
+    "c5.v3_slow_forced",
+    "c5.v3_slow_heuristic"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c3.gemm_struct",
+    "c5.v3_slow_forced",
+    "c5.v3_slow_heuristic"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "c5.j6_cublaslt",
+    "c5.v2_torch_probes",
+    "c5.v3_slow_forced"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "c5.j5_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.v2_forced_probes",
+    "c5.v2_torch_probes",
+    "c5.v3_slow_forced"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 7,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "c5.j5_cublaslt",
+    "c5.v0_reduce_probes",
+    "c5.v3_slow_forced"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 7,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 7,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 7,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c5.j5_cublaslt",
+    "c5.v3_slow_forced"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 7,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 7,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "c4.verify2",
+    "c4.verify3",
+    "c5.j3_cublaslt",
+    "misc.random_run2_c1_0",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c3.gemm_struct",
+    "c3.v0_epi_bulk",
+    "c4.V3",
+    "c4.verify2",
+    "c4.verify3",
+    "c5.j3_cublaslt",
+    "c5.j5_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.v0_dense",
+    "c5.v0_ownership_probes",
+    "c5.v0_reduce_probes",
+    "c5.v3_slow_forced",
+    "c5.v3_slow_heuristic",
+    "c5.v4_torch_demo",
+    "c5.v5_recorded_rerun",
+    "epilogue.zero_sign_v01b_a1_1",
+    "misc.c1_4_hw_splitk",
+    "misc.random_run1_c1_0",
+    "misc.reduction_order_c1_0",
+    "misc.splitk_probe_c1_6",
+    "misc.tcemu_tests_recorded_hw",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c3.gemm_struct"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c3.gemm_struct",
+    "c5.v5_recorded_rerun",
+    "misc.splitk_probe_c1_6",
+    "misc.tcemu_tests_recorded_hw"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c5.j5_cublaslt",
+    "c5.v3_slow_forced"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j5_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c5.j5_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j5_cublaslt"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c5.j5_cublaslt"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 11,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j5_cublaslt"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 11,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j5_cublaslt"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c3.gemm_struct",
+    "c3.v0_epi_bulk",
+    "c4.V3",
+    "c4.verify2",
+    "c4.verify3",
+    "c5.j3_cublaslt",
+    "c5.v3_slow_heuristic",
+    "c5.v4_torch_demo",
+    "c5.v5_recorded_rerun",
+    "epilogue.zero_sign_v01b_a1_1",
+    "misc.c1_4_hw_splitk",
+    "misc.reduction_order3_c1_0",
+    "misc.splitk_probe_c1_6",
+    "misc.tcemu_tests_recorded_hw"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c3.gemm_struct",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c3.gemm_struct",
+    "c5.v5_recorded_rerun",
+    "misc.splitk_probe_c1_6",
+    "misc.tcemu_tests_recorded_hw"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c3.gemm_struct",
+    "c3.v0_epi_bulk",
+    "epilogue.zero_sign_v01b_a1_1"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c3.gemm_struct"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c3.gemm_struct"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "c4.verify2",
+    "c4.verify3",
+    "c5.j5_cublaslt",
+    "c5.v3_slow_heuristic"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j5_cublaslt"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 13,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j5_cublaslt"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 13,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j5_cublaslt"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "c4.verify2",
+    "c4.verify3",
+    "c5.j3_cublaslt",
+    "c5.j5_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.v0_dense",
+    "c5.v0_reduce_probes",
+    "c5.v3_slow_heuristic",
+    "misc.random_run2_c1_0",
+    "misc.reduction_order3_c1_0"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j5_cublaslt"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 15,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j5_cublaslt"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 15,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j5_cublaslt"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 16,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "c4.verify3",
+    "c5.j6_cublaslt"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 16,
+   "fast": false,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 16,
+   "fast": false,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 16,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j5_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 16,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j5_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 24,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "c4.verify2",
+    "c4.verify3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 24,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 24,
+   "fast": false,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "c4.verify2",
+    "c4.verify3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V1",
+    "c4.V3",
+    "c4.V4",
+    "c4.verify3",
+    "c5.j6_cublaslt",
+    "c5.v1_heuristic_shapes",
+    "c5.v4_torch_demo",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c4.V3",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V1",
+    "c4.verify3",
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.v1_heuristic_shapes",
+    "c5.v2_forced_probes",
+    "c5.v2_torch_probes"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V1",
+    "c4.V2L",
+    "c4.V3",
+    "c4.epi",
+    "c4.epi2",
+    "c4.v3_te_linear",
+    "c4.verify0",
+    "c4.verify1",
+    "c4.verify3",
+    "c5.j6_cublaslt",
+    "c5.v1_heuristic_shapes",
+    "c5.v1_workspace_env",
+    "c5.v2_torch_probes",
+    "misc.random_run2_ws4096_c1_0"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "c4.verify1",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c4.V3",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V1",
+    "c4.verify3",
+    "c5.det2_determinism",
+    "c5.j1_cublaslt",
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.v1_heuristic_shapes",
+    "c5.v2_forced_probes",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "c5.j6_cublaslt",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "c4.V3",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 2,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V1",
+    "c4.V3",
+    "c4.verify3",
+    "c5.full_check",
+    "c5.j3_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.v1_heuristic_shapes",
+    "c5.v1_workspace_env",
+    "c5.v2_torch_probes",
+    "c5.v4_te_demo",
+    "c5.v4_torch_demo",
+    "c5.v5_recorded_rerun",
+    "misc.random_run2_c1_0",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c4.V3",
+    "c5.full_check",
+    "c5.v4_torch_demo",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V1",
+    "c4.misc",
+    "c4.verify0",
+    "c4.verify3",
+    "c5.det1_determinism",
+    "c5.det2_determinism",
+    "c5.full_check",
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.v0_dense",
+    "c5.v0_reduce_probes",
+    "c5.v1_heuristic_shapes",
+    "c5.v2_forced_probes",
+    "c5.v4_torch_demo",
+    "c5.v5_recorded_rerun",
+    "misc.kunit_isolation_c1_0",
+    "misc.random_run1_c1_0",
+    "misc.random_run2_c1_0",
+    "misc.reduction_order_c1_0",
+    "misc.repeat_runs_c1_8",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "c5.j6_cublaslt",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "c4.V3",
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V1",
+    "c4.V3",
+    "c4.V4",
+    "c4.v3_te_linear",
+    "c4.verify3",
+    "c5.j6_cublaslt",
+    "c5.v1_heuristic_shapes",
+    "c5.v1_workspace_env",
+    "c5.v2_torch_probes",
+    "misc.random_run2_ws4096_c1_0",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V1",
+    "c4.verify0",
+    "c5.det1_determinism",
+    "c5.det2_determinism",
+    "c5.full_check",
+    "c5.j1_cublaslt",
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.tree_probes",
+    "c5.v1_heuristic_shapes",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "c5.full_check"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "c5.full_check",
+    "c5.j6_cublaslt"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "c4.V3",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 3,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V1",
+    "c4.V3",
+    "c4.verify3",
+    "c5.j6_cublaslt",
+    "c5.v1_heuristic_shapes",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c4.V3",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V1",
+    "c4.verify3",
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "c4.V3",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V1",
+    "c4.V3",
+    "c4.v3_te_linear",
+    "c4.verify3",
+    "c5.j6_cublaslt",
+    "c5.v1_heuristic_shapes",
+    "c5.v2_torch_probes",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c4.V3",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V1",
+    "c4.verify3",
+    "c5.full_check",
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.tree_probes",
+    "c5.v1_heuristic_shapes",
+    "c5.v2_forced_probes",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 4,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V1",
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c5.j6_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V1",
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.v1_heuristic_shapes",
+    "c5.v2_forced_probes",
+    "c5.v2_torch_probes"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "c5.j6_cublaslt"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 5,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c3.gemm_struct",
+    "c3.v0_epi_bulk",
+    "c4.V1",
+    "c4.V3",
+    "c4.misc",
+    "c4.verify0",
+    "c4.verify3",
+    "c5.full_check",
+    "c5.j3_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.v0_dense",
+    "c5.v1_heuristic_shapes",
+    "c5.v1_workspace_env",
+    "c5.v2_forced_probes",
+    "c5.v2_torch_probes",
+    "c5.v4_te_demo",
+    "c5.v4_torch_demo",
+    "c5.v5_recorded_rerun",
+    "epilogue.zero_sign_v01b_a1_1",
+    "misc.c1_4_hw_splitk"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c3.gemm_struct",
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c3.gemm_struct",
+    "c4.V3",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c3.gemm_struct",
+    "c3.v0_epi_bulk",
+    "c4.V3",
+    "c4.epi",
+    "c4.epi2",
+    "c5.full_check",
+    "c5.v4_torch_demo",
+    "epilogue.zero_sign_v01b_a1_1"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c3.gemm_struct",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c3.gemm_struct"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c3.gemm_struct",
+    "c3.v0_epi_bulk",
+    "c4.V1",
+    "c4.verify3",
+    "c5.det1_determinism",
+    "c5.det2_determinism",
+    "c5.full_check",
+    "c5.j1_cublaslt",
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.j7_cublaslt",
+    "c5.tree_probes",
+    "c5.v0_dense",
+    "c5.v0_ownership_probes",
+    "c5.v0_reduce_probes",
+    "c5.v1_heuristic_shapes",
+    "c5.v2_forced_probes",
+    "c5.v2_torch_probes",
+    "c5.v3_slow_forced",
+    "c5.v4_torch_demo",
+    "c5.v5_recorded_rerun",
+    "epilogue.zero_sign_v01b_a1_1",
+    "misc.c1_4_hw_splitk",
+    "misc.kunit_isolation_c1_0",
+    "misc.random_run1_c1_0",
+    "misc.reduction_order_c1_0"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c3.gemm_struct",
+    "c4.V3",
+    "c5.full_check",
+    "c5.v0_dense",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c3.gemm_struct",
+    "c4.V3",
+    "c5.full_check"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "c4.V3",
+    "c4.epi",
+    "c4.epi2",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V1",
+    "c4.verify3",
+    "c5.j6_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V1",
+    "c4.verify0",
+    "c4.verify3",
+    "c5.full_check",
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.tree_probes",
+    "c5.v0_dense",
+    "c5.v0_ownership_probes",
+    "c5.v0_reduce_probes",
+    "c5.v1_heuristic_shapes",
+    "c5.v2_forced_probes",
+    "c5.v2_torch_probes"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3",
+    "c5.j6_cublaslt"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 6,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 7,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 7,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 7,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 7,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V1",
+    "c5.full_check",
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.v1_heuristic_shapes",
+    "c5.v2_forced_probes",
+    "c5.v4_torch_demo",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 7,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 7,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 7,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 7,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 7,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 7,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 7,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 7,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c3.gemm_struct",
+    "c3.v0_epi_bulk",
+    "c4.V1",
+    "c4.V2L",
+    "c4.V3",
+    "c4.epi",
+    "c4.epi2",
+    "c4.verify3",
+    "c5.full_check",
+    "c5.j3_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.v0_dense",
+    "c5.v1_heuristic_shapes",
+    "c5.v1_workspace_env",
+    "c5.v2_torch_probes",
+    "c5.v4_te_demo",
+    "c5.v4_torch_demo",
+    "c5.v5_recorded_rerun",
+    "epilogue.zero_sign_v01b_a1_1",
+    "misc.c1_4_hw_splitk",
+    "misc.splitk_probe_c1_6",
+    "misc.tcemu_tests_recorded_hw"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c3.gemm_struct",
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c3.gemm_struct",
+    "c4.V3",
+    "c5.v5_recorded_rerun",
+    "misc.splitk_probe_c1_6",
+    "misc.tcemu_tests_recorded_hw",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c4.V3",
+    "c5.v4_torch_demo"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c3.gemm_struct",
+    "c3.v0_epi_bulk",
+    "c4.V1",
+    "c4.V2L",
+    "c4.epi",
+    "c4.epi2",
+    "c4.misc",
+    "c4.verify0",
+    "c4.verify3",
+    "c5.det1_determinism",
+    "c5.det2_determinism",
+    "c5.full_check",
+    "c5.j1_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.v0_dense",
+    "c5.v0_ownership_probes",
+    "c5.v0_reduce_probes",
+    "c5.v1_heuristic_shapes",
+    "c5.v2_forced_probes",
+    "c5.v2_torch_probes",
+    "c5.v4_torch_demo",
+    "c5.v5_recorded_rerun",
+    "epilogue.zero_sign_v01b_a1_1",
+    "misc.c1_4_hw_splitk",
+    "misc.kunit_isolation_c1_0",
+    "misc.random_run1_c1_0",
+    "misc.reduction_order_c1_0",
+    "misc.splitk_probe_c1_6",
+    "misc.tcemu_tests_recorded_hw",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c3.gemm_struct",
+    "c4.V3",
+    "c5.full_check",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c3.gemm_struct",
+    "c4.V3",
+    "c5.full_check",
+    "c5.v5_recorded_rerun",
+    "misc.splitk_probe_c1_6",
+    "misc.tcemu_tests_recorded_hw"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V1",
+    "c4.V3",
+    "c4.V4"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": false,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": false,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V1",
+    "c4.verify3",
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.v2_forced_probes",
+    "c5.v2_torch_probes"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 8,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "bfloat16",
+   "recordings": [
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V1",
+    "c4.verify0",
+    "c4.verify3",
+    "c5.det1_determinism",
+    "c5.det2_determinism",
+    "c5.full_check",
+    "c5.j3_cublaslt",
+    "c5.v0_dense",
+    "c5.v0_reduce_probes",
+    "c5.v1_heuristic_shapes",
+    "c5.v2_forced_probes",
+    "misc.random_run2_c1_0",
+    "misc.reduction_order3_c1_0"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c5.j6_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 9,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V1",
+    "c4.V3",
+    "c4.verify0",
+    "c4.verify3",
+    "c5.j3_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.v1_heuristic_shapes",
+    "c5.v1_workspace_env",
+    "c5.v2_torch_probes",
+    "c5.v4_te_demo",
+    "c5.v4_torch_demo",
+    "misc.random_run2_c1_0",
+    "misc.reduction_order_c1_0"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c4.V3",
+    "c5.v4_torch_demo"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos",
+    "rtx4060_2026-10:r5.autosplit_in_envelope"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V1",
+    "c4.verify3",
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.v0_reduce_probes",
+    "c5.v2_forced_probes",
+    "c5.v2_torch_probes",
+    "c5.v4_torch_demo",
+    "c5.v5_recorded_rerun"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c5.j6_cublaslt"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j3_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 10,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 11,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 11,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j3_cublaslt"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V1",
+    "c4.V3",
+    "c4.verify3",
+    "c5.j6_cublaslt",
+    "c5.v1_heuristic_shapes",
+    "c5.v1_workspace_env",
+    "c5.v2_torch_probes"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.verify3",
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V1",
+    "c4.verify0",
+    "c5.det1_determinism",
+    "c5.det2_determinism",
+    "c5.full_check",
+    "c5.j1_cublaslt",
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.j6_cublaslt",
+    "c5.j7_cublaslt",
+    "c5.tree_probes",
+    "c5.v0_dense",
+    "c5.v0_ownership_probes",
+    "c5.v0_reduce_probes",
+    "c5.v1_heuristic_shapes",
+    "c5.v2_forced_probes",
+    "c5.v2_torch_probes",
+    "c5.v5_recorded_rerun"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c5.full_check"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 12,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c5.full_check",
+    "c5.j6_cublaslt",
+    "c5.v0_dense"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 13,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 13,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j3_cublaslt"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V1",
+    "c4.V3",
+    "c4.verify3",
+    "c5.v1_heuristic_shapes"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.verify3",
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j3_cublaslt"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r2.fp8out_live_verify",
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e4m3fn",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 14,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float8_e5m2",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 15,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 15,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j3_cublaslt"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 16,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "bfloat16",
+   "recordings": [
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 16,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c4.V1",
+    "c4.verify0",
+    "c4.verify3",
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 16,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 16,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c4.V3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 16,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "c5.j6_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 16,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 16,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "bfloat16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 16,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float16",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 16,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "c5.j2_cublaslt",
+    "c5.j3_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 20,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j3_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 20,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j3_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 24,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "bfloat16",
+   "recordings": [
+    "c4.verify3"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 24,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j3_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 24,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j3_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 29,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 29,
+   "fast": true,
+   "fmt_pair": "e4m3xe5m2",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 29,
+   "fast": true,
+   "fmt_pair": "e5m2xe4m3",
+   "in_table": true,
+   "out": "float32",
+   "recordings": [
+    "rtx4060_2026-10:r4.unverified_split_combos"
+   ],
+   "scheme": "serial",
+   "verified": true
+  },
+  {
+   "S": 32,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j3_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "pairwise",
+   "verified": true
+  },
+  {
+   "S": 32,
+   "fast": true,
+   "fmt_pair": "e4m3xe4m3",
+   "in_table": false,
+   "out": "float32",
+   "recordings": [
+    "c5.j3_cublaslt",
+    "c5.v2_forced_probes"
+   ],
+   "scheme": "serial",
+   "verified": true
+  }
+ ],
+ "definition": "a (fast, S, scheme, out dtype, fmt pair) combination is verified when a hardware gemm output with that LOGGED / captured split config exists (truth recordings, excluding the 3 + 46 outputs whose split was filled from the heuristic table; WS2 recordings rtx4060_2026-10:*) and the audit FixedModel replays it bitwise (see recordings/rtx4060_2026-10/README.txt)",
+ "format": "mmaemu-verified-split-combos/1",
+ "n_table_combos": 486,
+ "n_verified_table_combos": 486,
+ "table_id": "heur_rtx4060_lt12.8.3.14",
+ "unverified_table_combos": []
+}

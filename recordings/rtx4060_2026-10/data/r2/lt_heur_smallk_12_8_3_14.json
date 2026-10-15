@@ -1,0 +1,100 @@
+{
+ "format": "tcemu_ada_truth/1",
+ "id": "r2.lt_heur_smallk_12_8_3_14",
+ "group": "r2",
+ "title": "cuBLASLt 12.8.3.14 heuristic choices, e4m3xe4m3 small-K shape set at the 48 main settings (R2x)",
+ "level": "cublasLt.heuristic",
+ "hardware": {
+  "gpu": "NVIDIA GeForce RTX 4060",
+  "arch": "sm_89",
+  "sm_count": 24,
+  "driver": "572.16",
+  "cuda": "12.8",
+  "cublaslt": "12.8.3.14",
+  "cublaslt_lib": "/data/quant/stsc/research/round4/probe/.venv/lib/python3.12/site-packages/nvidia/cublas/lib/libcublasLt.so.12",
+  "torch": "2.7.1+cu128",
+  "python": "3.12.2",
+  "os": "Linux 5.15.167.4-microsoft-standard-WSL2",
+  "cublas": "12.8.3.14",
+  "nvidia_smi": "NVIDIA GeForce RTX 4060, 572.16, 2490 MHz, 44"
+ },
+ "producer": {
+  "agent": "mmaemu WS2 (pre-swap recordings, 2026-10)",
+  "scripts": [
+   "tools/record/r2r3_heur.py",
+   "mmaemu/platform/cublaslt.py",
+   "tools/record/common.py"
+  ],
+  "sources": [
+   "/data/quant/tcemu_audit/work/verify-c5-splitk-4/lt_ctypes.py (original tool)",
+   "/data/quant/tcemu_ada_truth/data/heur/lt_heuristic_12_8_3_14.npz"
+  ]
+ },
+ "claims": [
+  "SPEC v0.1 WS2 R2X; split-K table completion for mmaemu.platform.splitk_table"
+ ],
+ "notes": "R2 / R2x / R3: cuBLASLt heuristic rows recorded on the reference GPU (heuristic queries only, no kernels).\n\nR2   fp8 outputs (D = e4m3 / e5m2, C = fp16 as torch 2.7.1 passes it), lt descriptor of torch._scaled_mm, with and\n     without the D scale pointer (torch sets it iff scale_result is given):\n       ws {0, 1, 4, 32 MiB} x fast/slow x align {none, 256} x d_scale {0, 1} x (out, fmt pair) in\n       {e4m3 out: e4m3xe4m3, e4m3xe5m2, e5m2xe4m3; e5m2 out: e4m3xe5m2, e5m2xe4m3, e4m3xe4m3 (expected status 15)}\n     shapes: c5 grid + small-K set + Evo 2 grid (M = 16..8192 step 16) + Evo 2 small M (M = 1..256).\n     Includes critic gap 17 (e4m3 out at 224x176x80 and 176x224x80).\nR2x  completion of the non-fp8 table: mixed formats (e4m3xe5m2, e5m2xe4m3) at every ws x align x fp32/bf16/fp16 x\n     fast/slow on the same shapes (the truth table has mixed formats only at (1 MiB, none) and (4 MiB, 256), so align\n     invariance was never measured for them), and e4m3xe4m3 at the 48 main settings on the small-K set.\nR3   Evo 2 (K, N) in {(1920,5760), (4096,12288), (8192,24576)} x M = 1..256 (every integer) x the 72 settings of the\n     truth table (48 main e4m3xe4m3 + 24 mixed-format settings).\n\nusage:\n  python tools/record/r2r3_heur.py query --out STAGE.npz        (GPU: under gpu.sh; ~1-2 min)\n  python tools/record/r2r3_heur.py write --stage STAGE.npz       (CPU: table recordings into recordings/rtx4060_2026-10)\n  python tools/record/r2r3_heur.py count                          (CPU: number of queries per part)\nColumns (int64, no floats): M N K fa fb out fast ws align dscale lib status algo tile stages splitK reduction swizzle\ncustom workspace waves_x1000; fa/fb 0 = e4m3, 1 = e5m2; out 0 fp32, 1 bf16, 2 fp16, 3 e4m3, 4 e5m2; -1 = no\nalgorithm returned (status != 0).\nquery stats: {\"n\": 257856, \"seconds\": 4.1, \"n_shapes\": 5372, \"n_settings\": 48, \"status_nonzero\": 0, \"split_rows\": 15874}; library /data/quant/stsc/research/round4/probe/.venv/lib/python3.12/site-packages/nvidia/cublas/lib/libcublasLt.so.12 (cublasLtGetVersion-style 120803)",
+ "params": {
+  "columns": [
+   "M",
+   "N",
+   "K",
+   "fa",
+   "fb",
+   "out",
+   "fast",
+   "ws",
+   "align",
+   "dscale",
+   "lib",
+   "status",
+   "algo",
+   "tile",
+   "stages",
+   "splitK",
+   "reduction",
+   "swizzle",
+   "custom",
+   "workspace",
+   "waves_x1000"
+  ],
+  "requestedAlgoCount": 1,
+  "codes": {
+   "fa/fb": {
+    "e4m3": 0,
+    "e5m2": 1
+   },
+   "out": {
+    "float32": 0,
+    "bfloat16": 1,
+    "float16": 2,
+    "float8_e4m3fn": 3,
+    "float8_e5m2": 4
+   },
+   "align": "0 = no alignment preference (torch), 256 = MIN_ALIGNMENT_A/B/C/D 256 B (Transformer Engine)",
+   "dscale": "1 = D scale pointer set (torch passes scale_result)"
+  },
+  "descriptor": "torch 2.7.1 scaled_gemm: m=N, n=M, k=K, A=mat2 (fp8, transa=T), B=mat1, D=out dtype, C=out dtype (fp16 for fp8 outputs), FAST_ACCUM flag, A/B scale pointers (+ D scale pointer when dscale=1), MAX_WORKSPACE_BYTES (+ MIN_ALIGNMENT_A/B/C/D when align>0); no bias, no SM target"
+ },
+ "kind": "table",
+ "files": [],
+ "table_files": [
+  {
+   "name": "table",
+   "file": "lt_heur_smallk_12_8_3_14.npz",
+   "bytes": 187346,
+   "sha256": "7d6f273eef3f6d8b77079ba24d3f95c13adfbcca908b41d3515460575385edb5"
+  }
+ ],
+ "stats": {
+  "n_cases": 0,
+  "n_outputs": 0,
+  "n_outputs_stored": 0,
+  "n_outputs_hash_only": 0,
+  "n_output_values": 0,
+  "n_output_values_stored": 0,
+  "n_inputs_stored": 0,
+  "n_inputs_generated": 0
+ },
+ "cases": []
+}
