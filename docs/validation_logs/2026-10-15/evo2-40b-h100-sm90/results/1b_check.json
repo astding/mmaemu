@@ -1,0 +1,96 @@
+{
+ "test": [
+  {
+   "name": "p0",
+   "logits_equal": true,
+   "logits_differing": 0,
+   "logits_max_abs_diff": 0.0
+  },
+  {
+   "name": "p1",
+   "logits_equal": true,
+   "logits_differing": 0,
+   "logits_max_abs_diff": 0.0
+  },
+  {
+   "name": "p2",
+   "logits_equal": true,
+   "logits_differing": 0,
+   "logits_max_abs_diff": 0.0
+  },
+  {
+   "name": "p3",
+   "logits_equal": true,
+   "logits_differing": 0,
+   "logits_max_abs_diff": 0.0
+  },
+  {
+   "name": "w8k",
+   "logits_equal": true,
+   "logits_differing": 0,
+   "logits_max_abs_diff": 0.0
+  },
+  {
+   "name": "w4k",
+   "logits_equal": true,
+   "logits_differing": 0,
+   "logits_max_abs_diff": 0.0
+  },
+  {
+   "name": "w2k",
+   "logits_equal": true,
+   "logits_differing": 0,
+   "logits_max_abs_diff": 0.0
+  },
+  {
+   "name": "p0_4k",
+   "logits_equal": true,
+   "logits_differing": 0,
+   "logits_max_abs_diff": 0.0
+  },
+  {
+   "name": "p1_4k",
+   "logits_equal": true,
+   "logits_differing": 0,
+   "logits_max_abs_diff": 0.0
+  },
+  {
+   "name": "p2_4k",
+   "logits_equal": true,
+   "logits_differing": 0,
+   "logits_max_abs_diff": 0.0
+  },
+  {
+   "name": "p3_4k",
+   "logits_equal": true,
+   "logits_differing": 0,
+   "logits_max_abs_diff": 0.0
+  }
+ ],
+ "all_logits_equal": true,
+ "brca1_scores_equal": true,
+ "brca1_max_abs_score_diff": 0.0,
+ "brca1_windows": 20,
+ "brca1_chunks_official": [
+  {
+   "windows": 8,
+   "seconds": 1.700225830078125
+  },
+  {
+   "windows": 3,
+   "seconds": 0.9994528293609619
+  },
+  {
+   "windows": 3,
+   "seconds": 1.0009450912475586
+  },
+  {
+   "windows": 3,
+   "seconds": 1.0005722045898438
+  },
+  {
+   "windows": 3,
+   "seconds": 1.0011372566223145
+  }
+ ]
+}

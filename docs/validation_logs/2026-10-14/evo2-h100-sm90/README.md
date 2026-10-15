@@ -1,9 +1,12 @@
 # Evo 2 1B on an H100 PCIe through the official path, 14 October 2026
 
 A baseline for the Evo 2 results of mmaemu: how far two GPUs running the *official* implementation (upstream
-`evo2.Evo2("evo2_1b_base")` with Transformer Engine FP8) are from each other. The reference is the RTX 4060 run
-whose outputs ship with the notebook (`examples/data/evo2_1b_ada_rtx4060_te.npz`). mmaemu is not involved in this
-run.
+`evo2.Evo2("evo2_1b_base")` with Transformer Engine FP8) are from each other. The reference is the official-path
+RTX 4060 run. Its log-probabilities and BRCA1 scores ship with the notebook (`examples/data/evo2_1b_ada_rtx4060_te.npz`;
+the .json gives the sha256 of its logits); its full bf16 logits are maintainer data (`evo2_1b_base_real-te-fp8.npz`,
+read by `compare_h100.py`). The BRCA1 rows, the RTX 4060 next-token log p and the RTX 4060 loss reproduce from
+published files; the logit columns, the accuracies and the H100 window values need the uncommitted logits. mmaemu is
+not involved in this run.
 
 ## Setup
 

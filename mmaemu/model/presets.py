@@ -24,7 +24,9 @@ name                      maturity      evidence / scope
 ========================  ============  ============================================================================
 
 ``blackwell`` is accepted as an alias of ``b200_mma_sync`` and always warns. ``sm_120`` / ``rtx_blackwell`` are
-refused: there is no hardware evidence for sm_120 yet (see docs/runbooks/sm120_bringup.md).
+refused: sm_120 is not modelled (no preset, profile or split-K table). Probes on an RTX 5070 Ti are consistent with
+the B200 tensor-core numerics reported for sm_120 (arXiv:2512.07004v4), but nothing is validated at GEMM level
+(docs/validation_logs/2026-10-13-sm120, docs/runbooks/sm120_bringup.md).
 
 Custom :class:`Preset` objects (maturity ``"custom"``) can be passed wherever a preset name is accepted, e.g. to score
 hypotheses for new hardware; they are never a profile default.
@@ -57,6 +59,8 @@ class Preset:
     def __post_init__(self):
         if self.nfma < 1:
             raise ValueError("nfma must be positive")
+        if self.slow_chunk is not None and (type(self.slow_chunk) is not int or self.slow_chunk < 1):
+            raise ValueError(f"slow_chunk must be None or a positive int, got {self.slow_chunk!r}")
         if not (1 <= self.frac <= 40 and 1 <= self.frac_out <= 23):
             raise ValueError("frac must be in [1, 40] and frac_out in [1, 23]")
         if self.maturity not in ("validated", "experimental", "custom"):
@@ -115,9 +119,10 @@ def _lookup(name_or_preset) -> tuple:
     if name in _REGISTRY:
         return _REGISTRY[name], False
     if name.lower() in _REFUSED:
-        raise KeyError(f"preset {name!r}: there is no hardware evidence for sm_120 (RTX 50xx) FP8 numerics yet; "
-                       "the bring-up procedure is docs/runbooks/sm120_bringup.md. 'b200_mma_sync' (alias "
-                       "'blackwell') is NOT a model of sm_120.")
+        raise KeyError(f"preset {name!r}: sm_120 (RTX 50xx) is not modelled: mmaemu has no preset, profile or "
+                       "split-K table for it, and 'b200_mma_sync' (alias 'blackwell') is NOT a model of sm_120. "
+                       "Probes on an RTX 5070 Ti are consistent with the B200 tensor-core numerics but are not a "
+                       "GEMM-level validation; the bring-up procedure is docs/runbooks/sm120_bringup.md.")
     raise KeyError(f"unknown preset {name!r}; known: {list_presets()} (alias: 'blackwell')")
 
 

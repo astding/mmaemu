@@ -1,0 +1,38 @@
+{
+ "model": "evo2_1b_base",
+ "variants": 20,
+ "lof": 4,
+ "windows": 40,
+ "device": "NVIDIA GeForce RTX 5070 Ti",
+ "mmaemu": "0.1.0.dev0",
+ "modes": {
+  "mmaemu": {
+   "auroc": 0.546875,
+   "minutes": 0.7158364693323771,
+   "copy_s": 0.271298885345459,
+   "compute_s": 41.346389293670654,
+   "delta_pearson_vs_rtx4060": 0.9867361187934875,
+   "delta_spearman_vs_rtx4060": 0.8962406015037594,
+   "resident_bit_identical": true
+  },
+  "native": {
+   "auroc": 0.75,
+   "minutes": 0.2873796900113424,
+   "copy_s": 0.267545223236084,
+   "compute_s": 16.865363836288452,
+   "delta_pearson_vs_rtx4060": -0.05673794820904732,
+   "delta_spearman_vs_rtx4060": 0.23759398496240602,
+   "resident_bit_identical": true
+  },
+  "bf16": {
+   "auroc": 0.546875,
+   "minutes": 0.28748737573623656,
+   "copy_s": 0.2188880443572998,
+   "compute_s": 16.920820236206055,
+   "delta_pearson_vs_rtx4060": 0.17655792832374573,
+   "delta_spearman_vs_rtx4060": 0.06616541353383458,
+   "resident_bit_identical": true
+  }
+ },
+ "evo2_1b_rtx4060_official_te_auroc": 0.53125
+}

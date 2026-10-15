@@ -2,8 +2,9 @@
 the RTX 4060 hardware truth through tools/replay_truth.py (the same adapter and verdict as the full T2 gate, in a
 subprocess with the tcemu import blocker) and require the partial verdict PASS against the audit's FixedModel report.
 
-The full replay (all 173 recordings, about 80 min on CPU) is run by hand before a release:
-    MMAEMU_TRUTH_DIR=... python tools/replay_truth.py --out docs/validation_logs/<date> --compare .../replay_fixed.json
+The full replay (all 173 recordings, about 26 min on CPU with --threads 12) is run by hand before a release:
+    MMAEMU_TRUTH_DIR=... python tools/replay_truth.py --out docs/validation_logs/<date> --compare .../replay_fixed.json \
+        --threads 12
 
 Also unit-tests the adapter's exception mapping (exact classes; never `except RuntimeError`).
 """

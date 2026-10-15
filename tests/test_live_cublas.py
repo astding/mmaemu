@@ -5,9 +5,12 @@ torch's default cuBLASLt workspace (CUBLASLT_WORKSPACE_SIZE unset); elsewhere it
 unavailable". Run: $MMAEMU_GPU_LOCK timeout 600 python -m pytest -q tests/test_live_cublas.py
 
 Covers fast and slow accumulation; fp32 / bf16 / fp16 / e4m3 / e5m2 outputs (where allowed); the three FP8 format
-pairs; three scale sets (incl. underflowing alpha and negative scales); unsplit shapes (M*N >= 2^20, outside every
-recorded split envelope) and shapes whose split-K decision was recorded on this GPU (S = 3, 8, 12); NaN/Inf inputs;
-K = 0 / M = 0 / N = 0; and raise / no-raise parity of the argument checks. Each comparison is bitwise
+pairs; three scale sets (incl. underflowing alpha and negative scales); unsplit shapes (M*N = 2^20, run with
+splitk=1) and shapes whose split-K decision was recorded on this GPU (S = 3, 8, 12); NaN/Inf inputs;
+K = 0 / M = 0 / N = 0; and raise / no-raise parity of the argument checks. test_live_out_and_operand_layouts adds
+column-major and padded out= on shapes whose transposed problem splits differently, an out= without a unit stride
+(torch leaves it unchanged), a mat1 that torch copies (expanded, step 2), and zero sizes with out dtypes cuBLASLt
+rejects or with fnuz / e8m0 inputs. Each comparison is bitwise
 (mmaemu.testing.assert_bitwise_equal, NaN payloads included). mmaemu runs its reference backend on the same GPU.
 """
 from __future__ import annotations
@@ -109,7 +112,7 @@ def test_live_parity():
                   lambda: scaled_mm(a, b, sa, sb, out_dtype=od, use_fast_accum=fast, splitk=splitk,
                                     backend="reference", **kw))
 
-    # unsplit grid: M*N = 2^20 >= every recorded split envelope (max split M*N 983,040 at any recorded workspace)
+    # unsplit grid, run with splitk=1: M*N = 2^20 (the largest split M*N of any recorded setting is 983,040)
     for (M, K, N) in [(1024, 256, 1024), (512, 1920, 2048)]:
         for fa, fb in PAIRS:
             a, b = _data(M, K, N, fa, fb, g, dev, specials=(K == 256))
@@ -150,6 +153,71 @@ def test_live_parity():
     for f in T.failures[:20]:
         print("  FAIL", f)
     assert T.calls >= 200
+    assert not T.failures, T.failures[:10]
+
+
+# (M, N, K, fmt a, fmt b, out, fast): table rows whose transposed problem (N, M, K) splits differently, so a
+# column-major out= changes cuBLAS's split-K decision (picked from the 406 such rows probed on 2026-10-14)
+OUT_LAYOUT_CASES = [
+    (16, 48, 8208, E4, E4, torch.float32, False), (96, 64, 12288, E4, E5, torch.float32, False),
+    (32, 48, 1856, E4, E4, torch.float32, True), (64, 96, 1920, E5, E4, torch.float32, True),
+    (16, 48, 8192, E4, E4, torch.bfloat16, False), (64, 192, 2048, E5, E4, torch.bfloat16, False),
+    (16, 112, 1904, E4, E4, torch.bfloat16, True), (256, 96, 4096, E4, E5, torch.bfloat16, True),
+    (64, 16, 4096, E4, E4, torch.float16, False), (192, 64, 8192, E4, E5, torch.float16, False),
+    (16, 32, 12288, E4, E4, torch.float16, True), (96, 128, 4096, E4, E5, torch.float16, True),
+    (64, 192, 1920, E4, E4, E4, False), (128, 96, 2048, E4, E5, E4, False),
+    (96, 128, 4096, E4, E4, E4, True), (64, 96, 8192, E5, E4, E4, True),
+    (64, 96, 1920, E4, E5, E5, False), (96, 128, 4096, E5, E4, E5, True),
+]
+
+
+def test_live_out_and_operand_layouts():
+    """Column-major and padded out=, an out= without a unit stride (torch leaves it unchanged), a mat1 torch copies
+    (expand, step 2), and zero sizes with any out dtype or any float8 input dtype."""
+    dev = _device_or_skip()
+    T = Tally()
+    g = torch.Generator().manual_seed(2027)
+    s = torch.tensor(1.0, device=dev)
+
+    def outs(M, N, od):
+        return {"row": None,
+                "col": lambda: torch.empty(N, M, dtype=od, device=dev).t(),
+                "row ld+16": lambda: torch.empty(M, N + 16, dtype=od, device=dev)[:, :N],
+                "col ld+16": lambda: torch.empty(N, M + 16, dtype=od, device=dev)[:, :M].t(),
+                "step 2 (NaN)": lambda: torch.full((M, 2 * N), float("nan"), device=dev).to(od)[:, ::2]}
+
+    for M, N, K, fa, fb, od, fast in OUT_LAYOUT_CASES:
+        a = (torch.randn(M, K, generator=g) * (0.5 if od in (E4, E5) else 4.0)).clamp(-448, 448).to(fa).to(dev)
+        b = (torch.randn(N, K, generator=g) * (0.5 if od in (E4, E5) else 4.0)).clamp(-448, 448).to(fb).to(dev).t()
+        for name, mk in outs(M, N, od).items():
+            kw = dict(out_dtype=od, use_fast_accum=fast)
+            T.compare(f"out {name} {M}x{N}x{K} {fa}x{fb}->{od} fast={fast}",
+                      lambda: torch._scaled_mm(a, b, s, s, **kw, **({"out": mk()} if mk else {})).contiguous(),
+                      lambda: scaled_mm(a, b, s, s, **kw, backend="reference",
+                                        **({"out": mk()} if mk else {})).contiguous())
+    x = (torch.randn(1, 256, generator=g) * 4).to(E4).to(dev)
+    big = (torch.randn(64, 512, generator=g) * 4).to(E4).to(dev)
+    w = (torch.randn(48, 256, generator=g) * 4).to(E4).to(dev).t()
+    for name, mat1 in (("expand", x.expand(64, 256)), ("step 2", big[:, ::2])):
+        T.compare(f"mat1 {name}", lambda: torch._scaled_mm(mat1, w, s, s, out_dtype=torch.bfloat16),
+                  lambda: scaled_mm(mat1, w, s, s, out_dtype=torch.bfloat16, backend="reference"))
+    for od in (torch.float64, torch.int32):
+        for M, K, N in ((0, 256, 48), (64, 256, 0), (64, 0, 48), (64, 256, 48)):
+            a, b = big[:M, :K], w[:K, :N]
+            T.compare(f"M={M} K={K} N={N} -> {od}", lambda: torch._scaled_mm(a, b, s, s, out_dtype=od),
+                      lambda: scaled_mm(a, b, s, s, out_dtype=od, backend="reference"))
+    for dt in ("float8_e4m3fnuz", "float8_e5m2fnuz", "float8_e8m0fnu"):
+        if not hasattr(torch, dt):                      # float8_e8m0fnu is new in torch 2.7
+            continue
+        for M, K, N in ((0, 256, 48), (64, 256, 0), (64, 0, 48), (64, 256, 48)):
+            a, b = torch.ones(M, K, device=dev).to(getattr(torch, dt)), w[:K, :N]
+            T.compare(f"{dt} M={M} K={K} N={N}", lambda: torch._scaled_mm(a, b, s, s, out_dtype=torch.float32),
+                      lambda: scaled_mm(a, b, s, s, out_dtype=torch.float32, backend="reference"))
+    print(f"live calls: {T.calls}, failures: {len(T.failures)}")
+    for f in T.failures[:20]:
+        print("  FAIL", f)
+    n_fp8 = sum(hasattr(torch, dt) for dt in ("float8_e4m3fnuz", "float8_e5m2fnuz", "float8_e8m0fnu"))
+    assert T.calls == 5 * len(OUT_LAYOUT_CASES) + 2 + 8 + 4 * n_fp8
     assert not T.failures, T.failures[:10]
 
 

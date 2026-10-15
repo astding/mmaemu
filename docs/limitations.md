@@ -3,7 +3,7 @@
 mmaemu v0.1 reproduces one reference platform: the RTX 4060 (Ada, sm_89, 24 SMs) with cuBLAS/cuBLASLt 12.8.3.14,
 called through torch 2.7.1 `torch._scaled_mm` (1 MiB workspace) or Transformer Engine 2.3 (4 MiB workspace). This
 page lists what that scope excludes. [validation.md](validation.md) shows the evidence for what it includes, and
-the scope table there covers every row of the audit's scope table.
+the scope table there covers every row of the scope table of an internal (unpublished) review of the prototype.
 
 ## What mmaemu reproduces, and what it does not
 
@@ -13,9 +13,12 @@ the scope table there covers every row of the audit's scope table.
   give different bits.
 - Validated: the `ada` preset and the three `ada-rtx4060-*` profiles, with the exceptions below. The `hopper` and
   `b200_mma_sync` (alias `blackwell`) presets and their profiles are **experimental**: they warn on use.
-- **sm_120 is not modelled.** There is no hardware evidence for the FP8 tensor-core arithmetic of RTX 50-series
-  GPUs (sm_120, e.g. RTX 5070 Ti). `b200_mma_sync` is not such a model: it fits vectors produced by an `mma.sync`
-  rewrite into fp16 HMMA instructions on sm_90/sm_100, and the paper's own sm_120 model disagrees with it. The
+- **sm_120 is not modelled.** mmaemu ships no preset, profile or split-K table for RTX 50-series GPUs (sm_120, e.g.
+  RTX 5070 Ti), and `b200_mma_sync` is not such a model: it fits vectors produced by an `mma.sync` rewrite into
+  fp16 HMMA instructions on sm_90/sm_100, and the paper's own sm_120 model disagrees with it. Khattak and Mikaitis
+  (arXiv:2512.07004v4, section 4.1.8, Tables 3-4) report RTX PRO 6000 (sm_120) tensor-core numerics identical to
+  the B200's; probes on an RTX 5070 Ti are consistent with that model
+  ([2026-10-13-sm120](validation_logs/2026-10-13-sm120/README.md)), but it is not validated at GEMM level. The
   names `sm_120` and `rtx_blackwell` are rejected.
 - Hopper (`hopper`): validated by the toolbox only at instruction level and only with c = 0, so how the accumulator
   enters the sum is not constrained; there is no GEMM-level evidence and slow accumulation raises.
@@ -24,7 +27,7 @@ the scope table there covers every row of the audit's scope table.
 
 | Feature | Behaviour | Why |
 |---|---|---|
-| `bias` | `UnsupportedFeatureError` (also when passed positionally) | the fused-bias epilogue was measured by one audit agent only |
+| `bias` | `UnsupportedFeatureError` (also when passed positionally) | the fused-bias epilogue was measured only in an internal (unpublished) review of the prototype |
 | row-wise scales (`scale_a` [M,1], `scale_b` [1,N]) | `UnsupportedFeatureError` | cuBLAS routes them to a CUTLASS stream-K kernel whose results depend on the SM count |
 | inputs requiring grad under grad mode | `UnsupportedFeatureError` | mmaemu is inference-only; TE also recomputes scales from its amax history when grad is on |
 | slow accumulation on `hopper` / `b200_mma_sync` | `UnsupportedFeatureError` | not characterised |
@@ -40,8 +43,12 @@ custom op, a compiled CPU backend.
 - cuBLAS splits K on small M*N shapes. Which shapes split, and how the partial sums are combined, depends on the
   output dtype, fast/slow accumulation, the workspace size and the GPU's SM count; it is read from a table recorded
   on the RTX 4060, not derived from the shape.
-- A shape that is not in the table and lies inside the region where the table splits raises
-  `SplitKUnknownError`. Outside that region S = 1 is *inferred*; `MMAEMU_SPLITK_STRICT=1` disables the inference.
+- On the profile's own GPU, a shape that is not in the table is decided by a live cuBLASLt query. Elsewhere it
+  raises `SplitKUnknownError`, unless its M*N is more than twice the largest M*N that splits in the table for its
+  setting: then S = 1 is *inferred*. On the RTX 4060, cuBLASLt splits shapes up to 1.27 times that M*N, and at K
+  below the smallest K that splits in the table, so neither the table's region nor a K bound alone is safe
+  ([splitk-envelope](validation_logs/2026-10-14/splitk-envelope/README.md)). `MMAEMU_SPLITK_STRICT=1` disables the
+  inference.
 - Split decisions with S > 1 on the TE profile (`ada-rtx4060-te`) are experimental (`UnverifiedSplitWarning`).
 - Split combinations that were never replayed on hardware warn (`UnverifiedSplitWarning`).
 - Other Ada GPUs (e.g. the L40S with 142 SMs) may split shapes that never split on the 24-SM RTX 4060. They need
@@ -51,7 +58,10 @@ custom op, a compiled CPU backend.
 
 - E5M2 and mixed E4M3/E5M2 inputs, and non-`ada` presets, run on the reference backend (float64 model) only:
   correct but slow. The CUDA kernels cover E4M3 x E4M3 with the `ada` preset.
-- The CUDA kernels run on Linux x86_64 (WSL2 included). Elsewhere the reference backend is used.
+- The CUDA kernels are tested on Linux x86_64 (WSL2 included). They load wherever `libcuda.so.1` is found (Linux
+  aarch64 is untested); on native Windows and macOS the reference backend is used.
+- An unsplit fast-accumulation chain with K >= 2^24 raises `ValueError` on the kernels v4, v9 and tc3 (v1 takes
+  chains up to 2^30); pass `backend="cuda:v1"` or `"reference"` for such K.
 - The kernels v1 and v4 are IEEE-exact by construction and must pass a smoke self-test on each device. The fast
   kernels v9 and tc3 (both passed acceptance on the RTX 4060, T6) rely on properties of the
   fp16/bf16 tensor cores; they are validated on sm_89 only, are
@@ -68,20 +78,23 @@ custom op, a compiled CPU backend.
 
 The profiles are pinned to cuBLASLt 12.8.3.14 and torch 2.7.1. Another cuBLAS version may choose different
 kernels or splits; the API is tested against torch 2.6.0, 2.7.1 and the latest torch on the CPU, but the
-numerics are only claimed for the profile's versions. The zero-dimension rules (M, N or K = 0) and some API
-rejection rules are preliminary until their dedicated recordings are replayed.
+numerics are only claimed for the profile's versions. The zero-dimension rules (M, N or K = 0) and the API
+rejection rules follow the R6 and R1 recordings of the RTX 4060 (`recordings/rtx4060_2026-10`) and the probes of
+[audit-probes](validation_logs/2026-10-14/audit-probes/README.md).
 
 ## Evo 2
 
 The Evo 2 result that motivated mmaemu (FP8-trained models giving the reference GPU's outputs elsewhere) holds in
 this scope: RTX 4060, inference with the checkpoint's frozen FP8 scales, finite inputs, positive scales. On this
-GPU the Evo 2 projection shapes never use split-K at any recorded workspace, which is why torch (1 MiB) and
-Transformer Engine (4 MiB) agree on them. They disagree on split-prone shapes on the same GPU, so "native equals
+GPU the Evo 2 projection shapes never use split-K at 0, 1 or 4 MiB with the bf16 output Evo 2 uses (they split only
+at 32 MiB: (K, N) = (8192, 24576), M = 65..74, fp16 or fp8 output), which is why torch (1 MiB) and Transformer
+Engine (4 MiB) agree on them. They disagree on split-prone shapes on the same GPU, so "native equals
 TE" is a property of these shapes, not of the two callers.
 
 ## Corrections of earlier statements
 
-The prototype (tcemu) and its notes made statements that the audit found unsupported. v0.1 replaces them:
+The prototype (tcemu) and its notes made statements that an internal (unpublished) review of the prototype found
+unsupported. v0.1 replaces them:
 
 | Earlier statement | v0.1 |
 |---|---|

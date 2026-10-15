@@ -1,0 +1,64 @@
+Supported flash-attn versions are >= 2.1.1, <= 2.7.4.post1. Found flash-attn 2.8.0.post2.
+20:32:56 evo2_1b_base from $R/cache/hf/hub/models--arcinstitute--evo2_1b_base/snapshots/2279e1df422c991037470302360edd40d0d2ea1e/evo2_1b_base.pt; NVIDIA H100 PCIe; groups ['test', 'brca1']
+Extra keys in state_dict: {'blocks.3.mixer.dense._extra_state'}
+20:32:58   block 10/25, 2 s, GPU peak 2.4 GiB
+Extra keys in state_dict: {'blocks.10.mixer.dense._extra_state'}
+Extra keys in state_dict: {'blocks.17.mixer.dense._extra_state'}
+20:32:59   block 20/25, 2 s, GPU peak 2.4 GiB
+Extra keys in state_dict: {'blocks.24.mixer.dense._extra_state'}
+20:32:59   block 25/25, 3 s, GPU peak 2.4 GiB
+20:32:59   p0: loss 0.2256, accuracy 0.9244
+20:32:59   p1: loss 0.7812, accuracy 0.6651
+20:32:59   p2: loss 0.5586, accuracy 0.7772
+20:32:59   p3: loss 0.4434, accuracy 0.8144
+20:32:59   w8k: loss 0.3848, accuracy 0.8495
+20:32:59   w4k: loss 0.1572, accuracy 0.9585
+20:32:59   w2k: loss 0.2021, accuracy 0.9414
+20:32:59   p0_4k: loss 0.1572, accuracy 0.9585
+20:32:59   p1_4k: loss 0.7617, accuracy 0.6735
+20:32:59   p2_4k: loss 0.5664, accuracy 0.7748
+20:32:59   p3_4k: loss 0.4160, accuracy 0.8168
+20:33:00 test done in 3 s: {'loss': 0.502197265625, 'accuracy': 0.7952930182218552, 'loss_fp32': 0.5025806911289692}
+20:33:00 BRCA1 chunk 1/5: 8 windows
+Extra keys in state_dict: {'blocks.3.mixer.dense._extra_state'}
+20:33:01   block 10/25, 1 s, GPU peak 2.4 GiB
+Extra keys in state_dict: {'blocks.10.mixer.dense._extra_state'}
+Extra keys in state_dict: {'blocks.17.mixer.dense._extra_state'}
+20:33:01   block 20/25, 1 s, GPU peak 2.4 GiB
+Extra keys in state_dict: {'blocks.24.mixer.dense._extra_state'}
+20:33:02   block 25/25, 2 s, GPU peak 2.4 GiB
+20:33:02 BRCA1 first 4 variants: AUROC None
+20:33:02 BRCA1 chunk 2/5: 3 windows
+Extra keys in state_dict: {'blocks.3.mixer.dense._extra_state'}
+20:33:02   block 10/25, 0 s, GPU peak 2.4 GiB
+Extra keys in state_dict: {'blocks.10.mixer.dense._extra_state'}
+Extra keys in state_dict: {'blocks.17.mixer.dense._extra_state'}
+20:33:03   block 20/25, 1 s, GPU peak 2.4 GiB
+Extra keys in state_dict: {'blocks.24.mixer.dense._extra_state'}
+20:33:03   block 25/25, 1 s, GPU peak 2.4 GiB
+20:33:03 BRCA1 chunk 3/5: 3 windows
+Extra keys in state_dict: {'blocks.3.mixer.dense._extra_state'}
+20:33:03   block 10/25, 0 s, GPU peak 2.4 GiB
+Extra keys in state_dict: {'blocks.10.mixer.dense._extra_state'}
+Extra keys in state_dict: {'blocks.17.mixer.dense._extra_state'}
+20:33:04   block 20/25, 1 s, GPU peak 2.4 GiB
+Extra keys in state_dict: {'blocks.24.mixer.dense._extra_state'}
+20:33:04   block 25/25, 1 s, GPU peak 2.4 GiB
+20:33:04 BRCA1 chunk 4/5: 3 windows
+Extra keys in state_dict: {'blocks.3.mixer.dense._extra_state'}
+20:33:04   block 10/25, 0 s, GPU peak 2.4 GiB
+Extra keys in state_dict: {'blocks.10.mixer.dense._extra_state'}
+Extra keys in state_dict: {'blocks.17.mixer.dense._extra_state'}
+20:33:05   block 20/25, 1 s, GPU peak 2.4 GiB
+Extra keys in state_dict: {'blocks.24.mixer.dense._extra_state'}
+20:33:05   block 25/25, 1 s, GPU peak 2.4 GiB
+20:33:05 BRCA1 chunk 5/5: 3 windows
+Extra keys in state_dict: {'blocks.3.mixer.dense._extra_state'}
+20:33:05   block 10/25, 0 s, GPU peak 2.4 GiB
+Extra keys in state_dict: {'blocks.10.mixer.dense._extra_state'}
+Extra keys in state_dict: {'blocks.17.mixer.dense._extra_state'}
+20:33:06   block 20/25, 1 s, GPU peak 2.4 GiB
+Extra keys in state_dict: {'blocks.24.mixer.dense._extra_state'}
+20:33:06   block 25/25, 1 s, GPU peak 2.4 GiB
+20:33:06 BRCA1 done: AUROC 0.0 (10 variants)
+20:33:06 DONE

@@ -7,9 +7,9 @@
              self-test is unavailable). ``--json PATH`` writes the full report.
   explain    shows what ``mmaemu.scaled_mm`` would do for an M x N x K call (validation, profile, preset maturity,
              split-K decision, backend, fallbacks, warnings) without running the GEMM. Exit 0 = the call is valid,
-             1 = the call would raise, 4 = explain is unavailable.
+             1 = the call would raise, 4 = explain is unavailable (also: the device cannot be used).
 
-Exit status 2 is a usage error.
+Exit status 2 is a usage error (including a negative size or a malformed --splitk).
 """
 from __future__ import annotations
 
@@ -54,12 +54,27 @@ def cmd_selftest(args) -> int:
 
 
 def parse_splitk(text: str):
-    if text == "auto":
-        return "auto"
-    if "," in text:
-        s, scheme = text.split(",", 1)
-        return (int(s), scheme.strip())
-    return int(text)
+    """--splitk: 'auto', an int, or 'S,scheme'; anything else is a usage error (exit 2)."""
+    try:
+        if text == "auto":
+            return "auto"
+        if "," in text:
+            s, scheme = text.split(",", 1)
+            return (int(s), scheme.strip())
+        return int(text)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"invalid split-K {text!r}: use 'auto', '1', or 'S,serial' / "
+                                         f"'S,pairwise'") from None
+
+
+def _size(text: str) -> int:
+    try:
+        v = int(text)
+    except ValueError:
+        v = -1
+    if v < 0:
+        raise argparse.ArgumentTypeError(f"invalid size {text!r}: a non-negative integer")
+    return v
 
 
 def _plan_dict(plan) -> dict:
@@ -93,22 +108,27 @@ def cmd_explain(args) -> int:
     except Exception as e:  # noqa: BLE001
         print(f"explain unavailable: {D.reason(e)}", file=sys.stderr)
         return D.EXIT_UNAVAILABLE
-    if args.device == "auto":
-        use_cuda = not D.cuda_disabled() and torch.cuda.is_available()
-        device = torch.device("cuda" if use_cuda else "cpu")
-    else:
-        device = torch.device(args.device)
     a_dt = getattr(torch, IN_DTYPES[args.a])
     b_dt = getattr(torch, IN_DTYPES[args.b])
     out_dt = getattr(torch, OUT_DTYPES[args.out]) if args.out else None
     M, N, K = args.M, args.N, args.K
-    # input [M, K] row-major, mat2 [K, N] column-major (the layout torch._scaled_mm requires); contents are zeros
-    a = torch.zeros((M, K), dtype=torch.uint8, device=device).view(a_dt)
-    b = torch.zeros((N, K), dtype=torch.uint8, device=device).view(b_dt).t()
-    sa = torch.tensor(args.scale_a, dtype=torch.float32, device=device)
-    sb = torch.tensor(args.scale_b, dtype=torch.float32, device=device)
-    sr = None if args.scale_result is None else torch.tensor(args.scale_result, dtype=torch.float32, device=device)
-    kwargs = {"splitk": parse_splitk(args.splitk), "backend": args.backend}
+    try:
+        if args.device == "auto":
+            use_cuda = not D.cuda_disabled() and torch.cuda.is_available()
+            device = torch.device("cuda" if use_cuda else "cpu")
+        else:
+            device = torch.device(args.device)
+        # input [M, K] row-major, mat2 [K, N] column-major (the layout torch._scaled_mm requires); contents are zeros
+        a = torch.zeros((M, K), dtype=torch.uint8, device=device).view(a_dt)
+        b = torch.zeros((N, K), dtype=torch.uint8, device=device).view(b_dt).t()
+        sa = torch.tensor(args.scale_a, dtype=torch.float32, device=device)
+        sb = torch.tensor(args.scale_b, dtype=torch.float32, device=device)
+        sr = None if args.scale_result is None else torch.tensor(args.scale_result, dtype=torch.float32,
+                                                                 device=device)
+    except Exception as e:  # noqa: BLE001
+        print(f"explain unavailable: device {args.device!r}: {D.reason(e)}", file=sys.stderr)
+        return D.EXIT_UNAVAILABLE
+    kwargs = {"splitk": args.splitk, "backend": args.backend}
     if args.profile:
         kwargs["profile"] = args.profile
     try:
@@ -143,9 +163,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--json", metavar="PATH", help="write the full report as JSON")
     p.set_defaults(fn=cmd_selftest)
     p = sub.add_parser("explain", help="show the plan of a scaled_mm call without running it")
-    p.add_argument("M", type=int)
-    p.add_argument("N", type=int)
-    p.add_argument("K", type=int)
+    p.add_argument("M", type=_size)
+    p.add_argument("N", type=_size)
+    p.add_argument("K", type=_size)
     p.add_argument("--a", choices=sorted(IN_DTYPES), default="e4m3", help="input format (default e4m3)")
     p.add_argument("--b", choices=sorted(IN_DTYPES), default="e4m3", help="mat2 format (default e4m3)")
     p.add_argument("--out", choices=sorted(OUT_DTYPES), default=None,
@@ -155,7 +175,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--scale-b", type=float, default=1.0)
     p.add_argument("--scale-result", type=float, default=None)
     p.add_argument("--profile", default=None, help="platform profile (default: $MMAEMU_PROFILE or the default)")
-    p.add_argument("--splitk", default="auto", help="'auto' (default), '1', or 'S,serial' / 'S,pairwise'")
+    p.add_argument("--splitk", type=parse_splitk, default="auto", help="'auto' (default), '1', or 'S,serial' / 'S,pairwise'")
     p.add_argument("--backend", default="auto", help="auto | reference | cuda | cuda:v1 | cuda:v4 | cuda:v9 | cuda:tc3")
     p.add_argument("--device", default="auto", help="auto (CUDA if available) | cpu | cuda | cuda:N")
     p.add_argument("--json", metavar="PATH", help="also write the plan as JSON ('-' = JSON on stdout only)")

@@ -1,0 +1,53 @@
+{
+ "model": "evo2_40b",
+ "variants": 500,
+ "lof": 111,
+ "ref_windows": 435,
+ "windows": 935,
+ "windows_done": 935,
+ "chunks": [
+  {
+   "windows": 198,
+   "seconds": 469.11405968666077
+  },
+  {
+   "windows": 250,
+   "seconds": 585.3931066989899
+  },
+  {
+   "windows": 250,
+   "seconds": 585.3054988384247
+  },
+  {
+   "windows": 237,
+   "seconds": 555.3795325756073
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA H100 PCIe",
+  "capability": [
+   9,
+   0
+  ],
+  "sm_count": 114,
+  "nvidia_smi": "570.148.08, 1755 MHz, 350.00 W",
+  "versions": {
+   "python": "3.12.15",
+   "torch": "2.7.1+cu128",
+   "cuda": "12.8",
+   "transformer_engine": "2.3.0",
+   "transformer_engine_cu12": "2.3.0",
+   "transformer_engine_torch": "2.3.0",
+   "evo2": "0.6.0",
+   "vtx": "1.1.0",
+   "flash_attn": "2.8.0.post2",
+   "nvidia-cublas-cu12": "12.8.3.14"
+  },
+  "env": {
+   "NVTE_DISABLE_NVRTC": "1",
+   "CUBLASLT_LOG_LEVEL": null
+  }
+ },
+ "auroc_first_100": 0.855,
+ "auroc": 0.8684314134185599
+}

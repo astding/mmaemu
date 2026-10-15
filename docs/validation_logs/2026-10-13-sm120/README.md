@@ -19,12 +19,12 @@ The existing driver ran every CUDA test; no driver was installed or changed.
 | CPU mutations | 43 killed, 5 identity controls survive, 2 equivalent, no errors | [mutants-cpu.json](mutants-cpu.json) |
 | GPU mutations | 7 killed, 1 identity control survives; NaN rerun is explicitly recorded | [mutants-gpu.json](mutants-gpu.json) |
 | Wheel without nvcc | 673 comparisons, 7,493,365 outputs, zero numerical mismatches; Evo2 projection bf16 bits and accumulator hash match | [wheel.json](wheel.json) |
-| Distribution | 60 checks, zero failures; strict twine, ruff, actionlint and docs checks pass | [distribution.txt](distribution.txt) |
+| Distribution | 60 checks, zero failures (check_dist); strict twine, ruff, actionlint and docs checks were also run, but their output is not kept here | [distribution.txt](distribution.txt) |
 
 The wheel is a development build with shipped CUDA sources and NVRTC fallback.
 Its release-fatbin loader check is explicitly skipped: release binaries have not
 been committed into the wheel. Development fatbins were built with the pinned
-release flags and checked for all five modules, with no spills. Profile-device
+release flags; their build report is not kept here. Profile-device
 tests skip because their native platform is the RTX 4060. Unsupported tc3 tests
 skip; this report does not claim tc3 support on sm_120. v9 remains an opt-in
 backend on this architecture; AUTO selects the validated v4 kernel.
@@ -79,17 +79,24 @@ Before timing, v1 matches a CPU reference slice and v4/v9 match v1 over the full
 output. Host-clock checks fail on WSL, so all GPU timing uses CUDA events. Details:
 [1B](performance-1b.json), [7B](performance-7b.json), [40B](performance-40b.json).
 
-The new [runbook](../../runbooks/sm120_bringup.md) and runner support G0–G10,
-single stages, resuming from a stage and forced failures. G0, G2, G8 and G9, forced
+The new [runbook](../../runbooks/sm120_bringup.md) and runner (`tools/bringup/run_bringup.py`) support G0–G10,
+single stages, resuming from a stage and forced failures. The CPU and T3 suites are `tests/` (pytest,
+`tools/run_gpu_tests.sh`), the mutation matrices `tools/mutants/`, the distribution checks `tools/check_dist.py`.
+G9 runs the benchmark of evo2-anywhere (a separate repository, not included) against the RTX 4060 capture
+`evo2_1b_base_real-te-fp8.npz` ([its log](../2026-10-12/evo2-rtx-4060-official/README.md)). G0, G2, G8 and G9, forced
 G4 failure and output-preservation controls are exercised separately. Artifacts
 here were generated from the working tree after integration commit 1f9ced16;
 the historical metadata retains that base commit and explicitly records dirty
 source status where available. The complete local logs and compiled artifacts
 are kept under build/resume-logs/ and build/fatbin/ in the development checkout.
 The [source SHA-256 inventory](source-sha256.json) identifies the final Python
-and CUDA sources reviewed in this development iteration. The final wheel has
-the same SHA-256 as the wheel tested on the GPU.
+and CUDA sources reviewed in this development iteration. The wheel tested on
+the GPU is the final build (wheel.json: build/dist-final, sha256 cd0b6152...).
+GPU UUIDs in info.json, selftest.json and wheel.json are redacted.
 
-This is GPU development validation, not a published release. The full release
-matrix, complete T2 truth replay and release-fatbin packaging remain separate
-release checks.
+This is GPU development validation, not a published release. Superseded for the
+release (2026-10-14): the release fatbins are committed (mmaemu/backends/cuda/bin/;
+build: [build_report.json](../2026-10-14/fatbin-release/build_report.json)) and passed
+T3 on this GPU ([summary](../2026-10-14/t3-rtx-5070-ti-sm120/summary.txt)); the full
+T2 truth replay passed ([README](../2026-10-14/t2/README.md)).
+[docs/validation.md](../../validation.md) has the current state.

@@ -1,0 +1,237 @@
+{
+ "device": "NVIDIA GeForce RTX 4060",
+ "cc": [
+  8,
+  9
+ ],
+ "sms": 24,
+ "torch": "2.7.1+cu128",
+ "shape": "1b",
+ "K": 1920,
+ "N": 5760,
+ "data": "gauss40",
+ "timer": "events",
+ "warmup_s": 1.5,
+ "window_s": 1.0,
+ "rounds": 5,
+ "hostclock": {
+  "adjtimex_rc": 0,
+  "tick_us": 10000,
+  "freq": -1124155,
+  "raw_s": 2.0001746979996824,
+  "perf_counter_s": 2.0001366510005028,
+  "ratio_perf_over_raw": 0.9999809781619488,
+  "tolerance": 0.002,
+  "ok": true
+ },
+ "kernels": {
+  "v1": {
+   "source": "fatbin",
+   "image_sha256": "96900cc2d5ce3410bcf91edcb5a0ef8b50b0ac9e3027492ce45d7c241abd723e",
+   "fatbin_dir": "~/mmaemu-4060/src/mmaemu/backends/cuda/bin"
+  },
+  "v4": {
+   "source": "fatbin",
+   "image_sha256": "42e7ada5c3afeef1bd419616ccdb9cc2b8d39700b3800bbdb52c106fba6e0815",
+   "fatbin_dir": "~/mmaemu-4060/src/mmaemu/backends/cuda/bin"
+  },
+  "v9": {
+   "source": "fatbin",
+   "image_sha256": "bca69d0a845013cf65f6d4c82300eac98101ebed4b0f45973a4b338dab09ffba",
+   "fatbin_dir": "~/mmaemu-4060/src/mmaemu/backends/cuda/bin"
+  },
+  "tc3": {
+   "source": "fatbin",
+   "image_sha256": "e8da5876ef01f2973d2a5d3d8dde4cc463023300de4052af68efd420b5e205b7",
+   "fatbin_dir": "~/mmaemu-4060/src/mmaemu/backends/cuda/bin"
+  }
+ },
+ "results": [
+  {
+   "kernel": "v1",
+   "M": 2048,
+   "N": 5760,
+   "K": 1920,
+   "data": "gauss40",
+   "source": "fatbin",
+   "tmac_s_median": 0.6325719009538069,
+   "tmac_s_min": 0.6315914856698557,
+   "tmac_s_max": 0.6338269434630329,
+   "windows": 5,
+   "window_s": [
+    1.0365,
+    1.0363,
+    1.0383,
+    1.04,
+    1.039
+   ],
+   "launches": [
+    29,
+    29,
+    29,
+    29,
+    29
+   ],
+   "per_gemm_ms_median": 35.80500740840517,
+   "smi": {
+    "n": 28,
+    "sm_mhz_mean": 2529.1071428571427,
+    "sm_mhz_min": 2370.0,
+    "sm_mhz_max": 2595.0,
+    "power_w_mean": null,
+    "throttle": [
+     "0x0000000000000004"
+    ],
+    "temp_c_max": 62.0
+   },
+   "mac_per_clk_per_sm": 10.421528646653602,
+   "exactness": {
+    "vs": "cpu reference",
+    "outputs": 16384,
+    "mismatches": 0
+   }
+  },
+  {
+   "kernel": "v4",
+   "M": 2048,
+   "N": 5760,
+   "K": 1920,
+   "data": "gauss40",
+   "source": "fatbin",
+   "tmac_s_median": 1.3474349306816704,
+   "tmac_s_min": 1.3462454427241466,
+   "tmac_s_max": 1.3505137848447204,
+   "windows": 5,
+   "window_s": [
+    1.0063,
+    1.0087,
+    1.0078,
+    1.0094,
+    1.0085
+   ],
+   "launches": [
+    60,
+    60,
+    60,
+    60,
+    60
+   ],
+   "per_gemm_ms_median": 16.809154256184897,
+   "smi": {
+    "n": 23,
+    "sm_mhz_mean": 2513.478260869565,
+    "sm_mhz_min": 2490.0,
+    "sm_mhz_max": 2565.0,
+    "power_w_mean": null,
+    "throttle": [
+     "0x0000000000000004"
+    ],
+    "temp_c_max": 62.0
+   },
+   "mac_per_clk_per_sm": 22.336824227122197,
+   "exactness": {
+    "vs": "v1 (full output)",
+    "outputs": 11796480,
+    "mismatches": 0
+   }
+  },
+  {
+   "kernel": "v9",
+   "M": 2048,
+   "N": 5760,
+   "K": 1920,
+   "data": "gauss40",
+   "source": "fatbin",
+   "tmac_s_median": 1.5425935922525464,
+   "tmac_s_min": 1.5322234348451604,
+   "tmac_s_max": 1.544673215547505,
+   "windows": 5,
+   "window_s": [
+    1.0122,
+    1.0117,
+    1.0188,
+    1.0131,
+    1.02
+   ],
+   "launches": [
+    69,
+    69,
+    69,
+    69,
+    69
+   ],
+   "per_gemm_ms_median": 14.682572074558424,
+   "smi": {
+    "n": 25,
+    "sm_mhz_mean": 2397.0,
+    "sm_mhz_min": 2250.0,
+    "sm_mhz_max": 2505.0,
+    "power_w_mean": null,
+    "throttle": [
+     "0x0000000000000004"
+    ],
+    "temp_c_max": 62.0
+   },
+   "mac_per_clk_per_sm": 26.814657075729148,
+   "exactness": {
+    "vs": "v1 (full output)",
+    "outputs": 11796480,
+    "mismatches": 0
+   }
+  },
+  {
+   "kernel": "tc3",
+   "M": 2048,
+   "N": 5760,
+   "K": 1920,
+   "data": "gauss40",
+   "source": "fatbin",
+   "tmac_s_median": 2.9445083748220275,
+   "tmac_s_min": 2.937316948838174,
+   "tmac_s_max": 2.9514967445450218,
+   "windows": 5,
+   "window_s": [
+    1.0064,
+    1.0086,
+    1.0053,
+    1.0101,
+    1.0077
+   ],
+   "launches": [
+    131,
+    131,
+    131,
+    131,
+    131
+   ],
+   "per_gemm_ms_median": 7.692028249493083,
+   "smi": {
+    "n": 25,
+    "sm_mhz_mean": 2522.4,
+    "sm_mhz_min": 2340.0,
+    "sm_mhz_max": 2625.0,
+    "power_w_mean": null,
+    "throttle": [
+     "0x0000000000000004"
+    ],
+    "temp_c_max": 62.0
+   },
+   "mac_per_clk_per_sm": 48.63933117305654,
+   "exactness": {
+    "vs": "v1 (full output)",
+    "outputs": 11796480,
+    "mismatches": 0
+   }
+  }
+ ],
+ "power_samples": {
+  "2048": {
+   "power_limit": "115.00 W",
+   "Duration": "2.36 sec",
+   "Number of Samples": "119",
+   "Max": "126.82 W",
+   "Min": "57.01 W",
+   "Avg": "109.46 W"
+  }
+ }
+}

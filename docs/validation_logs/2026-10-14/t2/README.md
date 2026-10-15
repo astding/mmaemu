@@ -1,6 +1,8 @@
 # T2: full truth replay, 2026-10-14
 
-Verdict: **PASS** (`compare.txt`). 173 of 173 recordings were compared with the audit's FixedModel replay.
+Verdict: **PASS** (`compare.txt`). The report lists all 173 recordings. 147 have outputs that mmaemu models; they
+are compared with the hardware and, count by count, with the audit's FixedModel replay. The 15 tables are listed
+without comparison, and the 11 bias, row-wise, fp16-accumulator or HMMA recordings have no output that mmaemu models.
 
 - Command: `python tools/replay_truth.py --out <dir> --compare $MMAEMU_TRUTH_DIR/replay/replay_fixed.json --threads 12`.
   It ran on the CPU with `CUDA_VISIBLE_DEVICES=""`, torch 2.7.1+cu128 and Python 3.12.2.

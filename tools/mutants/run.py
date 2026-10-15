@@ -10,9 +10,10 @@ usage:
 Tiers
   cpu: T0 + T1 = pytest <tests> -m "not gpu and not slow and not truth" with CUDA_VISIBLE_DEVICES='' (default <tests>:
        the whole tests/ directory of the copy).
-  gpu: T3 = pytest -m gpu on the GPU test files (default: tests/test_kernels_ieee.py, tests/test_fast_kernels.py,
-       tests/test_cuda_runtime.py, tests/test_hw_mini.py where present). The committed fatbins are removed from the
-       copy, so the (mutated) sources are compiled by NVRTC into a private MMAEMU_CACHE_DIR.
+  gpu: pytest -x -m gpu on tools/mutants/test_gpu.py (direct NVRTC v1 conformance, NaN propagation, the pinned NVRTC
+       options) and the T3 files tests/test_kernels_ieee.py, tests/test_fast_kernels.py, tests/test_cuda_runtime.py,
+       tests/test_hw_mini.py (where present); their fatbin tests skip in the copy. The committed fatbins are removed
+       from the copy, so the (mutated) sources are compiled by NVRTC into a private MMAEMU_CACHE_DIR.
 Outcome per mutant: killed (pytest exit 1; the first failing test is recorded), survived (exit 0), equivalent
 (survived, and the catalogue cites evidence that the mutant is unobservable), blocked (the edit's target does not
 exist in this checkout, e.g. a stripped tree), error (anything else: collection errors, timeouts,
@@ -136,6 +137,7 @@ def run_one(m: dict, args) -> dict:
         else:
             # Never let an inherited release directory hide the mutated sources.
             env["MMAEMU_FATBIN_DIR"] = str(tmp / "missing-fatbins")
+            env.pop("MMAEMU_TEST_FATBIN_DIR", None)
             env.setdefault("MMAEMU_TEST_REF_CACHE", str(REPO / "build" / "test_refs"))
             marker = "gpu"
             tests = args.tests.split() if args.tests else [t for t in GPU_TESTS if (tmp / t).exists()]

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://context7.com/schema/context7.json",
+  "projectTitle": "mmaemu",
+  "description": "Bit-accurate emulation of NVIDIA tensor-core FP8 GEMM numerics for PyTorch: the bits of torch._scaled_mm on a reference GPU (RTX 4060, cuBLASLt 12.8.3.14), computed on a CPU or another CUDA GPU.",
+  "excludeFolders": [
+    "docs/validation_logs",
+    "docs/release_logs",
+    "docs/runbooks",
+    "recordings",
+    "results",
+    "tests/data",
+    "tools/bringup",
+    "tools/record",
+    "tools/mutants"
+  ],
+  "excludeFiles": [
+    "release.md"
+  ],
+  "rules": [
+    "mmaemu.scaled_mm takes the arguments of torch._scaled_mm (torch 2.7.1): input [M, K] FP8 row-major, mat2 [K, N] FP8 column-major (w.t() of a row-major [N, K] weight), and one-element fp32 scales.",
+    "Pass use_fast_accum as a Python bool; mmaemu.accumulate has no default for it.",
+    "Compare results bit for bit with mmaemu.testing.assert_bitwise_equal, not with torch.allclose or float equality.",
+    "SplitKUnknownError means the reference GPU's split-K decision for the shape is not known: pass splitk=1 or splitk=(S, 'serial' | 'pairwise') if it is, and use mmaemu.explain to see the split-K decision and backend of a call.",
+    "v0.1 reproduces one reference platform (RTX 4060, cuBLASLt 12.8.3.14); bias, row-wise scales and, under grad mode, inputs that require grad raise instead of being approximated."
+  ]
+}

@@ -1,0 +1,229 @@
+Supported flash-attn versions are >= 2.1.1, <= 2.7.4.post1. Found flash-attn 2.8.0.post2.
+20:34:13 evo2_40b from /home/ubuntu/models/evo2_40b/evo2_40b.pt; NVIDIA H100 PCIe; groups ['brca1']
+20:34:13 BRCA1 chunk 1/4: 198 windows
+Extra keys in state_dict: {'blocks.0.out_filter_dense._extra_state', 'blocks.0.mlp.l2._extra_state', 'blocks.0.mlp.l3._extra_state', 'blocks.0.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.1.out_filter_dense._extra_state', 'blocks.1.mlp.l1._extra_state', 'blocks.1.mlp.l3._extra_state', 'blocks.1.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.2.mlp.l2._extra_state', 'blocks.2.mlp.l1._extra_state', 'blocks.2.mlp.l3._extra_state', 'blocks.2.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.3.mlp.l3._extra_state', 'blocks.3.mlp.l2._extra_state', 'blocks.3.inner_mha_cls.Wqkv._extra_state', 'blocks.3.mlp.l1._extra_state', 'blocks.3.mixer.dense._extra_state', 'blocks.3.mixer.attn._extra_state'}
+Extra keys in state_dict: {'blocks.4.mlp.l2._extra_state', 'blocks.4.out_filter_dense._extra_state', 'blocks.4.mlp.l3._extra_state', 'blocks.4.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.5.mlp.l1._extra_state', 'blocks.5.mlp.l2._extra_state', 'blocks.5.mlp.l3._extra_state', 'blocks.5.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.6.mlp.l3._extra_state', 'blocks.6.out_filter_dense._extra_state', 'blocks.6.mlp.l2._extra_state', 'blocks.6.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.7.mlp.l2._extra_state', 'blocks.7.mlp.l1._extra_state', 'blocks.7.mlp.l3._extra_state', 'blocks.7.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.8.out_filter_dense._extra_state', 'blocks.8.mlp.l1._extra_state', 'blocks.8.mlp.l3._extra_state', 'blocks.8.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.9.mlp.l1._extra_state', 'blocks.9.mlp.l3._extra_state', 'blocks.9.out_filter_dense._extra_state', 'blocks.9.mlp.l2._extra_state'}
+20:35:48   block 10/50, 95 s, GPU peak 35.1 GiB
+Extra keys in state_dict: {'blocks.10.mlp.l1._extra_state', 'blocks.10.mlp.l3._extra_state', 'blocks.10.mixer.dense._extra_state', 'blocks.10.inner_mha_cls.Wqkv._extra_state', 'blocks.10.mlp.l2._extra_state', 'blocks.10.mixer.attn._extra_state'}
+Extra keys in state_dict: {'blocks.11.mlp.l2._extra_state', 'blocks.11.mlp.l1._extra_state', 'blocks.11.mlp.l3._extra_state', 'blocks.11.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.12.mlp.l1._extra_state', 'blocks.12.mlp.l2._extra_state', 'blocks.12.out_filter_dense._extra_state', 'blocks.12.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.13.mlp.l3._extra_state', 'blocks.13.mlp.l2._extra_state', 'blocks.13.out_filter_dense._extra_state', 'blocks.13.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.14.out_filter_dense._extra_state', 'blocks.14.mlp.l3._extra_state', 'blocks.14.mlp.l2._extra_state', 'blocks.14.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.15.out_filter_dense._extra_state', 'blocks.15.mlp.l3._extra_state', 'blocks.15.mlp.l2._extra_state', 'blocks.15.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.16.out_filter_dense._extra_state', 'blocks.16.mlp.l2._extra_state', 'blocks.16.mlp.l1._extra_state', 'blocks.16.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.17.mixer.attn._extra_state', 'blocks.17.mlp.l3._extra_state', 'blocks.17.mixer.dense._extra_state', 'blocks.17.inner_mha_cls.Wqkv._extra_state', 'blocks.17.mlp.l1._extra_state', 'blocks.17.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.18.mlp.l1._extra_state', 'blocks.18.mlp.l2._extra_state', 'blocks.18.mlp.l3._extra_state', 'blocks.18.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.19.mlp.l1._extra_state', 'blocks.19.out_filter_dense._extra_state', 'blocks.19.mlp.l2._extra_state', 'blocks.19.mlp.l3._extra_state'}
+20:37:19   block 20/50, 186 s, GPU peak 35.1 GiB
+Extra keys in state_dict: {'blocks.20.out_filter_dense._extra_state', 'blocks.20.mlp.l2._extra_state', 'blocks.20.mlp.l3._extra_state', 'blocks.20.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.21.mlp.l3._extra_state', 'blocks.21.out_filter_dense._extra_state', 'blocks.21.mlp.l2._extra_state', 'blocks.21.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.22.mlp.l1._extra_state', 'blocks.22.mlp.l3._extra_state', 'blocks.22.out_filter_dense._extra_state', 'blocks.22.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.23.mlp.l1._extra_state', 'blocks.23.mlp.l2._extra_state', 'blocks.23.mlp.l3._extra_state', 'blocks.23.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.24.mixer.dense._extra_state', 'blocks.24.mlp.l2._extra_state', 'blocks.24.mlp.l3._extra_state', 'blocks.24.inner_mha_cls.Wqkv._extra_state', 'blocks.24.mixer.attn._extra_state', 'blocks.24.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.25.mlp.l1._extra_state', 'blocks.25.out_filter_dense._extra_state', 'blocks.25.mlp.l2._extra_state', 'blocks.25.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.26.mlp.l1._extra_state', 'blocks.26.out_filter_dense._extra_state', 'blocks.26.mlp.l2._extra_state', 'blocks.26.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.27.mlp.l1._extra_state', 'blocks.27.mlp.l2._extra_state', 'blocks.27.out_filter_dense._extra_state', 'blocks.27.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.28.mlp.l2._extra_state', 'blocks.28.out_filter_dense._extra_state', 'blocks.28.mlp.l3._extra_state', 'blocks.28.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.29.mlp.l3._extra_state', 'blocks.29.mlp.l2._extra_state', 'blocks.29.out_filter_dense._extra_state', 'blocks.29.mlp.l1._extra_state'}
+20:38:53   block 30/50, 280 s, GPU peak 35.1 GiB
+Extra keys in state_dict: {'blocks.30.mlp.l1._extra_state', 'blocks.30.mlp.l3._extra_state', 'blocks.30.out_filter_dense._extra_state', 'blocks.30.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.31.mlp.l3._extra_state', 'blocks.31.mixer.attn._extra_state', 'blocks.31.inner_mha_cls.Wqkv._extra_state', 'blocks.31.mlp.l2._extra_state', 'blocks.31.mlp.l1._extra_state', 'blocks.31.mixer.dense._extra_state'}
+Extra keys in state_dict: {'blocks.32.mlp.l1._extra_state', 'blocks.32.mlp.l3._extra_state', 'blocks.32.mlp.l2._extra_state', 'blocks.32.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.33.mlp.l2._extra_state', 'blocks.33.mlp.l1._extra_state', 'blocks.33.mlp.l3._extra_state', 'blocks.33.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.34.mlp.l1._extra_state', 'blocks.34.mlp.l3._extra_state', 'blocks.34.out_filter_dense._extra_state', 'blocks.34.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.35.mixer.dense._extra_state', 'blocks.35.mlp.l2._extra_state', 'blocks.35.mixer.attn._extra_state', 'blocks.35.inner_mha_cls.Wqkv._extra_state', 'blocks.35.mlp.l1._extra_state', 'blocks.35.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.36.mlp.l2._extra_state', 'blocks.36.mlp.l1._extra_state', 'blocks.36.mlp.l3._extra_state', 'blocks.36.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.37.out_filter_dense._extra_state', 'blocks.37.mlp.l2._extra_state', 'blocks.37.mlp.l3._extra_state', 'blocks.37.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.38.mlp.l3._extra_state', 'blocks.38.mlp.l2._extra_state', 'blocks.38.out_filter_dense._extra_state', 'blocks.38.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.39.mlp.l3._extra_state', 'blocks.39.mlp.l1._extra_state', 'blocks.39.mlp.l2._extra_state', 'blocks.39.out_filter_dense._extra_state'}
+20:40:27   block 40/50, 374 s, GPU peak 35.1 GiB
+Extra keys in state_dict: {'blocks.40.mlp.l2._extra_state', 'blocks.40.out_filter_dense._extra_state', 'blocks.40.mlp.l1._extra_state', 'blocks.40.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.41.mlp.l3._extra_state', 'blocks.41.mlp.l1._extra_state', 'blocks.41.mlp.l2._extra_state', 'blocks.41.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.42.mlp.l3._extra_state', 'blocks.42.mixer.attn._extra_state', 'blocks.42.inner_mha_cls.Wqkv._extra_state', 'blocks.42.mixer.dense._extra_state', 'blocks.42.mlp.l1._extra_state', 'blocks.42.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.43.mlp.l1._extra_state', 'blocks.43.mlp.l3._extra_state', 'blocks.43.out_filter_dense._extra_state', 'blocks.43.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.44.out_filter_dense._extra_state', 'blocks.44.mlp.l2._extra_state', 'blocks.44.mlp.l3._extra_state', 'blocks.44.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.45.mlp.l2._extra_state', 'blocks.45.out_filter_dense._extra_state', 'blocks.45.mlp.l3._extra_state', 'blocks.45.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.46.mlp.l1._extra_state', 'blocks.46.mlp.l2._extra_state', 'blocks.46.mlp.l3._extra_state', 'blocks.46.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.47.mlp.l2._extra_state', 'blocks.47.mlp.l3._extra_state', 'blocks.47.mlp.l1._extra_state', 'blocks.47.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.48.out_filter_dense._extra_state', 'blocks.48.mlp.l1._extra_state', 'blocks.48.mlp.l3._extra_state', 'blocks.48.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.49.mixer.attn._extra_state', 'blocks.49.mlp.l2._extra_state', 'blocks.49.mlp.l1._extra_state', 'blocks.49.mlp.l3._extra_state', 'blocks.49.mixer.dense._extra_state', 'blocks.49.inner_mha_cls.Wqkv._extra_state'}
+20:42:02   block 50/50, 469 s, GPU peak 35.1 GiB
+20:42:02 BRCA1 first 100 variants: AUROC 0.855
+20:42:02 BRCA1 chunk 2/4: 250 windows
+Extra keys in state_dict: {'blocks.0.out_filter_dense._extra_state', 'blocks.0.mlp.l2._extra_state', 'blocks.0.mlp.l3._extra_state', 'blocks.0.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.1.out_filter_dense._extra_state', 'blocks.1.mlp.l1._extra_state', 'blocks.1.mlp.l3._extra_state', 'blocks.1.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.2.mlp.l2._extra_state', 'blocks.2.mlp.l1._extra_state', 'blocks.2.mlp.l3._extra_state', 'blocks.2.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.3.mlp.l3._extra_state', 'blocks.3.mlp.l2._extra_state', 'blocks.3.inner_mha_cls.Wqkv._extra_state', 'blocks.3.mlp.l1._extra_state', 'blocks.3.mixer.dense._extra_state', 'blocks.3.mixer.attn._extra_state'}
+Extra keys in state_dict: {'blocks.4.mlp.l2._extra_state', 'blocks.4.out_filter_dense._extra_state', 'blocks.4.mlp.l3._extra_state', 'blocks.4.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.5.mlp.l1._extra_state', 'blocks.5.mlp.l2._extra_state', 'blocks.5.mlp.l3._extra_state', 'blocks.5.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.6.mlp.l3._extra_state', 'blocks.6.out_filter_dense._extra_state', 'blocks.6.mlp.l2._extra_state', 'blocks.6.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.7.mlp.l2._extra_state', 'blocks.7.mlp.l1._extra_state', 'blocks.7.mlp.l3._extra_state', 'blocks.7.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.8.out_filter_dense._extra_state', 'blocks.8.mlp.l1._extra_state', 'blocks.8.mlp.l3._extra_state', 'blocks.8.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.9.mlp.l1._extra_state', 'blocks.9.mlp.l3._extra_state', 'blocks.9.out_filter_dense._extra_state', 'blocks.9.mlp.l2._extra_state'}
+20:44:01   block 10/50, 119 s, GPU peak 41.6 GiB
+Extra keys in state_dict: {'blocks.10.mlp.l1._extra_state', 'blocks.10.mlp.l3._extra_state', 'blocks.10.mixer.dense._extra_state', 'blocks.10.inner_mha_cls.Wqkv._extra_state', 'blocks.10.mlp.l2._extra_state', 'blocks.10.mixer.attn._extra_state'}
+Extra keys in state_dict: {'blocks.11.mlp.l2._extra_state', 'blocks.11.mlp.l1._extra_state', 'blocks.11.mlp.l3._extra_state', 'blocks.11.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.12.mlp.l1._extra_state', 'blocks.12.mlp.l2._extra_state', 'blocks.12.out_filter_dense._extra_state', 'blocks.12.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.13.mlp.l3._extra_state', 'blocks.13.mlp.l2._extra_state', 'blocks.13.out_filter_dense._extra_state', 'blocks.13.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.14.out_filter_dense._extra_state', 'blocks.14.mlp.l3._extra_state', 'blocks.14.mlp.l2._extra_state', 'blocks.14.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.15.out_filter_dense._extra_state', 'blocks.15.mlp.l3._extra_state', 'blocks.15.mlp.l2._extra_state', 'blocks.15.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.16.out_filter_dense._extra_state', 'blocks.16.mlp.l2._extra_state', 'blocks.16.mlp.l1._extra_state', 'blocks.16.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.17.mixer.attn._extra_state', 'blocks.17.mlp.l3._extra_state', 'blocks.17.mixer.dense._extra_state', 'blocks.17.inner_mha_cls.Wqkv._extra_state', 'blocks.17.mlp.l1._extra_state', 'blocks.17.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.18.mlp.l1._extra_state', 'blocks.18.mlp.l2._extra_state', 'blocks.18.mlp.l3._extra_state', 'blocks.18.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.19.mlp.l1._extra_state', 'blocks.19.out_filter_dense._extra_state', 'blocks.19.mlp.l2._extra_state', 'blocks.19.mlp.l3._extra_state'}
+20:45:54   block 20/50, 232 s, GPU peak 41.6 GiB
+Extra keys in state_dict: {'blocks.20.out_filter_dense._extra_state', 'blocks.20.mlp.l2._extra_state', 'blocks.20.mlp.l3._extra_state', 'blocks.20.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.21.mlp.l3._extra_state', 'blocks.21.out_filter_dense._extra_state', 'blocks.21.mlp.l2._extra_state', 'blocks.21.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.22.mlp.l1._extra_state', 'blocks.22.mlp.l3._extra_state', 'blocks.22.out_filter_dense._extra_state', 'blocks.22.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.23.mlp.l1._extra_state', 'blocks.23.mlp.l2._extra_state', 'blocks.23.mlp.l3._extra_state', 'blocks.23.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.24.mixer.dense._extra_state', 'blocks.24.mlp.l2._extra_state', 'blocks.24.mlp.l3._extra_state', 'blocks.24.inner_mha_cls.Wqkv._extra_state', 'blocks.24.mixer.attn._extra_state', 'blocks.24.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.25.mlp.l1._extra_state', 'blocks.25.out_filter_dense._extra_state', 'blocks.25.mlp.l2._extra_state', 'blocks.25.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.26.mlp.l1._extra_state', 'blocks.26.out_filter_dense._extra_state', 'blocks.26.mlp.l2._extra_state', 'blocks.26.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.27.mlp.l1._extra_state', 'blocks.27.mlp.l2._extra_state', 'blocks.27.out_filter_dense._extra_state', 'blocks.27.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.28.mlp.l2._extra_state', 'blocks.28.out_filter_dense._extra_state', 'blocks.28.mlp.l3._extra_state', 'blocks.28.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.29.mlp.l3._extra_state', 'blocks.29.mlp.l2._extra_state', 'blocks.29.out_filter_dense._extra_state', 'blocks.29.mlp.l1._extra_state'}
+20:47:52   block 30/50, 350 s, GPU peak 41.6 GiB
+Extra keys in state_dict: {'blocks.30.mlp.l1._extra_state', 'blocks.30.mlp.l3._extra_state', 'blocks.30.out_filter_dense._extra_state', 'blocks.30.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.31.mlp.l3._extra_state', 'blocks.31.mixer.attn._extra_state', 'blocks.31.inner_mha_cls.Wqkv._extra_state', 'blocks.31.mlp.l2._extra_state', 'blocks.31.mlp.l1._extra_state', 'blocks.31.mixer.dense._extra_state'}
+Extra keys in state_dict: {'blocks.32.mlp.l1._extra_state', 'blocks.32.mlp.l3._extra_state', 'blocks.32.mlp.l2._extra_state', 'blocks.32.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.33.mlp.l2._extra_state', 'blocks.33.mlp.l1._extra_state', 'blocks.33.mlp.l3._extra_state', 'blocks.33.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.34.mlp.l1._extra_state', 'blocks.34.mlp.l3._extra_state', 'blocks.34.out_filter_dense._extra_state', 'blocks.34.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.35.mixer.dense._extra_state', 'blocks.35.mlp.l2._extra_state', 'blocks.35.mixer.attn._extra_state', 'blocks.35.inner_mha_cls.Wqkv._extra_state', 'blocks.35.mlp.l1._extra_state', 'blocks.35.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.36.mlp.l2._extra_state', 'blocks.36.mlp.l1._extra_state', 'blocks.36.mlp.l3._extra_state', 'blocks.36.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.37.out_filter_dense._extra_state', 'blocks.37.mlp.l2._extra_state', 'blocks.37.mlp.l3._extra_state', 'blocks.37.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.38.mlp.l3._extra_state', 'blocks.38.mlp.l2._extra_state', 'blocks.38.out_filter_dense._extra_state', 'blocks.38.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.39.mlp.l3._extra_state', 'blocks.39.mlp.l1._extra_state', 'blocks.39.mlp.l2._extra_state', 'blocks.39.out_filter_dense._extra_state'}
+20:49:49   block 40/50, 467 s, GPU peak 41.6 GiB
+Extra keys in state_dict: {'blocks.40.mlp.l2._extra_state', 'blocks.40.out_filter_dense._extra_state', 'blocks.40.mlp.l1._extra_state', 'blocks.40.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.41.mlp.l3._extra_state', 'blocks.41.mlp.l1._extra_state', 'blocks.41.mlp.l2._extra_state', 'blocks.41.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.42.mlp.l3._extra_state', 'blocks.42.mixer.attn._extra_state', 'blocks.42.inner_mha_cls.Wqkv._extra_state', 'blocks.42.mixer.dense._extra_state', 'blocks.42.mlp.l1._extra_state', 'blocks.42.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.43.mlp.l1._extra_state', 'blocks.43.mlp.l3._extra_state', 'blocks.43.out_filter_dense._extra_state', 'blocks.43.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.44.out_filter_dense._extra_state', 'blocks.44.mlp.l2._extra_state', 'blocks.44.mlp.l3._extra_state', 'blocks.44.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.45.mlp.l2._extra_state', 'blocks.45.out_filter_dense._extra_state', 'blocks.45.mlp.l3._extra_state', 'blocks.45.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.46.mlp.l1._extra_state', 'blocks.46.mlp.l2._extra_state', 'blocks.46.mlp.l3._extra_state', 'blocks.46.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.47.mlp.l2._extra_state', 'blocks.47.mlp.l3._extra_state', 'blocks.47.mlp.l1._extra_state', 'blocks.47.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.48.out_filter_dense._extra_state', 'blocks.48.mlp.l1._extra_state', 'blocks.48.mlp.l3._extra_state', 'blocks.48.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.49.mixer.attn._extra_state', 'blocks.49.mlp.l2._extra_state', 'blocks.49.mlp.l1._extra_state', 'blocks.49.mlp.l3._extra_state', 'blocks.49.mixer.dense._extra_state', 'blocks.49.inner_mha_cls.Wqkv._extra_state'}
+20:51:47   block 50/50, 585 s, GPU peak 41.6 GiB
+20:51:48 BRCA1 chunk 3/4: 250 windows
+Extra keys in state_dict: {'blocks.0.out_filter_dense._extra_state', 'blocks.0.mlp.l2._extra_state', 'blocks.0.mlp.l3._extra_state', 'blocks.0.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.1.out_filter_dense._extra_state', 'blocks.1.mlp.l1._extra_state', 'blocks.1.mlp.l3._extra_state', 'blocks.1.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.2.mlp.l2._extra_state', 'blocks.2.mlp.l1._extra_state', 'blocks.2.mlp.l3._extra_state', 'blocks.2.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.3.mlp.l3._extra_state', 'blocks.3.mlp.l2._extra_state', 'blocks.3.inner_mha_cls.Wqkv._extra_state', 'blocks.3.mlp.l1._extra_state', 'blocks.3.mixer.dense._extra_state', 'blocks.3.mixer.attn._extra_state'}
+Extra keys in state_dict: {'blocks.4.mlp.l2._extra_state', 'blocks.4.out_filter_dense._extra_state', 'blocks.4.mlp.l3._extra_state', 'blocks.4.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.5.mlp.l1._extra_state', 'blocks.5.mlp.l2._extra_state', 'blocks.5.mlp.l3._extra_state', 'blocks.5.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.6.mlp.l3._extra_state', 'blocks.6.out_filter_dense._extra_state', 'blocks.6.mlp.l2._extra_state', 'blocks.6.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.7.mlp.l2._extra_state', 'blocks.7.mlp.l1._extra_state', 'blocks.7.mlp.l3._extra_state', 'blocks.7.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.8.out_filter_dense._extra_state', 'blocks.8.mlp.l1._extra_state', 'blocks.8.mlp.l3._extra_state', 'blocks.8.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.9.mlp.l1._extra_state', 'blocks.9.mlp.l3._extra_state', 'blocks.9.out_filter_dense._extra_state', 'blocks.9.mlp.l2._extra_state'}
+20:53:46   block 10/50, 119 s, GPU peak 41.6 GiB
+Extra keys in state_dict: {'blocks.10.mlp.l1._extra_state', 'blocks.10.mlp.l3._extra_state', 'blocks.10.mixer.dense._extra_state', 'blocks.10.inner_mha_cls.Wqkv._extra_state', 'blocks.10.mlp.l2._extra_state', 'blocks.10.mixer.attn._extra_state'}
+Extra keys in state_dict: {'blocks.11.mlp.l2._extra_state', 'blocks.11.mlp.l1._extra_state', 'blocks.11.mlp.l3._extra_state', 'blocks.11.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.12.mlp.l1._extra_state', 'blocks.12.mlp.l2._extra_state', 'blocks.12.out_filter_dense._extra_state', 'blocks.12.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.13.mlp.l3._extra_state', 'blocks.13.mlp.l2._extra_state', 'blocks.13.out_filter_dense._extra_state', 'blocks.13.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.14.out_filter_dense._extra_state', 'blocks.14.mlp.l3._extra_state', 'blocks.14.mlp.l2._extra_state', 'blocks.14.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.15.out_filter_dense._extra_state', 'blocks.15.mlp.l3._extra_state', 'blocks.15.mlp.l2._extra_state', 'blocks.15.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.16.out_filter_dense._extra_state', 'blocks.16.mlp.l2._extra_state', 'blocks.16.mlp.l1._extra_state', 'blocks.16.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.17.mixer.attn._extra_state', 'blocks.17.mlp.l3._extra_state', 'blocks.17.mixer.dense._extra_state', 'blocks.17.inner_mha_cls.Wqkv._extra_state', 'blocks.17.mlp.l1._extra_state', 'blocks.17.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.18.mlp.l1._extra_state', 'blocks.18.mlp.l2._extra_state', 'blocks.18.mlp.l3._extra_state', 'blocks.18.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.19.mlp.l1._extra_state', 'blocks.19.out_filter_dense._extra_state', 'blocks.19.mlp.l2._extra_state', 'blocks.19.mlp.l3._extra_state'}
+20:55:39   block 20/50, 232 s, GPU peak 41.6 GiB
+Extra keys in state_dict: {'blocks.20.out_filter_dense._extra_state', 'blocks.20.mlp.l2._extra_state', 'blocks.20.mlp.l3._extra_state', 'blocks.20.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.21.mlp.l3._extra_state', 'blocks.21.out_filter_dense._extra_state', 'blocks.21.mlp.l2._extra_state', 'blocks.21.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.22.mlp.l1._extra_state', 'blocks.22.mlp.l3._extra_state', 'blocks.22.out_filter_dense._extra_state', 'blocks.22.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.23.mlp.l1._extra_state', 'blocks.23.mlp.l2._extra_state', 'blocks.23.mlp.l3._extra_state', 'blocks.23.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.24.mixer.dense._extra_state', 'blocks.24.mlp.l2._extra_state', 'blocks.24.mlp.l3._extra_state', 'blocks.24.inner_mha_cls.Wqkv._extra_state', 'blocks.24.mixer.attn._extra_state', 'blocks.24.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.25.mlp.l1._extra_state', 'blocks.25.out_filter_dense._extra_state', 'blocks.25.mlp.l2._extra_state', 'blocks.25.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.26.mlp.l1._extra_state', 'blocks.26.out_filter_dense._extra_state', 'blocks.26.mlp.l2._extra_state', 'blocks.26.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.27.mlp.l1._extra_state', 'blocks.27.mlp.l2._extra_state', 'blocks.27.out_filter_dense._extra_state', 'blocks.27.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.28.mlp.l2._extra_state', 'blocks.28.out_filter_dense._extra_state', 'blocks.28.mlp.l3._extra_state', 'blocks.28.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.29.mlp.l3._extra_state', 'blocks.29.mlp.l2._extra_state', 'blocks.29.out_filter_dense._extra_state', 'blocks.29.mlp.l1._extra_state'}
+20:57:37   block 30/50, 350 s, GPU peak 41.6 GiB
+Extra keys in state_dict: {'blocks.30.mlp.l1._extra_state', 'blocks.30.mlp.l3._extra_state', 'blocks.30.out_filter_dense._extra_state', 'blocks.30.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.31.mlp.l3._extra_state', 'blocks.31.mixer.attn._extra_state', 'blocks.31.inner_mha_cls.Wqkv._extra_state', 'blocks.31.mlp.l2._extra_state', 'blocks.31.mlp.l1._extra_state', 'blocks.31.mixer.dense._extra_state'}
+Extra keys in state_dict: {'blocks.32.mlp.l1._extra_state', 'blocks.32.mlp.l3._extra_state', 'blocks.32.mlp.l2._extra_state', 'blocks.32.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.33.mlp.l2._extra_state', 'blocks.33.mlp.l1._extra_state', 'blocks.33.mlp.l3._extra_state', 'blocks.33.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.34.mlp.l1._extra_state', 'blocks.34.mlp.l3._extra_state', 'blocks.34.out_filter_dense._extra_state', 'blocks.34.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.35.mixer.dense._extra_state', 'blocks.35.mlp.l2._extra_state', 'blocks.35.mixer.attn._extra_state', 'blocks.35.inner_mha_cls.Wqkv._extra_state', 'blocks.35.mlp.l1._extra_state', 'blocks.35.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.36.mlp.l2._extra_state', 'blocks.36.mlp.l1._extra_state', 'blocks.36.mlp.l3._extra_state', 'blocks.36.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.37.out_filter_dense._extra_state', 'blocks.37.mlp.l2._extra_state', 'blocks.37.mlp.l3._extra_state', 'blocks.37.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.38.mlp.l3._extra_state', 'blocks.38.mlp.l2._extra_state', 'blocks.38.out_filter_dense._extra_state', 'blocks.38.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.39.mlp.l3._extra_state', 'blocks.39.mlp.l1._extra_state', 'blocks.39.mlp.l2._extra_state', 'blocks.39.out_filter_dense._extra_state'}
+20:59:34   block 40/50, 467 s, GPU peak 41.6 GiB
+Extra keys in state_dict: {'blocks.40.mlp.l2._extra_state', 'blocks.40.out_filter_dense._extra_state', 'blocks.40.mlp.l1._extra_state', 'blocks.40.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.41.mlp.l3._extra_state', 'blocks.41.mlp.l1._extra_state', 'blocks.41.mlp.l2._extra_state', 'blocks.41.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.42.mlp.l3._extra_state', 'blocks.42.mixer.attn._extra_state', 'blocks.42.inner_mha_cls.Wqkv._extra_state', 'blocks.42.mixer.dense._extra_state', 'blocks.42.mlp.l1._extra_state', 'blocks.42.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.43.mlp.l1._extra_state', 'blocks.43.mlp.l3._extra_state', 'blocks.43.out_filter_dense._extra_state', 'blocks.43.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.44.out_filter_dense._extra_state', 'blocks.44.mlp.l2._extra_state', 'blocks.44.mlp.l3._extra_state', 'blocks.44.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.45.mlp.l2._extra_state', 'blocks.45.out_filter_dense._extra_state', 'blocks.45.mlp.l3._extra_state', 'blocks.45.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.46.mlp.l1._extra_state', 'blocks.46.mlp.l2._extra_state', 'blocks.46.mlp.l3._extra_state', 'blocks.46.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.47.mlp.l2._extra_state', 'blocks.47.mlp.l3._extra_state', 'blocks.47.mlp.l1._extra_state', 'blocks.47.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.48.out_filter_dense._extra_state', 'blocks.48.mlp.l1._extra_state', 'blocks.48.mlp.l3._extra_state', 'blocks.48.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.49.mixer.attn._extra_state', 'blocks.49.mlp.l2._extra_state', 'blocks.49.mlp.l1._extra_state', 'blocks.49.mlp.l3._extra_state', 'blocks.49.mixer.dense._extra_state', 'blocks.49.inner_mha_cls.Wqkv._extra_state'}
+21:01:33   block 50/50, 585 s, GPU peak 41.6 GiB
+21:01:33 BRCA1 chunk 4/4: 237 windows
+Extra keys in state_dict: {'blocks.0.out_filter_dense._extra_state', 'blocks.0.mlp.l2._extra_state', 'blocks.0.mlp.l3._extra_state', 'blocks.0.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.1.out_filter_dense._extra_state', 'blocks.1.mlp.l1._extra_state', 'blocks.1.mlp.l3._extra_state', 'blocks.1.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.2.mlp.l2._extra_state', 'blocks.2.mlp.l1._extra_state', 'blocks.2.mlp.l3._extra_state', 'blocks.2.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.3.mlp.l3._extra_state', 'blocks.3.mlp.l2._extra_state', 'blocks.3.inner_mha_cls.Wqkv._extra_state', 'blocks.3.mlp.l1._extra_state', 'blocks.3.mixer.dense._extra_state', 'blocks.3.mixer.attn._extra_state'}
+Extra keys in state_dict: {'blocks.4.mlp.l2._extra_state', 'blocks.4.out_filter_dense._extra_state', 'blocks.4.mlp.l3._extra_state', 'blocks.4.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.5.mlp.l1._extra_state', 'blocks.5.mlp.l2._extra_state', 'blocks.5.mlp.l3._extra_state', 'blocks.5.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.6.mlp.l3._extra_state', 'blocks.6.out_filter_dense._extra_state', 'blocks.6.mlp.l2._extra_state', 'blocks.6.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.7.mlp.l2._extra_state', 'blocks.7.mlp.l1._extra_state', 'blocks.7.mlp.l3._extra_state', 'blocks.7.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.8.out_filter_dense._extra_state', 'blocks.8.mlp.l1._extra_state', 'blocks.8.mlp.l3._extra_state', 'blocks.8.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.9.mlp.l1._extra_state', 'blocks.9.mlp.l3._extra_state', 'blocks.9.out_filter_dense._extra_state', 'blocks.9.mlp.l2._extra_state'}
+21:03:26   block 10/50, 113 s, GPU peak 41.6 GiB
+Extra keys in state_dict: {'blocks.10.mlp.l1._extra_state', 'blocks.10.mlp.l3._extra_state', 'blocks.10.mixer.dense._extra_state', 'blocks.10.inner_mha_cls.Wqkv._extra_state', 'blocks.10.mlp.l2._extra_state', 'blocks.10.mixer.attn._extra_state'}
+Extra keys in state_dict: {'blocks.11.mlp.l2._extra_state', 'blocks.11.mlp.l1._extra_state', 'blocks.11.mlp.l3._extra_state', 'blocks.11.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.12.mlp.l1._extra_state', 'blocks.12.mlp.l2._extra_state', 'blocks.12.out_filter_dense._extra_state', 'blocks.12.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.13.mlp.l3._extra_state', 'blocks.13.mlp.l2._extra_state', 'blocks.13.out_filter_dense._extra_state', 'blocks.13.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.14.out_filter_dense._extra_state', 'blocks.14.mlp.l3._extra_state', 'blocks.14.mlp.l2._extra_state', 'blocks.14.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.15.out_filter_dense._extra_state', 'blocks.15.mlp.l3._extra_state', 'blocks.15.mlp.l2._extra_state', 'blocks.15.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.16.out_filter_dense._extra_state', 'blocks.16.mlp.l2._extra_state', 'blocks.16.mlp.l1._extra_state', 'blocks.16.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.17.mixer.attn._extra_state', 'blocks.17.mlp.l3._extra_state', 'blocks.17.mixer.dense._extra_state', 'blocks.17.inner_mha_cls.Wqkv._extra_state', 'blocks.17.mlp.l1._extra_state', 'blocks.17.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.18.mlp.l1._extra_state', 'blocks.18.mlp.l2._extra_state', 'blocks.18.mlp.l3._extra_state', 'blocks.18.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.19.mlp.l1._extra_state', 'blocks.19.out_filter_dense._extra_state', 'blocks.19.mlp.l2._extra_state', 'blocks.19.mlp.l3._extra_state'}
+21:05:13   block 20/50, 220 s, GPU peak 41.6 GiB
+Extra keys in state_dict: {'blocks.20.out_filter_dense._extra_state', 'blocks.20.mlp.l2._extra_state', 'blocks.20.mlp.l3._extra_state', 'blocks.20.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.21.mlp.l3._extra_state', 'blocks.21.out_filter_dense._extra_state', 'blocks.21.mlp.l2._extra_state', 'blocks.21.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.22.mlp.l1._extra_state', 'blocks.22.mlp.l3._extra_state', 'blocks.22.out_filter_dense._extra_state', 'blocks.22.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.23.mlp.l1._extra_state', 'blocks.23.mlp.l2._extra_state', 'blocks.23.mlp.l3._extra_state', 'blocks.23.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.24.mixer.dense._extra_state', 'blocks.24.mlp.l2._extra_state', 'blocks.24.mlp.l3._extra_state', 'blocks.24.inner_mha_cls.Wqkv._extra_state', 'blocks.24.mixer.attn._extra_state', 'blocks.24.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.25.mlp.l1._extra_state', 'blocks.25.out_filter_dense._extra_state', 'blocks.25.mlp.l2._extra_state', 'blocks.25.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.26.mlp.l1._extra_state', 'blocks.26.out_filter_dense._extra_state', 'blocks.26.mlp.l2._extra_state', 'blocks.26.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.27.mlp.l1._extra_state', 'blocks.27.mlp.l2._extra_state', 'blocks.27.out_filter_dense._extra_state', 'blocks.27.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.28.mlp.l2._extra_state', 'blocks.28.out_filter_dense._extra_state', 'blocks.28.mlp.l3._extra_state', 'blocks.28.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.29.mlp.l3._extra_state', 'blocks.29.mlp.l2._extra_state', 'blocks.29.out_filter_dense._extra_state', 'blocks.29.mlp.l1._extra_state'}
+21:07:05   block 30/50, 332 s, GPU peak 41.6 GiB
+Extra keys in state_dict: {'blocks.30.mlp.l1._extra_state', 'blocks.30.mlp.l3._extra_state', 'blocks.30.out_filter_dense._extra_state', 'blocks.30.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.31.mlp.l3._extra_state', 'blocks.31.mixer.attn._extra_state', 'blocks.31.inner_mha_cls.Wqkv._extra_state', 'blocks.31.mlp.l2._extra_state', 'blocks.31.mlp.l1._extra_state', 'blocks.31.mixer.dense._extra_state'}
+Extra keys in state_dict: {'blocks.32.mlp.l1._extra_state', 'blocks.32.mlp.l3._extra_state', 'blocks.32.mlp.l2._extra_state', 'blocks.32.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.33.mlp.l2._extra_state', 'blocks.33.mlp.l1._extra_state', 'blocks.33.mlp.l3._extra_state', 'blocks.33.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.34.mlp.l1._extra_state', 'blocks.34.mlp.l3._extra_state', 'blocks.34.out_filter_dense._extra_state', 'blocks.34.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.35.mixer.dense._extra_state', 'blocks.35.mlp.l2._extra_state', 'blocks.35.mixer.attn._extra_state', 'blocks.35.inner_mha_cls.Wqkv._extra_state', 'blocks.35.mlp.l1._extra_state', 'blocks.35.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.36.mlp.l2._extra_state', 'blocks.36.mlp.l1._extra_state', 'blocks.36.mlp.l3._extra_state', 'blocks.36.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.37.out_filter_dense._extra_state', 'blocks.37.mlp.l2._extra_state', 'blocks.37.mlp.l3._extra_state', 'blocks.37.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.38.mlp.l3._extra_state', 'blocks.38.mlp.l2._extra_state', 'blocks.38.out_filter_dense._extra_state', 'blocks.38.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.39.mlp.l3._extra_state', 'blocks.39.mlp.l1._extra_state', 'blocks.39.mlp.l2._extra_state', 'blocks.39.out_filter_dense._extra_state'}
+21:08:56   block 40/50, 443 s, GPU peak 41.6 GiB
+Extra keys in state_dict: {'blocks.40.mlp.l2._extra_state', 'blocks.40.out_filter_dense._extra_state', 'blocks.40.mlp.l1._extra_state', 'blocks.40.mlp.l3._extra_state'}
+Extra keys in state_dict: {'blocks.41.mlp.l3._extra_state', 'blocks.41.mlp.l1._extra_state', 'blocks.41.mlp.l2._extra_state', 'blocks.41.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.42.mlp.l3._extra_state', 'blocks.42.mixer.attn._extra_state', 'blocks.42.inner_mha_cls.Wqkv._extra_state', 'blocks.42.mixer.dense._extra_state', 'blocks.42.mlp.l1._extra_state', 'blocks.42.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.43.mlp.l1._extra_state', 'blocks.43.mlp.l3._extra_state', 'blocks.43.out_filter_dense._extra_state', 'blocks.43.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.44.out_filter_dense._extra_state', 'blocks.44.mlp.l2._extra_state', 'blocks.44.mlp.l3._extra_state', 'blocks.44.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.45.mlp.l2._extra_state', 'blocks.45.out_filter_dense._extra_state', 'blocks.45.mlp.l3._extra_state', 'blocks.45.mlp.l1._extra_state'}
+Extra keys in state_dict: {'blocks.46.mlp.l1._extra_state', 'blocks.46.mlp.l2._extra_state', 'blocks.46.mlp.l3._extra_state', 'blocks.46.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.47.mlp.l2._extra_state', 'blocks.47.mlp.l3._extra_state', 'blocks.47.mlp.l1._extra_state', 'blocks.47.out_filter_dense._extra_state'}
+Extra keys in state_dict: {'blocks.48.out_filter_dense._extra_state', 'blocks.48.mlp.l1._extra_state', 'blocks.48.mlp.l3._extra_state', 'blocks.48.mlp.l2._extra_state'}
+Extra keys in state_dict: {'blocks.49.mixer.attn._extra_state', 'blocks.49.mlp.l2._extra_state', 'blocks.49.mlp.l1._extra_state', 'blocks.49.mlp.l3._extra_state', 'blocks.49.mixer.dense._extra_state', 'blocks.49.inner_mha_cls.Wqkv._extra_state'}
+21:10:48   block 50/50, 555 s, GPU peak 41.6 GiB
+21:10:48 BRCA1 done: AUROC 0.8684314134185599 (500 variants)
+21:10:48 DONE

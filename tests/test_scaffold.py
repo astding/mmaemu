@@ -131,7 +131,7 @@ FROZEN_SIGNATURES = {
                               ("b_dtype", "KEYWORD_ONLY", E), ("out_dtype", "KEYWORD_ONLY", E),
                               ("use_fast_accum", "KEYWORD_ONLY", E), ("profile", "KEYWORD_ONLY", None),
                               ("splitk", "KEYWORD_ONLY", "auto"), ("layout_std", "KEYWORD_ONLY", True),
-                              ("strict", "KEYWORD_ONLY", None)],
+                              ("strict", "KEYWORD_ONLY", None), ("dry", "KEYWORD_ONLY", False)],
     "mmaemu.get_profile": [("name_or_profile", "POSITIONAL_OR_KEYWORD", None)],
     "mmaemu.list_profiles": [],
     "mmaemu.list_presets": [],

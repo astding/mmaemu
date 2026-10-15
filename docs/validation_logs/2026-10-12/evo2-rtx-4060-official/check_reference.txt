@@ -1,0 +1,56 @@
+ok   evo2_1b_base_real-te-fp8 p0: sha256(logits_bits) == logits_sha256 of its .json
+ok   evo2_1b_base_real-te-fp8 p1: sha256(logits_bits) == logits_sha256 of its .json
+ok   evo2_1b_base_real-te-fp8 p2: sha256(logits_bits) == logits_sha256 of its .json
+ok   evo2_1b_base_real-te-fp8 p3: sha256(logits_bits) == logits_sha256 of its .json
+ok   evo2_1b_base_real-te-fp8 w8k: sha256(logits_bits) == logits_sha256 of its .json
+ok   evo2_1b_base_real-te-fp8 w2k: sha256(logits_bits) == logits_sha256 of its .json
+ok   evo2_1b_base_oracle-te-fp8_p0-p1-p2-p3-w8k-w2k p0: sha256(logits_bits) == logits_sha256 of its .json
+ok   evo2_1b_base_oracle-te-fp8_p0-p1-p2-p3-w8k-w2k p1: sha256(logits_bits) == logits_sha256 of its .json
+ok   evo2_1b_base_oracle-te-fp8_p0-p1-p2-p3-w8k-w2k p2: sha256(logits_bits) == logits_sha256 of its .json
+ok   evo2_1b_base_oracle-te-fp8_p0-p1-p2-p3-w8k-w2k p3: sha256(logits_bits) == logits_sha256 of its .json
+ok   evo2_1b_base_oracle-te-fp8_p0-p1-p2-p3-w8k-w2k w8k: sha256(logits_bits) == logits_sha256 of its .json
+ok   evo2_1b_base_oracle-te-fp8_p0-p1-p2-p3-w8k-w2k w2k: sha256(logits_bits) == logits_sha256 of its .json
+ok   1B p0: oracle logits == real upstream logits
+ok   1B p1: oracle logits == real upstream logits
+ok   1B p2: oracle logits == real upstream logits
+ok   1B p3: oracle logits == real upstream logits
+ok   1B w2k: oracle logits == real upstream logits
+ok   1B w8k: oracle logits == real upstream logits
+ok   shipped 1B windows == captured windows
+ok   shipped 1B p0/ids == evo2_1b_base_real-te-fp8
+ok   shipped 1B p0/acgt == evo2_1b_base_real-te-fp8
+ok   shipped 1B p0/next == evo2_1b_base_real-te-fp8
+ok   shipped 1B p1/ids == evo2_1b_base_real-te-fp8
+ok   shipped 1B p1/acgt == evo2_1b_base_real-te-fp8
+ok   shipped 1B p1/next == evo2_1b_base_real-te-fp8
+ok   shipped 1B p2/ids == evo2_1b_base_real-te-fp8
+ok   shipped 1B p2/acgt == evo2_1b_base_real-te-fp8
+ok   shipped 1B p2/next == evo2_1b_base_real-te-fp8
+ok   shipped 1B p3/ids == evo2_1b_base_real-te-fp8
+ok   shipped 1B p3/acgt == evo2_1b_base_real-te-fp8
+ok   shipped 1B p3/next == evo2_1b_base_real-te-fp8
+ok   shipped 1B w2k/ids == evo2_1b_base_real-te-fp8
+ok   shipped 1B w2k/acgt == evo2_1b_base_real-te-fp8
+ok   shipped 1B w2k/next == evo2_1b_base_real-te-fp8
+ok   shipped 1B w8k/ids == evo2_1b_base_real-te-fp8
+ok   shipped 1B w8k/acgt == evo2_1b_base_real-te-fp8
+ok   shipped 1B w8k/next == evo2_1b_base_real-te-fp8
+ok   shipped 1B .json p0: bp, mean_next_logprob, logits_sha256 == capture
+ok   shipped 1B .json p1: bp, mean_next_logprob, logits_sha256 == capture
+ok   shipped 1B .json p2: bp, mean_next_logprob, logits_sha256 == capture
+ok   shipped 1B .json p3: bp, mean_next_logprob, logits_sha256 == capture
+ok   shipped 1B .json w8k: bp, mean_next_logprob, logits_sha256 == capture
+ok   shipped 1B .json w2k: bp, mean_next_logprob, logits_sha256 == capture
+ok   shipped brca1/rs == evo2_1b_base_real-te-fp8_brca1-subset500_scores
+ok   shipped brca1/vs == evo2_1b_base_real-te-fp8_brca1-subset500_scores
+ok   shipped brca1/pos == the notebook's sample
+ok   shipped brca1/ref == the notebook's sample
+ok   shipped brca1/alt == the notebook's sample
+ok   shipped brca1/lof == the notebook's sample
+ok   evo2_40b_oracle-te-fp8_w2k w2k: sha256(logits_bits) == logits_sha256 of its .json
+ok   40B log w2k/acgt == evo2_40b_oracle-te-fp8_w2k
+ok   40B log w2k/next == evo2_40b_oracle-te-fp8_w2k
+ok   evo2_40b_oracle-te-fp8_w4k w4k: sha256(logits_bits) == logits_sha256 of its .json
+ok   40B log w4k/acgt == evo2_40b_oracle-te-fp8_w4k
+ok   40B log w4k/next == evo2_40b_oracle-te-fp8_w4k
+0 failure(s)

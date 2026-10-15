@@ -1,0 +1,20 @@
+406 cases (keys at ws 1 MiB whose swapped key records another split)
+  row_eq_def            406 of 406
+  row_eq_col             28 of 406
+  col_eq_mmaemu_col     406 of 406
+  col_eq_swapped        406 of 406
+cases where hardware col-major out != swapped-key emulation: 0
+largest mismatch, mmaemu today vs hardware (col-major out): {'key': [144, 80, 2048, 0, 0, 1, 1], 'dec': [1, 'none'], 'dec_swapped': [2, 'pairwise'], 'row_eq_def': True, 'col_eq_mmaemu_col': True, 'col_eq_swapped': True, 'row_eq_col': False, 'n_diff_col_vs_mmaemu': 0, 'numel': 11520}
+expand mmaemu OK, equal to hardware: True
+expand mmaemu on .contiguous() equal to hardware: True
+stride2 mmaemu OK, equal to hardware: True
+stride2 mmaemu on .contiguous() equal to hardware: True
+M0_float64 mmaemu OK torch.float64 (0, 48)
+N0_float64 mmaemu OK torch.float64 (64, 0)
+K0_float64 mmaemu OK torch.float64 (64, 48)
+M0_int32 mmaemu OK torch.int32 (0, 48)
+N0_int32 mmaemu OK torch.int32 (64, 0)
+K0_int32 mmaemu OK torch.int32 (64, 48)
+K0_scale2_bf16 hardware unique bits [0] mmaemu unique [0] equal True
+K0_bias_bf16 hardware unique bits [0] mmaemu unique [0] equal True
+K0_e4m3_sr hardware unique bits [0] mmaemu unique [0] equal True

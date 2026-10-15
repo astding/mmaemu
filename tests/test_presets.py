@@ -72,6 +72,12 @@ def test_sm120_names_are_refused(name):
         P.get_preset(name)
 
 
+@pytest.mark.parametrize("bad", [0, -128, 64.0, True, "128"])
+def test_slow_chunk_must_be_a_positive_int(bad):
+    with pytest.raises(ValueError, match="slow_chunk"):
+        P.Preset("x", nfma=16, frac=13, frac_out=13, min_exp=-132, late_c=False, slow_chunk=bad)
+
+
 def test_unknown_preset():
     with pytest.raises(KeyError, match="unknown preset"):
         P.get_preset("volta")

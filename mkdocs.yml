@@ -1,0 +1,78 @@
+# The documentation site: the pages of docs/, built by .github/workflows/docs.yml.
+#   pip install mkdocs==1.6.1 mkdocs-material==9.7.7 && mkdocs build --strict
+# Links to anything the site does not carry (code, logs, data, the validation-log files) point to the repository
+# (tools/mkdocs_hooks.py).
+site_name: mmaemu
+site_description: Software FP8 tensor-core numerics for PyTorch, so that FP8 models give the results of the GPUs they were made on.
+site_url: https://astding.github.io/mmaemu/
+repo_url: https://github.com/astding/mmaemu
+repo_name: astding/mmaemu
+edit_uri: ""
+docs_dir: docs
+strict: true
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle: {icon: material/brightness-7, name: Dark mode}
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle: {icon: material/brightness-4, name: Light mode}
+
+hooks:
+  - tools/mkdocs_hooks.py
+
+# Only the pages and their images are published.
+exclude_docs: |
+  *
+  !*.md
+  !/images/*.png
+
+not_in_nav: |
+  /validation_logs/**
+
+markdown_extensions:
+  - tables
+  - toc:
+      permalink: true
+  - admonition
+  - attr_list
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn
+
+nav:
+  - Home: index.md
+  - Using mmaemu:
+      - User guide: user_guide.md
+      - API reference: api.md
+      - Evo 2 on other GPUs: evo2.md
+      - FAQ: faq.md
+  - Numerics:
+      - Semantics: semantics.md
+      - Presets and profiles: presets_profiles.md
+      - Split-K tables: splitk_tables.md
+  - Implementation:
+      - Backends: backends.md
+      - Gated fast kernels: kernels_fast.md
+  - Evidence:
+      - Validation: validation.md
+      - Limitations: limitations.md
+      - Performance: performance.md
+      - Testing: testing.md
+      - Release logs: release_logs/README.md
+  - Maintainers:
+      - Releasing: release.md
+      - sm_120 bring-up runbook: runbooks/sm120_bringup.md

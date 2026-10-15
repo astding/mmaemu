@@ -24,18 +24,22 @@ and validated here, and all three RTX 4060 profiles match the device.
 |---|---|---|
 | OS | Windows host, WSL2 | Debian 13, kernel 6.12.111, native Linux |
 | Driver | 572.16 (Windows) | 570.211.01, open kernel module, with the one-line build fix below |
-| CPU | AMD Ryzen 9 9950X | Intel Core i5-6600K, 4 cores, no AVX-512 |
+| CPU | AMD Ryzen 9 9950X (not in the recordings' metadata) | Intel Core i5-6600K, 4 cores, no AVX-512 |
 | PCIe link | not recorded | Gen3 x8 |
 
-- The driver does not choose the GEMM arithmetic: cuBLASLt and its kernels come from the same pip wheel version as
-  during the recordings, and mmaemu's kernels are the frozen fatbins (SASS for sm_89, no JIT). T3p's live parity
-  test calls `torch._scaled_mm` on this host and compares it bit for bit with mmaemu's reference backend; it
-  passed.
+- The driver loads but does not compile or choose the GEMM kernels: cuBLASLt (kernels and heuristic) comes from
+  the same pip wheel version as during the recordings, and mmaemu's kernels are the frozen fatbins (SASS for sm_89,
+  no JIT). cuBLASLt's heuristic reads device attributes through the driver; T3p checks its choices on this host on
+  samples (the 12 recorded split-K cases of `test_live_parity`, 500 re-queried rows of the split-K table) and
+  compares live `torch._scaled_mm` bit for bit with mmaemu's reference backend; it passed (see
+  `../t3-rtx-4060-sm89/README.md`).
 - Throughput (T6) is measured with CUDA events on the GPU and the operands stay in device memory, so the PCIe link
   and the CPU do not enter the TMAC/s figures.
-- The 570.211.01 runfile does not build against Debian's 6.12.111 kernel, which backported a fourth argument
-  (`exclude_bars`) to `pci_resize_resource`. `nv-pci-exclude-bars.patch` passes 0 there, the same change NVIDIA made
-  in its 615.78.08 driver. It touches only the BAR1 resize at probe time.
+- The 570.211.01 runfile does not build against this kernel: Linux 6.12.97 and later (here Debian's 6.12.111)
+  carry the stable backport of upstream commit 337b1b566db0, which adds a fourth argument (`exclude_bars`) to
+  `pci_resize_resource`. `nv-pci-exclude-bars.patch` passes 0 there, as NVIDIA's own modules do on such kernels
+  behind a conftest check from 580.126.09 and 590.48.01 on (no 570-branch release has it). It touches only the BAR1
+  resize at probe time.
 
 ## Files
 
@@ -44,6 +48,6 @@ and validated here, and all three RTX 4060 profiles match the device.
 - `mmaemu_info.txt`: `python -m mmaemu info`.
 - `nv-pci-exclude-bars.patch`: the driver build fix.
 - `ladder_probe.py`: the probe that measured the backend fallback ladder on this device after the first T3 run
-  (see `../t3-rtx-4060-sm89/README.md`).
+  (see `../t3-rtx-4060-sm89/README.md`); its output is not kept.
 - `di_full.sh`: the full-accumulator device-independence run of every kernel after T6
   (`../t3-rtx-4060-sm89/di_full_gpu_kernels.log`).

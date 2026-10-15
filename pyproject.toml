@@ -12,9 +12,14 @@ license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE", "LICENSES/*"]
 requires-python = ">=3.10"
 authors = [{ name = "Xun Ding", email = "dxun1@alumni.jh.edu" }]
-keywords = ["fp8", "tensor core", "gemm", "emulation", "cublas", "scaled_mm", "reproducibility", "numerics"]
+keywords = [
+    "fp8", "tensor core", "tensor-cores", "gemm", "matmul", "emulation", "emulator", "cublas", "cublaslt", "scaled_mm",
+    "torch._scaled_mm", "pytorch", "bit-exact", "deterministic", "reproducibility", "numerics", "floating-point",
+    "transformer-engine", "evo2",
+]
 classifiers = [
     "Development Status :: 3 - Alpha",
+    "Environment :: GPU :: NVIDIA CUDA :: 12",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
     "Programming Language :: Python :: 3",
@@ -25,6 +30,9 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Topic :: Scientific/Engineering",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Software Development :: Testing",
     "Typing :: Typed",
 ]
 # torch floor: the lowest torch of the CI matrix whose T0+T1 pass. torch 2.5.1 fails them (its CPU backend has no
@@ -35,6 +43,7 @@ dependencies = ["torch>=2.6", "numpy"]
 test = ["pytest"]
 
 [project.urls]
+Documentation = "https://github.com/astding/mmaemu/blob/master/docs/index.md"
 Source = "https://github.com/astding/mmaemu"
 Issues = "https://github.com/astding/mmaemu/issues"
 Changelog = "https://github.com/astding/mmaemu/blob/master/CHANGELOG.md"
@@ -90,7 +99,8 @@ markers = [
 [tool.ruff]
 line-length = 120
 target-version = "py310"
-extend-exclude = ["tools/bringup/kits", "recordings", "results"]
+# The capture scripts of a validation log are kept as they ran.
+extend-exclude = ["tools/bringup/kits", "recordings", "results", "docs/validation_logs/2026-10-12/evo2-rtx-4060-official/scripts"]
 
 [tool.ruff.lint]
 # Explicit rule set, so that the CI result does not depend on the default rules of the pinned ruff version:

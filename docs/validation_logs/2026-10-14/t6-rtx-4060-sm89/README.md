@@ -2,19 +2,24 @@
 
 Verdict: PASS. At M = 2048 every kernel is above its v0.1 acceptance threshold on the Evo 2 1B, 7B and 40B shapes,
 with Gaussian and with adversarial data. Before timing, every kernel's output was checked bitwise at every M (v1
-against the CPU reference on a 64x256 block, the other kernels against v1 on the full output): 0 mismatches.
+against the CPU reference on its first min(M, 64) rows x 256 columns, the other kernels against v1 on the full
+output): 0 mismatches.
 
 - Host and software: `../rtx4060-host/README.md` (preflight 18 of 18 PASS).
 - Code: the tree of da9edd4 with the frozen release fatbins, loaded as users get them: every report's `kernels`
-  entry has source `fatbin` and the image sha256 of `mmaemu/backends/cuda/bin/manifest.json`.
+  entry has source `fatbin` and the image sha256 of `mmaemu/backends/cuda/bin/manifest.json`. Later commits change
+  no kernel source and no fatbin. `tools/bench_kernels.py` changed after this run: an exactness mismatch now
+  exits 1, and v1 is checked against the CPU reference even when it is not timed. Neither changes these runs, which
+  timed v1 and had no mismatch.
 - Kernel command, under the GPU lock, for `d` in gauss40 and adversarial and `s` in 1b, 7b and 40b:
 
       python tools/bench_kernels.py --kernels v1,v4,v9,tc3 --shape $s --M 16,64,256,1024,2048,8192 --data $d \
           --out performance-$s-$d.json
 
 - Native baseline: `native_fp8_bench.py` (this directory) times `torch._scaled_mm` (E4M3 x E4M3 to bf16, fast
-  accumulation, unit scales) on the same shapes and M with the same method: CUDA events, at least 1.5 s of warm-up,
-  five windows of at least 1.0 s, the median. It writes `native-fp8.json`.
+  accumulation, unit scales) on the same shapes and M with CUDA events, at least 1.5 s of warm-up (host timer) and
+  the median of five windows. Unlike `bench_kernels.py`, it sizes each window once from 10 launches and does not
+  extend it to 1.0 s: the windows in `native-fp8.json` are 0.62-1.09 s. It writes `native-fp8.json`.
 - Host clock: perf_counter / CLOCK_MONOTONIC_RAW was 0.99995-1.00001 in every report (tolerance 0.2%; this native
   Linux host does not show the WSL2 drift). All timings are CUDA events.
 - Clock and power: on this host `nvidia-smi --query-gpu=power.draw` reads `[N/A]`, so the per-window

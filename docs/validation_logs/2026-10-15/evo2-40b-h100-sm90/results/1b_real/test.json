@@ -1,0 +1,52 @@
+{
+ "model": "evo2_1b_base",
+ "kind": "real upstream evo2.Evo2 with TE FP8",
+ "fp8_projection_modules": 21,
+ "sequences": [
+  {
+   "name": "p0",
+   "logits_sha256": "71e7d0138ced2c5145a10531166d86331f95474125658031f3554fd83880d2e4"
+  },
+  {
+   "name": "p1",
+   "logits_sha256": "7482608e78944fa973547f9395c1fc5e1dd22f7ba12f0111b37d72ba5e012c75"
+  },
+  {
+   "name": "p2",
+   "logits_sha256": "c9c5ac3372310e4696fa631627eeb914a0471c107f585427043b16c164f493f7"
+  },
+  {
+   "name": "p3",
+   "logits_sha256": "9cbe18f0c856a0a0bed5d68ecd3236404dacc0c7c42156d1dd80d72adbd4b9a0"
+  },
+  {
+   "name": "w8k",
+   "logits_sha256": "bb41d083d1cdf86a8bd12dd1d404308ca6f7eb52cbe2c6083484abd2e18516c9"
+  },
+  {
+   "name": "w4k",
+   "logits_sha256": "979a3c4d07bd7985f4f46e2abbb344ca6b0d11a3b038fb69b7e658bc641b602b"
+  },
+  {
+   "name": "w2k",
+   "logits_sha256": "c896b0bf2d9291208e02dd31c0344bf55e6de329cfd01ff2edfbad44ce98228f"
+  },
+  {
+   "name": "p0_4k",
+   "logits_sha256": "979a3c4d07bd7985f4f46e2abbb344ca6b0d11a3b038fb69b7e658bc641b602b"
+  },
+  {
+   "name": "p1_4k",
+   "logits_sha256": "125f355ef82452ff6766d5968c92eec3c35ecbc3769e0380d8d612b9293a56e4"
+  },
+  {
+   "name": "p2_4k",
+   "logits_sha256": "f094efc7ca20b1bfd82e05230ce73b8551094507196774ed63783042d6fc1644"
+  },
+  {
+   "name": "p3_4k",
+   "logits_sha256": "c0f71c84be997c5cf8577ccfc51e28818b558cf2f68aa6adc82e2901dd47e854"
+  }
+ ],
+ "brca1_variants": 10
+}

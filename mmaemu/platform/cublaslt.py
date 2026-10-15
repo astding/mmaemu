@@ -329,7 +329,8 @@ def _query(lt, M, N, K, fa, fb, od, fast, ws, align, dptr, d_scale, bias, sm_tar
             setd(op, _D_BIAS_PTR, C.c_void_p(dptr + 4096))
             setd(op, _D_EPI, C.c_uint32(_EPI_BIAS))
             setd(op, _D_BIAS_DT, C.c_int32(bdt))
-        lays = [layout(FMTS[fb], K, N, K), layout(FMTS[fa], K, M, K), layout(cdt, N, M, N), layout(odt, N, M, N)]
+        for dt, rows, cols in ((FMTS[fb], K, N), (FMTS[fa], K, M), (cdt, N, M), (odt, N, M)):
+            lays.append(layout(dt, rows, cols, rows))       # appended one by one: all are destroyed if one fails
         _ck(lt.cublasLtMatmulPreferenceCreate(C.byref(pref)), "pref")
         setp(pref, _P_MAXWS, C.c_uint64(ws))
         if align:

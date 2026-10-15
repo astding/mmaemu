@@ -74,7 +74,7 @@ the error is reported in `CallPlan.validation`.
 | `profile`, `preset`, `preset_maturity` | the platform and instruction model used, and its maturity |
 | `split` | the `SplitDecision` |
 | `backend` | the backend that would run (`"reference"`, `"cuda:v4"`, ...) |
-| `fallbacks` | every backend of higher priority that was skipped, with the reason |
+| `fallbacks` | why each backend tried before the chosen one was skipped for this call (its formats, preset and device); `cuda: <reason>` when no CUDA kernel can run |
 | `warnings` | the warnings the call would emit |
 
 ## Instruction model
@@ -115,12 +115,13 @@ cuBLASLt version. Shipped profiles: `ada-rtx4060-torch` (default), `ada-rtx4060-
 
 ```python
 mmaemu.resolve_splitk(M, N, K, *, a_dtype, b_dtype, out_dtype, use_fast_accum, profile=None, splitk="auto",
-                      layout_std=True, strict=None) -> SplitDecision
+                      layout_std=True, strict=None, dry=False) -> SplitDecision
 ```
 
 The split-K decision for an M x N x K call on the profile's platform, in the order explicit, workspace0, table,
 live-query, envelope ([presets_profiles.md](presets_profiles.md#split-k-resolution)). `strict=True` (or
-`MMAEMU_SPLITK_STRICT=1`) disables the envelope inference.
+`MMAEMU_SPLITK_STRICT=1`) disables the envelope inference. `dry=True` (used by `explain`) warns without using up
+the one-time `UnverifiedSplitWarning` of a later call.
 
 ### `mmaemu.SplitK`, `mmaemu.SplitDecision`
 
@@ -166,7 +167,7 @@ The integer view of `t` with the same element size (uint8, int16, int32 or int64
 | `BackendUnavailableError` | `MmaemuError`, `RuntimeError` | an explicitly requested backend cannot serve the call |
 | `ExperimentalPresetWarning` | `UserWarning` | an experimental preset or profile is used |
 | `UnverifiedSplitWarning` | `UserWarning` | a split decision that was not replayed on hardware |
-| `BackendFallbackWarning` | `RuntimeWarning` | no CUDA kernel could be loaded; the reference model runs |
+| `BackendFallbackWarning` | `RuntimeWarning` | a faster CUDA kernel failed to load or failed a gate, or a kernel had to be compiled with NVRTC; a slower kernel, the same kernel built by NVRTC, or the reference model runs instead (the message says which) |
 
 ## Command line
 

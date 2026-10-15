@@ -19,7 +19,7 @@ record a table for another GPU.
 | S values | 2-10, 12, 14, 16, 24, 29 |
 | (reductionScheme, customOption) of split rows | (2, 1) 106,947; (2, 2) 11,798; (2, 0) 7,235 |
 | workspaces | 0, 1, 4, 32 MiB |
-| package data | `mmaemu/platform/data/heur_rtx4060_lt12.8.3.14.npz` (236,342 B, sha256 `304203ef...`), `.json` (sources, envelopes), `verified_split_combos.json`; 402,715 B in total |
+| package data | `mmaemu/platform/data/heur_rtx4060_lt12.8.3.14.npz` (236,342 B, sha256 `304203ef...`), `.json` (sources, envelopes), `verified_split_combos.json`; 402,581 B in total |
 
 Sources (each sha256 is in the `.json` sidecar):
 - the truth table `heur.lt_heuristic_12_8_3_14` (906,600 queries, sha256 `992aa95c...`, equal to the truth
@@ -53,8 +53,8 @@ Running it twice gives identical files (`sha256sum` before/after; `--check` comp
 ## Resolution: `resolve_splitk`
 
 `mmaemu.platform.splitk_table.resolve_splitk(M, N, K, *, a_dtype, b_dtype, out_dtype, use_fast_accum, profile=None,
-splitk="auto", layout_std=True, strict=None)` returns a `SplitDecision(S, scheme, source, verified, table_id,
-note)`. The order is:
+splitk="auto", layout_std=True, strict=None, dry=False)` returns a `SplitDecision(S, scheme, source, verified,
+table_id, note)`. The order is:
 
 1. **explicit**: `splitk=1`, `SplitK(S, scheme)` or `(S, scheme)`; an int > 1 without a scheme raises ValueError;
 2. **workspace0**: the profile's workspace is 0 -> S = 1 (0 split rows among 209,712 workspace-0 queries);
@@ -63,8 +63,9 @@ note)`. The order is:
 4. **live-query**: the current GPU is the profile's reference platform (`Profile.matches_device`: GPU name, SM
    count and cuBLASLt version) -> `mmaemu.platform.cublaslt.heuristic` is queried with the profile's workspace and
    alignment;
-5. **envelope**: outside the split envelope of the setting (M*N above the largest M*N that split, or K below the
-   smallest K that split) and not strict -> S = 1. This is an inference; the note says so;
+5. **envelope**: M*N above twice the largest M*N that split in the setting (`ENVELOPE_MARGIN = 2`), and not
+   strict -> S = 1. K plays no part. This is an inference; the note says so. The margin and the absence of a K rule
+   come from live sweeps on the RTX 4060 (below);
 6. otherwise `SplitKUnknownError`, which names the setting and its envelope and gives three ways out: `splitk=1`,
    `splitk=(S, scheme)`, or recording the shape with `tools/record_heuristics.py` on the reference GPU.
 
@@ -75,6 +76,7 @@ raises there. `strict` defaults to `$MMAEMU_SPLITK_STRICT == "1"`.
 `UnverifiedSplitWarning` is emitted once per combination when the (fast, S, scheme, out dtype, format pair)
 combination was never replayed on hardware, or when S > 1 on a profile whose split decisions are experimental (the
 TE profile: the reduction scheme of 46 TE split outputs in the truth was filled from the table itself).
+`dry=True` (what `mmaemu.explain` uses) emits the warning on every call and does not count it as the one warning.
 
 ### Profiles
 
@@ -113,6 +115,7 @@ captured split config exists and the audit FixedModel replays it bitwise.
 | `tests/test_splitk_table.py -m profile_device`: 500 random rows re-queried live | 0 differ |
 | `tools/record_heuristics.py` on the 4060 (74,304 queries) vs the shipped table | 0 differ |
 | `tests/test_splitk_table.py -m truth`: in-table truth gemm outputs with a hardware-captured split | 22,306 / 22,306 agree |
+| `tests/test_splitk_table.py -m profile_device`: shapes with M*N 2-4 x the largest split M*N of every setting of both profiles, K = 1,024..4,194,304 | 11,760 / 11,760 live S = 1 ([log](validation_logs/2026-10-15/rtx-4060-sm89/t3p_profile_device.log)) |
 
 ### Evo 2
 
@@ -129,9 +132,23 @@ captured split config exists and the audit FixedModel replays it bitwise.
 ### Split envelopes
 
 Per setting: rows in the table, rows that split, the largest M*N and the smallest K among split rows, and the S
-values that occur. Shapes outside the envelope resolve to S = 1 by inference; shapes inside it but absent from the
-table raise (unless the live query is available). Inside the envelope only part of the shapes split, so the envelope
-is not a predictor (audit claim 5). Workspace 0 has no split rows (28 settings).
+values that occur. A shape absent from the table resolves to S = 1 by inference only when its M*N is more than
+twice the largest split M*N of its setting; otherwise it raises (unless the live query is available). Inside that
+bound only part of the shapes split, so the envelope is not a predictor (audit claim 5). Workspace 0 has no split
+rows (28 settings).
+
+The smallest split K is reported but not used. Live sweeps of cuBLASLt's heuristic on the RTX 4060 (both table
+profiles, every setting with split rows; [splitk-envelope](validation_logs/2026-10-14/splitk-envelope/README.md))
+found:
+
+- shapes absent from the table split at up to 1.27 times the largest split M*N of their setting (8,292 of 663,936
+  queries with M*N between 1 and 4 times it; 52 of the 56 settings; K from 3,072 to 4,194,304);
+- 18,504 of 125,419 queries with K below the smallest split K of the table (and M*N inside the envelope) split, at
+  K down to 1,760: the table's K grid has gaps (for example none between 2,064 and 3,072);
+- no split above 1.271 times the largest split M*N in 1,512,000 queries up to 17 times it.
+
+Before this was measured, mmaemu inferred S = 1 for every shape above the largest split M*N or below the smallest
+split K, which gives wrong bits for such shapes off the reference GPU.
 
 | ws | formats | out | accumulation | rows | split rows | max split M*N | min split K | S values |
 |---|---|---|---|---|---|---|---|---|

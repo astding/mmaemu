@@ -33,6 +33,14 @@ import numpy as np
 GPUS = ("Ada", "L40S", "H100", "H200", "B200")
 FMTS = ("E4M3", "E5M2")
 TOOLBOX_ORIGIN = "https://github.com/north-numerical-computing/MATLAB-tensor-core (validation vectors)"
+# The toolbox commit the vectors come from, and how the paths in 'sources' map to it (reviewed 2026-10-14).
+TOOLBOX_UPSTREAM = {
+    "commit": "79143bd29a4a71dc7c2ed47741b63572498b17f6",
+    "paths": "model_validation/<GPU>/<FMT>/<file>; the prototype's copy, named in 'sources', was "
+             "tests/data/<GPU>/<FMT>/<file>",
+    "checked": "the sha256 of model_validation/Ada/E4M3/a_Ada_E4M3.txt and d_Ada_fp32.txt at that commit equal the "
+               "ones in 'sources' (2026-10-14)",
+}
 TIES_PT = "verify-c1-claims-5/fix/data/epilogue_ties_rtx4060.pt"     # relative to $MMAEMU_AUDIT_DIR
 EPILOGUE_HW_IDS = ("epilogue.c1_4_hw_underflow", "epilogue.zero_nan_v2_a1_5", "epilogue.c1_4_hw_zero_scale")
 
@@ -112,6 +120,7 @@ def cmd_toolbox(args) -> int:
     meta = {
         "format": "mmaemu-toolbox-vectors/1",
         "origin": TOOLBOX_ORIGIN,
+        "upstream": TOOLBOX_UPSTREAM,
         "licence": "BSD-2-Clause, Copyright (c) 2025 Faizan A. Khattak and Mantas Mikaitis "
                    "(LICENCE.MATLAB-tensor-core)",
         "layout": "a, b: uint32 fp32 bit patterns [5000, 32] holding FP8 values; c, d: uint32 fp32 bits [5000]; "

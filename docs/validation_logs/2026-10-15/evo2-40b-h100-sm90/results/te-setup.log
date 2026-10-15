@@ -1,0 +1,162 @@
++ $R/venv/bin/pip freeze
++ $R/venv/bin/pip install --no-deps transformer_engine==2.3.0 transformer_engine_cu12==2.3.0
+Collecting transformer_engine==2.3.0
+  Downloading transformer_engine-2.3.0-py3-none-any.whl.metadata (19 kB)
+Collecting transformer_engine_cu12==2.3.0
+  Downloading transformer_engine_cu12-2.3.0-py3-none-manylinux_2_28_x86_64.whl.metadata (19 kB)
+Downloading transformer_engine-2.3.0-py3-none-any.whl (486 kB)
+Downloading transformer_engine_cu12-2.3.0-py3-none-manylinux_2_28_x86_64.whl (266.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 266.4/266.4 MB 11.0 MB/s eta 0:00:00
+Installing collected packages: transformer_engine_cu12, transformer_engine
+Successfully installed transformer_engine-2.3.0 transformer_engine_cu12-2.3.0
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: $R/venv/bin/python3.12 -m pip install --upgrade pip
++ $R/venv/bin/pip install pydantic importlib-metadata
+Collecting pydantic
+  Downloading pydantic-2.14.1-py3-none-any.whl.metadata (133 kB)
+Collecting importlib-metadata
+  Downloading importlib_metadata-9.0.1-py3-none-any.whl.metadata (4.5 kB)
+Collecting annotated-types>=0.6.0 (from pydantic)
+  Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.50.1 (from pydantic)
+  Downloading pydantic_core-2.50.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.5 kB)
+Requirement already satisfied: typing-extensions>=4.16.0 in $R/venv/lib/python3.12/site-packages (from pydantic) (4.16.0)
+Collecting typing-inspection>=0.4.4 (from pydantic)
+  Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+Collecting zipp>=3.20 (from importlib-metadata)
+  Downloading zipp-4.1.1-py3-none-any.whl.metadata (3.6 kB)
+Downloading pydantic-2.14.1-py3-none-any.whl (488 kB)
+Downloading pydantic_core-2.50.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 37.4 MB/s eta 0:00:00
+Downloading importlib_metadata-9.0.1-py3-none-any.whl (27 kB)
+Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+Downloading zipp-4.1.1-py3-none-any.whl (10 kB)
+Installing collected packages: zipp, typing-inspection, pydantic-core, annotated-types, pydantic, importlib-metadata
+Successfully installed annotated-types-0.8.0 importlib-metadata-9.0.1 pydantic-2.14.1 pydantic-core-2.50.1 typing-inspection-0.4.4 zipp-4.1.1
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: $R/venv/bin/python3.12 -m pip install --upgrade pip
++ tar -C $R/venv/lib/python3.12/site-packages -xzf /home/ubuntu/h100-40b/te_torch_2.3.0_ada.tar.gz
++ cd $R/venv/lib/python3.12/site-packages
++ sha256sum -c /home/ubuntu/h100-40b/local_te_so.sha256
+transformer_engine/wheel_lib/libtransformer_engine.so: OK
+transformer_engine/wheel_lib/transformer_engine_torch.cpython-312-x86_64-linux-gnu.so: OK
++ $R/venv/bin/pip freeze
++ diff /home/ubuntu/h100-40b/out/pip-freeze-before.txt /home/ubuntu/h100-40b/out/pip-freeze-after.txt
+0a1
+> annotated-types==0.8.0
+15a17
+> importlib_metadata==9.0.1
+41a44,45
+> pydantic==2.14.1
+> pydantic_core==2.50.1
+50a55,57
+> transformer_engine==2.3.0
+> transformer_engine_cu12==2.3.0
+> transformer_engine_torch==2.3.0
+52a60
+> typing-inspection==0.4.4
+55a64
+> zipp==4.1.1
++ $R/venv/bin/python -c 'import torch; assert torch.__version__ == '\''2.7.1+cu128'\'', torch.__version__; print('\''torch unchanged'\'')'
+torch unchanged
++ sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+Get:1 https://nvidia.github.io/libnvidia-container/stable/deb/amd64  InRelease [1477 B]
+Hit:2 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Ign:3 http://linux.mellanox.com/public/repo/doca/2.9.2/ubuntu22.04/x86_64 ./ InRelease
+Hit:4 <the provider apt mirror> jammy InRelease
+Hit:5 http://linux.mellanox.com/public/repo/doca/2.9.2/ubuntu22.04/x86_64 ./ Release
+Hit:6 https://download.docker.com/linux/ubuntu jammy InRelease
+Hit:7 https://packages.microsoft.com/repos/azure-cli jammy InRelease
+Hit:8 https://pkg.cloudflare.com/cloudflared jammy InRelease
+Hit:9 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:10 http://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu jammy InRelease
+Hit:11 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:12 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Hit:13 https://ppa.launchpadcontent.net/flexiondotorg/nvtop/ubuntu jammy InRelease
+Get:15 https://ppa.launchpadcontent.net/ubuntu-toolchain-r/test/ubuntu jammy InRelease [24.6 kB]
+Get:16 https://ppa.launchpadcontent.net/ubuntu-toolchain-r/test/ubuntu jammy/main amd64 Packages [55.7 kB]
+Get:17 https://ppa.launchpadcontent.net/ubuntu-toolchain-r/test/ubuntu jammy/main Translation-en [21.6 kB]
+Fetched 103 kB in 3s (38.2 kB/s)
+Reading package lists...
+PPA publishes dbgsym, you may need to include 'main/debug' component
+Repository: 'deb https://ppa.launchpadcontent.net/ubuntu-toolchain-r/test/ubuntu/ jammy main'
+Description:
+Toolchain test builds; see https://wiki.ubuntu.com/ToolChain
+
+More info: https://launchpad.net/~ubuntu-toolchain-r/+archive/ubuntu/test
+Adding repository.
+Adding deb entry to /etc/apt/sources.list.d/ubuntu-toolchain-r-ubuntu-test-jammy.list
+Adding disabled deb-src entry to /etc/apt/sources.list.d/ubuntu-toolchain-r-ubuntu-test-jammy.list
+Adding key to /etc/apt/trusted.gpg.d/ubuntu-toolchain-r-ubuntu-test.gpg with fingerprint C8EC952E2A0E1FBDC5090F6A2C277A0A352154E5
++ sudo apt-get -o DPkg::Lock::Timeout=600 install -y libstdc++6
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  gcc-16-base
+The following NEW packages will be installed:
+  gcc-16-base
+The following packages will be upgraded:
+  libstdc++6
+1 upgraded, 1 newly installed, 0 to remove and 313 not upgraded.
+Need to get 898 kB of archives.
+After this operation, 818 kB of additional disk space will be used.
+Get:1 https://ppa.launchpadcontent.net/ubuntu-toolchain-r/test/ubuntu jammy/main amd64 gcc-16-base amd64 16-20260315-1ubuntu1~22~ppa1 [20.4 kB]
+Get:2 https://ppa.launchpadcontent.net/ubuntu-toolchain-r/test/ubuntu jammy/main amd64 libstdc++6 amd64 16-20260315-1ubuntu1~22~ppa1 [877 kB]
+debconf: unable to initialize frontend: Dialog
+debconf: (Dialog frontend will not work on a dumb terminal, an emacs shell buffer, or without a controlling terminal.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+dpkg-preconfigure: unable to re-open stdin: 
+Fetched 898 kB in 2s (549 kB/s)
+Selecting previously unselected package gcc-16-base:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 214052 files and directories currently installed.)
+Preparing to unpack .../gcc-16-base_16-20260315-1ubuntu1~22~ppa1_amd64.deb ...
+Unpacking gcc-16-base:amd64 (16-20260315-1ubuntu1~22~ppa1) ...
+Setting up gcc-16-base:amd64 (16-20260315-1ubuntu1~22~ppa1) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 214057 files and directories currently installed.)
+Preparing to unpack .../libstdc++6_16-20260315-1ubuntu1~22~ppa1_amd64.deb ...
+Unpacking libstdc++6:amd64 (16-20260315-1ubuntu1~22~ppa1) over (12.3.0-1ubuntu1~22.04) ...
+Setting up libstdc++6:amd64 (16-20260315-1ubuntu1~22~ppa1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.10) ...
+
+Running kernel seems to be up-to-date.
+
+Services to be restarted:
+ systemctl restart glances.service
+ systemctl restart lambda-jupyter.service
+ systemctl restart packagekit.service
+
+Service restarts being deferred:
+ systemctl restart unattended-upgrades.service
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
++ strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6
++ grep -x GLIBCXX_3.4.32
+GLIBCXX_3.4.32
++ HF_HOME=$R/cache/hf
++ $R/venv/bin/python -c 'from huggingface_hub import snapshot_download; print(snapshot_download('\''arcinstitute/evo2_1b_base'\''))'
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 4 files:  25%|██▌       | 1/4 [00:00<00:00,  4.64it/s]Fetching 4 files:  50%|█████     | 2/4 [00:00<00:00,  6.13it/s]Fetching 4 files: 100%|██████████| 4/4 [00:30<00:00,  9.56s/it]Fetching 4 files: 100%|██████████| 4/4 [00:30<00:00,  7.66s/it]
+$R/cache/hf/hub/models--arcinstitute--evo2_1b_base/snapshots/2279e1df422c991037470302360edd40d0d2ea1e
++ sha256sum $R/cache/hf/hub/models--arcinstitute--evo2_1b_base/snapshots/2279e1df422c991037470302360edd40d0d2ea1e/evo2_1b_base.pt
+8ffba7d0e6445a8f2c92d9ff1c4e772c7f73ca9179f5e0c699b8b0ca1b966f64  $R/cache/hf/hub/models--arcinstitute--evo2_1b_base/snapshots/2279e1df422c991037470302360edd40d0d2ea1e/evo2_1b_base.pt
+++ tr '\n' :
+++ ls -d $R/venv/lib/python3.12/site-packages/nvidia/cublas/lib $R/venv/lib/python3.12/site-packages/nvidia/cuda_cupti/lib $R/venv/lib/python3.12/site-packages/nvidia/cuda_nvrtc/lib $R/venv/lib/python3.12/site-packages/nvidia/cuda_runtime/lib $R/venv/lib/python3.12/site-packages/nvidia/cudnn/lib $R/venv/lib/python3.12/site-packages/nvidia/cufft/lib $R/venv/lib/python3.12/site-packages/nvidia/cufile/lib $R/venv/lib/python3.12/site-packages/nvidia/curand/lib $R/venv/lib/python3.12/site-packages/nvidia/cusolver/lib $R/venv/lib/python3.12/site-packages/nvidia/cusparse/lib $R/venv/lib/python3.12/site-packages/nvidia/nccl/lib $R/venv/lib/python3.12/site-packages/nvidia/nvjitlink/lib $R/venv/lib/python3.12/site-packages/nvidia/nvtx/lib
++ export NVTE_DISABLE_NVRTC=1 LD_LIBRARY_PATH=$R/venv/lib/python3.12/site-packages/nvidia/cublas/lib:$R/venv/lib/python3.12/site-packages/nvidia/cuda_cupti/lib:$R/venv/lib/python3.12/site-packages/nvidia/cuda_nvrtc/lib:$R/venv/lib/python3.12/site-packages/nvidia/cuda_runtime/lib:$R/venv/lib/python3.12/site-packages/nvidia/cudnn/lib:$R/venv/lib/python3.12/site-packages/nvidia/cufft/lib:$R/venv/lib/python3.12/site-packages/nvidia/cufile/lib:$R/venv/lib/python3.12/site-packages/nvidia/curand/lib:$R/venv/lib/python3.12/site-packages/nvidia/cusolver/lib:$R/venv/lib/python3.12/site-packages/nvidia/cusparse/lib:$R/venv/lib/python3.12/site-packages/nvidia/nccl/lib:$R/venv/lib/python3.12/site-packages/nvidia/nvjitlink/lib:$R/venv/lib/python3.12/site-packages/nvidia/nvtx/lib:
++ NVTE_DISABLE_NVRTC=1
++ LD_LIBRARY_PATH=$R/venv/lib/python3.12/site-packages/nvidia/cublas/lib:$R/venv/lib/python3.12/site-packages/nvidia/cuda_cupti/lib:$R/venv/lib/python3.12/site-packages/nvidia/cuda_nvrtc/lib:$R/venv/lib/python3.12/site-packages/nvidia/cuda_runtime/lib:$R/venv/lib/python3.12/site-packages/nvidia/cudnn/lib:$R/venv/lib/python3.12/site-packages/nvidia/cufft/lib:$R/venv/lib/python3.12/site-packages/nvidia/cufile/lib:$R/venv/lib/python3.12/site-packages/nvidia/curand/lib:$R/venv/lib/python3.12/site-packages/nvidia/cusolver/lib:$R/venv/lib/python3.12/site-packages/nvidia/cusparse/lib:$R/venv/lib/python3.12/site-packages/nvidia/nccl/lib:$R/venv/lib/python3.12/site-packages/nvidia/nvjitlink/lib:$R/venv/lib/python3.12/site-packages/nvidia/nvtx/lib:
++ $R/venv/bin/python -c 'import transformer_engine, transformer_engine.pytorch as te; print('\''TE OK'\'', transformer_engine.__version__)'
+Supported flash-attn versions are >= 2.1.1, <= 2.7.4.post1. Found flash-attn 2.8.0.post2.
+TE OK 2.3.0
++ echo SETUP_DONE
+SETUP_DONE

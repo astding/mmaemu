@@ -1,0 +1,10 @@
+{
+ "tag": "evo2_1b_base_real-te-fp8_brca1-subset500",
+ "kind": "real upstream evo2.Evo2('evo2_1b_base') with Transformer Engine FP8, upstream score_sequences (mean log-likelihood, prepend_bos=False)",
+ "recorded": "2026-10-10 on this RTX 4060 (sm_89, 24 SMs), driver 572.16, TE 2.3.0, torch 2.7.1+cu128 (same TE env as the other goldens)",
+ "data": "BRCA1 saturation genome editing (Findlay et al. 2018, 41586_2018_461_MOESM3_ESM.xlsx) from the upstream evo2 notebook; GRCh37.p13 chr17; 8192-bp windows centred on the variant (upstream notebook logic); random subset of 500 variants (pandas sample random_state=0) -> 435 unique reference windows",
+ "arrays": {"rs": "score of each unique reference window (435, float32)", "vs": "score of each variant window (500, float32)"},
+ "rerun": "_scores_rerun.npz is the same computation repeated (batch-size-2 run in the noise-floor experiment): bit-identical to the first run per /data/quant/stsc/research/round4/probe/logs/fp8_emulation/brca1_subset500_noise_floor.json",
+ "auroc_te_subset": 0.7378,
+ "script": "/data/quant/evo2_ada_goldens/scripts/brca1_source_script.py (copy of /data/quant/stsc/research/round4/probe/scripts/brca1_lut_vs_te.py)"
+}

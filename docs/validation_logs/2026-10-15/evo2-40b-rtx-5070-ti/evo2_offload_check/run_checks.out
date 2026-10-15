@@ -1,0 +1,34 @@
+brca1_40.fasta: 20 reference and 20 variant windows
+test 1b mmaemu rc=0
+score 1b mmaemu rc=0
+test 1b native rc=1
+score 1b native rc=0
+test 1b bf16 rc=1
+score 1b bf16 rc=0
+1b mmaemu p0 logits sha256 + loss + accuracy == this log's script: True
+1b mmaemu p1 logits sha256 + loss + accuracy == this log's script: True
+1b mmaemu p2 logits sha256 + loss + accuracy == this log's script: True
+1b mmaemu p3 logits sha256 + loss + accuracy == this log's script: True
+1b mmaemu mean loss 0.502685546875
+1b mmaemu 40 BRCA1 scores bit for bit == brca1_check_1b.npz (= score_sequences): True
+1b native p0 logits sha256 + loss + accuracy == this log's script: True
+1b native p1 logits sha256 + loss + accuracy == this log's script: True
+1b native p2 logits sha256 + loss + accuracy == this log's script: True
+1b native p3 logits sha256 + loss + accuracy == this log's script: True
+1b native mean loss 1.248046875
+1b native 40 BRCA1 scores bit for bit == brca1_check_1b.npz (= score_sequences): True
+1b bf16 p0 logits sha256 + loss + accuracy == this log's script: True
+1b bf16 p1 logits sha256 + loss + accuracy == this log's script: True
+1b bf16 p2 logits sha256 + loss + accuracy == this log's script: True
+1b bf16 p3 logits sha256 + loss + accuracy == this log's script: True
+1b bf16 mean loss 1.365234375
+1b bf16 40 BRCA1 scores bit for bit == brca1_check_1b.npz (= score_sequences): True
+FAILURES 0
+test 40b mmaemu rc=0
+40b mmaemu p0 logits sha256 + loss + accuracy == this log's script: True
+40b mmaemu p1 logits sha256 + loss + accuracy == this log's script: True
+40b mmaemu p2 logits sha256 + loss + accuracy == this log's script: True
+40b mmaemu p3 logits sha256 + loss + accuracy == this log's script: True
+40b mmaemu mean loss 0.216064453125
+FAILURES 0
+rc=0

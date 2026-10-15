@@ -1,5 +1,5 @@
 # CPU-only CI (docs/testing.md). No GPU jobs and no publishing: GitHub-hosted runners have no GPU, so the GPU tiers
-# (T3, T3p, T5, T6, T7) run locally on the maintainer's GPU host under a GPU lock (docs/release.md).
+# (T3, T3p, the GPU tier of T4, T6, T7) run locally on the maintainer's GPU host under a GPU lock (docs/release.md).
 name: ci
 
 on:
@@ -70,7 +70,7 @@ jobs:
             status=1
           fi
           exit "$status"
-      - name: release/ci workflow policy review
+      - name: release/ci/docs workflow policy review
         run: python tests/test_packaging.py --review-workflows
 
   test:
@@ -95,12 +95,13 @@ jobs:
         run: |
           if [ "$TORCH_VERSION" = latest ]; then spec=torch; else spec="torch==$TORCH_VERSION"; fi
           python -m pip install "$spec" --index-url "$TORCH_CPU_INDEX"
-          python -m pip install numpy pytest
+          python -m pip install numpy pytest pyyaml==6.0.3
           python -c "import torch, numpy; print('torch', torch.__version__, 'numpy', numpy.__version__)"
       - name: T0 + T1 (source tree)
         run: python -m pytest -q -p no:cacheprovider tests -m "$CPU_TIERS" --durations=20
         env:
           PYTHONPATH: ${{ github.workspace }}
+          MMAEMU_REQUIRE_YAML: "1"
 
   nvrtc:
     name: NVRTC compile of every kernel source x arch (no GPU)
@@ -116,6 +117,10 @@ jobs:
         run: |
           python -m pip install torch==2.7.1 --index-url "$TORCH_CPU_INDEX"
           python -m pip install numpy pytest "nvidia-cuda-nvrtc-cu12==12.8.*"
+      - name: NVRTC is loadable (otherwise every compile test would skip)
+        run: python -c "from mmaemu.backends.cuda import nvrtc; nvrtc.libnvrtc(); print(nvrtc.library_path(), nvrtc.version())"
+        env:
+          PYTHONPATH: ${{ github.workspace }}
       - name: NVRTC compile test
         run: python -m pytest -q -p no:cacheprovider tests/test_nvrtc_compile.py
         env:
@@ -151,7 +156,7 @@ jobs:
         run: |
           python -m venv "$RUNNER_TEMP/venv"
           "$RUNNER_TEMP/venv/bin/python" -m pip install torch==2.7.1 --index-url "$TORCH_CPU_INDEX"
-          "$RUNNER_TEMP/venv/bin/python" -m pip install dist/*.whl pytest
+          "$RUNNER_TEMP/venv/bin/python" -m pip install dist/*.whl pytest pyyaml==6.0.3
       - name: python -m mmaemu info (installed wheel)
         working-directory: ${{ runner.temp }}
         run: |
@@ -160,5 +165,6 @@ jobs:
         working-directory: ${{ runner.temp }}
         env:
           MMAEMU_EXPECT_INSTALLED: "1"
+          MMAEMU_REQUIRE_YAML: "1"
         run: |
           "$RUNNER_TEMP/venv/bin/python" -m pytest -q -p no:cacheprovider "$GITHUB_WORKSPACE/tests" -m "$CPU_TIERS"

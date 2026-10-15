@@ -59,7 +59,7 @@
   "subset": "pandas DataFrame.sample(n=500, random_state=0) of all variants",
   "window_bp": 8192,
   "auroc": 0.7378,
-  "recorded": "2026-10-10"
+  "recorded": "2026-10-11"
  },
  "projection0_w2k": {
   "truth_id": "evo2.evo2_1b_w2k",

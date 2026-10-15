@@ -11,7 +11,8 @@ Parts of mmaemu are translated and adapted from the MATLAB Tensor Core toolbox
 (https://github.com/north-numerical-computing/MATLAB-tensor-core), Copyright (c) 2025, Faizan A. Khattak
 and Mantas Mikaitis, distributed under the BSD 2-Clause License. That licence is reproduced below and in
 LICENSES/BSD-2-Clause-MATLAB-tensor-core.txt. Reference: F. A. Khattak, M. Mikaitis, "Accurate Models of
-NVIDIA Tensor Cores", arXiv:2512.07004.
+NVIDIA Tensor Cores", ACM Transactions on Architecture and Code Optimization 23(3), 2026,
+doi:10.1145/3830409 (arXiv:2512.07004).
 
 Files derived from the toolbox:
 - mmaemu/model/chain.py: the tensor-core block multiply-accumulate model (block alignment, truncation and
@@ -22,6 +23,16 @@ Files derived from the toolbox:
   files), with the toolbox licence next to them.
 - tools/bringup/kits/ (repository only, not part of the wheel or the sdist): probe sets built from the toolbox
   validation vectors.
+
+Data derived from Evo 2 (not part of the wheel): the Arc Institute's evo2
+(https://github.com/ArcInstitute/evo2) and its checkpoint arcinstitute/evo2_1b_base are licensed under the
+Apache License, Version 2.0.
+- tests/data/hw_mini/evo2.npz (also in the sdist): the E4M3 operands of three Evo 2 1B projections on the RTX
+  4060 (32 x 1920 activations and 128 x 1920 quantised weight values each) and the hardware's outputs.
+- examples/data/ (repository only): outputs of the official Evo 2 1B path on the RTX 4060 for the four prompts
+  of evo2's test/data/prompts.csv (stored as token ids) and two windows of their concatenation, and for 500
+  BRCA1 variants (positions, alleles and classes) from Findlay et al., Nature 562, 217-222 (2018),
+  Supplementary Table, as used by evo2's BRCA1 notebook.
 
 The wheel and the sdist carry this NOTICE and LICENSES/BSD-2-Clause-MATLAB-tensor-core.txt.
 

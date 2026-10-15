@@ -99,6 +99,9 @@ def test_explicit_forms():
         SplitK(1, "serial")
     with pytest.raises(TypeError):
         rs(16, 128, 8192, splitk="8")
+    for bad in ((2.7, "serial"), (True, "none")):                # not truncated to an int
+        with pytest.raises(ValueError):
+            rs(16, 128, 8192, splitk=bad)
 
 
 def test_project_cases_8_8_8_12():
@@ -150,29 +153,59 @@ def test_evo2_small_m_finding_is_in_the_table():
 
 
 def test_unknown_in_envelope_shape_raises_with_three_ways_out():
-    # 1 MiB, fp32 out, fast, e4m3 x e4m3: envelope max split M*N 100,352, min split K 1,824; N = 100 is not a grid N
+    # 1 MiB, fp32 out, fast, e4m3 x e4m3: largest split M*N 100,352, inference bound 200,704; N = 100 is not a grid N
     assert load_table(TID).lookup(17, 100, 4096, "e4m3", "e4m3", "float32", True, 1 << 20) is None
     with pytest.raises(SplitKUnknownError) as ei:
         rs(17, 100, 4096)
     msg = str(ei.value)
     assert "splitk=1" in msg and "splitk=(S" in msg and "tools/record_heuristics.py" in msg
-    assert "100352" in msg and "1824" in msg
+    assert "100352" in msg and "200704" in msg
     assert isinstance(ei.value, LookupError)
 
 
 def test_envelope_inference_and_strict_mode(monkeypatch):
-    # outside the envelope (M*N too large) and not in the table
+    # M*N above twice the largest split M*N and not in the table
     assert load_table(TID).lookup(4000, 4000, 4096, "e4m3", "e4m3", "float32", True, 1 << 20) is None
     d = rs(4000, 4000, 4096)
-    assert (d.S, d.source) == (1, "envelope") and "inference" in d.note
-    d = rs(17, 100, 1000)                                       # K below the smallest split K (1,824)
-    assert (d.S, d.source) == (1, "envelope")
+    assert (d.S, d.source) == (1, "envelope") and "inference" in d.note and "200704" in d.note
+    with pytest.raises(SplitKUnknownError, match="not above the inference bound"):
+        rs(17, 100, 1000)                                       # a small K does not make S = 1
     with pytest.raises(SplitKUnknownError, match="strict"):
         rs(4000, 4000, 4096, strict=True)
     monkeypatch.setenv("MMAEMU_SPLITK_STRICT", "1")
     with pytest.raises(SplitKUnknownError):
         rs(4000, 4000, 4096)
     assert rs(16, 128, 8192).source == "table"                  # strict never blocks a table hit
+
+
+# Shapes absent from the table that cuBLASLt splits on the RTX 4060 (live heuristic, sweeps in
+# docs/validation_logs/2026-10-14/splitk-envelope): M*N up to 1.27 x the largest split M*N of the setting, or K below
+# the smallest split K of the table. (profile, M, N, K, out, fast, fa, fb, live numSplitsK).
+LIVE_SPLITS_OFF_TABLE = [
+    ("ada-rtx4060-torch", 128, 976, 4096, E5, False, E4, E5, 2),           # M*N 1.27 x 98,304
+    ("ada-rtx4060-torch", 64, 1552, 16384, "float32", True, E4, E5, 2),    # M*N 1.01 x 98,304
+    ("ada-rtx4060-torch", 128, 128, 2176, "float16", True, E4, E5, 3),     # K 2,176 < table's smallest split K 4,096
+    ("ada-rtx4060-te", 1024, 960, 6144, "float32", True, E4, E5, 5),       # M*N 1.25 x 786,432
+    ("ada-rtx4060-te", 256, 1024, 1760, "bfloat16", True, E4, E5, 2),      # K 1,760 < 1,920
+]
+
+
+@pytest.mark.parametrize("case", LIVE_SPLITS_OFF_TABLE, ids=lambda c: f"{c[0][12:]}-{c[1]}x{c[2]}x{c[3]}")
+def test_shapes_that_split_live_are_not_inferred_unsplit(case):
+    prof, M, N, K, out, fast, fa, fb, _ = case
+    ws = get_profile(prof).workspace_bytes
+    assert load_table(TID).lookup(M, N, K, splitk_table.FMTS[fa], splitk_table.FMTS[fb], out, fast, ws) is None
+    with pytest.raises(SplitKUnknownError, match="not above the inference bound"):
+        rs(M, N, K, out, fast, fa=fa, fb=fb, profile=prof)
+
+
+def test_envelope_bound_is_twice_the_largest_split_mn():
+    # 1 MiB, fp32 out, fast, e4m3 x e5m2: largest split M*N 98,304; K = 20,000 is not a grid K
+    assert splitk_table.ENVELOPE_MARGIN == 2
+    d = rs(64, 3088, 20000, fa=E4, fb=E5)                       # 197,632 > 196,608
+    assert (d.S, d.source) == (1, "envelope")
+    with pytest.raises(SplitKUnknownError):
+        rs(64, 3072, 20000, fa=E4, fb=E5)                       # 196,608 = 2 x 98,304
 
 
 def test_profiles_without_table_always_raise_on_auto():
@@ -224,6 +257,20 @@ def test_unverified_split_warning_on_the_te_profile():
         rs(hit[0], hit[1], 8192, "bfloat16", True, profile="ada-rtx4060-te")
         d = rs(16, 128, 8192)                                    # validated profile, verified combination
         assert d.S == 8
+
+
+def test_dry_resolution_does_not_use_up_the_warning():
+    """mmaemu.explain resolves with dry=True: it reports the warning every time, and the next real call still warns."""
+    assert rs(16, 128, 8192, "bfloat16", True, profile="ada-rtx4060-te").S > 1
+    splitk_table._WARNED.clear()
+    for _ in range(2):
+        with pytest.warns(UnverifiedSplitWarning, match="experimental"):
+            rs(16, 128, 8192, "bfloat16", True, profile="ada-rtx4060-te", dry=True)
+    with pytest.warns(UnverifiedSplitWarning, match="experimental"):
+        rs(16, 128, 8192, "bfloat16", True, profile="ada-rtx4060-te")
+    with warnings.catch_warnings():
+        warnings.simplefilter("error", UnverifiedSplitWarning)
+        rs(16, 128, 8192, "bfloat16", True, profile="ada-rtx4060-te")
 
 
 def test_decisions_are_frozen_dataclasses():
@@ -406,3 +453,38 @@ def test_live_query_step_resolves_unknown_shapes(monkeypatch, request):
         pytest.skip("profile device unavailable")
     d = rs(17, 100, 4096)                                 # in the envelope, not in the table
     assert d.source == "live-query" and d.S >= 1
+
+
+@pytest.mark.profile_device
+def test_live_heuristic_never_splits_where_the_envelope_infers_s1(monkeypatch, request):
+    """Step 5 (S = 1 above twice the largest split M*N) against the live heuristic: shapes with M*N = 2.0-4.0 x the
+    largest split M*N of every setting of both table profiles, K = 1,024 to 4,194,304 (the RTX 4060 splits up to
+    1.27 x)."""
+    _require_profile_device_run(request)
+    monkeypatch.undo()
+    from mmaemu.platform import cublaslt
+    if not get_profile("ada-rtx4060-torch").matches_device():
+        pytest.skip("profile device unavailable")
+    t, bad, n = load_table(TID), [], 0
+    for prof in ("ada-rtx4060-torch", "ada-rtx4060-te"):
+        p = get_profile(prof)
+        for st in json.loads((DATA / f"{TID}.json").read_text())["settings"]:
+            if st["ws"] != p.workspace_bytes or not st["split_rows"]:
+                continue
+            mx = st["max_split_MN"]
+            for M in (1, 16, 64, 128, 256, 1024, 4096):
+                for f in (2.0, 2.25, 2.5, 3.0, 4.0):
+                    N = max(16, -(-int(mx * f / M) // 16) * 16)
+                    if M * N <= 2 * mx:
+                        N += 16
+                    outside, _, _ = splitk_table._envelope(t, M, N, p.workspace_bytes, st["out"], st["fast"],
+                                                           st["fmt_a"], st["fmt_b"])
+                    assert outside
+                    for K in (1024, 2048, 4096, 16384, 262144, 4194304):
+                        r = cublaslt.heuristic(M, N, K, fmt_a=st["fmt_a"], fmt_b=st["fmt_b"], out_dtype=st["out"],
+                                               fast=st["fast"], workspace_bytes=p.workspace_bytes, align=p.align)
+                        n += 1
+                        if r["status"] != 0 or r["splitK"] != 1:
+                            bad.append((prof, st["out"], st["fast"], st["fmt_a"], st["fmt_b"], M, N, K, r))
+    print(f"\n{n} live queries above the inference bound, {len(bad)} not S = 1")
+    assert n > 10000 and not bad, bad[:10]

@@ -1,4 +1,4 @@
-fatbins under test: /home/ubuntu/mmaemu-rc-t3/mmaemu-rc/mmaemu/backends/cuda/bin
+fatbins under test: ~/mmaemu-rc-t3/mmaemu-rc/mmaemu/backends/cuda/bin
 test_scaffold                                    rc=0      3s  2 passed, 102 deselected in 2.18s
 test_backend_reference                           rc=0      9s  3 passed, 12 deselected, 2 warnings in 6.81s
 test_epilogue                                    rc=0      3s  5 passed, 349 deselected in 2.29s

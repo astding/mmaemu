@@ -127,6 +127,20 @@ def test_no_cuda_device(world, monkeypatch):
         registry.select(REQ, "cuda")
 
 
+def test_cuda_device_without_index_when_cuda_is_unusable(world, monkeypatch):
+    # "cuda" (no index) must not ask torch for the current device when CUDA is unavailable or disabled
+    def no_current():
+        raise AssertionError("Torch not compiled with CUDA enabled")
+    monkeypatch.setattr(torch.cuda, "current_device", no_current)
+    req = ChainRequest(device=torch.device("cuda"), fmt_a="e4m3", fmt_b="e4m3", preset="ada")
+    monkeypatch.setattr(torch.cuda, "is_available", lambda: False)
+    assert select(req)[0].name == "reference"
+    registry.clear()
+    monkeypatch.setattr(torch.cuda, "is_available", lambda: True)
+    monkeypatch.setenv("MMAEMU_DISABLE_CUDA", "1")
+    assert select(req)[0].name == "reference" and world.tried == []
+
+
 def test_min_cc(world):
     world.cc = (7, 5)
     be, w = select()

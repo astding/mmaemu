@@ -11,7 +11,8 @@ Method
   - Kernels are loaded as for users (fatbin from --fatbin-dir / the package, else NVRTC); performance acceptance
     requires a fatbin (--allow-nvrtc records NVRTC numbers instead, marked as such).
   - Exactness gate before timing: v1 is compared bit for bit with the CPU reference on a row/column subset, and every
-    other kernel with v1 on the full output; a mismatch aborts.
+    other kernel with v1 on the full output (v1 is checked even when it is not timed); a mismatch stops the run,
+    which writes its report and exits 1.
   - Warm-up >= 1.5 s per kernel, then rounds of windows >= 1.0 s each (kernels interleaved, order rotated per round);
     per window: CUDA events around n back-to-back launches. Reported: median over windows of TMAC/s, min/max.
   - nvidia-smi samples SM clock, power and throttle reasons every 200 ms during the windows; MAC/clk/SM uses the mean
@@ -251,7 +252,8 @@ def main(argv=None) -> int:
         lm = modules.module_info(specs[nm].module, dev)
         if lm.source != "fatbin" and not a.allow_nvrtc:
             raise SystemExit(f"bench_kernels: {nm} was loaded via {lm.source} ({lm.fatbin_error}); performance "
-                             "acceptance needs a fatbin (--fatbin-dir build/fatbin_rel) or pass --allow-nvrtc")
+                             "acceptance needs a fatbin (the package's release fatbins, or --fatbin-dir <dir>) or "
+                             "pass --allow-nvrtc")
         fns[nm] = fn
         info[nm] = dict(source=lm.source, image_sha256=lm.sha256, fatbin_dir=str(modules.fatbin_dir()))
     report = dict(device=props.name, cc=list(torch.cuda.get_device_capability(dev)), sms=sms,
@@ -280,20 +282,16 @@ def main(argv=None) -> int:
         macs = M * N * K
         # exactness gate before timing
         exact = {}
-        base = None
-        if "v1" in fns:
-            base = fns["v1"](A, B)
-            rs, cs = slice(0, min(M, 64)), slice(0, min(N, 256))
-            want = chain_gemm(A[rs].view(torch.uint8).cpu(), B[cs].view(torch.uint8).cpu(), fmt_a="e4m3",
-                              fmt_b="e4m3", preset="ada").float()
-            bad = int((base[rs, cs].cpu().view(torch.int32) != want.view(torch.int32)).sum())
-            exact["v1"] = dict(vs="cpu reference", outputs=want.numel(), mismatches=bad)
+        base = fns["v1"](A, B) if "v1" in fns else chain_fn_for(specs["v1"], req)(A, B)  # checked even if not timed
+        rs, cs = slice(0, min(M, 64)), slice(0, min(N, 256))
+        want = chain_gemm(A[rs].view(torch.uint8).cpu(), B[cs].view(torch.uint8).cpu(), fmt_a="e4m3",
+                          fmt_b="e4m3", preset="ada").float()
+        bad = int((base[rs, cs].cpu().view(torch.int32) != want.view(torch.int32)).sum())
+        exact["v1"] = dict(vs="cpu reference", outputs=want.numel(), mismatches=bad)
         for nm, f in fns.items():
             if nm == "v1":
                 continue
             out = f(A, B)
-            if base is None:
-                base = chain_fn_for(specs["v1"], req)(A, B)
             bad = int((out.view(torch.int32) != base.view(torch.int32)).sum())
             exact[nm] = dict(vs="v1 (full output)", outputs=out.numel(), mismatches=bad)
         torch.cuda.synchronize(dev)
@@ -342,7 +340,7 @@ def main(argv=None) -> int:
     if a.out:
         Path(a.out).parent.mkdir(parents=True, exist_ok=True)
         Path(a.out).write_text(json.dumps(report, indent=1))
-    return 0
+    return 1 if any("error" in r for r in report["results"]) else 0
 
 
 if __name__ == "__main__":

@@ -2,7 +2,8 @@
 # Core toolbox (AdaTC.m, Generic_BFMA_TC.m):
 #   Copyright (c) 2025, Faizan A. Khattak and Mantas Mikaitis. BSD 2-Clause License (see NOTICE and
 #   LICENSES/BSD-2-Clause-MATLAB-tensor-core.txt).  https://github.com/north-numerical-computing/MATLAB-tensor-core
-#   F. A. Khattak, M. Mikaitis, "Accurate Models of NVIDIA Tensor Cores", arXiv:2512.07004.
+#   F. A. Khattak, M. Mikaitis, "Accurate Models of NVIDIA Tensor Cores", ACM Trans. Archit. Code Optim. 23(3),
+#   2026, doi:10.1145/3830409 (arXiv:2512.07004).
 # Changes against the toolbox: exact float64 evaluation in torch, the hardware-measured +0 rule for zero block results
 # (c2-M1), canonical NaN, explicit format handling, tiling.
 """Instruction-level FP8 tensor-core chain model (docs/semantics.md).

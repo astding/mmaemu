@@ -11,8 +11,9 @@ aligning them to the block's largest exponent and truncating them, cuBLAS may sp
 partial sums in an order of its own choosing, and the epilogue of `torch._scaled_mm` rounds twice. Two GPUs with
 different tensor cores, or the same GPU with a different cuBLAS, therefore give different bits for the same FP8
 GEMM. mmaemu recomputes the GEMM exactly as one *reference platform* computes it (in v0.1: the RTX 4060, Ada,
-with cuBLASLt 12.8.3.14), on the CPU or on another CUDA GPU, using only arithmetic whose result does not depend on
-the device.
+with cuBLASLt 12.8.3.14), on the CPU or on another CUDA GPU, with kernels that return the reference bits wherever
+they run: IEEE-exact kernels everywhere, tensor-core kernels only where a per-device self-test confirms the
+properties they rely on.
 
 ## 2. Install and check
 
@@ -37,7 +38,9 @@ python -m mmaemu selftest   # runs the kernel self-tests on the GPU; exit 0 = ev
 
 `info` tells you which backend `scaled_mm` will use on your GPU and why the others are unavailable, and whether
 your GPU *is* a reference platform (`Profile.matches_device`). On a GPU that is not one, mmaemu still computes the
-reference platform's result; it does not change what it computes depending on where it runs.
+reference platform's result. What it computes does not depend on where it runs, with one exception: the split-K
+decision of a shape missing from the profile's table is queried live on the reference GPU, and elsewhere inferred
+(S = 1 when M*N is more than twice every split M*N of the table's setting) or refused with `SplitKUnknownError`.
 
 ## 3. A first GEMM
 
@@ -79,8 +82,7 @@ print(mmaemu.explain(x, w.t(), scale_x, scale_w, out_dtype=torch.bfloat16, use_f
 CallPlan(validation='ok', profile='ada-rtx4060-torch', preset='ada', preset_maturity='validated',
   split=SplitDecision(S=1, scheme='none', source='table', verified=True, table_id='heur_rtx4060_lt12.8.3.14',
                       note='table row: algo 60, tile 18, numSplitsK 1, customOption 0'),
-  backend='reference', fallbacks=['cuda:tc3: tensors on cpu', 'cuda:v9: tensors on cpu', 'cuda:v4: tensors on cpu',
-                                  'cuda:v1: tensors on cpu'], warnings=[])
+  backend='reference', fallbacks=['cuda: tensors on cpu'], warnings=[])
 ```
 
 The same is available from the shell: `python -m mmaemu explain 64 5760 1920 --out bf16 --fast` (M N K).
@@ -111,8 +113,10 @@ order that depends on the shape, the formats, the output dtype, the accumulation
 mmaemu reads that decision from a table recorded on the reference GPU (`splitk="auto"`, the default).
 
 - If the table decides, the call runs. `explain` shows the decision and where it came from.
-- If the shape is outside every region where the reference GPU ever split, mmaemu infers S = 1 and says so in the
-  decision's note (`MMAEMU_SPLITK_STRICT=1` turns this inference off).
+- On the reference GPU itself, a shape missing from the table is decided by a live query of cuBLASLt's heuristic.
+- Elsewhere, if the shape's M*N is more than twice the largest M*N that ever split in the table for its setting,
+  mmaemu infers S = 1 and says so in the decision's note (`MMAEMU_SPLITK_STRICT=1` turns this inference off). The
+  margin is measured: on the RTX 4060, cuBLASLt splits shapes up to 1.27 times that M*N.
 - Otherwise the call raises `SplitKUnknownError` instead of guessing. Pass `splitk=1` (no split) or
   `splitk=(S, "serial")` / `splitk=(S, "pairwise")` if you know the decision, or record the shape on the reference
   GPU with `tools/record_heuristics.py`.
@@ -127,7 +131,7 @@ Typical model projections (large M x N) never split on the reference GPU; all Ev
 | `cuda:v1` | CUDA, sm_75 and newer, IEEE-exact | 1.9 TMAC/s |
 | `cuda:v4` | CUDA, sm_80 and newer, IEEE-exact | 4.0 TMAC/s |
 | `cuda:v9` | CUDA, gated: bf16 tensor cores for the exponents | 4.8 TMAC/s (opt-in outside sm_89) |
-| `cuda:tc3` | CUDA, gated: fp16 tensor cores, sm_80/86/89 binaries only | about 3 TMAC/s on the RTX 4060 (prototype) |
+| `cuda:tc3` | CUDA, gated: fp16 tensor cores, sm_80/86/89 binaries only | no sm_120 binary (2.94 TMAC/s on the RTX 4060, T6) |
 
 With `backend="auto"` mmaemu takes the highest-priority kernel that loaded and passed its self-test on the device
 (tc3 > v9 > v4 > v1 > reference). v1 and v4 use only IEEE-defined instructions, so their results do not depend on
@@ -203,10 +207,10 @@ Typical uses:
 | `MmaemuError` | e.g. CPU flush-to-zero is on | `torch.set_flush_denormal(False)` |
 | `ExperimentalPresetWarning` | an experimental preset or profile is in use | read its validated scope |
 | `UnverifiedSplitWarning` | a split decision whose reduction was never replayed on hardware | treat the result as experimental |
-| `BackendFallbackWarning` | no CUDA kernel could be loaded; the reference model runs instead | `python -m mmaemu info` shows why |
+| `BackendFallbackWarning` | a faster CUDA kernel failed to load or failed a gate, or a kernel had to be compiled with NVRTC; a slower kernel, the same kernel built by NVRTC, or the reference model runs instead (the message says which) | `python -m mmaemu info` shows why |
 
-All exceptions derive from `mmaemu.MmaemuError` and from the matching built-in class (`RuntimeError`,
-`NotImplementedError`, `LookupError`).
+The exception classes above derive from `mmaemu.MmaemuError` and from the matching built-in class (`RuntimeError`,
+`NotImplementedError`, `LookupError`); argument errors raise the built-in `TypeError`, `ValueError` or `KeyError`.
 
 ## 10. Environment variables
 

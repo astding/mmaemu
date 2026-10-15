@@ -1,0 +1,107 @@
+{
+ "tag": "evo2_1b_base_real-te-fp8",
+ "kind": "real upstream evo2.Evo2",
+ "model": "evo2_1b_base",
+ "fp8_projections": true,
+ "windows": [
+  {
+   "window": "p0",
+   "bp": 6538,
+   "logits_dtype": "torch.bfloat16",
+   "logits_shape": [
+    6538,
+    512
+   ],
+   "logits_sha256": "62ee11418c7327fb4d23d5d20f8e4a0b18d46e3525d63fede5842f1a228b35b8",
+   "cuda_event_s": 4.587,
+   "mean_next_logprob": -0.22533518075942993
+  },
+  {
+   "window": "p1",
+   "bp": 7056,
+   "logits_dtype": "torch.bfloat16",
+   "logits_shape": [
+    7056,
+    512
+   ],
+   "logits_sha256": "0e4146b39950ca17cd72649b74eec0ba4b6bb73ae70c10e71ab8a6f99a531b48",
+   "cuda_event_s": 1.605,
+   "mean_next_logprob": -0.7801355719566345
+  },
+  {
+   "window": "p2",
+   "bp": 6160,
+   "logits_dtype": "torch.bfloat16",
+   "logits_shape": [
+    6160,
+    512
+   ],
+   "logits_sha256": "7ae702e2f5e5f77c6636b8e0c9138b71ed8c3887bbca75efb026176c3dd136c6",
+   "cuda_event_s": 0.925,
+   "mean_next_logprob": -0.5599954724311829
+  },
+  {
+   "window": "p3",
+   "bp": 7616,
+   "logits_dtype": "torch.bfloat16",
+   "logits_shape": [
+    7616,
+    512
+   ],
+   "logits_sha256": "9d2856c85b63a1956b38cf2683d737e7811dc5752b64418f3ebecc380f03dfdf",
+   "cuda_event_s": 1.298,
+   "mean_next_logprob": -0.4443177282810211
+  },
+  {
+   "window": "w8k",
+   "bp": 8192,
+   "logits_dtype": "torch.bfloat16",
+   "logits_shape": [
+    8192,
+    512
+   ],
+   "logits_sha256": "1a5e4136c8b8531c2263bd6f630adc1dccb4cbaf330649e3b76764637a7acdbb",
+   "cuda_event_s": 1.588,
+   "mean_next_logprob": -0.3840143382549286
+  },
+  {
+   "window": "w2k",
+   "bp": 2048,
+   "logits_dtype": "torch.bfloat16",
+   "logits_shape": [
+    2048,
+    512
+   ],
+   "logits_sha256": "e0afe6c6c63c45001a923b2e70f61dcacd07e3b35fecaaf65555d9397a218c69",
+   "cuda_event_s": 0.279,
+   "mean_next_logprob": -0.20100508630275726
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA GeForce RTX 4060",
+  "capability": [
+   8,
+   9
+  ],
+  "sm_count": 24,
+  "nvidia_smi": "572.16, 2730 MHz, 115.00 W",
+  "versions": {
+   "python": "3.12.2",
+   "torch": "2.7.1+cu128",
+   "cuda": "12.8",
+   "transformer_engine": "2.3.0",
+   "transformer-engine": "2.3.0",
+   "evo2": "0.6.0",
+   "vtx": "1.1.0",
+   "flash-attn": "2.8.0.post2",
+   "nvidia-cublas-cu12": "12.8.3.14",
+   "triton": "3.3.1"
+  },
+  "env": {
+   "CUBLASLT_WORKSPACE_SIZE": null,
+   "CUBLAS_WORKSPACE_CONFIG": null,
+   "CUBLASLT_LOG_LEVEL": "2",
+   "NVTE_DISABLE_NVRTC": "1"
+  }
+ }
+}

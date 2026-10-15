@@ -21,9 +21,11 @@ your GPU matches a profile.
 - Using an experimental preset emits `ExperimentalPresetWarning` (a `UserWarning`) once per process and preset.
   The alias `blackwell` warns on every use: it fits the toolbox B200 `mma.sync` (HMMA-rewrite) vectors, it is
   NOT a model of sm_120 / RTX 5070 Ti, and NOT B200 cuBLAS.
-- The names `sm_120` and `rtx_blackwell` are not accepted: there is no hardware evidence for sm_120 FP8 numerics
-  yet. The bring-up runbook (docs/runbooks/sm120_bringup.md in the repository) describes how such evidence is
-  collected.
+- The names `sm_120` and `rtx_blackwell` are not accepted: sm_120 is not modelled (no preset, profile or split-K
+  table). Khattak and Mikaitis (arXiv:2512.07004v4, section 4.1.8, Tables 3-4) report RTX PRO 6000 (sm_120)
+  tensor-core numerics identical to the B200's, and probes on an RTX 5070 Ti are consistent with that model, but it
+  is not validated at GEMM level. The bring-up runbook (docs/runbooks/sm120_bringup.md in the repository) describes
+  how the remaining evidence is collected.
 - You can build your own `Preset(...)` (maturity `"custom"`), for example to test a hypothesis. A custom preset is
   never a profile default.
 
@@ -61,9 +63,10 @@ source:
 3. **table**: the shape and setting (M, N, K, formats, output dtype, fast/slow, workspace) is in the profile's
    recorded cuBLASLt heuristic table.
 4. **live-query**: the current GPU matches the profile, so cuBLASLt's own heuristic is queried.
-5. **envelope**: the shape lies outside the region where the table ever split for this setting (M*N above the
-   largest split M*N, or K below the smallest split K), so S = 1 is inferred. This is an inference, and the
-   decision's note says so. `MMAEMU_SPLITK_STRICT=1` (or `strict=True`) turns this step off.
+5. **envelope**: the shape's M*N is more than twice the largest M*N that split in the table for this setting, so
+   S = 1 is inferred (whatever K is). This is an inference, and the decision's note says so: on the RTX 4060,
+   cuBLASLt splits shapes up to 1.27 times that M*N, and at K below the smallest K that split in the table.
+   `MMAEMU_SPLITK_STRICT=1` (or `strict=True`) turns this step off.
 6. Otherwise `SplitKUnknownError`, whose message gives three ways out: pass `splitk=1`, pass `splitk=(S, scheme)`,
    or record the shape on the reference GPU with `tools/record_heuristics.py`.
 
@@ -75,27 +78,28 @@ pair) was never replayed on hardware, or when S > 1 on a profile whose split-K m
 
 ### The shipped table
 
-`heur_rtx4060_lt12.8.3.14` holds cuBLASLt 12.8.3.14's heuristic choices on the RTX 4060 for 906,600 queries over
-17,476 shapes (hardware recording `heur.lt_heuristic_12_8_3_14` of the ground truth). Facts measured on it while
-writing the v0.1 specification:
+`heur_rtx4060_lt12.8.3.14` holds 1,228,448 heuristic choices of cuBLASLt 12.8.3.14 on the RTX 4060 over 18,497
+shapes, merged from the ground truth's table (`heur.lt_heuristic_12_8_3_14`, 906,600 queries) and the recordings
+R2, R2x and R3:
 
-- 108,286 rows split K, with S in {2..10, 12, 14, 16, 24, 29} and customOption 0, 1 or 2;
-- a 0-byte workspace never splits (0 of 209,712 queries);
-- the alignment setting (none vs 256 bytes) never changes the choice (0 of 419,424 query pairs), so the lookup key
-  omits it;
-- the Evo 2 projection shapes, (K, N) = (1920, 5760), (4096, 12288) and (8192, 24576), never split at any recorded
-  workspace.
+- 125,980 rows split K, with S in {2..10, 12, 14, 16, 24, 29} and customOption 0, 1 or 2;
+- a 0-byte workspace never splits (0 of 307,112 workspace-0 rows);
+- the alignment setting (none vs 256 bytes) never changes the choice (0 of 1,422,624 query pairs), so the lookup
+  key omits it;
+- the Evo 2 projection shapes, (K, N) = (1920, 5760), (4096, 12288) and (8192, 24576), never split at 0, 1 or
+  4 MiB; at 32 MiB, (8192, 24576) splits at M = 65..74 with fp16 or fp8 outputs.
 
-Split envelopes of the e4m3-family settings (largest M*N that split, smallest K that split):
+Largest split M*N of the e4m3 x e4m3 settings (S = 1 is inferred only above twice this value):
 
 | Workspace | Output | Fast accumulation | Slow accumulation |
 |---|---|---|---|
-| 1 MiB | fp32 | M*N <= 100,352, K >= 1,824 | M*N <= 106,496, K >= 16 |
-| 1 MiB | bf16 | M*N <= 100,352, K >= 16 | M*N <= 131,072, K >= 2,048 |
-| 1 MiB | fp16 | M*N <= 135,168, K >= 2,048 | M*N <= 106,496, K >= 16 |
-| 4 MiB | all | M*N <= 983,040, K >= 16 .. 1,792 | M*N <= 983,040, K >= 16 .. 1,792 |
+| 1 MiB | fp32 | 100,352 | 106,496 |
+| 1 MiB | bf16 | 100,352 | 131,072 |
+| 1 MiB | fp16 | 135,168 | 106,496 |
+| 1 MiB | E4M3 | 131,072 | 98,304 |
+| 4 MiB | all | 983,040 | 983,040 |
 
-Inside an envelope, not every shape splits: a shape missing from the table raises instead of guessing.
+Below that bound, not every shape splits: a shape missing from the table raises instead of guessing.
 The table's per-setting envelopes and coverage are documented with the table itself (docs/splitk_tables.md in
 the repository).
 

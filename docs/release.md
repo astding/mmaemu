@@ -1,8 +1,9 @@
 # Releasing mmaemu
 
-The maintainer prepares and publishes a release. Nothing in this repository pushes, tags remotely or uploads: steps
-marked **[by hand]** publish something and are done by the maintainer by hand; every other step leaves a committed
-log.
+The maintainer prepares and publishes a release. No script here pushes or tags; the only upload to PyPI is
+release.yml's publish job, which runs on a v* tag pushed by hand and waits for approval of the `pypi` environment.
+docs.yml deploys the documentation site to GitHub Pages, and only once the repository is public. Steps marked
+**[by hand]** publish something and are done by the maintainer by hand; every other step leaves a committed log.
 
 The environment is the one of [testing.md](testing.md): a venv with torch 2.7.1+cu128, nvcc 12.8.61 for building the
 release fatbins, and a GPU lock (`$GPU`, i.e. `$MMAEMU_GPU_LOCK`). T2 and the Evo 2 check of T7 need the unpublished
@@ -106,25 +107,36 @@ maintainer decides when to switch its visibility.
 
    Pre-release CI runs the same way in the private repository `astding/mmaemu-ci`, which also only ever receives
    snapshots of candidate trees (each parented on the previous one). Never push a `v*` tag to either repository
-   before step 4: it starts the release workflow.
-2. **[by hand]** On PyPI, add a trusted publisher (pending publisher for a new project): project `mmaemu`, owner
+   before step 5: it starts the release workflow.
+2. **[by hand]** Documentation site, once `astding/mmaemu` is public: Settings → Pages → Build and deployment →
+   Source: **GitHub Actions**, then run the `docs` workflow (Actions → docs → Run workflow) and check
+   <https://astding.github.io/mmaemu/>. Its build job (`mkdocs build --strict`, mkdocs.yml) runs on every push and
+   pull request; its deploy job, the only one there with `pages: write` and `id-token: write`, is skipped while the
+   repository is private and deploys only master.
+3. **[by hand]** On PyPI, add a trusted publisher (pending publisher for a new project): project `mmaemu`, owner
    `astding`, repository `mmaemu`, workflow `release.yml`, environment `pypi`.
-3. **[by hand]** On GitHub, create the environment `pypi` with yourself as required reviewer, and protect `v*`
+4. **[by hand]** On GitHub, create the environment `pypi` with yourself as required reviewer, and protect `v*`
    tags (only maintainers may create them).
-4. **[by hand]** Push the tag: `git push https://github.com/astding/mmaemu.git refs/tags/v0.1.0`. The `release`
+5. **[by hand]** Push the tag: `git push https://github.com/astding/mmaemu.git refs/tags/v0.1.0`. The `release`
    workflow then:
    - job **build**: `tools/build_fatbin.py --check`, `tools/check_dist.py --verify-manifest` (committed fatbins vs
      manifest sha256), tag == `mmaemu/_version.py`, `python -m build --sdist --wheel`, `twine check --strict`,
      `tools/check_dist.py --require-fatbins --tag`, and uploads the `dist` artifact (and `SHA256SUMS`);
-   - job **publish** waits for the `pypi` environment approval. It is the only job with `id-token: write` and
-     uses `pypa/gh-action-pypi-publish` pinned by commit SHA (no API token).
-5. **[by hand]** Before approving: download the `dist` artifact of that run and validate it on the GPU:
+   - job **publish** waits for the `pypi` environment approval. It is the only job of release.yml and ci.yml with
+     `id-token: write` and uses `pypa/gh-action-pypi-publish` pinned by commit SHA (no API token).
+6. **[by hand]** Before approving: download the `dist` artifact of that run and validate it on the GPU:
 
        $GPU timeout 600 python tools/validate_release.py <download>/mmaemu-0.1.0-py3-none-any.whl
 
-   Compare its sha256 with the local build and with `SHA256SUMS`. Then approve the deployment.
-6. **[by hand]** Post-publish smoke test, in fresh venvs: `pip install mmaemu==0.1.0`, then `python -m mmaemu info`,
+   Compare its sha256 with the local build and with `SHA256SUMS` (build locally with the hatchling version named
+   in the CI wheel's `WHEEL` Generator line, otherwise the files differ in that line). Then approve the
+   deployment.
+7. **[by hand]** Post-publish smoke test, in fresh venvs: `pip install mmaemu==0.1.0`, then `python -m mmaemu info`,
    once with CPU torch and once with CUDA torch. Then evo2-anywhere pins `mmaemu>=0.1,<0.2`.
+8. **[by hand]** Archive on Zenodo (a DOI for citing): at zenodo.org, log in with GitHub and switch on
+   `astding/mmaemu` in the GitHub settings (public repositories only), then on GitHub create a Release from the tag
+   `v0.1.0` (Releases → Draft a new release). Zenodo archives the release and takes its metadata from
+   `CITATION.cff`. Add the DOI it mints to `CITATION.cff` (`doi:`) and to the README in the next snapshot.
 
 `workflow_dispatch` runs the build job only (a dry run of the release); it never publishes.
 
@@ -137,7 +149,10 @@ maintainer decides when to switch its visibility.
     tools/ci_local.sh lint dist  # selected jobs
     MMAEMU_CI_TORCH="2.6.0 2.7.1" tools/ci_local.sh test   # T0/T1 against other CPU torch versions
 
-The full Python x torch matrix runs only on GitHub.
+The full Python x torch matrix runs only on GitHub. The documentation site (the build job of docs.yml):
+
+    python -m pip install mkdocs==1.6.1 mkdocs-material==9.7.7   # in a scratch venv
+    mkdocs build --strict --site-dir build/site
 
 ## 6. After a release
 

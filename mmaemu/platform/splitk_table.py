@@ -1,7 +1,7 @@
 """Split-K resolution: which (S, reduction scheme) cuBLAS uses for a GEMM on the profile's reference platform.
 
     resolve_splitk(M, N, K, *, a_dtype, b_dtype, out_dtype, use_fast_accum, profile=None, splitk="auto",
-                   layout_std=True, strict=None) -> SplitDecision
+                   layout_std=True, strict=None, dry=False) -> SplitDecision
 
 Resolution order (docs/splitk_tables.md):
   1. explicit: splitk is 1, a SplitK or an (S, scheme) tuple. An int > 1 without a scheme raises ValueError.
@@ -10,15 +10,16 @@ Resolution order (docs/splitk_tables.md):
      (numSplitsK, customOption); customOption 0 or 2 -> "serial", 1 -> "pairwise" ("table").
   4. the current CUDA device is the profile's reference platform (profile.matches_device): live cuBLASLt heuristic
      query through mmaemu.platform.cublaslt with the profile's workspace and alignment ("live-query").
-  5. outside the split envelope of the setting (ws, out, fast, fmt pair) -- M*N above the largest M*N that split,
-     or K below the smallest K that split -- and not strict: S = 1 ("envelope"; an inference, said in the note).
-     A setting absent from the table uses the union envelope of the same (ws, fast, fmt pair) over output dtypes.
+  5. M*N above ENVELOPE_MARGIN (2) times the largest M*N that split in the setting (ws, out, fast, fmt pair), and
+     not strict: S = 1 ("envelope"; an inference, said in the note). K plays no part. A setting absent from the
+     table uses the union envelope of the same (ws, fast, fmt pair) over output dtypes.
   6. otherwise SplitKUnknownError, naming the setting and the envelope, with three ways out.
 Zero-size GEMMs (M, N or K = 0) resolve to S = 1 before step 3 (nothing is accumulated; r6.zero_dims).
 Profiles without a table (hopper, b200) have no envelope: "auto" always raises.
 UnverifiedSplitWarning is emitted once per combination when the (fast, S, scheme, out, fmt pair) combination was
 never replayed on hardware (verified_split_combos.json), or when S > 1 on a profile whose splitk_maturity is
-"experimental". strict defaults to $MMAEMU_SPLITK_STRICT == "1".
+"experimental"; dry=True (mmaemu.explain) warns every time and does not use up the once. strict defaults to
+$MMAEMU_SPLITK_STRICT == "1".
 
 Package data (mmaemu/platform/data, written by tools/export_splitk_table.py): <table_id>.npz (columns M N K fa fb out
 fast ws splitK custom algo tile stages reduction swizzle; align dropped after asserting invariance), <table_id>.json
@@ -60,6 +61,10 @@ FMTS = {"float8_e4m3fn": "e4m3", "float8_e5m2": "e5m2", "e4m3": "e4m3", "e5m2": 
 OUT_CODES = {"float32": 0, "bfloat16": 1, "float16": 2, "float8_e4m3fn": 3, "float8_e5m2": 4}
 FMT_CODES = {"e4m3": 0, "e5m2": 1}
 _KEY_LIMIT = 1 << 21
+# Step 5 infers S = 1 only for M*N above this multiple of the setting's largest split M*N. On the RTX 4060, cuBLASLt
+# splits shapes with M*N up to 1.27 times that value, and below the smallest split K of the table's K grid
+# (docs/validation_logs/2026-10-14/splitk-envelope).
+ENVELOPE_MARGIN = 2
 
 
 @dataclass(frozen=True)
@@ -206,21 +211,36 @@ def _current_device():
     return 0
 
 
-def _warn(p: Profile, fast, S, scheme, out, pair, verified, source):
+def _warn(p: Profile, fast, S, scheme, out, pair, verified, source, dry=False):
     if verified and not (S > 1 and p.splitk_maturity == "experimental"):
         return
     key = (p.name, bool(fast), S, scheme, out, pair)
-    if key in _WARNED:
-        return
-    _WARNED.add(key)
+    if not dry:
+        if key in _WARNED:
+            return
+        _WARNED.add(key)
     why = ("this (fast, S, scheme, out, format pair) combination was never replayed on hardware"
            if not verified else f"split-K decisions of profile {p.name} are experimental")
     warnings.warn(f"mmaemu split-K S={S} scheme={scheme} ({'fast' if fast else 'slow'} accumulation, out {out}, "
                   f"{pair}, source {source}, profile {p.name}): {why}", UnverifiedSplitWarning, stacklevel=3)
 
 
+def _envelope(table: SplitTable, M, N, ws, out, fast, fa, fb) -> tuple[bool, dict | None, str]:
+    """(step 5 infers S = 1 for an M x N output, the setting's envelope or None, its description). K plays no part."""
+    env, how = table.envelope(ws, out, fast, fa, fb)
+    setting = f"(ws={ws} B, out={out}, {'fast' if fast else 'slow'} accumulation, {fa}x{fb})"
+    if env is None:
+        return False, None, f"no envelope for setting {setting}: {how}"
+    if not env["split_rows"]:
+        return True, env, f"split envelope of setting {setting} [{how}]: none of its {env['rows']} rows split"
+    mx = env["max_split_MN"]
+    return M * N > ENVELOPE_MARGIN * mx, env, (
+        f"inference bound {ENVELOPE_MARGIN} x {mx} = {ENVELOPE_MARGIN * mx} of setting {setting} [{how}] (largest "
+        f"split M*N {mx}; {env['split_rows']} of {env['rows']} rows split)")
+
+
 def resolve_splitk(M, N, K, *, a_dtype, b_dtype, out_dtype, use_fast_accum, profile=None, splitk="auto",
-                   layout_std=True, strict=None) -> SplitDecision:
+                   layout_std=True, strict=None, dry=False) -> SplitDecision:
     """Resolve the split-K decision for torch._scaled_mm(a[M,K], b[K,N]) on the profile's platform (see module
     docstring). out_dtype None means a_dtype (torch's default)."""
     p = get_profile(profile)
@@ -248,11 +268,11 @@ def resolve_splitk(M, N, K, *, a_dtype, b_dtype, out_dtype, use_fast_accum, prof
                                  f"({splitk}, 'pairwise')")
             sk = SplitK(int(splitk), "none")
         elif isinstance(splitk, tuple) and len(splitk) == 2:
-            sk = SplitK(int(splitk[0]), splitk[1])
+            sk = SplitK(splitk[0], splitk[1])
         else:
             raise TypeError(f"splitk must be 'auto', 1, a SplitK or an (S, scheme) tuple, got {splitk!r}")
         ver = sk.S == 1 or (fast, sk.S, sk.scheme, out, pair) in verified_set
-        _warn(p, fast, sk.S, sk.scheme, out, pair, ver, "explicit")
+        _warn(p, fast, sk.S, sk.scheme, out, pair, ver, "explicit", dry)
         return SplitDecision(sk.S, sk.scheme, "explicit", ver, None, "given by the caller")
     # 2. workspace 0
     if p.workspace_bytes == 0:
@@ -275,7 +295,7 @@ def resolve_splitk(M, N, K, *, a_dtype, b_dtype, out_dtype, use_fast_accum, prof
             S = int(row["splitK"])
             scheme = "none" if S <= 1 else _scheme_of(row["custom"])
             ver = S == 1 or (fast, S, scheme, out, pair) in verified_set
-            _warn(p, fast, S, scheme, out, pair, ver, "table")
+            _warn(p, fast, S, scheme, out, pair, ver, "table", dry)
             return SplitDecision(S, scheme, "table", ver, table.id,
                                  f"table row: algo {row['algo']}, tile {row['tile']}, numSplitsK {S}, customOption "
                                  f"{row['custom']}")
@@ -288,25 +308,21 @@ def resolve_splitk(M, N, K, *, a_dtype, b_dtype, out_dtype, use_fast_accum, prof
             S = int(r["splitK"])
             scheme = "none" if S <= 1 else _scheme_of(r["custom"])
             ver = S == 1 or (fast, S, scheme, out, pair) in verified_set
-            _warn(p, fast, S, scheme, out, pair, ver, "live-query")
+            _warn(p, fast, S, scheme, out, pair, ver, "live-query", dry)
             return SplitDecision(S, scheme, "live-query", ver, None,
                                  f"live cuBLASLt heuristic on {p.gpu_name}: algo {r['algo']}, tile {r['tile']}, "
                                  f"numSplitsK {S}, customOption {r['custom']}")
     # 5. envelope
-    env, how = table.envelope(ws, out, fast, fa, fb)
-    setting = f"(ws={ws} B, out={out}, {'fast' if fast else 'slow'} accumulation, {pair})"
-    if env is not None:
-        mx, mk = env["max_split_MN"], env["min_split_K"]
-        outside = (not env["split_rows"]) or M * N > mx or K < mk
-        env_s = (f"split envelope of setting {setting} [{how}]: max split M*N = {mx}, min split K = {mk}, "
-                 f"{env['split_rows']} of {env['rows']} rows split")
-        if outside and not strict:
-            return SplitDecision(1, "none", "envelope", True, table.id,
-                                 f"inference: outside the {env_s} (M*N = {M * N}, K = {K})")
+    outside, env, env_s = _envelope(table, M, N, ws, out, fast, fa, fb)
+    if outside and not strict:
+        return SplitDecision(1, "none", "envelope", True, table.id,
+                             f"inference: M*N = {M * N} is above the {env_s}")
+    if env is None:
+        reason = "the table has no rows for this setting"
+    elif outside:
+        reason = "strict mode (MMAEMU_SPLITK_STRICT=1 or strict=True)"
     else:
-        env_s = f"no envelope for setting {setting}: {how}"
-    reason = "strict mode (MMAEMU_SPLITK_STRICT=1 or strict=True)" if (env is not None and strict) else \
-        "the shape is inside the split envelope but not in the table"
+        reason = f"the shape is not in the table and M*N = {M * N} is not above the inference bound"
     raise SplitKUnknownError(
         f"split-K decision unknown for M={M} N={N} K={K} on profile {p.name!r}: {reason}; {env_s}. Ways out: pass "
         f"splitk=1 if the call is known to be unsplit; splitk=(S, 'serial'|'pairwise') if the split is known; or "

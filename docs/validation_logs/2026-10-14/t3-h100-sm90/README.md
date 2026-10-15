@@ -3,8 +3,9 @@
 Verdict: every per-file run exits 0 (`summary.txt`). Tests that need the ground truth were skipped, so this run does
 not include the device-independence check.
 
-- Hardware: NVIDIA H100 PCIe (sm_90, 114 SMs, 80 GB), driver 570.148.08, on a rented x86_64 Ubuntu 22.04 host.
-- Software: torch 2.7.1+cu128, cuBLASLt 12.8.3.14, Python 3.12.15.
+- Hardware: NVIDIA H100 PCIe (sm_90, 114 SMs), rented; torch 2.7.1+cu128, CUDA 12.8 (`fixed-fp8.json`, `fixed-fp8.log`).
+- Software: this run did not record the driver, Python or cuBLASLt; the Evo 2 baseline on the rented H100 the same
+  day recorded driver 570.148.08, Python 3.12.15 and cuBLASLt 12.8.3.14 (`../evo2-h100-sm90/windows.json`).
 - Code under test: the tree of 69cd231 (`git archive`), with the frozen release fatbins (rc1/v0.1.0, which include
   sm_90 SASS).
 - Command: `PYTHON=<venv>/bin/python tools/run_gpu_tests.sh --out <dir>`. `MMAEMU_TRUTH_DIR` and `MMAEMU_AUDIT_DIR`

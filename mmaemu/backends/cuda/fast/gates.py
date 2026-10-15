@@ -32,8 +32,8 @@ GEMM level against reference results.  A gate never approximates: any difference
        the tcemu audit's verify-p2-int-mixed-3/analyse.py (hw part) with vectors.py structural().
     2. gemm: v9 on the same 8 GEMM cases.
 
-Reference results of the GEMM checks are stored in data/gate_gemm_v1.npz (uint32 bit patterns, no pickle): the
-float64 reference takes ~14 s on 4 CPU threads for 130x136x1936, far above the 2 s budget of a gate.  Their inputs come
+Reference results of the GEMM checks are stored in data/gate_gemm_v1.npz (uint32 bit patterns, no pickle), so a gate
+does not run the CPU reference.  Their inputs come
 from a self-contained integer generator (splitmix64), so they do not depend on torch's RNG; the file records the
 sha256 of every input, the test suite recomputes every expected matrix with the mmaemu reference
 (tests/test_gates_hmma.py) and ``python -m mmaemu.backends.cuda.fast.gates --write-gemm-data`` regenerates it.

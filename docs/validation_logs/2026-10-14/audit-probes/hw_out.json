@@ -1,0 +1,8677 @@
+{
+ "a01": [
+  {
+   "i": 0,
+   "key": [
+    144,
+    80,
+    2048,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    2,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 1,
+   "key": [
+    160,
+    80,
+    2048,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    2,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 2,
+   "key": [
+    256,
+    96,
+    3072,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    2,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 3,
+   "key": [
+    240,
+    80,
+    3072,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 4,
+   "key": [
+    240,
+    96,
+    3072,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 5,
+   "key": [
+    112,
+    224,
+    3072,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 6,
+   "key": [
+    128,
+    224,
+    3072,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 7,
+   "key": [
+    160,
+    16,
+    2048,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 8,
+   "key": [
+    96,
+    48,
+    1904,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 9,
+   "key": [
+    64,
+    192,
+    2048,
+    1,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 10,
+   "key": [
+    208,
+    32,
+    2048,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 11,
+   "key": [
+    16,
+    112,
+    1904,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 12,
+   "key": [
+    176,
+    144,
+    3072,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 13,
+   "key": [
+    160,
+    48,
+    1904,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 14,
+   "key": [
+    224,
+    32,
+    1776,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 15,
+   "key": [
+    208,
+    48,
+    2048,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 16,
+   "key": [
+    224,
+    112,
+    3072,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 17,
+   "key": [
+    128,
+    96,
+    2048,
+    0,
+    1,
+    3,
+    0
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 18,
+   "key": [
+    128,
+    96,
+    2048,
+    0,
+    0,
+    3,
+    0
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 19,
+   "key": [
+    192,
+    64,
+    1920,
+    0,
+    1,
+    4,
+    0
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 20,
+   "key": [
+    64,
+    96,
+    1920,
+    0,
+    1,
+    4,
+    0
+   ],
+   "dec": [
+    1,
+    "none"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 21,
+   "key": [
+    80,
+    160,
+    2048,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    2,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 22,
+   "key": [
+    80,
+    144,
+    2048,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    2,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 23,
+   "key": [
+    96,
+    256,
+    3072,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    2,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 24,
+   "key": [
+    112,
+    208,
+    4096,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    2,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 25,
+   "key": [
+    96,
+    192,
+    5760,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    2,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 26,
+   "key": [
+    96,
+    192,
+    5760,
+    0,
+    1,
+    1,
+    1
+   ],
+   "dec": [
+    2,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 27,
+   "key": [
+    64,
+    272,
+    3088,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    2,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 28,
+   "key": [
+    96,
+    192,
+    3072,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    2,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 29,
+   "key": [
+    96,
+    160,
+    4096,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    2,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 30,
+   "key": [
+    96,
+    224,
+    4096,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    2,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 31,
+   "key": [
+    80,
+    240,
+    4096,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    2,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 32,
+   "key": [
+    160,
+    80,
+    8192,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    2,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 33,
+   "key": [
+    192,
+    80,
+    8192,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    2,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 34,
+   "key": [
+    176,
+    80,
+    8192,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    2,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 35,
+   "key": [
+    80,
+    240,
+    3072,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 36,
+   "key": [
+    80,
+    256,
+    3072,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 37,
+   "key": [
+    208,
+    112,
+    4096,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "pairwise"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 38,
+   "key": [
+    192,
+    96,
+    5760,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "pairwise"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 39,
+   "key": [
+    192,
+    96,
+    5760,
+    1,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "pairwise"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 40,
+   "key": [
+    272,
+    64,
+    3088,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "pairwise"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 41,
+   "key": [
+    192,
+    96,
+    3072,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "pairwise"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 42,
+   "key": [
+    160,
+    96,
+    4096,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "pairwise"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 43,
+   "key": [
+    96,
+    224,
+    6144,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 44,
+   "key": [
+    96,
+    256,
+    3072,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 45,
+   "key": [
+    80,
+    208,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 46,
+   "key": [
+    80,
+    224,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 47,
+   "key": [
+    192,
+    96,
+    5760,
+    0,
+    1,
+    1,
+    0
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 48,
+   "key": [
+    96,
+    208,
+    3072,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 49,
+   "key": [
+    80,
+    224,
+    3072,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 50,
+   "key": [
+    96,
+    208,
+    3072,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 51,
+   "key": [
+    96,
+    224,
+    6144,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 52,
+   "key": [
+    96,
+    208,
+    6144,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 53,
+   "key": [
+    96,
+    256,
+    4096,
+    0,
+    1,
+    3,
+    0
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 54,
+   "key": [
+    96,
+    256,
+    4096,
+    0,
+    0,
+    3,
+    0
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 55,
+   "key": [
+    96,
+    256,
+    4096,
+    1,
+    0,
+    4,
+    0
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 56,
+   "key": [
+    96,
+    256,
+    4096,
+    0,
+    1,
+    4,
+    0
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 57,
+   "key": [
+    96,
+    256,
+    4096,
+    1,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 58,
+   "key": [
+    96,
+    256,
+    4096,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 59,
+   "key": [
+    96,
+    256,
+    4096,
+    1,
+    0,
+    3,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 60,
+   "key": [
+    96,
+    256,
+    4096,
+    0,
+    1,
+    3,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 61,
+   "key": [
+    96,
+    256,
+    4096,
+    0,
+    1,
+    4,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 62,
+   "key": [
+    96,
+    256,
+    4096,
+    1,
+    0,
+    4,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 63,
+   "key": [
+    160,
+    128,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    4,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 64,
+   "key": [
+    176,
+    112,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    4,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 65,
+   "key": [
+    176,
+    112,
+    6144,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    4,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 66,
+   "key": [
+    192,
+    112,
+    6144,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    4,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 67,
+   "key": [
+    80,
+    192,
+    6144,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    4,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 68,
+   "key": [
+    96,
+    192,
+    6144,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    2,
+    "serial"
+   ],
+   "dec_swapped": [
+    4,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 69,
+   "key": [
+    160,
+    176,
+    3072,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 70,
+   "key": [
+    224,
+    128,
+    3072,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 71,
+   "key": [
+    64,
+    96,
+    1920,
+    1,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 72,
+   "key": [
+    32,
+    48,
+    1856,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 73,
+   "key": [
+    192,
+    48,
+    2048,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 74,
+   "key": [
+    192,
+    64,
+    2048,
+    0,
+    1,
+    1,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 75,
+   "key": [
+    48,
+    144,
+    1856,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 76,
+   "key": [
+    48,
+    240,
+    2048,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 77,
+   "key": [
+    48,
+    176,
+    1872,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 78,
+   "key": [
+    32,
+    256,
+    1824,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 79,
+   "key": [
+    48,
+    240,
+    2048,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 80,
+   "key": [
+    80,
+    256,
+    3072,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 81,
+   "key": [
+    64,
+    192,
+    1920,
+    0,
+    0,
+    3,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 82,
+   "key": [
+    96,
+    128,
+    2048,
+    0,
+    1,
+    3,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 83,
+   "key": [
+    64,
+    192,
+    1920,
+    0,
+    1,
+    4,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 84,
+   "key": [
+    96,
+    64,
+    1920,
+    0,
+    1,
+    4,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    1,
+    "none"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 85,
+   "key": [
+    256,
+    96,
+    4096,
+    0,
+    1,
+    1,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 86,
+   "key": [
+    256,
+    80,
+    6144,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 87,
+   "key": [
+    240,
+    96,
+    4096,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 88,
+   "key": [
+    224,
+    96,
+    4096,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 89,
+   "key": [
+    240,
+    80,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 90,
+   "key": [
+    208,
+    80,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 91,
+   "key": [
+    208,
+    96,
+    3072,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 92,
+   "key": [
+    256,
+    80,
+    4096,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 93,
+   "key": [
+    224,
+    80,
+    4096,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 94,
+   "key": [
+    208,
+    80,
+    3072,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 95,
+   "key": [
+    208,
+    96,
+    6144,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 96,
+   "key": [
+    240,
+    80,
+    6144,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 97,
+   "key": [
+    256,
+    96,
+    4096,
+    1,
+    0,
+    3,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 98,
+   "key": [
+    256,
+    96,
+    4096,
+    0,
+    0,
+    3,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 99,
+   "key": [
+    256,
+    96,
+    4096,
+    1,
+    0,
+    4,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 100,
+   "key": [
+    256,
+    96,
+    4096,
+    0,
+    1,
+    4,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 101,
+   "key": [
+    128,
+    256,
+    4096,
+    1,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "serial"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 102,
+   "key": [
+    128,
+    256,
+    4096,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "serial"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 103,
+   "key": [
+    128,
+    256,
+    4096,
+    0,
+    1,
+    3,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "serial"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 104,
+   "key": [
+    128,
+    256,
+    4096,
+    1,
+    0,
+    3,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "serial"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 105,
+   "key": [
+    128,
+    256,
+    4096,
+    0,
+    1,
+    4,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "serial"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 106,
+   "key": [
+    128,
+    256,
+    4096,
+    1,
+    0,
+    4,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "serial"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 107,
+   "key": [
+    192,
+    64,
+    8192,
+    1,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 108,
+   "key": [
+    192,
+    64,
+    8192,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 109,
+   "key": [
+    128,
+    96,
+    8192,
+    0,
+    1,
+    1,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 110,
+   "key": [
+    128,
+    96,
+    8192,
+    1,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 111,
+   "key": [
+    112,
+    96,
+    12288,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 112,
+   "key": [
+    128,
+    96,
+    8192,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 113,
+   "key": [
+    112,
+    80,
+    8192,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 114,
+   "key": [
+    192,
+    64,
+    8192,
+    0,
+    1,
+    2,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 115,
+   "key": [
+    128,
+    80,
+    4096,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 116,
+   "key": [
+    128,
+    96,
+    5760,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 117,
+   "key": [
+    192,
+    64,
+    8192,
+    0,
+    1,
+    3,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 118,
+   "key": [
+    128,
+    96,
+    8192,
+    0,
+    1,
+    3,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 119,
+   "key": [
+    128,
+    96,
+    8192,
+    1,
+    0,
+    3,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 120,
+   "key": [
+    128,
+    96,
+    8192,
+    0,
+    0,
+    3,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 121,
+   "key": [
+    192,
+    64,
+    8192,
+    1,
+    0,
+    4,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 122,
+   "key": [
+    128,
+    96,
+    8192,
+    1,
+    0,
+    4,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 123,
+   "key": [
+    128,
+    96,
+    5760,
+    1,
+    0,
+    4,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 124,
+   "key": [
+    128,
+    96,
+    5760,
+    0,
+    1,
+    4,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 125,
+   "key": [
+    96,
+    144,
+    8192,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 126,
+   "key": [
+    144,
+    80,
+    8192,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 127,
+   "key": [
+    224,
+    32,
+    8192,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 128,
+   "key": [
+    240,
+    32,
+    6144,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 129,
+   "key": [
+    144,
+    16,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 130,
+   "key": [
+    192,
+    16,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 131,
+   "key": [
+    160,
+    32,
+    6144,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 132,
+   "key": [
+    144,
+    32,
+    4096,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 133,
+   "key": [
+    240,
+    16,
+    8192,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 134,
+   "key": [
+    240,
+    16,
+    12288,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 135,
+   "key": [
+    208,
+    16,
+    6144,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 136,
+   "key": [
+    176,
+    32,
+    6144,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 137,
+   "key": [
+    256,
+    16,
+    12288,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 138,
+   "key": [
+    192,
+    16,
+    6144,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 139,
+   "key": [
+    208,
+    48,
+    12288,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 140,
+   "key": [
+    224,
+    48,
+    12288,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 141,
+   "key": [
+    208,
+    48,
+    12288,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 142,
+   "key": [
+    256,
+    16,
+    16384,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 143,
+   "key": [
+    176,
+    16,
+    6144,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    7,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 144,
+   "key": [
+    144,
+    32,
+    6144,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    7,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 145,
+   "key": [
+    112,
+    16,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    7,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 146,
+   "key": [
+    80,
+    16,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    7,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 147,
+   "key": [
+    128,
+    16,
+    6144,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 148,
+   "key": [
+    112,
+    16,
+    6144,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 149,
+   "key": [
+    192,
+    16,
+    8192,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 150,
+   "key": [
+    160,
+    16,
+    6144,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 151,
+   "key": [
+    144,
+    32,
+    6144,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 152,
+   "key": [
+    144,
+    16,
+    6144,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 153,
+   "key": [
+    160,
+    64,
+    12288,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 154,
+   "key": [
+    192,
+    48,
+    12288,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 155,
+   "key": [
+    64,
+    16,
+    4096,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    3,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    10,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 156,
+   "key": [
+    240,
+    80,
+    4096,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    3,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 157,
+   "key": [
+    256,
+    96,
+    4096,
+    0,
+    1,
+    2,
+    1
+   ],
+   "dec": [
+    3,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 158,
+   "key": [
+    256,
+    96,
+    4096,
+    0,
+    0,
+    3,
+    1
+   ],
+   "dec": [
+    3,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 159,
+   "key": [
+    256,
+    96,
+    4096,
+    0,
+    1,
+    3,
+    1
+   ],
+   "dec": [
+    3,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 160,
+   "key": [
+    256,
+    96,
+    4096,
+    1,
+    0,
+    4,
+    1
+   ],
+   "dec": [
+    3,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 161,
+   "key": [
+    256,
+    96,
+    4096,
+    0,
+    1,
+    4,
+    1
+   ],
+   "dec": [
+    3,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 162,
+   "key": [
+    256,
+    128,
+    4096,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    3,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 163,
+   "key": [
+    256,
+    128,
+    4096,
+    0,
+    1,
+    2,
+    1
+   ],
+   "dec": [
+    3,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 164,
+   "key": [
+    256,
+    128,
+    4096,
+    0,
+    1,
+    3,
+    1
+   ],
+   "dec": [
+    3,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 165,
+   "key": [
+    256,
+    128,
+    4096,
+    0,
+    0,
+    3,
+    1
+   ],
+   "dec": [
+    3,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 166,
+   "key": [
+    256,
+    128,
+    4096,
+    0,
+    1,
+    4,
+    1
+   ],
+   "dec": [
+    3,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 167,
+   "key": [
+    256,
+    128,
+    4096,
+    1,
+    0,
+    4,
+    1
+   ],
+   "dec": [
+    3,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 168,
+   "key": [
+    64,
+    192,
+    8192,
+    0,
+    1,
+    0,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 169,
+   "key": [
+    64,
+    192,
+    8192,
+    1,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 170,
+   "key": [
+    96,
+    128,
+    8192,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 171,
+   "key": [
+    80,
+    128,
+    8192,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 172,
+   "key": [
+    96,
+    112,
+    8192,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 173,
+   "key": [
+    80,
+    112,
+    12288,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 174,
+   "key": [
+    80,
+    128,
+    8192,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 175,
+   "key": [
+    80,
+    112,
+    8192,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 176,
+   "key": [
+    96,
+    128,
+    8192,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 177,
+   "key": [
+    96,
+    128,
+    4096,
+    0,
+    1,
+    2,
+    1
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 178,
+   "key": [
+    64,
+    192,
+    8192,
+    0,
+    0,
+    3,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 179,
+   "key": [
+    64,
+    192,
+    8192,
+    0,
+    1,
+    3,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 180,
+   "key": [
+    96,
+    128,
+    4096,
+    0,
+    0,
+    3,
+    1
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 181,
+   "key": [
+    96,
+    128,
+    8192,
+    0,
+    0,
+    3,
+    1
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 182,
+   "key": [
+    64,
+    192,
+    8192,
+    1,
+    0,
+    4,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 183,
+   "key": [
+    64,
+    192,
+    8192,
+    0,
+    1,
+    4,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 184,
+   "key": [
+    96,
+    128,
+    8192,
+    1,
+    0,
+    4,
+    1
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 185,
+   "key": [
+    96,
+    128,
+    4096,
+    1,
+    0,
+    4,
+    1
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 186,
+   "key": [
+    192,
+    16,
+    12288,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 187,
+   "key": [
+    192,
+    32,
+    8192,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 188,
+   "key": [
+    192,
+    32,
+    16384,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 189,
+   "key": [
+    96,
+    112,
+    12288,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 190,
+   "key": [
+    192,
+    32,
+    8192,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 191,
+   "key": [
+    192,
+    32,
+    8192,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 192,
+   "key": [
+    176,
+    32,
+    8192,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 193,
+   "key": [
+    160,
+    64,
+    12288,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 194,
+   "key": [
+    176,
+    48,
+    12288,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 195,
+   "key": [
+    144,
+    16,
+    8192,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 196,
+   "key": [
+    160,
+    16,
+    8192,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 197,
+   "key": [
+    176,
+    32,
+    12288,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 198,
+   "key": [
+    144,
+    32,
+    8192,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 199,
+   "key": [
+    64,
+    160,
+    12288,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    4,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 200,
+   "key": [
+    80,
+    160,
+    8192,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    4,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 201,
+   "key": [
+    80,
+    144,
+    8192,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    4,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 202,
+   "key": [
+    80,
+    176,
+    8192,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    4,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 203,
+   "key": [
+    112,
+    176,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    4,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 204,
+   "key": [
+    80,
+    192,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    4,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 205,
+   "key": [
+    96,
+    192,
+    6144,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    4,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 206,
+   "key": [
+    80,
+    176,
+    6144,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    4,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 207,
+   "key": [
+    192,
+    96,
+    6144,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    4,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 208,
+   "key": [
+    192,
+    80,
+    6144,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    4,
+    "serial"
+   ],
+   "dec_swapped": [
+    2,
+    "serial"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 209,
+   "key": [
+    80,
+    144,
+    8192,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    4,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 210,
+   "key": [
+    80,
+    160,
+    8192,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    4,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 211,
+   "key": [
+    16,
+    240,
+    8192,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 212,
+   "key": [
+    32,
+    240,
+    8192,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 213,
+   "key": [
+    16,
+    176,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 214,
+   "key": [
+    16,
+    192,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 215,
+   "key": [
+    32,
+    96,
+    4096,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 216,
+   "key": [
+    16,
+    208,
+    6144,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 217,
+   "key": [
+    16,
+    192,
+    6144,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 218,
+   "key": [
+    32,
+    208,
+    8192,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 219,
+   "key": [
+    16,
+    208,
+    6144,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 220,
+   "key": [
+    32,
+    240,
+    8192,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 221,
+   "key": [
+    16,
+    256,
+    8192,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 222,
+   "key": [
+    48,
+    80,
+    4096,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 223,
+   "key": [
+    32,
+    192,
+    8192,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 224,
+   "key": [
+    16,
+    192,
+    8192,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 225,
+   "key": [
+    32,
+    192,
+    16384,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 226,
+   "key": [
+    112,
+    80,
+    12288,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 227,
+   "key": [
+    32,
+    192,
+    8192,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 228,
+   "key": [
+    32,
+    176,
+    8192,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 229,
+   "key": [
+    16,
+    176,
+    8192,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 230,
+   "key": [
+    16,
+    224,
+    16384,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "serial"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 231,
+   "key": [
+    16,
+    240,
+    16384,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "serial"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 232,
+   "key": [
+    128,
+    32,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    7,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 233,
+   "key": [
+    48,
+    96,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    7,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 234,
+   "key": [
+    64,
+    96,
+    16384,
+    0,
+    1,
+    2,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    7,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 235,
+   "key": [
+    64,
+    96,
+    16384,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    7,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 236,
+   "key": [
+    64,
+    96,
+    16384,
+    1,
+    0,
+    3,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    7,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 237,
+   "key": [
+    64,
+    96,
+    16384,
+    0,
+    1,
+    3,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    7,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 238,
+   "key": [
+    64,
+    96,
+    16384,
+    1,
+    0,
+    4,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    7,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 239,
+   "key": [
+    64,
+    96,
+    16384,
+    0,
+    1,
+    4,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    7,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 240,
+   "key": [
+    48,
+    80,
+    6144,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 241,
+   "key": [
+    64,
+    80,
+    12288,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 242,
+   "key": [
+    112,
+    16,
+    8192,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 243,
+   "key": [
+    64,
+    80,
+    16384,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 244,
+   "key": [
+    48,
+    80,
+    8192,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 245,
+   "key": [
+    48,
+    96,
+    16384,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 246,
+   "key": [
+    48,
+    96,
+    12288,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 247,
+   "key": [
+    128,
+    32,
+    6144,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 248,
+   "key": [
+    64,
+    80,
+    8192,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 249,
+   "key": [
+    64,
+    96,
+    16384,
+    1,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 250,
+   "key": [
+    16,
+    192,
+    8192,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 251,
+   "key": [
+    32,
+    192,
+    12288,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 252,
+   "key": [
+    64,
+    96,
+    12288,
+    0,
+    0,
+    3,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 253,
+   "key": [
+    64,
+    96,
+    8192,
+    0,
+    0,
+    3,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 254,
+   "key": [
+    64,
+    96,
+    8192,
+    1,
+    0,
+    3,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 255,
+   "key": [
+    64,
+    96,
+    8192,
+    0,
+    0,
+    3,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 256,
+   "key": [
+    64,
+    96,
+    16384,
+    0,
+    1,
+    4,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 257,
+   "key": [
+    64,
+    96,
+    12288,
+    0,
+    1,
+    4,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 258,
+   "key": [
+    64,
+    96,
+    12288,
+    0,
+    1,
+    4,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 259,
+   "key": [
+    64,
+    96,
+    12288,
+    1,
+    0,
+    4,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 260,
+   "key": [
+    128,
+    32,
+    16384,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    10,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 261,
+   "key": [
+    128,
+    32,
+    12288,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    10,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 262,
+   "key": [
+    112,
+    32,
+    6144,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    10,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 263,
+   "key": [
+    112,
+    16,
+    6144,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    10,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 264,
+   "key": [
+    112,
+    16,
+    8192,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    10,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 265,
+   "key": [
+    112,
+    32,
+    8192,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    10,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 266,
+   "key": [
+    112,
+    32,
+    16384,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 267,
+   "key": [
+    112,
+    16,
+    16384,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 268,
+   "key": [
+    112,
+    16,
+    16384,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 269,
+   "key": [
+    128,
+    16,
+    16384,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 270,
+   "key": [
+    112,
+    16,
+    8192,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 271,
+   "key": [
+    112,
+    16,
+    12288,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 272,
+   "key": [
+    112,
+    32,
+    16384,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 273,
+   "key": [
+    112,
+    32,
+    12288,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    6,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 274,
+   "key": [
+    48,
+    224,
+    12288,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    6,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 275,
+   "key": [
+    48,
+    208,
+    12288,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    6,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 276,
+   "key": [
+    48,
+    208,
+    12288,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    6,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 277,
+   "key": [
+    16,
+    240,
+    16384,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    6,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 278,
+   "key": [
+    240,
+    16,
+    16384,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    6,
+    "serial"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 279,
+   "key": [
+    224,
+    16,
+    16384,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    6,
+    "serial"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": true
+  },
+  {
+   "i": 280,
+   "key": [
+    32,
+    160,
+    6144,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    7,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 281,
+   "key": [
+    16,
+    160,
+    6144,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    7,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 282,
+   "key": [
+    16,
+    128,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    7,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 283,
+   "key": [
+    16,
+    80,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    7,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 284,
+   "key": [
+    80,
+    48,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    7,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 285,
+   "key": [
+    32,
+    112,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    7,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 286,
+   "key": [
+    96,
+    64,
+    16384,
+    0,
+    1,
+    2,
+    1
+   ],
+   "dec": [
+    7,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 287,
+   "key": [
+    96,
+    64,
+    16384,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    7,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 288,
+   "key": [
+    96,
+    64,
+    16384,
+    0,
+    1,
+    3,
+    1
+   ],
+   "dec": [
+    7,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 289,
+   "key": [
+    96,
+    64,
+    16384,
+    0,
+    0,
+    3,
+    1
+   ],
+   "dec": [
+    7,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 290,
+   "key": [
+    96,
+    64,
+    16384,
+    0,
+    1,
+    4,
+    1
+   ],
+   "dec": [
+    7,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 291,
+   "key": [
+    96,
+    64,
+    16384,
+    1,
+    0,
+    4,
+    1
+   ],
+   "dec": [
+    7,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 292,
+   "key": [
+    16,
+    64,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    7,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    10,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 293,
+   "key": [
+    32,
+    48,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    7,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    10,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 294,
+   "key": [
+    32,
+    128,
+    12288,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    7,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    10,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 295,
+   "key": [
+    96,
+    112,
+    12288,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 296,
+   "key": [
+    32,
+    176,
+    8192,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 297,
+   "key": [
+    16,
+    192,
+    8192,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 298,
+   "key": [
+    16,
+    144,
+    6144,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 299,
+   "key": [
+    16,
+    160,
+    6144,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 300,
+   "key": [
+    16,
+    176,
+    6144,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 301,
+   "key": [
+    48,
+    176,
+    12288,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 302,
+   "key": [
+    64,
+    160,
+    12288,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 303,
+   "key": [
+    16,
+    144,
+    8192,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 304,
+   "key": [
+    32,
+    176,
+    12288,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 305,
+   "key": [
+    32,
+    144,
+    8192,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 306,
+   "key": [
+    16,
+    144,
+    8192,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 307,
+   "key": [
+    176,
+    48,
+    12288,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    4,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 308,
+   "key": [
+    96,
+    64,
+    12288,
+    0,
+    1,
+    0,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 309,
+   "key": [
+    80,
+    48,
+    8192,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 310,
+   "key": [
+    16,
+    112,
+    8192,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 311,
+   "key": [
+    16,
+    128,
+    16384,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 312,
+   "key": [
+    96,
+    64,
+    12288,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 313,
+   "key": [
+    80,
+    64,
+    8192,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 314,
+   "key": [
+    96,
+    64,
+    16384,
+    0,
+    1,
+    1,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 315,
+   "key": [
+    96,
+    64,
+    16384,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 316,
+   "key": [
+    32,
+    128,
+    16384,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 317,
+   "key": [
+    80,
+    112,
+    12288,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 318,
+   "key": [
+    144,
+    16,
+    8192,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 319,
+   "key": [
+    176,
+    16,
+    16384,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 320,
+   "key": [
+    96,
+    64,
+    5760,
+    1,
+    0,
+    3,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 321,
+   "key": [
+    96,
+    64,
+    5760,
+    0,
+    1,
+    3,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 322,
+   "key": [
+    96,
+    64,
+    12288,
+    0,
+    0,
+    3,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 323,
+   "key": [
+    96,
+    64,
+    8192,
+    0,
+    1,
+    3,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 324,
+   "key": [
+    96,
+    64,
+    8192,
+    1,
+    0,
+    4,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 325,
+   "key": [
+    96,
+    64,
+    5760,
+    1,
+    0,
+    4,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 326,
+   "key": [
+    96,
+    64,
+    8192,
+    0,
+    1,
+    4,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 327,
+   "key": [
+    96,
+    64,
+    8192,
+    1,
+    0,
+    4,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 328,
+   "key": [
+    80,
+    32,
+    16384,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    9,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 329,
+   "key": [
+    80,
+    32,
+    12288,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    9,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 330,
+   "key": [
+    96,
+    32,
+    8192,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    10,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 331,
+   "key": [
+    80,
+    32,
+    6144,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    10,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 332,
+   "key": [
+    96,
+    32,
+    6144,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    10,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 333,
+   "key": [
+    80,
+    32,
+    6144,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    10,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 334,
+   "key": [
+    80,
+    64,
+    12288,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    10,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 335,
+   "key": [
+    80,
+    16,
+    12288,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    10,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 336,
+   "key": [
+    80,
+    32,
+    8192,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 337,
+   "key": [
+    80,
+    32,
+    16384,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 338,
+   "key": [
+    16,
+    48,
+    8208,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 339,
+   "key": [
+    16,
+    48,
+    8192,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 340,
+   "key": [
+    80,
+    16,
+    12288,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 341,
+   "key": [
+    96,
+    16,
+    8192,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 342,
+   "key": [
+    96,
+    32,
+    16384,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 343,
+   "key": [
+    96,
+    32,
+    8192,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 344,
+   "key": [
+    32,
+    144,
+    16384,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    8,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    14,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 345,
+   "key": [
+    48,
+    192,
+    12288,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    8,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 346,
+   "key": [
+    64,
+    160,
+    12288,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    8,
+    "serial"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 347,
+   "key": [
+    32,
+    80,
+    16384,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    9,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 348,
+   "key": [
+    32,
+    96,
+    12288,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    9,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 349,
+   "key": [
+    16,
+    32,
+    12288,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    9,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    16,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 350,
+   "key": [
+    16,
+    32,
+    16384,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    9,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    16,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 351,
+   "key": [
+    16,
+    64,
+    4096,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    10,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    3,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 352,
+   "key": [
+    32,
+    128,
+    12288,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    10,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 353,
+   "key": [
+    16,
+    128,
+    16384,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    10,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 354,
+   "key": [
+    32,
+    112,
+    6144,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    10,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 355,
+   "key": [
+    16,
+    112,
+    6144,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    10,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 356,
+   "key": [
+    32,
+    112,
+    8192,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    10,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 357,
+   "key": [
+    16,
+    112,
+    8192,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    10,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 358,
+   "key": [
+    64,
+    16,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    10,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    7,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 359,
+   "key": [
+    48,
+    32,
+    6144,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    10,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    7,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 360,
+   "key": [
+    128,
+    32,
+    12288,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    10,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    7,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 361,
+   "key": [
+    32,
+    80,
+    6144,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    10,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 362,
+   "key": [
+    16,
+    96,
+    6144,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    10,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 363,
+   "key": [
+    16,
+    96,
+    6144,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    10,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 364,
+   "key": [
+    32,
+    80,
+    6144,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    10,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 365,
+   "key": [
+    16,
+    80,
+    16384,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    10,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 366,
+   "key": [
+    32,
+    80,
+    16384,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    10,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 367,
+   "key": [
+    16,
+    32,
+    12288,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    10,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    14,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 368,
+   "key": [
+    48,
+    16,
+    16384,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    10,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    14,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 369,
+   "key": [
+    16,
+    112,
+    16384,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 370,
+   "key": [
+    32,
+    112,
+    16384,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 371,
+   "key": [
+    32,
+    128,
+    8192,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 372,
+   "key": [
+    32,
+    128,
+    12288,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 373,
+   "key": [
+    16,
+    112,
+    12288,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 374,
+   "key": [
+    16,
+    112,
+    8192,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 375,
+   "key": [
+    32,
+    112,
+    8192,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 376,
+   "key": [
+    16,
+    128,
+    12288,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    6,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 377,
+   "key": [
+    16,
+    80,
+    8192,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 378,
+   "key": [
+    16,
+    96,
+    16384,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 379,
+   "key": [
+    16,
+    96,
+    16384,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 380,
+   "key": [
+    32,
+    96,
+    12288,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 381,
+   "key": [
+    16,
+    96,
+    16384,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 382,
+   "key": [
+    16,
+    96,
+    12288,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 383,
+   "key": [
+    16,
+    96,
+    16384,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 384,
+   "key": [
+    16,
+    80,
+    12288,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 385,
+   "key": [
+    64,
+    16,
+    12288,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    14,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 386,
+   "key": [
+    64,
+    16,
+    16384,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    14,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 387,
+   "key": [
+    48,
+    16,
+    16384,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    14,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 388,
+   "key": [
+    64,
+    32,
+    16384,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    14,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 389,
+   "key": [
+    48,
+    16,
+    16384,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    14,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 390,
+   "key": [
+    48,
+    16,
+    8192,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    14,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 391,
+   "key": [
+    48,
+    16,
+    16384,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    16,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 392,
+   "key": [
+    48,
+    32,
+    16384,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    12,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    16,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 393,
+   "key": [
+    144,
+    32,
+    16384,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    14,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    8,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 394,
+   "key": [
+    32,
+    16,
+    12288,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    14,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    10,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 395,
+   "key": [
+    16,
+    48,
+    16384,
+    0,
+    0,
+    2,
+    1
+   ],
+   "dec": [
+    14,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    10,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 396,
+   "key": [
+    32,
+    64,
+    12288,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    14,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 397,
+   "key": [
+    16,
+    48,
+    8208,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dec": [
+    14,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 398,
+   "key": [
+    16,
+    48,
+    12288,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    14,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 399,
+   "key": [
+    32,
+    48,
+    16384,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dec": [
+    14,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 400,
+   "key": [
+    16,
+    48,
+    8192,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    14,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 401,
+   "key": [
+    16,
+    64,
+    8192,
+    0,
+    0,
+    2,
+    0
+   ],
+   "dec": [
+    14,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 402,
+   "key": [
+    32,
+    16,
+    16384,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    16,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    9,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 403,
+   "key": [
+    32,
+    16,
+    12288,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dec": [
+    16,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    9,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 404,
+   "key": [
+    32,
+    48,
+    12288,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    16,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  },
+  {
+   "i": 405,
+   "key": [
+    16,
+    48,
+    16384,
+    0,
+    0,
+    1,
+    0
+   ],
+   "dec": [
+    16,
+    "pairwise"
+   ],
+   "dec_swapped": [
+    12,
+    "pairwise"
+   ],
+   "row_eq_col": false
+  }
+ ],
+ "misc": [
+  {
+   "name": "expand",
+   "ok": true,
+   "dtype": "torch.bfloat16",
+   "shape": [
+    64,
+    48
+   ],
+   "stride": [
+    48,
+    1
+   ]
+  },
+  {
+   "name": "stride2",
+   "ok": true,
+   "dtype": "torch.bfloat16",
+   "shape": [
+    64,
+    48
+   ],
+   "stride": [
+    48,
+    1
+   ]
+  },
+  {
+   "name": "M0_float64",
+   "ok": true,
+   "dtype": "torch.float64",
+   "shape": [
+    0,
+    48
+   ],
+   "stride": [
+    48,
+    1
+   ]
+  },
+  {
+   "name": "N0_float64",
+   "ok": true,
+   "dtype": "torch.float64",
+   "shape": [
+    64,
+    0
+   ],
+   "stride": [
+    1,
+    1
+   ]
+  },
+  {
+   "name": "K0_float64",
+   "ok": false,
+   "error": "KeyError: 8"
+  },
+  {
+   "name": "full_float64",
+   "ok": false,
+   "error": "RuntimeError: CUDA error: CUBLAS_STATUS_NOT_SUPPORTED when calling `cublasLtMatmulAlgoGetHeuristic( ltHandle, computeDesc.descriptor(), Adesc.descriptor(), Bdesc.descriptor(), Cdesc.descriptor(), Ddesc.descriptor()"
+  },
+  {
+   "name": "M0_int32",
+   "ok": true,
+   "dtype": "torch.int32",
+   "shape": [
+    0,
+    48
+   ],
+   "stride": [
+    48,
+    1
+   ]
+  },
+  {
+   "name": "N0_int32",
+   "ok": true,
+   "dtype": "torch.int32",
+   "shape": [
+    64,
+    0
+   ],
+   "stride": [
+    1,
+    1
+   ]
+  },
+  {
+   "name": "K0_int32",
+   "ok": true,
+   "dtype": "torch.int32",
+   "shape": [
+    64,
+    48
+   ],
+   "stride": [
+    48,
+    1
+   ]
+  },
+  {
+   "name": "full_int32",
+   "ok": false,
+   "error": "RuntimeError: CUDA error: CUBLAS_STATUS_NOT_SUPPORTED when calling `cublasLtMatmulAlgoGetHeuristic( ltHandle, computeDesc.descriptor(), Adesc.descriptor(), Bdesc.descriptor(), Cdesc.descriptor(), Ddesc.descriptor()"
+  },
+  {
+   "name": "K0_scale2_bf16",
+   "ok": true,
+   "dtype": "torch.bfloat16",
+   "shape": [
+    64,
+    48
+   ],
+   "stride": [
+    48,
+    1
+   ]
+  },
+  {
+   "name": "K0_bias_bf16",
+   "ok": true,
+   "dtype": "torch.bfloat16",
+   "shape": [
+    64,
+    48
+   ],
+   "stride": [
+    48,
+    1
+   ]
+  },
+  {
+   "name": "K0_e4m3_sr",
+   "ok": true,
+   "dtype": "torch.float8_e4m3fn",
+   "shape": [
+    64,
+    48
+   ],
+   "stride": [
+    48,
+    1
+   ]
+  }
+ ]
+}

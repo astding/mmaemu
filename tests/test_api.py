@@ -12,7 +12,8 @@ import pytest
 import torch
 
 from mmaemu.api import CallPlan, accumulate, explain, scaled_mm
-from mmaemu.errors import ExperimentalPresetWarning, MmaemuError, ReferenceRejectsError, UnsupportedFeatureError
+from mmaemu.errors import (ExperimentalPresetWarning, MmaemuError, ReferenceRejectsError, SplitKUnknownError,
+                           UnsupportedFeatureError)
 from mmaemu.model import presets as P
 from mmaemu.testing import assert_bitwise_equal
 
@@ -80,6 +81,8 @@ def test_type_errors():
         scaled_mm(a, b, ONE, ONE, torch.bfloat16)          # positional 5th argument is bias, not out_dtype
     with pytest.raises(TypeError):
         scaled_mm(a, b, ONE, ONE, use_fast_accum=1)
+    with pytest.raises(TypeError):
+        scaled_mm(a, b, ONE, ONE, use_fast_accum=np.bool_(True))      # torch 2.7.1 rejects numpy.bool_ too
     with pytest.raises(TypeError):
         scaled_mm(a, b, ONE, ONE, out_dtype="bfloat16")
     with pytest.raises(TypeError):
@@ -275,6 +278,86 @@ def test_out_semantics():
     assert_bitwise_equal(nc.contiguous(), ref)
 
 
+def test_out_without_unit_stride_is_returned_unchanged():
+    # torch 2.7.1 computes into a contiguous copy of such an out= and never copies it back (RTX 4060: an out of
+    # strides (64, 2) prefilled with NaN stays NaN)
+    a, b = _mats(16, 64, 32)
+    o = torch.full((16, 64), float("nan"), dtype=torch.bfloat16)[:, ::2]
+    assert any("returned unchanged" in w for w in explain(a, b, ONE, ONE, out_dtype=torch.bfloat16, out=o).warnings)
+    with pytest.warns(UserWarning, match="returned unchanged"):
+        y = scaled_mm(a, b, ONE, ONE, out_dtype=torch.bfloat16, out=o, splitk=1)
+    assert y is o and o.isnan().all()
+    # the result is discarded, so a shape whose split-K decision is unknown does not raise either
+    a2, b2 = _mats(17, 4112, 112)
+    with pytest.raises(SplitKUnknownError):
+        scaled_mm(a2, b2, ONE, ONE, out_dtype=torch.float32)
+    o2 = torch.full((17, 224), float("nan"))[:, ::2]
+    with pytest.warns(UserWarning, match="returned unchanged"):
+        assert scaled_mm(a2, b2, ONE, ONE, out_dtype=torch.float32, out=o2) is o2
+    assert o2.isnan().all()
+    assert explain(a2, b2, ONE, ONE, out_dtype=torch.float32, out=o2).backend == "none (out= is returned unchanged)"
+    o0 = torch.full((16, 64), float("nan"), dtype=torch.bfloat16)[:, ::2]
+    scaled_mm(torch.zeros(16, 0).to(E4), torch.zeros(32, 0).to(E4).t(), ONE, ONE, out=o0)
+    assert not o0.isnan().any() and not o0.any()           # K = 0: torch zeroes out= itself, whatever its strides
+
+
+def test_column_major_out_uses_the_swapped_split():
+    # torch 2.7.1 computes a column-major out= as mat1 x mat2, so cuBLASLt's heuristic sees the row-major problem
+    # (N, M, K) with the formats swapped (RTX 4060: 406 of 406 such calls; T3p checks it live)
+    a, b = _mats(16, 8192, 48)
+    col = torch.empty(48, 16, dtype=torch.bfloat16).t()
+    row = explain(a, b, ONE, ONE, out_dtype=torch.bfloat16).split
+    swapped = explain(b.t(), a.t(), ONE, ONE, out_dtype=torch.bfloat16).split
+    assert (row.S, row.scheme, swapped.S, swapped.scheme) == (8, "pairwise", 12, "pairwise")
+    d = explain(a, b, ONE, ONE, out_dtype=torch.bfloat16, out=col).split
+    assert (d.S, d.scheme, d.source) == (12, "pairwise", "table")
+    y = scaled_mm(a, b, ONE, ONE, out_dtype=torch.bfloat16, out=col)
+    assert_bitwise_equal(y.contiguous(), scaled_mm(a, b, ONE, ONE, out_dtype=torch.bfloat16, splitk=(12, "pairwise")))
+    # a padded column-major out is still column-major; a wrong-shape out is resized to row-major first
+    padded = torch.empty(48, 32, dtype=torch.bfloat16)[:, :16].t()
+    assert explain(a, b, ONE, ONE, out_dtype=torch.bfloat16, out=padded).split.S == 12
+    resized = torch.empty(16, 48, dtype=torch.bfloat16).t()
+    assert explain(a, b, ONE, ONE, out_dtype=torch.bfloat16, out=resized).split.S == 8
+
+
+def test_mat1_neither_row_nor_column_major_is_copied():
+    # torch 2.7.1 (prepare_matrix_for_cublas) copies such a mat1 to a contiguous one; measured on the RTX 4060
+    g = torch.Generator().manual_seed(7)
+    x = (torch.randn(1, 64, generator=g) * 40).clamp(-448, 448).to(E4)
+    big = (torch.randn(32, 128, generator=g) * 40).clamp(-448, 448).to(E4)
+    _, b = _mats()
+    for mat1 in (x.expand(32, 64), big[:, ::2]):
+        assert_bitwise_equal(scaled_mm(mat1, b, ONE, ONE, splitk=1), scaled_mm(mat1.contiguous(), b, ONE, ONE,
+                                                                                splitk=1))
+    with pytest.raises(ReferenceRejectsError, match="row-major and column-major"):
+        scaled_mm(big[:, :64].t().contiguous().t(), b, ONE, ONE, splitk=1)        # column-major mat1
+
+
+@pytest.mark.parametrize("od", [torch.float64, torch.int32])
+def test_zero_size_returns_before_the_out_dtype_check(od):
+    # torch returns early for M, N or K = 0 whatever the out dtype; cuBLASLt rejects the dtype only for real GEMMs
+    for M, K, N in ((0, 32, 16), (16, 32, 0), (16, 0, 16)):
+        a, b = torch.zeros(M, K).to(E4), torch.zeros(N, K).to(E4).t()
+        y = scaled_mm(a, b, ONE, ONE, out_dtype=od)
+        assert y.shape == (M, N) and y.dtype == od and not y.any()
+    a, b = _mats()
+    with pytest.raises(ReferenceRejectsError, match="not supported by cuBLASLt"):
+        scaled_mm(a, b, ONE, ONE, out_dtype=od)
+
+
+@pytest.mark.parametrize("dt", ["float8_e4m3fnuz", "float8_e5m2fnuz", "float8_e8m0fnu"])
+def test_zero_size_accepts_every_torch_float8_dtype(dt):
+    # torch's isFloat8Type admits fnuz and e8m0: zero sizes return (RTX 4060), real GEMMs fail on CUDA
+    if not hasattr(torch, dt):
+        pytest.skip(f"torch {torch.__version__} has no {dt}")
+    D = getattr(torch, dt)
+    for M, K, N in ((0, 32, 16), (16, 0, 16), (16, 32, 0)):
+        y = scaled_mm(torch.ones(M, K).to(D), torch.zeros(N, K).to(E4).t(), ONE, ONE, out_dtype=torch.float32)
+        assert y.shape == (M, N) and not y.any()
+    with pytest.raises(ReferenceRejectsError, match="other than float8_e4m3fn"):
+        scaled_mm(torch.ones(16, 32).to(D), torch.zeros(16, 32).to(E4).t(), ONE, ONE, out_dtype=torch.float32)
+
+
 # --------------------------------------------------------------------------------------------------------------------
 # accumulate: any K, alignment, layout; dtype and K checks
 def test_accumulate_any_k_alignment_layout():
@@ -301,6 +384,7 @@ def test_accumulate_checks():
         accumulate(a, torch.zeros(4, 48).to(E4), use_fast_accum=True)
     with pytest.raises(TypeError):
         accumulate(a, a, use_fast_accum="yes")
+    assert accumulate(a, a, use_fast_accum=np.bool_(True), splitk=1).shape == (4, 4)    # accumulate is not torch
 
 
 # --------------------------------------------------------------------------------------------------------------------
@@ -311,6 +395,7 @@ def test_explain():
     assert isinstance(cp, CallPlan) and cp.validation == "ok"
     assert cp.profile == "ada-rtx4060-torch" and cp.preset == "ada" and cp.preset_maturity == "validated"
     assert cp.split.S == 1 and cp.split.source == "explicit" and cp.backend == "reference"
+    assert cp.fallbacks == ["cuda: tensors on cpu"]           # the selection's own reasons for this call
     cp = explain(a, b, ONE, ONE, out_dtype=E5)
     assert cp.validation[0] == "ReferenceRejectsError"
     cp = explain(a, b, ONE, ONE, torch.zeros(32, dtype=torch.bfloat16), out_dtype=torch.bfloat16, splitk=1)

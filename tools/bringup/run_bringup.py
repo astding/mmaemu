@@ -61,10 +61,11 @@ class Bringup:
         self.rows = []
         self.out = None
 
-    def call(self, gate, name, argv, *, gpu=True, env=None, accepted=(0,)):
+    def call(self, gate, name, argv, *, gpu=True, env=None, accepted=(0,), timeout=580):
         target = self.out / gate
         target.mkdir(exist_ok=True)
-        command = (self.gpu if gpu and not self.inherited_lock else []) + ["timeout", "580", *argv]
+        cap = ["timeout", str(timeout)] if timeout is not None else []
+        command = (self.gpu if gpu and not self.inherited_lock else []) + cap + list(argv)
         t0 = time.monotonic()
         with (target / f"{name}.log").open("x") as log:
             proc = subprocess.run(command, cwd=ROOT, env=self.env | (env or {}), stdout=log,
@@ -79,6 +80,12 @@ class Bringup:
     def python(self, gate, name, script, *argv, **kwargs):
         self.call(gate, name, [PY, script, *argv], **kwargs)
 
+    def need_truth(self, gate):
+        truth = self.env.get("MMAEMU_TRUTH_DIR")
+        if not truth or not Path(truth).is_dir():
+            raise RuntimeError(f"{gate} needs the hardware ground truth: set MMAEMU_TRUTH_DIR (now {truth!r}); without "
+                               "it tests/test_device_independence.py skips every test and exits 0")
+
     def stage(self, gate):
         out = self.out / gate
         out.mkdir(exist_ok=True)
@@ -91,11 +98,13 @@ class Bringup:
         elif gate == "G1":
             self.call(gate, "cpu", [PY, "-m", "pytest", "-q", "-p", "no:cacheprovider", "tests", "-m", CPU],
                       gpu=False, env={"CUDA_VISIBLE_DEVICES": ""})
+            # no overall cap: run_gpu_tests.sh takes the GPU lock and a 600 s timeout for each test file itself
             self.call(gate, "t3", ["bash", "tools/run_gpu_tests.sh", "--out", str(out / "t3")],
-                      gpu=False, env={"PYTHON": PY})
+                      gpu=False, env={"PYTHON": PY}, timeout=None)
         elif gate == "G2":
             self.call(gate, "selftest", [PY, "-m", "mmaemu", "selftest", "--force", "--json", str(out / "selftest.json")])
         elif gate == "G3":
+            self.need_truth(gate)
             self.call(gate, "independence", [PY, "-m", "pytest", "-q", "-p", "no:cacheprovider",
                                            "tests/test_device_independence.py"],
                       env={"MMAEMU_ALLOW_GATED_KERNELS": "1", "MMAEMU_DI_FULL": "cuda:v1,cuda:v4,cuda:v9"})
@@ -149,6 +158,7 @@ class Bringup:
             bench = consumer / "benchmarks/bench.py"
             if not bench.is_file():
                 raise RuntimeError(f"consumer benchmark missing: {bench}; pass --evo2-root")
+            self.need_truth(gate)
             self.call(gate, "gemm-truth", [PY, "-m", "pytest", "-q", "-p", "no:cacheprovider",
                                          "tests/test_device_independence.py"])
             for mode in ("native", "emulate", "compat", "auto"):

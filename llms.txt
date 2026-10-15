@@ -1,0 +1,29 @@
+# mmaemu
+
+> Bit-accurate emulation of NVIDIA tensor-core FP8 GEMM numerics for PyTorch: the bits of `torch._scaled_mm` on a
+> reference GPU (RTX 4060), computed on a CPU or another CUDA GPU.
+
+One reference platform (RTX 4060, cuBLASLt 12.8.3.14) is modelled and validated against 173 recordings of its
+hardware. `mmaemu.scaled_mm` takes the arguments of `torch._scaled_mm`.
+
+## Docs
+
+- [README](https://raw.githubusercontent.com/astding/mmaemu/master/README.md): what mmaemu is for, results, install, quickstart, related work
+- [User guide](https://raw.githubusercontent.com/astding/mmaemu/master/docs/user_guide.md): a first GEMM, profiles, split-K, backends, use inside a model, testing
+- [API reference](https://raw.githubusercontent.com/astding/mmaemu/master/docs/api.md): every public function and class, the exceptions and warnings, the command line
+- [FAQ](https://raw.githubusercontent.com/astding/mmaemu/master/docs/faq.md): short answers to the first questions
+- [Evo 2 on other GPUs](https://raw.githubusercontent.com/astding/mmaemu/master/docs/evo2.md): routing Evo 2's FP8 projections through mmaemu (1B, and 40B with the weights in host RAM), measured results
+- [Semantics](https://raw.githubusercontent.com/astding/mmaemu/master/docs/semantics.md): exactly what is computed, and what raises
+- [Limitations](https://raw.githubusercontent.com/astding/mmaemu/master/docs/limitations.md): what v0.1 does not do
+
+## Examples
+
+- [Evo 2 1B notebook](https://github.com/astding/mmaemu/blob/master/examples/evo2_blackwell.ipynb): upstream Evo 2 1B on an RTX 5070 Ti with its FP8 projections computed by mmaemu
+- [Evo 2 with the weights in host RAM](https://github.com/astding/mmaemu/blob/master/examples/evo2_offload.py): upstream Evo 2 40B on a 16 GB GPU with its FP8 projections computed by mmaemu: the upstream test and the scoring of sequences
+
+## Optional
+
+- [Validation](https://raw.githubusercontent.com/astding/mmaemu/master/docs/validation.md): the hardware recordings and the test results behind every claim
+- [Presets and profiles](https://raw.githubusercontent.com/astding/mmaemu/master/docs/presets_profiles.md): tensor-core models, reference platforms, split-K resolution, environment variables
+- [Performance](https://raw.githubusercontent.com/astding/mmaemu/master/docs/performance.md): how speed is measured and the kernel throughput
+- [Changelog](https://raw.githubusercontent.com/astding/mmaemu/master/CHANGELOG.md)

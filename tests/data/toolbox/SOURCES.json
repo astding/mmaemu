@@ -1,6 +1,11 @@
 {
  "format": "mmaemu-toolbox-vectors/1",
  "origin": "https://github.com/north-numerical-computing/MATLAB-tensor-core (validation vectors)",
+ "upstream": {
+  "commit": "79143bd29a4a71dc7c2ed47741b63572498b17f6",
+  "paths": "model_validation/<GPU>/<FMT>/<file>; the prototype's copy, named in 'sources', was tests/data/<GPU>/<FMT>/<file>",
+  "checked": "the sha256 of model_validation/Ada/E4M3/a_Ada_E4M3.txt and d_Ada_fp32.txt at that commit equal the ones in 'sources' (2026-10-14)"
+ },
  "licence": "BSD-2-Clause, Copyright (c) 2025 Faizan A. Khattak and Mantas Mikaitis (LICENCE.MATLAB-tensor-core)",
  "layout": "a, b: uint32 fp32 bit patterns [5000, 32] holding FP8 values; c, d: uint32 fp32 bits [5000]; d = MMA(a, b) + c as recorded by the toolbox authors on each GPU (H100/H200 recorded with c = 0)",
  "npz_sha256": "ad04412a02ac5110cf692254cc4e5000ee02720999e376de890c3e0834c37cd1",

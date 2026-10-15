@@ -1,0 +1,137 @@
+{
+ "model": "evo2_40b",
+ "kind": "official path (TE FP8), upstream blocks one at a time",
+ "seconds": 36.158989906311035,
+ "fp8_projection_modules_per_block_max": 1,
+ "test_evo2_mean": {
+  "loss": 0.2159423828125,
+  "accuracy": 0.9166673570871353,
+  "loss_fp32": 0.21601060777902603
+ },
+ "sequences": [
+  {
+   "name": "p0",
+   "length": 6538,
+   "loss": 0.15234375,
+   "accuracy": 0.9426342248916626,
+   "loss_fp32": 0.1522609293460846,
+   "logits_sha256": "57f2822836f3d3d4a578b3165df61c0034ba5f521a1647dceb2bf712e3538c8b",
+   "mean_next_logprob": -0.1522609293460846
+  },
+  {
+   "name": "p1",
+   "length": 7056,
+   "loss": 0.17578125,
+   "accuracy": 0.9373493790626526,
+   "loss_fp32": 0.17624801397323608,
+   "logits_sha256": "8862a3325e7e37afb5ac36039dbecd9ee12efd3aef007004312f28ba89231ef5",
+   "mean_next_logprob": -0.17624801397323608
+  },
+  {
+   "name": "p2",
+   "length": 6160,
+   "loss": 0.4453125,
+   "accuracy": 0.8225361704826355,
+   "loss_fp32": 0.44505205750465393,
+   "logits_sha256": "dd69bf946c7651587c31dc685041b396ff3c48f43406560ad74228995441ef3e",
+   "mean_next_logprob": -0.44505205750465393
+  },
+  {
+   "name": "p3",
+   "length": 7616,
+   "loss": 0.09033203125,
+   "accuracy": 0.9641496539115906,
+   "loss_fp32": 0.09048143029212952,
+   "logits_sha256": "226501116c9c8345458ba4865217fbe14440110c15d8e9289b4eeb05c1c06d5d",
+   "mean_next_logprob": -0.09048143029212952
+  },
+  {
+   "name": "w8k",
+   "length": 8192,
+   "loss": 0.158203125,
+   "accuracy": 0.9385911226272583,
+   "loss_fp32": 0.15814542770385742,
+   "logits_sha256": "210ae93a619af4cfd27a6f73dae3146e486ea03e9cde45caacdc94174c1b72a6",
+   "mean_next_logprob": -0.15814542770385742
+  },
+  {
+   "name": "w4k",
+   "length": 4096,
+   "loss": 0.060302734375,
+   "accuracy": 0.9858364462852478,
+   "loss_fp32": 0.06031782925128937,
+   "logits_sha256": "a7aed49df9a6b546e5c29eb82c72101ebeab8ddcce0ef32d33d537204fe9d9e9",
+   "mean_next_logprob": -0.060317832976579666
+  },
+  {
+   "name": "w2k",
+   "length": 2048,
+   "loss": 0.072265625,
+   "accuracy": 0.9824132919311523,
+   "loss_fp32": 0.07208830118179321,
+   "logits_sha256": "8abb2cf0cb85cf8b6b9292230969bed4f7983c7cd98059e37a3b2fb4bd21ef88",
+   "mean_next_logprob": -0.07208828628063202
+  },
+  {
+   "name": "p0_4k",
+   "length": 4096,
+   "loss": 0.060302734375,
+   "accuracy": 0.9858364462852478,
+   "loss_fp32": 0.06031782925128937,
+   "logits_sha256": "a7aed49df9a6b546e5c29eb82c72101ebeab8ddcce0ef32d33d537204fe9d9e9",
+   "mean_next_logprob": -0.060317832976579666
+  },
+  {
+   "name": "p1_4k",
+   "length": 4096,
+   "loss": 0.1328125,
+   "accuracy": 0.954090416431427,
+   "loss_fp32": 0.13261502981185913,
+   "logits_sha256": "62483bbecfa14ad8d4a2b611e4d0366ac3056ea393c1feaf36426f8339b1dfaa",
+   "mean_next_logprob": -0.13261504471302032
+  },
+  {
+   "name": "p2_4k",
+   "length": 4096,
+   "loss": 0.431640625,
+   "accuracy": 0.8256410956382751,
+   "loss_fp32": 0.43082454800605774,
+   "logits_sha256": "36e14b7d516772b0c827c45de32be99130aa1901a207f41db50cdf27ceb0faf2",
+   "mean_next_logprob": -0.43082454800605774
+  },
+  {
+   "name": "p3_4k",
+   "length": 4096,
+   "loss": 0.130859375,
+   "accuracy": 0.9467644095420837,
+   "loss_fp32": 0.1307823807001114,
+   "logits_sha256": "c1fe5cd00d2ce8bea9dd1e82cbf95e95f862b246605693bb99d6dfe41f803a5a",
+   "mean_next_logprob": -0.13078241050243378
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA H100 PCIe",
+  "capability": [
+   9,
+   0
+  ],
+  "sm_count": 114,
+  "nvidia_smi": "570.148.08, 1755 MHz, 350.00 W",
+  "versions": {
+   "python": "3.12.15",
+   "torch": "2.7.1+cu128",
+   "cuda": "12.8",
+   "transformer_engine": "2.3.0",
+   "transformer_engine_cu12": "2.3.0",
+   "transformer_engine_torch": "2.3.0",
+   "evo2": "0.6.0",
+   "vtx": "1.1.0",
+   "flash_attn": "2.8.0.post2",
+   "nvidia-cublas-cu12": "12.8.3.14"
+  },
+  "env": {
+   "NVTE_DISABLE_NVRTC": "1",
+   "CUBLASLT_LOG_LEVEL": null
+  }
+ }
+}

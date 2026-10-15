@@ -256,10 +256,18 @@ def test_explain_unavailable(fake):
     assert cli.main(["explain", "16", "16", "32", "--device", "cpu"]) == D.EXIT_UNAVAILABLE
 
 
-def test_usage_error_exit_2():
+@pytest.mark.parametrize("argv", [["explain", "16"], ["explain", "16", "-8", "32"], ["explain", "16", "8", "x"],
+                                  ["explain", "16", "16", "32", "--splitk", "two"],
+                                  ["explain", "16", "16", "32", "--splitk", "2.5,serial"]])
+def test_usage_error_exit_2(argv):
     with pytest.raises(SystemExit) as e:
-        cli.main(["explain", "16"])
+        cli.main(argv)
     assert e.value.code == 2
+
+
+def test_explain_unusable_device_exits_4(capsys):
+    assert cli.main(["explain", "16", "16", "32", "--device", "nonsense"]) == D.EXIT_UNAVAILABLE
+    assert "device 'nonsense'" in capsys.readouterr().err
 
 
 # ----------------------------------------------------------------------------------------------- real CLI

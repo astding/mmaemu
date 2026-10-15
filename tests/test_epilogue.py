@@ -8,7 +8,9 @@ CPU data (no truth dir needed):
                                                the truth dataset (epilogue.c1_4_hw_underflow, epilogue.zero_nan_v2_a1_5,
                                                epilogue.c1_4_hw_zero_scale); they kill the fp32 "acc*alpha + 0" form
 -m truth: every epilogue.* GEMM recording and misc.api_defaults_va1_3 through scaled_mm(backend="reference").
--m gpu:   CPU == CUDA epilogue on 1e6 (acc, alpha) pairs incl. subnormals, +-0, +-Inf and NaN, for every out dtype.
+-m gpu:   CPU == CUDA on 1e6 (acc, alpha) pairs (incl. subnormals, +-0, +-Inf and NaN) through apply()'s
+          fma(acc, alpha, +0) and to_out_dtype, for every out dtype and scale_result; apply() itself with one
+          scalar alpha.
 
 The helpers truth_loader / replay_gemm_output are shared with tests/test_plan.py and tests/test_api.py.
 """

@@ -22,10 +22,12 @@ The Ada FP8 `mma.sync` instruction (m16n8k32 in SASS: QMMA.16832) computes, for 
 
 The hardware does not round each product or each addition. Instead, per block:
 
-1. Input exponents are clamped at the format's minimum normal exponent (E4M3: -6, E5M2: -14), so subnormal
-   inputs keep their true exponent.
-2. The block maximum exponent E is taken over the nonzero products and c. Products that are exactly zero do
-   not take part.
+1. Each input x has the exponent e(x) = max(floor(log2|x|), emin), with emin = -6 for E4M3 and -14 for E5M2. A
+   subnormal input therefore uses emin, with its denormalised significand.
+2. Each nonzero product a_i * b_i is given the exponent e(a_i) + e(b_i). The product of the significands (in
+   [0, 4)) is not renormalised, so this can differ from the product's own exponent: one below it when the
+   significands multiply to 2 or more, above it when an input is subnormal. The block exponent E is the largest of
+   these and the exponent of c, floored at -132. Products that are exactly zero do not take part.
 3. Every product and c are aligned to 2^E and truncated toward zero to 13 fraction bits below 2^E.
 4. The aligned terms are summed exactly. The sum is truncated toward zero to 13 fraction bits relative to its
    own leading bit, and becomes the new accumulator (fp32).
@@ -70,8 +72,10 @@ How mmaemu decides S and the scheme (`splitk="auto"`) is described in
 codes, Inf * 0 and +Inf + -Inf give NaN, so any NaN code in row m of A or column n of B makes output (m, n) NaN.
 The patch is applied after the combination; NaN is canonical.
 
-**Empty dimensions.** M = 0 or N = 0 gives an empty result. K = 0 gives an accumulator of +0 everywhere, and the
-epilogue then applies. (These rules are preliminary until the dedicated zero-dimension recordings are replayed.)
+**Empty dimensions.** M = 0 or N = 0 gives an empty result. K = 0 gives +0 everywhere, for every scale,
+scale_result and output dtype: torch returns before calling cuBLASLt, so no epilogue is applied (`r6.zero_dims`;
+also measured with scale 2, a bias of 3.0 and scale_result 2 on the RTX 4060). This early return happens for any
+out dtype and for every float8 input dtype torch accepts, fnuz and e8m0 included, which fail for non-empty GEMMs.
 
 ## 3. The epilogue of `torch._scaled_mm` (tensor-wise scales)
 
@@ -91,7 +95,11 @@ use_fast_accum=False, *, out=None, profile=None, splitk="auto", backend="auto")`
      fp32 multiply); then saturation to +-448 (E4M3) or +-57344 (E5M2), Inf included, NaN passing through; then
      round-to-nearest-even. `scale_result` is ignored for the other output dtypes.
 4. NaN is canonical: fp32 0x7FFFFFFF, bf16/fp16 0x7FFF, fp8 0x7F.
-5. The result never depends on the previous contents of an `out=` buffer.
+5. `out=`: an out of another shape is resized first (with torch's UserWarning). A column-major out= (strides
+   (1, ld), ld >= M) is computed as mat1 x mat2, as torch 2.7.1 does, so cuBLASLt chooses the split of the problem
+   (N, M, K) with the formats swapped, and mmaemu resolves that key (RTX 4060: 406 of 406 such calls). An out=
+   that is neither row- nor column-major is returned unchanged, with a UserWarning: torch computes into a
+   contiguous copy and never copies it back. Otherwise the result never depends on the previous contents of out=.
 
 The default `out_dtype` is the input dtype and the default `use_fast_accum` is False, as in torch. Evo 2 calls
 `use_fast_accum=True` with bf16 output.
@@ -100,15 +108,16 @@ The default `out_dtype` is the input dtype and the default `use_fast_accum` is F
 
 | Error | When |
 |---|---|
-| `TypeError` | wrong Python argument types; non-FP8 or `fnuz` dtypes where FP8 is required |
-| `ReferenceRejectsError` | wherever torch 2.7.1 or the profile's cuBLAS rejects the call: shape/divisibility/layout and storage-offset rules, e5m2 x e5m2, scale dtype/numel, out= dtype/shape, e4m3 x e4m3 -> e5m2 output on the RTX 4060 profiles |
+| `TypeError` | wrong Python argument types; for `accumulate()` and `dot()`, non-FP8 dtypes |
+| `ReferenceRejectsError` | wherever torch 2.7.1 or the profile's cuBLAS rejects the call: shape/divisibility/layout and storage-offset rules, non-FP8 inputs (and fnuz / e8m0 inputs of non-empty GEMMs), e5m2 x e5m2, scale dtype/numel, out= dtype, e4m3 x e4m3 -> e5m2 output on the RTX 4060 profiles. A wrong out= shape is not an error: out= is resized with a UserWarning |
 | `UnsupportedFeatureError` (a `NotImplementedError`) | `bias`, row-wise scales, inputs that require grad under grad mode (mmaemu is inference-only), preset features that are not characterised (slow accumulation on `hopper` / `b200_mma_sync`) |
 | `SplitKUnknownError` (a `LookupError`) | `splitk="auto"` cannot determine S for this shape on this profile; the message names three ways out |
 | `MmaemuError` | CPU flush-to-zero is active (`torch.set_flush_denormal(True)`), which would change subnormal arithmetic |
 
 `mmaemu.accumulate` is more permissive than `scaled_mm`: any K (zero-padded; zero products never set the block
-maximum), any alignment and layout (a misaligned operand is copied), and `use_fast_accum` must always be given
-explicitly.
+maximum; an unsplit fast-accumulation chain with K >= 2^24 needs `cuda:v1` or the reference backend, see
+limitations.md), any alignment and layout (a misaligned operand is copied), and `use_fast_accum` must always be
+given explicitly.
 
 ## 5. Device independence
 

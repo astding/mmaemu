@@ -7,18 +7,20 @@ numbers are recorded.
 ## Method
 
 All GPU timings use **CUDA events**. Host timers are not used for kernel throughput: on the WSL2 reference host
-`time.perf_counter` ran 6-10% fast against an external clock during the audit, which biased every throughput
-computed from it. The kernel benchmark (`tools/bench_kernels.py` in the repository):
+`time.perf_counter` ran 6-10% fast against an external clock during the internal review of the prototype, which
+biased every throughput computed from it. The kernel benchmark (`tools/bench_kernels.py` in the repository):
 
-- checks the full output of the timed kernel bitwise against v1 or the reference before timing;
+- checks every timed kernel bitwise before timing: v1 against the CPU reference on its first min(M, 64) rows x 256
+  columns, every other kernel against v1 on the full output (a mismatch stops the run and exits 1);
 - warms up for at least 1.5 s, then times windows of at least 1.0 s (sustained load: the RTX 4060 reaches its
   power limit and lowers its clock, so short bursts overstate throughput by 5-10%);
 - samples the SM clock and power with `nvidia-smi` and reports TMAC/s (10^12 multiply-accumulates per second) and
   MAC per clock per SM;
 - refuses to run when the host clock check (`tools/hostclock.py`) reports a perf_counter drift above 0.2% and no
   CUDA events are in use;
-- measures performance on locally built release-flag fatbins only. NVRTC-compiled kernels are checked for equal
-  bits; their speed is recorded but not used for thresholds.
+- requires each timed kernel to be loaded from a fatbin and records its image sha256 (the release numbers come from
+  the release fatbins in the package); `--allow-nvrtc` admits NVRTC builds, recorded as such and not used for
+  thresholds. `--v1-variant` builds are bench-only nvcc cubins.
 
 ## Release measurements on the RTX 4060 (T6)
 
@@ -42,14 +44,17 @@ Sustained TMAC/s at M = 2048 for the Evo 2 shapes, Gaussian data (MAC per clock 
 | float64 reference, CPU (8 threads) | | | | none | 116-181 MMAC/s |
 
 - Every kernel is above its threshold on every shape. On the 1B shape tc3 (at the low end) and v4 lie inside the
-  audit's ranges of the prototypes; v9 is 1-3% and v1 about 5% below them. The shipped v1 is the DEC1 variant,
-  which measured 0.636 on the same GPU in development (backends.md, "v1 variant decision").
-- Native FP8 reaches 29.8-30.5 TMAC/s at M = 2048, about 500 MAC/clk/SM, as in the audit on the recording host
-  (30-32). From M = 256 on, the emulated GEMM with tc3 is about 10x slower than native (16-17x at M = 16 and 64).
-  The test host's PCIe Gen3 x8 link does not enter: the operands stay on the GPU.
-- The GPU runs at its 115 W power limit throughout: the clock-event reason "SW power cap" appears in every
-  measurement, the SM clock averages 2.36-2.58 GHz at M >= 256, and the driver's power average is 109-115 W.
-  MAC/clk/SM divides out the clock, so it is the figure to compare across hosts.
+  ranges an internal review measured for the prototypes; v9 is 1-3% and v1 about 5% below them. The shipped v1 is
+  the DEC1 variant, which measured 0.636 on the same GPU in development (backends.md, "v1 variant decision").
+- Native FP8 reaches 29.8-30.5 TMAC/s at M = 2048, about 500 MAC/clk/SM, as in the internal review on the
+  recording host (30-32). From M = 256 on, the emulated GEMM with tc3 is about 10x slower than native (16-17x at M = 16 and 64
+  on the 1B shape; about 10x there on the 7B and 40B shapes). The test host's PCIe Gen3 x8 link does not enter:
+  the operands stay on the GPU.
+- In every kernel measurement the GPU runs at its 115 W power limit: the clock-event reason "SW power cap" appears
+  in each, the SM clock averages 2.36-2.58 GHz at M >= 256, and the driver's power average is 109-115 W. The native
+  runs record clocks but no power; the cap appears in 16 of their 18 measurements (not at M = 16 on the 1B shape nor
+  at M = 64 on the 40B shape), and their clock at M >= 256 averages 2.40-2.63 GHz. MAC/clk/SM divides out the
+  clock, so it is the figure to compare across hosts.
 - The data does not change the speed: with the adversarial generator of the self-test, every kernel is within 1%
   of its Gaussian rate at every M and shape (ratios 0.990-1.006). The speed on real Evo 2 operands was not timed
   separately; their bits are checked by T3 (device independence: the full accumulators of all 21 Evo 2 1B
@@ -78,14 +83,15 @@ unavailable; `python -m mmaemu selftest --force` re-runs the gates.
 
 ## What this means end to end
 
-For Evo 2 1B on the RTX 4060 the audit measured the emulated FP8 projections as the dominant cost of an emulated
-forward pass with the prototype v1 kernel: about 95% of the extra time over native, and about 3.6x the native time
+For Evo 2 1B on the RTX 4060 the internal review of the prototype measured the emulated FP8 projections as the
+dominant cost of an emulated forward pass with the prototype v1 kernel: about 95% of the extra time over native, and about 3.6x the native time
 in all (paired measurement). With tc3, about 10x slower than the native GEMM (T6 above), the emulated forward
 pass on the RTX 4060 is expected to take roughly 1.5-2x the native time. That is an estimate from the kernel rates;
 it was not measured.
 
 The measured end-to-end figure is from the RTX 5070 Ti, where AUTO selects v4: an 8,192-bp Evo 2 1B forward pass
-takes about 1.0 s with mmaemu against 0.45 s natively (host timer; [evo2.md](evo2.md)). It is a different GPU and
+takes about 1.0 s with mmaemu against 0.45 s natively (host timer;
+[evo2-rtx-5070-ti](validation_logs/2026-10-14/evo2-rtx-5070-ti/README.md)). It is a different GPU and
 kernel from the estimate above.
 
 On the CPU the float64 reference is practical for tests and single projections, not for whole models.

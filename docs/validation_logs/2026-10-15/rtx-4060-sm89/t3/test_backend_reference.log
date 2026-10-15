@@ -1,0 +1,12 @@
+...                                                                      [100%]
+=============================== warnings summary ===============================
+tests/test_backend_reference.py::test_scaled_mm_reference_cpu_equals_cuda
+  ~/mmaemu-4060/src/mmaemu/api.py:307: UnverifiedSplitWarning: mmaemu split-K S=8 scheme=serial (slow accumulation, out bfloat16, e4m3xe4m3, source explicit, profile ada-rtx4060-torch): this (fast, S, scheme, out, format pair) combination was never replayed on hardware
+    P.decision = resolve_splitk(*key[:3], a_dtype=key[3], b_dtype=key[4], out_dtype=od,
+
+tests/test_backend_reference.py::test_scaled_mm_reference_cpu_equals_cuda
+  ~/mmaemu-4060/src/mmaemu/api.py:307: UnverifiedSplitWarning: mmaemu split-K S=8 scheme=serial (fast accumulation, out float8_e4m3fn, e4m3xe4m3, source explicit, profile ada-rtx4060-torch): this (fast, S, scheme, out, format pair) combination was never replayed on hardware
+    P.decision = resolve_splitk(*key[:3], a_dtype=key[3], b_dtype=key[4], out_dtype=od,
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+3 passed, 12 deselected, 2 warnings in 11.72s

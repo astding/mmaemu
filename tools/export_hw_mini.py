@@ -11,17 +11,20 @@ Selection (every item is listed in the coverage report, tests/data/hw_mini/COVER
   hw_error  every hw_error output that the audit's FixedModel reproduces (113): replayed as a call on zero
             operands of the hardware call's shape and dtypes, expected mmaemu error by exact class;
   combo     for every hardware-replayed (fast, S, scheme, out_dtype, fmt_a, fmt_b), the smallest recorded case
-            (M*N*K <= 3e7 preferred), restricted to a few output rows/columns (the split-K partition depends on K
+            (M*N*K <= 3e7 preferred), restricted to one output position (of 2 rows x 8 spread columns, the one
+            the most rival plans of tools/mutants/discriminate.py get wrong; the split-K partition depends on K
             only, so any row/column subset of a recorded output is reproduced by the GEMM of the subset operands);
-  c2fam     the c2 T_* and S16_* families (>= 4096 vectors each; all of S16_zeros);
+  c2fam     the c2 T_* and S16_* families: the first recorded output of each case, at most 4096 outputs per
+            family (c2.T_overflow: 1024 of its 2048); all of S16_zeros;
   epilogue  every epilogue.* gemm case whose stored output has M*N <= 65,536 (all its in-scope outputs);
-  project   misc.tcemu_tests_recorded_hw in full (it replaces tests/data/hw/*.pt);
+  project   all 16 outputs of misc.tcemu_tests_recorded_hw, 8 rows x 16 spread columns each (it replaces
+            tests/data/hw/*.pt);
   evo2      rows 0..31 of 3 Evo 2 1B projections (evo2.evo2_1b_w2k calls 0, 10, 20; a column subset, see
             --evo2-cols, because a full weight is 11 MB);
   extra     a few small special-value outputs (c3.gemm_table, scope-boundary cases: bias, row-wise);
   ws2       from the pre-swap recordings (--ws2, if it exists): R1 in full, >= 1 case per R4 combination, >= 1 output of
             every other recording.
-The exporter fails if the directory would exceed --budget-mb (default 20, as `du` counts MiB).
+The exporter fails if the directory would exceed --budget-mb (default 19.5, as `du` counts MiB; the limit is 20).
 
 Format (mmaemu-hwmini/1): index.json + <group>.npz shards (allow_pickle=False, raw bit patterns only, arrays
 deduplicated by content). See docs/testing.md. Expected mmaemu error classes (scope rules of docs/semantics.md):

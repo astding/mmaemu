@@ -117,7 +117,7 @@ def _device(dev):
     import torch
 
     d = torch.device(dev)
-    if d.type == "cuda" and d.index is None:
+    if d.type == "cuda" and d.index is None and not _flag("MMAEMU_DISABLE_CUDA") and torch.cuda.is_available():
         d = torch.device("cuda", torch.cuda.current_device())
     return d
 

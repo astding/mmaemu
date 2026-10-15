@@ -36,7 +36,7 @@ by up to 0.3125. A 32-row slice computed by mmaemu on the CPU equals the GPU res
 | RTX 5070 Ti, bf16 GEMMs | 2.8550 (1.8873-3.4794) | 0.3698 | 1.1453 | 0.46 s |
 
 The logits of all three modes were bit-identical to those of an earlier run of the notebook (20 BRCA1 variants)
-on the same machine.
+on the same machine; that run's outputs are not kept.
 
 **The upstream test** (prompts p0-p3; cross entropy in bf16 on the GPU, as `evo2/test/test_evo2.py` computes it):
 mmaemu 0.5027 (accuracy 0.7960), native FP8 1.2480 (0.3848), bf16 GEMMs 1.3652 (0.3262); expected 0.502 (0.7956).

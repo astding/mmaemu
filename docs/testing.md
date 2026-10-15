@@ -23,7 +23,7 @@ variable:
 | Variable | Data | Used by |
 |---|---|---|
 | `MMAEMU_TRUTH_DIR` | the hardware ground truth (unpublished) | truth-marked tests, T2 (`tools/replay_truth.py`), the Evo 2 check of T7, the exporters and recorders under `tools/` |
-| `MMAEMU_AUDIT_DIR` | the tcemu audit's work directory (unpublished) | extra GPU data sets of `tests/test_fast_kernels.py` (not collected without it), `tools/bringup/vendor_kits.py` |
+| `MMAEMU_AUDIT_DIR` | the tcemu audit's work directory (unpublished) | extra GPU data sets of `tests/test_fast_kernels.py` (skipped without it), `tools/bringup/vendor_kits.py` |
 | `MMAEMU_TCEMU_DIR` | a checkout of the tcemu prototype | `tools/record/replay_fixed.py` only |
 
 T0, T1, T3 and T4 run without them (the truth-marked tests in T3 skip).
@@ -35,14 +35,15 @@ T0, T1, T3 and T4 run without them (the truth-marked tests in T3 skip).
 | T0 unit | CI, every push | `CUDA_VISIBLE_DEVICES= python -m pytest -q tests -m "not gpu and not slow and not truth" --ignore tests/test_hw_mini.py` | < 3 min |
 | T1 hw_mini | CI, every push | `CUDA_VISIBLE_DEVICES= python -m pytest -q tests/test_hw_mini.py` (4 torch threads) | <= 20 MiB data, < 5 min |
 | T1s slow | nightly / manual | `python -m pytest -q -m slow tests` | < 1 h |
-| T2 full truth replay | before a release, maintainer only (needs the truth) | `python tools/replay_truth.py --out docs/validation_logs/<date> --compare $MMAEMU_TRUTH_DIR/replay/replay_fixed.json` | about 80 min on CPU |
+| T2 full truth replay | before a release, maintainer only (needs the truth) | `python tools/replay_truth.py --out docs/validation_logs/<date> --compare $MMAEMU_TRUTH_DIR/replay/replay_fixed.json --threads 12` | about 26 min on CPU with `--threads 12` |
 | T3 GPU | any CUDA device | `tools/run_gpu_tests.sh` (one locked run per test file) | < 10 min per run |
 | T3p profile device | RTX 4060 only | `$GPU timeout 600 python -m pytest -q -m profile_device tests` (live `torch._scaled_mm` parity, the profile match, live split-K table queries) | < 10 min |
 | T4 mutation | weekly (CPU), before a release (GPU) | `python tools/mutants/run.py --tier cpu`; `$GPU timeout 600 python tools/mutants/run.py --tier gpu` | < 20 min CPU |
 | T6 performance | before a release, RTX 4060 | `$GPU timeout 3000 python tools/bench_kernels.py --kernels v1,v4,v9,tc3 --shape <1b, 7b, 40b> --M 16,64,256,1024,2048,8192 --data <gauss40, adversarial> --out <json>` ([performance.md](performance.md)) | about 4 min per shape and data set |
 | T7 release wheel | before a release, on the GPU | `$GPU timeout 600 python tools/validate_release.py dist/mmaemu-<version>-py3-none-any.whl` ([release.md](release.md)) | |
 
-T0 + T1 together are what CI runs: `python -m pytest -q tests -m "not gpu and not slow and not truth"`.
+T0 + T1 together are what CI runs: `python -m pytest -q tests -m "not gpu and not slow and not truth and not
+profile_device"`.
 
 ## Markers
 
@@ -52,7 +53,8 @@ Registered by `tests/conftest.py`:
 - `slow`: T1s.
 - `truth`: needs `$MMAEMU_TRUTH_DIR`. Skipped without it.
 - `profile_device("<profile>")`: runs only on the reference device of that profile. Elsewhere it is skipped with
-  "profile device unavailable".
+  "profile device unavailable". The tests in this repository use the bare marker and check the profile device
+  themselves.
 
 `tests/conftest.py` also blocks `import tcemu` (the audited prototype), and fails the session if `tcemu` was imported.
 
@@ -60,7 +62,8 @@ Registered by `tests/conftest.py`:
 
 - Every bit claim goes through `mmaemu.testing.assert_bitwise_equal(actual, expected, nan="bits")`. It compares
   integer views, so +0 differs from -0 and NaN payloads must match.
-- `torch.equal` and `==` are banned for bit claims. CI greps `tests/` and `tools/` for `torch.equal(`.
+- Float `torch.equal` and `==` are banned for bit claims; bit claims compare integer views, normally through
+  `assert_bitwise_equal`. CI greps `tests/` and `tools/` for `torch.equal(`.
 - `nan="mask"` (NaN positions must match, payload ignored) is allowed only against a reference that does not
   canonicalise NaN. Each use carries an inline `# nan=mask: <reason>` comment.
   - mmaemu canonicalises NaN on every backend (fp32 0x7FFFFFFF, bf16/fp16 0x7FFF, fp8 0x7F), and so does the RTX 4060.
@@ -88,15 +91,19 @@ included, the n/a reasons, and the 239 split/accumulation combinations. The expo
   rejections);
 - for every hardware-replayed `(fast, S, scheme, out_dtype, fmt_a, fmt_b)` combination (239, of which 211 are split
   combinations), the smallest recorded case;
-  - It keeps 1 output row and 4 spread columns. The split-K partition depends on K only, so any row/column subset of
-    a recorded output is reproduced by the GEMM of the subset operands.
-- the c2 `T_*` and `S16_*` instruction families, at least 4,096 vectors each, and all of `S16_zeros`;
+  - It keeps one output position per combination: among the first 2 rows x 8 spread columns, the one that the most
+    rival plans (`tools/mutants/discriminate.py`, a subset of the catalogue's plan mutants) get wrong. The split-K
+    partition depends on K only, so any row/column subset of a recorded output is reproduced by the GEMM of the
+    subset operands.
+- the c2 `T_*` and `S16_*` instruction families: the first recorded output of each case, at most 4,096 outputs
+  per family (`c2.T_overflow`: 1,024 of its 2,048), and all of `S16_zeros`;
 - every `epilogue.*` case whose stored output has M*N <= 65,536;
-  - When the operands exceed 48 KiB, it keeps the 8 rows and 32 columns richest in special outputs (+-0, NaN, Inf,
+  - When the operands exceed 48 KiB, it keeps the 4 rows and 16 columns richest in special outputs (+-0, NaN, Inf,
     subnormal, fp8 saturation).
-- `misc.tcemu_tests_recorded_hw` in full (it replaces the old `tests/data/hw/*.pt`);
+- all 16 outputs of `misc.tcemu_tests_recorded_hw`, 8 rows x 16 spread columns each (it replaces the old
+  `tests/data/hw/*.pt`);
 - rows 0..31 of the Evo 2 1B projections `evo2.evo2_1b_w2k` calls 0, 10 and 20 (unit-scale fp32 accumulator, real-scale
-  bf16, TE bf16), on 256 columns (a full 1B weight is 11 MB);
+  bf16, TE bf16), on 128 columns (a full 1B weight is 11 MB);
 - the special-value table `c3.gemm_table` (scale set s00);
 - one scope-boundary call per recording that has bias or row-wise outputs;
 - from the pre-swap recordings (`recordings/rtx4060_2026-10`, when present): R1 in full, at least one case per R4
@@ -229,7 +236,8 @@ truth) runs such a partial replay on 21 representative recordings.
 
 ## T3: GPU
 
-`tools/run_gpu_tests.sh` runs every GPU test file in its own locked run of less than 10 minutes, and writes logs to
+`tools/run_gpu_tests.sh` runs each GPU test file listed in its FILES in its own locked run of less than 10 minutes
+(`tests/test_compile.py`'s GPU test is not among them), and writes logs to
 `docs/validation_logs/<date>/t3-<gpu>-sm<cc>/`. Expected outcomes depend on the device capability.
 
 The fatbin tests (`tests/test_kernels_ieee.py`, `tests/test_cuda_runtime.py`) load the fatbins of
@@ -251,7 +259,10 @@ failure, so that untested kernels never pass as tested.
 
 ## T4: mutation matrix (`tools/mutants/`)
 
-T4 runs on the repository alone: the CPU tier kills mutants with T0 + T1, the GPU tier with T3. The catalogue's
+T4 runs on the repository alone: the CPU tier kills mutants with T0 + T1. The GPU tier runs `pytest -x -m gpu` on
+`tools/mutants/test_gpu.py` (direct NVRTC v1 conformance, NaN propagation, the pinned NVRTC options) and the T3
+files; their fatbin tests skip in the copy. The kernel mutants edit `v1.cu` and code shared by all kernels; the
+v4, v9 and tc3 sources are not mutated. The catalogue's
 `source` fields name where a mutant comes from (for some, a script of the tcemu audit); they are labels in the report
 and are not read at run time.
 

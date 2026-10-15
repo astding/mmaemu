@@ -13,13 +13,18 @@ export CUDA_HOME=<CUDA 12.8 toolkit>                # nvcc >= 12.8 for the sm_12
 export PATH=<venv>/bin:$CUDA_HOME/bin:$PATH
 export MMAEMU_TRUTH_DIR=<truth checkout>             # the unpublished hardware ground truth (G3)
 export MMAEMU_GPU_LOCK="flock -w 3600 /tmp/mmaemu-gpu.lock"   # GPU lock command prefix (default: in $TMPDIR)
-export MMAEMU_FATBIN_DIR="$PWD/build/fatbin"
 export MMAEMU_CACHE_DIR="$PWD/build/mmaemu-cache"
 python tools/bringup/run_bringup.py
 ```
 
-The runner acquires the GPU lock separately for each GPU command, with a
-580-second timeout. Build and CPU analysis commands run outside the lock.
+Every command runs under `timeout 580`, except G1's T3 step: it runs the whole
+tools/run_gpu_tests.sh, which takes the GPU lock and a 600-second timeout for
+each test file itself (about 280 s in all on the RTX 5070 Ti, about 560 s on an
+RTX 4060). Each other GPU command takes the GPU lock separately (the lock prefix
+above waits up to 3600 s); build and CPU analysis commands run outside the
+lock. The shipped fatbins in mmaemu/backends/cuda/bin are tested; to test a
+local build instead, run `python tools/build_fatbin.py --release --out
+build/fatbin` and export `MMAEMU_FATBIN_DIR=$PWD/build/fatbin`.
 An inherited lock is detected to avoid taking the same lock twice. Prefer
 running the runner outside the lock so CPU work does not hold the GPU lock.
 
@@ -27,7 +32,9 @@ Each run creates a unique directory under results/bringup/. `--out DIR`
 requires a new directory. `--stage G8` runs just that gate; `--from G8`
 resumes at G8 in a new directory, preserving earlier evidence. `--dry-run`
 executes G0-G3, G8 and G10 on sm_89 or sm_120 and skips native research.
-`--stage G4 --force-fail G4` must fail and name G4 in summary.json.
+`--stage G4 --force-fail G4` must fail and name G4 in summary.json. G0 and G2
+write the GPU's UUID (`info.json`, `selftest.json`); redact it before committing
+bring-up outputs.
 
 | Gate | Evidence and acceptance |
 |---|---|
@@ -51,8 +58,12 @@ computing tolerances; bitwise claims apply to the FP8 GEMMs. Candidate native
 model loss simulation remains research work and is not a shipped profile.
 
 All probe inputs and sources are vendored with SHA-256 provenance; runtime
-outputs and caches stay in the new run directory. Truth, audit recordings and
-Ada golden files are read-only. G3 requires the pinned local truth package;
-G9 additionally requires cached model blocks and the local consumer. The truth, the
+outputs and caches stay in the new run directory. The c6 README is the
+audit's, unmodified: its ../family.py is vendored as c6/family.py, while
+../pool.py, ../results/ and the MM_sm90mma and MM_cublas64 sets (GH200) are
+not vendored. Truth, audit recordings and
+Ada golden files are read-only. G3 requires the pinned local truth package
+(the runner refuses G3 and G9 without `MMAEMU_TRUTH_DIR`); G9 additionally
+requires cached model blocks and the local consumer. The truth, the
 golden files and the consumer are maintainer-only data, so G3 and G9 run only on
 the maintainer's host.

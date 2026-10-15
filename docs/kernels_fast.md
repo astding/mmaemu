@@ -149,7 +149,7 @@ Reasons start with a stable code:
      outputs carries its own 8-term vector.
    - Every vector runs with +c and with −c, and the gate checks exactly tc3's combine against the exact half sum
      S·u, bitwise.
-   - Vectors: 4 data classes × 32 tiles = **16,384**. Offsets E − maxep ∈ [0, 7] for half of them and [0, 55] for
+   - Vectors: 4 data classes × 32 tiles × 128 outputs = **16,384**. Offsets E − maxep ∈ [0, 7] for half of them and [0, 55] for
      the other half (E ≤ 43), plus outputs with no nonzero product.
    - This is the sharpened check of `verify-p3-tensorcore-exact-1` (`scripts/sim_gate_v2.py`).
    - It fixes the false reject at p3 `scripts/selftest.py:58`. That check ran one random sign per vector and
@@ -184,8 +184,7 @@ Reasons start with a stable code:
 
 `data/gate_gemm_v1.npz` is 123,523 B. It holds uint32 bit patterns, a JSON `meta` array and no pickle.
 
-- **Why stored:** the float64 reference takes about 14 s on 4 CPU threads for 130×136×1936 (measured on this host),
-  which does not fit a 2 s gate.
+- **Why stored:** the gate compares the kernel with fixed bits and does not run the CPU reference.
 - **Inputs** come from a splitmix64 integer generator, so they do not depend on torch's RNG.
   - The file records the sha256 of every input.
   - `gemm_expected()` refuses to run if the generator no longer reproduces them.
@@ -199,8 +198,8 @@ Reasons start with a stable code:
 |---|---|---|
 | (8, 9) RTX 4060 | **PASS** (measured) | **PASS** (measured) |
 | (8, 0), (8, 6) | expected pass [inference: toolbox A100/A2 bf16/fp16 vectors fit the Ada model] | expected pass [same inference]; must pass for tc3 to be used |
-| (9, 0), (10, 0) | expected pass [inference: the published Hopper/B200 bf16 model satisfies the window property; CPU simulation passes] | no tc3 binary; the probe would reject (CPU simulation of the F = 25, 16-term model: `design_a.property`, 2,392/16,384 outputs violate) |
-| (12, 0) RTX 5070 Ti | expected pass [inference, paper model; not measured]; v9 stays unselected unless `MMAEMU_ALLOW_GATED_KERNELS=1` until it is added to `validated_on` with evidence | no tc3 binary. The runbook (G8) runs the probes module there to record the design-A rejection. Design A cannot work on a 25-bit HMMA |
+| (9, 0), (10, 0) | (9, 0): pass implied by T3 on an H100 (the gates ran in `tests/test_fast_kernels.py`, no xfail; no verdict recorded). (10, 0): expected pass [inference: the published Hopper/B200 bf16 model satisfies the window property; CPU simulation passes] | no tc3 binary; the probe would reject (CPU simulation of the F = 25, 16-term model: `design_a.property`, 2,392/16,384 outputs violate) |
+| (12, 0) RTX 5070 Ti | **PASS** (measured: [selftest.json](validation_logs/2026-10-13-sm120/selftest.json), 974,848 E-pass outputs and the 8 GEMM cases exact); v9 stays unselected unless `MMAEMU_ALLOW_GATED_KERNELS=1` until it is added to `validated_on` with evidence | no tc3 binary; the probes module, run there, rejects design A (`design_a.property`, 2,392/16,384 outputs, as the CPU simulation predicts: [design-a.json](validation_logs/2026-10-13-sm120/design-a.json)). Design A cannot work on a 25-bit HMMA |
 
 Simulated models used by `tests/test_gates_hmma.py`. They are the Khattak–Mikaitis block-FMA family, from the port
 of `verify-p3-tensorcore-exact-1/scripts/sim_gate.py` `hmma_gen`.
@@ -227,8 +226,10 @@ of `verify-p3-tensorcore-exact-1/scripts/sim_gate.py` `hmma_gen`.
   stand-in outside the repository.
   - It implements the v0.1 signatures of `spec.py`, `driver.py`, `modules.py` and the registry.
   - Its `chain_gemm` wraps the pre-v0.1 reference model.
-  - The registry, verdict-cache and benchmark results below are therefore results against that stand-in. They must
-    be re-run on the integrated runtime (section 5).
+  - The registry, verdict-cache and benchmark results below are therefore results against that stand-in. They
+    were re-run on the integrated runtime on the RTX 4060 on 2026-10-14: T3
+    ([log](validation_logs/2026-10-14/t3-rtx-4060-sm89/README.md)) and T6
+    ([log](validation_logs/2026-10-14/t6-rtx-4060-sm89/README.md)).
 - **ptxas:** 0 spill bytes for every kernel and arch.
   - Registers: v9 218 (sm_80/86), 220 (sm_89/90), 229 (sm_100/120); tc3 175; probes 20–32.
   - NVRTC (libnvrtc 12.8 from the torch wheel) compiles all three sources for every listed arch with no CUDA
@@ -339,7 +340,7 @@ cuobjdump --list-elf --list-ptx mmaemu/backends/cuda/bin/{probes,tc3,v9}.fatbin 
 python -m mmaemu.backends.cuda.fast.gates --write-gemm-data --device cuda           # regenerate the gate data
 ```
 
-## 5. Interface assumptions (to re-check on the integrated runtime)
+## 5. Interface assumptions (the integrated runtime passed T3 and T6 with them, 2026-10-14)
 
 These were checked against the drafts of `spec.py` and `driver.py` that existed on 2026-10-12. The others were taken
 from the v0.1 interface contract.

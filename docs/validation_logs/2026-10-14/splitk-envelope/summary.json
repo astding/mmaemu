@@ -1,0 +1,1099 @@
+{
+ "device": "NVIDIA GeForce RTX 4060 (24 SMs), driver 570.211.01, torch 2.7.1+cu128, cuBLASLt 12.8.3.14",
+ "query": "mmaemu.platform.cublaslt.heuristic: torch 2.7.1 _scaled_mm descriptor, the profile's workspace and alignment",
+ "settings": "every (out dtype, fast, format pair) with split rows, ada-rtx4060-torch (1 MiB) and ada-rtx4060-te (4 MiB, align 256)",
+ "factor": "M*N / largest split M*N of the setting in the shipped table",
+ "runs": [
+  {
+   "date": "2026-10-14",
+   "code": "the review's work-in-progress tree (cublaslt.heuristic, SplitKTable.envelope and the shipped table as at 8429385)"
+  },
+  {
+   "date": "2026-10-15",
+   "code": "49f1ecf (git archive)",
+   "result": "per-query rows equal to those of 2026-10-14; the counts below recomputed from them: 0 differences",
+   "log": "../../2026-10-15/rtx-4060-sm89/sweeps/"
+  }
+ ],
+ "sweeps": {
+  "sweep_env": {
+   "script": "sweep_env.py",
+   "Ms": [
+    16,
+    32,
+    48,
+    64,
+    96,
+    128,
+    192,
+    256,
+    384,
+    512,
+    768,
+    1024,
+    2048,
+    4096,
+    8192
+   ],
+   "factors": "1.0-4.0 step 0.1, 5, 6, 8, 12, 16",
+   "Ks": [
+    2048,
+    16384,
+    65536,
+    262144,
+    1048576,
+    4194304
+   ],
+   "above_queries": 181440,
+   "above_split": 1419,
+   "above_max_split_factor": 1.2083,
+   "below_min_split_K_queries": 125419,
+   "below_min_split_K_split": 18504,
+   "below_note": "K = 16 .. table_min_split_K - 16 (step 16), M in 16..256, N in 16..1024, M*N <= largest split M*N"
+  },
+  "sweep_env2": {
+   "script": "sweep_env2.py",
+   "Ms": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    48,
+    64,
+    96,
+    128,
+    256,
+    512,
+    1024,
+    2048,
+    4096,
+    8192
+   ],
+   "factors": "1.00-2.00 step 0.02, 2.25-4.0 step 0.25",
+   "Ks": [
+    1024,
+    2048,
+    3072,
+    4096,
+    6144,
+    8192,
+    12288,
+    16384,
+    32768,
+    65536,
+    262144,
+    1048576,
+    4194304
+   ],
+   "above_queries": 663936,
+   "above_split": 8292,
+   "above_max_split_factor": 1.2708
+  },
+  "sweep_env3": {
+   "script": "sweep_env3.py",
+   "Ms": "16..1024 step 16",
+   "factors": "1.25-2.0 step 0.025",
+   "Ks": [
+    3072,
+    4096,
+    6144,
+    8192,
+    16384,
+    32768
+   ],
+   "above_queries": 666624,
+   "above_split": 274,
+   "above_max_split_factor": 1.2708
+  }
+ },
+ "per_setting": {
+  "sweep_env_above": {
+   "ada-rtx4060-torch|float32|fast|e4m3xe4m3": {
+    "queries": 3240,
+    "split": 25,
+    "max_split_factor": 1.0204
+   },
+   "ada-rtx4060-torch|float32|fast|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 25,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-torch|float32|fast|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 25,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-torch|float32|slow|e4m3xe4m3": {
+    "queries": 3240,
+    "split": 48,
+    "max_split_factor": 1.1058
+   },
+   "ada-rtx4060-torch|float32|slow|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 82,
+    "max_split_factor": 1.2031
+   },
+   "ada-rtx4060-torch|float32|slow|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 82,
+    "max_split_factor": 1.2031
+   },
+   "ada-rtx4060-torch|bfloat16|fast|e4m3xe4m3": {
+    "queries": 3240,
+    "split": 50,
+    "max_split_factor": 1.102
+   },
+   "ada-rtx4060-torch|bfloat16|fast|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 50,
+    "max_split_factor": 1.125
+   },
+   "ada-rtx4060-torch|bfloat16|fast|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 50,
+    "max_split_factor": 1.125
+   },
+   "ada-rtx4060-torch|bfloat16|slow|e4m3xe4m3": {
+    "queries": 3240,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|bfloat16|slow|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|bfloat16|slow|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|float16|fast|e4m3xe4m3": {
+    "queries": 3240,
+    "split": 11,
+    "max_split_factor": 1.0303
+   },
+   "ada-rtx4060-torch|float16|fast|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 13,
+    "max_split_factor": 1.0312
+   },
+   "ada-rtx4060-torch|float16|fast|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 13,
+    "max_split_factor": 1.0312
+   },
+   "ada-rtx4060-torch|float16|slow|e4m3xe4m3": {
+    "queries": 3240,
+    "split": 39,
+    "max_split_factor": 1.1058
+   },
+   "ada-rtx4060-torch|float16|slow|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 68,
+    "max_split_factor": 1.1667
+   },
+   "ada-rtx4060-torch|float16|slow|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 68,
+    "max_split_factor": 1.1667
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|fast|e4m3xe4m3": {
+    "queries": 3240,
+    "split": 13,
+    "max_split_factor": 1.0312
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|fast|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 13,
+    "max_split_factor": 1.0312
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|fast|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 13,
+    "max_split_factor": 1.0312
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|slow|e4m3xe4m3": {
+    "queries": 3240,
+    "split": 68,
+    "max_split_factor": 1.1667
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|slow|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 68,
+    "max_split_factor": 1.1667
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|slow|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 68,
+    "max_split_factor": 1.1667
+   },
+   "ada-rtx4060-torch|float8_e5m2|fast|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 13,
+    "max_split_factor": 1.0312
+   },
+   "ada-rtx4060-torch|float8_e5m2|fast|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 13,
+    "max_split_factor": 1.0312
+   },
+   "ada-rtx4060-torch|float8_e5m2|slow|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 68,
+    "max_split_factor": 1.1667
+   },
+   "ada-rtx4060-torch|float8_e5m2|slow|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 68,
+    "max_split_factor": 1.1667
+   },
+   "ada-rtx4060-te|float32|fast|e4m3xe4m3": {
+    "queries": 3240,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float32|fast|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 10,
+    "max_split_factor": 1.2083
+   },
+   "ada-rtx4060-te|float32|fast|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 10,
+    "max_split_factor": 1.2083
+   },
+   "ada-rtx4060-te|float32|slow|e4m3xe4m3": {
+    "queries": 3240,
+    "split": 19,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|float32|slow|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 19,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|float32|slow|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 19,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|bfloat16|fast|e4m3xe4m3": {
+    "queries": 3240,
+    "split": 15,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|bfloat16|fast|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 15,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|bfloat16|fast|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 15,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|bfloat16|slow|e4m3xe4m3": {
+    "queries": 3240,
+    "split": 17,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|bfloat16|slow|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 17,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|bfloat16|slow|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 17,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|float16|fast|e4m3xe4m3": {
+    "queries": 3240,
+    "split": 12,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|float16|fast|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 12,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|float16|fast|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 12,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|float16|slow|e4m3xe4m3": {
+    "queries": 3240,
+    "split": 12,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|float16|slow|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 12,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|float16|slow|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 12,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|float8_e4m3fn|fast|e4m3xe4m3": {
+    "queries": 3240,
+    "split": 12,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|float8_e4m3fn|fast|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 12,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|float8_e4m3fn|fast|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 12,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|float8_e4m3fn|slow|e4m3xe4m3": {
+    "queries": 3240,
+    "split": 12,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|float8_e4m3fn|slow|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 12,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|float8_e4m3fn|slow|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 12,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|float8_e5m2|fast|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 12,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|float8_e5m2|fast|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 12,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|float8_e5m2|slow|e4m3xe5m2": {
+    "queries": 3240,
+    "split": 12,
+    "max_split_factor": 1.0125
+   },
+   "ada-rtx4060-te|float8_e5m2|slow|e5m2xe4m3": {
+    "queries": 3240,
+    "split": 12,
+    "max_split_factor": 1.0125
+   }
+  },
+  "sweep_env2_above": {
+   "ada-rtx4060-torch|float32|fast|e4m3xe4m3": {
+    "queries": 11856,
+    "split": 94,
+    "max_split_factor": 1.1429
+   },
+   "ada-rtx4060-torch|float32|fast|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 132,
+    "max_split_factor": 1.1667
+   },
+   "ada-rtx4060-torch|float32|fast|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 132,
+    "max_split_factor": 1.1667
+   },
+   "ada-rtx4060-torch|float32|slow|e4m3xe4m3": {
+    "queries": 11856,
+    "split": 242,
+    "max_split_factor": 1.1058
+   },
+   "ada-rtx4060-torch|float32|slow|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 461,
+    "max_split_factor": 1.2031
+   },
+   "ada-rtx4060-torch|float32|slow|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 461,
+    "max_split_factor": 1.2031
+   },
+   "ada-rtx4060-torch|bfloat16|fast|e4m3xe4m3": {
+    "queries": 11856,
+    "split": 216,
+    "max_split_factor": 1.1327
+   },
+   "ada-rtx4060-torch|bfloat16|fast|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 248,
+    "max_split_factor": 1.1458
+   },
+   "ada-rtx4060-torch|bfloat16|fast|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 248,
+    "max_split_factor": 1.1458
+   },
+   "ada-rtx4060-torch|bfloat16|slow|e4m3xe4m3": {
+    "queries": 11856,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|bfloat16|slow|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|bfloat16|slow|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|float16|fast|e4m3xe4m3": {
+    "queries": 11856,
+    "split": 74,
+    "max_split_factor": 1.0455
+   },
+   "ada-rtx4060-torch|float16|fast|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 121,
+    "max_split_factor": 1.0898
+   },
+   "ada-rtx4060-torch|float16|fast|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 121,
+    "max_split_factor": 1.0898
+   },
+   "ada-rtx4060-torch|float16|slow|e4m3xe4m3": {
+    "queries": 11856,
+    "split": 300,
+    "max_split_factor": 1.1731
+   },
+   "ada-rtx4060-torch|float16|slow|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 550,
+    "max_split_factor": 1.2708
+   },
+   "ada-rtx4060-torch|float16|slow|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 550,
+    "max_split_factor": 1.2708
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|fast|e4m3xe4m3": {
+    "queries": 11856,
+    "split": 121,
+    "max_split_factor": 1.0898
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|fast|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 121,
+    "max_split_factor": 1.0898
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|fast|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 121,
+    "max_split_factor": 1.0898
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|slow|e4m3xe4m3": {
+    "queries": 11856,
+    "split": 550,
+    "max_split_factor": 1.2708
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|slow|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 550,
+    "max_split_factor": 1.2708
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|slow|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 550,
+    "max_split_factor": 1.2708
+   },
+   "ada-rtx4060-torch|float8_e5m2|fast|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 121,
+    "max_split_factor": 1.0898
+   },
+   "ada-rtx4060-torch|float8_e5m2|fast|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 121,
+    "max_split_factor": 1.0898
+   },
+   "ada-rtx4060-torch|float8_e5m2|slow|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 550,
+    "max_split_factor": 1.2708
+   },
+   "ada-rtx4060-torch|float8_e5m2|slow|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 550,
+    "max_split_factor": 1.2708
+   },
+   "ada-rtx4060-te|float32|fast|e4m3xe4m3": {
+    "queries": 11856,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float32|fast|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 123,
+    "max_split_factor": 1.25
+   },
+   "ada-rtx4060-te|float32|fast|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 123,
+    "max_split_factor": 1.25
+   },
+   "ada-rtx4060-te|float32|slow|e4m3xe4m3": {
+    "queries": 11856,
+    "split": 35,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|float32|slow|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 35,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|float32|slow|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 35,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|bfloat16|fast|e4m3xe4m3": {
+    "queries": 11856,
+    "split": 27,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|bfloat16|fast|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 27,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|bfloat16|fast|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 27,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|bfloat16|slow|e4m3xe4m3": {
+    "queries": 11856,
+    "split": 33,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|bfloat16|slow|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 33,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|bfloat16|slow|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 33,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|float16|fast|e4m3xe4m3": {
+    "queries": 11856,
+    "split": 29,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|float16|fast|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 29,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|float16|fast|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 29,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|float16|slow|e4m3xe4m3": {
+    "queries": 11856,
+    "split": 28,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|float16|slow|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 28,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|float16|slow|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 28,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|float8_e4m3fn|fast|e4m3xe4m3": {
+    "queries": 11856,
+    "split": 29,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|float8_e4m3fn|fast|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 29,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|float8_e4m3fn|fast|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 29,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|float8_e4m3fn|slow|e4m3xe4m3": {
+    "queries": 11856,
+    "split": 28,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|float8_e4m3fn|slow|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 28,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|float8_e4m3fn|slow|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 28,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|float8_e5m2|fast|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 29,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|float8_e5m2|fast|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 29,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|float8_e5m2|slow|e4m3xe5m2": {
+    "queries": 11856,
+    "split": 28,
+    "max_split_factor": 1.0417
+   },
+   "ada-rtx4060-te|float8_e5m2|slow|e5m2xe4m3": {
+    "queries": 11856,
+    "split": 28,
+    "max_split_factor": 1.0417
+   }
+  },
+  "sweep_env3_above": {
+   "ada-rtx4060-torch|float32|fast|e4m3xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|float32|fast|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|float32|fast|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|float32|slow|e4m3xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|float32|slow|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|float32|slow|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|bfloat16|fast|e4m3xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|bfloat16|fast|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|bfloat16|fast|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|bfloat16|slow|e4m3xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|bfloat16|slow|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|bfloat16|slow|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|float16|fast|e4m3xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|float16|fast|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|float16|fast|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|float16|slow|e4m3xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|float16|slow|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 38,
+    "max_split_factor": 1.2708
+   },
+   "ada-rtx4060-torch|float16|slow|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 38,
+    "max_split_factor": 1.2708
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|fast|e4m3xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|fast|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|fast|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|slow|e4m3xe4m3": {
+    "queries": 11904,
+    "split": 38,
+    "max_split_factor": 1.2708
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|slow|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 38,
+    "max_split_factor": 1.2708
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|slow|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 38,
+    "max_split_factor": 1.2708
+   },
+   "ada-rtx4060-torch|float8_e5m2|fast|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|float8_e5m2|fast|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-torch|float8_e5m2|slow|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 38,
+    "max_split_factor": 1.2708
+   },
+   "ada-rtx4060-torch|float8_e5m2|slow|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 38,
+    "max_split_factor": 1.2708
+   },
+   "ada-rtx4060-te|float32|fast|e4m3xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float32|fast|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 4,
+    "max_split_factor": 1.25
+   },
+   "ada-rtx4060-te|float32|fast|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 4,
+    "max_split_factor": 1.25
+   },
+   "ada-rtx4060-te|float32|slow|e4m3xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float32|slow|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float32|slow|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|bfloat16|fast|e4m3xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|bfloat16|fast|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|bfloat16|fast|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|bfloat16|slow|e4m3xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|bfloat16|slow|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|bfloat16|slow|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float16|fast|e4m3xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float16|fast|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float16|fast|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float16|slow|e4m3xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float16|slow|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float16|slow|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float8_e4m3fn|fast|e4m3xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float8_e4m3fn|fast|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float8_e4m3fn|fast|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float8_e4m3fn|slow|e4m3xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float8_e4m3fn|slow|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float8_e4m3fn|slow|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float8_e5m2|fast|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float8_e5m2|fast|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float8_e5m2|slow|e4m3xe5m2": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   },
+   "ada-rtx4060-te|float8_e5m2|slow|e5m2xe4m3": {
+    "queries": 11904,
+    "split": 0,
+    "max_split_factor": null
+   }
+  },
+  "sweep_env_below_min_split_K": {
+   "ada-rtx4060-torch|float32|fast|e4m3xe4m3": {
+    "queries": 3616,
+    "split": 0,
+    "smallest_split_K": null,
+    "table_min_split_K": 1824
+   },
+   "ada-rtx4060-torch|float32|fast|e4m3xe5m2": {
+    "queries": 3808,
+    "split": 0,
+    "smallest_split_K": null,
+    "table_min_split_K": 1920
+   },
+   "ada-rtx4060-torch|float32|fast|e5m2xe4m3": {
+    "queries": 3808,
+    "split": 0,
+    "smallest_split_K": null,
+    "table_min_split_K": 1920
+   },
+   "ada-rtx4060-torch|bfloat16|slow|e4m3xe4m3": {
+    "queries": 4318,
+    "split": 0,
+    "smallest_split_K": null,
+    "table_min_split_K": 2048
+   },
+   "ada-rtx4060-torch|bfloat16|slow|e4m3xe5m2": {
+    "queries": 4318,
+    "split": 0,
+    "smallest_split_K": null,
+    "table_min_split_K": 2048
+   },
+   "ada-rtx4060-torch|bfloat16|slow|e5m2xe4m3": {
+    "queries": 4318,
+    "split": 0,
+    "smallest_split_K": null,
+    "table_min_split_K": 2048
+   },
+   "ada-rtx4060-torch|float16|fast|e4m3xe4m3": {
+    "queries": 4318,
+    "split": 0,
+    "smallest_split_K": null,
+    "table_min_split_K": 2048
+   },
+   "ada-rtx4060-torch|float16|fast|e4m3xe5m2": {
+    "queries": 8670,
+    "split": 2614,
+    "smallest_split_K": 2176,
+    "table_min_split_K": 4096
+   },
+   "ada-rtx4060-torch|float16|fast|e5m2xe4m3": {
+    "queries": 8670,
+    "split": 2614,
+    "smallest_split_K": 2176,
+    "table_min_split_K": 4096
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|fast|e4m3xe4m3": {
+    "queries": 8670,
+    "split": 2614,
+    "smallest_split_K": 2176,
+    "table_min_split_K": 4096
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|fast|e4m3xe5m2": {
+    "queries": 8670,
+    "split": 2614,
+    "smallest_split_K": 2176,
+    "table_min_split_K": 4096
+   },
+   "ada-rtx4060-torch|float8_e4m3fn|fast|e5m2xe4m3": {
+    "queries": 8670,
+    "split": 2614,
+    "smallest_split_K": 2176,
+    "table_min_split_K": 4096
+   },
+   "ada-rtx4060-torch|float8_e5m2|fast|e4m3xe5m2": {
+    "queries": 8670,
+    "split": 2614,
+    "smallest_split_K": 2176,
+    "table_min_split_K": 4096
+   },
+   "ada-rtx4060-torch|float8_e5m2|fast|e5m2xe4m3": {
+    "queries": 8670,
+    "split": 2614,
+    "smallest_split_K": 2176,
+    "table_min_split_K": 4096
+   },
+   "ada-rtx4060-te|float32|slow|e4m3xe4m3": {
+    "queries": 3885,
+    "split": 0,
+    "smallest_split_K": null,
+    "table_min_split_K": 1792
+   },
+   "ada-rtx4060-te|float32|slow|e4m3xe5m2": {
+    "queries": 4165,
+    "split": 13,
+    "smallest_split_K": 1808,
+    "table_min_split_K": 1920
+   },
+   "ada-rtx4060-te|float32|slow|e5m2xe4m3": {
+    "queries": 4165,
+    "split": 13,
+    "smallest_split_K": 1808,
+    "table_min_split_K": 1920
+   },
+   "ada-rtx4060-te|bfloat16|fast|e4m3xe4m3": {
+    "queries": 3605,
+    "split": 0,
+    "smallest_split_K": null,
+    "table_min_split_K": 1664
+   },
+   "ada-rtx4060-te|bfloat16|fast|e4m3xe5m2": {
+    "queries": 4165,
+    "split": 52,
+    "smallest_split_K": 1760,
+    "table_min_split_K": 1920
+   },
+   "ada-rtx4060-te|bfloat16|fast|e5m2xe4m3": {
+    "queries": 4165,
+    "split": 52,
+    "smallest_split_K": 1760,
+    "table_min_split_K": 1920
+   },
+   "ada-rtx4060-te|bfloat16|slow|e4m3xe4m3": {
+    "queries": 3745,
+    "split": 0,
+    "smallest_split_K": null,
+    "table_min_split_K": 1728
+   },
+   "ada-rtx4060-te|bfloat16|slow|e4m3xe5m2": {
+    "queries": 4165,
+    "split": 38,
+    "smallest_split_K": 1776,
+    "table_min_split_K": 1920
+   },
+   "ada-rtx4060-te|bfloat16|slow|e5m2xe4m3": {
+    "queries": 4165,
+    "split": 38,
+    "smallest_split_K": 1776,
+    "table_min_split_K": 1920
+   }
+  }
+ }
+}

@@ -32,6 +32,7 @@ import json
 import os
 import posixpath
 import re
+import subprocess
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -295,7 +296,7 @@ def rel(p: Path) -> str:
 
 
 def doc_files() -> list[Path]:
-    files = [p for p in (README, ROOT / "CHANGELOG.md") if p.is_file()]
+    files = [p for p in (README, ROOT / "CHANGELOG.md", ROOT / "llms.txt") if p.is_file()]
     docs = ROOT / "docs"
     if docs.is_dir():
         for p in sorted(docs.rglob("*")):
@@ -324,6 +325,15 @@ def strip_code_fences(lines: list[str]) -> list[tuple[int, str, bool]]:
 
 
 def repo_files() -> set[str]:
+    """Files a reference may point to: the git-tracked files (staged ones included) in a git checkout, so that an
+    untracked local file does not satisfy a reference; otherwise every file of the tree."""
+    if (ROOT / ".git").exists():
+        try:
+            listed = subprocess.run(["git", "-C", str(ROOT), "ls-files", "-z"], check=True,
+                                    capture_output=True).stdout.decode().split("\0")
+            return {f for f in listed if f and (ROOT / f).is_file()}
+        except (OSError, subprocess.CalledProcessError):
+            pass
     out = set()
     for p in ROOT.rglob("*"):
         r = rel(p)

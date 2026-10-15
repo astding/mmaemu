@@ -1,0 +1,37 @@
+mmaemu 0.1.0.dev0  (~/mmaemu-4060/src/mmaemu)
+python 3.12.2  Linux-6.12.111+deb13-amd64-x86_64-with-glibc2.41
+torch 2.7.1+cu128  (CUDA build 12.8)
+
+Device
+  NVIDIA GeForce RTX 4060  sm_89  24 SMs  7814 MiB
+  display driver 570.211.01  CUDA driver API 12080  cuBLASLt 12.8.3.14  NVRTC [12, 8]
+
+Profiles (default: ada-rtx4060-torch)
+  ada-rtx4060-torch: preset ada, NVIDIA GeForce RTX 4060, 24 SMs, cuBLASLt 12.8.3.14, caller torch._scaled_mm, workspace 1048576, table heur_rtx4060_lt12.8.3.14; maturity validated, split-K validated; MATCHES this device
+  ada-rtx4060-te: preset ada, NVIDIA GeForce RTX 4060, 24 SMs, cuBLASLt 12.8.3.14, caller transformer_engine, workspace 4194304, table heur_rtx4060_lt12.8.3.14; maturity validated, split-K experimental; MATCHES this device
+  ada-rtx4060-ws0: preset ada, NVIDIA GeForce RTX 4060, 24 SMs, cuBLASLt 12.8.3.14, caller torch._scaled_mm, workspace 0, table heur_rtx4060_lt12.8.3.14; maturity validated, split-K validated; MATCHES this device
+  hopper-experimental: preset hopper, None, None SMs, cuBLASLt None, caller torch._scaled_mm, workspace None, table None; maturity experimental, split-K none; does not match this device
+  b200-mma-sync-experimental: preset b200_mma_sync, None, None SMs, cuBLASLt None, caller torch._scaled_mm, workspace None, table None; maturity experimental, split-K none; does not match this device
+
+Presets
+  ada: validated - Ada (sm_89) FP8 mma.sync m16n8k32, validated bit for bit on an RTX 4060
+  b200_mma_sync (alias: blackwell): experimental - fits the toolbox B200 mma.sync (HMMA-rewrite) vectors; NOT a model of sm_120 / RTX 5070 Ti; NOT B200 cuBLAS
+  hopper: experimental - instruction level only, toolbox H100/H200 vectors with c = 0; how c enters and all GEMM-level behaviour are not validated
+
+Backends
+  cuda:tc3: available via fatbin, validated here
+  cuda:v9: available via fatbin, validated here
+  cuda:v4: available via fatbin, validated here
+  cuda:v1: available via fatbin, validated here
+  reference: available via torch, validated here - float64 model on the tensors' device
+
+Fatbins (nvcc 12.8.61, flags -O3 --fmad=false)
+  probes: SASS [80, 86, 89, 90, 100, 120] PTX None sha256 OK
+  tc3: SASS [80, 86, 89] PTX None sha256 OK
+  v1: SASS [75, 80, 86, 89, 90, 100, 120] PTX 75 sha256 OK
+  v4: SASS [80, 86, 89, 90, 100, 120] PTX 80 sha256 OK
+  v9: SASS [80, 86, 89, 90, 100, 120] PTX None sha256 OK
+
+Split-K tables
+  heur_rtx4060_lt12.8.3.14: heur_rtx4060_lt12.8.3.14.json (33291 B, sha256 657607b2a2e2), heur_rtx4060_lt12.8.3.14.npz (236342 B, sha256 304203efc0f1); rows 1228448
+  (other package data): verified_split_combos.json

@@ -1,0 +1,24 @@
+== 40B w4k 00:43:59
+OK w4k
+== 40B p0 00:55:00
+FAILED p0: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.00 GiB. GPU 0 has a total capacity of 8.00 GiB of which 
+OK p0_4k
+== 40B p1 00:58:43
+FAILED p1: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.45 GiB. GPU 0 has a total capacity of 8.00 GiB of which 
+OK p1_4k
+== 40B p2 00:59:42
+FAILED p2: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.01 GiB. GPU 0 has a total capacity of 8.00 GiB of which 
+OK p2_4k
+== 40B p3 01:00:34
+FAILED p3: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.72 GiB. GPU 0 has a total capacity of 8.00 GiB of which 
+OK p3_4k
+== 40B w8k 01:01:23
+FAILED w8k: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 4.00 GiB. GPU 0 has a total capacity of 8.00 GiB of which 
+== heuristics 01:01:30
+cublasLt 120803 on NVIDIA GeForce RTX 4060 (24 SMs): 67752 queries in 2.0s; failures 0
+total 22016
+drwxrwxr-x 2 <user> <user>     4096 Oct 12 01:01 .
+drwxrwxr-x 6 <user> <user>     4096 Oct 12 00:25 ..
+-rw-rw-r-- 1 <user> <user> 13571785 Oct 12 01:01 heur_rtx4060_cublasLt12.8.3.json
+-rw-rw-r-- 1 <user> <user>  8959296 Oct 12 00:26 jobs.json
+CHAIN_DONE 01:01:33

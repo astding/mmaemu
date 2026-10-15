@@ -8,10 +8,13 @@ profile (mmaemu.platform); calls the profile cannot decide raise instead of gues
 Validation order (normative; parity tests check exception classes and raise/no-raise):
   1. Python argument types: TypeError.
   2. torch 2.7.1 _scaled_mm argument checks: ReferenceRejectsError. Then, as torch does, zero-size results return
-     early (M == 0 or N == 0: empty; K == 0: all +0 for every scale, measured on the RTX 4060).
-     cuBLAS-level checks follow: operand layout (mat1 row-major, mat2 column-major), 16-byte operand alignment,
-     leading dimensions % 16 (measured on the RTX 4060 with torch 2.7.1 and cuBLASLt 12.8.3.14; the R1
-     recordings of recordings/rtx4060_2026-10 are the authority).
+     early (M == 0 or N == 0: empty; K == 0: all +0 for every scale, measured on the RTX 4060), for any out dtype
+     and for every float8 dtype torch accepts (fnuz and e8m0 included). cuBLAS-level checks follow: operand layout
+     (mat1 not column-major, mat2 column-major; a mat1 that is neither row- nor column-major is copied to
+     row-major, as torch does), FP8 formats other than e4m3fn / e5m2, out dtype, 16-byte operand alignment, leading
+     dimensions % 16 (measured on the RTX 4060 with torch 2.7.1 and cuBLASLt 12.8.3.14; the R1 recordings of
+     recordings/rtx4060_2026-10 are the authority). An out= that is neither row- nor column-major is returned
+     unchanged with a UserWarning: torch computes into a contiguous copy of it and never copies the result back.
   3. Profile rejects (e.g. e4m3 x e4m3 -> e5m2 on ada-rtx4060-*): ReferenceRejectsError.
   4. Scope: bias, row-wise scales, inputs requiring grad under grad mode: UnsupportedFeatureError.
   5. Preset maturity warning (ExperimentalPresetWarning).
@@ -38,6 +41,9 @@ __all__ = ["scaled_mm", "accumulate", "explain", "CallPlan"]
 _E4, _E5 = torch.float8_e4m3fn, torch.float8_e5m2
 _OUT_NAMES = {torch.float32: "float32", torch.bfloat16: "bfloat16", torch.float16: "float16",
               _E4: "float8_e4m3fn", _E5: "float8_e5m2"}
+# torch 2.7.1 isFloat8Type: the dtypes _scaled_mm accepts before its zero-size early return
+_TORCH_FP8 = {getattr(torch, n) for n in ("float8_e4m3fn", "float8_e5m2", "float8_e4m3fnuz", "float8_e5m2fnuz",
+                                          "float8_e8m0fnu") if hasattr(torch, n)}
 
 
 @dataclass
@@ -100,6 +106,12 @@ def _row_major(t: torch.Tensor) -> bool:
     return t.is_contiguous() or (t.stride(1) == 1 and t.stride(0) >= max(1, t.shape[1]))
 
 
+def _col_major(t: torch.Tensor) -> bool:
+    """[R, C] that torch 2.7.1's prepare_matrix_for_cublas passes to cuBLAS untransposed (not contiguous, unit row
+    stride, ld >= R). Every other layout is passed transposed: row-major as is, anything else as a contiguous copy."""
+    return not t.is_contiguous() and t.stride(0) == 1 and t.stride(1) >= max(1, t.shape[0])
+
+
 def _profile_and_preset(profile, warn: bool):
     from mmaemu.platform.profiles import get_profile
     prof = get_profile(profile)
@@ -115,14 +127,15 @@ def _select_backend(device: torch.device, fa: str, fb: str, preset_name: str, ba
     return req, be
 
 
-def _fallbacks(device: torch.device, chosen: str) -> list:
+def _fallbacks(req, backend: str) -> list:
+    """Why each backend tried before the chosen one was skipped for this call (its formats, preset and device)."""
+    from mmaemu.backends.registry import explain_selection
+    if backend == "auto":
+        backend = os.environ.get("MMAEMU_BACKEND", "auto") or "auto"
     try:
-        from mmaemu.backends import status
-        st = status(device)
+        return explain_selection(req, backend)[1]
     except Exception as e:  # noqa: BLE001  (diagnostics only)
-        return [f"backend status unavailable: {type(e).__name__}: {e}"]
-    return [f"{name}: {s.reason or 'not available'}" for name, s in st.items()
-            if name != chosen and (not s.available or s.reason)]
+        return [f"backend selection unavailable: {type(e).__name__}: {e}"]
 
 
 # ---------------------------------------------------------------------------------------------------------------
@@ -136,7 +149,7 @@ def _check_types(input, mat2, scale_a, scale_b, bias, scale_result, out_dtype, u
             raise TypeError(f"scaled_mm(): argument '{name}' must be Tensor, not {type(v).__name__}")
     if out_dtype is not None and not isinstance(out_dtype, torch.dtype):
         raise TypeError(f"scaled_mm(): argument 'out_dtype' must be torch.dtype, not {type(out_dtype).__name__}")
-    if not _is_bool(use_fast_accum):
+    if type(use_fast_accum) is not bool:                  # torch's parser rejects numpy.bool_ too
         raise TypeError(f"scaled_mm(): argument 'use_fast_accum' must be bool, not {type(use_fast_accum).__name__}")
 
 
@@ -177,9 +190,8 @@ def _torch_checks(mat1, mat2, scale_a, scale_b, bias, scale_result, out_dtype, o
         raise R("out_dtype must match output matrix type")
     od = out_dtype if out_dtype is not None else (out.dtype if out is not None else mat1.dtype)
     for name, t in (("mat1", mat1), ("mat2", mat2)):
-        if not is_fp8_dtype(t.dtype):
-            raise R(f"Expected {name} to be Float8 matrix got {t.dtype}" +
-                    (" (fnuz formats are rejected on CUDA)" if "fnuz" in str(t.dtype) else ""))
+        if t.dtype not in _TORCH_FP8:
+            raise R(f"Expected {name} to be Float8 matrix got {t.dtype}")
     if mat1.dtype == _E5 and mat2.dtype == _E5:
         raise R("Multiplication of two Float8_e5m2 matrices is not supported")
     if bias is not None:
@@ -196,18 +208,25 @@ def _torch_checks(mat1, mat2, scale_a, scale_b, bias, scale_result, out_dtype, o
         if t is not None and t.device != dev:
             raise R(f"Expected all tensors to be on the same device, but found at least two devices, {dev} and "
                     f"{t.device}!")
-    if od not in _OUT_NAMES:
-        raise R(f"out dtype {od} is not supported by cuBLASLt FP8 GEMMs (CUBLAS_STATUS_NOT_SUPPORTED)")
     return scaling, od
 
 
-def _cublas_checks(mat1, mat2, scaling, od):
-    """Checks torch/cuBLASLt apply only for non-empty calls (after torch's zero-size early return)."""
+def _cublas_checks(mat1, mat2, scaling, od) -> torch.Tensor:
+    """Checks torch/cuBLASLt apply only for non-empty calls (after torch's zero-size early return). Returns mat1 as
+    cuBLAS reads it: torch copies a mat1 that is neither row- nor column-major to a contiguous one."""
     R = ReferenceRejectsError
     if scaling == "rowwise" and od != torch.bfloat16:
         raise R("Only bf16 high precision output types are supported for row-wise scaling.")
-    if not _row_major(mat1) or not _row_major(mat2.t()):
+    if _col_major(mat1) or not _row_major(mat2.t()):
         raise R("Only multiplication of row-major and column-major matrices is supported by cuBLASLt")
+    if not _row_major(mat1):
+        mat1 = mat1.contiguous()
+    for name, t in (("mat1", mat1), ("mat2", mat2)):
+        if not is_fp8_dtype(t.dtype):
+            raise R(f"{name} is {t.dtype}: torch 2.7.1 fails on CUDA for FP8 formats other than float8_e4m3fn and "
+                    f"float8_e5m2 (internal assert: cannot convert the ScalarType to a CUDA data type)")
+    if od not in _OUT_NAMES:
+        raise R(f"out dtype {od} is not supported by cuBLASLt FP8 GEMMs (CUBLAS_STATUS_NOT_SUPPORTED)")
     if _misaligned(mat1) or _misaligned(mat2):
         raise R("CUBLAS_STATUS_NOT_SUPPORTED when calling cublasLtMatmul (operand pointer not 16-byte aligned)")
     lda = mat1.stride(0) if mat1.shape[0] > 1 else mat1.shape[1]
@@ -215,6 +234,7 @@ def _cublas_checks(mat1, mat2, scaling, od):
     if lda % 16 or ldb % 16:
         raise R("CUBLAS_STATUS_NOT_SUPPORTED when calling cublasLtMatmulAlgoGetHeuristic (leading dimension not a "
                 "multiple of 16)")
+    return mat1
 
 
 def _profile_rejects(prof, fa: str, fb: str, od):
@@ -225,8 +245,9 @@ def _profile_rejects(prof, fa: str, fb: str, od):
 
 def _scope_checks(scaling, bias, tensors):
     if bias is not None:
-        raise UnsupportedFeatureError("bias is not supported in mmaemu 0.1 (cuBLAS's fused-bias epilogue is "
-                                      "measured by one agent only); add the bias yourself after scaled_mm")
+        raise UnsupportedFeatureError("bias is not supported in mmaemu 0.1 (cuBLAS's fused-bias epilogue was "
+                                      "measured only in an internal review of the prototype); add the bias "
+                                      "yourself after scaled_mm")
     if scaling == "rowwise":
         raise UnsupportedFeatureError("row-wise scales are not supported in mmaemu 0.1 (sm_89 runs them through "
                                       "CUTLASS stream-K, whose split depends on the SM count)")
@@ -237,7 +258,8 @@ def _scope_checks(scaling, bias, tensors):
 
 # ---------------------------------------------------------------------------------------------------------------
 class _Prepared:
-    __slots__ = ("early", "M", "N", "K", "fa", "fb", "od", "prof", "preset", "decision", "req", "be", "warnings")
+    __slots__ = ("early", "M", "N", "K", "fa", "fb", "od", "prof", "preset", "decision", "req", "be", "warnings",
+                 "mat1", "out_unchanged")
 
 
 def _prepare(input, mat2, scale_a, scale_b, bias, scale_result, out_dtype, use_fast_accum, out, profile, splitk,
@@ -249,13 +271,15 @@ def _prepare(input, mat2, scale_a, scale_b, bias, scale_result, out_dtype, use_f
     scaling, od = _torch_checks(input, mat2, scale_a, scale_b, bias, scale_result, out_dtype, out)
     P.M, P.K, P.N = input.shape[0], input.shape[1], mat2.shape[1]
     P.od = od
-    P.fa, P.fb = fmt_of(input.dtype), fmt_of(mat2.dtype)
     P.prof, P.preset = _profile_and_preset(profile, warn=False)
     P.early = P.M == 0 or P.N == 0 or P.K == 0
-    P.decision = P.req = P.be = None
+    P.decision = P.req = P.be = P.fa = P.fb = None
+    P.mat1 = input
+    P.out_unchanged = False
     if P.early:
         return P
-    _cublas_checks(input, mat2, scaling, od)
+    input = P.mat1 = _cublas_checks(input, mat2, scaling, od)
+    P.fa, P.fb = fmt_of(input.dtype), fmt_of(mat2.dtype)
     _profile_rejects(P.prof, P.fa, P.fb, od)
     _scope_checks(scaling, bias, (input, mat2, scale_a, scale_b, scale_result, bias))
     msg = maturity_warning(P.preset)
@@ -263,10 +287,26 @@ def _prepare(input, mat2, scale_a, scale_b, bias, scale_result, out_dtype, use_f
         P.warnings.append(msg)
     if not dry:
         get_preset(P.prof.preset)                     # emits the ExperimentalPresetWarning (once per name)
+    # torch 2.7.1 keeps an out= of shape [M, N] (another shape is resized to a contiguous one); one that is neither
+    # row- nor column-major is computed into a contiguous copy that is never copied back (RTX 4060: out unchanged).
+    # Its result is discarded, so no split-K decision or backend is needed.
+    if out is not None and tuple(out.shape) == (P.M, P.N) and not (_row_major(out) or _col_major(out)):
+        P.out_unchanged = True
+        P.warnings.append(f"out= with strides {tuple(out.stride())} is neither row- nor column-major: torch 2.7.1 "
+                          f"computes into a contiguous copy and never copies it back, so out= is returned unchanged "
+                          f"(mmaemu does the same)")
+        return P
     layout_std = input.is_contiguous() and mat2.t().is_contiguous()
-    P.decision = resolve_splitk(P.M, P.N, P.K, a_dtype=input.dtype, b_dtype=mat2.dtype, out_dtype=od,
+    # torch runs a row-major result as mat2^T x mat1^T, so the table is keyed by that problem. A column-major out=
+    # (kept by torch when its shape is [M, N]) is computed as mat1 x mat2: cuBLASLt's heuristic then sees the
+    # problem of a row-major call with shape (N, M, K) and the formats swapped (RTX 4060: 406 of 406 such calls).
+    if out is not None and tuple(out.shape) == (P.M, P.N) and _col_major(out):
+        key = (P.N, P.M, P.K, mat2.dtype, input.dtype)
+    else:
+        key = (P.M, P.N, P.K, input.dtype, mat2.dtype)
+    P.decision = resolve_splitk(*key[:3], a_dtype=key[3], b_dtype=key[4], out_dtype=od,
                                 use_fast_accum=bool(use_fast_accum), profile=P.prof, splitk=splitk,
-                                layout_std=layout_std)
+                                layout_std=layout_std, dry=dry)
     P.req, P.be = _select_backend(input.device, P.fa, P.fb, P.preset.name, backend)
     return P
 
@@ -275,6 +315,9 @@ def _scaled_mm_impl(input, mat2, scale_a, scale_b, bias=None, scale_result=None,
                     use_fast_accum=False, *, out=None, profile=None, splitk="auto", backend="auto"):
     P = _prepare(input, mat2, scale_a, scale_b, bias, scale_result, out_dtype, use_fast_accum, out, profile, splitk,
                  backend, dry=False)
+    if P.out_unchanged:
+        warnings.warn(P.warnings[-1], UserWarning, stacklevel=3)
+        return out
     dev = input.device
     if P.early:
         y = torch.zeros(P.M, P.N, dtype=P.od, device=dev)      # torch: empty result, or K == 0 -> out.zero_()
@@ -283,7 +326,7 @@ def _scaled_mm_impl(input, mat2, scale_a, scale_b, bias=None, scale_result=None,
             _ftz_canary()
         plan = make_plan(P.K, fast=bool(use_fast_accum), S=P.decision.S, scheme=P.decision.scheme,
                          preset=P.preset)
-        acc = execute_plan(plan, input.view(torch.uint8), mat2.t().view(torch.uint8), fmt_a=P.fa, fmt_b=P.fb,
+        acc = execute_plan(plan, P.mat1.view(torch.uint8), mat2.t().view(torch.uint8), fmt_a=P.fa, fmt_b=P.fb,
                            chain_fn=P.be.chain_fn(P.req))
         y = epilogue.apply(acc, scale_a, scale_b, out_dtype=P.od, scale_result=scale_result)
     if out is None:
@@ -373,9 +416,11 @@ def explain(input, mat2, scale_a, scale_b, bias=None, scale_result=None, out_dty
         cp.split = P.decision
         if P.early:
             cp.backend = "none (zero-size result)"
+        elif P.out_unchanged:
+            cp.backend = "none (out= is returned unchanged)"
         else:
             cp.backend = P.be.name
-            cp.fallbacks = _fallbacks(input.device, P.be.name)
+            cp.fallbacks = _fallbacks(P.req, backend)
     except Exception as e:  # noqa: BLE001  (explain reports instead of raising)
         cp.validation = (type(e).__name__, str(e))
         try:

@@ -1,0 +1,123 @@
+{
+ "a09": {
+  "queries": 3360,
+  "status_nonzero": 0,
+  "split": 251,
+  "split_by_K": {
+   "16384": 50,
+   "32768": 64,
+   "65536": 53,
+   "262144": 43,
+   "1048576": 41
+  },
+  "note": "M*N at about 1.05, 2 and 8 times the largest split M*N of each setting (M in 16, 64, 256, 1024; K 16,384 to 1,048,576): every split is at the 1.05 point (largest factor 1.083). Superseded by ../splitk-envelope"
+ },
+ "misc": [
+  {
+   "name": "out step 2 (no unit stride), prefilled NaN",
+   "returned_is_out": true,
+   "out_still_all_nan": true,
+   "out_equals_product": false,
+   "stride": [
+    64,
+    2
+   ]
+  },
+  {
+   "name": "float8_e4m3fnuz mat1 M=0 K=32 N=16",
+   "ok": true,
+   "shape": [
+    0,
+    16
+   ],
+   "any_nonzero": null
+  },
+  {
+   "name": "float8_e4m3fnuz mat1 M=16 K=0 N=16",
+   "ok": true,
+   "shape": [
+    16,
+    16
+   ],
+   "any_nonzero": false
+  },
+  {
+   "name": "float8_e4m3fnuz mat1 M=16 K=32 N=0",
+   "ok": true,
+   "shape": [
+    16,
+    0
+   ],
+   "any_nonzero": null
+  },
+  {
+   "name": "float8_e4m3fnuz mat1 M=16 K=32 N=16",
+   "ok": false,
+   "error": "RuntimeError: false INTERNAL ASSERT FAILED at \"/pytorch/aten/src/ATen/cuda/CUDADataType.h\":94, please report a bug to PyTorch. Cannot convert ScalarType Float8_e4m3fnuz to cu"
+  },
+  {
+   "name": "float8_e5m2fnuz mat1 M=0 K=32 N=16",
+   "ok": true,
+   "shape": [
+    0,
+    16
+   ],
+   "any_nonzero": null
+  },
+  {
+   "name": "float8_e5m2fnuz mat1 M=16 K=0 N=16",
+   "ok": true,
+   "shape": [
+    16,
+    16
+   ],
+   "any_nonzero": false
+  },
+  {
+   "name": "float8_e5m2fnuz mat1 M=16 K=32 N=0",
+   "ok": true,
+   "shape": [
+    16,
+    0
+   ],
+   "any_nonzero": null
+  },
+  {
+   "name": "float8_e5m2fnuz mat1 M=16 K=32 N=16",
+   "ok": false,
+   "error": "RuntimeError: false INTERNAL ASSERT FAILED at \"/pytorch/aten/src/ATen/cuda/CUDADataType.h\":94, please report a bug to PyTorch. Cannot convert ScalarType Float8_e5m2fnuz to cu"
+  },
+  {
+   "name": "float8_e8m0fnu mat1 M=0 K=32 N=16",
+   "ok": true,
+   "shape": [
+    0,
+    16
+   ],
+   "any_nonzero": null
+  },
+  {
+   "name": "float8_e8m0fnu mat1 M=16 K=0 N=16",
+   "ok": true,
+   "shape": [
+    16,
+    16
+   ],
+   "any_nonzero": false
+  },
+  {
+   "name": "float8_e8m0fnu mat1 M=16 K=32 N=0",
+   "ok": true,
+   "shape": [
+    16,
+    0
+   ],
+   "any_nonzero": null
+  },
+  {
+   "name": "float8_e8m0fnu mat1 M=16 K=32 N=16",
+   "ok": false,
+   "error": "RuntimeError: false INTERNAL ASSERT FAILED at \"/pytorch/aten/src/ATen/cuda/CUDADataType.h\":94, please report a bug to PyTorch. Cannot convert ScalarType Float8_e8m0fnu to cud"
+  }
+ ]
+}

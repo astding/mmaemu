@@ -1,0 +1,20 @@
+406 cases (keys at ws 1 MiB whose swapped key records another split)
+  row_eq_def            406 of 406
+  row_eq_col             28 of 406
+  col_eq_mmaemu_col      28 of 406
+  col_eq_swapped        406 of 406
+cases where hardware col-major out != swapped-key emulation: 0
+largest mismatch, mmaemu today vs hardware (col-major out): {'key': [224, 128, 3072, 0, 0, 0, 0], 'dec': [3, 'pairwise'], 'dec_swapped': [1, 'none'], 'row_eq_def': True, 'col_eq_mmaemu_col': False, 'col_eq_swapped': True, 'row_eq_col': False, 'n_diff_col_vs_mmaemu': 28433, 'numel': 28672}
+expand mmaemu raises ReferenceRejectsError Only multiplication of row-major and column-major matrices is supported by cuBLASLt
+expand mmaemu on .contiguous() equal to hardware: True
+stride2 mmaemu raises ReferenceRejectsError Only multiplication of row-major and column-major matrices is supported by cuBLASLt
+stride2 mmaemu on .contiguous() equal to hardware: True
+M0_float64 mmaemu raises ReferenceRejectsError out dtype torch.float64 is not supported by cuBLASLt FP8 GEMMs (CUBLAS_STATUS_NOT_SUPPORTED)
+N0_float64 mmaemu raises ReferenceRejectsError out dtype torch.float64 is not supported by cuBLASLt FP8 GEMMs (CUBLAS_STATUS_NOT_SUPPORTED)
+K0_float64 mmaemu raises ReferenceRejectsError out dtype torch.float64 is not supported by cuBLASLt FP8 GEMMs (CUBLAS_STATUS_NOT_SUPPORTED)
+M0_int32 mmaemu raises ReferenceRejectsError out dtype torch.int32 is not supported by cuBLASLt FP8 GEMMs (CUBLAS_STATUS_NOT_SUPPORTED)
+N0_int32 mmaemu raises ReferenceRejectsError out dtype torch.int32 is not supported by cuBLASLt FP8 GEMMs (CUBLAS_STATUS_NOT_SUPPORTED)
+K0_int32 mmaemu raises ReferenceRejectsError out dtype torch.int32 is not supported by cuBLASLt FP8 GEMMs (CUBLAS_STATUS_NOT_SUPPORTED)
+K0_scale2_bf16 hardware unique bits [0] mmaemu unique [0] equal True
+K0_bias_bf16 hardware unique bits [0] mmaemu unique [0] equal True
+K0_e4m3_sr hardware unique bits [0] mmaemu unique [0] equal True

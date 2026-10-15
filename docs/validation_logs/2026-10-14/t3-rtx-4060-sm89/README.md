@@ -6,8 +6,9 @@ is the profile device, so every kernel runs here: tc3, v9, v4, v1 and the refere
 - Hardware and software: the RTX 4060 host described in `../rtx4060-host/README.md` (preflight 18 of 18 PASS:
   torch 2.7.1+cu128, cuBLASLt 12.8.3.14, the 32 packages of the recording venv, driver 570.211.01).
 - Code under test: the tree of da9edd4 (`git archive`), with the frozen release fatbins. Under `mmaemu/` it is
-  identical to 76fd4ea (`git diff 76fd4ea da9edd4 -- mmaemu/` is empty); da9edd4 changes two tests and four docs
-  (see the first run below).
+  identical to 76fd4ea (`git diff 76fd4ea da9edd4 -- mmaemu/` is empty); da9edd4 changes two tests and three docs
+  (see the first run below), and the two commits between 76fd4ea and it change only project metadata (README.md,
+  CITATION.cff, pyproject.toml).
 - T3 command: `MMAEMU_TRUTH_DIR=<truth> MMAEMU_AUDIT_DIR=<audit> PYTHON=<venv>/bin/python tools/run_gpu_tests.sh
   --out <dir>`, under the GPU lock. The ground truth and the audit data (`vperf-p3-tensorcore-exact-1/data/ref2`,
   `p2-int-mixed/data/cases.pt`) were present.
@@ -59,7 +60,8 @@ The first T3 run used the tree of 76fd4ea and failed two tests:
   gates and the kernel used instead (`cuda:v4`), as the log shows.
 
 Both expectations came from the prototype and had not run on an sm_89 device since the gated kernels were
-integrated. `ladder_probe.py` (in `../rtx4060-host/`) measured the actual ladder on this device; mmaemu's behaviour
+integrated. `ladder_probe.py` (in `../rtx4060-host/`; its output is not kept, and the first run's logs in
+`run1-76fd4ea/` show the same ladder) measured the actual ladder on this device; mmaemu's behaviour
 was the documented one, so da9edd4 changes the tests and states the merged warning in docs/backends.md (rule 5),
 docs/kernels_fast.md and docs/limitations.md. No file under `mmaemu/` changed. The complete T3 was then run again on
 da9edd4 (the files in this directory).

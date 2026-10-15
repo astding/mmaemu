@@ -6,15 +6,17 @@
 1. Creates a fresh venv (uv if available, else python -m venv + pip) in a temporary directory and installs torch
    (default: the version and CUDA flavour of the torch this script runs with, from the PyTorch index) and the wheel.
 2. Runs everything in a scrubbed environment: PATH holds only the venv's bin/ (and the WSL driver directory for
-   nvidia-smi), so no nvcc is reachable; CUDA_HOME, CUDA_PATH, PYTHONPATH, LD_LIBRARY_PATH and CONDA_PREFIX are unset;
-   HOME, XDG_CACHE_HOME and MMAEMU_CACHE_DIR point into the temporary directory; the working directory is outside the
-   source tree, and the import location of mmaemu is checked.
+   nvidia-smi), so no nvcc is reachable; CUDA_HOME, CUDA_PATH, PYTHONPATH, LD_LIBRARY_PATH, LD_PRELOAD, CONDA_PREFIX,
+   CUDA_FORCE_PTX_JIT, CUDA_DISABLE_PTX_JIT and every MMAEMU_* variable are unset; HOME, XDG_CACHE_HOME and
+   MMAEMU_CACHE_DIR point into the temporary directory; the working directory is outside the source tree, and the
+   import location of mmaemu is checked.
 3. Checks, each PASS / FAIL / SKIP with its evidence:
      environment    nvcc not on PATH, CUDA_HOME unset, a CUDA device visible to the venv's torch
      install        mmaemu is imported from the venv; version == wheel; the wheel's fatbins (if any) listed
      info           `python -m mmaemu info --json` exits 0
      selftest       `python -m mmaemu selftest --force --json` exits 0 (verdict PASS; v1 and v4 passed)
-     loader         with release fatbins in the wheel, the IEEE kernels load from the fatbin (not NVRTC)
+     loader         with release fatbins in the wheel, the IEEE kernels load from the fatbin (not NVRTC) in the
+                    venv, and every kernel that ran loaded the image whose sha256 the wheel's manifest records
      conformance    T3 subset: every available CUDA kernel vs the CPU reference, bitwise (8 data classes x
                     tile-straddling shapes, slow accumulation, split-K serial/pairwise, NaN rows/columns, a
                     misaligned operand, scaled_mm bf16 through backend="auto")
@@ -49,9 +51,8 @@ FORMAT = "mmaemu-release-validation/1"
 EVO2_RECORDING = "data/evo2/evo2_1b_w2k.json"
 WSL_DRIVER_DIR = "/usr/lib/wsl/lib"
 SCRUB = ("CUDA_HOME", "CUDA_PATH", "CUDA_ROOT", "CUDA_TOOLKIT_ROOT_DIR", "CUDACXX", "PYTHONPATH", "PYTHONHOME",
-         "LD_LIBRARY_PATH", "CONDA_PREFIX", "CONDA_DEFAULT_ENV", "VIRTUAL_ENV", "PYTHONSTARTUP", "PIP_TARGET",
-         "MMAEMU_BACKEND", "MMAEMU_DISABLE_CUDA", "MMAEMU_ALLOW_GATED_KERNELS", "MMAEMU_PROFILE",
-         "MMAEMU_TEST_FORCE_FAIL", "MMAEMU_LIBCUDA_PATH", "MMAEMU_NVRTC_PATH", "MMAEMU_SPLITK_STRICT")
+         "LD_LIBRARY_PATH", "LD_PRELOAD", "CONDA_PREFIX", "CONDA_DEFAULT_ENV", "VIRTUAL_ENV", "PYTHONSTARTUP",
+         "PIP_TARGET", "CUDA_FORCE_PTX_JIT", "CUDA_DISABLE_PTX_JIT")  # and every MMAEMU_* variable (scrubbed_env)
 
 
 def clock() -> float:
@@ -238,6 +239,12 @@ def inner_conformance(args) -> dict:
     compare("scaled_mm auto bf16", got, ref)
     out["seconds"] = round(clock() - t0, 3)
     out["status_after"] = snapshot()  # same process, after every kernel ran: the loader each one used
+    from mmaemu.backends.cuda import modules
+    out["fatbin_dir"] = str(modules.fatbin_dir())
+    out["modules"] = {}
+    for k in kernels:                 # the image each kernel ran from, to compare with the wheel's manifest
+        lm = modules.module_info(k.split(":", 1)[1], dev)
+        out["modules"][k] = {"source": lm.source, "sha256": lm.sha256}
     return out
 
 
@@ -322,7 +329,7 @@ class Runner:
 
 
 def scrubbed_env(tmp: Path, venv: Path) -> dict:
-    env = {k: v for k, v in os.environ.items() if k not in SCRUB}
+    env = {k: v for k, v in os.environ.items() if k not in SCRUB and not k.startswith("MMAEMU_")}
     path = [str(venv / "bin")]
     if os.path.isdir(WSL_DRIVER_DIR):
         path.append(WSL_DRIVER_DIR)
@@ -400,8 +407,8 @@ def wheel_facts(wheel: Path) -> dict:
         facts["fatbins"] = None
         if man in names:
             mods = json.loads(z.read(man)).get("modules", {})
-            facts["fatbins"] = {k: {"sass_archs": v.get("sass_archs"), "ptx_arch": v.get("ptx_arch")}
-                                for k, v in mods.items()}
+            facts["fatbins"] = {k: {"sass_archs": v.get("sass_archs"), "ptx_arch": v.get("ptx_arch"),
+                                    "sha256": v.get("sha256")} for k, v in mods.items()}
     return facts
 
 
@@ -511,13 +518,22 @@ def outer(args) -> int:
                   reason="" if ok else (data.get("error") or "; ".join(data.get("mismatches", [])[:3])
                                         or r.stderr.strip()[-500:]))
 
-        # loader: the IEEE kernels ran from the shipped fatbin (status snapshot of the conformance process)
-        after = ((report.get("conformance") or {}).get("status_after")) or {}
+        # loader: the IEEE kernels ran from the shipped fatbin (status snapshot of the conformance process), from the
+        # venv's package, and every kernel that ran loaded the image the wheel's manifest records
+        conf = report.get("conformance") or {}
+        after = conf.get("status_after") or {}
         src = {n: b.get("source") for n, b in after.items() if isinstance(b, dict)}
         if wf["fatbins"]:
             bad = {n: src.get(n) for n in REQUIRED_KERNELS if src.get(n) != "fatbin"}
-            R.add("loader", "FAIL" if bad else "PASS", summary=f"sources after use: {src}",
-                  reason=f"not loaded from the fatbin: {bad}" if bad else "")
+            for k, m in (conf.get("modules") or {}).items():
+                want = (wf["fatbins"].get(k.split(":", 1)[1]) or {}).get("sha256")
+                if m.get("source") == "fatbin" and m.get("sha256") != want:
+                    bad[k] = f"image sha256 {m.get('sha256')} != wheel manifest {want}"
+            fdir = conf.get("fatbin_dir") or ""
+            if not Path(fdir).resolve().is_relative_to(venv.resolve()):
+                bad["fatbin_dir"] = f"{fdir!r} is not in the venv"
+            R.add("loader", "FAIL" if bad else "PASS", summary=f"sources after use: {src}; fatbin dir {fdir}",
+                  reason=f"not loaded from the wheel's fatbins: {bad}" if bad else "")
         elif args.allow_missing_fatbins:
             R.add("loader", "SKIP", reason="the wheel has no fatbins (--allow-missing-fatbins): kernels via NVRTC",
                   summary=f"sources after use: {src}")

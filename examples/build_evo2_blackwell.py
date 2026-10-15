@@ -28,8 +28,8 @@ md(r"""
 
 [Evo 2](https://github.com/ArcInstitute/evo2) 1B computes its input projections in FP8: 21 of its 25 blocks run
 their input projection as an FP8 GEMM through NVIDIA Transformer Engine (TE). The model's outputs depend on
-how the tensor cores accumulate that GEMM. On a GPU whose FP8 arithmetic differs, the same weights give a different,
-much worse model.
+how the tensor cores accumulate that GEMM. On a GPU whose FP8 arithmetic differs, the same weights can give a
+different, much worse model, as on the RTX 5070 Ti below.
 
 This notebook runs Evo 2 1B on an **RTX 5070 Ti (Blackwell, sm_120)** in three ways and compares each with the
 official path on an RTX 4060 (Ada, sm_89: evo2 0.6.0 + TE 2.3.0), whose outputs ship with this notebook:
@@ -546,10 +546,10 @@ Measured on the RTX 5070 Ti (the stored outputs above):
 - **Upstream test:** loss 0.503 with mmaemu (the test expects 0.502); 1.248 natively and 1.365 with bf16
   projections, the two values reported in evo2 issue #157.
 - **Whole model:** with mmaemu the mean |Δ log p(A,C,G,T)| against the RTX 4060 is 0.040, the same size as that of
-  the official path on an H100 (0.041). Native FP8 (2.58) and bf16 projections (2.86) are about 65 and 70 times
+  the official path on an H100 (0.041). Native FP8 (2.58) and bf16 projections (2.85) are about 65 and 70 times
   further away and lower the score of every window.
 - **BRCA1 (500 variants):** AUROC 0.732 with mmaemu, against 0.738 on the RTX 4060 and 0.733 on the H100; the
-  per-variant score changes correlate with the RTX 4060's as closely as the H100's do (Pearson 0.986 and 0.987).
+  per-variant score changes correlate with the RTX 4060's almost as closely as the H100's do (Pearson 0.986 and 0.987).
   The AUROC drops to 0.559 natively and to 0.484 with bf16 projections, whose score changes are almost
   uncorrelated with the RTX 4060's (Pearson 0.06 and 0.07).
 

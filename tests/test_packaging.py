@@ -1,5 +1,5 @@
 """Packaging tests: version, package resources, licence files, metadata, no CUDA initialisation on import, and
-the policy of the CI and release workflows.
+the policy of the CI, release and docs workflows.
 
 Runs from the source tree (T0) and against an installed wheel (CI dist job: MMAEMU_EXPECT_INSTALLED=1, run from a
 directory outside the repository). The workflow review also runs without pytest or torch:
@@ -171,6 +171,54 @@ def review_ci_workflow(path: Path) -> list[str]:
     return p
 
 
+def review_docs_workflow(path: Path) -> list[str]:
+    """Problems of .github/workflows/docs.yml against docs/release.md (empty list = compliant)."""
+    p: list[str] = []
+    doc = _load_yaml(path)
+    text = path.read_text()
+    on = _triggers(doc)
+    if set(on) - {"push", "pull_request", "workflow_dispatch"}:
+        p.append(f"unexpected triggers {sorted(set(on) - {'push', 'pull_request', 'workflow_dispatch'})}")
+    if doc.get("permissions") != {"contents": "read"}:
+        p.append(f"top-level permissions must be {{contents: read}}, got {doc.get('permissions')}")
+    jobs = doc.get("jobs") or {}
+    if set(jobs) != {"build", "deploy"}:
+        p.append(f"jobs must be build and deploy, got {sorted(jobs)}")
+    build, dep = jobs.get("build") or {}, jobs.get("deploy") or {}
+    for name, job in jobs.items():
+        runs_on = json.dumps(job.get("runs-on"))
+        if "self-hosted" in runs_on:
+            p.append(f"job {name} must run on a GitHub-hosted runner, got {runs_on}")
+        if name != "deploy" and "permissions" in job:
+            p.append(f"job {name} must keep the top-level permissions")
+    if dep.get("permissions") != {"pages": "write", "id-token": "write"}:
+        p.append(f"deploy permissions must be exactly {{pages: write, id-token: write}}, got {dep.get('permissions')}")
+    env = dep.get("environment")
+    if (env.get("name") if isinstance(env, dict) else env) != "github-pages":
+        p.append(f"deploy environment must be github-pages, got {env}")
+    needs = dep.get("needs")
+    if needs != "build" and needs != ["build"]:
+        p.append(f"deploy must need build, got {needs}")
+    cond = str(dep.get("if", ""))
+    for needle in ("!github.event.repository.private", "github.ref == 'refs/heads/master'",
+                   "github.event_name != 'pull_request'"):
+        if needle not in cond:
+            p.append(f"deploy must run only for master of a public repository ({needle!r}), got if: {cond!r}")
+    steps = dep.get("steps") or []
+    if len(steps) != 1 or not str(steps[0].get("uses", "")).startswith("actions/deploy-pages@"):
+        p.append("deploy must have one step, actions/deploy-pages (it runs no repository code)")
+    unpinned = [u for u in _all_uses(doc) if not SHA_PIN.match(u)]
+    if unpinned:
+        p.append(f"every action must be pinned by commit SHA: {unpinned}")
+    if re.search(r"secrets\.", text) or "gh-action-pypi-publish" in text or "twine upload" in text:
+        p.append("docs.yml must use no secrets and must not publish to PyPI")
+    b = _steps_text(build)
+    for needle in ("mkdocs==1.6.1", "mkdocs build --strict", "actions/upload-pages-artifact@"):
+        if needle not in b:
+            p.append(f"build job lacks {needle!r}")
+    return p
+
+
 def test_release_workflow_policy():
     _require_yaml()
     path = ROOT / ".github" / "workflows" / "release.yml"
@@ -210,6 +258,38 @@ def test_release_review_detects_violations(tmp_path):
         f = tmp_path / f"{name.replace(' ', '_')}.yml"
         f.write_text(text)
         assert review_release_workflow(f), f"mutation {name!r} not detected"
+
+
+def test_docs_workflow_policy():
+    _require_yaml()
+    path = ROOT / ".github" / "workflows" / "docs.yml"
+    _skip_unless(path.is_file(), "no .github/workflows in this tree (sdist)")
+    assert review_docs_workflow(path) == []
+
+
+def test_docs_review_detects_violations(tmp_path):
+    """The review is not vacuous: each mutation of a compliant workflow is reported."""
+    _require_yaml()
+    src = ROOT / ".github" / "workflows" / "docs.yml"
+    _skip_unless(src.is_file(), "no .github/workflows in this tree (sdist)")
+    good = src.read_text()
+    mutations = {
+        "token in build": good.replace("    name: build (mkdocs --strict)\n",
+                                       "    name: build (mkdocs --strict)\n    permissions:\n      id-token: write\n", 1),
+        "write-all": good.replace("permissions:\n  contents: read\n", "permissions: write-all\n", 1),
+        "private deploys": good.replace(" && !github.event.repository.private", ""),
+        "code in deploy": good.replace("      - id: deployment\n",
+                                       "      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1\n"
+                                       "      - id: deployment\n"),
+        "tag pinned": re.sub(r"deploy-pages@[0-9a-f]{40}", "deploy-pages@v5", good),
+        "not strict": good.replace("mkdocs build --strict", "mkdocs build"),
+        "pr target": good.replace("  pull_request:\n", "  pull_request_target:\n"),
+    }
+    for name, text in mutations.items():
+        assert text != good, name
+        f = tmp_path / f"{name.replace(' ', '_')}.yml"
+        f.write_text(text)
+        assert review_docs_workflow(f), f"mutation {name!r} not detected"
 
 
 # =============================================================================================== helpers
@@ -487,7 +567,8 @@ def _main(argv: list[str]) -> int:
         print(__doc__)
         return 2
     bad = 0
-    for name, fn in (("release.yml", review_release_workflow), ("ci.yml", review_ci_workflow)):
+    for name, fn in (("release.yml", review_release_workflow), ("ci.yml", review_ci_workflow),
+                     ("docs.yml", review_docs_workflow)):
         probs = fn(ROOT / ".github" / "workflows" / name)
         for pr in probs:
             print(f"FAIL {name}: {pr}")
