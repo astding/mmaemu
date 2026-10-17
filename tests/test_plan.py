@@ -4,6 +4,8 @@ composition, identity plans, and (-m truth) the recorded project cases of misc.t
 The index vectors below are written out literally (not via split_index) so the test is not circular."""
 from __future__ import annotations
 
+import dataclasses
+
 import numpy as np
 import pytest
 import torch
@@ -11,7 +13,7 @@ import torch
 from mmaemu.api import accumulate
 from mmaemu.backends.reference import REFERENCE
 from mmaemu.model.chain import dot
-from mmaemu.model.plan import execute_plan, make_plan, reduce_partials, split_index
+from mmaemu.model.plan import contiguous_index, execute_plan, make_plan, reduce_partials, split_index
 from mmaemu.testing import assert_bitwise_equal
 
 E4 = torch.float8_e4m3fn
@@ -89,6 +91,49 @@ def test_split_index_matches_literal():
         assert split_index(K, S).tolist() == v
 
 
+# contiguous (H100): split s owns the 128-wide k-tiles [s*q, (s+1)*q), q = ceil(T / S); -1 = zero padding
+CONTIG = {
+    (512, 2): [R(0, 256), R(256, 512)],                             # T = 4, q = 2
+    (640, 3): [R(0, 256), R(256, 512), R(512, 640)],                # T = 5, q = 2: the last split is short
+    (768, 4): [R(0, 256), R(256, 512), R(512, 768), []],            # T = 6, q = 2: split 3 owns no tile
+    (1152, 2): [R(0, 640), R(640, 1152)],                           # T = 9, q = 5
+    (200, 2): [R(0, 128), idx(R(128, 200), [PAD] * 56)],            # ragged K: the last tile is zero padded
+}
+
+
+@pytest.mark.parametrize("K,S", sorted(CONTIG))
+def test_contiguous_plan_literal_fast(K, S):
+    plan = make_plan(K, fast=True, S=S, scheme="contiguous", preset="hopper")
+    assert plan.S == S and not plan.identity and plan.scheme == "contiguous"
+    assert [[c.tolist() for c in chunks] for chunks in plan.chunks] == [[v] if v else [] for v in CONTIG[(K, S)]]
+    assert [v.tolist() for v in contiguous_index(K, S)] == CONTIG[(K, S)]
+
+
+def test_contiguous_plan_literal_slow():
+    # every 128-wide k-tile is its own chain (the H100 restarts slow accumulation every 128 of a split's elements)
+    plan = make_plan(640, fast=False, S=3, scheme="contiguous", preset="hopper")
+    assert [[c.tolist() for c in ch] for ch in plan.chunks] == [[R(0, 128), R(128, 256)], [R(256, 384), R(384, 512)],
+                                                                [R(512, 640)]]
+    plan = make_plan(768, fast=False, S=4, scheme="contiguous", preset="hopper")
+    assert plan.chunks[3] == ()
+    # unsplit slow on hopper: chunks of 128, as on the RTX 4060
+    plan = make_plan(300, fast=False, preset="hopper")
+    assert [c.tolist() for c in plan.chunks[0]] == [R(0, 128), R(128, 256), idx(R(256, 300), [PAD] * 84)]
+
+
+def test_split_scheme_must_belong_to_the_preset():
+    from mmaemu.model.presets import get_preset
+    with pytest.raises(ValueError, match="not a split-K layout of preset 'hopper'"):
+        make_plan(512, fast=True, S=2, scheme="serial", preset="hopper")
+    for sch in ("contiguous",):
+        with pytest.raises(ValueError, match="not a split-K layout of preset 'ada'"):
+            make_plan(512, fast=True, S=2, scheme=sch, preset="ada")
+    custom = dataclasses.replace(get_preset("hopper", warn=False), name="mine", maturity="custom")
+    for sch in ("serial", "pairwise", "contiguous"):
+        assert make_plan(512, fast=True, S=2, scheme=sch, preset=custom).scheme == sch
+    assert make_plan(512, fast=True, S=1, scheme="serial", preset="hopper").scheme == "none"
+
+
 # --------------------------------------------------------------------------------------------------------------------
 # reduction orders
 def _p(*vals):
@@ -134,10 +179,10 @@ def _cols(x8, ix):
     return out.to(E4)
 
 
-def _chain(a8, b8, ix):
+def _chain(a8, b8, ix, preset="ada"):
     A, B = _cols(a8, ix), _cols(b8, ix)
     M, N = A.shape[0], B.shape[0]
-    return dot(A[:, None, :].expand(M, N, -1), B[None, :, :].expand(M, N, -1))
+    return dot(A[:, None, :].expand(M, N, -1), B[None, :, :].expand(M, N, -1), preset=preset)
 
 
 @pytest.mark.parametrize("K,S", sorted(LITERAL))
@@ -166,13 +211,39 @@ def test_execute_slow_split_matches_hand_composition():
             acc = acc + _chain(a8, b8, v)         # fp32, serially from +0
         parts.append(acc)
     want = reduce_partials(parts, "pairwise")
-    got = accumulate(a8, b8, use_fast_accum=False, splitk=(2, "pairwise"), backend="reference")
+    got = accumulate(a8, b8, use_fast_accum=False, splitk=(2, "pairwise"), backend="reference",
+                     profile="ada")
     assert_bitwise_equal(got, want)
 
 
-def _req():
+def _req(preset="ada"):
     from mmaemu.backends import ChainRequest
-    return ChainRequest(device=torch.device("cpu"), fmt_a="e4m3", fmt_b="e4m3", preset="ada")
+    return ChainRequest(device=torch.device("cpu"), fmt_a="e4m3", fmt_b="e4m3", preset=preset)
+
+
+@pytest.mark.parametrize("K,S", sorted(CONTIG))
+@pytest.mark.parametrize("fast", [True, False])
+def test_execute_contiguous_matches_hand_composition(K, S, fast):
+    g = torch.Generator().manual_seed(K * 10 + S + fast)
+    a8, b8 = _gauss((6, K), g), _gauss((5, K), g)
+    parts = []
+    for v in CONTIG[(K, S)]:
+        if not v:
+            parts.append(torch.zeros(6, 5))                                  # an empty split: +0
+        elif fast:
+            parts.append(_chain(a8, b8, v, "hopper"))                        # one chain per split
+        else:
+            acc = torch.zeros(6, 5)
+            for j in range(0, len(v), 128):
+                acc = acc + _chain(a8, b8, v[j:j + 128], "hopper")           # every tile a chain, serially from +0
+            parts.append(acc)
+    want = parts[0]
+    for q in parts[1:]:
+        want = want + q                                                      # ((p0 + p1) + p2) + ...
+    plan = make_plan(K, fast=fast, S=S, scheme="contiguous", preset="hopper")
+    got = execute_plan(plan, a8.view(torch.uint8), b8.view(torch.uint8), fmt_a="e4m3", fmt_b="e4m3",
+                       chain_fn=REFERENCE.chain_fn(_req("hopper")))
+    assert_bitwise_equal(got, want)
 
 
 def test_identity_plan_does_not_copy():

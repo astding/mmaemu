@@ -1,0 +1,426 @@
+{
+ "part": "p2",
+ "profile": "torch",
+ "ws": 1048576,
+ "align": 0,
+ "chunk": 1,
+ "chunks": 2,
+ "pairs": [
+  500000,
+  835800
+ ],
+ "hardware": {
+  "gpu": "NVIDIA H100 PCIe",
+  "capability": [
+   9,
+   0
+  ],
+  "sm_count": 114,
+  "cublaslt": "12.8.3.14",
+  "cublaslt_lib": "<task-root>/venv/lib/python3.12/site-packages/nvidia/cublas/lib/libcublasLt.so.12",
+  "python": "3.12.15",
+  "os": "Linux 6.8.0-60-generic",
+  "date": "2026-10-16 19:45:11",
+  "driver": "570.148.08",
+  "torch": "2.7.1+cu128"
+ },
+ "seconds": 52.9,
+ "shapes_file": "shapes/p2.json",
+ "shapes_sha256": "00e6d4ad9741a68db209441f57c01aea7dcdd8514c0b30f8c70bccaa7297efe4",
+ "summary": {
+  "settings": [
+   {
+    "ws": 1048576,
+    "out": "float16",
+    "fast": 0,
+    "fa": 1,
+    "fb": 0,
+    "rows": 1480,
+    "status_nonzero": 0,
+    "split_rows": 0,
+    "max_split_MN": null,
+    "min_split_K": null,
+    "S": [],
+    "reduction": [],
+    "custom": [],
+    "split_K_not_128": 0
+   },
+   {
+    "ws": 1048576,
+    "out": "float8_e4m3fn",
+    "fast": 0,
+    "fa": 0,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 7075,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3544
+   },
+   {
+    "ws": 1048576,
+    "out": "float8_e4m3fn",
+    "fast": 0,
+    "fa": 0,
+    "fb": 1,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 7058,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3538
+   },
+   {
+    "ws": 1048576,
+    "out": "float8_e4m3fn",
+    "fast": 0,
+    "fa": 1,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 7124,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3572
+   },
+   {
+    "ws": 1048576,
+    "out": "float8_e4m3fn",
+    "fast": 1,
+    "fa": 0,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 7075,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3544
+   },
+   {
+    "ws": 1048576,
+    "out": "float8_e4m3fn",
+    "fast": 1,
+    "fa": 0,
+    "fb": 1,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 7058,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3538
+   },
+   {
+    "ws": 1048576,
+    "out": "float8_e4m3fn",
+    "fast": 1,
+    "fa": 1,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 7124,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3572
+   },
+   {
+    "ws": 1048576,
+    "out": "float8_e5m2",
+    "fast": 0,
+    "fa": 0,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 27860,
+    "split_rows": 0,
+    "max_split_MN": null,
+    "min_split_K": null,
+    "S": [],
+    "reduction": [],
+    "custom": [],
+    "split_K_not_128": 0
+   },
+   {
+    "ws": 1048576,
+    "out": "float8_e5m2",
+    "fast": 0,
+    "fa": 0,
+    "fb": 1,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 7088,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3545
+   },
+   {
+    "ws": 1048576,
+    "out": "float8_e5m2",
+    "fast": 0,
+    "fa": 1,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 7062,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3542
+   },
+   {
+    "ws": 1048576,
+    "out": "float8_e5m2",
+    "fast": 1,
+    "fa": 0,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 27860,
+    "split_rows": 0,
+    "max_split_MN": null,
+    "min_split_K": null,
+    "S": [],
+    "reduction": [],
+    "custom": [],
+    "split_K_not_128": 0
+   },
+   {
+    "ws": 1048576,
+    "out": "float8_e5m2",
+    "fast": 1,
+    "fa": 0,
+    "fb": 1,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 7088,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3545
+   },
+   {
+    "ws": 1048576,
+    "out": "float8_e5m2",
+    "fast": 1,
+    "fa": 1,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 7062,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3542
+   }
+  ],
+  "split_rows": 70814,
+  "max_split_MN": 122880,
+  "S_values": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "format": "mmaemu-h100-sweep/1",
+ "columns": [
+  "M",
+  "N",
+  "K",
+  "fa",
+  "fb",
+  "out",
+  "fast",
+  "ws",
+  "align",
+  "dscale",
+  "lib",
+  "status",
+  "algo",
+  "tile",
+  "stages",
+  "splitK",
+  "reduction",
+  "swizzle",
+  "custom",
+  "workspace",
+  "waves_x1000"
+ ],
+ "rows": 335800,
+ "status_nonzero": 55720,
+ "npz_sha256": "03e39e20741b02f061b238db11edb5d341c43db90aedd48452ad45e0dda890ea"
+}

@@ -1,0 +1,9 @@
+.s....ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 52%]
+sssssssssssssssssssssssssssssssssssssss......................s....       [100%]
+=========================== short test summary info ============================
+SKIPPED [23] tests/test_device_independence.py:71: 'cuda' not reported by mmaemu.backends_status()
+SKIPPED [21] tests/test_device_independence.py:136: full accumulator for reference only with MMAEMU_DI_FULL=all or =reference
+SKIPPED [21] tests/test_device_independence.py:136: full accumulator for cuda:v1 only with MMAEMU_DI_FULL=all or =cuda:v1
+SKIPPED [21] tests/test_device_independence.py:136: full accumulator for cuda:v4 only with MMAEMU_DI_FULL=all or =cuda:v4
+SKIPPED [21] tests/test_device_independence.py:136: full accumulator for cuda:v9 only with MMAEMU_DI_FULL=all or =cuda:v9
+31 passed, 107 skipped in 45.95s

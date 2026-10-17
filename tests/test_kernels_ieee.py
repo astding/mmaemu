@@ -1,16 +1,18 @@
-"""Conformance of the IEEE kernels v1 / v4. GPU; run under the lock:
+"""Conformance of the IEEE kernels v1 / v4 (preset ada) and h1 / h4 (preset hopper). GPU; run under the lock:
 
     $GPU timeout 600 python -m pytest -q tests/test_kernels_ieee.py
 
 Port of the tcemu audit's verify-a3-integration-review-5/test_kernel.py: every kernel, loaded both from
 the fatbin in build/fatbin ($MMAEMU_TEST_FATBIN_DIR overrides; build it with tools/build_fatbin.py --out
 build/fatbin) and through NVRTC, is compared BIT FOR BIT (int32 views, +0 != -0, NaN payloads) with the CPU float64
-reference (mmaemu.model.chain.chain_gemm) on 8 data classes x M {1, 65, 129, 200} x N {1, 63, 127, 257} x
-K {16, 48, 1920}, and NVRTC output must equal fatbin output. Then: NaN codes in rows / columns (canonical NaN exactly
-at the affected outputs, through the raw v1 kernel and through the plan for v1 and v4), and plan compositions
-(slow accumulation, split-K with both reduction schemes, K % 16 != 0 through accumulate) against the reference path.
+reference (mmaemu.model.chain.chain_gemm) under the kernel's preset (KernelSpec.preset) on 8 data classes x
+M {1, 65, 129, 200} x N {1, 63, 127, 257} x K {16, 48, 1920} (for h1 and h4, K = 16 and 48 end in a half block),
+and NVRTC output must equal fatbin output. Then: NaN codes in rows / columns (canonical NaN exactly at the affected outputs,
+through the raw v1 and h1 kernels and through the plan), and plan compositions (slow accumulation, split-K with the
+preset's schemes: serial and pairwise for ada, contiguous for hopper; K % 16 != 0 through accumulate) against the
+reference path.
 
-The CPU references of the 384 conformance cases take ~25 s; precompute them outside the GPU lock with
+The CPU references of the 384 conformance cases per preset take ~25 s each; precompute them outside the GPU lock with
     python tests/test_kernels_ieee.py --precompute
 (cached as .npy under $MMAEMU_TEST_REF_CACHE or build/test_refs, keyed by the case and the reference sources).
 """
@@ -107,19 +109,19 @@ def ref_dir() -> Path:
     return Path(os.environ.get("MMAEMU_TEST_REF_CACHE", ROOT / "build" / "test_refs"))
 
 
-def reference(a_u8, b_u8):
+def reference(a_u8, b_u8, preset="ada"):
     from mmaemu.model.chain import chain_gemm
 
-    return chain_gemm(a_u8.cpu(), b_u8.cpu(), fmt_a="e4m3", fmt_b="e4m3", preset="ada").float()
+    return chain_gemm(a_u8.cpu(), b_u8.cpu(), fmt_a="e4m3", fmt_b="e4m3", preset=preset).float()
 
 
-def cached_reference(case) -> torch.Tensor:
+def cached_reference(case, preset="ada") -> torch.Tensor:
     gen, M, N, K = case
-    p = ref_dir() / _ref_identity() / f"{gen}-{M}-{N}-{K}.npy"
+    p = ref_dir() / _ref_identity() / f"{gen}-{M}-{N}-{K}{'' if preset == 'ada' else '-' + preset}.npy"
     if p.is_file():
         return torch.from_numpy(np.load(p, allow_pickle=False)).view(torch.float32)
     a, b = make(gen, M, N, K)
-    r = reference(a, b)
+    r = reference(a, b, preset)
     try:
         p.parent.mkdir(parents=True, exist_ok=True)
         tmp = p.with_suffix(f".{os.getpid()}.tmp.npy")
@@ -167,11 +169,19 @@ def _specs():
     return SPECS
 
 
+KERNELS = ["v1", "v4", "h1", "h4"]
+PRESETS = ("ada", "hopper")
+
+
+def _spec(kernel):
+    return {s.name: s for s in _specs()}[kernel]
+
+
 def _chain(spec, dev):
     from mmaemu.backends import ChainRequest
     from mmaemu.backends.cuda.kernels import chain_fn_for
 
-    return chain_fn_for(spec, ChainRequest(device=dev, fmt_a="e4m3", fmt_b="e4m3", preset="ada"))
+    return chain_fn_for(spec, ChainRequest(device=dev, fmt_a="e4m3", fmt_b="e4m3", preset=spec.preset))
 
 
 def _bits(t):
@@ -206,33 +216,52 @@ def outputs(env):
 
 @pytest.fixture(scope="module")
 def refs():
-    return {case: cached_reference(case).view(torch.int32) for case in CASES}
+    return {(preset, case): cached_reference(case, preset).view(torch.int32) for preset in PRESETS for case in CASES}
 
 
 # ----------------------------------------------------------------------------------------------------------------
 # conformance and NVRTC == fatbin
 
 @pytest.mark.parametrize("source", ["fatbin", "nvrtc"])
-@pytest.mark.parametrize("kernel", ["v1", "v4"])
+@pytest.mark.parametrize("kernel", KERNELS)
 def test_conformance(outputs, refs, kernel, source):
-    """All 384 cases (8 data classes x 48 shapes), bit for bit against the CPU reference."""
+    """All 384 cases (8 data classes x 48 shapes), bit for bit against the CPU reference of the kernel's preset."""
     from mmaemu.testing import assert_bitwise_equal
 
+    preset = _spec(kernel).preset
     got = outputs[(kernel, source)]
     bad, total = [], 0
     for case in CASES:
-        total += refs[case].numel()
-        n = int((got[case] != refs[case]).sum())
+        want = refs[(preset, case)]
+        total += want.numel()
+        n = int((got[case] != want).sum())
         if n:
             bad.append((case, n))
-    print(f"{kernel}/{source}: {len(CASES)} cases, {total} outputs, {sum(n for _, n in bad)} bit mismatches")
+    print(f"{kernel}/{source} ({preset}): {len(CASES)} cases, {total} outputs, {sum(n for _, n in bad)} bit mismatches")
     if bad:
         case = bad[0][0]
-        assert_bitwise_equal(got[case].view(torch.float32), refs[case].view(torch.float32),
+        assert_bitwise_equal(got[case].view(torch.float32), refs[(preset, case)].view(torch.float32),
                              msg=f"{kernel}/{source} {case}; all failing cases: {bad[:20]}")
 
 
-@pytest.mark.parametrize("kernel", ["v1", "v4"])
+def test_presets_differ_on_the_conformance_data(refs):
+    """The conformance data tells the presets apart, so h1 cannot pass by computing ada's chain (or v1 hopper's):
+    for K = 48 and 1920, the ada and hopper references differ at thousands of outputs in six of the eight data
+    classes. They agree on "sat" (every product the same size) and "tiny" (exact either way), and at K = 16 (one
+    block in both presets)."""
+    diff = {}
+    for case in CASES:
+        k = (case[0], case[3])
+        diff[k] = diff.get(k, 0) + int((refs[("ada", case)] != refs[("hopper", case)]).sum())
+    for gen in GENS:
+        assert diff[(gen, 16)] == 0
+        if gen in ("sat", "tiny"):
+            assert diff[(gen, 48)] == diff[(gen, 1920)] == 0
+        else:
+            assert diff[(gen, 48)] > 1000 and diff[(gen, 1920)] > 1000, (gen, diff[(gen, 48)], diff[(gen, 1920)])
+
+
+@pytest.mark.parametrize("kernel", KERNELS)
 def test_nvrtc_equals_fatbin(outputs, kernel):
     from mmaemu.testing import assert_bitwise_equal
 
@@ -263,22 +292,22 @@ def _nan_data():
     return a, b, affected
 
 
-def test_nan_raw_v1_kernel(env):
-    """The v1 kernel itself decodes NaN codes to NaN (the prototype's v1 decoded them as 0): canonical NaN exactly at
-    the affected outputs."""
-    from mmaemu.backends.cuda.kernels import V1
-
+@pytest.mark.parametrize("kernel", ["v1", "h1"])
+def test_nan_raw_kernel(env, kernel):
+    """The v1 and h1 kernels themselves decode NaN codes to NaN (the prototype's v1 decoded them as 0): canonical NaN
+    exactly at the affected outputs."""
+    spec = _spec(kernel)
     a, b, affected = _nan_data()
-    out = _chain(V1, env)(a.to(env), b.to(env)).cpu()
+    out = _chain(spec, env)(a.to(env), b.to(env)).cpu()
     bits = out.view(torch.int32)
     assert bool((bits[affected] == 0x7FFFFFFF).all()), "affected outputs must be canonical NaN 0x7FFFFFFF"
     assert not bool(torch.isnan(out[~affected]).any())
     clean = torch.where((a & 0x7F) == 0x7F, 0, a), torch.where((b & 0x7F) == 0x7F, 0, b)
-    ref = reference(*clean).view(torch.int32)
+    ref = reference(*clean, spec.preset).view(torch.int32)
     assert int((bits[~affected] != ref[~affected]).sum()) == 0
 
 
-@pytest.mark.parametrize("kernel", ["v1", "v4"])
+@pytest.mark.parametrize("kernel", KERNELS)
 @pytest.mark.parametrize("fast", [True, False])
 def test_nan_through_plan(env, kernel, fast):
     """execute_plan (sanitise, chain, patch) with the kernel equals the reference path bit for bit; NaN canonical."""
@@ -287,23 +316,25 @@ def test_nan_through_plan(env, kernel, fast):
     from mmaemu.model.plan import execute_plan, make_plan
     from mmaemu.testing import assert_bitwise_equal
 
-    spec = {s.name: s for s in _specs()}[kernel]
+    spec = _spec(kernel)
     a, b, affected = _nan_data()
-    plan = make_plan(a.shape[1], fast=fast)
+    plan = make_plan(a.shape[1], fast=fast, preset=spec.preset)
     got = execute_plan(plan, a.to(env), b.to(env), fmt_a="e4m3", fmt_b="e4m3", chain_fn=_chain(spec, env)).cpu()
-    ref_fn = REFERENCE.chain_fn(ChainRequest(device=torch.device("cpu"), fmt_a="e4m3", fmt_b="e4m3", preset="ada"))
+    ref_fn = REFERENCE.chain_fn(ChainRequest(device=torch.device("cpu"), fmt_a="e4m3", fmt_b="e4m3",
+                                             preset=spec.preset))
     want = execute_plan(plan, a, b, fmt_a="e4m3", fmt_b="e4m3", chain_fn=ref_fn)
     assert_bitwise_equal(got, want, msg=f"{kernel} fast={fast}")
     assert bool((got.view(torch.int32)[affected] == 0x7FFFFFFF).all())
     assert not bool(torch.isnan(got[~affected]).any())
 
 
-@pytest.mark.parametrize("kernel", ["v1", "v4"])
+@pytest.mark.parametrize("kernel", KERNELS)
 @pytest.mark.parametrize("fill", ["0xFF", "0x7F", "0x80", "uniform256"])
 def test_any_byte_value_never_faults(env, kernel, fill):
     """ABI v1 (spec.py): the kernel must not fault for any byte value, NaN codes included (the wrapper never feeds
-    them, but a fault would kill the CUDA context). v1 also gives canonical NaN wherever a NaN code is involved."""
-    spec = {s.name: s for s in _specs()}[kernel]
+    them, but a fault would kill the CUDA context). v1 and h1 also give canonical NaN wherever a NaN code is
+    involved."""
+    spec = _spec(kernel)
     M, N, K = 200, 257, 1920
     if fill == "uniform256":
         g = torch.Generator().manual_seed(256)
@@ -315,7 +346,7 @@ def test_any_byte_value_never_faults(env, kernel, fill):
     out = _chain(spec, env)(a.to(env), b.to(env))
     torch.cuda.synchronize(env)  # an illegal address or misaligned access would raise here
     assert out.shape == (M, N)
-    if kernel == "v1" and fill in ("0xFF", "0x7F", "uniform256"):
+    if kernel in ("v1", "h1") and fill in ("0xFF", "0x7F", "uniform256"):
         assert bool((out.cpu().view(torch.int32) == 0x7FFFFFFF).all())  # every output involves a NaN code
     if fill == "0x80":  # -0 * -0: an exactly-zero chain is +0 (M1)
         assert int(out.cpu().view(torch.int32).abs().sum()) == 0
@@ -335,24 +366,27 @@ def _compare_plan(env, kernel, plan, a, b):
     from mmaemu.model.plan import execute_plan
     from mmaemu.testing import assert_bitwise_equal
 
-    spec = {s.name: s for s in _specs()}[kernel]
+    spec = _spec(kernel)
     got = execute_plan(plan, a.to(env), b.to(env), fmt_a="e4m3", fmt_b="e4m3", chain_fn=_chain(spec, env)).cpu()
-    ref_fn = REFERENCE.chain_fn(ChainRequest(device=torch.device("cpu"), fmt_a="e4m3", fmt_b="e4m3", preset="ada"))
+    ref_fn = REFERENCE.chain_fn(ChainRequest(device=torch.device("cpu"), fmt_a="e4m3", fmt_b="e4m3",
+                                             preset=spec.preset))
     want = execute_plan(plan, a, b, fmt_a="e4m3", fmt_b="e4m3", chain_fn=ref_fn)
     assert_bitwise_equal(got, want, msg=f"{kernel} plan K={plan.K} fast={plan.fast} S={plan.S} {plan.scheme}")
     return got
 
 
-@pytest.mark.parametrize("kernel", ["v1", "v4"])
+@pytest.mark.parametrize("kernel", KERNELS)
 @pytest.mark.parametrize("K", [1920, 8192])
 def test_slow_accumulation(env, kernel, K):
     from mmaemu.model.plan import make_plan
 
     a, b = _plan_case(24, 40, K, K)
-    _compare_plan(env, kernel, make_plan(K, fast=False), a, b)
+    _compare_plan(env, kernel, make_plan(K, fast=False, preset=_spec(kernel).preset), a, b)
 
 
 SPLITS = [(S, scheme, fast) for S in (2, 3, 8, 12, 29) for scheme in ("serial", "pairwise") for fast in (True, False)]
+SPLITS_H = [(S, K, fast) for S in (2, 3, 4, 5, 6, 8) for K in (128 * 4 * S, 128 * 4 * S + 1000) for fast in (True, False)]
+PROFILE = {"ada": "ada", "hopper": "hopper"}
 
 
 @pytest.mark.parametrize("kernel", ["v1", "v4"])
@@ -365,17 +399,29 @@ def test_split_k(env, kernel, S, scheme, fast):
     _compare_plan(env, kernel, make_plan(K, fast=fast, S=S, scheme=scheme), a, b)
 
 
-@pytest.mark.parametrize("kernel", ["v1", "v4"])
+@pytest.mark.parametrize("kernel", ["h1", "h4"])
+@pytest.mark.parametrize("S,K,fast", SPLITS_H, ids=[f"S{s}-K{k}-{'fast' if f else 'slow'}" for s, k, f in SPLITS_H])
+def test_split_k_contiguous_hopper(env, kernel, S, K, fast):
+    """h1 and h4 under the H100's contiguous split-K (128-wide k-tiles; K a multiple of 128, and a ragged K)."""
+    from mmaemu.model.plan import make_plan
+
+    a, b = _plan_case(33, 47, K, 2000 + S)
+    _compare_plan(env, kernel, make_plan(K, fast=fast, S=S, scheme="contiguous", preset="hopper"), a, b)
+
+
+@pytest.mark.parametrize("kernel", KERNELS)
 @pytest.mark.parametrize("K", [1, 15, 100, 1000])
 @pytest.mark.parametrize("fast", [True, False])
 def test_k_not_multiple_of_16_via_accumulate(env, kernel, K, fast):
     import mmaemu.api as api
     from mmaemu.testing import assert_bitwise_equal
 
+    prof = PROFILE[_spec(kernel).preset]
     a, b = _plan_case(17, 29, K, 7 + K)
     a8, b8 = a.view(E4M3), b.view(E4M3)
-    got = api.accumulate(a8.to(env), b8.to(env), use_fast_accum=fast, splitk=1, backend=f"cuda:{kernel}").cpu()
-    want = api.accumulate(a8, b8, use_fast_accum=fast, splitk=1, backend="reference")
+    got = api.accumulate(a8.to(env), b8.to(env), use_fast_accum=fast, splitk=1, profile=prof,
+                         backend=f"cuda:{kernel}").cpu()
+    want = api.accumulate(a8, b8, use_fast_accum=fast, splitk=1, profile=prof, backend="reference")
     assert_bitwise_equal(got, want, msg=f"{kernel} K={K} fast={fast}")
 
 
@@ -389,5 +435,6 @@ if __name__ == "__main__" and "--precompute" in sys.argv:
     t0 = time.monotonic()
     torch.set_num_threads(2)
     with cf.ProcessPoolExecutor(max_workers=int(os.environ.get("JOBS", "8"))) as ex:
-        list(ex.map(cached_reference, sorted(CASES, key=lambda c: -c[1] * c[2] * c[3])))
-    print(f"{len(CASES)} references in {ref_dir() / _ref_identity()} ({time.monotonic() - t0:.1f} s)")
+        work = sorted(((c, p) for p in PRESETS for c in CASES), key=lambda t: -t[0][1] * t[0][2] * t[0][3])
+        list(ex.map(cached_reference, [c for c, _ in work], [p for _, p in work]))
+    print(f"{len(CASES)} x {len(PRESETS)} references in {ref_dir() / _ref_identity()} ({time.monotonic() - t0:.1f} s)")

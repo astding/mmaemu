@@ -1,0 +1,14 @@
+fatbins under test: ~/mmaemu-4060/src/mmaemu/backends/cuda/bin
+test_scaffold                                    rc=0      4s  2 passed, 103 deselected in 2.81s
+test_backend_reference                           rc=0     13s  3 passed, 12 deselected, 2 warnings in 11.69s
+test_epilogue                                    rc=0      7s  5 passed, 349 deselected in 6.48s
+test_kernels_ieee                                rc=0     27s  167 passed in 25.17s
+test_cuda_runtime                                rc=0     90s  19 passed in 89.12s (0:01:29)
+test_fast_kernels                                rc=0     52s  182 passed in 50.59s
+test_gates_hmma                                  rc=0     19s  4 passed, 17 deselected in 18.25s
+test_live_cublas                                 rc=0     44s  2 passed, 8 warnings in 42.30s
+test_hw_mini                                     rc=0    217s  5 passed, 1 skipped, 2520 deselected, 5 warnings in 215.92s (0:03:35)
+test_device_independence                         rc=0     47s  31 passed, 107 skipped in 45.95s
+test_h100_mini                                   rc=0     35s  310 passed, 125 deselected in 33.60s
+test_backend_selection                           rc=5      2s  
+logs: ~/mmaemu-4060/logs-f2/t3-rtx-4060-sm89

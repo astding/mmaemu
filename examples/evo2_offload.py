@@ -3,13 +3,15 @@
 Evo 2 1B, 20B and 40B compute their input projections as FP8 GEMMs through Transformer Engine, and give wrong
 results on GPUs whose FP8 arithmetic differs from the one they were trained with (evo2 issue #157). This script
 runs the upstream model (vortex's StripedHyena, evo2's configuration and checkpoint loader) without Transformer
-Engine and computes each FP8 projection as Transformer Engine does on an RTX 4060, with `mmaemu.scaled_mm`
-(profile "ada-rtx4060-te"), as in examples/evo2_blackwell.ipynb. The weights stay in host RAM and the model runs
-one block at a time on the GPU, so Evo 2 40B (82 GB of weights) runs on a 16 GB GPU.
+Engine and computes each FP8 projection with `mmaemu.scaled_mm` as Transformer Engine does on an H100 PCIe
+(--profile hopper-te, the default) or on an RTX 4060 (--profile ada-te, as examples/evo2_blackwell.ipynb does). The
+weights stay in host RAM and the model runs one block at a time on the GPU, so Evo 2 40B (82 GB of weights) runs
+on a 16 GB GPU.
 
-Measured on an RTX 5070 Ti with 180 GiB of RAM (docs/validation_logs/2026-10-15/evo2-40b-rtx-5070-ti/): Evo 2 40B
-scores 0.2161 on the upstream test, where 0.2159 is expected (native FP8: 1.4023). Only the FP8 GEMMs are the
-RTX 4060's; the rest of the model runs natively, so the outputs are close to the official ones, not equal to them.
+Measured on an RTX 5070 Ti with 180 GiB of RAM (docs/validation_logs/2026-10-16/evo2-h100-profile-rtx-5070-ti/ and
+2026-10-15/evo2-40b-rtx-5070-ti/): Evo 2 40B scores 0.2161 on the upstream test with either profile, where 0.2159
+is expected (native FP8: 1.4023). Only the FP8 GEMMs are the reference GPU's; the rest of the model runs natively,
+so the outputs are close to the official ones, not equal to them.
 
 Requirements: evo2 0.6.0 with its vtx and flash-attn, torch with CUDA, mmaemu; no Transformer Engine. Host RAM: the
 checkpoint (82 GB for 40B, 2.7 GB for 1B) plus 2 bytes x hidden size (8,192 for 40B) x the tokens of the sequences
@@ -47,6 +49,7 @@ import yaml
 import mmaemu
 
 E4M3_MAX = 448.0  # largest finite float8_e4m3fn value; TE saturates the cast to it
+PROFILES = ("hopper-te", "ada-te")   # Transformer Engine on the H100 PCIe (the default), on the RTX 4060
 # evo2/test/test_evo2.py (evo2 0.6.0)
 EXPECTED = {"evo2_40b": (0.2159424, 91.673), "evo2_7b": (0.3476563, 86.346), "evo2_40b_base": (0.2149658, 91.741),
             "evo2_7b_base": (0.3520508, 85.921), "evo2_1b_base": (0.501953125, 79.556),
@@ -102,15 +105,16 @@ def read_te_scales(checkpoint):
 
 
 class Projection(torch.nn.Module):
-    """A Hyena block's input projection: "mmaemu" (TE's FP8 GEMM on an RTX 4060, emulated), "native"
-    (torch._scaled_mm on this GPU) or "bf16" (vortex's linear layer without TE). The E4M3 weight is derived on the
-    device the weight is on, at every call (the same bits as deriving it once)."""
+    """A Hyena block's input projection: "mmaemu" (TE's FP8 GEMM on the reference GPU of `profile`, emulated),
+    "native" (torch._scaled_mm on this GPU) or "bf16" (vortex's linear layer without TE). The E4M3 weight is derived
+    on the device the weight is on, at every call (the same bits as deriving it once)."""
 
-    def __init__(self, weight, scale, mode):
+    def __init__(self, weight, scale, mode, profile):
         super().__init__()
         self.weight = weight                            # [N, K] bf16 Parameter, moved with its block
         self.scale = scale                              # [input, weight], fp32, CPU
         self.mode = mode
+        self.profile = profile
 
     def forward(self, x):
         if self.mode == "bf16":
@@ -125,14 +129,14 @@ class Projection(torch.nn.Module):
         xq = (x.float() * scale[0]).clamp(-E4M3_MAX, E4M3_MAX).to(torch.float8_e4m3fn).reshape(-1, x.shape[-1])
         if self.mode == "mmaemu":
             y = mmaemu.scaled_mm(xq, wq.t(), scale_inv[0], scale_inv[1], out_dtype=torch.bfloat16,
-                                 use_fast_accum=True, profile="ada-rtx4060-te")
+                                 use_fast_accum=True, profile=self.profile)
         else:
             y = torch._scaled_mm(xq, wq.t(), scale_a=scale_inv[0], scale_b=scale_inv[1],
                                  out_dtype=torch.bfloat16, use_fast_accum=True)
         return y.reshape(*shape[:-2], -1, self.weight.shape[0])[..., :L, :], None   # TELinear's (output, bias)
 
 
-def load_model(model_name, checkpoint, mode):
+def load_model(model_name, checkpoint, mode, profile):
     from evo2.utils import CONFIG_MAP
     from vortex.model.model import StripedHyena
     from vortex.model.utils import dotdict, load_checkpoint
@@ -146,7 +150,7 @@ def load_model(model_name, checkpoint, mode):
     for i in scales:
         original = model.blocks[i].projections
         assert getattr(original, "bias", None) is None, f"block {i}: Evo 2's FP8 projections have no bias"
-        model.blocks[i].projections = Projection(original.weight, scales[i], mode)
+        model.blocks[i].projections = Projection(original.weight, scales[i], mode, profile)
     return model, scales
 
 
@@ -273,6 +277,8 @@ def main():
     ap.add_argument("--model", required=True, help="evo2 model name, e.g. evo2_40b, evo2_1b_base, evo2_20b")
     ap.add_argument("--checkpoint", required=True, help="the model's .pt file (for 40B, the two parts joined)")
     ap.add_argument("--fp8", choices=["mmaemu", "native", "bf16"], default="mmaemu")
+    ap.add_argument("--profile", choices=PROFILES, default=PROFILES[0],
+                    help="mmaemu: whose Transformer Engine GEMM to reproduce (default %(default)s)")
     ap.add_argument("--input", help="score: FASTA, or one sequence per line")
     ap.add_argument("--out", help="score: TSV of name, length and score; test: JSON of the results")
     ap.add_argument("--reduce", choices=["mean", "sum"], default="mean", help="score: as evo2's score_sequences")
@@ -286,7 +292,7 @@ def main():
 
     dev = torch.device("cuda:0")
     log(f"mmaemu {mmaemu.__version__}, torch {torch.__version__}, {torch.cuda.get_device_name(dev)}; "
-        f"{a.model}, FP8 projections: {a.fp8}")
+        f"{a.model}, FP8 projections: {a.fp8}{f' (profile {a.profile})' if a.fp8 == 'mmaemu' else ''}")
     size = os.path.getsize(a.checkpoint) / 2**30
     try:
         avail = int(open("/proc/meminfo").read().split("MemAvailable:")[1].split()[0]) / 2**20
@@ -296,7 +302,7 @@ def main():
         log(f"warning: the checkpoint ({size:.0f} GiB) and --ram-gb {a.ram_gb:g} exceed the available RAM "
             f"({avail:.0f} GiB)")
     t0 = time.time()
-    model, scales = load_model(a.model, a.checkpoint, a.fp8)
+    model, scales = load_model(a.model, a.checkpoint, a.fp8, a.profile)
     log(f"loaded in {time.time() - t0:.0f} s: {sum(p.numel() for p in model.parameters()) / 1e9:.2f} B parameters, "
         f"FP8 projections in {len(scales)} blocks")
     tok = CharLevelTokenizer(512)
@@ -325,7 +331,8 @@ def main():
         log(f"mean loss {loss:.4f}, accuracy {acc:.3f}%{verdict}")
         if a.out:
             with open(a.out, "w") as f:
-                json.dump(dict(model=a.model, fp8=a.fp8, device=torch.cuda.get_device_name(dev),
+                json.dump(dict(model=a.model, fp8=a.fp8, profile=a.profile if a.fp8 == "mmaemu" else None,
+                               device=torch.cuda.get_device_name(dev),
                                mmaemu=mmaemu.__version__, mean_loss=float(loss), mean_accuracy=float(acc) / 100,
                                sequences=rows), f, indent=1)
         return 0 if exp is None or abs(loss - exp[0]) < 1e-3 else 1

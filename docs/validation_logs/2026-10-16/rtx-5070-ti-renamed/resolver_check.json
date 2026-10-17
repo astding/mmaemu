@@ -1,0 +1,193 @@
+{
+ "format": "mmaemu-h100-resolver-check/1",
+ "provenance": {
+  "mmaemu_commit": "2648bbae0fd957f0474802455da77fbc770c4dc2",
+  "dirty": false,
+  "dirty_scope": [
+   "mmaemu",
+   "tools/check_splitk_resolution_h100.py"
+  ],
+  "python": "3.12.2",
+  "numpy": "2.5.4",
+  "table": {
+   "heur_h100pcie_lt12.8.3.14.npz": "17a191951c8dc1868e0c697d0cf65aebb38e6962faea5a345c722a88348c20a1",
+   "heur_h100pcie_lt12.8.3.14.json": "ae6f103ba0f7e1a1d818eaaa882b7c2078dd0802911d1dca8e7e1021a44f4ec6",
+   "verified_split_combos_h100pcie_lt12.8.3.14.json": "9187d37892dc1859e7ac5f3449f918a6b573ec62d64cd86f1a358e2df09c37c7"
+  }
+ },
+ "parts": {
+  "p1": {
+   "te": {
+    "rows": 2439360,
+    "status_nonzero": 174240,
+    "by_source": {
+     "envelope": 945042,
+     "table": 12264,
+     "unknown": 1482054
+    },
+    "differ": 0,
+    "differences": []
+   },
+   "torch": {
+    "rows": 2438899,
+    "status_nonzero": 174701,
+    "by_source": {
+     "envelope": 1568346,
+     "table": 12264,
+     "unknown": 858289
+    },
+    "differ": 0,
+    "differences": []
+   },
+   "ws0": {
+    "rows": 609840,
+    "status_nonzero": 43560,
+    "by_source": {
+     "workspace0": 609840
+    },
+    "differ": 0,
+    "differences": []
+   }
+  },
+  "p2": {
+   "te": {
+    "rows": 780080,
+    "status_nonzero": 55720,
+    "by_source": {
+     "envelope": 157780,
+     "table": 924,
+     "unknown": 621376
+    },
+    "differ": 0,
+    "differences": []
+   },
+   "torch": {
+    "rows": 780080,
+    "status_nonzero": 55720,
+    "by_source": {
+     "envelope": 270676,
+     "table": 924,
+     "unknown": 508480
+    },
+    "differ": 0,
+    "differences": []
+   }
+  },
+  "p3": {
+   "te": {
+    "rows": 1498784,
+    "status_nonzero": 107056,
+    "by_source": {
+     "table": 1498784
+    },
+    "differ": 0,
+    "differences": []
+   },
+   "torch": {
+    "rows": 1498784,
+    "status_nonzero": 107056,
+    "by_source": {
+     "table": 1498784
+    },
+    "differ": 0,
+    "differences": []
+   }
+  },
+  "p4_sealed": {
+   "te": {
+    "rows": 208846,
+    "status_nonzero": 15094,
+    "by_source": {
+     "envelope": 77485,
+     "table": 33,
+     "unknown": 131328
+    },
+    "differ": 1,
+    "differences": [
+     {
+      "id": 198795,
+      "M": 69,
+      "N": 29456,
+      "K": 19872,
+      "fmt_a": "e4m3",
+      "fmt_b": "e5m2",
+      "out": "float32",
+      "fast": false,
+      "ws": 33554432,
+      "S_h100": 2,
+      "S_mmaemu": 1,
+      "source": "envelope",
+      "verified": false,
+      "file": "p4_sealed/te_a256_c00.npz"
+     }
+    ]
+   },
+   "torch": {
+    "rows": 208756,
+    "status_nonzero": 15184,
+    "by_source": {
+     "envelope": 154159,
+     "table": 33,
+     "unknown": 54564
+    },
+    "differ": 0,
+    "differences": []
+   },
+   "ws0": {
+    "rows": 46654,
+    "status_nonzero": 3346,
+    "by_source": {
+     "workspace0": 46654
+    },
+    "differ": 0,
+    "differences": []
+   }
+  },
+  "live": {
+   "probe+p5": {
+    "rows": 4167,
+    "status_nonzero": 0,
+    "by_source": {
+     "envelope": 28,
+     "table": 1761,
+     "unknown": 2334,
+     "workspace0": 44
+    },
+    "differ": 0,
+    "differences": []
+   }
+  }
+ },
+ "eval_sealed_failures": [
+  {
+   "M": 69,
+   "N": 29456,
+   "K": 19872,
+   "splitK": 2,
+   "custom": 5,
+   "reduction": 2,
+   "algo": 66,
+   "tile": 456,
+   "MN": 2032464,
+   "out": "float32",
+   "fast": false,
+   "fmt_a": "e4m3",
+   "fmt_b": "e5m2",
+   "B": 1653270,
+   "file": "p4_sealed/te_a256_c00.npz"
+  }
+ ],
+ "passed": true,
+ "envelope_vs_eval_sealed": {
+  "hopper-h100pcie-torch": {
+   "eval_tested": 154191,
+   "resolver_envelope": 154159,
+   "resolver_table": 33
+  },
+  "hopper-h100pcie-te": {
+   "eval_tested": 77518,
+   "resolver_envelope": 77485,
+   "resolver_table": 33
+  }
+ }
+}

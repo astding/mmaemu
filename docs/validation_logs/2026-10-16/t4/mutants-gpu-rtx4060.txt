@@ -1,0 +1,9 @@
+kernel_identity                    identity  survived     271.2s 
+kernel_rn                          kernel    killed         4.8s tools/mutants/test_gpu.py::test_mutated_nvrtc_conformance
+kernel_noacc                       kernel    killed         4.8s tools/mutants/test_gpu.py::test_mutated_nvrtc_conformance
+kernel_rowtile                     kernel    killed         4.8s tools/mutants/test_gpu.py::test_mutated_nvrtc_conformance
+kernel_floor                       kernel    killed         4.7s tools/mutants/test_gpu.py::test_mutated_nvrtc_conformance
+kernel_nan_as_zero                 kernel    killed        10.0s tools/mutants/test_gpu.py::test_mutated_nan_propagation
+kernel_zero_lut                    kernel    killed         4.7s tools/mutants/test_gpu.py::test_mutated_nvrtc_conformance
+kernel_fmad_true                   kernel    killed        10.0s tools/mutants/test_gpu.py::test_pinned_arithmetic_options
+PASS: {'killed': 7, 'survived': 1, 'equivalent': 0, 'blocked': 0, 'error': 0} -> ~/mmaemu-4060/logs-final/t4/mutants-gpu-rtx4060.json

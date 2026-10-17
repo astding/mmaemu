@@ -89,12 +89,14 @@ def test_scaled_mm_nan_rows_and_columns():
     b[5, 0] = 0x00          # column 5: Inf * 0 for rows 0, 2, 3
     b[7, 9] = 0xFF          # column 7: NaN everywhere
     one = torch.tensor(1.0)
-    y = scaled_mm(a.view(E5), b.view(E4).t(), one, one, out_dtype=torch.float32, use_fast_accum=True, splitk=1)
+    y = scaled_mm(a.view(E5), b.view(E4).t(), one, one, out_dtype=torch.float32, use_fast_accum=True, splitk=1,
+                  profile="ada")
     bits = y.view(torch.int32)
     assert y[0, 0].item() == float("inf") and y[2, 0].item() == -float("inf")
     assert (bits[1] == 0x7FFFFFFF).all() and (bits[3] == 0x7FFFFFFF).all() and (bits[:, 7] == 0x7FFFFFFF).all()
     assert bits[0, 5].item() == 0x7FFFFFFF and bits[2, 5].item() == 0x7FFFFFFF
     assert torch.isfinite(y[4:, :7]).all() and y[4, 0].item() == 32.0
     # fp8 outputs: Inf saturates, NaN is 0x7F (repro_fp8_out specials, RTX 4060)
-    y8 = scaled_mm(a.view(E5), b.view(E4).t(), one, one, out_dtype=E4, use_fast_accum=True, splitk=1)
+    y8 = scaled_mm(a.view(E5), b.view(E4).t(), one, one, out_dtype=E4, use_fast_accum=True, splitk=1,
+                   profile="ada")
     assert y8.view(torch.uint8)[:3, 0].tolist() == [0x7E, 0x7F, 0xFE]

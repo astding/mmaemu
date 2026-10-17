@@ -10,19 +10,20 @@ An FP8 GEMM on NVIDIA tensor cores is not an IEEE computation. The tensor core a
 aligning them to the block's largest exponent and truncating them, cuBLAS may split the K dimension and add the
 partial sums in an order of its own choosing, and the epilogue of `torch._scaled_mm` rounds twice. Two GPUs with
 different tensor cores, or the same GPU with a different cuBLAS, therefore give different bits for the same FP8
-GEMM. mmaemu recomputes the GEMM exactly as one *reference platform* computes it (in v0.1: the RTX 4060, Ada,
-with cuBLASLt 12.8.3.14), on the CPU or on another CUDA GPU, with kernels that return the reference bits wherever
-they run: IEEE-exact kernels everywhere, tensor-core kernels only where a per-device self-test confirms the
-properties they rely on.
+GEMM. mmaemu recomputes the GEMM exactly as one *reference platform* computes it (in v0.1: the H100 PCIe, Hopper,
+by default, or the RTX 4060, Ada, both with cuBLASLt 12.8.3.14), on the CPU or on another CUDA GPU, with kernels
+that return the reference bits wherever they run: IEEE-exact kernels everywhere, tensor-core kernels only where a
+per-device self-test confirms the properties they rely on.
 
 ## 2. Install and check
 
-mmaemu needs Python 3.10 or newer, PyTorch 2.6 or newer and NumPy. Until 0.1.0 is on PyPI, install it from the
-repository:
+mmaemu needs Python 3.10 or newer, PyTorch 2.6 or newer and NumPy:
 
 ```bash
-pip install "git+https://github.com/astding/mmaemu"
+pip install mmaemu
 ```
+
+The development version installs from the repository: `pip install "git+https://github.com/astding/mmaemu"`.
 
 No CUDA toolkit, nvcc or C++ compiler is needed: the package contains prebuilt CUDA kernels (fatbins) that are
 loaded through the NVIDIA driver. If they cannot be used, mmaemu compiles the shipped kernel sources with NVRTC
@@ -40,7 +41,7 @@ python -m mmaemu selftest   # runs the kernel self-tests on the GPU; exit 0 = ev
 your GPU *is* a reference platform (`Profile.matches_device`). On a GPU that is not one, mmaemu still computes the
 reference platform's result. What it computes does not depend on where it runs, with one exception: the split-K
 decision of a shape missing from the profile's table is queried live on the reference GPU, and elsewhere inferred
-(S = 1 when M*N is more than twice every split M*N of the table's setting) or refused with `SplitKUnknownError`.
+(S = 1 when M*N is above the profile's envelope for the setting) or refused with `SplitKUnknownError`.
 
 ## 3. A first GEMM
 
@@ -79,9 +80,9 @@ print(mmaemu.explain(x, w.t(), scale_x, scale_w, out_dtype=torch.bfloat16, use_f
 ```
 
 ```text
-CallPlan(validation='ok', profile='ada-rtx4060-torch', preset='ada', preset_maturity='validated',
-  split=SplitDecision(S=1, scheme='none', source='table', verified=True, table_id='heur_rtx4060_lt12.8.3.14',
-                      note='table row: algo 60, tile 18, numSplitsK 1, customOption 0'),
+CallPlan(validation='ok', profile='hopper', preset='hopper', preset_maturity='validated',
+  split=SplitDecision(S=1, scheme='none', source='table', verified=True, table_id='heur_h100pcie_lt12.8.3.14',
+                      note='table row: algo 66, tile 134, numSplitsK 1, customOption 0'),
   backend='reference', fallbacks=['cuda: tensors on cpu'], warnings=[])
 ```
 
@@ -98,28 +99,37 @@ picks.
 
 | Profile | Use it for results produced by |
 |---|---|
-| `ada-rtx4060-torch` (default) | `torch._scaled_mm` on an RTX 4060 (1 MiB workspace) |
-| `ada-rtx4060-te` | Transformer Engine 2.3 on an RTX 4060 (4 MiB workspace), e.g. Evo 2 |
-| `ada-rtx4060-ws0` | cuBLAS with `CUBLASLT_WORKSPACE_SIZE=0` on an RTX 4060 (never splits) |
+| `hopper` (default) | `torch._scaled_mm` on an H100 PCIe (114 SMs, 1 MiB workspace) |
+| `hopper-te` | Transformer Engine 2.3 on an H100 PCIe (32 MiB workspace), e.g. Evo 2 |
+| `hopper-ws0` | cuBLAS with `CUBLASLT_WORKSPACE_SIZE=0` on an H100 PCIe (never splits) |
+| `ada` | `torch._scaled_mm` on an RTX 4060 (1 MiB workspace) |
+| `ada-te` | Transformer Engine 2.3 on an RTX 4060 (4 MiB workspace), e.g. Evo 2 |
+| `ada-ws0` | cuBLAS with `CUBLASLT_WORKSPACE_SIZE=0` on an RTX 4060 (never splits) |
 
-Pass `profile="ada-rtx4060-te"` per call, or set `MMAEMU_PROFILE`. The experimental profiles
-(`hopper-experimental`, `b200-mma-sync-experimental`) evaluate experimental instruction models without a cuBLAS
-platform; they warn, and have no split-K table. Details: [presets_profiles.md](presets_profiles.md).
+Pass `profile="hopper-te"` per call, or set `MMAEMU_PROFILE`. On a GPU the H100 profiles run E4M3 x E4M3 on the
+CUDA kernel h4 (the hopper preset's 32-product blocks with v4's design, about 4.1 to 4.6 TMAC/s on an RTX 5070 Ti), or
+on h1 (v1's design, about 2 TMAC/s on an RTX 5070 Ti) on sm_75 GPUs, as h4 needs sm_80; mixed formats run on the reference backend, as for every profile. The experimental profiles
+(`hopper-experimental`, `b200-mma-sync-experimental`) evaluate instruction models without a reference platform; they
+warn, and have no split-K table. Details: [presets_profiles.md](presets_profiles.md).
 
 ## 5. Split-K
 
 cuBLAS splits the K dimension of some GEMMs (mostly small M x N with large K) and adds the partial results in an
 order that depends on the shape, the formats, the output dtype, the accumulation mode, the workspace and the GPU.
-mmaemu reads that decision from a table recorded on the reference GPU (`splitk="auto"`, the default).
+mmaemu reads that decision from a table recorded on the profile's GPU (`splitk="auto"`, the default).
 
 - If the table decides, the call runs. `explain` shows the decision and where it came from.
-- On the reference GPU itself, a shape missing from the table is decided by a live query of cuBLASLt's heuristic.
-- Elsewhere, if the shape's M*N is more than twice the largest M*N that ever split in the table for its setting,
-  mmaemu infers S = 1 and says so in the decision's note (`MMAEMU_SPLITK_STRICT=1` turns this inference off). The
-  margin is measured: on the RTX 4060, cuBLASLt splits shapes up to 1.27 times that M*N.
-- Otherwise the call raises `SplitKUnknownError` instead of guessing. Pass `splitk=1` (no split) or
-  `splitk=(S, "serial")` / `splitk=(S, "pairwise")` if you know the decision, or record the shape on the reference
-  GPU with `tools/record_heuristics.py`.
+- On the profile's GPU itself, a shape missing from the table is decided by a live query of cuBLASLt's heuristic.
+- Elsewhere, if the shape's M*N is above the profile's envelope for its setting, mmaemu infers S = 1 and says so
+  in the decision's note (`MMAEMU_SPLITK_STRICT=1` turns this inference off). On the RTX 4060 profiles the bound is
+  twice the largest M*N that ever split in the table for the setting; cuBLASLt splits shapes up to 1.27 times that
+  M*N there. On the H100 profiles (the default) the bound depends on K and comes from a dense sweep of the H100's
+  heuristic (1,024 <= K <= 4,194,304). It passed a sealed held-out test at torch's 1 MiB workspace and failed it at
+  Transformer Engine's 32 MiB (1 of 77,518 shapes), so `hopper-te` inferences emit
+  `UnvalidatedEnvelopeWarning` ([splitk_tables.md](splitk_tables.md)).
+- Otherwise the call raises `SplitKUnknownError` instead of guessing. Pass `splitk=1` (no split) or the known
+  split, `splitk=(S, "contiguous")` on the H100 profiles and `(S, "serial")` / `(S, "pairwise")` on the RTX 4060
+  ones, or record the shape on the profile's GPU with `tools/record_heuristics.py`.
 
 Typical model projections (large M x N) never split on the reference GPU; all Evo 2 projection shapes are S = 1.
 
@@ -132,10 +142,13 @@ Typical model projections (large M x N) never split on the reference GPU; all Ev
 | `cuda:v4` | CUDA, sm_80 and newer, IEEE-exact | 4.0 TMAC/s |
 | `cuda:v9` | CUDA, gated: bf16 tensor cores for the exponents | 4.8 TMAC/s (opt-in outside sm_89) |
 | `cuda:tc3` | CUDA, gated: fp16 tensor cores, sm_80/86/89 binaries only | no sm_120 binary (2.94 TMAC/s on the RTX 4060, T6) |
+| `cuda:h4` | CUDA, sm_80 and newer, IEEE-exact; the `hopper` preset (the H100 profiles) | 4.1 TMAC/s |
+| `cuda:h1` | CUDA, sm_75 and newer, IEEE-exact; the `hopper` preset (the H100 profiles) | 2.0 TMAC/s |
 
-With `backend="auto"` mmaemu takes the highest-priority kernel that loaded and passed its self-test on the device
-(tc3 > v9 > v4 > v1 > reference). v1 and v4 use only IEEE-defined instructions, so their results do not depend on
-the GPU; they are validated on sm_89 (RTX 4060) and sm_120 (RTX 5070 Ti). v9 and tc3 depend on how a GPU's
+With `backend="auto"` mmaemu takes the highest-priority kernel of the profile's preset that loaded and passed its
+self-test on the device (`ada`: tc3 > v9 > v4 > v1 > reference; `hopper`: h4 > h1 > reference). v1, v4, h1 and h4 use
+only IEEE-defined instructions, so their results do not depend on the GPU; v1, v4, h1 and h4 are validated on sm_89
+(RTX 4060) and sm_120 (RTX 5070 Ti). v9 and tc3 depend on how a GPU's
 tensor cores round, so they are auto-selected only on sm_89, where they were validated; elsewhere
 `MMAEMU_ALLOW_GATED_KERNELS=1` allows them after their gates pass. E5M2 and mixed-format inputs always use the
 reference backend. Force a backend with `backend="cuda:v4"` or `MMAEMU_BACKEND`. Details: [backends.md](backends.md).
@@ -151,19 +164,21 @@ FP8 `Linear`), call `mmaemu.scaled_mm` with the same FP8 operands and scales. A 
 
 ```python
 class EmulatedFP8Linear(torch.nn.Module):
-    """y = x @ W.T with E4M3 operands, as Transformer Engine computes it on an RTX 4060 (no bias)."""
+    """y = x @ W.T with E4M3 operands, as Transformer Engine 2.3 computes it on an H100 PCIe (no bias)."""
 
-    def __init__(self, weight, scale_x, scale_w):
+    def __init__(self, weight, scale_x, scale_w, profile="hopper-te"):
         super().__init__()
-        self.scale_x, self.scale_w = scale_x, scale_w                       # quantisation scales (fp32 tensors)
+        self.scale_x, self.scale_w, self.profile = scale_x, scale_w, profile   # quantisation scales (fp32 tensors)
         self.wq = (weight.detach().float() * scale_w).clamp(-448, 448).to(torch.float8_e4m3fn)
 
     def forward(self, x):
         xq = (x.float() * self.scale_x).clamp(-448, 448).to(torch.float8_e4m3fn).reshape(-1, x.shape[-1])
-        y = mmaemu.scaled_mm(xq, self.wq.t(), 1 / self.scale_x, 1 / self.scale_w, out_dtype=torch.bfloat16,
-                             use_fast_accum=True, profile="ada-rtx4060-te")
+        y = mmaemu.scaled_mm(xq, self.wq.t(), 1 / self.scale_x, 1 / self.scale_w,   # torch takes the inverse scales
+                             out_dtype=torch.bfloat16, use_fast_accum=True, profile=self.profile)
         return y.reshape(*x.shape[:-1], -1)
 ```
+
+`profile="ada-te"` gives the RTX 4060's TE GEMM instead, as in the Evo 2 notebook.
 
 Things to get right, all of which change bits:
 
@@ -191,7 +206,7 @@ Typical uses:
 - **Golden outputs without a GPU.** Compute expected FP8 GEMM results on a CPU-only CI runner and compare your
   kernel's output on the GPU later.
 - **Checking a native result.** On an RTX 4060 with cuBLASLt 12.8.3.14 and torch 2.7.1, `torch._scaled_mm` and
-  `mmaemu.scaled_mm` (profile `ada-rtx4060-torch`) return the same bits for the validated scope; a difference
+  `mmaemu.scaled_mm` (profile `ada`) return the same bits for the validated scope; a difference
   there is a bug report.
 - **Attributing a discrepancy.** When a model differs between two GPUs, replace its FP8 GEMMs with mmaemu on both:
   what remains comes from the non-FP8 operations.
@@ -207,6 +222,7 @@ Typical uses:
 | `MmaemuError` | e.g. CPU flush-to-zero is on | `torch.set_flush_denormal(False)` |
 | `ExperimentalPresetWarning` | an experimental preset or profile is in use | read its validated scope |
 | `UnverifiedSplitWarning` | a split decision whose reduction was never replayed on hardware | treat the result as experimental |
+| `UnvalidatedEnvelopeWarning` | (an `UnverifiedSplitWarning`) S = 1 inferred by an envelope that failed its held-out test (H100 at 32 MiB) | pass `splitk` if you know the H100's split, or treat the result as experimental |
 | `BackendFallbackWarning` | a faster CUDA kernel failed to load or failed a gate, or a kernel had to be compiled with NVRTC; a slower kernel, the same kernel built by NVRTC, or the reference model runs instead (the message says which) | `python -m mmaemu info` shows why |
 
 The exception classes above derive from `mmaemu.MmaemuError` and from the matching built-in class (`RuntimeError`,
@@ -217,7 +233,7 @@ The exception classes above derive from `mmaemu.MmaemuError` and from the matchi
 | Variable | Effect |
 |---|---|
 | `MMAEMU_PROFILE` | default profile |
-| `MMAEMU_BACKEND` | default backend (`auto`, `reference`, `cuda`, `cuda:v1`, `cuda:v4`, `cuda:v9`, `cuda:tc3`) |
+| `MMAEMU_BACKEND` | default backend (`auto`, `reference`, `cuda`, `cuda:v1`, `cuda:v4`, `cuda:v9`, `cuda:tc3`, `cuda:h1`, `cuda:h4`) |
 | `MMAEMU_SPLITK_STRICT=1` | no envelope inference of S = 1 |
 | `MMAEMU_DISABLE_CUDA=1` | never touch CUDA |
 | `MMAEMU_ALLOW_GATED_KERNELS=1` | allow v9 / tc3 on capabilities they were not validated on, if their gates pass |

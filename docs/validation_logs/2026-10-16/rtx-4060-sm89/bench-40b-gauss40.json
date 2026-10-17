@@ -1,0 +1,341 @@
+{
+ "device": "NVIDIA GeForce RTX 4060",
+ "cc": [
+  8,
+  9
+ ],
+ "sms": 24,
+ "torch": "2.7.1+cu128",
+ "shape": "40b",
+ "K": 8192,
+ "N": 24576,
+ "data": "gauss40",
+ "timer": "events",
+ "warmup_s": 1.5,
+ "window_s": 1.0,
+ "rounds": 5,
+ "hostclock": {
+  "adjtimex_rc": 0,
+  "tick_us": 10000,
+  "freq": -1113280,
+  "raw_s": 2.0001681279973127,
+  "perf_counter_s": 2.00013566101552,
+  "ratio_perf_over_raw": 0.9999837678736411,
+  "tolerance": 0.002,
+  "ok": true
+ },
+ "kernels": {
+  "v1": {
+   "source": "fatbin",
+   "image_sha256": "96900cc2d5ce3410bcf91edcb5a0ef8b50b0ac9e3027492ce45d7c241abd723e",
+   "fatbin_dir": "~/mmaemu-4060/src/mmaemu/backends/cuda/bin",
+   "preset": "ada"
+  },
+  "v4": {
+   "source": "fatbin",
+   "image_sha256": "42e7ada5c3afeef1bd419616ccdb9cc2b8d39700b3800bbdb52c106fba6e0815",
+   "fatbin_dir": "~/mmaemu-4060/src/mmaemu/backends/cuda/bin",
+   "preset": "ada"
+  },
+  "v9": {
+   "source": "fatbin",
+   "image_sha256": "bca69d0a845013cf65f6d4c82300eac98101ebed4b0f45973a4b338dab09ffba",
+   "fatbin_dir": "~/mmaemu-4060/src/mmaemu/backends/cuda/bin",
+   "preset": "ada"
+  },
+  "tc3": {
+   "source": "fatbin",
+   "image_sha256": "e8da5876ef01f2973d2a5d3d8dde4cc463023300de4052af68efd420b5e205b7",
+   "fatbin_dir": "~/mmaemu-4060/src/mmaemu/backends/cuda/bin",
+   "preset": "ada"
+  },
+  "h1": {
+   "source": "fatbin",
+   "image_sha256": "261a760569d7672a815348d037129a1297b03b66b7d06a947d57479a7b0fc5a2",
+   "fatbin_dir": "~/mmaemu-4060/src/mmaemu/backends/cuda/bin",
+   "preset": "hopper"
+  },
+  "h4": {
+   "source": "fatbin",
+   "image_sha256": "7e1f96c33d602f22251b378620741887ccdaad42d05c9c1e440cfaae4e534b39",
+   "fatbin_dir": "~/mmaemu-4060/src/mmaemu/backends/cuda/bin",
+   "preset": "hopper"
+  }
+ },
+ "results": [
+  {
+   "kernel": "v1",
+   "M": 2048,
+   "N": 24576,
+   "K": 8192,
+   "data": "gauss40",
+   "source": "fatbin",
+   "tmac_s_median": 0.6263023110955612,
+   "tmac_s_min": 0.6251807008787406,
+   "tmac_s_max": 0.6272256318036256,
+   "windows": 5,
+   "window_s": [
+    1.3147,
+    1.319,
+    1.315,
+    1.3177,
+    1.3167
+   ],
+   "launches": [
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "per_gemm_ms_median": 658.335205078125,
+   "smi": {
+    "n": 34,
+    "sm_mhz_mean": 2515.1470588235293,
+    "sm_mhz_min": 2430.0,
+    "sm_mhz_max": 2595.0,
+    "power_w_mean": null,
+    "throttle": [
+     "0x0000000000000004"
+    ],
+    "temp_c_max": 66.0
+   },
+   "mac_per_clk_per_sm": 10.37550847670442,
+   "exactness": {
+    "vs": "cpu reference (ada)",
+    "outputs": 16384,
+    "mismatches": 0
+   }
+  },
+  {
+   "kernel": "v4",
+   "M": 2048,
+   "N": 24576,
+   "K": 8192,
+   "data": "gauss40",
+   "source": "fatbin",
+   "tmac_s_median": 1.3707552985397995,
+   "tmac_s_min": 1.3679738176698442,
+   "tmac_s_max": 1.3729850407452142,
+   "windows": 5,
+   "window_s": [
+    1.2016,
+    1.2032,
+    1.2037,
+    1.2012,
+    1.2056
+   ],
+   "launches": [
+    4,
+    4,
+    4,
+    4,
+    4
+   ],
+   "per_gemm_ms_median": 300.7953796386719,
+   "smi": {
+    "n": 29,
+    "sm_mhz_mean": 2488.9655172413795,
+    "sm_mhz_min": 2415.0,
+    "sm_mhz_max": 2550.0,
+    "power_w_mean": null,
+    "throttle": [
+     "0x0000000000000004"
+    ],
+    "temp_c_max": 66.0
+   },
+   "mac_per_clk_per_sm": 22.947205861304017,
+   "exactness": {
+    "vs": "v1 (full output)",
+    "outputs": 50331648,
+    "mismatches": 0
+   }
+  },
+  {
+   "kernel": "v9",
+   "M": 2048,
+   "N": 24576,
+   "K": 8192,
+   "data": "gauss40",
+   "source": "fatbin",
+   "tmac_s_median": 1.5456779613211513,
+   "tmac_s_min": 1.5453095345463757,
+   "tmac_s_max": 1.553115344712764,
+   "windows": 5,
+   "window_s": [
+    1.067,
+    1.066,
+    1.067,
+    1.0673,
+    1.0619
+   ],
+   "launches": [
+    4,
+    4,
+    4,
+    4,
+    4
+   ],
+   "per_gemm_ms_median": 266.75469970703125,
+   "smi": {
+    "n": 27,
+    "sm_mhz_mean": 2349.4444444444443,
+    "sm_mhz_min": 2220.0,
+    "sm_mhz_max": 2490.0,
+    "power_w_mean": null,
+    "throttle": [
+     "0x0000000000000004"
+    ],
+    "temp_c_max": 66.0
+   },
+   "mac_per_clk_per_sm": 27.41211801822804,
+   "exactness": {
+    "vs": "v1 (full output)",
+    "outputs": 50331648,
+    "mismatches": 0
+   }
+  },
+  {
+   "kernel": "tc3",
+   "M": 2048,
+   "N": 24576,
+   "K": 8192,
+   "data": "gauss40",
+   "source": "fatbin",
+   "tmac_s_median": 2.942904362050255,
+   "tmac_s_min": 2.933074260161435,
+   "tmac_s_max": 2.9531097252790013,
+   "windows": 5,
+   "window_s": [
+    1.1185,
+    1.117,
+    1.1226,
+    1.1208,
+    1.1246
+   ],
+   "launches": [
+    8,
+    8,
+    8,
+    8,
+    8
+   ],
+   "per_gemm_ms_median": 140.1054229736328,
+   "smi": {
+    "n": 28,
+    "sm_mhz_mean": 2476.6071428571427,
+    "sm_mhz_min": 2340.0,
+    "sm_mhz_max": 2565.0,
+    "power_w_mean": null,
+    "throttle": [
+     "0x0000000000000004"
+    ],
+    "temp_c_max": 67.0
+   },
+   "mac_per_clk_per_sm": 49.5116940282928,
+   "exactness": {
+    "vs": "v1 (full output)",
+    "outputs": 50331648,
+    "mismatches": 0
+   }
+  },
+  {
+   "kernel": "h1",
+   "M": 2048,
+   "N": 24576,
+   "K": 8192,
+   "data": "gauss40",
+   "source": "fatbin",
+   "tmac_s_median": 0.687192460500544,
+   "tmac_s_min": 0.685943303213766,
+   "tmac_s_max": 0.6875432809676928,
+   "windows": 5,
+   "window_s": [
+    1.2009,
+    1.1994,
+    1.1998,
+    1.2022,
+    1.2
+   ],
+   "launches": [
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "per_gemm_ms_median": 600.0020141601562,
+   "smi": {
+    "n": 28,
+    "sm_mhz_mean": 2458.3928571428573,
+    "sm_mhz_min": 2325.0,
+    "sm_mhz_max": 2520.0,
+    "power_w_mean": null,
+    "throttle": [
+     "0x0000000000000004"
+    ],
+    "temp_c_max": 67.0
+   },
+   "mac_per_clk_per_sm": 11.647047828148972,
+   "exactness": {
+    "vs": "cpu reference (hopper)",
+    "outputs": 16384,
+    "mismatches": 0
+   }
+  },
+  {
+   "kernel": "h4",
+   "M": 2048,
+   "N": 24576,
+   "K": 8192,
+   "data": "gauss40",
+   "source": "fatbin",
+   "tmac_s_median": 1.4138438080768183,
+   "tmac_s_min": 1.4067752456048408,
+   "tmac_s_max": 1.4159181798710772,
+   "windows": 5,
+   "window_s": [
+    1.1665,
+    1.1648,
+    1.17,
+    1.1663,
+    1.1724
+   ],
+   "launches": [
+    4,
+    4,
+    4,
+    4,
+    4
+   ],
+   "per_gemm_ms_median": 291.6282958984375,
+   "smi": {
+    "n": 28,
+    "sm_mhz_mean": 2456.25,
+    "sm_mhz_min": 2415.0,
+    "sm_mhz_max": 2520.0,
+    "power_w_mean": null,
+    "throttle": [
+     "0x0000000000000004"
+    ],
+    "temp_c_max": 67.0
+   },
+   "mac_per_clk_per_sm": 23.983779611141955,
+   "exactness": {
+    "vs": "h1 (full output)",
+    "outputs": 50331648,
+    "mismatches": 0
+   }
+  }
+ ],
+ "power_samples": {
+  "2048": {
+   "power_limit": "115.00 W",
+   "Duration": "2.38 sec",
+   "Number of Samples": "119",
+   "Max": "125.42 W",
+   "Min": "57.30 W",
+   "Avg": "113.26 W"
+  }
+ }
+}

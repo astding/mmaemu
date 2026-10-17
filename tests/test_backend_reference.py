@@ -98,9 +98,10 @@ def test_scaled_mm_reference_cpu_equals_cuda():
     for od in (torch.float32, torch.bfloat16, torch.float16, E4):
         for fast in (True, False):
             for sk in (1, (3, "pairwise"), (8, "serial")):
-                cpu = scaled_mm(a, b.t(), sa, sb, out_dtype=od, use_fast_accum=fast, splitk=sk, backend="reference")
-                gpu = scaled_mm(a.cuda(), b.cuda().t(), sa.cuda(), sb.cuda(), out_dtype=od, use_fast_accum=fast,
-                                splitk=sk, backend="reference")
+                kw = dict(out_dtype=od, use_fast_accum=fast, splitk=sk, backend="reference",
+                          profile="ada")
+                cpu = scaled_mm(a, b.t(), sa, sb, **kw)
+                gpu = scaled_mm(a.cuda(), b.cuda().t(), sa.cuda(), sb.cuda(), **kw)
                 assert gpu.device.type == "cuda"
                 assert_bitwise_equal(gpu, cpu, msg=f"{od} fast={fast} splitk={sk}")
 

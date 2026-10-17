@@ -1,0 +1,2548 @@
+{
+ "out": "<probe-work>/dry_4060/out",
+ "model": "ada",
+ "R": 128,
+ "parts": {
+  "m1": {
+   "MM_cublas64.M1024N1024K64.fast": {
+    "ada/same": 198025,
+    "ada/restart": 182346,
+    "hopper/same": 186235,
+    "hopper/restart": 173825,
+    "hopper_latec/same": 173825,
+    "hopper_latec/restart": 173825,
+    "b200/same": 124513,
+    "b200/restart": 124513,
+    "n2": 198025,
+    "lt": "algoId=60 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3"
+   },
+   "MM_cublas64.M1024N1024K64.slow": {
+    "ada/same": 198025,
+    "ada/restart": 182346,
+    "hopper/same": 186235,
+    "hopper/restart": 173825,
+    "hopper_latec/same": 173825,
+    "hopper_latec/restart": 173825,
+    "b200/same": 124513,
+    "b200/restart": 124513,
+    "n2": 198025,
+    "lt": "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ctaSwizzling=1"
+   },
+   "MM_cublas64.M4096N4096K64.fast": {
+    "ada/same": 198025,
+    "ada/restart": 182346,
+    "hopper/same": 186235,
+    "hopper/restart": 173825,
+    "hopper_latec/same": 173825,
+    "hopper_latec/restart": 173825,
+    "b200/same": 124513,
+    "b200/restart": 124513,
+    "n2": 198025,
+    "lt": "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1"
+   },
+   "MM_cublas64.M4096N4096K64.slow": {
+    "ada/same": 198025,
+    "ada/restart": 182346,
+    "hopper/same": 186235,
+    "hopper/restart": 173825,
+    "hopper_latec/same": 173825,
+    "hopper_latec/restart": 173825,
+    "b200/same": 124513,
+    "b200/restart": 124513,
+    "n2": 198025,
+    "lt": "algoId=35 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1"
+   },
+   "MM_cublas64.M2048N5760K1920.fast": {
+    "ada/same": 198025,
+    "ada/restart": 182346,
+    "hopper/same": 186235,
+    "hopper/restart": 173825,
+    "hopper_latec/same": 173825,
+    "hopper_latec/restart": 173825,
+    "b200/same": 124513,
+    "b200/restart": 124513,
+    "n2": 198025,
+    "lt": "algoId=60 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3"
+   },
+   "MM_cublas64.M2048N5760K1920.slow": {
+    "ada/same": 182346,
+    "ada/restart": 198025,
+    "hopper/same": 173941,
+    "hopper/restart": 186272,
+    "hopper_latec/same": 186272,
+    "hopper_latec/restart": 186272,
+    "b200/same": 131134,
+    "b200/restart": 131134,
+    "n2": 198025,
+    "lt": "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4"
+   },
+   "MM_cublas64.M2048N12288K4096.fast": {
+    "ada/same": 198025,
+    "ada/restart": 182346,
+    "hopper/same": 186235,
+    "hopper/restart": 173825,
+    "hopper_latec/same": 173825,
+    "hopper_latec/restart": 173825,
+    "b200/same": 124513,
+    "b200/restart": 124513,
+    "n2": 198025,
+    "lt": "algoId=60 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ctaSwizzling=1"
+   },
+   "MM_cublas64.M2048N12288K4096.slow": {
+    "ada/same": 182346,
+    "ada/restart": 198025,
+    "hopper/same": 173941,
+    "hopper/restart": 186272,
+    "hopper_latec/same": 186272,
+    "hopper_latec/restart": 186272,
+    "b200/same": 131134,
+    "b200/restart": 131134,
+    "n2": 198025,
+    "lt": "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4"
+   },
+   "MM_cublas64.M2048N24576K8192.fast": {
+    "ada/same": 198025,
+    "ada/restart": 182346,
+    "hopper/same": 186235,
+    "hopper/restart": 173825,
+    "hopper_latec/same": 173825,
+    "hopper_latec/restart": 173825,
+    "b200/same": 124513,
+    "b200/restart": 124513,
+    "n2": 198025,
+    "lt": "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1"
+   },
+   "MM_cublas64.M2048N24576K8192.slow": {
+    "ada/same": 182346,
+    "ada/restart": 198025,
+    "hopper/same": 173941,
+    "hopper/restart": 186272,
+    "hopper_latec/same": 186272,
+    "hopper_latec/restart": 186272,
+    "b200/same": 131134,
+    "b200/restart": 131134,
+    "n2": 198025,
+    "lt": "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4"
+   },
+   "MM_cublas64_sm120.M1024N1024K64.fast": {
+    "ada/same": 695556,
+    "ada/restart": 575018,
+    "hopper/same": 586164,
+    "hopper/restart": 494614,
+    "hopper_latec/same": 494614,
+    "hopper_latec/restart": 494614,
+    "b200/same": 260841,
+    "b200/restart": 260841,
+    "n2": 695556,
+    "lt": "algoId=60 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3"
+   },
+   "MM_cublas64_sm120.M1024N1024K64.slow": {
+    "ada/same": 695556,
+    "ada/restart": 575018,
+    "hopper/same": 586164,
+    "hopper/restart": 494614,
+    "hopper_latec/same": 494614,
+    "hopper_latec/restart": 494614,
+    "b200/same": 260841,
+    "b200/restart": 260841,
+    "n2": 695556,
+    "lt": "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ctaSwizzling=1"
+   },
+   "MM_cublas64_sm120.M4096N4096K64.fast": {
+    "ada/same": 695556,
+    "ada/restart": 575018,
+    "hopper/same": 586164,
+    "hopper/restart": 494614,
+    "hopper_latec/same": 494614,
+    "hopper_latec/restart": 494614,
+    "b200/same": 260841,
+    "b200/restart": 260841,
+    "n2": 695556,
+    "lt": "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1"
+   },
+   "MM_cublas64_sm120.M4096N4096K64.slow": {
+    "ada/same": 695556,
+    "ada/restart": 575018,
+    "hopper/same": 586164,
+    "hopper/restart": 494614,
+    "hopper_latec/same": 494614,
+    "hopper_latec/restart": 494614,
+    "b200/same": 260841,
+    "b200/restart": 260841,
+    "n2": 695556,
+    "lt": "algoId=35 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1"
+   },
+   "MM_cublas64_sm120.M2048N5760K1920.fast": {
+    "ada/same": 695556,
+    "ada/restart": 575018,
+    "hopper/same": 586164,
+    "hopper/restart": 494614,
+    "hopper_latec/same": 494614,
+    "hopper_latec/restart": 494614,
+    "b200/same": 260841,
+    "b200/restart": 260841,
+    "n2": 695556,
+    "lt": "algoId=60 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3"
+   },
+   "MM_cublas64_sm120.M2048N5760K1920.slow": {
+    "ada/same": 575018,
+    "ada/restart": 695556,
+    "hopper/same": 495272,
+    "hopper/restart": 581982,
+    "hopper_latec/same": 581982,
+    "hopper_latec/restart": 581982,
+    "b200/same": 296919,
+    "b200/restart": 296919,
+    "n2": 695556,
+    "lt": "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4"
+   },
+   "MM_cublas64_sm120.M2048N12288K4096.fast": {
+    "ada/same": 695556,
+    "ada/restart": 575018,
+    "hopper/same": 586164,
+    "hopper/restart": 494614,
+    "hopper_latec/same": 494614,
+    "hopper_latec/restart": 494614,
+    "b200/same": 260841,
+    "b200/restart": 260841,
+    "n2": 695556,
+    "lt": "algoId=60 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ctaSwizzling=1"
+   },
+   "MM_cublas64_sm120.M2048N12288K4096.slow": {
+    "ada/same": 575018,
+    "ada/restart": 695556,
+    "hopper/same": 495272,
+    "hopper/restart": 581982,
+    "hopper_latec/same": 581982,
+    "hopper_latec/restart": 581982,
+    "b200/same": 296919,
+    "b200/restart": 296919,
+    "n2": 695556,
+    "lt": "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4"
+   },
+   "MM_cublas64_sm120.M2048N24576K8192.fast": {
+    "ada/same": 695556,
+    "ada/restart": 575018,
+    "hopper/same": 586164,
+    "hopper/restart": 494614,
+    "hopper_latec/same": 494614,
+    "hopper_latec/restart": 494614,
+    "b200/same": 260841,
+    "b200/restart": 260841,
+    "n2": 695556,
+    "lt": "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1"
+   },
+   "MM_cublas64_sm120.M2048N24576K8192.slow": {
+    "ada/same": 575018,
+    "ada/restart": 695556,
+    "hopper/same": 495272,
+    "hopper/restart": 581982,
+    "hopper_latec/same": 581982,
+    "hopper_latec/restart": 581982,
+    "b200/same": 296919,
+    "b200/restart": 296919,
+    "n2": 695556,
+    "lt": "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4"
+   },
+   "MM_cublas64.M1024N1024K64.te": {
+    "ada/same": 198025,
+    "ada/restart": 182346,
+    "hopper/same": 186235,
+    "hopper/restart": 173825,
+    "hopper_latec/same": 173825,
+    "hopper_latec/restart": 173825,
+    "b200/same": 124513,
+    "b200/restart": 124513,
+    "n2": 198025,
+    "lt": "algoId=60 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3"
+   },
+   "MM_cublas64.M1024N1024K64.te_split": {
+    "ada/same": 198025,
+    "ada/restart": 182346,
+    "hopper/same": 186235,
+    "hopper/restart": 173825,
+    "hopper_latec/same": 173825,
+    "hopper_latec/restart": 173825,
+    "b200/same": 124513,
+    "b200/restart": 124513,
+    "n2": 198025,
+    "lt": "algoId=35 tile=MATMUL_TILE_64x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1"
+   },
+   "MM_cublas64.M4096N4096K64.te": {
+    "ada/same": 198025,
+    "ada/restart": 182346,
+    "hopper/same": 186235,
+    "hopper/restart": 173825,
+    "hopper_latec/same": 173825,
+    "hopper_latec/restart": 173825,
+    "b200/same": 124513,
+    "b200/restart": 124513,
+    "n2": 198025,
+    "lt": "algoId=60 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3"
+   },
+   "MM_cublas64.M4096N4096K64.te_split": {
+    "ada/same": 198025,
+    "ada/restart": 182346,
+    "hopper/same": 186235,
+    "hopper/restart": 173825,
+    "hopper_latec/same": 173825,
+    "hopper_latec/restart": 173825,
+    "b200/same": 124513,
+    "b200/restart": 124513,
+    "n2": 198025,
+    "lt": "algoId=35 tile=MATMUL_TILE_64x64 stages=MATMUL_STAGES_64x6 ctaSwizzling=1"
+   },
+   "MM_cublas64.M2048N5760K1920.te": {
+    "ada/same": 198025,
+    "ada/restart": 182346,
+    "hopper/same": 186235,
+    "hopper/restart": 173825,
+    "hopper_latec/same": 173825,
+    "hopper_latec/restart": 173825,
+    "b200/same": 124513,
+    "b200/restart": 124513,
+    "n2": 198025,
+    "lt": "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4"
+   },
+   "MM_cublas64.M2048N5760K1920.te_split": {
+    "ada/same": 182346,
+    "ada/restart": 198025,
+    "hopper/same": 173941,
+    "hopper/restart": 186272,
+    "hopper_latec/same": 186272,
+    "hopper_latec/restart": 186272,
+    "b200/same": 131134,
+    "b200/restart": 131134,
+    "n2": 198025,
+    "lt": "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4"
+   },
+   "MM_cublas64.M2048N12288K4096.te": {
+    "ada/same": 198025,
+    "ada/restart": 182346,
+    "hopper/same": 186235,
+    "hopper/restart": 173825,
+    "hopper_latec/same": 173825,
+    "hopper_latec/restart": 173825,
+    "b200/same": 124513,
+    "b200/restart": 124513,
+    "n2": 198025,
+    "lt": "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4"
+   },
+   "MM_cublas64.M2048N12288K4096.te_split": {
+    "ada/same": 182346,
+    "ada/restart": 198025,
+    "hopper/same": 173941,
+    "hopper/restart": 186272,
+    "hopper_latec/same": 186272,
+    "hopper_latec/restart": 186272,
+    "b200/same": 131134,
+    "b200/restart": 131134,
+    "n2": 198025,
+    "lt": "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ctaSwizzling=1"
+   },
+   "MM_cublas64.M2048N24576K8192.te": {
+    "ada/same": 198025,
+    "ada/restart": 182346,
+    "hopper/same": 186235,
+    "hopper/restart": 173825,
+    "hopper_latec/same": 173825,
+    "hopper_latec/restart": 173825,
+    "b200/same": 124513,
+    "b200/restart": 124513,
+    "n2": 198025,
+    "lt": "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4"
+   },
+   "MM_cublas64.M2048N24576K8192.te_split": {
+    "ada/same": 182346,
+    "ada/restart": 198025,
+    "hopper/same": 173941,
+    "hopper/restart": 186272,
+    "hopper_latec/same": 186272,
+    "hopper_latec/restart": 186272,
+    "b200/same": 131134,
+    "b200/restart": 131134,
+    "n2": 198025,
+    "lt": "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ctaSwizzling=1"
+   },
+   "MM_cublas64_sm120.M1024N1024K64.te": {
+    "ada/same": 695556,
+    "ada/restart": 575018,
+    "hopper/same": 586164,
+    "hopper/restart": 494614,
+    "hopper_latec/same": 494614,
+    "hopper_latec/restart": 494614,
+    "b200/same": 260841,
+    "b200/restart": 260841,
+    "n2": 695556,
+    "lt": "algoId=60 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3"
+   },
+   "MM_cublas64_sm120.M1024N1024K64.te_split": {
+    "ada/same": 695556,
+    "ada/restart": 575018,
+    "hopper/same": 586164,
+    "hopper/restart": 494614,
+    "hopper_latec/same": 494614,
+    "hopper_latec/restart": 494614,
+    "b200/same": 260841,
+    "b200/restart": 260841,
+    "n2": 695556,
+    "lt": "algoId=35 tile=MATMUL_TILE_64x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1"
+   },
+   "MM_cublas64_sm120.M4096N4096K64.te": {
+    "ada/same": 695556,
+    "ada/restart": 575018,
+    "hopper/same": 586164,
+    "hopper/restart": 494614,
+    "hopper_latec/same": 494614,
+    "hopper_latec/restart": 494614,
+    "b200/same": 260841,
+    "b200/restart": 260841,
+    "n2": 695556,
+    "lt": "algoId=60 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3"
+   },
+   "MM_cublas64_sm120.M4096N4096K64.te_split": {
+    "ada/same": 695556,
+    "ada/restart": 575018,
+    "hopper/same": 586164,
+    "hopper/restart": 494614,
+    "hopper_latec/same": 494614,
+    "hopper_latec/restart": 494614,
+    "b200/same": 260841,
+    "b200/restart": 260841,
+    "n2": 695556,
+    "lt": "algoId=35 tile=MATMUL_TILE_64x64 stages=MATMUL_STAGES_64x6 ctaSwizzling=1"
+   },
+   "MM_cublas64_sm120.M2048N5760K1920.te": {
+    "ada/same": 695556,
+    "ada/restart": 575018,
+    "hopper/same": 586164,
+    "hopper/restart": 494614,
+    "hopper_latec/same": 494614,
+    "hopper_latec/restart": 494614,
+    "b200/same": 260841,
+    "b200/restart": 260841,
+    "n2": 695556,
+    "lt": "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4"
+   },
+   "MM_cublas64_sm120.M2048N5760K1920.te_split": {
+    "ada/same": 575018,
+    "ada/restart": 695556,
+    "hopper/same": 495272,
+    "hopper/restart": 581982,
+    "hopper_latec/same": 581982,
+    "hopper_latec/restart": 581982,
+    "b200/same": 296919,
+    "b200/restart": 296919,
+    "n2": 695556,
+    "lt": "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4"
+   },
+   "MM_cublas64_sm120.M2048N12288K4096.te": {
+    "ada/same": 695556,
+    "ada/restart": 575018,
+    "hopper/same": 586164,
+    "hopper/restart": 494614,
+    "hopper_latec/same": 494614,
+    "hopper_latec/restart": 494614,
+    "b200/same": 260841,
+    "b200/restart": 260841,
+    "n2": 695556,
+    "lt": "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4"
+   },
+   "MM_cublas64_sm120.M2048N12288K4096.te_split": {
+    "ada/same": 575018,
+    "ada/restart": 695556,
+    "hopper/same": 495272,
+    "hopper/restart": 581982,
+    "hopper_latec/same": 581982,
+    "hopper_latec/restart": 581982,
+    "b200/same": 296919,
+    "b200/restart": 296919,
+    "n2": 695556,
+    "lt": "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ctaSwizzling=1"
+   },
+   "MM_cublas64_sm120.M2048N24576K8192.te": {
+    "ada/same": 695556,
+    "ada/restart": 575018,
+    "hopper/same": 586164,
+    "hopper/restart": 494614,
+    "hopper_latec/same": 494614,
+    "hopper_latec/restart": 494614,
+    "b200/same": 260841,
+    "b200/restart": 260841,
+    "n2": 695556,
+    "lt": "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4"
+   },
+   "MM_cublas64_sm120.M2048N24576K8192.te_split": {
+    "ada/same": 575018,
+    "ada/restart": 695556,
+    "hopper/same": 495272,
+    "hopper/restart": 581982,
+    "hopper_latec/same": 581982,
+    "hopper_latec/restart": 581982,
+    "b200/same": 296919,
+    "b200/restart": 296919,
+    "n2": 695556,
+    "lt": "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ctaSwizzling=1"
+   }
+  },
+  "m3": {
+   "m3_torch:pairs.M2048N5760K1920:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 3962,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/1024/seq",
+        1960
+       ],
+       [
+        "ada/1024/tree",
+        1960
+       ],
+       [
+        "hopper/1024/seq",
+        1960
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 3962,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/1024/seq",
+        1960
+       ],
+       [
+        "ada/1024/tree",
+        1960
+       ],
+       [
+        "hopper/1024/seq",
+        1960
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:pairs.M2048N5760K1920:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 3962,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        132
+       ],
+       [
+        "ada/64/tree",
+        132
+       ],
+       [
+        "hopper/64/seq",
+        132
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 3962,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        132
+       ],
+       [
+        "ada/64/tree",
+        132
+       ],
+       [
+        "hopper/64/seq",
+        132
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:triples.M2048N5760K1920:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3 ws=1048576"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 7082,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/1024/seq",
+        1630
+       ],
+       [
+        "ada/1024/tree",
+        1630
+       ],
+       [
+        "hopper/1024/seq",
+        1630
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:triples.M2048N5760K1920:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ws=1048576"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 7082,
+      "matching": [
+       "ada/128/seq",
+       "hopper/128/seq"
+      ],
+      "closest_nonmatching": [
+       [
+        "hopper_latec/128/seq",
+        4
+       ],
+       [
+        "b200/128/seq",
+        4
+       ],
+       [
+        "ada/64/seq",
+        312
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:tie_bf16.M2048N5760K1920:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 362,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/1024/seq",
+        172
+       ],
+       [
+        "ada/1024/tree",
+        172
+       ],
+       [
+        "hopper/1024/seq",
+        172
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:tie_bf16.M2048N5760K1920:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 362,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        12
+       ],
+       [
+        "ada/64/tree",
+        12
+       ],
+       [
+        "hopper/64/seq",
+        12
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:pairs.M2048N12288K4096:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 17154,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        8576
+       ],
+       [
+        "ada/2048/tree",
+        8576
+       ],
+       [
+        "hopper/2048/seq",
+        8576
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 17154,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        8576
+       ],
+       [
+        "ada/2048/tree",
+        8576
+       ],
+       [
+        "hopper/2048/seq",
+        8576
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:pairs.M2048N12288K4096:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 17154,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        268
+       ],
+       [
+        "ada/64/tree",
+        268
+       ],
+       [
+        "hopper/64/seq",
+        268
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 17154,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        268
+       ],
+       [
+        "ada/64/tree",
+        268
+       ],
+       [
+        "hopper/64/seq",
+        268
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:triples.M2048N12288K4096:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=1048576"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 3962,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        1028
+       ],
+       [
+        "ada/2048/tree",
+        1028
+       ],
+       [
+        "hopper/2048/seq",
+        1028
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:triples.M2048N12288K4096:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ws=1048576"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 3962,
+      "matching": [
+       "ada/128/seq",
+       "hopper/128/seq",
+       "hopper_latec/128/seq",
+       "b200/128/seq"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        72
+       ],
+       [
+        "hopper/64/seq",
+        72
+       ],
+       [
+        "hopper_latec/64/seq",
+        72
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:tie_bf16.M2048N12288K4096:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 770,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        384
+       ],
+       [
+        "ada/2048/tree",
+        384
+       ],
+       [
+        "hopper/2048/seq",
+        384
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:tie_bf16.M2048N12288K4096:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 770,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        12
+       ],
+       [
+        "ada/64/tree",
+        12
+       ],
+       [
+        "hopper/64/seq",
+        12
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:pairs.M2048N24576K8192:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 18178,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        13632
+       ],
+       [
+        "ada/2048/tree",
+        13632
+       ],
+       [
+        "hopper/2048/seq",
+        13632
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 18178,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        13632
+       ],
+       [
+        "ada/2048/tree",
+        13632
+       ],
+       [
+        "hopper/2048/seq",
+        13632
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:pairs.M2048N24576K8192:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 18178,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        142
+       ],
+       [
+        "ada/64/tree",
+        142
+       ],
+       [
+        "hopper/64/seq",
+        142
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 18178,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        142
+       ],
+       [
+        "ada/64/tree",
+        142
+       ],
+       [
+        "hopper/64/seq",
+        142
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:triples.M2048N24576K8192:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=1048576"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 4326,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/tree",
+        1262
+       ],
+       [
+        "hopper/2048/tree",
+        1262
+       ],
+       [
+        "ada/1024/tree",
+        1286
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:triples.M2048N24576K8192:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ws=1048576"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 4326,
+      "matching": [
+       "ada/128/seq",
+       "hopper/128/seq",
+       "hopper_latec/128/seq",
+       "b200/128/seq"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        26
+       ],
+       [
+        "hopper/64/seq",
+        26
+       ],
+       [
+        "hopper_latec/64/seq",
+        26
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:tie_bf16.M2048N24576K8192:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 1538,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        1152
+       ],
+       [
+        "ada/2048/tree",
+        1152
+       ],
+       [
+        "hopper/2048/seq",
+        1152
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:tie_bf16.M2048N24576K8192:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 1538,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        12
+       ],
+       [
+        "ada/64/tree",
+        12
+       ],
+       [
+        "hopper/64/seq",
+        12
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:pairs.M1024N1024K4096:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_64x64 stages=MATMUL_STAGES_64x6 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 17154,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        8576
+       ],
+       [
+        "ada/2048/tree",
+        8576
+       ],
+       [
+        "hopper/2048/seq",
+        8576
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 17154,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        8576
+       ],
+       [
+        "ada/2048/tree",
+        8576
+       ],
+       [
+        "hopper/2048/seq",
+        8576
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:pairs.M1024N1024K4096:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_64x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 17154,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        268
+       ],
+       [
+        "ada/64/tree",
+        268
+       ],
+       [
+        "hopper/64/seq",
+        268
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 17154,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        268
+       ],
+       [
+        "ada/64/tree",
+        268
+       ],
+       [
+        "hopper/64/seq",
+        268
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:triples.M1024N1024K4096:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_64x64 stages=MATMUL_STAGES_64x6 ws=1048576"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 3962,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        1028
+       ],
+       [
+        "ada/2048/tree",
+        1028
+       ],
+       [
+        "hopper/2048/seq",
+        1028
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:triples.M1024N1024K4096:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_64x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=1048576"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 3962,
+      "matching": [
+       "ada/128/seq",
+       "hopper/128/seq",
+       "hopper_latec/128/seq",
+       "b200/128/seq"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        72
+       ],
+       [
+        "hopper/64/seq",
+        72
+       ],
+       [
+        "hopper_latec/64/seq",
+        72
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:tie_bf16.M1024N1024K4096:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 770,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        384
+       ],
+       [
+        "ada/2048/tree",
+        384
+       ],
+       [
+        "hopper/2048/seq",
+        384
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:tie_bf16.M1024N1024K4096:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 770,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        12
+       ],
+       [
+        "ada/64/tree",
+        12
+       ],
+       [
+        "hopper/64/seq",
+        12
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:pairs.M2048N5760K1920:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ws=4194304"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 3962,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/1024/seq",
+        1960
+       ],
+       [
+        "ada/1024/tree",
+        1960
+       ],
+       [
+        "hopper/1024/seq",
+        1960
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 3962,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/1024/seq",
+        1960
+       ],
+       [
+        "ada/1024/tree",
+        1960
+       ],
+       [
+        "hopper/1024/seq",
+        1960
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:pairs.M2048N5760K1920:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ws=4194304"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 3962,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        132
+       ],
+       [
+        "ada/64/tree",
+        132
+       ],
+       [
+        "hopper/64/seq",
+        132
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 3962,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        132
+       ],
+       [
+        "ada/64/tree",
+        132
+       ],
+       [
+        "hopper/64/seq",
+        132
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:triples.M2048N5760K1920:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ws=4194304"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 7082,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/1024/seq",
+        1630
+       ],
+       [
+        "ada/1024/tree",
+        1630
+       ],
+       [
+        "hopper/1024/seq",
+        1630
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:triples.M2048N5760K1920:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ws=4194304"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 7082,
+      "matching": [
+       "ada/128/seq",
+       "hopper/128/seq"
+      ],
+      "closest_nonmatching": [
+       [
+        "hopper_latec/128/seq",
+        4
+       ],
+       [
+        "b200/128/seq",
+        4
+       ],
+       [
+        "ada/64/seq",
+        312
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:tie_bf16.M2048N5760K1920:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3 ctaSwizzling=1 ws=4194304"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 362,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/1024/seq",
+        172
+       ],
+       [
+        "ada/1024/tree",
+        172
+       ],
+       [
+        "hopper/1024/seq",
+        172
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:tie_bf16.M2048N5760K1920:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ws=4194304"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 362,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        12
+       ],
+       [
+        "ada/64/tree",
+        12
+       ],
+       [
+        "hopper/64/seq",
+        12
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:pairs.M2048N12288K4096:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ws=4194304"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 17154,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        8576
+       ],
+       [
+        "ada/2048/tree",
+        8576
+       ],
+       [
+        "hopper/2048/seq",
+        8576
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 17154,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        8576
+       ],
+       [
+        "ada/2048/tree",
+        8576
+       ],
+       [
+        "hopper/2048/seq",
+        8576
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:pairs.M2048N12288K4096:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=4194304"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 17154,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        268
+       ],
+       [
+        "ada/64/tree",
+        268
+       ],
+       [
+        "hopper/64/seq",
+        268
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 17154,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        268
+       ],
+       [
+        "ada/64/tree",
+        268
+       ],
+       [
+        "hopper/64/seq",
+        268
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:triples.M2048N12288K4096:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ws=4194304"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 3962,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        1028
+       ],
+       [
+        "ada/2048/tree",
+        1028
+       ],
+       [
+        "hopper/2048/seq",
+        1028
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:triples.M2048N12288K4096:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=4194304"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 3962,
+      "matching": [
+       "ada/128/seq",
+       "hopper/128/seq",
+       "hopper_latec/128/seq",
+       "b200/128/seq"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        72
+       ],
+       [
+        "hopper/64/seq",
+        72
+       ],
+       [
+        "hopper_latec/64/seq",
+        72
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:tie_bf16.M2048N12288K4096:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3 ws=4194304"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 770,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        384
+       ],
+       [
+        "ada/2048/tree",
+        384
+       ],
+       [
+        "hopper/2048/seq",
+        384
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:tie_bf16.M2048N12288K4096:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=4194304"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 770,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        12
+       ],
+       [
+        "ada/64/tree",
+        12
+       ],
+       [
+        "hopper/64/seq",
+        12
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:pairs.M2048N24576K8192:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ws=4194304"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 18178,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        13632
+       ],
+       [
+        "ada/2048/tree",
+        13632
+       ],
+       [
+        "hopper/2048/seq",
+        13632
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 18178,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        13632
+       ],
+       [
+        "ada/2048/tree",
+        13632
+       ],
+       [
+        "hopper/2048/seq",
+        13632
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:pairs.M2048N24576K8192:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=4194304"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 18178,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        142
+       ],
+       [
+        "ada/64/tree",
+        142
+       ],
+       [
+        "hopper/64/seq",
+        142
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 18178,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        142
+       ],
+       [
+        "ada/64/tree",
+        142
+       ],
+       [
+        "hopper/64/seq",
+        142
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:triples.M2048N24576K8192:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ws=4194304"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 4326,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/tree",
+        1262
+       ],
+       [
+        "hopper/2048/tree",
+        1262
+       ],
+       [
+        "ada/1024/tree",
+        1286
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:triples.M2048N24576K8192:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=4194304"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 4326,
+      "matching": [
+       "ada/128/seq",
+       "hopper/128/seq",
+       "hopper_latec/128/seq",
+       "b200/128/seq"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        26
+       ],
+       [
+        "hopper/64/seq",
+        26
+       ],
+       [
+        "hopper_latec/64/seq",
+        26
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:tie_bf16.M2048N24576K8192:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3 ctaSwizzling=1 ws=4194304"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 1538,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        1152
+       ],
+       [
+        "ada/2048/tree",
+        1152
+       ],
+       [
+        "hopper/2048/seq",
+        1152
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:tie_bf16.M2048N24576K8192:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ctaSwizzling=1 ws=4194304"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 1538,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        12
+       ],
+       [
+        "ada/64/tree",
+        12
+       ],
+       [
+        "hopper/64/seq",
+        12
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:pairs.M1024N1024K4096:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3 ctaSwizzling=1 ws=4194304"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 17154,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        8576
+       ],
+       [
+        "ada/2048/tree",
+        8576
+       ],
+       [
+        "hopper/2048/seq",
+        8576
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 17154,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        8576
+       ],
+       [
+        "ada/2048/tree",
+        8576
+       ],
+       [
+        "hopper/2048/seq",
+        8576
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:pairs.M1024N1024K4096:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3 ctaSwizzling=1 ws=4194304"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 17154,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        268
+       ],
+       [
+        "ada/64/tree",
+        268
+       ],
+       [
+        "hopper/64/seq",
+        268
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 17154,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        268
+       ],
+       [
+        "ada/64/tree",
+        268
+       ],
+       [
+        "hopper/64/seq",
+        268
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:triples.M1024N1024K4096:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3 ctaSwizzling=1 ws=4194304"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 3962,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        1028
+       ],
+       [
+        "ada/2048/tree",
+        1028
+       ],
+       [
+        "hopper/2048/seq",
+        1028
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:triples.M1024N1024K4096:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_64x3 ctaSwizzling=1 ws=4194304"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 3962,
+      "matching": [
+       "ada/128/seq",
+       "hopper/128/seq",
+       "hopper_latec/128/seq",
+       "b200/128/seq"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        72
+       ],
+       [
+        "hopper/64/seq",
+        72
+       ],
+       [
+        "hopper_latec/64/seq",
+        72
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:tie_bf16.M1024N1024K4096:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=60 tile=MATMUL_TILE_128x64 stages=MATMUL_STAGES_64x4 ws=4194304"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 770,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        384
+       ],
+       [
+        "ada/2048/tree",
+        384
+       ],
+       [
+        "hopper/2048/seq",
+        384
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:tie_bf16.M1024N1024K4096:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=35 tile=MATMUL_TILE_64x128 stages=MATMUL_STAGES_64x4 ws=4194304"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 770,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        12
+       ],
+       [
+        "ada/64/tree",
+        12
+       ],
+       [
+        "hopper/64/seq",
+        12
+       ]
+      ]
+     }
+    }
+   }
+  },
+  "m2": {
+   "model": "ada",
+   "R": 128,
+   "per_call": {
+    "call00": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call01": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call02": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call03": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call04": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call05": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call06": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call07": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call08": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call09": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call10": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call11": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call12": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call13": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call14": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call15": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call16": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call17": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call18": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call19": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    },
+    "call20": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true,
+     "acc_slow": true,
+     "te_acc_split": true,
+     "y_slow": true,
+     "te_y_split": true
+    }
+   },
+   "totals": {
+    "acc_fast": "21/21",
+    "te_acc": "21/21",
+    "y_fast": "21/21",
+    "te_y": "21/21",
+    "acc_slow": "21/21",
+    "te_acc_split": "21/21",
+    "y_slow": "21/21",
+    "te_y_split": "21/21"
+   }
+  },
+  "m4": {
+   "model": "ada",
+   "R": 128,
+   "jobs": 690,
+   "equal": 663,
+   "different": 0,
+   "not_modelled": 0,
+   "errors": 27,
+   "by_tag": {
+    "evo2": {
+     "equal": 120,
+     "different": 0,
+     "not_modelled": 0
+    },
+    "c5": {
+     "equal": 213,
+     "different": 0,
+     "not_modelled": 0
+    },
+    "longk": {
+     "equal": 60,
+     "different": 0,
+     "not_modelled": 0
+    },
+    "smallk": {
+     "equal": 30,
+     "different": 0,
+     "not_modelled": 0
+    },
+    "m6": {
+     "equal": 240,
+     "different": 0,
+     "not_modelled": 0
+    }
+   },
+   "bad": []
+  }
+ },
+ "seconds": {
+  "m1": 1.6,
+  "m3": 15.8,
+  "m2": 53.4,
+  "m4": 65.8
+ }
+}

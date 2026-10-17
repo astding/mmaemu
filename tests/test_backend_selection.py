@@ -15,11 +15,11 @@ from mmaemu.backends.cuda.spec import GATES, GateResult, KernelSpec
 from mmaemu.errors import BackendFallbackWarning, BackendUnavailableError
 
 
-def fake_spec(name, priority, *, gated=False, validated=((8, 9),), gates=(), min_cc=(7, 5), smem=0):
+def fake_spec(name, priority, *, gated=False, validated=((8, 9),), gates=(), min_cc=(7, 5), smem=0, preset="ada"):
     return KernelSpec(name=name, module=f"fake_{name}", source=f"fake_{name}.cu", entry=f"mmaemu_{name}_e4m3e4m3",
                       sass_archs=(75, 80, 89, 120), ptx_arch=None, min_cc=min_cc, gated=gated,
                       validated_on=frozenset(validated), gates=gates, priority=priority, tile_m=64, tile_n=64,
-                      threads=256, smem_bytes=smem, align_bytes=4, k_max=1 << 24)
+                      threads=256, smem_bytes=smem, align_bytes=4, k_max=1 << 24, preset=preset)
 
 
 TC3 = fake_spec("tc3", 40, gated=True, gates=("design_a",), min_cc=(8, 0))
@@ -90,6 +90,47 @@ def test_unsupported_formats_and_presets_route_to_reference(world):
         be, w = select(ChainRequest(device=REQ.device, fmt_a=fa, fmt_b=fb, preset=preset))
         assert be.name == "reference" and not w
     assert world.tried == []
+
+
+def test_kernels_serve_only_their_preset(monkeypatch):
+    """A kernel is used only for its own preset (KernelSpec.preset): hopper requests reach h1 and never the ada
+    kernels, ada requests never reach h1; formats a kernel lacks still go to the reference."""
+    h1 = fake_spec("h1", 10, preset="hopper")
+    w = World(monkeypatch, cc=(12, 0), specs=(TC3, V9, V4, V1, h1))
+    hop = ChainRequest(device=REQ.device, fmt_a="e4m3", fmt_b="e4m3", preset="hopper")
+    be, warns = select(hop)
+    assert be.name == "cuda:h1" and not warns and w.tried == ["h1"]
+    w.tried.clear()
+    be, _ = select(REQ)
+    assert be.name == "cuda:v4" and "h1" not in w.tried
+    be, _ = select(ChainRequest(device=REQ.device, fmt_a="e4m3", fmt_b="e5m2", preset="hopper"))
+    assert be.name == "reference"
+    _, skipped = registry.explain_selection(hop)
+    assert any(r.startswith("cuda:v4: implements preset 'ada', not 'hopper'") for r in skipped), skipped
+    with pytest.raises(BackendUnavailableError, match="implements preset 'hopper'"):
+        registry.select(REQ, "cuda:h1")
+    st = registry.status(torch.device("cuda", 0))
+    assert st["cuda:h1"].available and st["cuda:v1"].available
+    registry.clear()
+
+
+def test_hopper_prefers_h4_and_falls_back_to_h1(monkeypatch):
+    """Within the hopper preset the priority order holds as for ada: h4 (20, sm_80+) before h1 (10); below sm_80, or
+    when h4 fails to load, h1 serves (a load failure warns once)."""
+    h1 = fake_spec("h1", 10, preset="hopper")
+    h4 = fake_spec("h4", 20, min_cc=(8, 0), preset="hopper")
+    hop = ChainRequest(device=REQ.device, fmt_a="e4m3", fmt_b="e4m3", preset="hopper")
+    w = World(monkeypatch, cc=(12, 0), specs=(V4, V1, h1, h4))
+    be, warns = select(hop)
+    assert be.name == "cuda:h4" and not warns and w.tried == ["h4"]
+    w = World(monkeypatch, cc=(7, 5), specs=(V4, V1, h1, h4))
+    be, warns = select(hop)
+    assert be.name == "cuda:h1" and not warns and w.tried == ["h1"]
+    w = World(monkeypatch, cc=(12, 0), specs=(V4, V1, h1, h4))
+    w.outcome["h4"] = (False, "no binary", None, None)
+    be, warns = select(hop)
+    assert be.name == "cuda:h1" and w.tried == ["h4", "h1"] and len(warns) == 1
+    registry.clear()
 
 
 def test_explicit_backends(world):

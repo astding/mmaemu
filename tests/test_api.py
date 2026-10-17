@@ -226,9 +226,16 @@ def test_grad_guard():
 def test_experimental_profile_warns_before_split_resolution():
     a, b = _mats()
     P._reset_warnings_for_tests()
-    with pytest.warns(ExperimentalPresetWarning):
+    with pytest.warns(ExperimentalPresetWarning, match="profile 'hopper-experimental' is experimental"):
         scaled_mm(a, b, ONE, ONE, out_dtype=torch.float32, use_fast_accum=True, profile="hopper-experimental",
                   splitk=1)
+    with warnings.catch_warnings():
+        warnings.simplefilter("error")                # once per process per profile
+        scaled_mm(a, b, ONE, ONE, out_dtype=torch.float32, use_fast_accum=True, profile="hopper-experimental",
+                  splitk=1)
+    P._reset_warnings_for_tests()
+    with pytest.warns(ExperimentalPresetWarning, match="profile 'hopper-experimental' is experimental"):
+        accumulate(a, b.t(), use_fast_accum=False, profile="hopper-experimental", splitk=1)   # slow is modelled
 
 
 # --------------------------------------------------------------------------------------------------------------------
@@ -305,19 +312,20 @@ def test_column_major_out_uses_the_swapped_split():
     # torch 2.7.1 computes a column-major out= as mat1 x mat2, so cuBLASLt's heuristic sees the row-major problem
     # (N, M, K) with the formats swapped (RTX 4060: 406 of 406 such calls; T3p checks it live)
     a, b = _mats(16, 8192, 48)
+    bf = dict(out_dtype=torch.bfloat16, profile="ada")
     col = torch.empty(48, 16, dtype=torch.bfloat16).t()
-    row = explain(a, b, ONE, ONE, out_dtype=torch.bfloat16).split
-    swapped = explain(b.t(), a.t(), ONE, ONE, out_dtype=torch.bfloat16).split
+    row = explain(a, b, ONE, ONE, **bf).split
+    swapped = explain(b.t(), a.t(), ONE, ONE, **bf).split
     assert (row.S, row.scheme, swapped.S, swapped.scheme) == (8, "pairwise", 12, "pairwise")
-    d = explain(a, b, ONE, ONE, out_dtype=torch.bfloat16, out=col).split
+    d = explain(a, b, ONE, ONE, **bf, out=col).split
     assert (d.S, d.scheme, d.source) == (12, "pairwise", "table")
-    y = scaled_mm(a, b, ONE, ONE, out_dtype=torch.bfloat16, out=col)
-    assert_bitwise_equal(y.contiguous(), scaled_mm(a, b, ONE, ONE, out_dtype=torch.bfloat16, splitk=(12, "pairwise")))
+    y = scaled_mm(a, b, ONE, ONE, **bf, out=col)
+    assert_bitwise_equal(y.contiguous(), scaled_mm(a, b, ONE, ONE, **bf, splitk=(12, "pairwise")))
     # a padded column-major out is still column-major; a wrong-shape out is resized to row-major first
     padded = torch.empty(48, 32, dtype=torch.bfloat16)[:, :16].t()
-    assert explain(a, b, ONE, ONE, out_dtype=torch.bfloat16, out=padded).split.S == 12
+    assert explain(a, b, ONE, ONE, **bf, out=padded).split.S == 12
     resized = torch.empty(16, 48, dtype=torch.bfloat16).t()
-    assert explain(a, b, ONE, ONE, out_dtype=torch.bfloat16, out=resized).split.S == 8
+    assert explain(a, b, ONE, ONE, **bf, out=resized).split.S == 8
 
 
 def test_mat1_neither_row_nor_column_major_is_copied():
@@ -391,21 +399,27 @@ def test_accumulate_checks():
 # explain
 def test_explain():
     a, b = _mats()
-    cp = explain(a, b, ONE, ONE, out_dtype=torch.float32, splitk=1)
+    cp = explain(a, b, ONE, ONE, out_dtype=torch.float32, splitk=1, profile="ada")
     assert isinstance(cp, CallPlan) and cp.validation == "ok"
-    assert cp.profile == "ada-rtx4060-torch" and cp.preset == "ada" and cp.preset_maturity == "validated"
+    assert cp.profile == "ada" and cp.preset == "ada" and cp.preset_maturity == "validated"
     assert cp.split.S == 1 and cp.split.source == "explicit" and cp.backend == "reference"
     assert cp.fallbacks == ["cuda: tensors on cpu"]           # the selection's own reasons for this call
     cp = explain(a, b, ONE, ONE, out_dtype=E5)
     assert cp.validation[0] == "ReferenceRejectsError"
     cp = explain(a, b, ONE, ONE, torch.zeros(32, dtype=torch.bfloat16), out_dtype=torch.bfloat16, splitk=1)
     assert cp.validation[0] == "UnsupportedFeatureError"
+    for prof, split in (("hopper", (2, "serial")), ("ada", (2, "contiguous"))):
+        cp = explain(a, b, ONE, ONE, out_dtype=torch.float32, use_fast_accum=True, splitk=split, profile=prof)
+        assert cp.validation[0] == "ValueError" and "is not a split-K layout of preset" in cp.validation[1]
+        with pytest.raises(ValueError, match="is not a split-K layout of preset"):    # what explain reports
+            scaled_mm(a, b, ONE, ONE, out_dtype=torch.float32, use_fast_accum=True, splitk=split, profile=prof)
     P._reset_warnings_for_tests()
     with warnings.catch_warnings():
         warnings.simplefilter("error")              # explain never emits the warning itself, it reports it
         cp = explain(a, b, ONE, ONE, out_dtype=torch.float32, use_fast_accum=True, profile="hopper-experimental",
                      splitk=1)
-    assert cp.preset_maturity == "experimental" and any("experimental" in w for w in cp.warnings)
+    assert cp.preset_maturity == "validated"
+    assert any("profile 'hopper-experimental' is experimental" in w for w in cp.warnings)
 
 
 # --------------------------------------------------------------------------------------------------------------------

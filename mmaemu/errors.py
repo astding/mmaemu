@@ -14,6 +14,7 @@ __all__ = [
     "BackendUnavailableError",
     "ExperimentalPresetWarning",
     "UnverifiedSplitWarning",
+    "UnvalidatedEnvelopeWarning",
     "BackendFallbackWarning",
 ]
 
@@ -39,11 +40,17 @@ class BackendUnavailableError(MmaemuError, RuntimeError):
 
 
 class ExperimentalPresetWarning(UserWarning):
-    """The selected preset is experimental (not validated against GEMM-level hardware recordings)."""
+    """The selected preset is experimental (not validated against GEMM-level hardware recordings), or the profile is
+    experimental although its preset is validated (hopper-experimental: a platform other than the validated one)."""
 
 
 class UnverifiedSplitWarning(UserWarning):
     """The split-K decision used was never replayed on hardware (or comes from an experimental profile)."""
+
+
+class UnvalidatedEnvelopeWarning(UnverifiedSplitWarning):
+    """S = 1 was inferred by a split-K envelope that did not pass its held-out test (the H100 table at Transformer
+    Engine's 32 MiB workspace): the reference GPU may split the shape."""
 
 
 class BackendFallbackWarning(RuntimeWarning):

@@ -1,0 +1,39 @@
+p1 torch align 0 chunk 0: 66522/500000 queries, 1109/s
+p1 torch align 0 chunk 0: 197989/500000 queries, 1650/s
+p1 torch align 0 chunk 1/6: 500000 queries in 172.8s (2893/s), status!=0 96; split rows 98706, largest split M*N 129024, S [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 24, 25, 27, 31]
+p1 torch align 0 chunk 1: 356449/500000 queries, 5941/s
+p1 torch align 0 chunk 2/6: 500000 queries in 86.4s (5789/s), status!=0 86; split rows 94208, largest split M*N 129024, S [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 24, 25, 27, 31]
+p1 torch align 0 chunk 2: 359238/500000 queries, 5987/s
+p1 torch align 0 chunk 3/6: 500000 queries in 83.3s (6000/s), status!=0 88; split rows 94016, largest split M*N 129024, S [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 24, 25, 27, 31]
+p1 torch align 0 chunk 3: 277580/500000 queries, 4626/s
+p1 torch align 0 chunk 4/6: 500000 queries in 97.0s (5152/s), status!=0 93; split rows 96974, largest split M*N 129024, S [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 24, 25, 27, 31]
+p1 torch align 0 chunk 5/6: 500000 queries in 58.3s (8582/s), status!=0 174300; split rows 64884, largest split M*N 129024, S [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 24, 25, 27, 31]
+p1 torch align 0 chunk 6/6: 113600 queries in 17.4s (6541/s), status!=0 38; split rows 18718, largest split M*N 129024, S [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 24, 25, 27, 31]
+p1 torch align 0: 2613600 queries in 518.6s
+p1 te align 256 chunk 0: 55570/500000 queries, 926/s
+p1 te align 256 chunk 0: 117365/500000 queries, 978/s
+p1 te align 256 chunk 0: 220897/500000 queries, 1227/s
+p1 te align 256 chunk 0: 362732/500000 queries, 1511/s
+p1 te align 256 chunk 0: 491332/500000 queries, 1638/s
+p1 te align 256 chunk 1/6: 500000 queries in 303.6s (1647/s), status!=0 0; split rows 181493, largest split M*N 3936000, S [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 30, 31, 32, 33, 34, 35, 36, 37, 38, 41, 43, 44, 45, 46, 47, 57, 65, 72, 91]
+p1 te align 256 chunk 1: 134967/500000 queries, 2249/s
+p1 te align 256 chunk 1: 266029/500000 queries, 2217/s
+p1 te align 256 chunk 1: 406473/500000 queries, 2258/s
+p1 te align 256 chunk 2/6: 500000 queries in 221.0s (2262/s), status!=0 0; split rows 178425, largest split M*N 3936000, S [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 41, 43, 45, 46, 47, 51, 57, 65, 72, 91]
+p1 te align 256 chunk 2: 141041/500000 queries, 2351/s
+p1 te align 256 chunk 2: 271094/500000 queries, 2259/s
+p1 te align 256 chunk 2: 414591/500000 queries, 2303/s
+p1 te align 256 chunk 3/6: 500000 queries in 218.1s (2293/s), status!=0 0; split rows 180118, largest split M*N 3936000, S [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 38, 41, 43, 45, 46, 47, 57, 65, 91]
+p1 te align 256 chunk 3: 123515/500000 queries, 2059/s
+p1 te align 256 chunk 3: 256358/500000 queries, 2136/s
+p1 te align 256 chunk 3: 387200/500000 queries, 2151/s
+p1 te align 256 chunk 4/6: 500000 queries in 228.5s (2188/s), status!=0 0; split rows 184199, largest split M*N 3936000, S [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 38, 41, 43, 45, 46, 47, 51, 57, 65, 72, 91]
+p1 te align 256 chunk 4: 304361/500000 queries, 5073/s
+p1 te align 256 chunk 4: 449454/500000 queries, 3745/s
+p1 te align 256 chunk 5/6: 500000 queries in 146.4s (3415/s), status!=0 174240; split rows 117920, largest split M*N 3936000, S [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 38, 41, 43, 45, 46, 47, 51, 57, 65, 72, 91]
+p1 te align 256 chunk 6/6: 113600 queries in 44.2s (2569/s), status!=0 0; split rows 40660, largest split M*N 3936000, S [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 38, 40, 41, 43, 45, 46, 47, 57, 65, 91]
+p1 te align 256: 2613600 queries in 1165.5s
+p1 ws0 align 0 chunk 0: 288458/500000 queries, 4808/s
+p1 ws0 align 0 chunk 1/2: 500000 queries in 92.4s (5411/s), status!=0 0; split rows 0, largest split M*N None, S []
+p1 ws0 align 0 chunk 2/2: 153400 queries in 14.3s (10724/s), status!=0 43560; split rows 0, largest split M*N None, S []
+p1 ws0 align 0: 653400 queries in 107.7s

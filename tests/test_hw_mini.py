@@ -36,6 +36,7 @@ IVIEW = {1: (np.uint8, torch.uint8), 2: (np.int16, torch.int16), 4: (np.int32, t
 ERRORS = {n: getattr(E, n) for n in ("ReferenceRejectsError", "UnsupportedFeatureError", "SplitKUnknownError",
                                      "BackendUnavailableError", "MmaemuError")}
 GPU_BACKENDS = ("reference", "cuda", "cuda:v1", "cuda:v4", "cuda:v9", "cuda:tc3")
+ADA = "ada"  # the profile of the RTX 4060 recordings replayed here
 
 _HM = None
 
@@ -103,14 +104,14 @@ def run_gemm(p, inputs, device, backend, label):
     sr = None if p.get("scale_result_bits") is None else f32(p["scale_result_bits"], device)
     if p["api"] == "accumulate":
         acc = mmaemu.accumulate(a, b, use_fast_accum=p["fast"], splitk=splitk_arg(p), backend=backend,
-                               out_dtype_for_split=od)
+                               out_dtype_for_split=od, profile=ADA)
         y = mmaemu.model.epilogue.apply(acc, sa, sb, out_dtype=od, scale_result=sr)
         if p.get("out_select") == "diagonal":
             y = torch.diagonal(y).contiguous()
         return y.cpu()
     call = p.get("call", {})          # omitted keys = defaults (docs/testing.md "call spec")
     args = [a, b.t(), sa, sb]
-    kw = dict(splitk=splitk_arg(p), backend=backend)
+    kw = dict(splitk=splitk_arg(p), backend=backend, profile=ADA)
     if call.get("bias"):
         bias = torch.zeros(N, dtype=TD[p.get("bias_dtype", "bfloat16")], device=device)
         if call["bias"] == "positional":
@@ -195,7 +196,7 @@ def run_call(case, o, device, backend):
     mat2 = _physical(_logical(hm().array(case["inputs"]["b"]), c["mat2"]["dtype"]), c["mat2"], "mat2", device)
     sa = _scale(c["scale_a"], M, N, "a", device)
     sb = _scale(c["scale_b"], M, N, "b", device)
-    kw = dict(use_fast_accum=o["fast"], backend=backend,
+    kw = dict(use_fast_accum=o["fast"], backend=backend, profile=ADA,
               splitk=1 if not o.get("splitk") else (int(o["splitk"][0]), o["splitk"][1]))
     if o.get("out_dtype_passed", True):
         kw["out_dtype"] = getattr(torch, o["out_dtype"])

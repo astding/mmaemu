@@ -1,0 +1,16 @@
+p3 torch align 0 chunk 0: 298275/500000 queries, 4971/s
+p3 torch align 0 chunk 1/2: 500000 queries in 86.0s (5817/s), status!=0 0; split rows 1481, largest split M*N 114688, S [2, 3]
+p3 torch align 0 chunk 2/2: 302920 queries in 33.2s (9126/s), status!=0 53528; split rows 729, largest split M*N 114688, S [2, 3]
+p3 torch align 0: 802920 queries in 120.5s
+p3 torch align 256 chunk 0: 272764/500000 queries, 4546/s
+p3 torch align 256 chunk 1/2: 500000 queries in 89.5s (5586/s), status!=0 0; split rows 1481, largest split M*N 114688, S [2, 3]
+p3 torch align 256 chunk 2/2: 302920 queries in 32.7s (9266/s), status!=0 53528; split rows 729, largest split M*N 114688, S [2, 3]
+p3 torch align 256: 802920 queries in 123.4s
+p3 te align 256 chunk 0: 245397/500000 queries, 4090/s
+p3 te align 256 chunk 1/2: 500000 queries in 98.5s (5077/s), status!=0 0; split rows 5717, largest split M*N 1441792, S [2, 3]
+p3 te align 256 chunk 2/2: 302920 queries in 36.8s (8238/s), status!=0 53528; split rows 2895, largest split M*N 1441792, S [2, 3]
+p3 te align 256: 802920 queries in 136.5s
+p3 te align 0 chunk 0: 258734/500000 queries, 4312/s
+p3 te align 0 chunk 1/2: 500000 queries in 95.2s (5254/s), status!=0 0; split rows 5717, largest split M*N 1441792, S [2, 3]
+p3 te align 0 chunk 2/2: 302920 queries in 36.1s (8401/s), status!=0 53528; split rows 2895, largest split M*N 1441792, S [2, 3]
+p3 te align 0: 802920 queries in 132.6s

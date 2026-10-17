@@ -45,6 +45,7 @@ from mmaemu import errors as E  # noqa: E402
 from mmaemu.model import epilogue as mm_epilogue  # noqa: E402
 from mmaemu.model import plan as mm_plan  # noqa: E402
 
+PROFILE = "ada"      # the truth is the RTX 4060's; split-K is passed explicitly (preset, rejections)
 REF_LIMIT = 3e7                    # M*N*K above which the large-GEMM path is used (as in the truth replay)
 SAMPLE_ROWS, SAMPLE_COLS = 2, 32
 MMA_ELEMS = 1 << 23                # operand elements per mmaemu.model.dot call (bounds float64 temporaries)
@@ -252,7 +253,7 @@ class MmaemuTruthModel:
             bias = torch.zeros(N, dtype=TD[p.get("bias_dtype", "bfloat16")])
         sr = None if p.get("scale_result") is None else f32(int(p["scale_result"]))
         plan = mmaemu.explain(a, b.t(), sa, sb, bias, sr, TD[p["out_dtype"]], bool(p.get("fast_accum", True)),
-                              splitk=1)
+                              splitk=1, profile=PROFILE)
         v = plan.validation
         if v == "ok":
             return
@@ -295,18 +296,18 @@ class MmaemuTruthModel:
                               and K > 0)
                 if torch_call:
                     y = mmaemu.scaled_mm(codes(A, fa), codes(B, fb).t(), sa, sb, None, sr, od, fast,
-                                         splitk=splitk_arg(sk), backend="reference")
+                                         splitk=splitk_arg(sk), backend="reference", profile=PROFILE)
                     src = "mmaemu.scaled_mm(reference)"
                 else:
                     acc = mmaemu.accumulate(codes(A, fa), codes(B, fb), use_fast_accum=fast, splitk=splitk_arg(sk),
-                                            backend="reference")
+                                            backend="reference", profile=PROFILE)
                     y = mm_epilogue.apply(acc, sa, sb, out_dtype=od, scale_result=sr)
                     src = "mmaemu.accumulate(reference)+epilogue"
             else:
                 if self.device.type == "cuda":
                     acc = mmaemu.accumulate(codes(A, fa, self.device), codes(B, fb, self.device),
                                             use_fast_accum=fast, splitk=splitk_arg(sk),
-                                            backend=self.cuda_backend).cpu()
+                                            backend=self.cuda_backend, profile=PROFILE).cpu()
                     src = f"mmaemu.accumulate(cuda:{self.cuda_backend})+epilogue"
                 else:
                     acc = self._acc_fastacc(A, B, fa, fb, fast, sk)
@@ -341,7 +342,7 @@ class MmaemuTruthModel:
         ri = sorted({0, M - 1})[:SAMPLE_ROWS]
         ci = np.unique(np.linspace(0, N - 1, min(N, SAMPLE_COLS)).astype(int))
         ref = mmaemu.accumulate(codes(A[ri], fa), codes(B[ci], fb), use_fast_accum=fast, splitk=splitk_arg(sk),
-                                backend="reference")
+                                backend="reference", profile=PROFILE)
         got = acc[ri][:, torch.from_numpy(ci)]
         rb, gb = tbits(ref), tbits(got)
         ctx.checks.append(dict(case=ctx.label, fast=fast, S=int(sk[0]), scheme=sk[1], n=int(rb.size),

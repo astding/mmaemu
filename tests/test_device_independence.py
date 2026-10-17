@@ -98,7 +98,7 @@ def evo2_case(call):
 
 
 def accumulate(a, b, backend):
-    return mmaemu.accumulate(a, b, use_fast_accum=True, splitk=1, backend=backend)
+    return mmaemu.accumulate(a, b, use_fast_accum=True, splitk=1, backend=backend, profile="ada")
 
 
 # ---------------------------------------------------------------------------------------------------------------

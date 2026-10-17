@@ -21,6 +21,7 @@ from .errors import (
     ReferenceRejectsError,
     SplitKUnknownError,
     UnsupportedFeatureError,
+    UnvalidatedEnvelopeWarning,
     UnverifiedSplitWarning,
 )
 
@@ -59,7 +60,8 @@ __all__ = [
     "backends_status", "selftest",
     "model", "testing", "errors",
     "MmaemuError", "ReferenceRejectsError", "UnsupportedFeatureError", "SplitKUnknownError",
-    "BackendUnavailableError", "ExperimentalPresetWarning", "UnverifiedSplitWarning", "BackendFallbackWarning",
+    "BackendUnavailableError", "ExperimentalPresetWarning", "UnverifiedSplitWarning", "UnvalidatedEnvelopeWarning",
+    "BackendFallbackWarning",
 ]
 
 

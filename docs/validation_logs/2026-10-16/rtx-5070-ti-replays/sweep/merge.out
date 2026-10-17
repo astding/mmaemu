@@ -1,0 +1,52 @@
+{
+ "live_jobs": 2744,
+ "live_verdicts": {
+  "equal": 2744
+ },
+ "live_by": [
+  [
+   "p5_live",
+   "fast",
+   "split",
+   "equal",
+   1208
+  ],
+  [
+   "p5_live",
+   "fast",
+   "unsplit",
+   "equal",
+   164
+  ],
+  [
+   "p5_live",
+   "slow",
+   "split",
+   "equal",
+   1208
+  ],
+  [
+   "p5_live",
+   "slow",
+   "unsplit",
+   "equal",
+   164
+  ]
+ ],
+ "live_auto": {
+  "agrees": 480,
+  "unknown": 2264
+ },
+ "live_auto_m6": {},
+ "live_passes_equal": {
+  "None": 2300,
+  "True": 444
+ },
+ "live_split_equal": 2416,
+ "live_unsplit_equal": 328,
+ "live_backends": {
+  "cuda:h4": 994,
+  "reference": 1750
+ },
+ "PASS": true
+}

@@ -542,7 +542,8 @@ def test_docs_check_detects_violations(tmp_path):
     spec.loader.exec_module(cd)
     fake = tmp_path / "repo"
     (fake / "docs").mkdir(parents=True)
-    readme = (ROOT / "README.md").read_text().replace("experimental", "available").replace("not modelled", "planned")
+    readme = (ROOT / "README.md").read_text().replace("experimental", "available").replace("not modelled", "planned") \
+        .replace("H100 PCIe", "H100")
     (fake / "README.md").write_text(readme + "\nIt runs on any GPU.\n")
     val = (ROOT / "docs" / "validation.md").read_text()
     val = val.replace("| Hopper preset |", "| (removed) |") + "\nWe measured 12345 outputs.\nSee `truth:c9.nope`.\n"
@@ -556,7 +557,7 @@ def test_docs_check_detects_violations(tmp_path):
     cd.check_scope_rows(res)
     cd.check_readme(res)
     text = "\n".join(res.errors)
-    for needle in ("[any-gpu]", "`truth:c9.nope`", "12345", "'Hopper preset'", "`hopper` preset experimental",
+    for needle in ("[any-gpu]", "`truth:c9.nope`", "12345", "'Hopper preset'", "`hopper` preset to the H100 PCIe",
                    "sm_120 is not modelled"):
         assert needle in text, (needle, text)
 

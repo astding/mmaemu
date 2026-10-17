@@ -1,0 +1,1020 @@
+{
+ "format": "mmaemu-mutants/1",
+ "tier": "cpu",
+ "date": "2026-10-16 19:52:43",
+ "repo_commit": "fa0fd9053169b7892e6be995390261574c400265",
+ "mmaemu_file": "<src>/mmaemu/__init__.py",
+ "mmaemu_version": "0.1.0",
+ "python": "3.12.2",
+ "argv": [
+  "tools/mutants/run.py",
+  "--tier",
+  "cpu",
+  "--jobs",
+  "4",
+  "--out",
+  "<out>/t4/mutants-cpu.json"
+ ],
+ "package_src": null,
+ "source_tree": null,
+ "seconds": 1458.5,
+ "verdict": "PASS",
+ "problems": [],
+ "counts": {
+  "killed": 43,
+  "survived": 5,
+  "equivalent": 2,
+  "blocked": 0,
+  "error": 0
+ },
+ "mutants": [
+  {
+   "name": "identity_chain",
+   "group": "identity",
+   "tier": "cpu",
+   "source": "tools/mutants/impl.py",
+   "description": "re-implementation of dot/chain_gemm with no change (must survive)",
+   "rc": 0,
+   "killed_by": [],
+   "pytest_summary": [
+    "3493 passed, 13 skipped, 851 deselected, 8 warnings in 231.39s (0:03:51)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "survived",
+   "seconds": 238.5
+  },
+  {
+   "name": "identity_plan",
+   "group": "identity",
+   "tier": "cpu",
+   "source": "tools/mutants/impl.py",
+   "description": "re-implementation of make_plan with no change (must survive)",
+   "rc": 0,
+   "killed_by": [],
+   "pytest_summary": [
+    "3493 passed, 13 skipped, 851 deselected, 8 warnings in 138.80s (0:02:18)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "survived",
+   "seconds": 143.8
+  },
+  {
+   "name": "identity_execute",
+   "group": "identity",
+   "tier": "cpu",
+   "source": "tools/mutants/impl.py",
+   "description": "re-implementation of execute_plan with no change (must survive)",
+   "rc": 0,
+   "killed_by": [],
+   "pytest_summary": [
+    "3493 passed, 13 skipped, 851 deselected, 8 warnings in 146.69s (0:02:26)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "survived",
+   "seconds": 152.3
+  },
+  {
+   "name": "identity_epilogue",
+   "group": "identity",
+   "tier": "cpu",
+   "source": "tools/mutants/impl.py",
+   "description": "re-implementation of epilogue.apply with no change (must survive)",
+   "rc": 0,
+   "killed_by": [],
+   "pytest_summary": [
+    "3493 passed, 13 skipped, 851 deselected, 8 warnings in 144.56s (0:02:24)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "survived",
+   "seconds": 149.2
+  },
+  {
+   "name": "identity_api",
+   "group": "identity",
+   "tier": "cpu",
+   "source": "tools/mutants/impl.py",
+   "description": "pass-through wrapper of scaled_mm (must survive)",
+   "rc": 0,
+   "killed_by": [],
+   "pytest_summary": [
+    "3493 passed, 13 skipped, 851 deselected, 8 warnings in 179.71s (0:02:59)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "survived",
+   "seconds": 183.2
+  },
+  {
+   "name": "control_sign_flip",
+   "group": "control",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-a1-reference-review-5/scripts/v3_mutation.py",
+   "description": "every nonzero output negated (must be killed)",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_api.py::test_b6_repro_fp8_out[fa0-od0]"
+   ],
+   "pytest_summary": [
+    "1 failed, 85 passed, 851 deselected, 2 warnings in 4.18s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 5.9
+  },
+  {
+   "name": "sub_true_exp",
+   "group": "model",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c2-instr-fuzz-0/mut/make_mutants.py",
+   "description": "subnormal inputs use their true exponent (no clamp at the format emin)",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_hw_mini.py::test_case[c2.S16_alternating/e5m2xe4m3/hw_k16@c2fam]"
+   ],
+   "pytest_summary": [
+    "1 failed, 767 passed, 851 deselected, 2 warnings in 132.24s (0:02:12)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 135.6
+  },
+  {
+   "name": "phantom_zero",
+   "group": "model",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c2-instr-fuzz-0/mut/make_mutants.py",
+   "description": "zero products take part in the block maximum exponent",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_hw_mini.py::test_case[c2.S16_mixed/e4m3xe5m2/hw_k16@c2fam]"
+   ],
+   "pytest_summary": [
+    "1 failed, 786 passed, 851 deselected, 2 warnings in 360.03s (0:06:00)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 362.9
+  },
+  {
+   "name": "c_pass",
+   "group": "model",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c2-instr-fuzz-0/mut/make_mutants.py",
+   "description": "an all-zero block returns c without truncating it",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_hw_mini.py::test_case[c2.S16_sparse/e4m3xe4m3/hw_k16@c2fam]"
+   ],
+   "pytest_summary": [
+    "1 failed, 789 passed, 851 deselected, 2 warnings in 367.20s (0:06:07)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 373.3
+  },
+  {
+   "name": "ieee_zero",
+   "group": "model",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c2-instr-fuzz-0/mut/make_mutants.py",
+   "description": "exact-zero block results follow IEEE sign rules instead of +0",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_hw_mini.py::test_case[c2.S16_zeros/e4m3xe4m3/hw_k16]"
+   ],
+   "pytest_summary": [
+    "1 failed, 805 passed, 851 deselected, 2 warnings in 353.54s (0:05:53)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 358.8
+  },
+  {
+   "name": "m1_off",
+   "group": "model",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-a1-reference-review-5/scripts/v3_mutation.py",
+   "description": "c2-M1 off: a truncated-to-zero block result keeps the sign of the exact sum (-0)",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_hw_mini.py::test_case[c2.S16_zeros/e4m3xe4m3/hw_k16]"
+   ],
+   "pytest_summary": [
+    "1 failed, 805 passed, 851 deselected, 2 warnings in 298.39s (0:04:58)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 304.6
+  },
+  {
+   "name": "min_exp_-126",
+   "group": "model",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c2-instr-fuzz-0/mut/make_mutants.py",
+   "description": "alignment exponent clamped at -126 instead of -132",
+   "rc": 0,
+   "killed_by": [],
+   "pytest_summary": [
+    "3493 passed, 13 skipped, 851 deselected, 8 warnings in 416.41s (0:06:56)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "equivalent",
+   "evidence": "tcemu audit finding: 'min_exp is unobservable (-132, -133 or smaller give the same results)', from its scripts v8_minexp_unconstrained.py and v8b_minexp_vs_hw.py; for an FP8 product the block exponent is >= -32 and the fp32 result exponent is clamped at -126 before truncation, so only c values below 2^-132 could observe it",
+   "seconds": 419.5
+  },
+  {
+   "name": "min_exp_-140",
+   "group": "model",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "alignment exponent clamped at -140",
+   "rc": 0,
+   "killed_by": [],
+   "pytest_summary": [
+    "3493 passed, 13 skipped, 851 deselected, 8 warnings in 460.76s (0:07:40)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "equivalent",
+   "evidence": "tcemu audit finding: 'min_exp is unobservable (-132, -133 or smaller give the same results)', from its scripts v8_minexp_unconstrained.py and v8b_minexp_vs_hw.py; for an FP8 product the block exponent is >= -32 and the fp32 result exponent is clamped at -126 before truncation, so only c values below 2^-132 could observe it",
+   "seconds": 463.9
+  },
+  {
+   "name": "nfma32",
+   "group": "model",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "32-term blocks",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_epilogue.py::test_epilogue_hw_extract[2-0]"
+   ],
+   "pytest_summary": [
+    "1 failed, 392 passed, 851 deselected, 2 warnings in 129.10s (0:02:09)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 131.9
+  },
+  {
+   "name": "frac12",
+   "group": "model",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "12 fraction bits (positive control CTRL_frac12_ada of c2)",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_epilogue.py::test_epilogue_tie[16]"
+   ],
+   "pytest_summary": [
+    "1 failed, 174 passed, 851 deselected, 2 warnings in 43.33s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 46.3
+  },
+  {
+   "name": "frac14",
+   "group": "model",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "14 fraction bits",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_epilogue.py::test_epilogue_hw_extract[2-0]"
+   ],
+   "pytest_summary": [
+    "1 failed, 392 passed, 851 deselected, 2 warnings in 192.52s (0:03:12)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 195.2
+  },
+  {
+   "name": "frac_out23",
+   "group": "model",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "block result kept at full fp32 precision",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_epilogue.py::test_epilogue_hw_extract[2-0]"
+   ],
+   "pytest_summary": [
+    "1 failed, 392 passed, 851 deselected, 2 warnings in 159.60s (0:02:39)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 162.3
+  },
+  {
+   "name": "align_rne",
+   "group": "model",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "aligned terms rounded to nearest even instead of truncated",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_epilogue.py::test_epilogue_hw_extract[2-0]"
+   ],
+   "pytest_summary": [
+    "1 failed, 392 passed, 851 deselected, 2 warnings in 77.89s (0:01:17)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 80.6
+  },
+  {
+   "name": "norm_rne",
+   "group": "model",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "block result rounded to nearest even instead of truncated",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_epilogue.py::test_epilogue_hw_extract[2-0]"
+   ],
+   "pytest_summary": [
+    "1 failed, 392 passed, 851 deselected, 2 warnings in 121.08s (0:02:01)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 123.8
+  },
+  {
+   "name": "c_exact",
+   "group": "model",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "c enters the block sum exactly (not truncated at alignment)",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_epilogue.py::test_epilogue_hw_extract[2-0]"
+   ],
+   "pytest_summary": [
+    "1 failed, 392 passed, 851 deselected, 2 warnings in 134.33s (0:02:14)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 137.3
+  },
+  {
+   "name": "ed_noclamp",
+   "group": "model",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "result exponent not clamped at -126 before normalisation",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_hw_mini.py::test_case[c2.S16_sparse/e4m3xe4m3/hw_k16@c2fam]"
+   ],
+   "pytest_summary": [
+    "1 failed, 789 passed, 851 deselected, 2 warnings in 258.58s (0:04:18)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 262.3
+  },
+  {
+   "name": "rival_exact_rn",
+   "group": "model",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "rival model: exact dot product rounded once to fp32",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_epilogue.py::test_epilogue_hw_extract[2-0]"
+   ],
+   "pytest_summary": [
+    "1 failed, 392 passed, 851 deselected, 2 warnings in 28.09s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 30.9
+  },
+  {
+   "name": "rival_fp32_fma_seq",
+   "group": "model",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "rival model: sequential fp32 FMA along K",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_epilogue.py::test_epilogue_hw_extract[2-0]"
+   ],
+   "pytest_summary": [
+    "1 failed, 392 passed, 851 deselected, 2 warnings in 100.38s (0:01:40)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 104.4
+  },
+  {
+   "name": "split_contiguous",
+   "group": "plan",
+   "tier": "cpu",
+   "source": "v0.1 catalogue",
+   "description": "split s owns a contiguous slice of k-tiles instead of the tiles t mod S = s",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_hw_mini.py::test_case[misc.tcemu_tests_recorded_hw/2]"
+   ],
+   "pytest_summary": [
+    "1 failed, 763 passed, 851 deselected, 2 warnings in 137.92s (0:02:17)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 144.3
+  },
+  {
+   "name": "scheme_swapped",
+   "group": "plan",
+   "tier": "cpu",
+   "source": "v0.1 catalogue",
+   "description": "serial <-> pairwise split-K reduction",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_hw_mini.py::test_case[c5.v2_forced_probes/uneven_0_34.3]"
+   ],
+   "pytest_summary": [
+    "1 failed, 1118 passed, 851 deselected, 2 warnings in 150.61s (0:02:30)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 155.2
+  },
+  {
+   "name": "slow_chunk64",
+   "group": "plan",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "slow accumulation restarts every 64 elements",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_hw_mini.py::test_case[misc.tcemu_tests_recorded_hw/0]"
+   ],
+   "pytest_summary": [
+    "1 failed, 761 passed, 851 deselected, 2 warnings in 63.12s (0:01:03)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 66.2
+  },
+  {
+   "name": "slow_chunk256",
+   "group": "plan",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "slow accumulation restarts every 256 elements",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_hw_mini.py::test_case[misc.tcemu_tests_recorded_hw/0]"
+   ],
+   "pytest_summary": [
+    "1 failed, 761 passed, 851 deselected, 2 warnings in 64.30s (0:01:04)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 71.2
+  },
+  {
+   "name": "slow_restart_global_tiles",
+   "group": "plan",
+   "tier": "cpu",
+   "source": "v0.1 catalogue",
+   "description": "split-K slow restart counted on global 128-element tiles instead of the split's own",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_hw_mini.py::test_case[misc.tcemu_tests_recorded_hw/2]"
+   ],
+   "pytest_summary": [
+    "1 failed, 763 passed, 851 deselected, 2 warnings in 76.36s (0:01:16)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 81.8
+  },
+  {
+   "name": "fast_restart2048",
+   "group": "plan",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "fast accumulation restarts every 2048 elements (fp32 adds)",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_hw_mini.py::test_case[epilogue.fp8out_v01_a1_2/P5_3]"
+   ],
+   "pytest_summary": [
+    "1 failed, 888 passed, 851 deselected, 2 warnings in 81.39s (0:01:21)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 85.9
+  },
+  {
+   "name": "fast_restart4096",
+   "group": "plan",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "fast accumulation restarts every 4096 elements (fp32 adds)",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_hw_mini.py::test_case[epilogue.zero_sign_v01b_a1_1/256x8192x24576]"
+   ],
+   "pytest_summary": [
+    "1 failed, 1062 passed, 851 deselected, 2 warnings in 89.07s (0:01:29)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 93.2
+  },
+  {
+   "name": "fast_restart1024",
+   "group": "plan",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "fast accumulation restarts every 1024 elements (fp32 adds)",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_epilogue.py::test_epilogue_tie[0]"
+   ],
+   "pytest_summary": [
+    "1 failed, 158 passed, 851 deselected, 2 warnings in 29.70s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 33.1
+  },
+  {
+   "name": "slow_tail_head",
+   "group": "plan",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "the partial slow chunk sits at the start of K instead of the end",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_plan.py::test_slow_unsplit_chunks_of_128"
+   ],
+   "pytest_summary": [
+    "1 failed, 3258 passed, 8 skipped, 851 deselected, 7 warnings in 116.80s (0:01:56)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 120.3
+  },
+  {
+   "name": "slow_chunk_sum_reversed",
+   "group": "plan",
+   "tier": "cpu",
+   "source": "v0.1 catalogue",
+   "description": "slow chunk results added in reverse order",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_hw_mini.py::test_case[c5.v3_slow_forced/s4.77]"
+   ],
+   "pytest_summary": [
+    "1 failed, 1146 passed, 851 deselected, 2 warnings in 72.84s (0:01:12)"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 75.9
+  },
+  {
+   "name": "slow_sum_fp64",
+   "group": "plan",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "slow chunk results summed in float64, rounded once",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_h100_mini.py::test_case[m4_0169]"
+   ],
+   "pytest_summary": [
+    "1 failed, 530 passed, 851 deselected, 2 warnings in 34.15s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 40.6
+  },
+  {
+   "name": "slow_sum_pairwise",
+   "group": "plan",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "slow chunk results summed as an fp32 binary tree",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_h100_mini.py::test_case[m4_0169]"
+   ],
+   "pytest_summary": [
+    "1 failed, 530 passed, 851 deselected, 2 warnings in 42.07s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 45.2
+  },
+  {
+   "name": "alpha_before_reduction",
+   "group": "plan",
+   "tier": "cpu",
+   "source": "v0.1 catalogue",
+   "description": "alpha applied to each split-K partial before the reduction",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_epilogue.py::test_epilogue_hw_extract[0-3]"
+   ],
+   "pytest_summary": [
+    "1 failed, 227 passed, 851 deselected, 2 warnings in 24.74s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 27.4
+  },
+  {
+   "name": "epi_single_round",
+   "group": "epilogue",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "bf16/fp16 rounded once from the exact acc*alpha (no fp32 intermediate)",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_epilogue.py::test_epilogue_tie[0]"
+   ],
+   "pytest_summary": [
+    "1 failed, 158 passed, 851 deselected, 2 warnings in 15.70s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 18.5
+  },
+  {
+   "name": "epi_sa_then_sb",
+   "group": "epilogue",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "(acc*sa)*sb instead of acc*fp32(sa*sb)",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_epilogue.py::test_epilogue_tie[22]"
+   ],
+   "pytest_summary": [
+    "1 failed, 180 passed, 851 deselected, 2 warnings in 16.84s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 20.0
+  },
+  {
+   "name": "epi_fp32_mul_add0",
+   "group": "epilogue",
+   "tier": "cpu",
+   "source": "tcemu audit (epilogue)",
+   "description": "fp32 acc*alpha + 0.0 instead of fma(acc, alpha, +0)",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_epilogue.py::test_epilogue_hw_extract[0-0]"
+   ],
+   "pytest_summary": [
+    "1 failed, 224 passed, 851 deselected, 2 warnings in 18.56s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 21.4
+  },
+  {
+   "name": "fp8_saturation_off",
+   "group": "epilogue",
+   "tier": "cpu",
+   "source": "v0.1 catalogue",
+   "description": "fp8 outputs not saturated (Inf/NaN on overflow)",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_api.py::test_b6_repro_fp8_out[fa0-od0]"
+   ],
+   "pytest_summary": [
+    "1 failed, 85 passed, 851 deselected, 2 warnings in 3.97s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 5.5
+  },
+  {
+   "name": "scale_result_on_bf16",
+   "group": "epilogue",
+   "tier": "cpu",
+   "source": "v0.1 catalogue",
+   "description": "scale_result also applied to non-fp8 outputs",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_epilogue.py::test_scale_result_fp8_only_and_before_saturation"
+   ],
+   "pytest_summary": [
+    "1 failed, 502 passed, 851 deselected, 2 warnings in 20.95s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 24.1
+  },
+  {
+   "name": "scale_result_after_sat",
+   "group": "epilogue",
+   "tier": "cpu",
+   "source": "v0.1 catalogue",
+   "description": "scale_result applied after saturation",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_epilogue.py::test_scale_result_fp8_only_and_before_saturation"
+   ],
+   "pytest_summary": [
+    "1 failed, 502 passed, 851 deselected, 2 warnings in 20.95s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 26.2
+  },
+  {
+   "name": "nan_payload_kept",
+   "group": "epilogue",
+   "tier": "cpu",
+   "source": "v0.1 catalogue",
+   "description": "NaN outputs not canonicalised",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_epilogue.py::test_epilogue_hw_extract[3-4]"
+   ],
+   "pytest_summary": [
+    "1 failed, 432 passed, 851 deselected, 2 warnings in 23.12s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 26.9
+  },
+  {
+   "name": "nan_negpayload",
+   "group": "epilogue",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "NaN outputs all-ones",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_api.py::test_b6_repro_fp8_out_specials"
+   ],
+   "pytest_summary": [
+    "1 failed, 89 passed, 851 deselected, 2 warnings in 6.30s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 8.2
+  },
+  {
+   "name": "zero_plus",
+   "group": "epilogue",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "every zero output +0",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_epilogue.py::test_epilogue_hw_extract[0-0]"
+   ],
+   "pytest_summary": [
+    "1 failed, 224 passed, 851 deselected, 2 warnings in 21.97s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 25.0
+  },
+  {
+   "name": "zero_flip",
+   "group": "epilogue",
+   "tier": "cpu",
+   "source": "tcemu audit: verify-c4-cublas-fuzz-8/mutants.py",
+   "description": "the sign of every zero output flipped (a1 v3 M2: -0 where +0)",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_api.py::test_accepted_layouts_and_shapes"
+   ],
+   "pytest_summary": [
+    "1 failed, 40 passed, 851 deselected in 3.65s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 5.8
+  },
+  {
+   "name": "api_default_fast_accum",
+   "group": "api",
+   "tier": "cpu",
+   "source": "v0.1 catalogue",
+   "description": "use_fast_accum defaults to True",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_api.py::test_column_major_out_uses_the_swapped_split"
+   ],
+   "pytest_summary": [
+    "1 failed, 73 passed, 851 deselected in 4.13s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 6.2
+  },
+  {
+   "name": "api_default_out_fp32",
+   "group": "api",
+   "tier": "cpu",
+   "source": "v0.1 catalogue",
+   "description": "out_dtype defaults to float32",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_api.py::test_accepted_layouts_and_shapes"
+   ],
+   "pytest_summary": [
+    "1 failed, 40 passed, 851 deselected in 3.75s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 5.6
+  },
+  {
+   "name": "api_positional_bias_dropped",
+   "group": "api",
+   "tier": "cpu",
+   "source": "v0.1 catalogue",
+   "description": "a positional bias is silently dropped",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_api.py::test_type_errors"
+   ],
+   "pytest_summary": [
+    "1 failed, 4 passed, 851 deselected in 3.73s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 5.4
+  },
+  {
+   "name": "api_e4m3_e4m3_to_e5m2_allowed",
+   "group": "api",
+   "tier": "cpu",
+   "source": "v0.1 catalogue",
+   "description": "e4m3 x e4m3 -> e5m2 computed instead of rejected",
+   "rc": 1,
+   "killed_by": [
+    "tests/test_api.py::test_rejections[e4m3"
+   ],
+   "pytest_summary": [
+    "1 failed, 35 passed, 851 deselected in 3.71s"
+   ],
+   "tests": [
+    "tests"
+   ],
+   "marker": "not gpu and not slow and not truth",
+   "status": "killed",
+   "seconds": 5.4
+  }
+ ]
+}

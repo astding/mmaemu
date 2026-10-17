@@ -15,13 +15,21 @@ name                      maturity      evidence / scope
 ``ada``                   validated     RTX 4060 (sm_89) mma.sync m16n8k32: 1.06e8 hardware outputs incl. targeted
                                         vectors, all four FP8 format pairs; toolbox Ada/L40S vectors 5000/5000;
                                         GEMM level through cuBLASLt 12.8.3.14 (see mmaemu.model.plan)
-``hopper``                experimental  instruction level only: toolbox H100/H200 vectors recorded with c = 0, which
-                                        cannot tell how the accumulator enters; no GEMM-level evidence
+``hopper``                validated     cuBLAS FP8 GEMMs (sm_90 nvjet kernels, algo 66) on an H100 PCIe (114 SMs),
+                                        cuBLASLt 12.8.3.14, bit for bit: how c enters (MM_cublas64 445/445, stored
+                                        n x n blocks), the 21 Evo 2 1B projections (168/168 outputs), 374 unsplit
+                                        and 1,049 split live calls (docs/validation_logs/2026-10-15/h100-probe).
+                                        NOT a model of the sm_90 mma.sync instruction (a different unit: 25
+                                        fraction bits, c added late)
 ``b200_mma_sync``         experimental  fits the toolbox B200 mma.sync vectors, which ptxas compiles for sm_90/sm_100
                                         into two fp16 HMMAs plus an fp32 add (HMMA rewrite); the fitted model is not
                                         unique. NOT a model of sm_120 (RTX 50xx, whose mma.sync is a native QMMA) and
                                         NOT a model of B200 cuBLAS (tcgen05)
 ========================  ============  ============================================================================
+
+The split-K layouts measured for a preset's cuBLASLt kernels (:data:`SPLIT_SCHEMES`, used by
+:func:`mmaemu.model.plan.make_plan`): ``ada`` 'serial' / 'pairwise' (64-wide k-tiles t mod S), ``hopper``
+'contiguous' (runs of 128-wide k-tiles). Custom presets accept any scheme.
 
 ``blackwell`` is accepted as an alias of ``b200_mma_sync`` and always warns. ``sm_120`` / ``rtx_blackwell`` are
 refused: sm_120 is not modelled (no preset, profile or split-K table). Probes on an RTX 5070 Ti are consistent with
@@ -40,7 +48,7 @@ from typing import Literal
 
 from mmaemu.errors import ExperimentalPresetWarning
 
-__all__ = ["Preset", "get_preset", "list_presets", "ALIASES"]
+__all__ = ["Preset", "get_preset", "list_presets", "ALIASES", "SPLIT_SCHEMES", "split_schemes"]
 
 
 @dataclass(frozen=True)
@@ -73,10 +81,12 @@ ADA = Preset(
     evidence=("c2.*", "c6.kit_MM_ada_sm89", "c2.s0_toolbox_vectors_rerec", "toolbox Ada/L40S vectors 5000/5000",
               "tcemu audit: Ada instruction model confirmed"))
 HOPPER = Preset(
-    "hopper", nfma=32, frac=13, frac_out=13, min_exp=-132, late_c=False, slow_chunk=None, maturity="experimental",
-    validated_scope="instruction level only, toolbox H100/H200 vectors with c = 0; how c enters and all GEMM-level "
-                    "behaviour are not validated",
-    evidence=("toolbox H100/H200 E4M3/E5M2 vectors (c = 0) 5000/5000", "tcemu audit: instruction level only"))
+    "hopper", nfma=32, frac=13, frac_out=13, min_exp=-132, late_c=False, slow_chunk=128, maturity="validated",
+    validated_scope="cuBLAS FP8 GEMMs (sm_90 nvjet kernels) on an H100 PCIe (114 SMs), cuBLASLt 12.8.3.14, validated "
+                    "bit for bit; not a model of the sm_90 mma.sync instruction",
+    evidence=("docs/validation_logs/2026-10-15/h100-probe", "MM_cublas64 through cuBLAS 445/445 (c in the alignment)",
+              "Evo 2 1B projections 168/168 (torch and TE, fast and slow)", "live calls: 374 unsplit, 1049 split",
+              "toolbox H100/H200 E4M3/E5M2 vectors (c = 0) 5000/5000"))
 B200_MMA_SYNC = Preset(
     "b200_mma_sync", nfma=32, frac=25, frac_out=23, min_exp=-133, late_c=True, slow_chunk=None,
     maturity="experimental",
@@ -86,6 +96,7 @@ B200_MMA_SYNC = Preset(
               "tcemu audit: not a model of RTX Blackwell (docs/limitations.md)"))
 
 _REGISTRY = {p.name: p for p in (ADA, HOPPER, B200_MMA_SYNC)}
+SPLIT_SCHEMES = {"ada": ("serial", "pairwise"), "hopper": ("contiguous",), "b200_mma_sync": ()}
 ALIASES = {"blackwell": "b200_mma_sync"}
 _REFUSED = ("sm_120", "sm120", "rtx_blackwell", "rtx-blackwell", "rtx5070ti", "rtx_5070_ti")
 _ALIAS_WARNING = ("preset 'blackwell' is an alias of 'b200_mma_sync': it fits the toolbox B200 mma.sync "
@@ -97,6 +108,13 @@ _lock = threading.Lock()
 def list_presets() -> list:
     """Canonical preset names (aliases excluded)."""
     return sorted(_REGISTRY)
+
+
+def split_schemes(p: Preset) -> tuple | None:
+    """The split-K schemes measured for the preset's cuBLASLt kernels; None (any scheme) for a custom preset."""
+    if p.maturity == "custom" or _REGISTRY.get(p.name) is not p:
+        return None
+    return SPLIT_SCHEMES[p.name]
 
 
 def maturity_warning(p: Preset) -> str | None:
@@ -126,6 +144,15 @@ def _lookup(name_or_preset) -> tuple:
     raise KeyError(f"unknown preset {name!r}; known: {list_presets()} (alias: 'blackwell')")
 
 
+def warn_once(key: str, msg: str, stacklevel: int = 3) -> None:
+    """Emit ExperimentalPresetWarning(msg) once per process per key (profile warnings use "profile:<name>")."""
+    with _lock:
+        first = key not in _warned
+        _warned.add(key)
+    if first:
+        warnings.warn(msg, ExperimentalPresetWarning, stacklevel=stacklevel)
+
+
 def get_preset(name, *, warn: bool = True) -> Preset:
     """Look up a preset by name (or pass a :class:`Preset` through).
 
@@ -138,15 +165,11 @@ def get_preset(name, *, warn: bool = True) -> Preset:
         else:
             msg = maturity_warning(p)
             if msg is not None:
-                with _lock:
-                    first = p.name not in _warned
-                    _warned.add(p.name)
-                if first:
-                    warnings.warn(msg, ExperimentalPresetWarning, stacklevel=2)
+                warn_once(p.name, msg)
     return p
 
 
 def _reset_warnings_for_tests() -> None:
-    """Forget which presets have warned (test hook: the once-per-process policy makes tests order-dependent)."""
+    """Forget which presets and profiles have warned (test hook: the once-per-process policy makes tests order-dependent)."""
     with _lock:
         _warned.clear()

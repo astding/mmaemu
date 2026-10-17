@@ -1,0 +1,14 @@
+.s..ss                                                                   [100%]
+=============================== warnings summary ===============================
+tests/test_hw_mini.py::test_gpu_backend[reference]
+tests/test_hw_mini.py::test_gpu_backend[cuda:v1]
+tests/test_hw_mini.py::test_gpu_backend[cuda:v4]
+  <venv>/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py:838: UserWarning: An output with one or more elements was resized since it had shape [16, 33], which does not match the required output shape [16, 32].
+    return fn(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_hw_mini.py:330: backend 'cuda' not reported by mmaemu.backends_status() on this device
+SKIPPED [1] tests/test_hw_mini.py:332: backend 'cuda:v9' unavailable on NVIDIA GeForce RTX 5070 Ti: gated kernel not validated on sm_120 (validated on ['sm_89']; MMAEMU_ALLOW_GATED_KERNELS=1 to try)
+SKIPPED [1] tests/test_hw_mini.py:332: backend 'cuda:tc3' unavailable on NVIDIA GeForce RTX 5070 Ti: no binary for sm_120 (SASS (80, 86, 89), PTX None)
+3 passed, 3 skipped, 2520 deselected, 3 warnings in 148.15s (0:02:28)

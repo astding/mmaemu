@@ -3,7 +3,7 @@
 # Links to anything the site does not carry (code, logs, data, the validation-log files) point to the repository
 # (tools/mkdocs_hooks.py).
 site_name: mmaemu
-site_description: Software FP8 tensor-core numerics for PyTorch, so that FP8 models give the results of the GPUs they were made on.
+site_description: Bit-exact NVIDIA FP8 tensor-core GEMMs for PyTorch (torch._scaled_mm, Transformer Engine), as an H100 PCIe or an RTX 4060 computes them, on the CPU or another CUDA GPU.
 site_url: https://astding.github.io/mmaemu/
 repo_url: https://github.com/astding/mmaemu
 repo_name: astding/mmaemu

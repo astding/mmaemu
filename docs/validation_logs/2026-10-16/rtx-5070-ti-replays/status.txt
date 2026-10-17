@@ -1,0 +1,46 @@
+commit fa0fd9053169b7892e6be995390261574c400265 clean=0 audit=$MMAEMU_AUDIT_DIR
+be1270ed64432a1311ab5e2c98ccb69028f72e3424ad4c6148d4cd468fba6695  $MMAEMU_TRUTH_DIR/manifest.json
+2026-10-16 18:08:50 START t3
+2026-10-16 18:15:22 END   t3 rc=0 392s
+2026-10-16 18:15:22 START t4gpu
+2026-10-16 18:18:29 END   t4gpu rc=0 187s
+2026-10-16 18:18:29 START replay_probe_live_0
+2026-10-16 18:19:58 END   replay_probe_live_0 rc=0 89s
+2026-10-16 18:19:58 START replay_probe_live_250
+2026-10-16 18:21:12 END   replay_probe_live_250 rc=0 74s
+2026-10-16 18:21:12 START replay_probe_live_500
+2026-10-16 18:21:29 END   replay_probe_live_500 rc=0 17s
+2026-10-16 18:21:29 START replay_probe_live_750
+2026-10-16 18:21:45 END   replay_probe_live_750 rc=0 16s
+2026-10-16 18:21:45 START replay_probe_live_1000
+2026-10-16 18:21:58 END   replay_probe_live_1000 rc=0 13s
+2026-10-16 18:21:58 START replay_probe_live_1250
+2026-10-16 18:22:17 END   replay_probe_live_1250 rc=0 19s
+2026-10-16 18:22:17 START replay_probe_m2_0
+2026-10-16 18:22:23 END   replay_probe_m2_0 rc=0 6s
+2026-10-16 18:22:23 START replay_probe_m2_11
+2026-10-16 18:22:31 END   replay_probe_m2_11 rc=0 8s
+2026-10-16 18:22:31 START replay_probe_merge
+2026-10-16 18:22:32 END   replay_probe_merge rc=0 1s
+2026-10-16 18:22:32 START t2
+2026-10-16 19:29:25 END   t2 rc=0 4013s
+be1270ed64432a1311ab5e2c98ccb69028f72e3424ad4c6148d4cd468fba6695  $MMAEMU_TRUTH_DIR/manifest.json
+2026-10-16 19:29:25 START t4cpu
+2026-10-16 19:52:43 END   t4cpu rc=0 1398s
+2026-10-16 19:52:43 START pytest_full
+2026-10-16 20:04:15 END   pytest_full rc=0 692s
+2026-10-16 20:04:15 START replay_sweep_0
+2026-10-16 20:08:00 END   replay_sweep_0 rc=0 225s
+2026-10-16 20:08:00 START replay_sweep_500
+2026-10-16 20:11:07 END   replay_sweep_500 rc=0 187s
+2026-10-16 20:11:07 START replay_sweep_1000
+2026-10-16 20:12:33 END   replay_sweep_1000 rc=0 86s
+2026-10-16 20:12:33 START replay_sweep_1500
+2026-10-16 20:13:23 END   replay_sweep_1500 rc=0 50s
+2026-10-16 20:13:23 START replay_sweep_2000
+2026-10-16 20:14:30 END   replay_sweep_2000 rc=0 67s
+2026-10-16 20:14:30 START replay_sweep_2500
+2026-10-16 20:14:40 END   replay_sweep_2500 rc=0 10s
+2026-10-16 20:14:40 START replay_sweep_merge
+2026-10-16 20:14:40 END   replay_sweep_merge rc=0 0s
+2026-10-16 20:14:40 CHAIN DONE clean=0

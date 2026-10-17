@@ -1,0 +1,1 @@
+ v1/sm_75:same v1/sm_80:same v1/sm_86:same v1/sm_89:same v1/sm_90:same v1/sm_100:same v1/sm_120:same v1/ptx:DIFF v4/sm_75:same v4/sm_80:same v4/sm_86:same v4/sm_89:same v4/sm_90:same v4/sm_100:same v4/sm_120:same v4/ptx:DIFF

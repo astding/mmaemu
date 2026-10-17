@@ -31,11 +31,10 @@ def main():
                 b[:, 0] = 448
                 b = b.to(torch.float8_e5m2).t()
                 sa, sb, scale_result = map(torch.tensor, (alpha, 1.0, sr))
-                cpu = mmaemu.scaled_mm(a, b, sa, sb, scale_result=scale_result, out_dtype=od,
-                                      use_fast_accum=True, splitk=1, backend="reference")
-                gpu = mmaemu.scaled_mm(a.cuda(), b.cuda(), sa.cuda(), sb.cuda(),
-                                      scale_result=scale_result.cuda(), out_dtype=od,
-                                      use_fast_accum=True, splitk=1, backend="reference")
+                kw = dict(out_dtype=od, use_fast_accum=True, splitk=1, backend="reference",
+                          profile="ada")
+                cpu = mmaemu.scaled_mm(a, b, sa, sb, scale_result=scale_result, **kw)
+                gpu = mmaemu.scaled_mm(a.cuda(), b.cuda(), sa.cuda(), sb.cuda(), scale_result=scale_result.cuda(), **kw)
                 row = {"out_dtype": str(od), "alpha": alpha, "scale_result": sr}
                 try:
                     assert_bitwise_equal(gpu, cpu)

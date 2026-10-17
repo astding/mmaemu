@@ -1,0 +1,79 @@
+{
+ "nvcc": "~/anaconda3/bin/nvcc",
+ "nvcc_version": "12.8.61",
+ "cuobjdump": "/data/quant/mmaemu_work/venv-nb/lib/python3.12/site-packages/triton/backends/nvidia/bin/cuobjdump",
+ "release": true,
+ "modules": {
+  "h4": {
+   "command": "nvcc -fatbin -O3 --fmad=false -Xptxas -v -I. -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -gencode arch=compute_90,code=sm_90 -gencode arch=compute_100,code=sm_100 -gencode arch=compute_120,code=sm_120 -gencode arch=compute_80,code=compute_80 -o h4.fatbin h4.cu",
+   "ptxas": [
+    {
+     "entry": "mmaemu_h4_e4m3e4m3",
+     "arch": "sm_80",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 249
+    },
+    {
+     "entry": "mmaemu_h4_e4m3e4m3",
+     "arch": "sm_86",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 249
+    },
+    {
+     "entry": "mmaemu_h4_e4m3e4m3",
+     "arch": "sm_89",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 249
+    },
+    {
+     "entry": "mmaemu_h4_e4m3e4m3",
+     "arch": "sm_90",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 248
+    },
+    {
+     "entry": "mmaemu_h4_e4m3e4m3",
+     "arch": "sm_100",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 253
+    },
+    {
+     "entry": "mmaemu_h4_e4m3e4m3",
+     "arch": "sm_120",
+     "stack": 0,
+     "spill_stores": 0,
+     "spill_loads": 0,
+     "registers": 255
+    }
+   ],
+   "spill_bytes": 0,
+   "compiler_warnings": [],
+   "forbidden_ptx": {},
+   "cuobjdump": {
+    "elf": [
+     80,
+     86,
+     89,
+     90,
+     100,
+     120
+    ],
+    "ptx": [
+     80
+    ],
+    "ok": true
+   },
+   "entries_missing": []
+  }
+ }
+}

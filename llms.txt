@@ -1,10 +1,46 @@
 # mmaemu
 
-> Bit-accurate emulation of NVIDIA tensor-core FP8 GEMM numerics for PyTorch: the bits of `torch._scaled_mm` on a
-> reference GPU (RTX 4060), computed on a CPU or another CUDA GPU.
+> Bit-exact emulation of NVIDIA tensor-core FP8 GEMMs for PyTorch: `mmaemu.scaled_mm` takes the arguments of
+> `torch._scaled_mm` and returns the bits that `torch._scaled_mm` (torch 2.7.1) or Transformer Engine 2.3 return on a
+> reference GPU, an H100 PCIe (the default) or an RTX 4060, each with cuBLASLt 12.8.3.14, computed on a CPU or on
+> another CUDA GPU. Where a case lacks hardware evidence it warns or raises instead of guessing, apart from three
+> documented split-K exceptions (README, "How it works"): on the reference GPU itself a live cuBLASLt query decides a
+> shape missing from the table; above a profile's envelope S = 1 is inferred (`MMAEMU_SPLITK_STRICT=1` makes such
+> shapes raise); on the H100 profiles an explicit `splitk=(S, "contiguous")` with K above 262,144 is computed without
+> a warning.
 
-One reference platform (RTX 4060, cuBLASLt 12.8.3.14) is modelled and validated against 173 recordings of its
-hardware. `mmaemu.scaled_mm` takes the arguments of `torch._scaled_mm`.
+A profile (`profile=` or `MMAEMU_PROFILE`) is a reference platform: `hopper` (the default) reproduces
+`torch._scaled_mm` on the H100 PCIe and `hopper-te` Transformer Engine on it; `ada` and `ada-te` do the same for the
+RTX 4060; `hopper-ws0` and `ada-ws0` are cuBLAS with workspace 0. The names used until the rename on 16 October 2026
+(`hopper-h100pcie-torch`, `ada-rtx4060-te`, ...) raise `KeyError`; older validation logs still use them. A preset is
+the arithmetic of one tensor-core instruction: profile `hopper` uses preset `hopper`, and `ada` preset `ada`.
+`b200_mma_sync` (alias `blackwell`) is experimental and models neither B200 cuBLAS nor RTX 50-series GPUs.
+
+Evidence for the H100 PCIe: calls recorded on a rented H100 PCIe, replayed through mmaemu on an RTX 4060 and an
+RTX 5070 Ti. The 1,423 live `torch._scaled_mm` calls of a probe that cuBLASLt accepted return the H100's bits, given
+the split-K the H100 used; the 27 it rejected raise `ReferenceRejectsError`, as on the H100; the 21 FP8 projections
+of an Evo 2 1B window, through torch and Transformer Engine, are equal (168 of 168 outputs). mmaemu's CUDA kernels
+for the `hopper` profiles (h4, h1) are checked on the RTX 4060 and the RTX 5070 Ti; they have not run on an H100. For
+the RTX 4060: 173 hardware recordings, of which the 147 with outputs mmaemu models replay bit for bit (apart from
+6,120 NaN-decode outputs of an old emulator's recording), and live calls on the card equal mmaemu's.
+
+Not modelled: the H100 SXM, the H200, B200 cuBLAS, RTX 50-series GPUs (sm_120), other cuBLASLt versions. Inference
+only: bias, row-wise scales and autograd raise. Off the reference GPU, with `splitk="auto"`, a shape that neither the
+split-K table recorded on the profile's GPU nor the profile's envelope (a bound on M*N above which S = 1 is inferred;
+on the H100 one bound per K, for K from 1,024 to 4,194,304) decides raises `SplitKUnknownError` (on a CPU under
+`hopper`, M, N, K = 16, 256, 128 does: K is below that range); `mmaemu.explain` shows the decision without running
+the GEMM. Speed: on an RTX 4060 an emulated GEMM is about 10 (`ada`) to 22 (`hopper`) times slower than native FP8;
+the float64 CPU reference model is far slower: enough for tests and single projections, not for whole models.
+
+Example: Evo 2 1B and 40B on an RTX 5070 Ti (sm_120), with only their FP8 projections computed by mmaemu as
+Transformer Engine computes them on an H100 PCIe (`hopper-te`), pass their upstream test: losses 0.5022 and 0.2161 in
+bf16, where 0.502 and 0.2159 are expected; native FP8 on that GPU gives 1.248 for the 1B (evo2 issue #157). The RTX
+4060 profile `ada-te` also passes. The rest of the model runs natively, so the outputs are close to the official
+ones, not equal to them. Every run used one sequence at a time, of up to 8,192 bp, where each FP8 projection shape of
+the 1B and the 40B is in both profiles' split-K tables. Longer sequences, or several sequences batched into one
+projection, were not run: there both profiles infer S = 1, mostly from their envelope, and `hopper-te`'s envelope
+inferences warn (`UnvalidatedEnvelopeWarning`), because the H100 envelope failed its held-out test at TE's 32 MiB
+workspace.
 
 ## Docs
 
@@ -12,14 +48,14 @@ hardware. `mmaemu.scaled_mm` takes the arguments of `torch._scaled_mm`.
 - [User guide](https://raw.githubusercontent.com/astding/mmaemu/master/docs/user_guide.md): a first GEMM, profiles, split-K, backends, use inside a model, testing
 - [API reference](https://raw.githubusercontent.com/astding/mmaemu/master/docs/api.md): every public function and class, the exceptions and warnings, the command line
 - [FAQ](https://raw.githubusercontent.com/astding/mmaemu/master/docs/faq.md): short answers to the first questions
-- [Evo 2 on other GPUs](https://raw.githubusercontent.com/astding/mmaemu/master/docs/evo2.md): routing Evo 2's FP8 projections through mmaemu (1B, and 40B with the weights in host RAM), measured results
+- [Evo 2 on other GPUs](https://raw.githubusercontent.com/astding/mmaemu/master/docs/evo2.md): routing Evo 2's FP8 projections through mmaemu as Transformer Engine computes them on an H100 PCIe (`hopper-te`) or an RTX 4060 (`ada-te`), for the 1B and for the 40B with the weights in host RAM; measured results
 - [Semantics](https://raw.githubusercontent.com/astding/mmaemu/master/docs/semantics.md): exactly what is computed, and what raises
 - [Limitations](https://raw.githubusercontent.com/astding/mmaemu/master/docs/limitations.md): what v0.1 does not do
 
 ## Examples
 
-- [Evo 2 1B notebook](https://github.com/astding/mmaemu/blob/master/examples/evo2_blackwell.ipynb): upstream Evo 2 1B on an RTX 5070 Ti with its FP8 projections computed by mmaemu
-- [Evo 2 with the weights in host RAM](https://github.com/astding/mmaemu/blob/master/examples/evo2_offload.py): upstream Evo 2 40B on a 16 GB GPU with its FP8 projections computed by mmaemu: the upstream test and the scoring of sequences
+- [Evo 2 with the weights in host RAM](https://github.com/astding/mmaemu/blob/master/examples/evo2_offload.py): upstream Evo 2 40B on a 16 GB GPU with its FP8 projections computed by mmaemu (`--profile hopper-te`, the H100 PCIe's, or `ada-te`, the RTX 4060's): the upstream test and the scoring of sequences
+- [Evo 2 1B notebook](https://github.com/astding/mmaemu/blob/master/examples/evo2_blackwell.ipynb): upstream Evo 2 1B on an RTX 5070 Ti with its FP8 projections computed by mmaemu (profile `ada-te`), compared with the official output of the RTX 4060
 
 ## Optional
 

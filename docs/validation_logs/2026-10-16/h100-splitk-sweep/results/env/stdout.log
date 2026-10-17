@@ -1,0 +1,17 @@
+{
+ "torch": "2.7.1+cu128",
+ "cuda": "12.8",
+ "device": {
+  "name": "NVIDIA H100 PCIe",
+  "capability": [
+   9,
+   0
+  ],
+  "sm_count": 114,
+  "total_memory": 85028896768
+ },
+ "cublaslt_version": "12.8.3.14",
+ "cublaslt_lib": "<task-root>/venv/lib/python3.12/site-packages/nvidia/cublas/lib/libcublasLt.so.12",
+ "src_commit": "57bcf0d52d6eda2b38ba156749139f644d61c74b",
+ "mmaemu_file": "<sweep-root>/bundle/src/mmaemu/__init__.py"
+}

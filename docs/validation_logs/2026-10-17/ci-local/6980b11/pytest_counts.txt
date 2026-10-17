@@ -1,0 +1,8 @@
+log_test_T0_T1_torch_2_6_0.txt: 3497 passed, 5 skipped, 703 deselected, 8 warnings in 124.06s (0:02:04)
+log_test_T0_T1_torch_2_7_1.txt: 3499 passed, 3 skipped, 703 deselected, 8 warnings in 161.88s (0:02:41)
+log_test_T0_T1_torch_latest.txt: 3498 passed, 4 skipped, 703 deselected, 8 warnings in 131.24s (0:02:11)
+log_nvrtc_NVRTC_compile_test.txt: 44 passed in 29.17s
+log_dist_T0_T1_against_the_wheel.txt: 3501 passed, 1 skipped, 703 deselected, 8 warnings in 133.45s (0:02:13)
+venv-test-torch2.6.0: python 3.12.2 torch 2.6.0+cpu numpy 2.5.4
+venv-test-torch2.7.1: python 3.12.2 torch 2.7.1+cpu numpy 2.5.4
+venv-test-torchlatest: python 3.12.2 torch 2.14.1+cpu numpy 2.5.4

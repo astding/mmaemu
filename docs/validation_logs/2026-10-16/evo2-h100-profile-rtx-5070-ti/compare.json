@@ -1,0 +1,645 @@
+{
+ "inputs": {
+  "1b_brca1.json": "3116e9fbd8f89dd82fb6a8c4bb97e716ff8135b1ca28b22f6bbe7c8f7e0348d0",
+  "1b_test.json": "84698b8c6e1fc6b84745a80fe47e43d62240ff78c91cce665dc57cbbb3bdae34",
+  "40b_brca1.json": "fa11f7ae2214b3040b0bbe7fa55fd101a20cf2a1c9333ed35ea598e8350caf45",
+  "40b_test.json": "db851febf7073c43120fb2cd8aaa89dc571833682f7dc1f8764a1949aa879306",
+  "1b_brca1.npz": "cd7a297eac7641271ea3b9b626beaf305521bd3907b97ca230a5ac4f2b08f893",
+  "1b_test.npz": "fad8552c211e8cc3797f3774011781ccd290a22a98dc0e8a8a3a1d1d63a16441",
+  "40b_brca1.npz": "11230277f2e6f41b43950d71207bce62ae72fe95fe8fc322d45ae203ee827306",
+  "40b_test.npz": "e1270b0cffa42e8d318dee82d3aeb85c4b8355d6f7f2081628c3b19f0db0e8f0"
+ },
+ "evo2_1b_base": {
+  "upstream_test": {
+   "expected": {
+    "loss": 0.501953125,
+    "accuracy": 0.79556
+   },
+   "rtx5070ti_h100_profile": {
+    "loss": 0.502197265625,
+    "accuracy": 0.796111986041069,
+    "loss_fp32": 0.5024406835436821
+   },
+   "h100_official": {
+    "loss": 0.502197265625,
+    "accuracy": 0.7952930182218552,
+    "loss_fp32": 0.5025806911289692
+   },
+   "rtx4060_official": {
+    "loss_fp32": 0.5024459436535835,
+    "accuracy": 0.7951488047838211
+   },
+   "rtx5070ti_rtx4060_profile": {
+    "loss": 0.502685546875,
+    "accuracy": 0.7960409671068192,
+    "loss_fp32": 0.502520889043808
+   },
+   "passes_upstream_test": true,
+   "resident_equal": {
+    "mmaemu_h100/w2k": true,
+    "mmaemu_h100/w4k": true,
+    "mmaemu_h100/w8k": true,
+    "mmaemu_h100/p0": true,
+    "mmaemu_h100/p1": true,
+    "mmaemu_h100/p2": true,
+    "mmaemu_h100/p3": true
+   }
+  },
+  "windows": [
+   {
+    "window": "w2k",
+    "length": 2048,
+    "loss": 0.203125,
+    "accuracy": 0.9408891201019287,
+    "loss_fp32": 0.2028956562280655,
+    "mean_next_logprob": -0.20289567112922668,
+    "h100_loss_fp32": 0.2018955796957016,
+    "h100_accuracy": 0.9413776397705078,
+    "h100_mean_next_logprob": -0.2018955647945404,
+    "logits_equal_h100": false,
+    "vs_rtx4060_official": {
+     "mean_abs_dlogp_acgt": 0.046977460384368896,
+     "max_abs_dlogp_acgt": 1.0896971225738525,
+     "acgt_argmax_agree": 0.99560546875,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.20289567112922668,
+     "ref_mean_next_logprob": -0.20100508630275726
+    }
+   },
+   {
+    "window": "w4k",
+    "length": 4096,
+    "loss": 0.1572265625,
+    "accuracy": 0.9582418203353882,
+    "loss_fp32": 0.15689986944198608,
+    "mean_next_logprob": -0.1568998545408249,
+    "h100_loss_fp32": 0.15679720044136047,
+    "h100_accuracy": 0.958486020565033,
+    "h100_mean_next_logprob": -0.15679720044136047,
+    "logits_equal_h100": false
+   },
+   {
+    "window": "w8k",
+    "length": 8192,
+    "loss": 0.384765625,
+    "accuracy": 0.8492247462272644,
+    "loss_fp32": 0.38398802280426025,
+    "mean_next_logprob": -0.38398802280426025,
+    "h100_loss_fp32": 0.3841516375541687,
+    "h100_accuracy": 0.8494689464569092,
+    "h100_mean_next_logprob": -0.3841516375541687,
+    "logits_equal_h100": false,
+    "vs_rtx4060_official": {
+     "mean_abs_dlogp_acgt": 0.03584219515323639,
+     "max_abs_dlogp_acgt": 0.9993350505828857,
+     "acgt_argmax_agree": 0.9954833984375,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.38398802280426025,
+     "ref_mean_next_logprob": -0.3840143382549286
+    }
+   },
+   {
+    "window": "p0",
+    "length": 6538,
+    "loss": 0.2255859375,
+    "accuracy": 0.9250420331954956,
+    "loss_fp32": 0.22549203038215637,
+    "mean_next_logprob": -0.22549204528331757,
+    "h100_loss_fp32": 0.2252940684556961,
+    "h100_accuracy": 0.9244301319122314,
+    "h100_mean_next_logprob": -0.2252940833568573,
+    "logits_equal_h100": false,
+    "vs_rtx4060_official": {
+     "mean_abs_dlogp_acgt": 0.037490978837013245,
+     "max_abs_dlogp_acgt": 0.87351393699646,
+     "acgt_argmax_agree": 0.9975527684307127,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.22549204528331757,
+     "ref_mean_next_logprob": -0.22533518075942993
+    }
+   },
+   {
+    "window": "p1",
+    "length": 7056,
+    "loss": 0.78125,
+    "accuracy": 0.665343701839447,
+    "loss_fp32": 0.7801592350006104,
+    "mean_next_logprob": -0.7801592350006104,
+    "h100_loss_fp32": 0.780588686466217,
+    "h100_accuracy": 0.6650602221488953,
+    "h100_mean_next_logprob": -0.7805887460708618,
+    "logits_equal_h100": false,
+    "vs_rtx4060_official": {
+     "mean_abs_dlogp_acgt": 0.039121296256780624,
+     "max_abs_dlogp_acgt": 1.1096301078796387,
+     "acgt_argmax_agree": 0.9875283446712018,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.7801592350006104,
+     "ref_mean_next_logprob": -0.7801355719566345
+    }
+   },
+   {
+    "window": "p2",
+    "length": 6160,
+    "loss": 0.55859375,
+    "accuracy": 0.7786978483200073,
+    "loss_fp32": 0.5599061250686646,
+    "mean_next_logprob": -0.5599061250686646,
+    "h100_loss_fp32": 0.5603067278862,
+    "h100_accuracy": 0.7772365808486938,
+    "h100_mean_next_logprob": -0.5603066682815552,
+    "logits_equal_h100": false,
+    "vs_rtx4060_official": {
+     "mean_abs_dlogp_acgt": 0.039392467588186264,
+     "max_abs_dlogp_acgt": 0.6542372703552246,
+     "acgt_argmax_agree": 0.9922077922077922,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.5599061250686646,
+     "ref_mean_next_logprob": -0.5599954724311829
+    }
+   },
+   {
+    "window": "p3",
+    "length": 7616,
+    "loss": 0.443359375,
+    "accuracy": 0.8153643608093262,
+    "loss_fp32": 0.4442053437232971,
+    "mean_next_logprob": -0.44420531392097473,
+    "h100_loss_fp32": 0.44413328170776367,
+    "h100_accuracy": 0.8144451379776001,
+    "h100_mean_next_logprob": -0.44413331151008606,
+    "logits_equal_h100": false,
+    "vs_rtx4060_official": {
+     "mean_abs_dlogp_acgt": 0.04541459307074547,
+     "max_abs_dlogp_acgt": 1.3102221488952637,
+     "acgt_argmax_agree": 0.9954044117647058,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.44420531392097473,
+     "ref_mean_next_logprob": -0.4443177282810211
+    }
+   }
+  ],
+  "six_windows_vs_rtx4060_official": {
+   "rtx5070ti_h100_profile": {
+    "mean": 0.04070649854838848,
+    "min": 0.03584219515323639,
+    "max": 0.046977460384368896,
+    "argmax_agree_mean": 0.9939636973769854,
+    "windows": 6
+   },
+   "rtx5070ti_rtx4060_profile": {
+    "mean": 0.0403224944,
+    "min": 0.0352046266,
+    "max": 0.0466184244,
+    "windows": 6
+   },
+   "h100_official": {
+    "mean": 0.04108257653812567,
+    "min": 0.035109035670757294,
+    "max": 0.04851425439119339,
+    "windows": 6
+   }
+  },
+  "brca1": {
+   "rtx5070ti_h100_profile": {
+    "variants": 500,
+    "lof": 111,
+    "auroc": 0.735403784246972,
+    "auroc_ci95": [
+     0.674825303419253,
+     0.7926306784786737
+    ],
+    "mean_abs_delta": 0.0006114386487752199
+   },
+   "h100_official": {
+    "variants": 500,
+    "lof": 111,
+    "auroc": 0.7332268000648463,
+    "auroc_ci95": [
+     0.6726514396914263,
+     0.7921051589000665
+    ],
+    "mean_abs_delta": 0.0006085846689529717
+   },
+   "rtx4060_official": {
+    "variants": 500,
+    "lof": 111,
+    "auroc": 0.7377892030848329,
+    "auroc_ci95": [
+     0.679627467702319,
+     0.7974107876419825
+    ],
+    "mean_abs_delta": 0.0006105144275352359
+   },
+   "rtx5070ti_rtx4060_profile": {
+    "variants": 500,
+    "lof": 111,
+    "auroc": 0.7323120035202297,
+    "auroc_ci95": [
+     0.6717275013297468,
+     0.7914749221507585
+    ],
+    "mean_abs_delta": 0.0006167340325191617
+   },
+   "minutes": 15.456114240487416,
+   "rtx5070ti_h100_profile_vs": {
+    "h100_official": {
+     "delta_pearson": 0.987798810005188,
+     "delta_spearman": 0.9291732019945464,
+     "delta_same_sign": 0.86,
+     "max_abs_score_diff": 0.0003902316093444824,
+     "mean_abs_score_diff": 8.311195415444672e-05,
+     "scores_bit_identical": 2,
+     "scores": 935
+    },
+    "rtx4060_official": {
+     "delta_pearson": 0.9868419766426086,
+     "delta_spearman": 0.9204070686157536,
+     "delta_same_sign": 0.862,
+     "max_abs_score_diff": 0.0003692507743835449,
+     "mean_abs_score_diff": 9.025258623296395e-05,
+     "scores_bit_identical": 1,
+     "scores": 935
+    },
+    "rtx5070ti_rtx4060_profile": {
+     "delta_pearson": 0.9869108200073242,
+     "delta_spearman": 0.9233822006570148,
+     "delta_same_sign": 0.866,
+     "max_abs_score_diff": 0.00039142370223999023,
+     "mean_abs_score_diff": 9.165377559838817e-05,
+     "scores_bit_identical": 0,
+     "scores": 935
+    }
+   },
+   "for_comparison": {
+    "rtx5070ti_rtx4060_profile_vs_h100_official": {
+     "delta_pearson": 0.9863654971122742,
+     "delta_spearman": 0.9206901201123651,
+     "delta_same_sign": 0.842,
+     "max_abs_score_diff": 0.000377655029296875,
+     "mean_abs_score_diff": 9.16194767341949e-05,
+     "scores_bit_identical": 0,
+     "scores": 935
+    },
+    "rtx5070ti_rtx4060_profile_vs_rtx4060_official": {
+     "delta_pearson": 0.986446738243103,
+     "delta_spearman": 0.912257587548904,
+     "delta_same_sign": 0.84,
+     "max_abs_score_diff": 0.00039631128311157227,
+     "mean_abs_score_diff": 9.086220961762592e-05,
+     "scores_bit_identical": 0,
+     "scores": 935
+    },
+    "h100_official_vs_rtx4060_official": {
+     "delta_pearson": 0.9869935512542725,
+     "delta_spearman": 0.9215157641578666,
+     "delta_same_sign": 0.842,
+     "max_abs_score_diff": 0.00042134523391723633,
+     "mean_abs_score_diff": 9.022492304211482e-05,
+     "scores_bit_identical": 1,
+     "scores": 935
+    }
+   }
+  }
+ },
+ "evo2_40b": {
+  "upstream_test": {
+   "expected": {
+    "loss": 0.2159424,
+    "accuracy": 0.91673
+   },
+   "rtx5070ti_h100_profile": {
+    "loss": 0.216064453125,
+    "accuracy": 0.9163819849491119,
+    "loss_fp32": 0.2158485483378172
+   },
+   "h100_official": {
+    "loss": 0.2159423828125,
+    "accuracy": 0.9166673570871353,
+    "loss_fp32": 0.21601060777902603
+   },
+   "rtx5070ti_rtx4060_profile": {
+    "loss": 0.216064453125,
+    "accuracy": 0.9168765842914581,
+    "loss_fp32": 0.21575975231826305
+   },
+   "passes_upstream_test": true,
+   "per_prompt": [
+    {
+     "prompt": "p0",
+     "loss": 0.15234375,
+     "accuracy": 0.94186931848526,
+     "loss_fp32": 0.1520432084798813,
+     "h100_loss": 0.15234375,
+     "h100_accuracy": 0.9426342248916626,
+     "logits_equal_h100": false
+    },
+    {
+     "prompt": "p1",
+     "loss": 0.1767578125,
+     "accuracy": 0.9370658993721008,
+     "loss_fp32": 0.17631681263446808,
+     "h100_loss": 0.17578125,
+     "h100_accuracy": 0.9373493790626526,
+     "logits_equal_h100": false
+    },
+    {
+     "prompt": "p2",
+     "loss": 0.4453125,
+     "accuracy": 0.822049081325531,
+     "loss_fp32": 0.4449843168258667,
+     "h100_loss": 0.4453125,
+     "h100_accuracy": 0.8225361704826355,
+     "logits_equal_h100": false
+    },
+    {
+     "prompt": "p3",
+     "loss": 0.08984375,
+     "accuracy": 0.9645436406135559,
+     "loss_fp32": 0.0900498554110527,
+     "h100_loss": 0.09033203125,
+     "h100_accuracy": 0.9641496539115906,
+     "logits_equal_h100": false
+    }
+   ]
+  },
+  "windows": [
+   {
+    "window": "w2k",
+    "length": 2048,
+    "vs_h100_official": {
+     "mean_abs_dlogp_acgt": 0.028864458203315735,
+     "max_abs_dlogp_acgt": 0.6068246364593506,
+     "acgt_argmax_agree": 1.0,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.07195930927991867,
+     "ref_mean_next_logprob": -0.07208828628063202
+    },
+    "vs_rtx4060_official": {
+     "mean_abs_dlogp_acgt": 0.030274659395217896,
+     "max_abs_dlogp_acgt": 0.7958014011383057,
+     "acgt_argmax_agree": 0.9990234375,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.07195930927991867,
+     "ref_mean_next_logprob": -0.07176031172275543
+    },
+    "for_comparison_h100_official_vs_rtx4060_official": {
+     "mean_abs_dlogp_acgt": 0.029960518702864647,
+     "max_abs_dlogp_acgt": 0.9383695125579834,
+     "acgt_argmax_agree": 0.9990234375,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.07208828628063202,
+     "ref_mean_next_logprob": -0.07176031172275543
+    },
+    "vs_rtx5070ti_rtx4060_profile": {
+     "mean_abs_dlogp_acgt": 0.029877811670303345,
+     "max_abs_dlogp_acgt": 0.5586707592010498,
+     "acgt_argmax_agree": 1.0,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.07195930927991867,
+     "ref_mean_next_logprob": -0.07196037471294403
+    },
+    "for_comparison_rtx4060_profile_vs_h100_official": {
+     "mean_abs_dlogp_acgt": 0.029547899961471558,
+     "max_abs_dlogp_acgt": 0.6687183380126953,
+     "acgt_argmax_agree": 1.0,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.07196037471294403,
+     "ref_mean_next_logprob": -0.07208828628063202
+    }
+   },
+   {
+    "window": "w4k",
+    "length": 4096,
+    "vs_h100_official": {
+     "mean_abs_dlogp_acgt": 0.02830636128783226,
+     "max_abs_dlogp_acgt": 0.622127890586853,
+     "acgt_argmax_agree": 0.999755859375,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.06033939868211746,
+     "ref_mean_next_logprob": -0.060317832976579666
+    },
+    "vs_rtx4060_official": {
+     "mean_abs_dlogp_acgt": 0.02966703474521637,
+     "max_abs_dlogp_acgt": 0.6446504592895508,
+     "acgt_argmax_agree": 0.999267578125,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.06033939868211746,
+     "ref_mean_next_logprob": -0.06030254065990448
+    },
+    "for_comparison_h100_official_vs_rtx4060_official": {
+     "mean_abs_dlogp_acgt": 0.02921123243868351,
+     "max_abs_dlogp_acgt": 0.7282061576843262,
+     "acgt_argmax_agree": 0.9990234375,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.060317832976579666,
+     "ref_mean_next_logprob": -0.06030254065990448
+    },
+    "vs_rtx5070ti_rtx4060_profile": {
+     "mean_abs_dlogp_acgt": 0.02973990887403488,
+     "max_abs_dlogp_acgt": 0.518944263458252,
+     "acgt_argmax_agree": 0.99951171875,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.06033939868211746,
+     "ref_mean_next_logprob": -0.06032583862543106
+    },
+    "for_comparison_rtx4060_profile_vs_h100_official": {
+     "mean_abs_dlogp_acgt": 0.028758153319358826,
+     "max_abs_dlogp_acgt": 0.629165530204773,
+     "acgt_argmax_agree": 0.999267578125,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.06032583862543106,
+     "ref_mean_next_logprob": -0.060317832976579666
+    }
+   },
+   {
+    "window": "w8k",
+    "length": 8192,
+    "vs_h100_official": {
+     "mean_abs_dlogp_acgt": 0.03230668604373932,
+     "max_abs_dlogp_acgt": 1.311614990234375,
+     "acgt_argmax_agree": 0.99853515625,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.1579982042312622,
+     "ref_mean_next_logprob": -0.15814542770385742
+    }
+   },
+   {
+    "window": "p0",
+    "length": 6538,
+    "vs_h100_official": {
+     "mean_abs_dlogp_acgt": 0.026705771684646606,
+     "max_abs_dlogp_acgt": 0.5639514923095703,
+     "acgt_argmax_agree": 0.9987763842153564,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.1520432084798813,
+     "ref_mean_next_logprob": -0.1522609293460846
+    },
+    "vs_rtx5070ti_rtx4060_profile": {
+     "mean_abs_dlogp_acgt": 0.02683398127555847,
+     "max_abs_dlogp_acgt": 0.812599778175354,
+     "acgt_argmax_agree": 0.9990822881615172,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.1520432084798813,
+     "ref_mean_next_logprob": -0.15199191868305206
+    },
+    "for_comparison_rtx4060_profile_vs_h100_official": {
+     "mean_abs_dlogp_acgt": 0.02691715769469738,
+     "max_abs_dlogp_acgt": 0.7528895139694214,
+     "acgt_argmax_agree": 0.9990822881615172,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.15199191868305206,
+     "ref_mean_next_logprob": -0.1522609293460846
+    }
+   },
+   {
+    "window": "p1",
+    "length": 7056,
+    "vs_h100_official": {
+     "mean_abs_dlogp_acgt": 0.0510777048766613,
+     "max_abs_dlogp_acgt": 1.3305315971374512,
+     "acgt_argmax_agree": 0.995890022675737,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.1763167828321457,
+     "ref_mean_next_logprob": -0.17624801397323608
+    },
+    "vs_rtx5070ti_rtx4060_profile": {
+     "mean_abs_dlogp_acgt": 0.0510745570063591,
+     "max_abs_dlogp_acgt": 1.698317050933838,
+     "acgt_argmax_agree": 0.996031746031746,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.1763167828321457,
+     "ref_mean_next_logprob": -0.17658592760562897
+    },
+    "for_comparison_rtx4060_profile_vs_h100_official": {
+     "mean_abs_dlogp_acgt": 0.05137127637863159,
+     "max_abs_dlogp_acgt": 1.8246064186096191,
+     "acgt_argmax_agree": 0.9956065759637188,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.17658592760562897,
+     "ref_mean_next_logprob": -0.17624801397323608
+    }
+   },
+   {
+    "window": "p2",
+    "length": 6160,
+    "vs_h100_official": {
+     "mean_abs_dlogp_acgt": 0.03307552635669708,
+     "max_abs_dlogp_acgt": 0.5713415145874023,
+     "acgt_argmax_agree": 0.9946428571428572,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.4449843168258667,
+     "ref_mean_next_logprob": -0.44505205750465393
+    },
+    "vs_rtx5070ti_rtx4060_profile": {
+     "mean_abs_dlogp_acgt": 0.03530919924378395,
+     "max_abs_dlogp_acgt": 0.4670114517211914,
+     "acgt_argmax_agree": 0.9951298701298701,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.4449843168258667,
+     "ref_mean_next_logprob": -0.44483354687690735
+    },
+    "for_comparison_rtx4060_profile_vs_h100_official": {
+     "mean_abs_dlogp_acgt": 0.03540029749274254,
+     "max_abs_dlogp_acgt": 0.4804110527038574,
+     "acgt_argmax_agree": 0.9949675324675324,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.44483354687690735,
+     "ref_mean_next_logprob": -0.44505205750465393
+    }
+   },
+   {
+    "window": "p3",
+    "length": 7616,
+    "vs_h100_official": {
+     "mean_abs_dlogp_acgt": 0.05228287726640701,
+     "max_abs_dlogp_acgt": 1.9135960340499878,
+     "acgt_argmax_agree": 0.9961922268907563,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.0900498703122139,
+     "ref_mean_next_logprob": -0.09048143029212952
+    },
+    "vs_rtx5070ti_rtx4060_profile": {
+     "mean_abs_dlogp_acgt": 0.05389963835477829,
+     "max_abs_dlogp_acgt": 1.6803810596466064,
+     "acgt_argmax_agree": 0.9960609243697479,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.0900498703122139,
+     "ref_mean_next_logprob": -0.08962760120630264
+    },
+    "for_comparison_rtx4060_profile_vs_h100_official": {
+     "mean_abs_dlogp_acgt": 0.05248932167887688,
+     "max_abs_dlogp_acgt": 2.396498680114746,
+     "acgt_argmax_agree": 0.9964548319327731,
+     "acgt_bit_identical": false,
+     "mean_next_logprob": -0.08962760120630264,
+     "ref_mean_next_logprob": -0.09048143029212952
+    }
+   }
+  ],
+  "brca1": {
+   "rtx5070ti_h100_profile": {
+    "variants": 100,
+    "lof": 20,
+    "auroc": 0.8568749999999999,
+    "auroc_ci95": [
+     0.7490963855421687,
+     0.9397088535617499
+    ],
+    "mean_abs_delta": 0.002860682550817728
+   },
+   "h100_official_same_variants": {
+    "variants": 100,
+    "lof": 20,
+    "auroc": 0.855,
+    "auroc_ci95": [
+     0.7448562395436579,
+     0.9402062569213732
+    ],
+    "mean_abs_delta": 0.0028522068168967962
+   },
+   "rtx5070ti_rtx4060_profile": {
+    "variants": 100,
+    "lof": 20,
+    "auroc": 0.855,
+    "auroc_ci95": [
+     0.7512239546420979,
+     0.9340945101542217
+    ],
+    "mean_abs_delta": 0.002823734190315008
+   },
+   "minutes": 79.7456750790278,
+   "rtx5070ti_h100_profile_vs": {
+    "h100_official": {
+     "delta_pearson": 0.9985676407814026,
+     "delta_spearman": 0.9905550555055505,
+     "delta_same_sign": 0.99,
+     "max_abs_score_diff": 0.0004762411117553711,
+     "mean_abs_score_diff": 0.00010448754619574174,
+     "scores_bit_identical": 0,
+     "scores": 198
+    },
+    "rtx5070ti_rtx4060_profile": {
+     "delta_pearson": 0.9981312155723572,
+     "delta_spearman": 0.9845064506450644,
+     "delta_same_sign": 1.0,
+     "max_abs_score_diff": 0.000675201416015625,
+     "mean_abs_score_diff": 0.00011919875396415591,
+     "scores_bit_identical": 0,
+     "scores": 198
+    }
+   },
+   "for_comparison": {
+    "rtx5070ti_rtx4060_profile_vs_h100_official": {
+     "delta_pearson": 0.998070478439331,
+     "delta_spearman": 0.9856825682568257,
+     "delta_same_sign": 0.99,
+     "max_abs_score_diff": 0.00045615434646606445,
+     "mean_abs_score_diff": 0.000110616885649506,
+     "scores_bit_identical": 1,
+     "scores": 198
+    }
+   }
+  }
+ }
+}

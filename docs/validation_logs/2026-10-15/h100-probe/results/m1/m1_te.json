@@ -1,0 +1,4846 @@
+{
+ "step": "m1_te",
+ "argv": [
+  "m1_cvec.py",
+  "--te"
+ ],
+ "started": "2026-10-16T02:44:26Z",
+ "hardware": {
+  "gpu": "NVIDIA H100 PCIe",
+  "arch": "sm_90",
+  "sm_count": 114,
+  "driver": "570.148.08",
+  "cuda": "12.8",
+  "cublaslt": "12.8.3.14",
+  "cublaslt_lib": "<task-root>/venv/lib/python3.12/site-packages/nvidia/cublas/lib/libcublasLt.so.12",
+  "torch": "2.7.1+cu128",
+  "python": "3.12.15",
+  "os": "Linux 6.8.0-60-generic",
+  "cublas": "12.8.3.14",
+  "nvidia_smi": "NVIDIA H100 PCIe, 570.148.08, 345 MHz, 42"
+ },
+ "src": "<probe-root>/bundle/src",
+ "mmaemu_file": "<probe-root>/bundle/src/mmaemu/__init__.py",
+ "env": {
+  "CUBLASLT_WORKSPACE_SIZE": null,
+  "CUBLASLT_LOG_LEVEL": "2",
+  "CUBLASLT_LOG_FILE": "<probe-root>/bundle/out/m1_te/lt.log",
+  "NVTE_DISABLE_NVRTC": "1",
+  "MMAEMU_CUBLASLT_HEADER": "<probe-root>/bundle/include/cublasLt.h",
+  "CUDA_VISIBLE_DEVICES": null
+ },
+ "extra": {
+  "path": "te",
+  "te": {
+   "te": "2.3.0",
+   "te_workspace_bytes": 33554432
+  },
+  "sets": {
+   "MM_cublas64": {
+    "n": 445,
+    "n_models": 133,
+    "files_sha256": {
+     "a_MM_cublas64_E4M3.txt": "c8184f66ac4f094388ca0becf486ad91bedb3bc618269ba8fd5e4b0afb9efe3e",
+     "b_MM_cublas64_E4M3.txt": "5670c3c000ab3bb756aaac925468fe6290cf45f5ade17c6f0c027c59da23a698",
+     "cgen_MM_cublas64_E4M3.txt": "5b011a6585355d6ef96de98f520abbef65ab24f8e155e39dc8a55131568f1434"
+    }
+   },
+   "MM_cublas64_sm120": {
+    "n": 834,
+    "n_models": 12881,
+    "files_sha256": {
+     "a_MM_cublas64_sm120_E4M3.txt": "7bc740bbade216e3ba4c9f0181af15ccf967fa5762f3279a86ca17f0318c6891",
+     "b_MM_cublas64_sm120_E4M3.txt": "57caa97d7db749813cd3fdc9427f8c18fe96e73a4830b9f5f5018f806f738c32",
+     "cgen_MM_cublas64_sm120_E4M3.txt": "269f865d55ae61546d05c47ea8c3a2a523634bf3ae83c4579c75d7e26128295c"
+    }
+   }
+  },
+  "summaries": {
+   "MM_cublas64.M1024N1024K64.te": {
+    "n": 445,
+    "n_models_100pct": 8,
+    "top": [
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     }
+    ],
+    "preset_ada": 383,
+    "preset_hopper": 445,
+    "preset_blackwell": 106,
+    "preset_tbx_B200TC": 106,
+    "preset_tbx_B200TCRN": 106,
+    "preset_fig5c": 146
+   },
+   "MM_cublas64.M1024N1024K64.te_split": {
+    "n": 445,
+    "n_models_100pct": 8,
+    "top": [
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     }
+    ],
+    "preset_ada": 383,
+    "preset_hopper": 445,
+    "preset_blackwell": 106,
+    "preset_tbx_B200TC": 106,
+    "preset_tbx_B200TCRN": 106,
+    "preset_fig5c": 146
+   },
+   "MM_cublas64.M4096N4096K64.te": {
+    "n": 445,
+    "n_models_100pct": 8,
+    "top": [
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     }
+    ],
+    "preset_ada": 383,
+    "preset_hopper": 445,
+    "preset_blackwell": 106,
+    "preset_tbx_B200TC": 106,
+    "preset_tbx_B200TCRN": 106,
+    "preset_fig5c": 146
+   },
+   "MM_cublas64.M4096N4096K64.te_split": {
+    "n": 445,
+    "n_models_100pct": 8,
+    "top": [
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     }
+    ],
+    "preset_ada": 383,
+    "preset_hopper": 445,
+    "preset_blackwell": 106,
+    "preset_tbx_B200TC": 106,
+    "preset_tbx_B200TCRN": 106,
+    "preset_fig5c": 146
+   },
+   "MM_cublas64.M2048N5760K1920.te": {
+    "n": 445,
+    "n_models_100pct": 8,
+    "top": [
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     }
+    ],
+    "preset_ada": 383,
+    "preset_hopper": 445,
+    "preset_blackwell": 106,
+    "preset_tbx_B200TC": 106,
+    "preset_tbx_B200TCRN": 106,
+    "preset_fig5c": 146
+   },
+   "MM_cublas64.M2048N5760K1920.te_split": {
+    "n": 445,
+    "n_models_100pct": 8,
+    "top": [
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -132,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     }
+    ],
+    "preset_ada": 286,
+    "preset_hopper": 328,
+    "preset_blackwell": 164,
+    "preset_tbx_B200TC": 159,
+    "preset_tbx_B200TCRN": 163,
+    "preset_fig5c": 204
+   },
+   "MM_cublas64.M2048N12288K4096.te": {
+    "n": 445,
+    "n_models_100pct": 8,
+    "top": [
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     }
+    ],
+    "preset_ada": 383,
+    "preset_hopper": 445,
+    "preset_blackwell": 106,
+    "preset_tbx_B200TC": 106,
+    "preset_tbx_B200TCRN": 106,
+    "preset_fig5c": 146
+   },
+   "MM_cublas64.M2048N12288K4096.te_split": {
+    "n": 445,
+    "n_models_100pct": 8,
+    "top": [
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -132,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     }
+    ],
+    "preset_ada": 286,
+    "preset_hopper": 328,
+    "preset_blackwell": 164,
+    "preset_tbx_B200TC": 159,
+    "preset_tbx_B200TCRN": 163,
+    "preset_fig5c": 204
+   },
+   "MM_cublas64.M2048N24576K8192.te": {
+    "n": 445,
+    "n_models_100pct": 8,
+    "top": [
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     }
+    ],
+    "preset_ada": 383,
+    "preset_hopper": 445,
+    "preset_blackwell": 106,
+    "preset_tbx_B200TC": 106,
+    "preset_tbx_B200TCRN": 106,
+    "preset_fig5c": 146
+   },
+   "MM_cublas64.M2048N24576K8192.te_split": {
+    "n": 445,
+    "n_models_100pct": 8,
+    "top": [
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -132,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 445,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     }
+    ],
+    "preset_ada": 286,
+    "preset_hopper": 328,
+    "preset_blackwell": 164,
+    "preset_tbx_B200TC": 159,
+    "preset_tbx_B200TCRN": 163,
+    "preset_fig5c": 204
+   },
+   "MM_cublas64_sm120.M1024N1024K64.te": {
+    "n": 834,
+    "n_models_100pct": 8,
+    "top": [
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     }
+    ],
+    "preset_ada": 648,
+    "preset_hopper": 834,
+    "preset_blackwell": 123,
+    "preset_tbx_B200TC": 119,
+    "preset_tbx_B200TCRN": 125,
+    "preset_fig5c": 163
+   },
+   "MM_cublas64_sm120.M1024N1024K64.te_split": {
+    "n": 834,
+    "n_models_100pct": 8,
+    "top": [
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     }
+    ],
+    "preset_ada": 648,
+    "preset_hopper": 834,
+    "preset_blackwell": 123,
+    "preset_tbx_B200TC": 119,
+    "preset_tbx_B200TCRN": 125,
+    "preset_fig5c": 163
+   },
+   "MM_cublas64_sm120.M4096N4096K64.te": {
+    "n": 834,
+    "n_models_100pct": 8,
+    "top": [
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     }
+    ],
+    "preset_ada": 648,
+    "preset_hopper": 834,
+    "preset_blackwell": 123,
+    "preset_tbx_B200TC": 119,
+    "preset_tbx_B200TCRN": 125,
+    "preset_fig5c": 163
+   },
+   "MM_cublas64_sm120.M4096N4096K64.te_split": {
+    "n": 834,
+    "n_models_100pct": 8,
+    "top": [
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     }
+    ],
+    "preset_ada": 648,
+    "preset_hopper": 834,
+    "preset_blackwell": 123,
+    "preset_tbx_B200TC": 119,
+    "preset_tbx_B200TCRN": 125,
+    "preset_fig5c": 163
+   },
+   "MM_cublas64_sm120.M2048N5760K1920.te": {
+    "n": 834,
+    "n_models_100pct": 8,
+    "top": [
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     }
+    ],
+    "preset_ada": 648,
+    "preset_hopper": 834,
+    "preset_blackwell": 123,
+    "preset_tbx_B200TC": 119,
+    "preset_tbx_B200TCRN": 125,
+    "preset_fig5c": 163
+   },
+   "MM_cublas64_sm120.M2048N5760K1920.te_split": {
+    "n": 834,
+    "n_models_100pct": 1,
+    "top": [
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 772,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rz",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 739,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rd",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 738,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rne",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 695,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 14,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     }
+    ],
+    "preset_ada": 411,
+    "preset_hopper": 527,
+    "preset_blackwell": 239,
+    "preset_tbx_B200TC": 213,
+    "preset_tbx_B200TCRN": 228,
+    "preset_fig5c": 279
+   },
+   "MM_cublas64_sm120.M2048N12288K4096.te": {
+    "n": 834,
+    "n_models_100pct": 8,
+    "top": [
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     }
+    ],
+    "preset_ada": 648,
+    "preset_hopper": 834,
+    "preset_blackwell": 123,
+    "preset_tbx_B200TC": 119,
+    "preset_tbx_B200TCRN": 125,
+    "preset_fig5c": 163
+   },
+   "MM_cublas64_sm120.M2048N12288K4096.te_split": {
+    "n": 834,
+    "n_models_100pct": 1,
+    "top": [
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 772,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rz",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 739,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rd",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 738,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rne",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 695,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 14,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     }
+    ],
+    "preset_ada": 411,
+    "preset_hopper": 527,
+    "preset_blackwell": 239,
+    "preset_tbx_B200TC": 213,
+    "preset_tbx_B200TCRN": 228,
+    "preset_fig5c": 279
+   },
+   "MM_cublas64_sm120.M2048N24576K8192.te": {
+    "n": 834,
+    "n_models_100pct": 8,
+    "top": [
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -133,
+       "c_exp_sub": "m126"
+      }
+     },
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "first",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "emin",
+       "min_exp": -133,
+       "c_exp_sub": "floor"
+      }
+     }
+    ],
+    "preset_ada": 648,
+    "preset_hopper": 834,
+    "preset_blackwell": 123,
+    "preset_tbx_B200TC": 119,
+    "preset_tbx_B200TCRN": 125,
+    "preset_fig5c": 163
+   },
+   "MM_cublas64_sm120.M2048N24576K8192.te_split": {
+    "n": 834,
+    "n_models_100pct": 1,
+    "top": [
+     {
+      "match": 834,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 772,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rz",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 739,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rd",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 738,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 13,
+       "rnd_out": "rne",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     },
+     {
+      "match": 695,
+      "model": {
+       "groups": "flat32",
+       "chain": "early",
+       "c_mode": "late_rne",
+       "frac": 13,
+       "frac_out": 14,
+       "rnd_out": "rz",
+       "align": "rz",
+       "denorm_prd": true,
+       "in_sub": "clamp",
+       "zero_exp": "ignore",
+       "min_exp": -132,
+       "c_exp_sub": "floor"
+      }
+     }
+    ],
+    "preset_ada": 411,
+    "preset_hopper": 527,
+    "preset_blackwell": 239,
+    "preset_tbx_B200TC": 213,
+    "preset_tbx_B200TCRN": 228,
+    "preset_fig5c": 279
+   }
+  }
+ },
+ "summary": {
+  "n_calls": 20,
+  "n_nondeterministic": 0,
+  "n_errors": 0,
+  "n_without_lt_log": 0,
+  "seconds": 23.7
+ },
+ "calls": [
+  {
+   "id": "MM_cublas64.M1024N1024K64.te",
+   "meta": {
+    "set": "MM_cublas64",
+    "M": 1024,
+    "N": 1024,
+    "K": 64,
+    "n": 445,
+    "out": "float32",
+    "use_split_accumulator": false
+   },
+   "runs": [
+    {
+     "kernels": [
+      "nvjet_qqsss_128x128_128x6_4x2_v_bz_TNT"
+     ],
+     "gpu_seconds": 0.0464,
+     "sha256": "02b7ae9d1b4adb2444aee3cbe03092349c671f9f9257e01d98df33f56f1590d8",
+     "shape": [
+      1024,
+      1024
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 1024,
+        "ld": 64
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 1024,
+        "ld": 64
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 1024,
+        "cols": 1024,
+        "ld": 1024
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 1024,
+        "cols": 1024,
+        "ld": 1024
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_128xAUTO customOption=1 clusterShape=CLUSTER_SHAPE_4x2x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_128x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 20,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 1,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        1024,
+        1024,
+        64
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.0605
+    },
+    {
+     "gpu_seconds": 0.0003,
+     "sha256": "02b7ae9d1b4adb2444aee3cbe03092349c671f9f9257e01d98df33f56f1590d8",
+     "shape": [
+      1024,
+      1024
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 1024,
+        "ld": 64
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 1024,
+        "ld": 64
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 1024,
+        "cols": 1024,
+        "ld": 1024
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 1024,
+        "cols": 1024,
+        "ld": 1024
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_128xAUTO customOption=1 clusterShape=CLUSTER_SHAPE_4x2x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_128x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 20,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 1,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        1024,
+        1024,
+        64
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.008
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64.M1024N1024K64.te_split",
+   "meta": {
+    "set": "MM_cublas64",
+    "M": 1024,
+    "N": 1024,
+    "K": 64,
+    "n": 445,
+    "out": "float32",
+    "use_split_accumulator": true
+   },
+   "runs": [
+    {
+     "kernels": [
+      "nvjet_qqsss_128x128_128x6_4x2_v_bz_coopA_algo2_TNT"
+     ],
+     "gpu_seconds": 0.0067,
+     "sha256": "02b7ae9d1b4adb2444aee3cbe03092349c671f9f9257e01d98df33f56f1590d8",
+     "shape": [
+      1024,
+      1024
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 1024,
+        "ld": 64
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 1024,
+        "ld": 64
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 1024,
+        "cols": 1024,
+        "ld": 1024
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 1024,
+        "cols": 1024,
+        "ld": 1024
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_4x2x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_128x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 20,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 5,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        1024,
+        1024,
+        64
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.018
+    },
+    {
+     "gpu_seconds": 0.0003,
+     "sha256": "02b7ae9d1b4adb2444aee3cbe03092349c671f9f9257e01d98df33f56f1590d8",
+     "shape": [
+      1024,
+      1024
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 1024,
+        "ld": 64
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 1024,
+        "ld": 64
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 1024,
+        "cols": 1024,
+        "ld": 1024
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 1024,
+        "cols": 1024,
+        "ld": 1024
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_4x2x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_128x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 20,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 5,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        1024,
+        1024,
+        64
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.0086
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64.M4096N4096K64.te",
+   "meta": {
+    "set": "MM_cublas64",
+    "M": 4096,
+    "N": 4096,
+    "K": 64,
+    "n": 445,
+    "out": "float32",
+    "use_split_accumulator": false
+   },
+   "runs": [
+    {
+     "kernels": [
+      "Memset (Device)",
+      "nvjet_qqsss_320x128_128x3_4x1_v_bz_coopB_TNT"
+     ],
+     "gpu_seconds": 0.0079,
+     "sha256": "b0cca8bb2bb31b14c54df1e64d596ba1b58344c00a14dd296bd23e0a49477666",
+     "shape": [
+      4096,
+      4096
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 4096,
+        "ld": 64
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 4096,
+        "ld": 64
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 4096,
+        "cols": 4096,
+        "ld": 4096
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 4096,
+        "cols": 4096,
+        "ld": 4096
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_320x128 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_4x1x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_320x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 248,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 5,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        4096,
+        4096,
+        64
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.2046
+    },
+    {
+     "gpu_seconds": 0.0003,
+     "sha256": "b0cca8bb2bb31b14c54df1e64d596ba1b58344c00a14dd296bd23e0a49477666",
+     "shape": [
+      4096,
+      4096
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 4096,
+        "ld": 64
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 4096,
+        "ld": 64
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 4096,
+        "cols": 4096,
+        "ld": 4096
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 4096,
+        "cols": 4096,
+        "ld": 4096
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_320x128 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_4x1x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_320x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 248,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 5,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        4096,
+        4096,
+        64
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.1954
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64.M4096N4096K64.te_split",
+   "meta": {
+    "set": "MM_cublas64",
+    "M": 4096,
+    "N": 4096,
+    "K": 64,
+    "n": 445,
+    "out": "float32",
+    "use_split_accumulator": true
+   },
+   "runs": [
+    {
+     "kernels": [
+      "Memset (Device)",
+      "nvjet_qqsss_128x128_128x6_2x1_v_bz_coopA_algo2_TNT"
+     ],
+     "gpu_seconds": 0.0078,
+     "sha256": "b0cca8bb2bb31b14c54df1e64d596ba1b58344c00a14dd296bd23e0a49477666",
+     "shape": [
+      4096,
+      4096
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 4096,
+        "ld": 64
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 4096,
+        "ld": 64
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 4096,
+        "cols": 4096,
+        "ld": 4096
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 4096,
+        "cols": 4096,
+        "ld": 4096
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_2x1x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_128x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 20,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 5,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        4096,
+        4096,
+        64
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.1991
+    },
+    {
+     "gpu_seconds": 0.0003,
+     "sha256": "b0cca8bb2bb31b14c54df1e64d596ba1b58344c00a14dd296bd23e0a49477666",
+     "shape": [
+      4096,
+      4096
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 4096,
+        "ld": 64
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 4096,
+        "ld": 64
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 4096,
+        "cols": 4096,
+        "ld": 4096
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 4096,
+        "cols": 4096,
+        "ld": 4096
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_2x1x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_128x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 20,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 5,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        4096,
+        4096,
+        64
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.1947
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64.M2048N5760K1920.te",
+   "meta": {
+    "set": "MM_cublas64",
+    "M": 2048,
+    "N": 5760,
+    "K": 1920,
+    "n": 445,
+    "out": "float32",
+    "use_split_accumulator": false
+   },
+   "runs": [
+    {
+     "kernels": [
+      "Memset (Device)",
+      "nvjet_qqsss_192x192_128x4_2x1_v_bz_coopB_TNN"
+     ],
+     "gpu_seconds": 0.0086,
+     "sha256": "c9e82eab30ea34e12e67b8b73ccd88b9a38159012d92c2435bac424b84d509ea",
+     "shape": [
+      2048,
+      5760
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 1920,
+        "cols": 5760,
+        "ld": 1920
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 1920,
+        "cols": 2048,
+        "ld": 1920
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 5760,
+        "cols": 2048,
+        "ld": 5760
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 5760,
+        "cols": 2048,
+        "ld": 5760
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_192x192 stages=MATMUL_STAGES_128xAUTO customOption=4 clusterShape=CLUSTER_SHAPE_2x1x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_192x192",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 209,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 4,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        5760,
+        1920
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.1536
+    },
+    {
+     "gpu_seconds": 0.0004,
+     "sha256": "c9e82eab30ea34e12e67b8b73ccd88b9a38159012d92c2435bac424b84d509ea",
+     "shape": [
+      2048,
+      5760
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 1920,
+        "cols": 5760,
+        "ld": 1920
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 1920,
+        "cols": 2048,
+        "ld": 1920
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 5760,
+        "cols": 2048,
+        "ld": 5760
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 5760,
+        "cols": 2048,
+        "ld": 5760
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_192x192 stages=MATMUL_STAGES_128xAUTO customOption=4 clusterShape=CLUSTER_SHAPE_2x1x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_192x192",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 209,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 4,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        5760,
+        1920
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.1377
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64.M2048N5760K1920.te_split",
+   "meta": {
+    "set": "MM_cublas64",
+    "M": 2048,
+    "N": 5760,
+    "K": 1920,
+    "n": 445,
+    "out": "float32",
+    "use_split_accumulator": true
+   },
+   "runs": [
+    {
+     "kernels": [
+      "Memset (Device)",
+      "nvjet_qqsss_144x128_128x6_1x2_h_bz_coopA_algo2_TNN"
+     ],
+     "gpu_seconds": 0.0099,
+     "sha256": "f01408af9c057e33338bf15ea971c9feff98526fd29084ee57c9c3d93c2bf126",
+     "shape": [
+      2048,
+      5760
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 1920,
+        "cols": 5760,
+        "ld": 1920
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 1920,
+        "cols": 2048,
+        "ld": 1920
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 5760,
+        "cols": 2048,
+        "ld": 5760
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 5760,
+        "cols": 2048,
+        "ld": 5760
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_144x128 stages=MATMUL_STAGES_128xAUTO customOption=6 clusterShape=CLUSTER_SHAPE_1x2x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_144x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 184,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 6,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        5760,
+        1920
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.1472
+    },
+    {
+     "gpu_seconds": 0.0004,
+     "sha256": "f01408af9c057e33338bf15ea971c9feff98526fd29084ee57c9c3d93c2bf126",
+     "shape": [
+      2048,
+      5760
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 1920,
+        "cols": 5760,
+        "ld": 1920
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 1920,
+        "cols": 2048,
+        "ld": 1920
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 5760,
+        "cols": 2048,
+        "ld": 5760
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 5760,
+        "cols": 2048,
+        "ld": 5760
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_144x128 stages=MATMUL_STAGES_128xAUTO customOption=6 clusterShape=CLUSTER_SHAPE_1x2x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_144x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 184,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 6,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        5760,
+        1920
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.1367
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64.M2048N12288K4096.te",
+   "meta": {
+    "set": "MM_cublas64",
+    "M": 2048,
+    "N": 12288,
+    "K": 4096,
+    "n": 445,
+    "out": "float32",
+    "use_split_accumulator": false
+   },
+   "runs": [
+    {
+     "kernels": [
+      "Memset (Device)",
+      "nvjet_qqsss_256x128_128x4_1x2_h_bz_coopA_TNT"
+     ],
+     "gpu_seconds": 0.0085,
+     "sha256": "6c0f1f2cf44615409755d6480ce1a429408bf05f7fcfd1aace32c2a61110f475",
+     "shape": [
+      2048,
+      12288
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 4096,
+        "cols": 12288,
+        "ld": 4096
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 4096,
+        "cols": 2048,
+        "ld": 4096
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 12288,
+        "cols": 2048,
+        "ld": 12288
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 12288,
+        "cols": 2048,
+        "ld": 12288
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_256x128 stages=MATMUL_STAGES_128xAUTO customOption=7 clusterShape=CLUSTER_SHAPE_1x2x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_256x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 24,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 7,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        12288,
+        4096
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.3042
+    },
+    {
+     "gpu_seconds": 0.0006,
+     "sha256": "6c0f1f2cf44615409755d6480ce1a429408bf05f7fcfd1aace32c2a61110f475",
+     "shape": [
+      2048,
+      12288
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 4096,
+        "cols": 12288,
+        "ld": 4096
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 4096,
+        "cols": 2048,
+        "ld": 4096
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 12288,
+        "cols": 2048,
+        "ld": 12288
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 12288,
+        "cols": 2048,
+        "ld": 12288
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_256x128 stages=MATMUL_STAGES_128xAUTO customOption=7 clusterShape=CLUSTER_SHAPE_1x2x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_256x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 24,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 7,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        12288,
+        4096
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.2967
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64.M2048N12288K4096.te_split",
+   "meta": {
+    "set": "MM_cublas64",
+    "M": 2048,
+    "N": 12288,
+    "K": 4096,
+    "n": 445,
+    "out": "float32",
+    "use_split_accumulator": true
+   },
+   "runs": [
+    {
+     "kernels": [
+      "Memset (Device)",
+      "nvjet_qqsss_128x160_128x5_2x1_v_bz_coopA_algo2_TNT"
+     ],
+     "gpu_seconds": 0.0081,
+     "sha256": "6f7e31aaa1edd37fa09f87fa8b3294e1628fe4c2363710c9042fb4535294ca67",
+     "shape": [
+      2048,
+      12288
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 4096,
+        "cols": 12288,
+        "ld": 4096
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 4096,
+        "cols": 2048,
+        "ld": 4096
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 12288,
+        "cols": 2048,
+        "ld": 12288
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 12288,
+        "cols": 2048,
+        "ld": 12288
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_128x160 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_2x1x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_128x160",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 29,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 5,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        12288,
+        4096
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.3015
+    },
+    {
+     "gpu_seconds": 0.0005,
+     "sha256": "6f7e31aaa1edd37fa09f87fa8b3294e1628fe4c2363710c9042fb4535294ca67",
+     "shape": [
+      2048,
+      12288
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 4096,
+        "cols": 12288,
+        "ld": 4096
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 4096,
+        "cols": 2048,
+        "ld": 4096
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 12288,
+        "cols": 2048,
+        "ld": 12288
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 12288,
+        "cols": 2048,
+        "ld": 12288
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_128x160 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_2x1x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_128x160",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 29,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 5,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        12288,
+        4096
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.2963
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64.M2048N24576K8192.te",
+   "meta": {
+    "set": "MM_cublas64",
+    "M": 2048,
+    "N": 24576,
+    "K": 8192,
+    "n": 445,
+    "out": "float32",
+    "use_split_accumulator": false
+   },
+   "runs": [
+    {
+     "kernels": [
+      "Memset (Device)",
+      "nvjet_qqsss_320x128_128x3_1x2_h_bz_coopB_TNT"
+     ],
+     "gpu_seconds": 0.0095,
+     "sha256": "2043b04ca96ac43de8730badfe59df265a327d1e3b853811d347be6ba141e6e8",
+     "shape": [
+      2048,
+      24576
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 8192,
+        "cols": 24576,
+        "ld": 8192
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 8192,
+        "cols": 2048,
+        "ld": 8192
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 24576,
+        "cols": 2048,
+        "ld": 24576
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 24576,
+        "cols": 2048,
+        "ld": 24576
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_320x128 stages=MATMUL_STAGES_128xAUTO customOption=7 clusterShape=CLUSTER_SHAPE_1x2x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_320x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 248,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 7,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        24576,
+        8192
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.6005
+    },
+    {
+     "gpu_seconds": 0.0011,
+     "sha256": "2043b04ca96ac43de8730badfe59df265a327d1e3b853811d347be6ba141e6e8",
+     "shape": [
+      2048,
+      24576
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 8192,
+        "cols": 24576,
+        "ld": 8192
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 8192,
+        "cols": 2048,
+        "ld": 8192
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 24576,
+        "cols": 2048,
+        "ld": 24576
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 24576,
+        "cols": 2048,
+        "ld": 24576
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_320x128 stages=MATMUL_STAGES_128xAUTO customOption=7 clusterShape=CLUSTER_SHAPE_1x2x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_320x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 248,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 7,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        24576,
+        8192
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.5918
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64.M2048N24576K8192.te_split",
+   "meta": {
+    "set": "MM_cublas64",
+    "M": 2048,
+    "N": 24576,
+    "K": 8192,
+    "n": 445,
+    "out": "float32",
+    "use_split_accumulator": true
+   },
+   "runs": [
+    {
+     "kernels": [
+      "Memset (Device)",
+      "nvjet_qqsss_144x128_128x6_1x2_h_bz_coopA_algo2_TNN"
+     ],
+     "gpu_seconds": 0.0047,
+     "sha256": "04802bba929f96376f394274f7ca498aa223f5b9f70b6c0458fb8eedd79b2572",
+     "shape": [
+      2048,
+      24576
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 8192,
+        "cols": 24576,
+        "ld": 8192
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 8192,
+        "cols": 2048,
+        "ld": 8192
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 24576,
+        "cols": 2048,
+        "ld": 24576
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 24576,
+        "cols": 2048,
+        "ld": 24576
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_144x128 stages=MATMUL_STAGES_128xAUTO customOption=6 clusterShape=CLUSTER_SHAPE_1x2x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_144x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 184,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 6,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        24576,
+        8192
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.4595
+    },
+    {
+     "gpu_seconds": 0.001,
+     "sha256": "04802bba929f96376f394274f7ca498aa223f5b9f70b6c0458fb8eedd79b2572",
+     "shape": [
+      2048,
+      24576
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 8192,
+        "cols": 24576,
+        "ld": 8192
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 8192,
+        "cols": 2048,
+        "ld": 8192
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 24576,
+        "cols": 2048,
+        "ld": 24576
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 24576,
+        "cols": 2048,
+        "ld": 24576
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_144x128 stages=MATMUL_STAGES_128xAUTO customOption=6 clusterShape=CLUSTER_SHAPE_1x2x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_144x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 184,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 6,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        24576,
+        8192
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.4447
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64_sm120.M1024N1024K64.te",
+   "meta": {
+    "set": "MM_cublas64_sm120",
+    "M": 1024,
+    "N": 1024,
+    "K": 64,
+    "n": 834,
+    "out": "float32",
+    "use_split_accumulator": false
+   },
+   "runs": [
+    {
+     "kernels": [
+      "nvjet_qqsss_128x128_128x6_4x2_v_bz_TNT"
+     ],
+     "gpu_seconds": 0.004,
+     "sha256": "776d974d9a3811c7142964260cf30647084fbd42cf84f63139db29bbfb34dc70",
+     "shape": [
+      1024,
+      1024
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 1024,
+        "ld": 64
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 1024,
+        "ld": 64
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 1024,
+        "cols": 1024,
+        "ld": 1024
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 1024,
+        "cols": 1024,
+        "ld": 1024
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_128xAUTO customOption=1 clusterShape=CLUSTER_SHAPE_4x2x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_128x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 20,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 1,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        1024,
+        1024,
+        64
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.0112
+    },
+    {
+     "gpu_seconds": 0.0003,
+     "sha256": "776d974d9a3811c7142964260cf30647084fbd42cf84f63139db29bbfb34dc70",
+     "shape": [
+      1024,
+      1024
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 1024,
+        "ld": 64
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 1024,
+        "ld": 64
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 1024,
+        "cols": 1024,
+        "ld": 1024
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 1024,
+        "cols": 1024,
+        "ld": 1024
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_128xAUTO customOption=1 clusterShape=CLUSTER_SHAPE_4x2x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_128x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 20,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 1,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        1024,
+        1024,
+        64
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.0094
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64_sm120.M1024N1024K64.te_split",
+   "meta": {
+    "set": "MM_cublas64_sm120",
+    "M": 1024,
+    "N": 1024,
+    "K": 64,
+    "n": 834,
+    "out": "float32",
+    "use_split_accumulator": true
+   },
+   "runs": [
+    {
+     "kernels": [
+      "nvjet_qqsss_128x128_128x6_4x2_v_bz_coopA_algo2_TNT"
+     ],
+     "gpu_seconds": 0.0035,
+     "sha256": "776d974d9a3811c7142964260cf30647084fbd42cf84f63139db29bbfb34dc70",
+     "shape": [
+      1024,
+      1024
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 1024,
+        "ld": 64
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 1024,
+        "ld": 64
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 1024,
+        "cols": 1024,
+        "ld": 1024
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 1024,
+        "cols": 1024,
+        "ld": 1024
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_4x2x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_128x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 20,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 5,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        1024,
+        1024,
+        64
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.0106
+    },
+    {
+     "gpu_seconds": 0.0003,
+     "sha256": "776d974d9a3811c7142964260cf30647084fbd42cf84f63139db29bbfb34dc70",
+     "shape": [
+      1024,
+      1024
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 1024,
+        "ld": 64
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 1024,
+        "ld": 64
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 1024,
+        "cols": 1024,
+        "ld": 1024
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 1024,
+        "cols": 1024,
+        "ld": 1024
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_4x2x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_128x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 20,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 5,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        1024,
+        1024,
+        64
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.0087
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64_sm120.M4096N4096K64.te",
+   "meta": {
+    "set": "MM_cublas64_sm120",
+    "M": 4096,
+    "N": 4096,
+    "K": 64,
+    "n": 834,
+    "out": "float32",
+    "use_split_accumulator": false
+   },
+   "runs": [
+    {
+     "kernels": [
+      "Memset (Device)",
+      "nvjet_qqsss_320x128_128x3_4x1_v_bz_coopB_TNT"
+     ],
+     "gpu_seconds": 0.0039,
+     "sha256": "4cf0af4579b6a323af43851ec27c15a19bea6427fd860655332bc8f23c959a9c",
+     "shape": [
+      4096,
+      4096
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 4096,
+        "ld": 64
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 4096,
+        "ld": 64
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 4096,
+        "cols": 4096,
+        "ld": 4096
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 4096,
+        "cols": 4096,
+        "ld": 4096
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_320x128 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_4x1x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_320x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 248,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 5,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        4096,
+        4096,
+        64
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.1993
+    },
+    {
+     "gpu_seconds": 0.0004,
+     "sha256": "4cf0af4579b6a323af43851ec27c15a19bea6427fd860655332bc8f23c959a9c",
+     "shape": [
+      4096,
+      4096
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 4096,
+        "ld": 64
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 4096,
+        "ld": 64
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 4096,
+        "cols": 4096,
+        "ld": 4096
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 4096,
+        "cols": 4096,
+        "ld": 4096
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_320x128 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_4x1x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_320x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 248,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 5,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        4096,
+        4096,
+        64
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.1954
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64_sm120.M4096N4096K64.te_split",
+   "meta": {
+    "set": "MM_cublas64_sm120",
+    "M": 4096,
+    "N": 4096,
+    "K": 64,
+    "n": 834,
+    "out": "float32",
+    "use_split_accumulator": true
+   },
+   "runs": [
+    {
+     "kernels": [
+      "Memset (Device)",
+      "nvjet_qqsss_128x128_128x6_2x1_v_bz_coopA_algo2_TNT"
+     ],
+     "gpu_seconds": 0.0037,
+     "sha256": "4cf0af4579b6a323af43851ec27c15a19bea6427fd860655332bc8f23c959a9c",
+     "shape": [
+      4096,
+      4096
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 4096,
+        "ld": 64
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 4096,
+        "ld": 64
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 4096,
+        "cols": 4096,
+        "ld": 4096
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 4096,
+        "cols": 4096,
+        "ld": 4096
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_2x1x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_128x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 20,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 5,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        4096,
+        4096,
+        64
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.197
+    },
+    {
+     "gpu_seconds": 0.0003,
+     "sha256": "4cf0af4579b6a323af43851ec27c15a19bea6427fd860655332bc8f23c959a9c",
+     "shape": [
+      4096,
+      4096
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 4096,
+        "ld": 64
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 64,
+        "cols": 4096,
+        "ld": 64
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 4096,
+        "cols": 4096,
+        "ld": 4096
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 4096,
+        "cols": 4096,
+        "ld": 4096
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_128x128 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_2x1x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_128x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 20,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 5,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        4096,
+        4096,
+        64
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.1946
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64_sm120.M2048N5760K1920.te",
+   "meta": {
+    "set": "MM_cublas64_sm120",
+    "M": 2048,
+    "N": 5760,
+    "K": 1920,
+    "n": 834,
+    "out": "float32",
+    "use_split_accumulator": false
+   },
+   "runs": [
+    {
+     "kernels": [
+      "Memset (Device)",
+      "nvjet_qqsss_192x192_128x4_2x1_v_bz_coopB_TNN"
+     ],
+     "gpu_seconds": 0.0061,
+     "sha256": "38b91ccce1dfbc93ea8b9c8c747c5ddbacf40ccb14ae94152f348acd65ce7fdc",
+     "shape": [
+      2048,
+      5760
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 1920,
+        "cols": 5760,
+        "ld": 1920
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 1920,
+        "cols": 2048,
+        "ld": 1920
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 5760,
+        "cols": 2048,
+        "ld": 5760
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 5760,
+        "cols": 2048,
+        "ld": 5760
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_192x192 stages=MATMUL_STAGES_128xAUTO customOption=4 clusterShape=CLUSTER_SHAPE_2x1x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_192x192",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 209,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 4,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        5760,
+        1920
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.1426
+    },
+    {
+     "gpu_seconds": 0.0004,
+     "sha256": "38b91ccce1dfbc93ea8b9c8c747c5ddbacf40ccb14ae94152f348acd65ce7fdc",
+     "shape": [
+      2048,
+      5760
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 1920,
+        "cols": 5760,
+        "ld": 1920
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 1920,
+        "cols": 2048,
+        "ld": 1920
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 5760,
+        "cols": 2048,
+        "ld": 5760
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 5760,
+        "cols": 2048,
+        "ld": 5760
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_192x192 stages=MATMUL_STAGES_128xAUTO customOption=4 clusterShape=CLUSTER_SHAPE_2x1x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_192x192",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 209,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 4,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        5760,
+        1920
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.1091
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64_sm120.M2048N5760K1920.te_split",
+   "meta": {
+    "set": "MM_cublas64_sm120",
+    "M": 2048,
+    "N": 5760,
+    "K": 1920,
+    "n": 834,
+    "out": "float32",
+    "use_split_accumulator": true
+   },
+   "runs": [
+    {
+     "kernels": [
+      "Memset (Device)",
+      "nvjet_qqsss_144x128_128x6_1x2_h_bz_coopA_algo2_TNN"
+     ],
+     "gpu_seconds": 0.0029,
+     "sha256": "3564e61e860f6d8196c1b1cde22fa0962777376ccd260d3b57bd639bdc2b4f46",
+     "shape": [
+      2048,
+      5760
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 1920,
+        "cols": 5760,
+        "ld": 1920
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 1920,
+        "cols": 2048,
+        "ld": 1920
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 5760,
+        "cols": 2048,
+        "ld": 5760
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 5760,
+        "cols": 2048,
+        "ld": 5760
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_144x128 stages=MATMUL_STAGES_128xAUTO customOption=6 clusterShape=CLUSTER_SHAPE_1x2x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_144x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 184,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 6,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        5760,
+        1920
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.106
+    },
+    {
+     "gpu_seconds": 0.0003,
+     "sha256": "3564e61e860f6d8196c1b1cde22fa0962777376ccd260d3b57bd639bdc2b4f46",
+     "shape": [
+      2048,
+      5760
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 1920,
+        "cols": 5760,
+        "ld": 1920
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 1920,
+        "cols": 2048,
+        "ld": 1920
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 5760,
+        "cols": 2048,
+        "ld": 5760
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 5760,
+        "cols": 2048,
+        "ld": 5760
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_144x128 stages=MATMUL_STAGES_128xAUTO customOption=6 clusterShape=CLUSTER_SHAPE_1x2x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_144x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 184,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 6,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        5760,
+        1920
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.1033
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64_sm120.M2048N12288K4096.te",
+   "meta": {
+    "set": "MM_cublas64_sm120",
+    "M": 2048,
+    "N": 12288,
+    "K": 4096,
+    "n": 834,
+    "out": "float32",
+    "use_split_accumulator": false
+   },
+   "runs": [
+    {
+     "kernels": [
+      "Memset (Device)",
+      "nvjet_qqsss_256x128_128x4_1x2_h_bz_coopA_TNT"
+     ],
+     "gpu_seconds": 0.0032,
+     "sha256": "197b05f0e9261c06773a6d5612d2723196042bd30cc572f3c5439563017ae115",
+     "shape": [
+      2048,
+      12288
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 4096,
+        "cols": 12288,
+        "ld": 4096
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 4096,
+        "cols": 2048,
+        "ld": 4096
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 12288,
+        "cols": 2048,
+        "ld": 12288
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 12288,
+        "cols": 2048,
+        "ld": 12288
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_256x128 stages=MATMUL_STAGES_128xAUTO customOption=7 clusterShape=CLUSTER_SHAPE_1x2x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_256x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 24,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 7,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        12288,
+        4096
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.2228
+    },
+    {
+     "gpu_seconds": 0.0005,
+     "sha256": "197b05f0e9261c06773a6d5612d2723196042bd30cc572f3c5439563017ae115",
+     "shape": [
+      2048,
+      12288
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 4096,
+        "cols": 12288,
+        "ld": 4096
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 4096,
+        "cols": 2048,
+        "ld": 4096
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 12288,
+        "cols": 2048,
+        "ld": 12288
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 12288,
+        "cols": 2048,
+        "ld": 12288
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_256x128 stages=MATMUL_STAGES_128xAUTO customOption=7 clusterShape=CLUSTER_SHAPE_1x2x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_256x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 24,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 7,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        12288,
+        4096
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.2199
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64_sm120.M2048N12288K4096.te_split",
+   "meta": {
+    "set": "MM_cublas64_sm120",
+    "M": 2048,
+    "N": 12288,
+    "K": 4096,
+    "n": 834,
+    "out": "float32",
+    "use_split_accumulator": true
+   },
+   "runs": [
+    {
+     "kernels": [
+      "Memset (Device)",
+      "nvjet_qqsss_128x160_128x5_2x1_v_bz_coopA_algo2_TNT"
+     ],
+     "gpu_seconds": 0.003,
+     "sha256": "6f98f63deb204b801d0bd5376851d10e2c512c6db18b8e4ff44cf504a457fe2c",
+     "shape": [
+      2048,
+      12288
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 4096,
+        "cols": 12288,
+        "ld": 4096
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 4096,
+        "cols": 2048,
+        "ld": 4096
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 12288,
+        "cols": 2048,
+        "ld": 12288
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 12288,
+        "cols": 2048,
+        "ld": 12288
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_128x160 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_2x1x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_128x160",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 29,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 5,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        12288,
+        4096
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.2215
+    },
+    {
+     "gpu_seconds": 0.0005,
+     "sha256": "6f98f63deb204b801d0bd5376851d10e2c512c6db18b8e4ff44cf504a457fe2c",
+     "shape": [
+      2048,
+      12288
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 4096,
+        "cols": 12288,
+        "ld": 4096
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 4096,
+        "cols": 2048,
+        "ld": 4096
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 12288,
+        "cols": 2048,
+        "ld": 12288
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 12288,
+        "cols": 2048,
+        "ld": 12288
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_128x160 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_2x1x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_128x160",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 29,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 5,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        12288,
+        4096
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.2211
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64_sm120.M2048N24576K8192.te",
+   "meta": {
+    "set": "MM_cublas64_sm120",
+    "M": 2048,
+    "N": 24576,
+    "K": 8192,
+    "n": 834,
+    "out": "float32",
+    "use_split_accumulator": false
+   },
+   "runs": [
+    {
+     "kernels": [
+      "Memset (Device)",
+      "nvjet_qqsss_320x128_128x3_1x2_h_bz_coopB_TNT"
+     ],
+     "gpu_seconds": 0.0043,
+     "sha256": "5ed578690e4aa38d19bbfc8d6e26e20b9681e5c07d3945aa9aa5b81346227658",
+     "shape": [
+      2048,
+      24576
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 8192,
+        "cols": 24576,
+        "ld": 8192
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 8192,
+        "cols": 2048,
+        "ld": 8192
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 24576,
+        "cols": 2048,
+        "ld": 24576
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 24576,
+        "cols": 2048,
+        "ld": 24576
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_320x128 stages=MATMUL_STAGES_128xAUTO customOption=7 clusterShape=CLUSTER_SHAPE_1x2x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_320x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 248,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 7,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        24576,
+        8192
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.4457
+    },
+    {
+     "gpu_seconds": 0.001,
+     "sha256": "5ed578690e4aa38d19bbfc8d6e26e20b9681e5c07d3945aa9aa5b81346227658",
+     "shape": [
+      2048,
+      24576
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 8192,
+        "cols": 24576,
+        "ld": 8192
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 8192,
+        "cols": 2048,
+        "ld": 8192
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 24576,
+        "cols": 2048,
+        "ld": 24576
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 24576,
+        "cols": 2048,
+        "ld": 24576
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000 fastAccumulationFlag=1",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_320x128 stages=MATMUL_STAGES_128xAUTO customOption=7 clusterShape=CLUSTER_SHAPE_1x2x1",
+       "fast": true,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_320x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 248,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 7,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        24576,
+        8192
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.439
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  },
+  {
+   "id": "MM_cublas64_sm120.M2048N24576K8192.te_split",
+   "meta": {
+    "set": "MM_cublas64_sm120",
+    "M": 2048,
+    "N": 24576,
+    "K": 8192,
+    "n": 834,
+    "out": "float32",
+    "use_split_accumulator": true
+   },
+   "runs": [
+    {
+     "kernels": [
+      "Memset (Device)",
+      "nvjet_qqsss_144x128_128x6_1x2_h_bz_coopA_algo2_TNN"
+     ],
+     "gpu_seconds": 0.0036,
+     "sha256": "6d72a13d68097207756c1a23f5158cc69d2c14dae46a41d1a6628c4035dfe3e6",
+     "shape": [
+      2048,
+      24576
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 8192,
+        "cols": 24576,
+        "ld": 8192
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 8192,
+        "cols": 2048,
+        "ld": 8192
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 24576,
+        "cols": 2048,
+        "ld": 24576
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 24576,
+        "cols": 2048,
+        "ld": 24576
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_144x128 stages=MATMUL_STAGES_128xAUTO customOption=6 clusterShape=CLUSTER_SHAPE_1x2x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_144x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 184,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 6,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        24576,
+        8192
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.4422
+    },
+    {
+     "gpu_seconds": 0.001,
+     "sha256": "6d72a13d68097207756c1a23f5158cc69d2c14dae46a41d1a6628c4035dfe3e6",
+     "shape": [
+      2048,
+      24576
+     ],
+     "dtype": "uint32",
+     "lt": [
+      {
+       "Adesc": {
+        "type": "R_8F_E4M3",
+        "rows": 8192,
+        "cols": 24576,
+        "ld": 8192
+       },
+       "Bdesc": {
+        "type": "R_8F_E4M3",
+        "rows": 8192,
+        "cols": 2048,
+        "ld": 8192
+       },
+       "Cdesc": {
+        "type": "R_32F",
+        "rows": 24576,
+        "cols": 2048,
+        "ld": 24576
+       },
+       "Ddesc": {
+        "type": "R_32F",
+        "rows": 24576,
+        "cols": 2048,
+        "ld": 24576
+       },
+       "computeDesc": "computeType=COMPUTE_32F scaleType=R_32F transa=OP_T aScalePointer=0x7cebcc600000 bScalePointer=0x7cebcc600000",
+       "lt_algo_string": "algoId=66 tile=MATMUL_TILE_144x128 stages=MATMUL_STAGES_128xAUTO customOption=6 clusterShape=CLUSTER_SHAPE_1x2x1",
+       "fast": false,
+       "d_scale": false,
+       "transa": true,
+       "transb": false,
+       "algo": 66,
+       "tile": "MATMUL_TILE_144x128",
+       "stages": "MATMUL_STAGES_128xAUTO",
+       "tile_id": 184,
+       "stages_id": 36,
+       "numSplitsK": 1,
+       "customOption": 6,
+       "reductionScheme": null,
+       "ctaSwizzling": 0,
+       "workspace_bytes": 33554432,
+       "MNK": [
+        2048,
+        24576,
+        8192
+       ]
+      }
+     ],
+     "lt_other": [],
+     "seconds": 0.4396
+    }
+   ],
+   "deterministic": true,
+   "stored": [
+    "block"
+   ]
+  }
+ ]
+}

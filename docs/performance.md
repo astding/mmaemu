@@ -1,8 +1,8 @@
 # Performance
 
 Emulating FP8 tensor-core arithmetic exactly costs far more than running it natively. This page says how mmaemu
-measures speed, what the kernels are expected to reach on the reference GPU, and where the measured release
-numbers are recorded.
+measures speed, what the kernels are expected to reach on the RTX 4060 and an RTX 5070 Ti, and where the measured
+release numbers are recorded.
 
 ## Method
 
@@ -10,8 +10,9 @@ All GPU timings use **CUDA events**. Host timers are not used for kernel through
 `time.perf_counter` ran 6-10% fast against an external clock during the internal review of the prototype, which
 biased every throughput computed from it. The kernel benchmark (`tools/bench_kernels.py` in the repository):
 
-- checks every timed kernel bitwise before timing: v1 against the CPU reference on its first min(M, 64) rows x 256
-  columns, every other kernel against v1 on the full output (a mismatch stops the run and exits 1);
+- checks every timed kernel bitwise before timing, per preset: the preset's IEEE kernel (v1 for `ada`, h1 for
+  `hopper`) against the CPU reference of that preset on the first min(M, 64) rows x 256 columns, every other kernel
+  of the preset against that IEEE kernel on the full output (a mismatch stops the run and exits 1);
 - warms up for at least 1.5 s, then times windows of at least 1.0 s (sustained load: the RTX 4060 reaches its
   power limit and lowers its clock, so short bursts overstate throughput by 5-10%);
 - samples the SM clock and power with `nvidia-smi` and reports TMAC/s (10^12 multiply-accumulates per second) and
@@ -72,14 +73,44 @@ Throughput against M, Evo 2 1B shape:
 | 8192 | 2.928 | 1.535 | 1.343 | 0.630 | 29.9 | 10x |
 
 Small M has too little parallel work for 24 SMs: at M = 16 every kernel runs at an eighth to a quarter of its
-M = 2048 rate, and v9 is as fast as tc3 there (0.384 against 0.378 TMAC/s). AUTO does not depend on M and selects
-tc3 at every size; from M = 256 on tc3 is about 1.9x faster than v9.
+M = 2048 rate, and v9 is as fast as tc3 there (0.384 against 0.378 TMAC/s). AUTO does not depend on M and, for the
+`ada` preset, selects tc3 at every size; from M = 256 on tc3 is about 1.9x faster than v9.
+
+## The hopper preset's kernels h4 and h1
+
+h4 and h1 compute the `hopper` preset (the H100 profiles) with 32-product blocks: h4 with v4's design, h1 with v1's.
+On an RTX 5070 Ti (sm_120, 70 SMs, SM clock 2,707 to 2,722 MHz), at M = 2048 with `gauss40` data and the same method
+as above, after the exactness gate (v1 and h1 bit for bit against the CPU reference of their preset, v4 against v1
+and h4 against h1 on the full output):
+
+| Shape (K x N) | h4 | h1 | v4 | v1 (TMAC/s) |
+|---|---:|---:|---:|---:|
+| Evo 2 1B (1920 x 5760) | 4.133 | 2.026 | 4.006 | 1.947 |
+| Evo 2 7B (4096 x 12288) | 4.635 | 2.047 | 4.333 | 1.979 |
+| Evo 2 40B (8192 x 24576) | 4.619 | 2.045 | 4.392 | 1.981 |
+
+`log:docs/validation_logs/2026-10-16/h4-rtx-5070-ti/README.md`. h4 is 2.0 to 2.3 times as fast as h1 and 3 to 7%
+faster than v4; h1 is as fast as v1.
+
+On the RTX 4060 both were benched on fa0fd90 (and after the profile rename, within 0.01 TMAC/s:
+[log](validation_logs/2026-10-16/rtx-4060-sm89-renamed/README.md)), outside T6: at M = 2048 with `gauss40` data,
+the method above, every kernel from the release fatbins, the median of 5 windows, after the same exactness gate
+([log](validation_logs/2026-10-16/rtx-4060-sm89/README.md)):
+
+| Shape (K x N) | h4 | h1 | v4 | v1 (TMAC/s) |
+|---|---:|---:|---:|---:|
+| Evo 2 1B (1920 x 5760) | 1.35 | 0.69 | 1.35 | 0.63 |
+| Evo 2 7B (4096 x 12288) | 1.41 | 0.69 | 1.37 | 0.63 |
+| Evo 2 40B (8192 x 24576) | 1.41 | 0.69 | 1.37 | 0.63 |
+
+h4 is about twice as fast as h1 there, as fast as v4 on the 1B shape and slightly faster on the 7B and 40B shapes;
+h1 is faster than v1. In the same run v1, v4, v9 and tc3 were within 1% of their T6 rates above.
 
 ## Selection
 
-With `backend="auto"`, mmaemu uses the highest-priority kernel that loads and passes its gates on the device:
-tc3 > v9 > v4 > v1 > reference. `python -m mmaemu info` shows the status of each, with the reason when one is
-unavailable; `python -m mmaemu selftest --force` re-runs the gates.
+With `backend="auto"`, mmaemu uses the highest-priority kernel of the call's preset that loads and passes its gates on
+the device: tc3 > v9 > v4 > v1 > reference for `ada`, h4 > h1 > reference for `hopper`. `python -m mmaemu info` shows the
+status of each, with the reason when one is unavailable; `python -m mmaemu selftest --force` re-runs the gates.
 
 ## What this means end to end
 
@@ -89,9 +120,9 @@ in all (paired measurement). With tc3, about 10x slower than the native GEMM (T6
 pass on the RTX 4060 is expected to take roughly 1.5-2x the native time. That is an estimate from the kernel rates;
 it was not measured.
 
-The measured end-to-end figure is from the RTX 5070 Ti, where AUTO selects v4: an 8,192-bp Evo 2 1B forward pass
-takes about 1.0 s with mmaemu against 0.45 s natively (host timer;
-[evo2-rtx-5070-ti](validation_logs/2026-10-14/evo2-rtx-5070-ti/README.md)). It is a different GPU and
+The measured end-to-end figure is from the RTX 5070 Ti, where AUTO selects v4 for the profile the run used
+(`ada-te`): an 8,192-bp Evo 2 1B forward pass takes about 1.0 s with mmaemu against 0.45 s natively (host
+timer; [evo2-rtx-5070-ti](validation_logs/2026-10-14/evo2-rtx-5070-ti/README.md)). It is a different GPU and
 kernel from the estimate above.
 
 On the CPU the float64 reference is practical for tests and single projections, not for whole models.

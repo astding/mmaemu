@@ -58,7 +58,7 @@ job_lint() {
     step lint "build_fatbin --check" "$V/bin/python" tools/build_fatbin.py --check
     step lint "manifest sha256" "$V/bin/python" tools/check_dist.py --verify-manifest
   else
-    record SKIP lint "build_fatbin --check: no committed fatbins (committed at the release-candidate freeze)"
+    record SKIP lint "build_fatbin --check: no committed fatbins (no mmaemu/backends/cuda/bin/manifest.json)"
   fi
   if grep -rnE 'torch[.]equal[(]' tests tools >"$CI/banned_equal.txt"; then
     record FAIL lint "banned torch.equal call in tests/ or tools/: $(wc -l <"$CI/banned_equal.txt") hit(s), see $CI/banned_equal.txt"

@@ -1,9 +1,13 @@
 # Testing mmaemu
 
-mmaemu's oracle is hardware, not the paper: every bit claim is checked against outputs recorded on an RTX 4060
-(sm_89, 24 SMs, cuBLASLt 12.8.3.14, torch 2.7.1). The full recording set is a read-only dataset of 173 recordings
-("the truth"), the hardware ground truth of the tcemu audit. It is not published. The repository commits a 19 MB
-subset of it, `hw_mini`, so that CI and every user can replay real hardware bits without the dataset.
+mmaemu's oracle is hardware, not the paper: every bit claim is checked against outputs recorded on a reference GPU.
+For the RTX 4060 (sm_89, 24 SMs, cuBLASLt 12.8.3.14, torch 2.7.1) the full recording set is a read-only dataset of
+173 recordings ("the truth"), the hardware ground truth of the tcemu audit. It is not published. The repository
+commits a 19 MB subset of it, `hw_mini`, so that CI and every user can replay real hardware bits without the
+dataset. For the H100 PCIe (sm_90, 114 SMs, the same cuBLASLt and torch) the records are the committed logs of a
+probe and a split-K sweep (`docs/validation_logs/2026-10-15/h100-probe/`,
+`docs/validation_logs/2026-10-16/h100-splitk-sweep/`); `tests/data/h100_mini` holds 124 of the probe's live calls,
+which `tests/test_h100_mini.py` replays.
 
 All commands below assume the repository root as the working directory, and this environment:
 
@@ -11,7 +15,7 @@ All commands below assume the repository root as the working directory, and this
 # a venv with torch 2.7.1+cu128 (pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cu128) and pytest
 export PYTHONPATH=$PWD PYTHONDONTWRITEBYTECODE=1        # test the working tree; never write bytecode
 export MMAEMU_GPU_LOCK="flock -w 3600 /tmp/mmaemu-gpu.lock"   # GPU lock command prefix (default: this, in $TMPDIR)
-GPU=$MMAEMU_GPU_LOCK                                    # exclusive GPU lock; each locked run < 10 min
+GPU=$MMAEMU_GPU_LOCK                                    # exclusive GPU lock; each locked run < 10 min (bash; zsh: ${=GPU})
 ```
 
 nvcc is needed only to build fatbins (`tools/build_fatbin.py`: nvcc >= 12.8 from `--nvcc`, `$NVCC`, `$CUDA_HOME/bin`
@@ -119,10 +123,11 @@ python tools/export_hw_mini.py --truth $MMAEMU_TRUTH_DIR [--ws2 recordings/rtx40
 
 `index.json` holds the following keys:
 
-- `format` ("mmaemu-hwmini/1");
+- `format` ("mmaemu-hwmini/1"), `created_by` (the exporter);
 - `truth_manifest_sha256` (pinned; T1 checks it when `MMAEMU_TRUTH_DIR` is set);
 - `sources`, `selection` (the exporter options);
 - `shards` (name -> sha256, bytes);
+- `call_defaults` (the values that the exact calls of `gemm_call` cases leave out, below);
 - `cases`.
 
 Shards are `<group>.npz` files (`allow_pickle=False`) of raw bit patterns, deduplicated by content. Each case is a
@@ -132,7 +137,7 @@ dict with these keys:
 |---|---|
 | `id` | `<truth id>/<case>/<output>[@<selector>]`, unique |
 | `truth_id` | the truth recording id (`ws2:<id>` for the pre-swap recordings) |
-| `kind` | `"mma"` (instruction level) or `"gemm"` |
+| `kind` | `"mma"` (instruction level), `"gemm"` or `"gemm_call"` (an exact recorded call, see Pre-swap recordings in hw_mini) |
 | `why` | selector: `hw_error`, `project`, `c2fam`, `epilogue`, `evo2`, `combo`, `extra`, `scope`, `one`, `ws2_*` |
 | `src` | truth case/output names and the row/column/tile/vector selection (output coordinates) |
 | `params` | see below |
@@ -295,17 +300,12 @@ $GPU timeout 600 python tools/mutants/run.py --tier gpu                # -> docs
 
 ## Pre-swap recordings in hw_mini
 
-R1 (the API parity grid) is exported in full. The call spec above models these parameters:
-
-- `fmt_a`, `fmt_b`, `out_dtype`, `fast_accum`;
-- scales `scale_a`, `scale_b` (fp32 bits) and `scale_result`;
-- `splitk`;
-- `bias_input` / `bias_dtype`;
-- `scaling`;
-- `explicit_kwargs` / `call_variant`;
-- `requires_grad`;
-- `hw_shape`.
-
-The exporter stops on any other R1 parameter rather than drop it silently. The next exporter change adds the R1
-layouts, storage offsets, scale shapes/dtypes, `out=` variants and zero-dimension calls to the call spec, together
-with tests/test_hw_mini.py.
+R1 (the API parity grid) and R6 (the zero-dimension calls) record an exact description of every call; they are
+exported in full as `gemm_call` cases. Such a case holds `call` and `outputs` in place of `params` and `expect`.
+`call` is the recorded `torch._scaled_mm` call: M, N, K, each operand's dtype, layout, ld padding and storage
+offset, the scales' dtype, shape and value, the bias, `scale_result`, `out=` and grad mode, with the keys whose
+values equal `index.json`'s `call_defaults` left out. Each entry of `outputs` holds the output's name, `out_dtype`,
+`fast` and `expect`, and where needed `splitk`, `scope` (`out:bias`, `out:grad` or `out:row-wise`), `out_dtype_passed`
+(false: the call left `out_dtype` to its default) and a `call_diff` (the call's keys that differ for this output).
+Their `expect` is `{"bits", "shape", "sha256"}` or the exact mmaemu error class as a string. tests/test_hw_mini.py
+rebuilds the strided, offset and column-major operands and replays the exact call.

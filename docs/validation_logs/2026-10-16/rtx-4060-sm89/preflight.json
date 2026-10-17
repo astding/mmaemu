@@ -1,0 +1,181 @@
+{
+ "ok": true,
+ "expect": {
+  "commit": "fa0fd9053169b7892e6be995390261574c400265",
+  "python": "3.12.2",
+  "torch": "2.7.1+cu128",
+  "cuda": "12.8",
+  "gpu": "NVIDIA GeForce RTX 4060",
+  "capability": [
+   8,
+   9
+  ],
+  "sms": 24,
+  "cublaslt": "12.8.3.14",
+  "truth_manifest": "be1270ed64432a1311ab5e2c98ccb69028f72e3424ad4c6148d4cd468fba6695",
+  "driver_branch": "570.",
+  "profile": "ada-rtx4060-torch"
+ },
+ "checks": [
+  {
+   "check": "driver branch R570 (reference: Windows 572.16 via WSL2)",
+   "ok": true,
+   "got": "570.211.01",
+   "want": null
+  },
+  {
+   "check": "python",
+   "ok": true,
+   "got": "3.12.2",
+   "want": "3.12.2"
+  },
+  {
+   "check": "32 installed packages == reference lock",
+   "ok": true,
+   "got": "all equal",
+   "want": null
+  },
+  {
+   "check": "release commit",
+   "ok": true,
+   "got": "fa0fd9053169b7892e6be995390261574c400265",
+   "want": "fa0fd9053169b7892e6be995390261574c400265"
+  },
+  {
+   "check": "fatbins current (build_fatbin --check)",
+   "ok": true,
+   "got": "build_fatbin --check ~/mmaemu-4060/src/mmaemu/backends/cuda/bin: OK (7 modules)",
+   "want": null
+  },
+  {
+   "check": "fatbins == manifest sha256 (check_dist --verify-manifest)",
+   "ok": true,
+   "got": "check_dist: 18 checks, 0 failed",
+   "want": null
+  },
+  {
+   "check": "truth manifest sha256",
+   "ok": true,
+   "got": "be1270ed64432a13...",
+   "want": null
+  },
+  {
+   "check": "torch",
+   "ok": true,
+   "got": "2.7.1+cu128",
+   "want": "2.7.1+cu128"
+  },
+  {
+   "check": "torch CUDA",
+   "ok": true,
+   "got": "12.8",
+   "want": "12.8"
+  },
+  {
+   "check": "one visible CUDA device",
+   "ok": true,
+   "got": 1,
+   "want": null
+  },
+  {
+   "check": "GPU name",
+   "ok": true,
+   "got": "NVIDIA GeForce RTX 4060",
+   "want": "NVIDIA GeForce RTX 4060"
+  },
+  {
+   "check": "capability",
+   "ok": true,
+   "got": [
+    8,
+    9
+   ],
+   "want": [
+    8,
+    9
+   ]
+  },
+  {
+   "check": "SM count",
+   "ok": true,
+   "got": 24,
+   "want": 24
+  },
+  {
+   "check": "mmaemu imported from src/",
+   "ok": true,
+   "got": "~/mmaemu-4060/src/mmaemu/__init__.py",
+   "want": null
+  },
+  {
+   "check": "cuBLASLt version",
+   "ok": true,
+   "got": "12.8.3.14",
+   "want": "12.8.3.14"
+  },
+  {
+   "check": "cuBLASLt loaded from the venv",
+   "ok": true,
+   "got": "~/mmaemu-4060/venv/lib/python3.12/site-packages/nvidia/cublas/lib/libcublasLt.so.12",
+   "want": null
+  },
+  {
+   "check": "profile ada-rtx4060-torch matches this device",
+   "ok": true,
+   "got": "matches",
+   "want": null
+  },
+  {
+   "check": "python -m mmaemu info",
+   "ok": true,
+   "got": "rc=0",
+   "want": null
+  }
+ ],
+ "info": {
+  "host": {
+   "kernel": "6.12.111+deb13-amd64",
+   "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"",
+   "cpu": "Intel(R) Core(TM) i5-6600K CPU @ 3.50GHz"
+  },
+  "nvidia_smi": "NVIDIA GeForce RTX 4060, 570.211.01, 00000000:01:00.0, 8188 MiB, 115.00 W, 3105 MHz, 3, 8, 95.07.36.00.E1",
+  "kernel_module": "NVRM version: NVIDIA UNIX Open Kernel Module for x86_64  570.211.01  Release Build  (dvs-builder@U22-I3-AM27-29-5)  Tue Nov 25 16:23:07 UTC 2025",
+  "driver_patch": "--- /tmp/nv-pci.c.orig\t2026-10-14 21:08:53.202981510 -0700\n+++ kernel-open/nvidia/nv-pci.c\t2026-10-14 21:08:53.206981469 -0700\n@@ -237,7 +237,7 @@\n \n resize:\n     /* Attempt to resize BAR1 to the largest supported size */\n-    r = pci_resize_resource(pci_dev, NV_GPU_BAR1, requested_size);\n+    r = pci_resize_resource(pci_dev, NV_GPU_BAR1, requested_size, 0);  /* mmaemu: kernel 6.12.111 exclude_bars arg, as NVIDIA 615.78.08 */\n \n     if (r) {\n         if (r == -ENOSPC)",
+  "packages": {
+   "filelock": "3.32.3",
+   "fsspec": "2026.7.0",
+   "iniconfig": "2.3.1",
+   "jinja2": "3.1.6",
+   "markupsafe": "3.0.3",
+   "mpmath": "1.3.0",
+   "networkx": "3.6.1",
+   "numpy": "2.5.4",
+   "nvidia-cublas-cu12": "12.8.3.14",
+   "nvidia-cuda-cupti-cu12": "12.8.57",
+   "nvidia-cuda-nvrtc-cu12": "12.8.61",
+   "nvidia-cuda-runtime-cu12": "12.8.57",
+   "nvidia-cudnn-cu12": "9.7.1.26",
+   "nvidia-cufft-cu12": "11.3.3.41",
+   "nvidia-cufile-cu12": "1.13.0.11",
+   "nvidia-curand-cu12": "10.3.9.55",
+   "nvidia-cusolver-cu12": "11.7.2.55",
+   "nvidia-cusparse-cu12": "12.5.7.53",
+   "nvidia-cusparselt-cu12": "0.6.3",
+   "nvidia-nccl-cu12": "2.26.2",
+   "nvidia-nvjitlink-cu12": "12.8.61",
+   "nvidia-nvtx-cu12": "12.8.55",
+   "packaging": "26.3",
+   "pluggy": "1.6.0",
+   "pygments": "2.21.0",
+   "pytest": "9.1.1",
+   "pyyaml": "6.0.3",
+   "setuptools": "78.1.0",
+   "sympy": "1.14.0",
+   "torch": "2.7.1+cu128",
+   "triton": "3.3.1",
+   "typing-extensions": "4.16.0"
+  },
+  "cublaslt_library": "~/mmaemu-4060/venv/lib/python3.12/site-packages/nvidia/cublas/lib/libcublasLt.so.12",
+  "mmaemu_info": "mmaemu 0.1.0  (~/mmaemu-4060/src/mmaemu)\npython 3.12.2  Linux-6.12.111+deb13-amd64-x86_64-with-glibc2.41\ntorch 2.7.1+cu128  (CUDA build 12.8)\nenvironment: MMAEMU_AUDIT_DIR=~/mmaemu-4060/audit, MMAEMU_TRUTH_DIR=~/mmaemu-4060/truth\n\nDevice\n  NVIDIA GeForce RTX 4060  sm_89  24 SMs  7814 MiB\n  display driver 570.211.01  CUDA driver API 12080  cuBLASLt 12.8.3.14  NVRTC [12, 8]\n\nProfiles (default: hopper-h100pcie-torch)\n  ada-rtx4060-torch: preset ada, NVIDIA GeForce RTX 4060, 24 SMs, cuBLASLt 12.8.3.14, caller torch._scaled_mm, workspace 1048576, table heur_rtx4060_lt12.8.3.14; maturity validated, split-K validated; MATCHES this device\n  ada-rtx4060-te: preset ada, NVIDIA GeForce RTX 4060, 24 SMs, cuBLASLt 12.8.3.14, caller transformer_engine, workspace 4194304, table heur_rtx4060_lt12.8.3.14; maturity validated, split-K experimental; MATCHES this device\n  ada-rtx4060-ws0: preset ada, NVIDIA GeForce RTX 4060, 24 SMs, cuBLASLt 12.8.3.14, caller torch._scaled_mm, workspace 0, table heur_rtx4060_lt12.8.3.14; maturity validated, split-K validated; MATCHES this device\n  hopper-h100pcie-torch: preset hopper, NVIDIA H100 PCIe, 114 SMs, cuBLASLt 12.8.3.14, caller torch._scaled_mm, workspace 1048576, table heur_h100pcie_lt12.8.3.14; maturity validated, split-K validated; does not match this device\n  hopper-h100pcie-te: preset hopper, NVIDIA H100 PCIe, 114 SMs, cuBLASLt 12.8.3.14, caller transformer_engine, workspace 33554432, table heur_h100pcie_lt12.8.3.14; maturity validated, split-K experimental; does not match this device\n  hopper-h100pcie-ws0: preset hopper, NVIDIA H100 PCIe, 114 SMs, cuBLASLt 12.8.3.14, caller torch._scaled_mm, workspace 0, table heur_h100pcie_lt12.8.3.14; maturity validated, split-K validated; does not match this device\n  hopper-experimental: preset hopper, None, None SMs, cuBLASLt None, caller torch._scaled_mm, workspace None, table None; maturity experimental, split-K none; does not match this device\n  b200-mma-sync-experimental: preset b200_mma_sync, None, None SMs, cuBLASLt None, caller torch._scaled_mm, workspace None, table None; maturity experimental, split-K none; does not match this device\n\nPresets\n  ada: validated - Ada (sm_89) FP8 mma.sync m16n8k32, validated bit for bit on an RTX 4060\n  b200_mma_sync (alias: blackwell): experimental - fits the toolbox B200 mma.sync (HMMA-rewrite) vectors; NOT a model of sm_120 / RTX 5070 Ti; NOT B200 cuBLAS\n  hopper: validated - cuBLAS FP8 GEMMs (sm_90 nvjet kernels) on an H100 PCIe (114 SMs), cuBLASLt 12.8.3.14, validated bit for bit; not a model of the sm_90 mma.sync instruction\n\nBackends\n  cuda:tc3 (preset ada): available via fatbin, validated here\n  cuda:v9 (preset ada): available via fatbin, validated here\n  cuda:v4 (preset ada): available via fatbin, validated here\n  cuda:h4 (preset hopper): available via fatbin, validated here\n  cuda:v1 (preset ada): available via fatbin, validated here\n  cuda:h1 (preset hopper): available via fatbin, validated here\n  reference: available via torch, validated here - float64 model on the tensors' device\n\nFatbins (nvcc 12.8.61, flags -O3 --fmad=false)\n  h1: SASS [75, 80, 86, 89, 90, 100, 120] PTX 75 sha256 OK\n  h4: SASS [80, 86, 89, 90, 100, 120] PTX 80 sha256 OK\n  probes: SASS [80, 86, 89, 90, 100, 120] PTX None sha256 OK\n  tc3: SASS [80, 86, 89] PTX None sha256 OK\n  v1: SASS [75, 80, 86, 89, 90, 100, 120] PTX 75 sha256 OK\n  v4: SASS [80, 86, 89, 90, 100, 120] PTX 80 sha256 OK\n  v9: SASS [80, 86, 89, 90, 100, 120] PTX None sha256 OK\n\nSplit-K tables\n  heur_h100pcie_lt12.8.3.14: heur_h100pcie_lt12.8.3.14.json (76561 B, sha256 ae6f103ba0f7), heur_h100pcie_lt12.8.3.14.npz (224792 B, sha256 17a191951c8d); rows 1767416\n  heur_rtx4060_lt12.8.3.14: heur_rtx4060_lt12.8.3.14.json (33291 B, sha256 657607b2a2e2), heur_rtx4060_lt12.8.3.14.npz (236342 B, sha256 304203efc0f1); rows 1228448\n  (other package data): verified_split_combos.json, verified_split_combos_h100pcie_lt12.8.3.14.json"
+ }
+}

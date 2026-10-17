@@ -1,0 +1,26 @@
+examples/evo2_offload.py of 2648bbae0fd957f0474802455da77fbc770c4dc2 clean=0
+brca1_40.fasta: 20 reference and 20 variant windows
+test 1b ada-te rc=0
+score 1b ada-te rc=0
+test 1b hopper-te rc=0
+score 1b hopper-te rc=0
+1b ada-te p0 logits sha256 + loss + accuracy equal: True
+1b ada-te p1 logits sha256 + loss + accuracy equal: True
+1b ada-te p2 logits sha256 + loss + accuracy equal: True
+1b ada-te p3 logits sha256 + loss + accuracy equal: True
+1b ada-te mean loss 0.502685546875 profile ada-te
+1b ada-te 40 BRCA1 scores bit for bit equal: True
+1b hopper-te p0 logits sha256 + loss + accuracy equal: True
+1b hopper-te p1 logits sha256 + loss + accuracy equal: True
+1b hopper-te p2 logits sha256 + loss + accuracy equal: True
+1b hopper-te p3 logits sha256 + loss + accuracy equal: True
+1b hopper-te mean loss 0.502197265625 profile hopper-te
+1b hopper-te 40 BRCA1 scores bit for bit equal: True
+FAILURES 0
+test 40b hopper-te rc=0
+40b hopper-te p0 logits sha256 + loss + accuracy equal: True
+40b hopper-te p1 logits sha256 + loss + accuracy equal: True
+40b hopper-te p2 logits sha256 + loss + accuracy equal: True
+40b hopper-te p3 logits sha256 + loss + accuracy equal: True
+40b hopper-te mean loss 0.216064453125 profile hopper-te
+FAILURES 0

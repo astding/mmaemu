@@ -1,0 +1,32 @@
+fatbins under test: <src>/mmaemu/backends/cuda/bin
+test_scaffold                                    rc=0      2s  2 passed, 103 deselected in 1.65s
+test_backend_reference                           rc=0      7s  3 passed, 12 deselected, 2 warnings in 5.40s
+test_epilogue                                    rc=0      3s  5 passed, 349 deselected in 2.26s
+test_kernels_ieee                                rc=0     19s  167 passed in 18.26s
+test_cuda_runtime                                rc=0     43s  19 passed in 43.85s
+test_fast_kernels                                rc=0     16s  91 passed, 91 skipped in 14.16s
+test_gates_hmma                                  rc=0      1s  1 passed, 3 skipped, 17 deselected in 1.59s
+test_live_cublas                                 rc=0      3s  2 skipped in 1.90s
+test_hw_mini                                     rc=0    144s  3 passed, 3 skipped, 2520 deselected, 3 warnings in 148.15s (0:02:28)
+test_device_independence                         rc=0     13s  27 passed, 111 skipped in 12.08s
+test_h100_mini                                   rc=0     24s  310 passed, 125 deselected in 23.50s
+test_backend_selection                           rc=5      2s  
+di_full_reference_00-01-02-03-04-05-06           rc=0     38s  7 passed, 131 deselected in 39.23s
+di_full_reference_07-08-09-10-11-12-13           rc=0     14s  7 passed, 131 deselected in 12.13s
+di_full_reference_14-15-16-17-18-19-20           rc=0     12s  7 passed, 131 deselected in 12.03s
+di_full_cuda_00-01-02-03-04-05-06                rc=0      2s  7 skipped, 131 deselected in 1.45s
+di_full_cuda_07-08-09-10-11-12-13                rc=0      3s  7 skipped, 131 deselected in 1.67s
+di_full_cuda_14-15-16-17-18-19-20                rc=0      2s  7 skipped, 131 deselected in 1.47s
+di_full_cuda_v1_00-01-02-03-04-05-06             rc=0      5s  7 passed, 131 deselected in 3.47s
+di_full_cuda_v1_07-08-09-10-11-12-13             rc=0      4s  7 passed, 131 deselected in 3.52s
+di_full_cuda_v1_14-15-16-17-18-19-20             rc=0      5s  7 passed, 131 deselected in 3.38s
+di_full_cuda_v4_00-01-02-03-04-05-06             rc=0      5s  7 passed, 131 deselected in 3.49s
+di_full_cuda_v4_07-08-09-10-11-12-13             rc=0      3s  7 passed, 131 deselected in 3.92s
+di_full_cuda_v4_14-15-16-17-18-19-20             rc=0      5s  7 passed, 131 deselected in 3.77s
+di_full_cuda_v9_00-01-02-03-04-05-06             rc=0      3s  7 skipped, 131 deselected in 1.55s
+di_full_cuda_v9_07-08-09-10-11-12-13             rc=0      2s  7 skipped, 131 deselected in 1.48s
+di_full_cuda_v9_14-15-16-17-18-19-20             rc=0      2s  7 skipped, 131 deselected in 1.95s
+di_full_cuda_tc3_00-01-02-03-04-05-06            rc=0      3s  7 skipped, 131 deselected in 1.98s
+di_full_cuda_tc3_07-08-09-10-11-12-13            rc=0      3s  7 skipped, 131 deselected in 1.96s
+di_full_cuda_tc3_14-15-16-17-18-19-20            rc=0      2s  7 skipped, 131 deselected in 1.96s
+logs: <out>/t3-rtx-5070-ti-sm120

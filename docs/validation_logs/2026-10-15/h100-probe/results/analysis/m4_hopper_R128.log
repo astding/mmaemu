@@ -1,0 +1,2 @@
+m4 {"model": "hopper", "R": 128, "jobs": 1450, "equal": 374, "different": 404, "not_modelled": 645, "errors": 27, "input_fault": [], "by_tag": {"evo2": {"equal": 120, "different": 0, "not_modelled": 0}, "c5": {"equal": 172, "different": 22, "not_modelled": 19}, "longk": {"equal": 52, "different": 4, "not_modelled": 4}, "smallk": {"equal": 30, "different": 0, "not_modelled": 0}, "m6": {"equal": 0, "different": 378, "not_modelled": 622}}}
+wrote <probe-work>/an_h100_m4.json

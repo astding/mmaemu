@@ -1,34 +1,59 @@
 {
  "format": "mmaemu-release-validation/1",
- "created_utc": "2026-10-15T23:11:43+00:00",
+ "created_utc": "2026-10-17T11:19:06+00:00",
  "host": {
   "platform": "Linux-6.12.111+deb13-amd64-x86_64-with-glibc2.41",
   "python": "3.12.2",
   "machine": "x86_64"
  },
- "source_tree_commit": "85c780d283c76512c858a43cdd2e880e03f04dfe",
+ "source_tree_commit": "59b37e1214ac18355bd2778757faf25c38abca99",
  "checks": [
   {
    "name": "venv",
    "status": "PASS",
-   "summary": "uv, torch==2.7.1 (1.6 s)"
+   "summary": "uv, torch==2.7.1 (1.5 s)"
   },
   {
    "name": "environment",
    "status": "PASS",
    "reason": "",
-   "summary": "PATH=/tmp/mmaemu-t7-kvvy9m5h/venv/bin; nvcc not found; CUDA_HOME unset; NVIDIA GeForce RTX 4060 cc [8, 9] torch 2.7.1+cu128",
+   "summary": "PATH=/tmp/mmaemu-t7-lyfm8gi2/venv/bin; nvcc not found; CUDA_HOME unset; NVIDIA GeForce RTX 4060 cc [8, 9] torch 2.7.1+cu128",
    "nvcc_on_path": null,
-   "path": "/tmp/mmaemu-t7-kvvy9m5h/venv/bin",
-   "seconds": 4.19
+   "path": "/tmp/mmaemu-t7-lyfm8gi2/venv/bin",
+   "seconds": 4.18
   },
   {
    "name": "install",
    "status": "PASS",
-   "summary": "mmaemu 0.1.0 from /tmp/mmaemu-t7-kvvy9m5h/venv/lib/python3.12/site-packages/mmaemu/__init__.py",
+   "summary": "mmaemu 0.1.0 from /tmp/mmaemu-t7-lyfm8gi2/venv/lib/python3.12/site-packages/mmaemu/__init__.py",
    "reason": "",
-   "seconds": 0.02,
+   "seconds": 0.03,
    "fatbins_in_wheel": {
+    "h1": {
+     "sass_archs": [
+      75,
+      80,
+      86,
+      89,
+      90,
+      100,
+      120
+     ],
+     "ptx_arch": 75,
+     "sha256": "261a760569d7672a815348d037129a1297b03b66b7d06a947d57479a7b0fc5a2"
+    },
+    "h4": {
+     "sass_archs": [
+      80,
+      86,
+      89,
+      90,
+      100,
+      120
+     ],
+     "ptx_arch": 80,
+     "sha256": "7e1f96c33d602f22251b378620741887ccdaad42d05c9c1e440cfaae4e534b39"
+    },
     "probes": {
      "sass_archs": [
       80,
@@ -92,44 +117,69 @@
   {
    "name": "info",
    "status": "PASS",
-   "seconds": 4.86,
+   "seconds": 4.88,
    "reason": "",
-   "summary": "profiles matching: ['ada-rtx4060-torch', 'ada-rtx4060-te', 'ada-rtx4060-ws0']"
+   "summary": "profiles matching: ['ada', 'ada-te', 'ada-ws0']"
   },
   {
    "name": "selftest",
    "status": "PASS",
-   "seconds": 4.94,
-   "summary": "verdict PASS; tc3=pass, v9=pass, v4=pass, v1=pass",
+   "seconds": 4.89,
+   "summary": "verdict PASS; tc3=pass, v9=pass, v4=pass, h4=pass, v1=pass, h1=pass",
    "reason": ""
   },
   {
    "name": "conformance",
    "status": "PASS",
-   "seconds": 13.88,
-   "summary": "kernels ['cuda:v1', 'cuda:v4', 'cuda:v9', 'cuda:tc3'] (skipped {}): 897 comparisons, 9985692 outputs, 0 mismatching",
+   "seconds": 17.27,
+   "summary": "kernels ['cuda:v1', 'cuda:v4', 'cuda:v9', 'cuda:tc3', 'cuda:h1', 'cuda:h4'] (skipped {}): 1346 comparisons, 14986730 outputs, 0 mismatching",
    "reason": ""
   },
   {
    "name": "loader",
    "status": "PASS",
-   "summary": "sources after use: {'cuda:tc3': 'fatbin', 'cuda:v9': 'fatbin', 'cuda:v4': 'fatbin', 'cuda:v1': 'fatbin', 'reference': 'torch'}; fatbin dir /tmp/mmaemu-t7-kvvy9m5h/venv/lib/python3.12/site-packages/mmaemu/backends/cuda/bin",
+   "summary": "sources after use: {'cuda:tc3': 'fatbin', 'cuda:v9': 'fatbin', 'cuda:v4': 'fatbin', 'cuda:h4': 'fatbin', 'cuda:v1': 'fatbin', 'cuda:h1': 'fatbin', 'reference': 'torch'}; fatbin dir /tmp/mmaemu-t7-lyfm8gi2/venv/lib/python3.12/site-packages/mmaemu/backends/cuda/bin",
    "reason": ""
   },
   {
    "name": "evo2",
    "status": "PASS",
-   "seconds": 8.83,
-   "summary": "evo2.evo2_1b_w2k call00 [2048, 5760, 1920]: bf16 output == native True, accumulator sha256 == recorded True (backend cuda:tc3, split SplitDecision(S=1, scheme='none', source='table', verified=True, table_id='heur_rtx4060_lt12.8.3.14', note='table row: algo 60, tile 18, numSplitsK 1, customOption 0'))",
+   "seconds": 9.64,
+   "summary": "evo2.evo2_1b_w2k call00 [2048, 5760, 1920]: ada bf16 output == native True, accumulator sha256 == recorded True (backend cuda:tc3, split SplitDecision(S=1, scheme='none', source='table', verified=True, table_id='heur_rtx4060_lt12.8.3.14', note='table row: algo 60, tile 18, numSplitsK 1, customOption 0')); hopper: acc_fast == H100 (cuda:h4), y_fast == H100 (cuda:h4), acc_slow == H100 (cuda:h4), y_slow == H100 (cuda:h4)",
    "reason": ""
   }
  ],
  "wheel": {
   "file": "mmaemu-0.1.0-py3-none-any.whl",
-  "sha256": "a619cb8413681a5e6ffb86c5a2eafb416f372a4ec4dd1c6f0324b541582eb3ce",
-  "bytes": 890386,
+  "sha256": "f9725a7334901574debde819b9f285ca00443e2b6c7f6ccc9a7993ec0cf7e44f",
+  "bytes": 1360561,
   "version": "0.1.0",
   "fatbins": {
+   "h1": {
+    "sass_archs": [
+     75,
+     80,
+     86,
+     89,
+     90,
+     100,
+     120
+    ],
+    "ptx_arch": 75,
+    "sha256": "261a760569d7672a815348d037129a1297b03b66b7d06a947d57479a7b0fc5a2"
+   },
+   "h4": {
+    "sass_archs": [
+     80,
+     86,
+     89,
+     90,
+     100,
+     120
+    ],
+    "ptx_arch": 80,
+    "sha256": "7e1f96c33d602f22251b378620741887ccdaad42d05c9c1e440cfaae4e534b39"
+   },
    "probes": {
     "sass_archs": [
      80,
@@ -198,7 +248,7 @@
     "-q",
     "--python",
     "~/mmaemu-4060/venv/bin/python",
-    "/tmp/mmaemu-t7-kvvy9m5h/venv"
+    "/tmp/mmaemu-t7-lyfm8gi2/venv"
    ],
    "returncode": 0,
    "stderr_tail": ""
@@ -210,7 +260,7 @@
     "install",
     "-q",
     "--python",
-    "/tmp/mmaemu-t7-kvvy9m5h/venv/bin/python",
+    "/tmp/mmaemu-t7-lyfm8gi2/venv/bin/python",
     "torch==2.7.1",
     "--index-url",
     "https://download.pytorch.org/whl/cu128"
@@ -225,7 +275,7 @@
     "install",
     "-q",
     "--python",
-    "/tmp/mmaemu-t7-kvvy9m5h/venv/bin/python",
+    "/tmp/mmaemu-t7-lyfm8gi2/venv/bin/python",
     "~/mmaemu-4060/src/dist/mmaemu-0.1.0-py3-none-any.whl",
     "numpy"
    ],
@@ -237,7 +287,7 @@
   "tool": "uv",
   "torch_requirement": "torch==2.7.1",
   "torch_index": "https://download.pytorch.org/whl/cu128",
-  "seconds": 1.6
+  "seconds": 1.5
  },
  "device": {
   "torch": "2.7.1+cu128",
@@ -249,22 +299,22 @@
    9
   ],
   "sm_count": 24,
-  "executable": "/tmp/mmaemu-t7-kvvy9m5h/venv/bin/python"
+  "executable": "/tmp/mmaemu-t7-lyfm8gi2/venv/bin/python"
  },
  "info_before_selftest": {
   "format": "mmaemu-info/1",
   "problems": [],
   "mmaemu": {
    "version": "0.1.0",
-   "location": "/tmp/mmaemu-t7-kvvy9m5h/venv/lib/python3.12/site-packages/mmaemu"
+   "location": "/tmp/mmaemu-t7-lyfm8gi2/venv/lib/python3.12/site-packages/mmaemu"
   },
   "python": {
    "version": "3.12.2",
-   "executable": "/tmp/mmaemu-t7-kvvy9m5h/venv/bin/python",
+   "executable": "/tmp/mmaemu-t7-lyfm8gi2/venv/bin/python",
    "platform": "Linux-6.12.111+deb13-amd64-x86_64-with-glibc2.41"
   },
   "env": {
-   "MMAEMU_CACHE_DIR": "/tmp/mmaemu-t7-kvvy9m5h/mmaemu-cache"
+   "MMAEMU_CACHE_DIR": "/tmp/mmaemu-t7-lyfm8gi2/mmaemu-cache"
   },
   "device": {
    "torch": "2.7.1+cu128",
@@ -304,14 +354,14 @@
    },
    {
     "name": "hopper",
-    "maturity": "experimental",
-    "validated_scope": "instruction level only, toolbox H100/H200 vectors with c = 0; how c enters and all GEMM-level behaviour are not validated"
+    "maturity": "validated",
+    "validated_scope": "cuBLAS FP8 GEMMs (sm_90 nvjet kernels) on an H100 PCIe (114 SMs), cuBLASLt 12.8.3.14, validated bit for bit; not a model of the sm_90 mma.sync instruction"
    }
   ],
-  "default_profile": "ada-rtx4060-torch",
+  "default_profile": "hopper",
   "profiles": [
    {
-    "name": "ada-rtx4060-torch",
+    "name": "ada",
     "preset": "ada",
     "gpu_name": "NVIDIA GeForce RTX 4060",
     "capability": [
@@ -330,7 +380,7 @@
     "matches_device": true
    },
    {
-    "name": "ada-rtx4060-te",
+    "name": "ada-te",
     "preset": "ada",
     "gpu_name": "NVIDIA GeForce RTX 4060",
     "capability": [
@@ -349,7 +399,7 @@
     "matches_device": true
    },
    {
-    "name": "ada-rtx4060-ws0",
+    "name": "ada-ws0",
     "preset": "ada",
     "gpu_name": "NVIDIA GeForce RTX 4060",
     "capability": [
@@ -366,6 +416,63 @@
     "maturity": "validated",
     "splitk_maturity": "validated",
     "matches_device": true
+   },
+   {
+    "name": "hopper",
+    "preset": "hopper",
+    "gpu_name": "NVIDIA H100 PCIe",
+    "capability": [
+     9,
+     0
+    ],
+    "sm_count": 114,
+    "cublaslt_version": "12.8.3.14",
+    "caller": "torch._scaled_mm",
+    "torch_version": "2.7.1+cu128",
+    "workspace_bytes": 1048576,
+    "align": null,
+    "splitk_table": "heur_h100pcie_lt12.8.3.14",
+    "maturity": "validated",
+    "splitk_maturity": "validated",
+    "matches_device": false
+   },
+   {
+    "name": "hopper-te",
+    "preset": "hopper",
+    "gpu_name": "NVIDIA H100 PCIe",
+    "capability": [
+     9,
+     0
+    ],
+    "sm_count": 114,
+    "cublaslt_version": "12.8.3.14",
+    "caller": "transformer_engine",
+    "torch_version": "2.7.1+cu128",
+    "workspace_bytes": 33554432,
+    "align": 256,
+    "splitk_table": "heur_h100pcie_lt12.8.3.14",
+    "maturity": "validated",
+    "splitk_maturity": "experimental",
+    "matches_device": false
+   },
+   {
+    "name": "hopper-ws0",
+    "preset": "hopper",
+    "gpu_name": "NVIDIA H100 PCIe",
+    "capability": [
+     9,
+     0
+    ],
+    "sm_count": 114,
+    "cublaslt_version": "12.8.3.14",
+    "caller": "torch._scaled_mm",
+    "torch_version": "2.7.1+cu128",
+    "workspace_bytes": 0,
+    "align": null,
+    "splitk_table": "heur_h100pcie_lt12.8.3.14",
+    "maturity": "validated",
+    "splitk_maturity": "validated",
+    "matches_device": false
    },
    {
     "name": "hopper-experimental",
@@ -408,6 +515,22 @@
   ],
   "tables": [
    {
+    "name": "heur_h100pcie_lt12.8.3.14",
+    "files": [
+     {
+      "file": "heur_h100pcie_lt12.8.3.14.json",
+      "bytes": 76561,
+      "sha256": "ae6f103ba0f7e1a1d818eaaa882b7c2078dd0802911d1dca8e7e1021a44f4ec6"
+     },
+     {
+      "file": "heur_h100pcie_lt12.8.3.14.npz",
+      "bytes": 224792,
+      "sha256": "17a191951c8dc1868e0c697d0cf65aebb38e6962faea5a345c722a88348c20a1"
+     }
+    ],
+    "rows": 1767416
+   },
+   {
     "name": "heur_rtx4060_lt12.8.3.14",
     "files": [
      {
@@ -428,6 +551,9 @@
     "files": [
      {
       "file": "verified_split_combos.json"
+     },
+     {
+      "file": "verified_split_combos_h100pcie_lt12.8.3.14.json"
      }
     ]
    }
@@ -448,7 +574,7 @@
        "mismatches": 0,
        "first_mismatch": null
       },
-      "seconds": 0.019390127999940887,
+      "seconds": 0.01956698001595214,
       "cached": false
      },
      {
@@ -468,12 +594,12 @@
         "signs": 2,
         "mismatches": 0,
         "tiles": 128,
-        "seconds": 0.0087
+        "seconds": 0.0086
        },
        "xpass": {
         "outputs": 974848,
         "mismatches": 0,
-        "seconds": 0.2165
+        "seconds": 0.2209
        },
        "gemm": {
         "bell_48x40x256": 0,
@@ -484,10 +610,10 @@
         "tiny_17x9x80": 0,
         "bell_130x136x1936": 0,
         "mixed_130x136x1936": 0,
-        "seconds": 0.0472
+        "seconds": 0.0464
        }
       },
-      "seconds": 0.2724514739966253,
+      "seconds": 0.27599046801333316,
       "cached": false
      }
     ],
@@ -508,7 +634,7 @@
        "mismatches": 0,
        "first_mismatch": null
       },
-      "seconds": 0.00041067499842029065,
+      "seconds": 0.0004984799888916314,
       "cached": false
      },
      {
@@ -537,7 +663,7 @@
         "ratio_violations": 0,
         "offset_violations": 0,
         "mapping_violations": 0,
-        "seconds": 0.1323
+        "seconds": 0.1328
        },
        "gemm": {
         "bell_48x40x256": 0,
@@ -551,7 +677,7 @@
         "seconds": 0.0209
        }
       },
-      "seconds": 0.15321987400238868,
+      "seconds": 0.15380597300827503,
       "cached": false
      }
     ],
@@ -572,7 +698,28 @@
        "mismatches": 0,
        "first_mismatch": null
       },
-      "seconds": 0.0004619270039256662,
+      "seconds": 0.0004585770075209439,
+      "cached": false
+     }
+    ],
+    "reason": ""
+   },
+   "cuda:h4": {
+    "name": "cuda:h4",
+    "available": true,
+    "source": "fatbin",
+    "validated_here": true,
+    "gates": [
+     {
+      "name": "smoke",
+      "passed": true,
+      "reason": "",
+      "details": {
+       "outputs": 4224,
+       "mismatches": 0,
+       "first_mismatch": null
+      },
+      "seconds": 0.005381711001973599,
       "cached": false
      }
     ],
@@ -593,7 +740,28 @@
        "mismatches": 0,
        "first_mismatch": null
       },
-      "seconds": 0.00039359201036859304,
+      "seconds": 0.000432166998507455,
+      "cached": false
+     }
+    ],
+    "reason": ""
+   },
+   "cuda:h1": {
+    "name": "cuda:h1",
+    "available": true,
+    "source": "fatbin",
+    "validated_here": true,
+    "gates": [
+     {
+      "name": "smoke",
+      "passed": true,
+      "reason": "",
+      "details": {
+       "outputs": 4224,
+       "mismatches": 0,
+       "first_mismatch": null
+      },
+      "seconds": 0.0004253969818819314,
       "cached": false
      }
     ],
@@ -609,6 +777,61 @@
    }
   },
   "kernels": {
+   "h1": {
+    "gated": false,
+    "validated_on": [
+     [
+      12,
+      0
+     ],
+     [
+      8,
+      9
+     ]
+    ],
+    "sass_archs": [
+     75,
+     80,
+     86,
+     89,
+     90,
+     100,
+     120
+    ],
+    "ptx_arch": 75,
+    "min_cc": [
+     7,
+     5
+    ],
+    "preset": "hopper"
+   },
+   "h4": {
+    "gated": false,
+    "validated_on": [
+     [
+      12,
+      0
+     ],
+     [
+      8,
+      9
+     ]
+    ],
+    "sass_archs": [
+     80,
+     86,
+     89,
+     90,
+     100,
+     120
+    ],
+    "ptx_arch": 80,
+    "min_cc": [
+     8,
+     0
+    ],
+    "preset": "hopper"
+   },
    "tc3": {
     "gated": true,
     "validated_on": [
@@ -626,7 +849,8 @@
     "min_cc": [
      8,
      0
-    ]
+    ],
+    "preset": "ada"
    },
    "v1": {
     "gated": false,
@@ -653,7 +877,8 @@
     "min_cc": [
      7,
      5
-    ]
+    ],
+    "preset": "ada"
    },
    "v4": {
     "gated": false,
@@ -679,7 +904,8 @@
     "min_cc": [
      8,
      0
-    ]
+    ],
+    "preset": "ada"
    },
    "v9": {
     "gated": true,
@@ -701,7 +927,8 @@
     "min_cc": [
      8,
      0
-    ]
+    ],
+    "preset": "ada"
    }
   },
   "kernel_discovery_notes": [],
@@ -714,6 +941,33 @@
     "--fmad=false"
    ],
    "modules": {
+    "h1": {
+     "file": "h1.fatbin",
+     "sass_archs": [
+      75,
+      80,
+      86,
+      89,
+      90,
+      100,
+      120
+     ],
+     "ptx_arch": 75,
+     "sha256_ok": true
+    },
+    "h4": {
+     "file": "h4.fatbin",
+     "sass_archs": [
+      80,
+      86,
+      89,
+      90,
+      100,
+      120
+     ],
+     "ptx_arch": 80,
+     "sha256_ok": true
+    },
     "probes": {
      "file": "probes.fatbin",
      "sass_archs": [
@@ -823,7 +1077,7 @@
        "mismatches": 0,
        "first_mismatch": null
       },
-      "seconds": 0.02468706900253892,
+      "seconds": 0.025049807998584583,
       "cached": false
      },
      {
@@ -843,12 +1097,12 @@
         "signs": 2,
         "mismatches": 0,
         "tiles": 128,
-        "seconds": 0.0087
+        "seconds": 0.0086
        },
        "xpass": {
         "outputs": 974848,
         "mismatches": 0,
-        "seconds": 0.22
+        "seconds": 0.2145
        },
        "gemm": {
         "bell_48x40x256": 0,
@@ -859,10 +1113,10 @@
         "tiny_17x9x80": 0,
         "bell_130x136x1936": 0,
         "mixed_130x136x1936": 0,
-        "seconds": 0.0477
+        "seconds": 0.0468
        }
       },
-      "seconds": 0.2763915240066126,
+      "seconds": 0.26990714599378407,
       "cached": false
      }
     ]
@@ -881,7 +1135,7 @@
        "mismatches": 0,
        "first_mismatch": null
       },
-      "seconds": 0.00044943099783267826,
+      "seconds": 0.00040829298086464405,
       "cached": false
      },
      {
@@ -910,7 +1164,7 @@
         "ratio_violations": 0,
         "offset_violations": 0,
         "mapping_violations": 0,
-        "seconds": 0.1325
+        "seconds": 0.132
        },
        "gemm": {
         "bell_48x40x256": 0,
@@ -921,10 +1175,10 @@
         "tiny_17x9x80": 0,
         "bell_130x136x1936": 0,
         "mixed_130x136x1936": 0,
-        "seconds": 0.021
+        "seconds": 0.0212
        }
       },
-      "seconds": 0.15354055700299796,
+      "seconds": 0.15327929897466674,
       "cached": false
      }
     ]
@@ -943,7 +1197,26 @@
        "mismatches": 0,
        "first_mismatch": null
       },
-      "seconds": 0.0004648020112654194,
+      "seconds": 0.000456604000646621,
+      "cached": false
+     }
+    ]
+   },
+   "h4": {
+    "required": true,
+    "why": "IEEE-exact kernel: must pass on every supported device",
+    "passed": true,
+    "gates": [
+     {
+      "name": "smoke",
+      "passed": true,
+      "reason": "",
+      "details": {
+       "outputs": 4224,
+       "mismatches": 0,
+       "first_mismatch": null
+      },
+      "seconds": 0.005345509009202942,
       "cached": false
      }
     ]
@@ -962,7 +1235,26 @@
        "mismatches": 0,
        "first_mismatch": null
       },
-      "seconds": 0.00040712700865697116,
+      "seconds": 0.00043489597737789154,
+      "cached": false
+     }
+    ]
+   },
+   "h1": {
+    "required": true,
+    "why": "IEEE-exact kernel: must pass on every supported device",
+    "passed": true,
+    "gates": [
+     {
+      "name": "smoke",
+      "passed": true,
+      "reason": "",
+      "details": {
+       "outputs": 4224,
+       "mismatches": 0,
+       "first_mismatch": null
+      },
+      "seconds": 0.00042339699575677514,
       "cached": false
      }
     ]
@@ -976,11 +1268,13 @@
    "cuda:v1",
    "cuda:v4",
    "cuda:v9",
-   "cuda:tc3"
+   "cuda:tc3",
+   "cuda:h1",
+   "cuda:h4"
   ],
   "skipped": {},
-  "cases": 897,
-  "outputs": 9985692,
+  "cases": 1346,
+  "outputs": 14986730,
   "mismatches": [],
   "status_before": {
    "cuda:tc3": {
@@ -1001,7 +1295,19 @@
     "validated_here": true,
     "reason": ""
    },
+   "cuda:h4": {
+    "source": "fatbin",
+    "available": true,
+    "validated_here": true,
+    "reason": ""
+   },
    "cuda:v1": {
+    "source": "fatbin",
+    "available": true,
+    "validated_here": true,
+    "reason": ""
+   },
+   "cuda:h1": {
     "source": "fatbin",
     "available": true,
     "validated_here": true,
@@ -1014,7 +1320,19 @@
     "reason": "float64 model on the tensors' device"
    }
   },
-  "seconds": 5.5,
+  "presets": {
+   "cuda:v1": "ada",
+   "cuda:v4": "ada",
+   "cuda:v9": "ada",
+   "cuda:tc3": "ada",
+   "cuda:h1": "hopper",
+   "cuda:h4": "hopper"
+  },
+  "auto_backends": {
+   "ada": "cuda:tc3",
+   "hopper": "cuda:h4"
+  },
+  "seconds": 8.632,
   "status_after": {
    "cuda:tc3": {
     "source": "fatbin",
@@ -1034,7 +1352,19 @@
     "validated_here": true,
     "reason": ""
    },
+   "cuda:h4": {
+    "source": "fatbin",
+    "available": true,
+    "validated_here": true,
+    "reason": ""
+   },
    "cuda:v1": {
+    "source": "fatbin",
+    "available": true,
+    "validated_here": true,
+    "reason": ""
+   },
+   "cuda:h1": {
     "source": "fatbin",
     "available": true,
     "validated_here": true,
@@ -1047,7 +1377,7 @@
     "reason": "float64 model on the tensors' device"
    }
   },
-  "fatbin_dir": "/tmp/mmaemu-t7-kvvy9m5h/venv/lib/python3.12/site-packages/mmaemu/backends/cuda/bin",
+  "fatbin_dir": "/tmp/mmaemu-t7-lyfm8gi2/venv/lib/python3.12/site-packages/mmaemu/backends/cuda/bin",
   "modules": {
    "cuda:v1": {
     "source": "fatbin",
@@ -1064,6 +1394,14 @@
    "cuda:tc3": {
     "source": "fatbin",
     "sha256": "e8da5876ef01f2973d2a5d3d8dde4cc463023300de4052af68efd420b5e205b7"
+   },
+   "cuda:h1": {
+    "source": "fatbin",
+    "sha256": "261a760569d7672a815348d037129a1297b03b66b7d06a947d57479a7b0fc5a2"
+   },
+   "cuda:h4": {
+    "source": "fatbin",
+    "sha256": "7e1f96c33d602f22251b378620741887ccdaad42d05c9c1e440cfaae4e534b39"
    }
   }
  },
@@ -1081,8 +1419,34 @@
   "y_native_equal": true,
   "acc_sha256": "e8f449f70cd2d660706840bd9290eb6de27adfd87bbb20ed6fb42e8b0f378177",
   "acc_full_sha256_recorded": "e8f449f70cd2d660706840bd9290eb6de27adfd87bbb20ed6fb42e8b0f378177",
-  "acc_equal": true
+  "acc_equal": true,
+  "h100": {
+   "log": "m2_torch.json",
+   "outputs": {
+    "call00.acc_fast": {
+     "equal": true,
+     "sha256": "59d5b027be60cb86da6ea1dac6e5ee4e634be51028da9e40ed9a6d2c40c00aed",
+     "backend": "cuda:h4"
+    },
+    "call00.y_fast": {
+     "equal": true,
+     "sha256": "31ccdb1ea483996ae6a144b664665939ee1e488ed048784b93a89fd4127f4d62",
+     "backend": "cuda:h4"
+    },
+    "call00.acc_slow": {
+     "equal": true,
+     "sha256": "90cd4b8ac91fa48b82f8d50e0ea18e4a473f4e917febf854699bf7bc3fef9055",
+     "backend": "cuda:h4"
+    },
+    "call00.y_slow": {
+     "equal": true,
+     "sha256": "3029e8bf41df6581b14d0de5b56db9f1b6fa4f3005e3112b8fc9341120ca4429",
+     "backend": "cuda:h4"
+    }
+   },
+   "all_equal": true
+  }
  },
  "verdict": "PASS",
- "seconds_total": 38.3
+ "seconds_total": 42.4
 }

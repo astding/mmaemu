@@ -1,0 +1,35 @@
+{
+ "model": "evo2_40b",
+ "fp8": "mmaemu",
+ "profile": "hopper-te",
+ "device": "NVIDIA GeForce RTX 5070 Ti",
+ "mmaemu": "0.1.0",
+ "mean_loss": 0.216064453125,
+ "mean_accuracy": 0.9163819849491119,
+ "sequences": [
+  {
+   "loss": 0.15234375,
+   "accuracy": 0.94186931848526,
+   "loss_fp32": 0.1520432084798813,
+   "logits_sha256": "d9ebae6e1c5b849256b9812c822451b0cec16b3d6efb61ed81da8644dd8fb8cf"
+  },
+  {
+   "loss": 0.1767578125,
+   "accuracy": 0.9370658993721008,
+   "loss_fp32": 0.17631681263446808,
+   "logits_sha256": "a9e4176e32c20e17a960eb199cd0bd6c01c20256d4ef0a6904d0b441a02c9e49"
+  },
+  {
+   "loss": 0.4453125,
+   "accuracy": 0.822049081325531,
+   "loss_fp32": 0.4449843168258667,
+   "logits_sha256": "bbf8eabf9172c34dc9d422af028219d80fe7d4182044b417385f5db37cb5a259"
+  },
+  {
+   "loss": 0.08984375,
+   "accuracy": 0.9645436406135559,
+   "loss_fp32": 0.0900498554110527,
+   "logits_sha256": "326baee2a209af4bf12310ed20b02a9681e2cfa4de77809568ae92ba52cce3fc"
+  }
+ ]
+}

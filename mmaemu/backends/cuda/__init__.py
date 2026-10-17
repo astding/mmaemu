@@ -5,7 +5,7 @@ Importing this package loads nothing: libcuda and libnvrtc are opened on first u
   driver.py    ctypes bindings to the CUDA driver API
   nvrtc.py     ctypes bindings to NVRTC
   modules.py   per-(device, context) module cache: fatbin, then NVRTC
-  kernels.py   KernelSpecs v1 / v4 and the standard-ABI ChainFn wrapper
+  kernels.py   KernelSpecs v1 / v4 (preset ada), h1 / h4 (preset hopper) and the standard-ABI ChainFn wrapper
   selftest.py  per-device gates ("smoke") and the verdict cache
   fast/        gated kernels v9 / tc3 and their gates (optional)
 Selection between kernels and the reference backend: mmaemu.backends.registry. See docs/backends.md.
@@ -28,7 +28,7 @@ class CudaKernelBackend:
 
         if (req.fmt_a, req.fmt_b) not in tuple(tuple(f) for f in self.spec.formats):
             return f"format pair {req.fmt_a} x {req.fmt_b} not supported by {self.name}"
-        if req.preset != "ada":
+        if req.preset != self.spec.preset:
             return f"preset {req.preset!r} not implemented by {self.name}"
         if torch.device(req.device).type != "cuda":
             return f"{self.name} needs CUDA tensors"

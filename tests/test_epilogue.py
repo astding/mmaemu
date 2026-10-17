@@ -31,6 +31,7 @@ from mmaemu.model import epilogue
 from mmaemu.testing import assert_bitwise_equal
 
 DATA = Path(__file__).parent / "data" / "epilogue"
+ADA = "ada"  # the profile of the RTX 4060 extracts below
 E4, E5 = torch.float8_e4m3fn, torch.float8_e5m2
 TD = {"float32": torch.float32, "bfloat16": torch.bfloat16, "float16": torch.float16, "float8_e4m3fn": E4,
       "float8_e5m2": E5}
@@ -102,7 +103,7 @@ def replay_gemm_output(inputs: dict, out, *, backend: str = "reference", device:
     sb = f32(p["scale_b"]) if p.get("scale_b") is not None else torch.from_numpy(
         inputs["scale_b"].view(np.int32).copy()).view(torch.float32).reshape(())
     sa, sb = sa.to(device), sb.to(device)
-    kw = {}
+    kw = dict(profile=ADA)                     # the truth is the RTX 4060's
     variant = p.get("call_variant") if honour_call_variant else None
     if variant == "default_all":
         pass                                   # torch defaults: out_dtype = input dtype, use_fast_accum = False
@@ -183,7 +184,8 @@ def test_ties_data_integrity():
 def test_epilogue_tie(i):
     c = TIES["cases"][i]
     a, hw, sa, sb, od = _tie_inputs(c)
-    y = scaled_mm(a, B_TIES.t(), sa, sb, out_dtype=od, use_fast_accum=c["fast"], splitk=1, backend="reference")
+    y = scaled_mm(a, B_TIES.t(), sa, sb, out_dtype=od, use_fast_accum=c["fast"], splitk=1, backend="reference",
+                  profile=ADA)
     assert_bitwise_equal(y, hw, msg=f"tie case {i} ({c['kind']}, {c['out_dtype']}, fast={c['fast']})")
 
 
@@ -196,7 +198,7 @@ def test_tie_alternatives_fail(kind):
         if c["kind"] != kind:
             continue
         a, hw, sa, sb, od = _tie_inputs(c)
-        acc = accumulate(a, B_TIES, use_fast_accum=c["fast"], splitk=1, backend="reference")
+        acc = accumulate(a, B_TIES, use_fast_accum=c["fast"], splitk=1, backend="reference", profile=ADA)
         alt = _alt(kind, acc, sa, sb, od)
         failing += int(not np.array_equal(bits_np(alt), bits_np(hw)))
     assert failing >= 1
@@ -224,7 +226,7 @@ def test_epilogue_hw_extract(ci, oi):
     sk = o["splitk"]
     y = scaled_mm(a, b.t(), f32(o["scale_a_bits"]), f32(o["scale_b_bits"]), out_dtype=od,
                   use_fast_accum=o["fast_accum"], splitk=(sk["S"], sk["scheme"]) if sk["S"] > 1 else 1,
-                  backend="reference")
+                  backend="reference", profile=ADA)
     assert_bitwise_equal(y, from_bits(HWZ[o["bits"]], od), msg=f"{c['truth_id']}/{c['case']}/{o['name']}")
 
 
@@ -238,7 +240,7 @@ def test_fp32_epilogue_alternative_fails_on_hardware_data():
         od = TD[o["out_dtype"]]
         sk = o["splitk"]
         acc = accumulate(a, b, use_fast_accum=o["fast_accum"], splitk=(sk["S"], sk["scheme"]) if sk["S"] > 1 else 1,
-                         backend="reference")
+                         backend="reference", profile=ADA)
         alt = epilogue.to_out_dtype(acc * (f32(o["scale_a_bits"]) * f32(o["scale_b_bits"])) + 0.0, od)
         bad += int(not np.array_equal(bits_np(alt), HWZ[o["bits"]]))
     assert bad >= 1

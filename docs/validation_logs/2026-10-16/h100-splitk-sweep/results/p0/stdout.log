@@ -1,0 +1,2 @@
+NVIDIA H100 PCIe (114 SMs, cc [9, 0], cuBLASLt 12.8.3.14): 850320 queries in 64.2s, split rows 51270, status!=0 56688; Evo 2 split rows per ws: {"0": 0, "1048576": 0, "4194304": 0, "33554432": 0}; wrote <sweep-root>/bundle/out/p0/heur.npz
+drift gate: GO (rows {'reference': 850320, 'new': 850320}, column diffs {}, hardware mismatch {}, driver {'reference': '570.148.08', 'new': '570.148.08'})

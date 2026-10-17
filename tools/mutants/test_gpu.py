@@ -41,7 +41,7 @@ def test_mutated_nan_propagation(direct_v1):
     a.view(torch.uint8)[0, 0] = 0x7F
     want = torch.full((16, 16), 32.0)
     want.view(torch.int32)[0] = 0x7FFFFFFF
-    got = mmaemu.accumulate(a, b, use_fast_accum=True, splitk=1, backend="cuda:v1")
+    got = mmaemu.accumulate(a, b, use_fast_accum=True, splitk=1, backend="cuda:v1", profile="ada")
     assert_bitwise_equal(got, want)
 
 

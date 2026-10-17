@@ -1,0 +1,51 @@
+--- ../../../2026-10-15/evo2-40b-rtx-5070-ti/run_offload.py	2026-10-15 20:30:58.038508541 -0700
++++ run_offload.py	2026-10-16 21:25:29.313607459 -0700
+@@ -3,7 +3,8 @@
+ The model is the upstream one (vortex StripedHyena, evo2's configuration, vortex's checkpoint loader), built on the
+ CPU. Each block is copied to the GPU, run on every (mode, prompt) activation, and its GPU copy dropped. The FP8 input
+ projections are replaced as in examples/evo2_blackwell.ipynb: "mmaemu" (the RTX 4060's GEMM, profile
+-ada-rtx4060-te), "native" (torch._scaled_mm on this GPU), or "bf16" (the plain bf16 linear layer).
++ada-rtx4060-te), "mmaemu_h100" (the H100 PCIe's GEMM, profile hopper-h100pcie-te), "native" (torch._scaled_mm on
++this GPU), or "bf16" (the plain bf16 linear layer).
+ 
+ Metrics are those of evo2/test/test_evo2.py: cross entropy and accuracy of the bf16 logits on its four prompts.
+ """
+@@ -28,6 +29,8 @@
+ 
+ E4M3_MAX = 448.0
+ MODES = ("mmaemu", "native", "bf16")
++PROFILES = {"mmaemu": "ada-rtx4060-te", "mmaemu_h100": "hopper-h100pcie-te"}   # the mmaemu modes and their profiles
++EXPLAINED = set()                                   # (mode, M, K, N) already logged by mmaemu.explain
+ 
+ 
+ @contextlib.contextmanager
+@@ -109,9 +112,16 @@
+         if pad:
+             x = F.pad(x, (0, 0, 0, pad))
+         xq = (x.float() * scale[0]).clamp(-E4M3_MAX, E4M3_MAX).to(torch.float8_e4m3fn).reshape(-1, x.shape[-1])
+-        if self.mode == "mmaemu":
++        if self.mode in PROFILES:
++            key = (self.mode, *xq.shape, wq.shape[0])
++            if key not in EXPLAINED:                    # the plan of each distinct call, once
++                EXPLAINED.add(key)
++                cp = mmaemu.explain(xq, wq.t(), scale_inv[0], scale_inv[1], out_dtype=torch.bfloat16,
++                                    use_fast_accum=True, profile=PROFILES[self.mode])
++                print(f"{time.strftime('%H:%M:%S')} explain {self.mode} M={key[1]} K={key[2]} N={key[3]}: {cp}",
++                      flush=True)
+             y = mmaemu.scaled_mm(xq, wq.t(), scale_inv[0], scale_inv[1], out_dtype=torch.bfloat16,
+-                                 use_fast_accum=True, profile="ada-rtx4060-te")
++                                 use_fast_accum=True, profile=PROFILES[self.mode])
+         elif self.mode == "native":
+             y = torch._scaled_mm(xq, wq.t(), scale_a=scale_inv[0], scale_b=scale_inv[1],
+                                  out_dtype=torch.bfloat16, use_fast_accum=True)
+--- ../../../2026-10-15/evo2-40b-rtx-5070-ti/brca1_offload.py	2026-10-15 20:30:58.038508541 -0700
++++ brca1_offload.py	2026-10-16 21:25:29.313607459 -0700
+@@ -26,7 +26,7 @@
+ 
+ HERE = Path(__file__).resolve().parent
+ DATA = HERE / "brca1"
+-ADA_1B = Path("/data/quant/mmaemu_work/wt/audit-fix/examples/data/evo2_1b_ada_rtx4060_te.npz")
++ADA_1B = Path("<src>/examples/data/evo2_1b_ada_rtx4060_te.npz")
+ WINDOW = 8192
+ 
+ 

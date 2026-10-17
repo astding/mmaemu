@@ -1,0 +1,148 @@
+{
+ "out": "<probe-out>",
+ "model": "hopper",
+ "R": null,
+ "parts": {
+  "m2": {
+   "model": "hopper",
+   "R": null,
+   "per_call": {
+    "call00": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call01": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call02": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call03": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call04": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call05": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call06": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call07": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call08": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call09": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call10": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call11": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call12": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call13": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call14": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call15": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call16": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call17": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call18": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call19": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    },
+    "call20": {
+     "acc_fast": true,
+     "te_acc": true,
+     "y_fast": true,
+     "te_y": true
+    }
+   },
+   "totals": {
+    "acc_fast": "21/21",
+    "te_acc": "21/21",
+    "y_fast": "21/21",
+    "te_y": "21/21"
+   }
+  }
+ },
+ "seconds": {
+  "m2": 27.3
+ }
+}

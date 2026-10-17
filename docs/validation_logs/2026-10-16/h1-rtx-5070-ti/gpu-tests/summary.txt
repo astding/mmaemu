@@ -1,0 +1,8 @@
+commit 3d7dc66f5b6c2376159cd1a32dc89b7809b4645b
+dirty mmaemu/ tests/: 0 files
+torch 2.7.1+cu128 NVIDIA GeForce RTX 5070 Ti (12, 0)
+test_kernels_ieee rc=0 124 passed in 8.13s
+test_cuda_runtime rc=0 16 passed in 36.00s
+test_h100_mini rc=0 373 passed in 37.43s
+test_backend_selection rc=0 25 passed in 0.76s
+DONE

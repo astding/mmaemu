@@ -7,10 +7,11 @@ type: software
 title: "mmaemu: bit-accurate emulation of NVIDIA tensor-core FP8 GEMM numerics"
 abstract: >-
   mmaemu reproduces, bit for bit, the FP8 GEMM numerics of a reference GPU (block accumulation, split-K
-  reductions and the epilogue of cuBLAS FP8 GEMMs as called by torch._scaled_mm), so that results computed
-  with the reference GPU's FP8 tensor cores can be recomputed on other devices. Version 0.1 models one
-  reference platform (RTX 4060, sm_89, cuBLASLt 12.8.3.14) and is validated against hardware recordings of
-  that GPU.
+  reductions and the epilogue of cuBLAS FP8 GEMMs as called by torch._scaled_mm and Transformer Engine 2.3),
+  so that results computed with the reference GPU's FP8 tensor cores can be recomputed on other devices.
+  Version 0.1 models two reference platforms, both with cuBLASLt 12.8.3.14 and torch 2.7.1: the H100 PCIe
+  (Hopper, sm_90, 114 SMs), the default, and the RTX 4060 (Ada, sm_89, 24 SMs). It is validated against hardware recordings of the
+  RTX 4060 and against a bit-exactness probe and a split-K sweep on an H100 PCIe.
 authors:
   - given-names: Xun
     family-names: Ding
@@ -31,6 +32,8 @@ keywords:
   - torch._scaled_mm
   - cuBLAS
   - bit-exact
+  - Transformer Engine
+  - H100
   - Evo 2
 references:
   - type: article

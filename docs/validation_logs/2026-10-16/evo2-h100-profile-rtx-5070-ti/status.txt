@@ -1,0 +1,13 @@
+mmaemu fa0fd9053169b7892e6be995390261574c400265 clean=0
+python 3.12.2 torch 2.7.1+cu128
+e283825ccc897acb78a1ff2b38dd9c1865a1091635690ae1c807a666cf7b6851  run_offload.py
+3da416b3c6e1309600d5d5379380b7072a7e33cd5bdba389df4dcfe55ba4d0e8  brca1_offload.py
+2026-10-16 21:16:01 START 1b_test (MemAvailable 163 GiB)
+2026-10-16 21:16:18 END   1b_test rc=0 17s
+2026-10-16 21:16:18 START 1b_brca1 (MemAvailable 163 GiB)
+2026-10-16 21:31:55 END   1b_brca1 rc=0 937s
+2026-10-16 21:31:55 START 40b_test (MemAvailable 133 GiB)
+2026-10-16 21:37:24 END   40b_test rc=0 329s
+2026-10-16 21:37:24 START 40b_brca1 (MemAvailable 135 GiB)
+2026-10-16 22:58:39 END   40b_brca1 rc=0 4875s
+2026-10-16 22:58:39 CHAIN DONE clean=0

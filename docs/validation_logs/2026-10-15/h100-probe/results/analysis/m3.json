@@ -1,0 +1,1800 @@
+{
+ "out": "<probe-out>",
+ "model": "hopper",
+ "R": null,
+ "parts": {
+  "m3": {
+   "m3_torch:pairs.M2048N5760K1920:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_192x192 stages=MATMUL_STAGES_128xAUTO customOption=4 clusterShape=CLUSTER_SHAPE_2x1x1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 3962,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/1024/seq",
+        1960
+       ],
+       [
+        "ada/1024/tree",
+        1960
+       ],
+       [
+        "hopper/1024/seq",
+        1960
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 3962,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/1024/seq",
+        1960
+       ],
+       [
+        "ada/1024/tree",
+        1960
+       ],
+       [
+        "hopper/1024/seq",
+        1960
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:pairs.M2048N5760K1920:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_144x128 stages=MATMUL_STAGES_128xAUTO customOption=6 clusterShape=CLUSTER_SHAPE_1x2x1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 3962,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        132
+       ],
+       [
+        "ada/64/tree",
+        132
+       ],
+       [
+        "hopper/64/seq",
+        132
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 3962,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        132
+       ],
+       [
+        "ada/64/tree",
+        132
+       ],
+       [
+        "hopper/64/seq",
+        132
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:triples.M2048N5760K1920:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_192x192 stages=MATMUL_STAGES_128xAUTO customOption=4 clusterShape=CLUSTER_SHAPE_2x1x1 ws=1048576"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 7082,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/1024/seq",
+        1630
+       ],
+       [
+        "ada/1024/tree",
+        1630
+       ],
+       [
+        "hopper/1024/seq",
+        1630
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:triples.M2048N5760K1920:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_144x128 stages=MATMUL_STAGES_128xAUTO customOption=6 clusterShape=CLUSTER_SHAPE_1x2x1 ws=1048576"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 7082,
+      "matching": [
+       "ada/128/seq",
+       "hopper/128/seq"
+      ],
+      "closest_nonmatching": [
+       [
+        "hopper_latec/128/seq",
+        4
+       ],
+       [
+        "b200/128/seq",
+        4
+       ],
+       [
+        "ada/64/seq",
+        312
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:tie_bf16.M2048N5760K1920:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_192x192 stages=MATMUL_STAGES_128xAUTO customOption=4 clusterShape=CLUSTER_SHAPE_2x1x1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 362,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/1024/seq",
+        172
+       ],
+       [
+        "ada/1024/tree",
+        172
+       ],
+       [
+        "hopper/1024/seq",
+        172
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:tie_bf16.M2048N5760K1920:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_144x128 stages=MATMUL_STAGES_128xAUTO customOption=6 clusterShape=CLUSTER_SHAPE_1x2x1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 362,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        12
+       ],
+       [
+        "ada/64/tree",
+        12
+       ],
+       [
+        "hopper/64/seq",
+        12
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:pairs.M2048N12288K4096:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_256x128 stages=MATMUL_STAGES_128xAUTO customOption=7 clusterShape=CLUSTER_SHAPE_1x2x1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 17154,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        8576
+       ],
+       [
+        "ada/2048/tree",
+        8576
+       ],
+       [
+        "hopper/2048/seq",
+        8576
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 17154,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        8576
+       ],
+       [
+        "ada/2048/tree",
+        8576
+       ],
+       [
+        "hopper/2048/seq",
+        8576
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:pairs.M2048N12288K4096:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_128x160 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_2x1x1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 17154,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        268
+       ],
+       [
+        "ada/64/tree",
+        268
+       ],
+       [
+        "hopper/64/seq",
+        268
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 17154,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        268
+       ],
+       [
+        "ada/64/tree",
+        268
+       ],
+       [
+        "hopper/64/seq",
+        268
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:triples.M2048N12288K4096:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_256x128 stages=MATMUL_STAGES_128xAUTO customOption=7 clusterShape=CLUSTER_SHAPE_1x2x1 ws=1048576"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 3962,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        1028
+       ],
+       [
+        "ada/2048/tree",
+        1028
+       ],
+       [
+        "hopper/2048/seq",
+        1028
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:triples.M2048N12288K4096:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_128x160 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_2x1x1 ws=1048576"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 3962,
+      "matching": [
+       "ada/128/seq",
+       "hopper/128/seq",
+       "hopper_latec/128/seq",
+       "b200/128/seq"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        72
+       ],
+       [
+        "hopper/64/seq",
+        72
+       ],
+       [
+        "hopper_latec/64/seq",
+        72
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:tie_bf16.M2048N12288K4096:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_128x256 stages=MATMUL_STAGES_128xAUTO customOption=4 clusterShape=CLUSTER_SHAPE_2x1x1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 770,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        384
+       ],
+       [
+        "ada/2048/tree",
+        384
+       ],
+       [
+        "hopper/2048/seq",
+        384
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:tie_bf16.M2048N12288K4096:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_128x160 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_2x1x1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 770,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        12
+       ],
+       [
+        "ada/64/tree",
+        12
+       ],
+       [
+        "hopper/64/seq",
+        12
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:pairs.M2048N24576K8192:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_320x128 stages=MATMUL_STAGES_128xAUTO customOption=7 clusterShape=CLUSTER_SHAPE_1x2x1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 18178,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        13632
+       ],
+       [
+        "ada/2048/tree",
+        13632
+       ],
+       [
+        "hopper/2048/seq",
+        13632
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 18178,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        13632
+       ],
+       [
+        "ada/2048/tree",
+        13632
+       ],
+       [
+        "hopper/2048/seq",
+        13632
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:pairs.M2048N24576K8192:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_144x128 stages=MATMUL_STAGES_128xAUTO customOption=6 clusterShape=CLUSTER_SHAPE_1x2x1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 18178,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        142
+       ],
+       [
+        "ada/64/tree",
+        142
+       ],
+       [
+        "hopper/64/seq",
+        142
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 18178,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        142
+       ],
+       [
+        "ada/64/tree",
+        142
+       ],
+       [
+        "hopper/64/seq",
+        142
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:triples.M2048N24576K8192:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_320x128 stages=MATMUL_STAGES_128xAUTO customOption=7 clusterShape=CLUSTER_SHAPE_1x2x1 ws=1048576"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 4326,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/tree",
+        1262
+       ],
+       [
+        "hopper/2048/tree",
+        1262
+       ],
+       [
+        "ada/1024/tree",
+        1286
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:triples.M2048N24576K8192:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_144x128 stages=MATMUL_STAGES_128xAUTO customOption=6 clusterShape=CLUSTER_SHAPE_1x2x1 ws=1048576"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 4326,
+      "matching": [
+       "ada/128/seq",
+       "hopper/128/seq",
+       "hopper_latec/128/seq",
+       "b200/128/seq"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        26
+       ],
+       [
+        "hopper/64/seq",
+        26
+       ],
+       [
+        "hopper_latec/64/seq",
+        26
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:tie_bf16.M2048N24576K8192:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_320x128 stages=MATMUL_STAGES_128xAUTO customOption=7 clusterShape=CLUSTER_SHAPE_1x2x1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 1538,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        1152
+       ],
+       [
+        "ada/2048/tree",
+        1152
+       ],
+       [
+        "hopper/2048/seq",
+        1152
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:tie_bf16.M2048N24576K8192:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_128x160 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_2x1x1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 1538,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        12
+       ],
+       [
+        "ada/64/tree",
+        12
+       ],
+       [
+        "hopper/64/seq",
+        12
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:pairs.M1024N1024K4096:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_128x80 stages=MATMUL_STAGES_128xAUTO customOption=1 clusterShape=CLUSTER_SHAPE_4x1x1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 17154,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        8576
+       ],
+       [
+        "ada/2048/tree",
+        8576
+       ],
+       [
+        "hopper/2048/seq",
+        8576
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 17154,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        8576
+       ],
+       [
+        "ada/2048/tree",
+        8576
+       ],
+       [
+        "hopper/2048/seq",
+        8576
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:pairs.M1024N1024K4096:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_128x80 stages=MATMUL_STAGES_128xAUTO customOption=1 clusterShape=CLUSTER_SHAPE_4x1x1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 17154,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        268
+       ],
+       [
+        "ada/64/tree",
+        268
+       ],
+       [
+        "hopper/64/seq",
+        268
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 17154,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        268
+       ],
+       [
+        "ada/64/tree",
+        268
+       ],
+       [
+        "hopper/64/seq",
+        268
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:triples.M1024N1024K4096:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_128x80 stages=MATMUL_STAGES_128xAUTO customOption=1 clusterShape=CLUSTER_SHAPE_4x1x1 ws=1048576"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 3962,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        1028
+       ],
+       [
+        "ada/2048/tree",
+        1028
+       ],
+       [
+        "hopper/2048/seq",
+        1028
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:triples.M1024N1024K4096:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_128x80 stages=MATMUL_STAGES_128xAUTO customOption=1 clusterShape=CLUSTER_SHAPE_4x1x1 ws=1048576"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 3962,
+      "matching": [
+       "ada/128/seq",
+       "hopper/128/seq",
+       "hopper_latec/128/seq",
+       "b200/128/seq"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        72
+       ],
+       [
+        "hopper/64/seq",
+        72
+       ],
+       [
+        "hopper_latec/64/seq",
+        72
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:tie_bf16.M1024N1024K4096:fast": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_80x128 stages=MATMUL_STAGES_128xAUTO customOption=2 clusterShape=CLUSTER_SHAPE_1x4x1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 770,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        384
+       ],
+       [
+        "ada/2048/tree",
+        384
+       ],
+       [
+        "hopper/2048/seq",
+        384
+       ]
+      ]
+     }
+    }
+   },
+   "m3_torch:tie_bf16.M1024N1024K4096:slow": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_80x128 stages=MATMUL_STAGES_128xAUTO customOption=2 clusterShape=CLUSTER_SHAPE_1x4x1 ws=1048576"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 770,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        12
+       ],
+       [
+        "ada/64/tree",
+        12
+       ],
+       [
+        "hopper/64/seq",
+        12
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:pairs.M2048N5760K1920:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_192x192 stages=MATMUL_STAGES_128xAUTO customOption=4 clusterShape=CLUSTER_SHAPE_2x1x1 ws=33554432"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 3962,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/1024/seq",
+        1960
+       ],
+       [
+        "ada/1024/tree",
+        1960
+       ],
+       [
+        "hopper/1024/seq",
+        1960
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 3962,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/1024/seq",
+        1960
+       ],
+       [
+        "ada/1024/tree",
+        1960
+       ],
+       [
+        "hopper/1024/seq",
+        1960
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:pairs.M2048N5760K1920:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_144x128 stages=MATMUL_STAGES_128xAUTO customOption=6 clusterShape=CLUSTER_SHAPE_1x2x1 ws=33554432"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 3962,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        132
+       ],
+       [
+        "ada/64/tree",
+        132
+       ],
+       [
+        "hopper/64/seq",
+        132
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 3962,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        132
+       ],
+       [
+        "ada/64/tree",
+        132
+       ],
+       [
+        "hopper/64/seq",
+        132
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:triples.M2048N5760K1920:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_192x192 stages=MATMUL_STAGES_128xAUTO customOption=4 clusterShape=CLUSTER_SHAPE_2x1x1 ws=33554432"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 7082,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/1024/seq",
+        1630
+       ],
+       [
+        "ada/1024/tree",
+        1630
+       ],
+       [
+        "hopper/1024/seq",
+        1630
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:triples.M2048N5760K1920:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_144x128 stages=MATMUL_STAGES_128xAUTO customOption=6 clusterShape=CLUSTER_SHAPE_1x2x1 ws=33554432"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 7082,
+      "matching": [
+       "ada/128/seq",
+       "hopper/128/seq"
+      ],
+      "closest_nonmatching": [
+       [
+        "hopper_latec/128/seq",
+        4
+       ],
+       [
+        "b200/128/seq",
+        4
+       ],
+       [
+        "ada/64/seq",
+        312
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:tie_bf16.M2048N5760K1920:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_192x192 stages=MATMUL_STAGES_128xAUTO customOption=4 clusterShape=CLUSTER_SHAPE_2x1x1 ws=33554432"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 362,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/1024/seq",
+        172
+       ],
+       [
+        "ada/1024/tree",
+        172
+       ],
+       [
+        "hopper/1024/seq",
+        172
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:tie_bf16.M2048N5760K1920:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_144x128 stages=MATMUL_STAGES_128xAUTO customOption=6 clusterShape=CLUSTER_SHAPE_1x2x1 ws=33554432"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 362,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        12
+       ],
+       [
+        "ada/64/tree",
+        12
+       ],
+       [
+        "hopper/64/seq",
+        12
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:pairs.M2048N12288K4096:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_256x128 stages=MATMUL_STAGES_128xAUTO customOption=7 clusterShape=CLUSTER_SHAPE_1x2x1 ws=33554432"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 17154,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        8576
+       ],
+       [
+        "ada/2048/tree",
+        8576
+       ],
+       [
+        "hopper/2048/seq",
+        8576
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 17154,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        8576
+       ],
+       [
+        "ada/2048/tree",
+        8576
+       ],
+       [
+        "hopper/2048/seq",
+        8576
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:pairs.M2048N12288K4096:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_128x160 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_2x1x1 ws=33554432"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 17154,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        268
+       ],
+       [
+        "ada/64/tree",
+        268
+       ],
+       [
+        "hopper/64/seq",
+        268
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 17154,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        268
+       ],
+       [
+        "ada/64/tree",
+        268
+       ],
+       [
+        "hopper/64/seq",
+        268
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:triples.M2048N12288K4096:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_256x128 stages=MATMUL_STAGES_128xAUTO customOption=7 clusterShape=CLUSTER_SHAPE_1x2x1 ws=33554432"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 3962,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        1028
+       ],
+       [
+        "ada/2048/tree",
+        1028
+       ],
+       [
+        "hopper/2048/seq",
+        1028
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:triples.M2048N12288K4096:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_128x160 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_2x1x1 ws=33554432"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 3962,
+      "matching": [
+       "ada/128/seq",
+       "hopper/128/seq",
+       "hopper_latec/128/seq",
+       "b200/128/seq"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        72
+       ],
+       [
+        "hopper/64/seq",
+        72
+       ],
+       [
+        "hopper_latec/64/seq",
+        72
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:tie_bf16.M2048N12288K4096:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_128x256 stages=MATMUL_STAGES_128xAUTO customOption=4 clusterShape=CLUSTER_SHAPE_2x1x1 ws=33554432"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 770,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        384
+       ],
+       [
+        "ada/2048/tree",
+        384
+       ],
+       [
+        "hopper/2048/seq",
+        384
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:tie_bf16.M2048N12288K4096:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_128x160 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_2x1x1 ws=33554432"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 770,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        12
+       ],
+       [
+        "ada/64/tree",
+        12
+       ],
+       [
+        "hopper/64/seq",
+        12
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:pairs.M2048N24576K8192:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_320x128 stages=MATMUL_STAGES_128xAUTO customOption=7 clusterShape=CLUSTER_SHAPE_1x2x1 ws=33554432"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 18178,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        13632
+       ],
+       [
+        "ada/2048/tree",
+        13632
+       ],
+       [
+        "hopper/2048/seq",
+        13632
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 18178,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        13632
+       ],
+       [
+        "ada/2048/tree",
+        13632
+       ],
+       [
+        "hopper/2048/seq",
+        13632
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:pairs.M2048N24576K8192:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_144x128 stages=MATMUL_STAGES_128xAUTO customOption=6 clusterShape=CLUSTER_SHAPE_1x2x1 ws=33554432"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 18178,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        142
+       ],
+       [
+        "ada/64/tree",
+        142
+       ],
+       [
+        "hopper/64/seq",
+        142
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 18178,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        142
+       ],
+       [
+        "ada/64/tree",
+        142
+       ],
+       [
+        "hopper/64/seq",
+        142
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:triples.M2048N24576K8192:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_320x128 stages=MATMUL_STAGES_128xAUTO customOption=7 clusterShape=CLUSTER_SHAPE_1x2x1 ws=33554432"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 4326,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/tree",
+        1262
+       ],
+       [
+        "hopper/2048/tree",
+        1262
+       ],
+       [
+        "ada/1024/tree",
+        1286
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:triples.M2048N24576K8192:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_144x128 stages=MATMUL_STAGES_128xAUTO customOption=6 clusterShape=CLUSTER_SHAPE_1x2x1 ws=33554432"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 4326,
+      "matching": [
+       "ada/128/seq",
+       "hopper/128/seq",
+       "hopper_latec/128/seq",
+       "b200/128/seq"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        26
+       ],
+       [
+        "hopper/64/seq",
+        26
+       ],
+       [
+        "hopper_latec/64/seq",
+        26
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:tie_bf16.M2048N24576K8192:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_320x128 stages=MATMUL_STAGES_128xAUTO customOption=7 clusterShape=CLUSTER_SHAPE_1x2x1 ws=33554432"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 1538,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        1152
+       ],
+       [
+        "ada/2048/tree",
+        1152
+       ],
+       [
+        "hopper/2048/seq",
+        1152
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:tie_bf16.M2048N24576K8192:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_128x160 stages=MATMUL_STAGES_128xAUTO customOption=5 clusterShape=CLUSTER_SHAPE_2x1x1 ws=33554432"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 1538,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        12
+       ],
+       [
+        "ada/64/tree",
+        12
+       ],
+       [
+        "hopper/64/seq",
+        12
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:pairs.M1024N1024K4096:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_128x80 stages=MATMUL_STAGES_128xAUTO customOption=1 clusterShape=CLUSTER_SHAPE_4x1x1 ws=33554432"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 17154,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        8576
+       ],
+       [
+        "ada/2048/tree",
+        8576
+       ],
+       [
+        "hopper/2048/seq",
+        8576
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 17154,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        8576
+       ],
+       [
+        "ada/2048/tree",
+        8576
+       ],
+       [
+        "hopper/2048/seq",
+        8576
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:pairs.M1024N1024K4096:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_128x80 stages=MATMUL_STAGES_128xAUTO customOption=1 clusterShape=CLUSTER_SHAPE_4x1x1 ws=33554432"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 17154,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        268
+       ],
+       [
+        "ada/64/tree",
+        268
+       ],
+       [
+        "hopper/64/seq",
+        268
+       ]
+      ]
+     },
+     "g1": {
+      "rows": 17154,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        268
+       ],
+       [
+        "ada/64/tree",
+        268
+       ],
+       [
+        "hopper/64/seq",
+        268
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:triples.M1024N1024K4096:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_128x80 stages=MATMUL_STAGES_128xAUTO customOption=1 clusterShape=CLUSTER_SHAPE_4x1x1 ws=33554432"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 3962,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        1028
+       ],
+       [
+        "ada/2048/tree",
+        1028
+       ],
+       [
+        "hopper/2048/seq",
+        1028
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:triples.M1024N1024K4096:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_128x80 stages=MATMUL_STAGES_128xAUTO customOption=1 clusterShape=CLUSTER_SHAPE_4x1x1 ws=33554432"
+    ],
+    "groups": {
+     "g2": {
+      "rows": 3962,
+      "matching": [
+       "ada/128/seq",
+       "hopper/128/seq",
+       "hopper_latec/128/seq",
+       "b200/128/seq"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        72
+       ],
+       [
+        "hopper/64/seq",
+        72
+       ],
+       [
+        "hopper_latec/64/seq",
+        72
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:tie_bf16.M1024N1024K4096:te": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_80x128 stages=MATMUL_STAGES_128xAUTO customOption=2 clusterShape=CLUSTER_SHAPE_1x4x1 ws=33554432"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 770,
+      "matching": [
+       "ada/one-chain/one",
+       "hopper/one-chain/one"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/2048/seq",
+        384
+       ],
+       [
+        "ada/2048/tree",
+        384
+       ],
+       [
+        "hopper/2048/seq",
+        384
+       ]
+      ]
+     }
+    }
+   },
+   "m3_te:tie_bf16.M1024N1024K4096:te_split": {
+    "colvar": 0,
+    "lt": [
+     "algoId=66 tile=MATMUL_TILE_80x128 stages=MATMUL_STAGES_128xAUTO customOption=2 clusterShape=CLUSTER_SHAPE_1x4x1 ws=33554432"
+    ],
+    "groups": {
+     "g0": {
+      "rows": 770,
+      "matching": [
+       "ada/128/seq",
+       "ada/128/tree",
+       "hopper/128/seq",
+       "hopper/128/tree"
+      ],
+      "closest_nonmatching": [
+       [
+        "ada/64/seq",
+        12
+       ],
+       [
+        "ada/64/tree",
+        12
+       ],
+       [
+        "hopper/64/seq",
+        12
+       ]
+      ]
+     }
+    }
+   }
+  }
+ },
+ "seconds": {
+  "m3": 16.3
+ }
+}

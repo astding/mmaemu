@@ -1,0 +1,121 @@
+{
+ "model": "evo2_40b",
+ "checkpoint": "<models>/evo2_40b/evo2_40b.pt",
+ "device": "NVIDIA GeForce RTX 5070 Ti",
+ "mmaemu": "0.1.0",
+ "torch": "2.7.1+cu128",
+ "rows": [
+  {
+   "mode": "mmaemu_h100",
+   "window": "w2k",
+   "length": 2048,
+   "loss": 0.07177734375,
+   "accuracy": 0.9824132919311523,
+   "loss_fp32": 0.07195930927991867,
+   "mean_next_logprob": -0.07195930927991867,
+   "logits_sha256": "6ece6404703c70297c04694630e62891c78f7a33221d2a3dcb6f74a2d4a81886",
+   "ref_mean_next_logprob": -0.07208828628063202,
+   "mean_abs_dlogp_acgt": 0.028864458203315735,
+   "max_abs_dlogp_acgt": 0.6068246364593506,
+   "acgt_argmax_agree": 1.0,
+   "acgt_bit_identical": false
+  },
+  {
+   "mode": "mmaemu_h100",
+   "window": "w4k",
+   "length": 4096,
+   "loss": 0.060302734375,
+   "accuracy": 0.9860806465148926,
+   "loss_fp32": 0.06033940613269806,
+   "mean_next_logprob": -0.06033939868211746,
+   "logits_sha256": "8f9d1747040c9e442dbc34f34e9c810da82aba6d17e46568c5980790388267b1",
+   "ref_mean_next_logprob": -0.060317832976579666,
+   "mean_abs_dlogp_acgt": 0.02830636128783226,
+   "max_abs_dlogp_acgt": 0.622127890586853,
+   "acgt_argmax_agree": 0.999755859375,
+   "acgt_bit_identical": false
+  },
+  {
+   "mode": "mmaemu_h100",
+   "window": "w8k",
+   "length": 8192,
+   "loss": 0.158203125,
+   "accuracy": 0.9382248520851135,
+   "loss_fp32": 0.157998189330101,
+   "mean_next_logprob": -0.1579982042312622,
+   "logits_sha256": "a52c4f857f153658cbbfdaed2be60b15e55f9603ba3c91730dc0a82a42820258",
+   "ref_mean_next_logprob": -0.15814542770385742,
+   "mean_abs_dlogp_acgt": 0.03230668604373932,
+   "max_abs_dlogp_acgt": 1.311614990234375,
+   "acgt_argmax_agree": 0.99853515625,
+   "acgt_bit_identical": false
+  },
+  {
+   "mode": "mmaemu_h100",
+   "window": "p0",
+   "length": 6538,
+   "loss": 0.15234375,
+   "accuracy": 0.94186931848526,
+   "loss_fp32": 0.1520432084798813,
+   "mean_next_logprob": -0.1520432084798813,
+   "logits_sha256": "d9ebae6e1c5b849256b9812c822451b0cec16b3d6efb61ed81da8644dd8fb8cf",
+   "ref_mean_next_logprob": -0.1522609293460846,
+   "mean_abs_dlogp_acgt": 0.026705771684646606,
+   "max_abs_dlogp_acgt": 0.5639514923095703,
+   "acgt_argmax_agree": 0.9987763842153564,
+   "acgt_bit_identical": false
+  },
+  {
+   "mode": "mmaemu_h100",
+   "window": "p1",
+   "length": 7056,
+   "loss": 0.1767578125,
+   "accuracy": 0.9370658993721008,
+   "loss_fp32": 0.17631681263446808,
+   "mean_next_logprob": -0.1763167828321457,
+   "logits_sha256": "a9e4176e32c20e17a960eb199cd0bd6c01c20256d4ef0a6904d0b441a02c9e49",
+   "ref_mean_next_logprob": -0.17624801397323608,
+   "mean_abs_dlogp_acgt": 0.0510777048766613,
+   "max_abs_dlogp_acgt": 1.3305315971374512,
+   "acgt_argmax_agree": 0.995890022675737,
+   "acgt_bit_identical": false
+  },
+  {
+   "mode": "mmaemu_h100",
+   "window": "p2",
+   "length": 6160,
+   "loss": 0.4453125,
+   "accuracy": 0.822049081325531,
+   "loss_fp32": 0.4449843168258667,
+   "mean_next_logprob": -0.4449843168258667,
+   "logits_sha256": "bbf8eabf9172c34dc9d422af028219d80fe7d4182044b417385f5db37cb5a259",
+   "ref_mean_next_logprob": -0.44505205750465393,
+   "mean_abs_dlogp_acgt": 0.03307552635669708,
+   "max_abs_dlogp_acgt": 0.5713415145874023,
+   "acgt_argmax_agree": 0.9946428571428572,
+   "acgt_bit_identical": false
+  },
+  {
+   "mode": "mmaemu_h100",
+   "window": "p3",
+   "length": 7616,
+   "loss": 0.08984375,
+   "accuracy": 0.9645436406135559,
+   "loss_fp32": 0.0900498554110527,
+   "mean_next_logprob": -0.0900498703122139,
+   "logits_sha256": "326baee2a209af4bf12310ed20b02a9681e2cfa4de77809568ae92ba52cce3fc",
+   "ref_mean_next_logprob": -0.09048143029212952,
+   "mean_abs_dlogp_acgt": 0.05228287726640701,
+   "max_abs_dlogp_acgt": 1.9135960340499878,
+   "acgt_argmax_agree": 0.9961922268907563,
+   "acgt_bit_identical": false
+  }
+ ],
+ "test_evo2_mean": {
+  "mmaemu_h100": {
+   "loss": 0.216064453125,
+   "accuracy": 0.9163819849491119,
+   "loss_fp32": 0.2158485483378172
+  }
+ }
+}

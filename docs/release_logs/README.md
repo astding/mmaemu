@@ -16,7 +16,7 @@ Format `mmaemu-release-validation/1`:
 | `venv` | how the fresh environment was built (uv or venv + pip) and which torch was installed |
 | `device` | GPU name, capability, SM count, torch and CUDA versions inside the fresh environment |
 | `checks` | `environment`, `venv`, `install`, `info`, `selftest`, `loader`, `conformance`, `evo2`: each with `status` (PASS / FAIL / SKIP), a summary and its evidence |
-| `info_before_selftest`, `selftest`, `conformance`, `evo2` | the raw reports of `python -m mmaemu info`, `python -m mmaemu selftest --force` and the two in-venv checks (`conformance.status_after`: backend status, incl. each kernel's loader, after the kernels ran) |
+| `info_before_selftest`, `selftest`, `conformance`, `evo2` | the raw reports of `python -m mmaemu info`, `python -m mmaemu selftest --force` and the two in-venv checks (`conformance.status_after`: the backend status after the kernels ran, as auto-selection sees it, so a gated kernel not validated on the device shows `source: null` even when it ran on explicit request; `conformance.modules`: the image, source and sha256, that each kernel which ran was loaded from, which the `loader` check compares with the wheel's manifest) |
 | `verdict` | PASS only if every check is PASS |
 
 Only reports of release candidates and releases are committed here; dry runs go elsewhere (`--out`).

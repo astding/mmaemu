@@ -5,9 +5,10 @@ select(req, backend="auto") -> Backend
   - "reference", CPU tensors, MMAEMU_DISABLE_CUDA=1, or no CUDA device: the reference backend (an explicit "cuda..."
     request then raises BackendUnavailableError instead).
   - Otherwise the discovered kernels (kernels.SPECS + mmaemu.backends.cuda.fast.specs.SPECS when importable) are tried
-    in priority order (tc3 40 > v9 30 > v4 20 > v1 10). A kernel is skipped, by design and silently, when it does not
-    support the request (format pair, preset), the device capability is below min_cc, the device lacks the shared
-    memory it needs, or it is gated and the capability is not in validated_on (unless MMAEMU_ALLOW_GATED_KERNELS=1).
+    in priority order (ada: tc3 40 > v9 30 > v4 20 > v1 10; hopper: h4 20 > h1 10). A kernel is skipped, by design
+    and silently, when it does not support the request (format pair, preset), the device capability is below min_cc,
+    the device lacks the shared memory it needs, or it is gated and the capability is not in validated_on (unless
+    MMAEMU_ALLOW_GATED_KERNELS=1).
     It is skipped as a failure when its module cannot be loaded (fatbin and NVRTC both failed) or a gate fails.
   - The first kernel that loads and passes its gates is returned; if none does, "auto" returns the reference backend
     and "cuda" raises.
@@ -142,8 +143,8 @@ def _design_skip(spec, req, dev, explicit: bool) -> str | None:
 
     if (req.fmt_a, req.fmt_b) not in tuple(tuple(f) for f in spec.formats):
         return f"format pair {req.fmt_a} x {req.fmt_b} not supported (kernels: {spec.formats})"
-    if req.preset != "ada":
-        return f"preset {req.preset!r} has no CUDA kernel"
+    if req.preset != spec.preset:
+        return f"implements preset {spec.preset!r}, not {req.preset!r}"
     cc = tuple(torch.cuda.get_device_capability(dev))
     if cc < tuple(spec.min_cc):
         return f"needs compute capability >= {spec.min_cc[0]}.{spec.min_cc[1]}, device is {cc[0]}.{cc[1]}"
@@ -287,7 +288,7 @@ def status(device=None) -> dict:
         cc = tuple(torch.cuda.get_device_capability(dev))
         validated = cc in spec.validated_on
         fa, fb = tuple(spec.formats[0])
-        r = _design_skip(spec, ChainRequest(device=dev, fmt_a=fa, fmt_b=fb, preset="ada"), dev, False)
+        r = _design_skip(spec, ChainRequest(device=dev, fmt_a=fa, fmt_b=fb, preset=spec.preset), dev, False)
         if r is not None:
             out[name] = BackendStatus(name=name, available=False, source=None, validated_here=validated, reason=r)
             continue

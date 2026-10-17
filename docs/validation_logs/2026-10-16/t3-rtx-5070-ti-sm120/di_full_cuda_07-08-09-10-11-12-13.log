@@ -1,0 +1,4 @@
+sssssss                                                                  [100%]
+=========================== short test summary info ============================
+SKIPPED [7] tests/test_device_independence.py:71: 'cuda' not reported by mmaemu.backends_status()
+7 skipped, 131 deselected in 1.67s

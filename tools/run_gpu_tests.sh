@@ -42,7 +42,7 @@ fi
 # one file per locked run; files that do not exist are skipped and reported
 FILES=(tests/test_scaffold.py tests/test_backend_reference.py tests/test_epilogue.py tests/test_kernels_ieee.py
        tests/test_cuda_runtime.py tests/test_fast_kernels.py tests/test_gates_hmma.py tests/test_live_cublas.py
-       tests/test_hw_mini.py tests/test_device_independence.py)
+       tests/test_hw_mini.py tests/test_device_independence.py tests/test_h100_mini.py tests/test_backend_selection.py)
 fail=0
 summary="$OUT/summary.txt"
 : > "$summary"

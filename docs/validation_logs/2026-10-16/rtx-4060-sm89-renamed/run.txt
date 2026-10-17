@@ -1,0 +1,35 @@
+2026-10-16 23:11:30 commit 2648bbae0fd957f0474802455da77fbc770c4dc2 head 2648bbae0fd957f0474802455da77fbc770c4dc2 dirty 0
+NVIDIA GeForce RTX 4060, 570.211.01, 8.9
+2026-10-16 23:11:40 preflight rc=0
+2026-10-16 23:21:00 T3 rc=0
+2026-10-16 23:24:17 hopper-kernels done
+2026-10-16 23:24:20 info rc=0
+2026-10-16 23:24:55 DI_FULL rc=0
+2026-10-16 23:25:41 T3p rc=0
+2026-10-16 23:26:11 sweep_env rc=0
+2026-10-16 23:26:53 sweep_env2 rc=0
+2026-10-16 23:27:35 sweep_env3 rc=0
+2026-10-16 23:32:44 T4gpu rc=0
+2026-10-16 23:33:33 bench 1b rc=0
+2026-10-16 23:34:24 bench 7b rc=0
+2026-10-16 23:35:20 bench 40b rc=0
+2026-10-16 23:36:23 replay auto live 0 rc=0
+2026-10-16 23:38:31 replay auto live 250 rc=0
+2026-10-16 23:38:54 replay auto live 500 rc=0
+2026-10-16 23:39:15 replay auto live 750 rc=0
+2026-10-16 23:39:32 replay auto live 1000 rc=0
+2026-10-16 23:39:57 replay auto live 1250 rc=0
+2026-10-16 23:40:17 replay auto m2 0 rc=0
+2026-10-16 23:40:36 replay auto m2 11 rc=0
+2026-10-16 23:40:36 replay auto merge rc=0
+2026-10-16 23:41:28 replay cuda:h1 live 0 rc=0
+2026-10-16 23:41:57 replay cuda:h1 live 250 rc=0
+2026-10-16 23:42:08 replay cuda:h1 live 500 rc=0
+2026-10-16 23:42:18 replay cuda:h1 live 750 rc=0
+2026-10-16 23:42:29 replay cuda:h1 live 1000 rc=0
+2026-10-16 23:42:40 replay cuda:h1 live 1250 rc=0
+2026-10-16 23:43:01 replay cuda:h1 m2 0 rc=0
+2026-10-16 23:43:20 replay cuda:h1 m2 11 rc=0
+2026-10-16 23:43:21 replay cuda:h1 merge rc=0
+2026-10-16 23:43:21 src dirty after the run: 0
+2026-10-16 23:43:21 FINAL_F2_4060_DONE

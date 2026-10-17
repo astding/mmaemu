@@ -31,24 +31,28 @@ def test_registry_contents():
     assert (ada.nfma, ada.frac, ada.frac_out, ada.min_exp, ada.late_c, ada.slow_chunk, ada.maturity) == \
         (16, 13, 13, -132, False, 128, "validated")
     assert (hop.nfma, hop.frac, hop.frac_out, hop.min_exp, hop.late_c, hop.slow_chunk, hop.maturity) == \
-        (32, 13, 13, -132, False, None, "experimental")
+        (32, 13, 13, -132, False, 128, "validated")
     assert (b2.nfma, b2.frac, b2.frac_out, b2.min_exp, b2.late_c, b2.slow_chunk, b2.maturity) == \
         (32, 25, 23, -133, True, None, "experimental")
     for p in (ada, hop, b2):
         assert p.validated_scope and p.evidence
     assert "NOT a model of sm_120" in b2.validated_scope and "NOT B200 cuBLAS" in b2.validated_scope
+    assert "H100 PCIe" in hop.validated_scope and "not a model of the sm_90 mma.sync" in hop.validated_scope
+    assert P.split_schemes(ada) == ("serial", "pairwise") and P.split_schemes(hop) == ("contiguous",)
+    assert P.split_schemes(b2) == () and P.split_schemes(dataclasses.replace(hop, maturity="custom")) is None
     with pytest.raises(dataclasses.FrozenInstanceError):
         ada.frac = 14
 
 
-def test_validated_preset_never_warns():
+@pytest.mark.parametrize("name", ["ada", "hopper"])
+def test_validated_preset_never_warns(name):
     with warnings.catch_warnings():
         warnings.simplefilter("error")
-        P.get_preset("ada")
-        P.get_preset("ada")
+        P.get_preset(name)
+        P.get_preset(name)
 
 
-@pytest.mark.parametrize("name", ["hopper", "b200_mma_sync"])
+@pytest.mark.parametrize("name", ["b200_mma_sync"])
 def test_experimental_warns_once_per_process(name):
     with pytest.warns(ExperimentalPresetWarning, match=f"'{name}' is experimental"):
         P.get_preset(name)
@@ -85,7 +89,7 @@ def test_unknown_preset():
         P.get_preset(3)
 
 
-@pytest.mark.parametrize("name", ["hopper", "b200_mma_sync"])
+@pytest.mark.parametrize("name", ["b200_mma_sync"])
 def test_uncharacterised_gemm_level_raises(name):
     with pytest.raises(UnsupportedFeatureError, match="slow accumulation"):
         make_plan(256, fast=False, preset=name)
@@ -100,7 +104,7 @@ def test_uncharacterised_slow_accumulation_raises_through_the_api():
     a = torch.ones(16, 32).to(torch.float8_e4m3fn)
     with pytest.raises(UnsupportedFeatureError):
         with pytest.warns(ExperimentalPresetWarning):
-            accumulate(a, a, use_fast_accum=False, profile="hopper-experimental", splitk=1)
+            accumulate(a, a, use_fast_accum=False, profile="b200-mma-sync-experimental", splitk=1)
     P._reset_warnings_for_tests()
     with pytest.raises(UnsupportedFeatureError):
         with pytest.warns(ExperimentalPresetWarning):

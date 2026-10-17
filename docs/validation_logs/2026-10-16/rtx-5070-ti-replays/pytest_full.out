@@ -1,0 +1,111 @@
+........................................................................ [  1%]
+................................sss..................................... [  3%]
+................s.ssssssssssssssssssssssssssssssssssssssssssssssssssssss [  4%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [  6%]
+sssssssssssssssssssssssssssssss......................................... [  8%]
+........................................................................ [  9%]
+........................................................................ [ 11%]
+........................................................................ [ 13%]
+........................................................................ [ 14%]
+....................ssssssssssssssssssssssssssssssssssssssssssssssssssss [ 16%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 18%]
+sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss......... [ 19%]
+...........ssss......................................................... [ 21%]
+....................................................................ssss [ 23%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 24%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 26%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 28%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 29%]
+ssssssssssssssssss...................................................... [ 31%]
+........................................................................ [ 33%]
+........................................................................ [ 34%]
+........................................................................ [ 36%]
+........................................................................ [ 38%]
+........................................................................ [ 39%]
+........................................................................ [ 41%]
+........................................................................ [ 42%]
+........................................................................ [ 44%]
+........................................................................ [ 46%]
+........................................................................ [ 47%]
+........................................................................ [ 49%]
+........................................................................ [ 51%]
+........................................................................ [ 52%]
+........................................................................ [ 54%]
+........................................................................ [ 56%]
+........................................................................ [ 57%]
+........................................................................ [ 59%]
+........................................................................ [ 61%]
+........................................................................ [ 62%]
+........................................................................ [ 64%]
+........................................................................ [ 66%]
+........................................................................ [ 67%]
+........................................................................ [ 69%]
+........................................................................ [ 71%]
+........................................................................ [ 72%]
+........................................................................ [ 74%]
+........................................................................ [ 76%]
+........................................................................ [ 77%]
+........................................................................ [ 79%]
+........................................................................ [ 80%]
+........................................................................ [ 82%]
+........................................................................ [ 84%]
+........................................................................ [ 85%]
+........................................................................ [ 87%]
+..................ssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 89%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 90%]
+sssssssssssssssssssssssssssssssssssssssssssssssss....................... [ 92%]
+.........................................................s......s....... [ 94%]
+........................................................................ [ 95%]
+......s................................................................. [ 97%]
+.................s..........s..........s................................ [ 99%]
+..................sss................                                    [100%]
+=============================== warnings summary ===============================
+tests/test_api.py::test_explain
+  <src>/mmaemu/api.py:322: UnverifiedSplitWarning: mmaemu split-K S=2 scheme=serial (fast accumulation, out float32, e4m3xe4m3, source explicit, profile hopper-h100pcie-torch): this (fast, S, scheme, out, format pair) combination was never replayed on hardware
+    P.decision = resolve_splitk(*key[:3], a_dtype=key[3], b_dtype=key[4], out_dtype=od,
+
+tests/test_api.py::test_explain
+  <src>/mmaemu/api.py:322: UnverifiedSplitWarning: mmaemu split-K S=2 scheme=contiguous (fast accumulation, out float32, e4m3xe4m3, source explicit, profile ada-rtx4060-torch): K = 64 is not a multiple of 128 (no replayed split call has a ragged last k-tile)
+    P.decision = resolve_splitk(*key[:3], a_dtype=key[3], b_dtype=key[4], out_dtype=od,
+
+tests/test_hw_mini.py::test_case[ws2:r1.api_parity_grid/out_wrong_shape_f32]
+tests/test_hw_mini.py::test_case[ws2:r1.api_parity_grid/out_wrong_shape_bf16]
+tests/test_hw_mini.py::test_case[ws2:r1.api_parity_grid/out_wrong_shape_f16]
+tests/test_hw_mini.py::test_case[ws2:r1.api_parity_grid/out_wrong_shape_e4m3]
+tests/test_hw_mini.py::test_case[ws2:r1.api_parity_grid/out_wrong_shape_e5m2]
+  <venv>/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py:838: UserWarning: An output with one or more elements was resized since it had shape [16, 33], which does not match the required output shape [16, 32].
+    return fn(*args, **kwargs)
+
+tests/test_splitk_table.py::test_dry_resolution_does_not_use_up_the_warning
+  <src>/tests/test_splitk_table.py:43: UnverifiedSplitWarning: mmaemu split-K S=8 scheme=pairwise (fast accumulation, out bfloat16, e4m3xe4m3, source table, profile ada-rtx4060-te): split-K decisions of profile ada-rtx4060-te are experimental
+    return resolve_splitk(M, N, K, a_dtype=fa, b_dtype=fb, out_dtype=out, use_fast_accum=fast, profile=profile, **kw)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+SKIPPED [653] tests/conftest.py:114: needs a CUDA device
+SKIPPED [4] tests/test_cuda_runtime.py:91: needs a CUDA device
+SKIPPED [4] tests/test_cuda_runtime.py:120: needs a CUDA device
+SKIPPED [4] tests/test_cuda_runtime.py:142: needs a CUDA device
+SKIPPED [1] tests/test_cuda_runtime.py:262: needs a CUDA device
+SKIPPED [1] tests/test_cuda_runtime.py:277: needs a CUDA device
+SKIPPED [1] tests/test_cuda_runtime.py:301: needs a CUDA device
+SKIPPED [1] tests/test_cuda_runtime.py:335: needs a CUDA device
+SKIPPED [1] tests/test_cuda_runtime.py:355: needs a CUDA device
+SKIPPED [1] tests/test_cuda_runtime.py:373: needs a CUDA device
+SKIPPED [1] tests/test_cuda_runtime.py:440: needs a CUDA device
+SKIPPED [8] tests/test_kernels_ieee.py:225: needs a CUDA device
+SKIPPED [1] tests/test_kernels_ieee.py:247: needs a CUDA device
+SKIPPED [4] tests/test_kernels_ieee.py:264: needs a CUDA device
+SKIPPED [2] tests/test_kernels_ieee.py:295: needs a CUDA device
+SKIPPED [8] tests/test_kernels_ieee.py:310: needs a CUDA device
+SKIPPED [16] tests/test_kernels_ieee.py:331: needs a CUDA device
+SKIPPED [8] tests/test_kernels_ieee.py:378: needs a CUDA device
+SKIPPED [40] tests/test_kernels_ieee.py:392: needs a CUDA device
+SKIPPED [48] tests/test_kernels_ieee.py:402: needs a CUDA device
+SKIPPED [32] tests/test_kernels_ieee.py:412: needs a CUDA device
+SKIPPED [1] tests/test_packaging.py:299: MMAEMU_EXPECT_INSTALLED not set
+SKIPPED [1] tests/test_packaging.py:299: mmaemu is not imported from an installed distribution
+SKIPPED [1] tests/test_profiles.py:152: GPU test: select with -m profile_device and run under gpu.sh
+SKIPPED [1] tests/test_scaffold.py:570: the registry decides when it is installed
+SKIPPED [3] tests/test_splitk_table.py:709: GPU test: select with -m profile_device and run under gpu.sh
+3511 passed, 846 skipped, 8 warnings in 720.68s (0:12:00)

@@ -1,0 +1,20 @@
+PASS  driver branch R570 (reference: Windows 572.16 via WSL2): 570.211.01
+PASS  python: 3.12.2
+PASS  32 installed packages == reference lock: all equal
+PASS  release commit: 2648bbae0fd957f0474802455da77fbc770c4dc2
+PASS  fatbins current (build_fatbin --check): build_fatbin --check ~/mmaemu-4060/src/mmaemu/backends/cuda/bin: OK (7 modules)
+PASS  fatbins == manifest sha256 (check_dist --verify-manifest): check_dist: 18 checks, 0 failed
+PASS  truth manifest sha256: be1270ed64432a13...
+PASS  torch: 2.7.1+cu128
+PASS  torch CUDA: 12.8
+PASS  one visible CUDA device: 1
+PASS  GPU name: NVIDIA GeForce RTX 4060
+PASS  capability: [8, 9]
+PASS  SM count: 24
+PASS  mmaemu imported from src/: ~/mmaemu-4060/src/mmaemu/__init__.py
+PASS  cuBLASLt version: 12.8.3.14
+PASS  cuBLASLt loaded from the venv: ~/mmaemu-4060/venv/lib/python3.12/site-packages/nvidia/cublas/lib/libcublasLt.so.12
+PASS  profile ada matches this device: matches
+PASS  python -m mmaemu info: rc=0
+
+preflight: PASS (18/18); ~/mmaemu-4060/logs-f2/preflight

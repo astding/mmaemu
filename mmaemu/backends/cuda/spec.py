@@ -7,7 +7,8 @@ Kernel ABI v1 (every chain kernel):
                                                       float* __restrict__ C, int M, int N, int K);
 
 - A: [M][K] E4M3 codes, row-major. B: [N][K], row-major. C: [M][N] fp32, row-major.
-- C[m][n] = Ada fast chain over k = 0..K-1, starting from +0, with M1 (+0 for zero block results).
+- C[m][n] = the fast chain of the kernel's preset (KernelSpec.preset: "ada" 16-term blocks, "hopper" 32-term
+  blocks; mmaemu.model.chain) over k = 0..K-1, starting from +0, with M1 (+0 for zero block results).
 - Preconditions, checked by the Python wrapper and never by the kernel:
   1 <= M, N; 16 <= K < k_max; K % 16 == 0; all codes finite; pointers aligned to align_bytes;
   grid = (ceil(N/tile_n), ceil(M/tile_m), 1); block = (threads, 1, 1); dynamic smem = smem_bytes
@@ -39,7 +40,7 @@ KERNEL_ABI_VERSION = 1
 @dataclass(frozen=True)
 class KernelSpec:
     """One shipped chain kernel (one config per kernel)."""
-    name: str                       # "v1" | "v4" | "v9" | "tc3"
+    name: str                       # "v1" | "v4" | "v9" | "tc3" | "h1" | "h4"
     module: str                     # fatbin and source stem
     source: str                     # file under mmaemu/backends/cuda/csrc/
     entry: str                      # "mmaemu_<name>_e4m3e4m3"
@@ -49,7 +50,7 @@ class KernelSpec:
     gated: bool                     # True: hardware-dependent numerics (v9, tc3)
     validated_on: frozenset         # capabilities with hardware validation, e.g. {(8, 9), (12, 0)}
     gates: tuple[str, ...]          # extra gates beyond "smoke" (v9: ("window",), tc3: ("design_a",))
-    priority: int                   # tc3 40, v9 30, v4 20, v1 10
+    priority: int                   # within a preset; ada: tc3 40, v9 30, v4 20, v1 10; hopper: h4 20, h1 10
     tile_m: int
     tile_n: int
     threads: int
@@ -57,6 +58,7 @@ class KernelSpec:
     align_bytes: int                # 4 (v1/v4/v9) or 16 (tc3)
     k_max: int                      # exclusive; v4/v9: 1 << 24
     formats: tuple = (("e4m3", "e4m3"),)
+    preset: str = "ada"             # the numerics preset the kernel implements (h1, h4: "hopper")
 
     def __post_init__(self):
         def need(cond, what):
@@ -78,6 +80,7 @@ class KernelSpec:
         need(self.align_bytes > 0 and self.align_bytes & (self.align_bytes - 1) == 0,
              "align_bytes must be a power of two")
         need(self.k_max > 16, "k_max must exceed 16")
+        need(isinstance(self.preset, str) and self.preset, "preset must be a non-empty str")
 
     def launch_config(self, M: int, N: int) -> tuple[tuple[int, int, int], tuple[int, int, int], int]:
         """(grid, block, dynamic smem bytes) of the ABI v1 launch for an [M, N] output."""

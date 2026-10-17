@@ -14,15 +14,18 @@
      environment    nvcc not on PATH, CUDA_HOME unset, a CUDA device visible to the venv's torch
      install        mmaemu is imported from the venv; version == wheel; the wheel's fatbins (if any) listed
      info           `python -m mmaemu info --json` exits 0
-     selftest       `python -m mmaemu selftest --force --json` exits 0 (verdict PASS; v1 and v4 passed)
+     selftest       `python -m mmaemu selftest --force --json` exits 0 (verdict PASS; v1, v4, h1 and h4 passed)
      loader         with release fatbins in the wheel, the IEEE kernels load from the fatbin (not NVRTC) in the
                     venv, and every kernel that ran loaded the image whose sha256 the wheel's manifest records
-     conformance    T3 subset: every available CUDA kernel vs the CPU reference, bitwise (8 data classes x
-                    tile-straddling shapes, slow accumulation, split-K serial/pairwise, NaN rows/columns, a
-                    misaligned operand, scaled_mm bf16 through backend="auto")
-     evo2           one Evo 2 1B projection (truth evo2.evo2_1b_w2k, call 0, 2048x5760x1920): scaled_mm bf16 output
-                    == the recorded native RTX 4060 output bit for bit, and the fp32 accumulator's sha256 == the
-                    recorded full-accumulator sha256
+     conformance    T3 subset: every available CUDA kernel vs the CPU reference of its own preset (profile
+                    ada or hopper), bitwise (8 data classes x tile-straddling shapes,
+                    slow accumulation, split-K serial/pairwise for ada and contiguous for hopper, NaN rows/columns, a
+                    misaligned operand, scaled_mm bf16 through backend="auto" under both profiles)
+     evo2           one Evo 2 1B projection (truth evo2.evo2_1b_w2k, call 0, 2048x5760x1920), backend "auto":
+                    - ada: scaled_mm bf16 output == the recorded native RTX 4060 output bit for bit,
+                      and the fp32 accumulator's sha256 == the recorded full-accumulator sha256;
+                    - hopper: the bf16 output and the unit-scale fp32 output, fast and slow
+                      accumulation, have the sha256 of the H100's (the committed probe log, H100_M2)
 4. Writes docs/release_logs/<version>_<gpu>.json (or --out). Exit 0: every check PASS (verdict PASS); 3: no
    failure but a check was skipped (PASS-WITH-SKIPS, e.g. --allow-missing-fatbins); 1: a check failed; 2: usage.
 
@@ -49,6 +52,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 FORMAT = "mmaemu-release-validation/1"
 EVO2_RECORDING = "data/evo2/evo2_1b_w2k.json"
+H100_M2 = "docs/validation_logs/2026-10-15/h100-probe/results/m2/m2_torch.json"  # the H100's Evo 2 outputs (sha256)
 WSL_DRIVER_DIR = "/usr/lib/wsl/lib"
 SCRUB = ("CUDA_HOME", "CUDA_PATH", "CUDA_ROOT", "CUDA_TOOLKIT_ROOT_DIR", "CUDACXX", "PYTHONPATH", "PYTHONHOME",
          "LD_LIBRARY_PATH", "LD_PRELOAD", "CONDA_PREFIX", "CONDA_DEFAULT_ENV", "VIRTUAL_ENV", "PYTHONSTARTUP",
@@ -76,8 +80,19 @@ def slug(name: str, cc) -> str:
 # =============================================================================================== inner checks
 # These run inside the fresh venv (`--inner ...`); they import only torch, numpy and the installed mmaemu.
 GENS = ["random", "allcodes", "tiny", "sat", "spread", "blockscale", "cancel", "zeros"]
-KERNELS = ("cuda:v1", "cuda:v4", "cuda:v9", "cuda:tc3")
-REQUIRED_KERNELS = ("cuda:v1", "cuda:v4")  # IEEE-exact: must load and pass everywhere they are supported
+KERNELS = ("cuda:v1", "cuda:v4", "cuda:v9", "cuda:tc3", "cuda:h1", "cuda:h4")
+# IEEE-exact: must load and pass everywhere they are supported
+REQUIRED_KERNELS = ("cuda:v1", "cuda:v4", "cuda:h1", "cuda:h4")
+PROFILE_OF = {"ada": "ada", "hopper": "hopper"}  # the profile each preset is checked with
+PLANS = {  # plan compositions per preset: slow accumulation and the preset's split schemes (K = 1920: 15 k-tiles)
+    "ada": ({"use_fast_accum": False, "splitk": 1}, {"use_fast_accum": True, "splitk": (3, "pairwise")},
+            {"use_fast_accum": True, "splitk": (8, "serial")}, {"use_fast_accum": False, "splitk": (2, "serial")},
+            {"use_fast_accum": False, "splitk": (12, "pairwise")}),
+    "hopper": ({"use_fast_accum": False, "splitk": 1}, {"use_fast_accum": True, "splitk": (3, "contiguous")},
+               {"use_fast_accum": True, "splitk": (5, "contiguous")},
+               {"use_fast_accum": False, "splitk": (2, "contiguous")},
+               {"use_fast_accum": False, "splitk": (4, "contiguous")}),
+}
 SHAPES = [(M, N, K) for K in (16, 48, 1920) for M in (1, 65, 200) for N in (1, 127, 257)]
 
 
@@ -157,11 +172,14 @@ def inner_conformance(args) -> dict:
                                              "reason": getattr(v, "reason", "")} for k, v in dict(st).items()}
 
     out = {"kernels": [], "skipped": {}, "cases": 0, "outputs": 0, "mismatches": [], "status_before": snapshot()}
+    preset = kernel_presets()
+    out["presets"] = {k: preset[k] for k in KERNELS}
     # Try every kernel explicitly (a kernel may be reported available only after it was loaded and gated).
     probe_a, probe_b = make_case(torch, "random", 16, 8, 64, 1)
     for k in KERNELS:
         try:
-            mmaemu.accumulate(probe_a.to(dev), probe_b.to(dev), use_fast_accum=True, splitk=1, backend=k)
+            mmaemu.accumulate(probe_a.to(dev), probe_b.to(dev), use_fast_accum=True, splitk=1,
+                              profile=PROFILE_OF[preset[k]], backend=k)
             torch.cuda.synchronize(dev)
             out["kernels"].append(k)
         except Exception as e:  # noqa: BLE001 - BackendUnavailableError and friends: record the reason
@@ -182,33 +200,36 @@ def inner_conformance(args) -> dict:
         except AssertionError as e:
             out["mismatches"].append(f"{label}: {str(e).splitlines()[0][:300]}")
 
-    def acc(a, b, backend, **kw):
+    def acc(a, b, backend, pre, **kw):
         if backend == "reference":
-            return mmaemu.accumulate(a, b, backend="reference", **kw)
-        r = mmaemu.accumulate(a.to(dev), b.to(dev), backend=backend, **kw)
+            return mmaemu.accumulate(a, b, profile=PROFILE_OF[pre], backend="reference", **kw)
+        r = mmaemu.accumulate(a.to(dev), b.to(dev), profile=PROFILE_OF[pre], backend=backend, **kw)
         torch.cuda.synchronize(dev)
         return r
+
+    def refs(a, b, **kw):  # the CPU reference of every preset a kernel under test implements
+        return {pre: acc(a, b, "reference", pre, **kw) for pre in sorted({preset[k] for k in kernels})}
 
     t0 = clock()
     # 1. data classes x tile-straddling shapes, fast accumulation, unsplit
     for kind in GENS:
         for M, N, K in SHAPES:
             a, b = make_case(torch, kind, M, N, K, zlib.crc32(f"{kind}-{M}-{N}-{K}".encode()))
-            ref = acc(a, b, "reference", use_fast_accum=True, splitk=1)
+            ref = refs(a, b, use_fast_accum=True, splitk=1)
             for k in kernels:
-                compare(f"{k} {kind} {M}x{N}x{K} fast", acc(a, b, k, use_fast_accum=True, splitk=1), ref)
-    # 2. plan compositions: slow accumulation, split-K serial and pairwise, K % 16 != 0 (accumulate pads)
+                compare(f"{k} {kind} {M}x{N}x{K} fast", acc(a, b, k, preset[k], use_fast_accum=True, splitk=1),
+                        ref[preset[k]])
+    # 2. plan compositions: slow accumulation, the preset's split-K schemes, K % 16 != 0 (accumulate pads)
     a, b = make_case(torch, "random", 64, 96, 1920, 11)
-    for kw in ({"use_fast_accum": False, "splitk": 1}, {"use_fast_accum": True, "splitk": (3, "pairwise")},
-               {"use_fast_accum": True, "splitk": (8, "serial")}, {"use_fast_accum": False, "splitk": (2, "serial")},
-               {"use_fast_accum": False, "splitk": (12, "pairwise")}):
-        ref = acc(a, b, "reference", **kw)
-        for k in kernels:
-            compare(f"{k} plan {kw}", acc(a, b, k, **kw), ref)
+    for pre in sorted({preset[k] for k in kernels}):
+        for kw in PLANS[pre]:
+            ref = acc(a, b, "reference", pre, **kw)
+            for k in (k for k in kernels if preset[k] == pre):
+                compare(f"{k} plan {kw}", acc(a, b, k, pre, **kw), ref)
     a2, b2 = make_case(torch, "random", 33, 40, 200, 12)
-    ref = acc(a2, b2, "reference", use_fast_accum=True, splitk=1)
+    ref = refs(a2, b2, use_fast_accum=True, splitk=1)
     for k in kernels:
-        compare(f"{k} K=200", acc(a2, b2, k, use_fast_accum=True, splitk=1), ref)
+        compare(f"{k} K=200", acc(a2, b2, k, preset[k], use_fast_accum=True, splitk=1), ref[preset[k]])
     # 3. NaN codes in a row of A and a column of B -> canonical NaN exactly there
     a3, b3 = make_case(torch, "random", 48, 40, 256, 13)
     a3 = a3.view(torch.uint8).clone()
@@ -216,27 +237,32 @@ def inner_conformance(args) -> dict:
     a3[5, 17] = 0x7F
     b3[9, 200] = 0xFF
     a3, b3 = a3.view(torch.float8_e4m3fn), b3.view(torch.float8_e4m3fn)
-    ref = acc(a3, b3, "reference", use_fast_accum=True, splitk=1)
+    ref = refs(a3, b3, use_fast_accum=True, splitk=1)
     for k in kernels:
-        compare(f"{k} NaN rows/cols", acc(a3, b3, k, use_fast_accum=True, splitk=1), ref)
+        compare(f"{k} NaN rows/cols", acc(a3, b3, k, preset[k], use_fast_accum=True, splitk=1), ref[preset[k]])
     # 4. misaligned operand (storage offset 1 byte): accumulate copies, the result is unchanged
     a4, b4 = make_case(torch, "allcodes", 17, 31, 64, 14)
+    ref = refs(a4, b4, use_fast_accum=True, splitk=1)
     for k in kernels:
         buf = torch.zeros(17 * 64 + 1, dtype=torch.uint8, device=dev)
         am = buf[1:].view(17, 64)
         am.copy_(a4.view(torch.uint8).to(dev))
         got = mmaemu.accumulate(am.view(torch.float8_e4m3fn), b4.to(dev), use_fast_accum=True, splitk=1,
-                                backend=k)
+                                profile=PROFILE_OF[preset[k]], backend=k)
         torch.cuda.synchronize(dev)
-        compare(f"{k} misaligned", got, acc(a4, b4, "reference", use_fast_accum=True, splitk=1))
-    # 5. scaled_mm through backend="auto" (bf16 output, Evo 2 settings) vs the CPU
+        compare(f"{k} misaligned", got, ref[preset[k]])
+    # 5. scaled_mm through backend="auto" (bf16 output, Evo 2 settings) vs the CPU, under each preset's profile
     a5, b5 = make_case(torch, "random", 64, 256, 1920, 15)
     sa, sb = torch.tensor(0.0123), torch.tensor(-0.75)
-    ref = mmaemu.scaled_mm(a5, b5.t(), sa, sb, out_dtype=torch.bfloat16, use_fast_accum=True, splitk=1,
-                           backend="reference")
-    got = mmaemu.scaled_mm(a5.to(dev), b5.to(dev).t(), sa.to(dev), sb.to(dev), out_dtype=torch.bfloat16,
-                           use_fast_accum=True, splitk=1)
-    compare("scaled_mm auto bf16", got, ref)
+    out["auto_backends"] = {}
+    for prof in PROFILE_OF.values():
+        ref = mmaemu.scaled_mm(a5, b5.t(), sa, sb, out_dtype=torch.bfloat16, use_fast_accum=True, splitk=1,
+                               profile=prof, backend="reference")
+        args5 = (a5.to(dev), b5.to(dev).t(), sa.to(dev), sb.to(dev))
+        got = mmaemu.scaled_mm(*args5, out_dtype=torch.bfloat16, use_fast_accum=True, splitk=1, profile=prof)
+        out["auto_backends"][prof] = mmaemu.explain(*args5, out_dtype=torch.bfloat16, use_fast_accum=True, splitk=1,
+                                                    profile=prof).backend
+        compare(f"scaled_mm auto bf16 {prof}", got, ref)
     out["seconds"] = round(clock() - t0, 3)
     out["status_after"] = snapshot()  # same process, after every kernel ran: the loader each one used
     from mmaemu.backends.cuda import modules
@@ -246,6 +272,18 @@ def inner_conformance(args) -> dict:
         lm = modules.module_info(k.split(":", 1)[1], dev)
         out["modules"][k] = {"source": lm.source, "sha256": lm.sha256}
     return out
+
+
+def kernel_presets() -> dict:
+    """The preset of every kernel in KERNELS, from the installed package's KernelSpecs (default "ada")."""
+    import importlib
+    specs = {}
+    for mod in ("mmaemu.backends.cuda.kernels", "mmaemu.backends.cuda.fast.specs"):
+        try:
+            specs.update({s.name: s for s in importlib.import_module(mod).SPECS})
+        except ImportError:
+            pass
+    return {k: getattr(specs.get(k.split(":", 1)[1]), "preset", "ada") for k in KERNELS}
 
 
 def _load_truth_case(truth: Path):
@@ -287,11 +325,12 @@ def inner_evo2(args) -> dict:
     a = torch.from_numpy(a_np).view(torch.float8_e4m3fn).to(dev)
     b = torch.from_numpy(b_np).view(torch.float8_e4m3fn).to(dev)
     out = {"recording": rec["id"], "case": case["id"], "shape": [int(a.shape[0]), int(b.shape[0]), int(a.shape[1])]}
-    plan = mmaemu.explain(a, b.t(), sa.to(dev), sb.to(dev), out_dtype=torch.bfloat16, use_fast_accum=True)
+    ada = PROFILE_OF["ada"]
+    plan = mmaemu.explain(a, b.t(), sa.to(dev), sb.to(dev), out_dtype=torch.bfloat16, use_fast_accum=True, profile=ada)
     out["backend"] = str(getattr(plan, "backend", None))
     out["split"] = str(getattr(plan, "split", None))
     t0 = clock()
-    y = mmaemu.scaled_mm(a, b.t(), sa.to(dev), sb.to(dev), out_dtype=torch.bfloat16, use_fast_accum=True)
+    y = mmaemu.scaled_mm(a, b.t(), sa.to(dev), sb.to(dev), out_dtype=torch.bfloat16, use_fast_accum=True, profile=ada)
     torch.cuda.synchronize(dev)
     out["scaled_mm_seconds"] = round(clock() - t0, 3)
     expect = torch.from_numpy(np.ascontiguousarray(y_bits).view(np.int16)).view(torch.bfloat16)
@@ -301,13 +340,42 @@ def inner_evo2(args) -> dict:
     except AssertionError as e:
         out["y_native_equal"] = False
         out["y_native_mismatch"] = str(e).splitlines()[0][:300]
-    acc = mmaemu.accumulate(a, b, use_fast_accum=True)
+    acc = mmaemu.accumulate(a, b, use_fast_accum=True, profile=ada)
     torch.cuda.synchronize(dev)
     h = hashlib.sha256(acc.cpu().contiguous().view(torch.int32).numpy().tobytes()).hexdigest()
     out["acc_sha256"] = h
     out["acc_full_sha256_recorded"] = outs["acc_full"]["sha256"]
     out["acc_equal"] = h == outs["acc_full"]["sha256"]
+    if args.h100_m2:
+        out["h100"] = h100_outputs(torch, mmaemu, Path(args.h100_m2), case, a, b, dev)
     return out
+
+
+def h100_outputs(torch, mmaemu, m2: Path, case: dict, a, b, dev) -> dict:
+    """The same projection under hopper: each output's sha256 vs the H100's (probe step M2)."""
+    calls = {c["id"]: c for c in json.loads(m2.read_text())["calls"]}
+    p = case["params"]
+    bits = [p["fp8_scale_inv_in"], p["fp8_scale_inv_w"]]
+    inv = torch.tensor(bits, dtype=torch.int32).view(torch.float32).to(dev)
+    one = torch.ones((), device=dev)
+    prof = PROFILE_OF["hopper"]
+    res = {"log": m2.name, "outputs": {}}
+    for tag, fast in (("fast", True), ("slow", False)):
+        for name, sa, sb, od in (("acc", one, one, torch.float32), ("y", inv[0], inv[1], torch.bfloat16)):
+            cid = f"call{case['params']['call_index']:02d}.{name}_{tag}"
+            hw = calls[cid]
+            if hw["meta"]["scale_inv_bits"] != bits:
+                raise ValueError(f"{cid}: the probe's scale bits {hw['meta']['scale_inv_bits']} != the truth's {bits}")
+            kw = dict(out_dtype=od, use_fast_accum=fast, profile=prof)
+            y = mmaemu.scaled_mm(a, b.t(), sa, sb, **kw)
+            torch.cuda.synchronize(dev)
+            it = {2: torch.int16, 4: torch.int32}[y.element_size()]
+            got = hashlib.sha256(y.cpu().contiguous().view(it).numpy().tobytes()).hexdigest()
+            want = {r["sha256"] for r in hw["runs"]}
+            res["outputs"][cid] = {"equal": want == {got}, "sha256": got, "backend":
+                                   mmaemu.explain(a, b.t(), sa, sb, **kw).backend}
+    res["all_equal"] = bool(res["outputs"]) and all(o["equal"] for o in res["outputs"].values())
+    return res
 
 
 # =============================================================================================== outer driver
@@ -392,7 +460,7 @@ def run_py(vpy: Path, argv: list[str], env: dict, cwd: Path, timeout: float):
 def inner_json(vpy: Path, which: str, env: dict, cwd: Path, timeout: float, truth: str):
     out = cwd / f"inner_{which}.json"
     r, secs = run_py(vpy, [str(Path(__file__).resolve()), "--inner", which, "--inner-out", str(out),
-                           "--truth-dir", truth], env, cwd, timeout)
+                           "--truth-dir", truth, "--h100-m2", str(ROOT / H100_M2)], env, cwd, timeout)
     data = json.loads(out.read_text()) if out.is_file() else None
     return r, secs, data
 
@@ -494,12 +562,12 @@ def outer(args) -> int:
         st = json.loads(st_path.read_text()) if st_path.is_file() else None
         report["selftest"] = st
         kern = {k.split(":", 1)[-1]: v for k, v in (st or {}).get("kernels", {}).items()}
-        need = [k for k in ("v1", "v4") if k not in kern or not kern[k].get("passed")]
+        need = [k for k in ("v1", "v4", "h1", "h4") if k not in kern or not kern[k].get("passed")]
         ok = r.returncode == 0 and st and st.get("verdict") == "PASS" and not need
         R.add("selftest", "PASS" if ok else "FAIL", seconds=secs,
               summary=f"verdict {(st or {}).get('verdict')}; " + ", ".join(
                   f"{k}={'pass' if v.get('passed') else 'fail'}" for k, v in kern.items()),
-              reason="" if ok else (f"v1/v4 not passed: {need}; " if need else "") + ((st or {}).get("reason") or
+              reason="" if ok else (f"IEEE kernels not passed: {need}; " if need else "") + ((st or {}).get("reason") or
                                                                                       r.stderr.strip()[-300:]))
 
         # conformance (T3 subset)
@@ -557,12 +625,18 @@ def outer(args) -> int:
             if data is None:
                 R.add("evo2", "FAIL", reason="no result" + (f": {r.stderr.strip()[-600:]}" if r else " (timeout)"))
             else:
-                ok = r.returncode == 0 and data.get("y_native_equal") and data.get("acc_equal")
+                h100 = data.get("h100") or {}
+                ok = (r.returncode == 0 and data.get("y_native_equal") and data.get("acc_equal")
+                      and h100.get("all_equal"))
+                hsum = ", ".join(f"{k.split('.', 1)[1]} {'==' if o['equal'] else '!='} H100 ({o['backend']})"
+                                 for k, o in h100.get("outputs", {}).items())
                 R.add("evo2", "PASS" if ok else "FAIL", seconds=secs,
-                      summary=f"{data['recording']} {data['case']} {data['shape']}: bf16 output == native "
-                              f"{data.get('y_native_equal')}, accumulator sha256 == recorded {data.get('acc_equal')} "
-                              f"(backend {data.get('backend')}, split {data.get('split')})",
-                      reason="" if ok else (data.get("y_native_mismatch") or r.stderr.strip()[-500:]))
+                      summary=f"{data['recording']} {data['case']} {data['shape']}: {PROFILE_OF['ada']} bf16 output "
+                              f"== native {data.get('y_native_equal')}, accumulator sha256 == recorded "
+                              f"{data.get('acc_equal')} (backend {data.get('backend')}, split {data.get('split')}); "
+                              f"{PROFILE_OF['hopper']}: {hsum or 'not run'}",
+                      reason="" if ok else (data.get("y_native_mismatch") or ("H100 outputs differ or missing: "
+                                            f"{h100}" if not h100.get("all_equal") else "") or r.stderr.strip()[-500:]))
         return finish(args, report, R, wf, dev)
     finally:
         if not args.keep and not args.venv:
@@ -616,6 +690,7 @@ def main(argv=None) -> int:
     ap.add_argument("--install-timeout-s", type=float, default=900.0)
     ap.add_argument("--inner", choices=("conformance", "evo2"), help=argparse.SUPPRESS)
     ap.add_argument("--inner-out", help=argparse.SUPPRESS)
+    ap.add_argument("--h100-m2", help=argparse.SUPPRESS)
     args = ap.parse_args(argv)
     if args.inner:
         fn = {"conformance": inner_conformance, "evo2": inner_evo2}[args.inner]

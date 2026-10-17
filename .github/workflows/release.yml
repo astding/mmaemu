@@ -1,9 +1,10 @@
 # Release (docs/release.md). A pushed tag v<version> builds, checks and publishes to PyPI by
 # trusted publishing (OIDC; no token secrets). workflow_dispatch runs the build job only and never publishes.
 #
-# The fatbins are NOT built here: they are built and GPU-validated locally by the maintainer at the release-candidate
-# freeze (tools/build_fatbin.py --release, T3 + T7) and committed. This workflow only proves that the committed
-# binaries are current (source hashes) and intact (manifest sha256), then packages exactly those bytes.
+# The fatbins are NOT built here: they are built locally by the maintainer (tools/build_fatbin.py --release: a branch
+# that adds or changes a kernel commits that module's build, the release-candidate freeze rebuilds and compares every
+# module), GPU-validated (T3 + T7) and committed. This workflow only proves that the committed binaries are current
+# (source hashes) and intact (manifest sha256), then packages exactly those bytes.
 #
 # Maintainer-only setup (docs/release.md): PyPI trusted publisher (project mmaemu, owner astding, repository mmaemu,
 # workflow release.yml, environment pypi); required reviewers on the GitHub environment "pypi"; protected v* tags.

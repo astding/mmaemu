@@ -62,7 +62,7 @@ No Transformer Engine is needed. In a fresh Python 3.12 environment:
 pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cu128
 pip install evo2==0.6.0 vtx==1.1.0
 pip install flash-attn==2.8.0.post2 --no-build-isolation   # attention kernels used by vortex
-pip install "git+https://github.com/astding/mmaemu"   # mmaemu goes to PyPI with its 0.1.0 release
+pip install mmaemu==0.1.0
 pip install matplotlib pandas scikit-learn openpyxl jupyter
 ```
 
@@ -123,7 +123,7 @@ evo2 0.6.0 refuses to load the 1B model when Transformer Engine is not installed
 fallback). The cell below is the whole integration. It builds the upstream model with plain bf16 projections, reads
 the FP8 scales that TE stored in the checkpoint, and puts the FP8 GEMM back into each projection: the input and the
 weight are cast to E4M3 with those scales, and the GEMM is computed by mmaemu with the profile
-`ada-rtx4060-te` (the RTX 4060 with TE's cuBLAS workspace).
+`ada-te` (the RTX 4060 with TE's cuBLAS workspace).
 
 While loading, vortex lists the checkpoint entries that this model does not use: TE's FP8 metadata
 (`_extra_state`, which `read_te_scales` reads) and `unembed.weight` (the output layer is tied to the embedding).
@@ -201,7 +201,7 @@ class FP8Projection(torch.nn.Module):
         xq = self.quantize(x)
         if self.mode == "mmaemu":
             y = mmaemu.scaled_mm(xq, self.wq.t(), self.scale_inv[0], self.scale_inv[1], out_dtype=torch.bfloat16,
-                                 use_fast_accum=True, profile="ada-rtx4060-te")
+                                 use_fast_accum=True, profile="ada-te")
         elif self.mode == "native":
             y = torch._scaled_mm(xq, self.wq.t(), scale_a=self.scale_inv[0], scale_b=self.scale_inv[1],
                                  out_dtype=torch.bfloat16, use_fast_accum=True)
@@ -287,7 +287,7 @@ print(f"native vs RTX 4060: {gemm_native['differ']:,} of {gemm_native['outputs']
 # mmaemu gives the same bits on the CPU (exact float64 reference model) and on this GPU's kernel
 xq = evo.model.blocks[0].projections.quantize(captured["x"])[:32]
 proj = evo.model.blocks[0].projections
-args = dict(out_dtype=torch.bfloat16, use_fast_accum=True, profile="ada-rtx4060-te")
+args = dict(out_dtype=torch.bfloat16, use_fast_accum=True, profile="ada-te")
 with torch.inference_mode():
     y_gpu = mmaemu.scaled_mm(xq, proj.wq.t(), proj.scale_inv[0], proj.scale_inv[1], **args)
     y_cpu = mmaemu.scaled_mm(xq.cpu(), proj.wq.cpu().t(), proj.scale_inv[0].cpu(), proj.scale_inv[1].cpu(), **args)

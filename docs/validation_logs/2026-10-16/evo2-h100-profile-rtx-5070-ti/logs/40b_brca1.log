@@ -1,0 +1,329 @@
+21:37:28 mmaemu 0.1.0 (<src>/mmaemu/__init__.py); NVIDIA GeForce RTX 5070 Ti; 100 variants (20 LOF), 98 reference + 100 variant windows
+[10/16/26 21:37:28] INFO     StripedHyena - INFO - Initializing     model.py:645
+                             StripedHyena with config:                          
+                             {'model_name':                                     
+                             'shc-evo2-40b-8k-11T-v2',                          
+                             'vocab_size': 512, 'hidden_size':                  
+                             8192, 'num_filters': 8192,                         
+                             'hcl_layer_idxs': [2, 6, 9, 13, 16,                
+                             20, 23, 27, 30, 34, 38, 41, 45, 48],               
+                             'hcm_layer_idxs': [1, 5, 8, 12, 15,                
+                             19, 22, 26, 29, 33, 37, 40, 44, 47],               
+                             'hcs_layer_idxs': [0, 4, 7, 11, 14,                
+                             18, 21, 25, 28, 32, 36, 39, 43, 46],               
+                             'attn_layer_idxs': [3, 10, 17, 24, 31,             
+                             35, 42, 49], 'hcm_filter_length': 128,             
+                             'hcl_filter_groups': 8192,                         
+                             'hcm_filter_groups': 512,                          
+                             'hcs_filter_groups': 512,                          
+                             'hcs_filter_length': 7, 'num_layers':              
+                             50, 'short_filter_length': 3,                      
+                             'num_attention_heads': 64,                         
+                             'short_filter_bias': False,                        
+                             'mlp_init_method':                                 
+                             'torch.nn.init.zeros_',                            
+                             'mlp_output_init_method':                          
+                             'torch.nn.init.zeros_', 'eps': 1e-06,              
+                             'state_size': 16, 'rotary_emb_base':               
+                             1000000, 'rotary_emb_scaling_factor':              
+                             128,                                               
+                             'use_interpolated_rotary_pos_emb':                 
+                             True, 'make_vocab_size_divisible_by':              
+                             8, 'inner_size_multiple_of': 128,                  
+                             'inner_mlp_size': 22528,                           
+                             'log_intermediate_values': False,                  
+                             'proj_groups': 1,                                  
+                             'hyena_filter_groups': 1,                          
+                             'column_split_hyena': False,                       
+                             'column_split': True, 'interleave':                
+                             True, 'evo2_style_activations': True,              
+                             'use_fp8_input_projections': False,                
+                             'model_parallel_size': 1,                          
+                             'pipe_parallel_size': 1,                           
+                             'tie_embeddings': True,                            
+                             'mha_out_proj_bias': True,                         
+                             'hyena_out_proj_bias': True,                       
+                             'hyena_flip_x1x2': False,                          
+                             'qkv_proj_bias': False, 'max_seqlen':              
+                             1048576, 'max_batch_size': 1,                      
+                             'final_norm': True, 'use_flash_attn':              
+                             True, 'use_flash_rmsnorm': False,                  
+                             'use_flash_depthwise': False,                      
+                             'use_flashfft': False,                             
+                             'use_laughing_hyena': False,                       
+                             'inference_mode': True,                            
+                             'tokenizer_type':                                  
+                             'CharLevelTokenizer', 'prefill_style':             
+                             'fft', 'mlp_activation': 'gelu',                   
+                             'print_activations': False}                        
+                    INFO     StripedHyena - INFO - Initializing 50  model.py:678
+                             blocks...                                          
+                    INFO     StripedHyena - INFO - Distributing     model.py:685
+                             across 1 GPUs, approximately 50 layers             
+                             per GPU                                            
+
+  0%|          | 0/50 [00:00<?, ?it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=0 to device='cpu'                        
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 0: 822185472                             
+
+  2%|▏         | 1/50 [00:00<00:06,  7.99it/s][10/16/26 21:37:29] INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=1 to device='cpu'                        
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 1: 822255616                             
+
+  4%|▍         | 2/50 [00:00<00:06,  7.84it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=2 to device='cpu'                        
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 2: 822452224                             
+
+  6%|▌         | 3/50 [00:00<00:05,  8.46it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=3 to device='cpu'                        
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 3: 822108160                             
+
+  8%|▊         | 4/50 [00:00<00:06,  6.69it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=4 to device='cpu'                        
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 4: 822185472                             
+
+ 10%|█         | 5/50 [00:00<00:06,  7.26it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=5 to device='cpu'                        
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 5: 822255616                             
+
+ 12%|█▏        | 6/50 [00:00<00:05,  7.90it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=6 to device='cpu'                        
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 6: 822452224                             
+
+ 14%|█▍        | 7/50 [00:01<00:07,  6.14it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=7 to device='cpu'                        
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 7: 822185472                             
+
+ 16%|█▌        | 8/50 [00:01<00:06,  6.56it/s][10/16/26 21:37:30] INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=8 to device='cpu'                        
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 8: 822255616                             
+
+ 18%|█▊        | 9/50 [00:01<00:09,  4.45it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=9 to device='cpu'                        
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 9: 822452224                             
+
+ 20%|██        | 10/50 [00:01<00:10,  3.96it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=10 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 10: 822108160                            
+
+ 22%|██▏       | 11/50 [00:02<00:10,  3.90it/s][10/16/26 21:37:31] INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=11 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 11: 822185472                            
+
+ 24%|██▍       | 12/50 [00:02<00:08,  4.63it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=12 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 12: 822255616                            
+
+ 26%|██▌       | 13/50 [00:02<00:07,  5.17it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=13 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 13: 822452224                            
+                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=14 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 14: 822185472                            
+
+ 30%|███       | 15/50 [00:02<00:05,  6.84it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=15 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 15: 822255616                            
+
+ 32%|███▏      | 16/50 [00:02<00:05,  6.64it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=16 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 16: 822452224                            
+
+ 34%|███▍      | 17/50 [00:02<00:05,  6.34it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=17 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 17: 822108160                            
+
+ 36%|███▌      | 18/50 [00:03<00:05,  6.30it/s][10/16/26 21:37:32] INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=18 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 18: 822185472                            
+
+ 38%|███▊      | 19/50 [00:03<00:04,  6.23it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=19 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 19: 822255616                            
+
+ 40%|████      | 20/50 [00:03<00:04,  6.33it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=20 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 20: 822452224                            
+
+ 42%|████▏     | 21/50 [00:03<00:06,  4.62it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=21 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 21: 822185472                            
+
+ 44%|████▍     | 22/50 [00:03<00:05,  4.77it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=22 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 22: 822255616                            
+
+ 46%|████▌     | 23/50 [00:04<00:05,  4.75it/s][10/16/26 21:37:33] INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=23 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 23: 822452224                            
+
+ 48%|████▊     | 24/50 [00:04<00:05,  4.59it/s][10/16/26 21:37:31] INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=24 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 24: 822108160                            
+[10/16/26 21:37:32] INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=25 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 25: 822185472                            
+                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=26 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 26: 822255616                            
+                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=27 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 27: 822452224                            
+                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=28 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 28: 822185472                            
+                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=29 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 29: 822255616                            
+[10/16/26 21:37:33] INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=30 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 30: 822452224                            
+                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=31 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 31: 822108160                            
+
+ 64%|██████▍   | 32/50 [00:04<00:01, 13.70it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=32 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 32: 822185472                            
+                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=33 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 33: 822255616                            
+
+ 68%|██████▊   | 34/50 [00:04<00:01, 11.16it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=34 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 34: 822452224                            
+[10/16/26 21:37:34] INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=35 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 35: 822108160                            
+
+ 72%|███████▏  | 36/50 [00:05<00:01,  8.68it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=36 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 36: 822185472                            
+
+ 74%|███████▍  | 37/50 [00:05<00:01,  8.14it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=37 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 37: 822255616                            
+
+ 76%|███████▌  | 38/50 [00:05<00:01,  7.19it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=38 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 38: 822452224                            
+
+ 78%|███████▊  | 39/50 [00:05<00:01,  6.87it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=39 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 39: 822185472                            
+
+ 80%|████████  | 40/50 [00:06<00:01,  6.52it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=40 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 40: 822255616                            
+
+ 82%|████████▏ | 41/50 [00:06<00:01,  6.68it/s][10/16/26 21:37:35] INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=41 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 41: 822452224                            
+
+ 84%|████████▍ | 42/50 [00:06<00:01,  6.66it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=42 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 42: 822108160                            
+
+ 86%|████████▌ | 43/50 [00:06<00:01,  4.57it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=43 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 43: 822185472                            
+
+ 88%|████████▊ | 44/50 [00:06<00:01,  4.74it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=44 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 44: 822255616                            
+
+ 90%|█████████ | 45/50 [00:07<00:00,  5.15it/s][10/16/26 21:37:36] INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=45 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 45: 822452224                            
+
+ 92%|█████████▏| 46/50 [00:07<00:00,  4.74it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=46 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 46: 822185472                            
+
+ 94%|█████████▍| 47/50 [00:07<00:00,  4.81it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=47 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 47: 822255616                            
+
+ 96%|█████████▌| 48/50 [00:07<00:00,  4.95it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=48 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 48: 822452224                            
+
+ 98%|█████████▊| 49/50 [00:07<00:00,  5.32it/s]                    INFO     StripedHyena - INFO - Assigned         model.py:703
+                             layer_idx=49 to device='cpu'                       
+                    INFO     StripedHyena - INFO - Parameter count  model.py:704
+                             for block 49: 822108160                            
+
+100%|██████████| 50/50 [00:08<00:00,  4.82it/s]
+100%|██████████| 50/50 [00:08<00:00,  6.14it/s]
+                    INFO     StripedHyena - INFO - Initialized      model.py:723
+                             model                                              
+                    INFO     vortex.model.utils - INFO - Loading     utils.py:92
+                             <models>/evo2_40b/evo2_40b.pt            
+Extra keys in state_dict: {'blocks.3.mlp.l3._extra_state', 'blocks.27.mlp.l2._extra_state', 'blocks.1.mlp.l1._extra_state', 'blocks.37.mlp.l2._extra_state', 'blocks.9.mlp.l3._extra_state', 'blocks.38.mlp.l2._extra_state', 'blocks.38.mlp.l3._extra_state', 'blocks.18.mlp.l2._extra_state', 'blocks.17.mlp.l2._extra_state', 'blocks.45.mlp.l2._extra_state', 'blocks.6.mlp.l2._extra_state', 'blocks.23.mlp.l3._extra_state', 'blocks.29.mlp.l1._extra_state', 'blocks.19.mlp.l2._extra_state', 'blocks.3.inner_mha_cls.Wqkv._extra_state', 'blocks.33.projections._extra_state', 'blocks.49.mixer.dense._extra_state', 'blocks.18.out_filter_dense._extra_state', 'blocks.13.mlp.l2._extra_state', 'blocks.0.mlp.l3._extra_state', 'blocks.6.mlp.l3._extra_state', 'blocks.43.mlp.l3._extra_state', 'blocks.43.mlp.l1._extra_state', 'blocks.20.mlp.l3._extra_state', 'blocks.33.mlp.l2._extra_state', 'blocks.19.projections._extra_state', 'blocks.24.mixer.dense._extra_state', 'blocks.1.mlp.l3._extra_state', 'blocks.48.projections._extra_state', 'blocks.15.mlp.l1._extra_state', 'blocks.2.mlp.l2._extra_state', 'blocks.44.mlp.l3._extra_state', 'blocks.11.mlp.l1._extra_state', 'blocks.23.out_filter_dense._extra_state', 'blocks.28.projections._extra_state', 'blocks.15.projections._extra_state', 'blocks.28.mlp.l1._extra_state', 'blocks.14.projections._extra_state', 'blocks.42.mixer.attn._extra_state', 'blocks.5.mlp.l1._extra_state', 'blocks.46.projections._extra_state', 'blocks.49.mlp.l2._extra_state', 'blocks.28.out_filter_dense._extra_state', 'blocks.44.mlp.l1._extra_state', 'blocks.8.projections._extra_state', 'blocks.27.projections._extra_state', 'blocks.44.mlp.l2._extra_state', 'blocks.42.mlp.l2._extra_state', 'blocks.16.mlp.l3._extra_state', 'blocks.5.projections._extra_state', 'blocks.8.mlp.l1._extra_state', 'blocks.2.projections._extra_state', 'blocks.4.out_filter_dense._extra_state', 'blocks.11.mlp.l3._extra_state', 'blocks.4.mlp.l3._extra_state', 'blocks.10.mlp.l3._extra_state', 'blocks.9.mlp.l1._extra_state', 'blocks.14.mlp.l3._extra_state', 'blocks.1.out_filter_dense._extra_state', 'blocks.16.mlp.l1._extra_state', 'blocks.36.projections._extra_state', 'blocks.7.mlp.l3._extra_state', 'blocks.43.out_filter_dense._extra_state', 'blocks.2.out_filter_dense._extra_state', 'blocks.34.mlp.l3._extra_state', 'blocks.35.mlp.l3._extra_state', 'blocks.21.mlp.l2._extra_state', 'blocks.23.mlp.l2._extra_state', 'blocks.4.projections._extra_state', 'blocks.48.out_filter_dense._extra_state', 'blocks.10.mlp.l2._extra_state', 'blocks.21.projections._extra_state', 'blocks.5.mlp.l3._extra_state', 'blocks.40.mlp.l2._extra_state', 'blocks.17.mixer.attn._extra_state', 'blocks.34.out_filter_dense._extra_state', 'blocks.18.mlp.l1._extra_state', 'blocks.25.mlp.l2._extra_state', 'blocks.11.mlp.l2._extra_state', 'blocks.41.mlp.l1._extra_state', 'blocks.47.mlp.l3._extra_state', 'blocks.12.mlp.l1._extra_state', 'blocks.26.mlp.l1._extra_state', 'blocks.37.mlp.l1._extra_state', 'blocks.31.mlp.l3._extra_state', 'blocks.44.out_filter_dense._extra_state', 'blocks.4.mlp.l1._extra_state', 'blocks.29.projections._extra_state', 'blocks.38.mlp.l1._extra_state', 'blocks.20.mlp.l1._extra_state', 'blocks.3.mixer.attn._extra_state', 'blocks.25.projections._extra_state', 'blocks.35.mlp.l2._extra_state', 'blocks.10.mlp.l1._extra_state', 'blocks.25.mlp.l3._extra_state', 'blocks.33.mlp.l1._extra_state', 'blocks.36.mlp.l2._extra_state', 'blocks.31.inner_mha_cls.Wqkv._extra_state', 'blocks.4.mlp.l2._extra_state', 'blocks.49.mixer.attn._extra_state', 'blocks.0.out_filter_dense._extra_state', 'blocks.45.out_filter_dense._extra_state', 'blocks.49.mlp.l1._extra_state', 'blocks.36.out_filter_dense._extra_state', 'blocks.3.mixer.dense._extra_state', 'blocks.45.mlp.l1._extra_state', 'blocks.3.mlp.l2._extra_state', 'blocks.35.mlp.l1._extra_state', 'blocks.5.out_filter_dense._extra_state', 'blocks.14.mlp.l1._extra_state', 'blocks.13.out_filter_dense._extra_state', 'blocks.12.mlp.l3._extra_state', 'unembed.weight', 'blocks.17.inner_mha_cls.Wqkv._extra_state', 'blocks.25.out_filter_dense._extra_state', 'blocks.30.mlp.l2._extra_state', 'blocks.30.mlp.l3._extra_state', 'blocks.31.mixer.dense._extra_state', 'blocks.6.mlp.l1._extra_state', 'blocks.48.mlp.l3._extra_state', 'blocks.34.mlp.l1._extra_state', 'blocks.37.out_filter_dense._extra_state', 'blocks.32.projections._extra_state', 'blocks.19.mlp.l3._extra_state', 'blocks.8.out_filter_dense._extra_state', 'blocks.45.mlp.l3._extra_state', 'blocks.22.projections._extra_state', 'blocks.48.mlp.l1._extra_state', 'blocks.15.mlp.l2._extra_state', 'blocks.23.mlp.l1._extra_state', 'blocks.33.out_filter_dense._extra_state', 'blocks.39.projections._extra_state', 'blocks.40.projections._extra_state', 'blocks.17.mixer.dense._extra_state', 'blocks.41.out_filter_dense._extra_state', 'blocks.32.mlp.l2._extra_state', 'blocks.11.projections._extra_state', 'blocks.19.mlp.l1._extra_state', 'blocks.32.mlp.l3._extra_state', 'blocks.18.projections._extra_state', 'blocks.31.mixer.attn._extra_state', 'blocks.24.inner_mha_cls.Wqkv._extra_state', 'blocks.12.projections._extra_state', 'blocks.39.mlp.l2._extra_state', 'blocks.21.mlp.l1._extra_state', 'blocks.35.mixer.dense._extra_state', 'blocks.3.mlp.l1._extra_state', 'blocks.32.out_filter_dense._extra_state', 'blocks.0.mlp.l2._extra_state', 'blocks.38.projections._extra_state', 'blocks.46.out_filter_dense._extra_state', 'blocks.8.mlp.l3._extra_state', 'blocks.34.mlp.l2._extra_state', 'blocks.35.mixer.attn._extra_state', 'blocks.39.mlp.l3._extra_state', 'blocks.13.mlp.l3._extra_state', 'blocks.28.mlp.l2._extra_state', 'blocks.41.mlp.l2._extra_state', 'blocks.25.mlp.l1._extra_state', 'blocks.46.mlp.l3._extra_state', 'blocks.42.mlp.l1._extra_state', 'blocks.7.out_filter_dense._extra_state', 'blocks.44.projections._extra_state', 'blocks.6.projections._extra_state', 'blocks.15.mlp.l3._extra_state', 'blocks.31.mlp.l2._extra_state', 'blocks.24.mlp.l2._extra_state', 'blocks.8.mlp.l2._extra_state', 'blocks.46.mlp.l2._extra_state', 'blocks.11.out_filter_dense._extra_state', 'blocks.28.mlp.l3._extra_state', 'blocks.30.mlp.l1._extra_state', 'blocks.38.out_filter_dense._extra_state', 'blocks.1.mlp.l2._extra_state', 'blocks.7.mlp.l1._extra_state', 'blocks.47.out_filter_dense._extra_state', 'blocks.43.projections._extra_state', 'blocks.47.projections._extra_state', 'blocks.34.projections._extra_state', 'blocks.31.mlp.l1._extra_state', 'blocks.13.mlp.l1._extra_state', 'blocks.41.mlp.l3._extra_state', 'blocks.47.mlp.l1._extra_state', 'blocks.18.mlp.l3._extra_state', 'blocks.27.mlp.l3._extra_state', 'blocks.26.projections._extra_state', 'blocks.41.projections._extra_state', 'blocks.42.inner_mha_cls.Wqkv._extra_state', 'blocks.7.projections._extra_state', 'blocks.47.mlp.l2._extra_state', 'blocks.40.mlp.l1._extra_state', 'blocks.12.mlp.l2._extra_state', 'blocks.37.mlp.l3._extra_state', 'blocks.2.mlp.l3._extra_state', 'blocks.42.mixer.dense._extra_state', 'blocks.10.mixer.attn._extra_state', 'blocks.14.out_filter_dense._extra_state', 'blocks.36.mlp.l3._extra_state', 'blocks.17.mlp.l1._extra_state', 'blocks.20.mlp.l2._extra_state', 'blocks.16.out_filter_dense._extra_state', 'blocks.7.mlp.l2._extra_state', 'blocks.5.mlp.l2._extra_state', 'blocks.15.out_filter_dense._extra_state', 'blocks.40.out_filter_dense._extra_state', 'blocks.37.projections._extra_state', 'blocks.45.projections._extra_state', 'blocks.2.mlp.l1._extra_state', 'blocks.12.out_filter_dense._extra_state', 'blocks.0.mlp.l1._extra_state', 'blocks.14.mlp.l2._extra_state', 'blocks.6.out_filter_dense._extra_state', 'blocks.30.projections._extra_state', 'blocks.17.mlp.l3._extra_state', 'blocks.32.mlp.l1._extra_state', 'blocks.26.mlp.l3._extra_state', 'blocks.21.out_filter_dense._extra_state', 'blocks.29.mlp.l2._extra_state', 'blocks.19.out_filter_dense._extra_state', 'blocks.29.out_filter_dense._extra_state', 'blocks.20.projections._extra_state', 'blocks.29.mlp.l3._extra_state', 'blocks.22.out_filter_dense._extra_state', 'blocks.13.projections._extra_state', 'blocks.46.mlp.l1._extra_state', 'blocks.49.inner_mha_cls.Wqkv._extra_state', 'blocks.49.mlp.l3._extra_state', 'blocks.1.projections._extra_state', 'blocks.16.mlp.l2._extra_state', 'blocks.22.mlp.l1._extra_state', 'blocks.24.mixer.attn._extra_state', 'blocks.43.mlp.l2._extra_state', 'blocks.20.out_filter_dense._extra_state', 'blocks.27.out_filter_dense._extra_state', 'blocks.9.projections._extra_state', 'blocks.22.mlp.l3._extra_state', 'blocks.30.out_filter_dense._extra_state', 'blocks.10.mixer.dense._extra_state', 'blocks.22.mlp.l2._extra_state', 'blocks.36.mlp.l1._extra_state', 'blocks.10.inner_mha_cls.Wqkv._extra_state', 'blocks.26.out_filter_dense._extra_state', 'blocks.35.inner_mha_cls.Wqkv._extra_state', 'blocks.42.mlp.l3._extra_state', 'blocks.39.out_filter_dense._extra_state', 'blocks.9.mlp.l2._extra_state', 'blocks.24.mlp.l3._extra_state', 'blocks.23.projections._extra_state', 'blocks.39.mlp.l1._extra_state', 'blocks.21.mlp.l3._extra_state', 'blocks.0.projections._extra_state', 'blocks.26.mlp.l2._extra_state', 'blocks.9.out_filter_dense._extra_state', 'blocks.33.mlp.l3._extra_state', 'blocks.24.mlp.l1._extra_state', 'blocks.16.projections._extra_state', 'blocks.27.mlp.l1._extra_state', 'blocks.48.mlp.l2._extra_state', 'blocks.40.mlp.l3._extra_state'}
+[10/16/26 21:38:32] INFO     StripedHyena - INFO - Adjusting Wqkv  model.py:1008
+                             for column split (permuting rows)                  
+21:38:37 loaded evo2_40b in 69 s; FP8 projections in 42 blocks
+21:39:12 explain mmaemu_h100 M=8192 K=8192 N=24576: CallPlan(validation='ok', profile='hopper-h100pcie-te', preset='hopper', preset_maturity='validated', split=SplitDecision(S=1, scheme='none', source='table', verified=True, table_id='heur_h100pcie_lt12.8.3.14', note='table row: algo 66, tile 209, numSplitsK 1, customOption 4'), backend='cuda:h4', fallbacks=["cuda:tc3: implements preset 'ada', not 'hopper'", "cuda:v9: implements preset 'ada', not 'hopper'", "cuda:v4: implements preset 'ada', not 'hopper'"], warnings=[])
+21:46:45 mmaemu_h100: block 5/50, weights copy 2 s, compute 454 s, GPU peak 10.7 GiB
+21:55:32 mmaemu_h100: block 10/50, weights copy 3 s, compute 980 s, GPU peak 10.7 GiB
+22:03:05 mmaemu_h100: block 15/50, weights copy 7 s, compute 1430 s, GPU peak 10.7 GiB
+22:10:47 mmaemu_h100: block 20/50, weights copy 15 s, compute 1883 s, GPU peak 10.7 GiB
+22:18:30 mmaemu_h100: block 25/50, weights copy 24 s, compute 2337 s, GPU peak 10.7 GiB
+22:27:22 mmaemu_h100: block 30/50, weights copy 34 s, compute 2858 s, GPU peak 10.7 GiB
+22:35:09 mmaemu_h100: block 35/50, weights copy 48 s, compute 3312 s, GPU peak 10.7 GiB
+22:42:52 mmaemu_h100: block 40/50, weights copy 58 s, compute 3765 s, GPU peak 10.7 GiB
+22:50:36 mmaemu_h100: block 45/50, weights copy 69 s, compute 4218 s, GPU peak 10.7 GiB
+22:58:21 mmaemu_h100: block 50/50, weights copy 80 s, compute 4672 s, GPU peak 10.7 GiB
+22:58:22 mmaemu_h100: AUROC 0.8569 in 79.7 min {"copy_s": 79.95362901687622, "compute_s": 4671.6842432022095}
+22:58:22 1B on the RTX 4060 (official TE), same variants: AUROC 0.7194
+22:58:22 wrote <run>/out/40b_brca1.json
+wall_4875.66_s_maxrss_145045140_kB

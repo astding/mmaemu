@@ -8,6 +8,7 @@ from __future__ import annotations
 import dataclasses
 import json
 import os
+import re
 import subprocess
 import sys
 import types
@@ -75,6 +76,7 @@ class FakeSpec:
     min_cc: tuple = (7, 5)
     sass_archs: tuple = (89,)
     ptx_arch: int | None = None
+    preset: str = "ada"
 
 
 SPECS = {"v1": FakeSpec("v1", False, frozenset({(8, 9)})), "v4": FakeSpec("v4", False, frozenset({(8, 9)}), (8, 0)),
@@ -91,7 +93,7 @@ def fake_api(*, selftest=None, explain=None, profiles=None):
     presets = {"ada": FakePreset("ada", "validated", "RTX 4060 hardware"),
                "hopper": FakePreset("hopper", "experimental", "instruction level, c=0 vectors only"),
                "b200_mma_sync": FakePreset("b200_mma_sync", "experimental", "toolbox B200 mma.sync vectors; not sm_120")}
-    profs = profiles or {"ada-rtx4060-torch": FakeProfile("ada-rtx4060-torch", match=True),
+    profs = profiles or {"ada": FakeProfile("ada", match=True),
                          "hopper-experimental": FakeProfile("hopper-experimental", preset="hopper", splitk_table=None,
                                                             maturity="experimental", splitk_maturity="none")}
 
@@ -101,7 +103,7 @@ def fake_api(*, selftest=None, explain=None, profiles=None):
         return presets[name]
 
     def get_profile(name=None):
-        return profs[name or "ada-rtx4060-torch"]
+        return profs[name or "ada"]
 
     return types.SimpleNamespace(
         __version__="0.1.0.dev0",
@@ -144,14 +146,15 @@ def test_info_reports_profiles_presets_backends(fake, capsys, tmp_path):
     path = tmp_path / "info.json"
     assert cli.main(["info", "--json", str(path)]) == 0
     out = capsys.readouterr().out
-    assert "ada-rtx4060-torch" in out and "MATCHES this device" in out
+    assert re.search(r"^  ada: preset ada, .*MATCHES this device", out, re.M)
     assert "b200_mma_sync (alias: blackwell): experimental" in out
-    assert "cuda:tc3: unavailable - no binary for sm_120" in out
+    assert "cuda:tc3 (preset ada): unavailable - no binary for sm_120" in out
+    assert "cuda:v1 (preset ada): available via fatbin, validated here" in out
     rep = json.loads(path.read_text())
-    assert rep["format"] == D.INFO_FORMAT and rep["default_profile"] == "ada-rtx4060-torch"
-    assert {p["name"]: p["matches_device"] for p in rep["profiles"]} == {"ada-rtx4060-torch": True,
+    assert rep["format"] == D.INFO_FORMAT and rep["default_profile"] == "ada"
+    assert {p["name"]: p["matches_device"] for p in rep["profiles"]} == {"ada": True,
                                                                        "hopper-experimental": False}
-    assert rep["backends"]["cuda:v1"]["source"] == "fatbin"
+    assert rep["backends"]["cuda:v1"]["source"] == "fatbin" and rep["kernels"]["v1"]["preset"] == "ada"
     assert {p["name"]: p["maturity"] for p in rep["presets"]}["hopper"] == "experimental"
 
 
@@ -224,7 +227,7 @@ def test_unknown_kernel_without_spec_is_required(fake):
 @dataclasses.dataclass
 class FakePlan:
     validation: object
-    profile: str = "ada-rtx4060-torch"
+    profile: str = "ada"
     preset: str = "ada"
     preset_maturity: str = "validated"
     split: object = None

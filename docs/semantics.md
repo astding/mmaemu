@@ -2,13 +2,14 @@
 
 This page describes, operation by operation, the arithmetic that mmaemu reproduces. It is the user-facing rendering
 of section 3 of the v0.1 specification. The ground truth is hardware, not a paper: a behaviour is called
-*validated* only when recordings of the reference GPU reproduce it bit for bit
+*validated* only when recordings of the profile's reference GPU reproduce it bit for bit
 ([validation.md](validation.md)). Everything else is *experimental* (it warns) or raises.
 
-**Reference platform.** NVIDIA GeForce RTX 4060 (Ada, sm_89, 24 SMs), cuBLAS/cuBLASLt 12.8.3.14, called through
-torch 2.7.1 `torch._scaled_mm` (1 MiB cuBLAS workspace) or through Transformer Engine 2.3 (4 MiB workspace). A
-*profile* names this platform; a *preset* names the tensor-core arithmetic
-([presets_profiles.md](presets_profiles.md)).
+**Reference platforms.** Two, both with cuBLAS/cuBLASLt 12.8.3.14 and called through torch 2.7.1
+`torch._scaled_mm` (1 MiB cuBLAS workspace) or through Transformer Engine 2.3: the NVIDIA H100 PCIe (Hopper, sm_90,
+114 SMs; TE's workspace 32 MiB; preset `hopper`), whose profile `hopper` is the default, and the
+NVIDIA GeForce RTX 4060 (Ada, sm_89, 24 SMs; TE's workspace 4 MiB; preset `ada`). A *profile* names one platform
+and caller; a *preset* names the tensor-core arithmetic ([presets_profiles.md](presets_profiles.md)).
 
 "Bitwise" and "bit for bit" mean equal bit patterns, including the sign of zero and the NaN payload. Numeric
 equality (`==`, `torch.equal`) is weaker: it treats +0 and -0 as equal.
@@ -50,9 +51,13 @@ are combined.
 | slow accumulation (`use_fast_accum=False`), unsplit | one chain per consecutive 128-element chunk of K | `((+0 + ch0) + ch1) + ...`, fp32 round-to-nearest-even |
 | split-K, S > 1 | see below | serial or pairwise (below) |
 
+This is the plan on both reference GPUs, the RTX 4060 (`ada`) and the H100 PCIe (`hopper`, 32-product blocks); only
+split-K differs between them.
+
 **Split-K.** cuBLAS may split K across S thread blocks. The split count and the reduction scheme are chosen by the
 cuBLASLt heuristic. They depend on M, N, K, the formats, the output dtype, fast/slow accumulation, the workspace size
-and the GPU, and cannot be derived from the shape alone. When S > 1:
+and the GPU, and cannot be derived from the shape alone. When S > 1 on the RTX 4060 (schemes `"serial"` and
+`"pairwise"`):
 
 - K is cut into 64-wide k-tiles t (a ragged last tile is zero-padded). Split s owns the tiles with
   t mod S = s, in increasing t. Adjacent tiles therefore always belong to different splits.
@@ -64,9 +69,23 @@ and the GPU, and cannot be derived from the shape alone. When S > 1:
     `(((p_(S-1) + slot_0) + slot_1) + ...) + slot_(h-1)`. For S = 3 this is `(p2 + p0) + p1`.
 - The scale (alpha, below) is applied after the combination.
 
+On the H100 PCIe (scheme `"contiguous"`, every customOption):
+
+- K is cut into 128-wide k-tiles (the k-stage of the sm_90 kernels); with T tiles and q = ceil(T / S), split s owns
+  the contiguous tiles s*q .. (s+1)*q - 1.
+- Fast accumulation: one chain per split over its tiles. Slow accumulation: every tile is its own chain, and the
+  tile results are added serially from +0 in fp32 (the unsplit 128-element restart, within the split).
+- The partials are combined serially, `((p0 + p1) + p2) + ...`, and the scale is applied after the combination.
+- This rule was found by fitting 1,049 live split calls (S = 2 to 6, customOption 0 to 3, K from 5,760 to 16,384,
+  all multiples of 128) after the data came in; mmaemu reproduces all of them. The split-K sweep's 2,416 live split
+  calls, run after the rule was fixed (S = 2 to 24, K up to 262,144, 1,040 of them with K not a multiple of 128, the
+  last k-tile zero padded), replay equal too. A split without tiles was never recorded and emits
+  `UnverifiedSplitWarning`.
+
 How mmaemu decides S and the scheme (`splitk="auto"`) is described in
 [presets_profiles.md](presets_profiles.md#split-k-resolution). You can always pass it explicitly:
-`splitk=1`, or `splitk=(S, "serial")` / `splitk=(S, "pairwise")`.
+`splitk=1`, or `splitk=(S, "serial")` / `splitk=(S, "pairwise")` on the `ada` profiles and
+`splitk=(S, "contiguous")` on the `hopper` ones; a scheme of the other preset raises `ValueError`.
 
 **Non-finite inputs.** Wherever the IEEE value of sum(a*b) is non-finite, the result is that value: NaN
 codes, Inf * 0 and +Inf + -Inf give NaN, so any NaN code in row m of A or column n of B makes output (m, n) NaN.
@@ -109,8 +128,8 @@ The default `out_dtype` is the input dtype and the default `use_fast_accum` is F
 | Error | When |
 |---|---|
 | `TypeError` | wrong Python argument types; for `accumulate()` and `dot()`, non-FP8 dtypes |
-| `ReferenceRejectsError` | wherever torch 2.7.1 or the profile's cuBLAS rejects the call: shape/divisibility/layout and storage-offset rules, non-FP8 inputs (and fnuz / e8m0 inputs of non-empty GEMMs), e5m2 x e5m2, scale dtype/numel, out= dtype, e4m3 x e4m3 -> e5m2 output on the RTX 4060 profiles. A wrong out= shape is not an error: out= is resized with a UserWarning |
-| `UnsupportedFeatureError` (a `NotImplementedError`) | `bias`, row-wise scales, inputs that require grad under grad mode (mmaemu is inference-only), preset features that are not characterised (slow accumulation on `hopper` / `b200_mma_sync`) |
+| `ReferenceRejectsError` | wherever torch 2.7.1 or the profile's cuBLAS rejects the call: shape/divisibility/layout and storage-offset rules, non-FP8 inputs (and fnuz / e8m0 inputs of non-empty GEMMs), e5m2 x e5m2, scale dtype/numel, out= dtype, e4m3 x e4m3 -> e5m2 output on the RTX 4060 and H100 PCIe profiles. A wrong out= shape is not an error: out= is resized with a UserWarning |
+| `UnsupportedFeatureError` (a `NotImplementedError`) | `bias`, row-wise scales, inputs that require grad under grad mode (mmaemu is inference-only), preset features that are not characterised (slow accumulation and split-K on `b200_mma_sync`) |
 | `SplitKUnknownError` (a `LookupError`) | `splitk="auto"` cannot determine S for this shape on this profile; the message names three ways out |
 | `MmaemuError` | CPU flush-to-zero is active (`torch.set_flush_denormal(True)`), which would change subnormal arithmetic |
 
@@ -131,11 +150,14 @@ run outside `torch.compile` graphs, because Inductor's fp8 conversion double-rou
 | Preset | Block size | Fraction bits (terms / result) | c enters | Slow accumulation | Maturity |
 |---|---|---|---|---|---|
 | `ada` | 16 | 13 / 13 | in the alignment (early) | 128-element chunks | validated |
-| `hopper` | 32 | 13 / 13 | in the alignment (early) | raises | experimental |
+| `hopper` | 32 | 13 / 13 | in the alignment (early) | 128-element chunks | validated (cuBLAS on the H100 PCIe) |
 | `b200_mma_sync` (alias `blackwell`) | 32 | 25 / 23 | after the block sum, fp32 RNE (late) | raises | experimental |
 
-The `hopper` preset fits the toolbox's H100/H200 vectors, which were recorded with c = 0 and therefore cannot show
-how c enters the sum. The `b200_mma_sync` preset fits the toolbox's B200 vectors, which were produced by `mma.sync`
+The `hopper` preset is the instruction model of the H100's cuBLAS FP8 GEMMs (the sm_90 `nvjet` kernels). An H100
+PCIe probe measured how c enters (in the alignment of the block, like `ada`) and validated the whole GEMM bit for
+bit ([validation.md](validation.md)). It also fits the toolbox's H100/H200 vectors, recorded with c = 0. It is not
+a model of the sm_90 `mma.sync` instruction, which the probe measured as a different unit (25 fraction bits, c added
+after the block sum); cuBLAS does not use it. The `b200_mma_sync` preset fits the toolbox's B200 vectors, which were produced by `mma.sync`
 compiled for sm_90/sm_100 into two fp16 HMMA instructions plus an fp32 add; it is not a model of the B200's
 native FP8 path, nor of sm_120 GPUs (RTX 50 series such as the RTX 5070 Ti). See
 [limitations.md](limitations.md).

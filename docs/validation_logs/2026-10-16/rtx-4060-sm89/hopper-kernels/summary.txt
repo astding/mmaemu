@@ -1,0 +1,8 @@
+commit fa0fd9053169b7892e6be995390261574c400265
+dirty mmaemu/ tests/: 0 files
+torch 2.7.1+cu128 NVIDIA GeForce RTX 4060 (8, 9)
+test_kernels_ieee rc=0 167 passed in 26.19s
+test_cuda_runtime rc=0 19 passed in 89.22s (0:01:29)
+test_h100_mini rc=0 435 passed in 74.35s (0:01:14)
+test_backend_selection rc=0 26 passed in 1.32s
+DONE

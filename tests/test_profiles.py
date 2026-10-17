@@ -15,13 +15,14 @@ DATA = Path(profiles.__file__).resolve().parent / "data"
 
 
 def test_builtin_names_and_default(monkeypatch):
-    assert list_profiles() == ["ada-rtx4060-torch", "ada-rtx4060-te", "ada-rtx4060-ws0", "hopper-experimental",
+    assert list_profiles() == ["ada", "ada-te", "ada-ws0", "hopper",
+                               "hopper-te", "hopper-ws0", "hopper-experimental",
                                "b200-mma-sync-experimental"]
     monkeypatch.delenv("MMAEMU_PROFILE", raising=False)
-    assert get_profile().name == "ada-rtx4060-torch"
-    monkeypatch.setenv("MMAEMU_PROFILE", "ada-rtx4060-te")
-    assert get_profile().name == "ada-rtx4060-te"
-    p = get_profile("ada-rtx4060-ws0")
+    assert get_profile().name == "hopper"
+    monkeypatch.setenv("MMAEMU_PROFILE", "ada-te")
+    assert get_profile().name == "ada-te"
+    p = get_profile("ada-ws0")
     assert get_profile(p) is p
 
 
@@ -33,7 +34,7 @@ def test_unknown_profile_names_the_runbook():
 
 
 def test_table_of_section_4_2():
-    t, te, w0 = (get_profile(n) for n in ("ada-rtx4060-torch", "ada-rtx4060-te", "ada-rtx4060-ws0"))
+    t, te, w0 = (get_profile(n) for n in ("ada", "ada-te", "ada-ws0"))
     for p in (t, te, w0):
         assert (p.preset, p.gpu_name, p.capability, p.sm_count) == ("ada", "NVIDIA GeForce RTX 4060", (8, 9), 24)
         assert (p.cublaslt_version, p.torch_version) == ("12.8.3.14", "2.7.1+cu128")
@@ -48,6 +49,20 @@ def test_table_of_section_4_2():
         assert (p.preset, p.maturity, p.splitk_maturity, p.splitk_table) == (preset, "experimental", "none", None)
         assert p.matches_device() is False
     assert "NOT a model of sm_120" in get_profile("b200-mma-sync-experimental").description
+
+
+def test_h100pcie_profiles():
+    t, te, w0 = (get_profile(n) for n in ("hopper", "hopper-te", "hopper-ws0"))
+    for p in (t, te, w0):
+        assert (p.preset, p.gpu_name, p.capability, p.sm_count) == ("hopper", "NVIDIA H100 PCIe", (9, 0), 114)
+        assert (p.cublaslt_version, p.torch_version) == ("12.8.3.14", "2.7.1+cu128")
+        assert p.splitk_table == "heur_h100pcie_lt12.8.3.14" and p.maturity == "validated"
+    # the split rule was found after the probe's data came in; the sweep's live split calls, replayed after it was
+    # fixed, validate it at 1 MiB (and workspace 0); no split call ran through TE's own GEMM
+    assert (t.splitk_maturity, te.splitk_maturity, w0.splitk_maturity) == ("validated", "experimental", "validated")
+    assert (t.workspace_bytes, t.align, t.caller) == (1 << 20, None, "torch._scaled_mm")
+    assert (te.workspace_bytes, te.align, te.caller) == (32 << 20, 256, "transformer_engine")
+    assert w0.workspace_bytes == 0
 
 
 def test_profiles_are_frozen():
@@ -66,6 +81,8 @@ def test_rejects_e4m3_e4m3_to_e5m2_only():
     for od in (torch.float32, torch.bfloat16, torch.float16, e4):
         assert p.rejection(e4, e4, od) is None
     assert get_profile("hopper-experimental").rejection(e4, e4, e5) is None
+    h = get_profile("hopper")
+    assert "sm_90" in h.rejection(e4, e4, e5).message and h.rejection(e4, e5, e5) is None
 
 
 def test_reject_rule_matches_the_recorded_heuristic_status():
@@ -75,6 +92,10 @@ def test_reject_rule_matches_the_recorded_heuristic_status():
     z = np.load(DATA / "heur_rtx4060_lt12.8.3.14.npz", allow_pickle=False)
     bad = (z["fa"] == 0) & (z["fb"] == 0) & (z["out"] == 4)
     assert int(bad.sum()) == 0
+    meta = json.loads((DATA / "heur_h100pcie_lt12.8.3.14.json").read_text())
+    assert meta["dropped_status_nonzero"] == 135400 and meta["rejects"][0]["status"] == [15]   # probe + p3
+    z = np.load(DATA / "heur_h100pcie_lt12.8.3.14.npz", allow_pickle=False)
+    assert int(((z["fa"] == 0) & (z["fb"] == 0) & (z["out"] == 4)).sum()) == 0
 
 
 @pytest.fixture
@@ -94,7 +115,7 @@ def fake_device(monkeypatch):
 
 
 def test_matches_device_needs_name_sm_count_and_cublaslt(fake_device, monkeypatch):
-    p = get_profile()
+    p = get_profile("ada")             # the fake device is an RTX 4060
     assert p.matches_device() is True
     assert p.matches_device(0) is True
     fake_device["ver"] = "12.8.3"                    # no build number from the library: first three must match
@@ -129,9 +150,9 @@ def test_matches_the_reference_gpu_live(request):
     -m profile_device (it touches the GPU; run it under gpu.sh)."""
     if "profile_device" not in (request.config.getoption("markexpr") or ""):
         pytest.skip("GPU test: select with -m profile_device and run under gpu.sh")
-    p = get_profile("ada-rtx4060-torch")
+    p = get_profile("ada")
     if not p.matches_device():
         pytest.skip("profile device unavailable")
-    assert get_profile("ada-rtx4060-te").matches_device() and get_profile("ada-rtx4060-ws0").matches_device()
+    assert get_profile("ada-te").matches_device() and get_profile("ada-ws0").matches_device()
     assert cublaslt.device_capability() == (8, 9)
     assert cublaslt.version() == "12.8.3.14"

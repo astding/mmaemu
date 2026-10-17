@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 [project]
 name = "mmaemu"
 dynamic = ["version"]
-description = "Bit-accurate emulation of NVIDIA tensor-core FP8 GEMM numerics (cuBLAS FP8 GEMM / torch._scaled_mm), validated against RTX 4060 hardware recordings"
+description = "Bit-exact emulation of NVIDIA tensor-core FP8 GEMMs (torch._scaled_mm, Transformer Engine) as an H100 PCIe or RTX 4060 computes them, on the CPU or another CUDA GPU"
 readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE", "LICENSES/*"]
@@ -15,7 +15,7 @@ authors = [{ name = "Xun Ding", email = "dxun1@alumni.jh.edu" }]
 keywords = [
     "fp8", "tensor core", "tensor-cores", "gemm", "matmul", "emulation", "emulator", "cublas", "cublaslt", "scaled_mm",
     "torch._scaled_mm", "pytorch", "bit-exact", "deterministic", "reproducibility", "numerics", "floating-point",
-    "transformer-engine", "evo2",
+    "transformer-engine", "evo2", "h100", "hopper", "rtx-4060",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -100,7 +100,8 @@ markers = [
 line-length = 120
 target-version = "py310"
 # The capture scripts of a validation log are kept as they ran.
-extend-exclude = ["tools/bringup/kits", "recordings", "results", "docs/validation_logs/2026-10-12/evo2-rtx-4060-official/scripts"]
+extend-exclude = ["tools/bringup/kits", "recordings", "results", "docs/validation_logs/2026-10-12/evo2-rtx-4060-official/scripts",
+                  "docs/validation_logs/2026-10-15/h100-probe/scripts"]
 
 [tool.ruff.lint]
 # Explicit rule set, so that the CI result does not depend on the default rules of the pinned ruff version:

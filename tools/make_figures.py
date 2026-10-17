@@ -6,6 +6,8 @@
 Inputs:
   docs/validation_logs/2026-10-14/evo2-rtx-5070-ti/   results.json and brca1_<mode>.npz of examples/evo2_blackwell.ipynb
   docs/validation_logs/2026-10-14/evo2-h100-sm90/     the official-path baseline on an H100 (comparison_vs_ada.json)
+  docs/validation_logs/2026-10-16/evo2-h100-profile-rtx-5070-ti/results/   mmaemu with the H100 PCIe profile hopper-te
+  docs/validation_logs/2026-10-15/evo2-40b-rtx-5070-ti/test_40b.json, evo2-40b-h100-sm90/results/40b/test.json   40B
   examples/data/evo2_1b_ada_rtx4060_te.npz            the official-path reference on the RTX 4060
   docs/validation_logs/2026-10-13-sm120/performance-*.json   kernel throughput on the RTX 5070 Ti
   docs/validation_logs/2026-10-14/t6-rtx-4060-sm89/          T6: the release kernels and native FP8 on the RTX 4060
@@ -26,15 +28,26 @@ ROOT = Path(__file__).resolve().parents[1]
 LOGS = ROOT / "docs" / "validation_logs"
 WINDOWS = ["p0", "p1", "p2", "p3", "w8k", "w2k"]
 PROMPTS = ["p0", "p1", "p2", "p3"]
-COLORS = {"RTX 4060, official TE": "#222222", "H100, official TE": "#577590", "mmaemu": "#2a9d8f",
-          "native": "#e76f51", "bf16": "#f4a261"}
-LABELS = {"RTX 4060, official TE": "RTX 4060 (Ada), official TE FP8 — reference",
-          "H100, official TE": "H100 (Hopper), official TE FP8",
-          "mmaemu": "RTX 5070 Ti + mmaemu (RTX 4060 FP8 GEMM emulated)",
+H100P = LOGS / "2026-10-16" / "evo2-h100-profile-rtx-5070-ti"   # mmaemu with the H100 PCIe profile (hopper-te)
+B40, H40 = LOGS / "2026-10-15" / "evo2-40b-rtx-5070-ti", LOGS / "2026-10-15" / "evo2-40b-h100-sm90"
+COLORS = {"RTX 4060, official TE": "#222222", "H100, official TE": "#577590", "mmaemu_h100": "#2a9d8f",
+          "mmaemu": "#83c5be", "native": "#e76f51", "bf16": "#f4a261"}
+LABELS = {"RTX 4060, official TE": "RTX 4060 (Ada), official TE FP8",
+          "H100, official TE": "H100 PCIe (Hopper), official TE FP8",
+          "mmaemu_h100": "RTX 5070 Ti + mmaemu, the H100 PCIe's FP8 GEMM (hopper-te)",
+          "mmaemu": "RTX 5070 Ti + mmaemu, the RTX 4060's FP8 GEMM (ada-te)",
           "native": "RTX 5070 Ti, native FP8 (torch._scaled_mm)",
           "bf16": "RTX 5070 Ti, bf16 projections (no FP8)"}
 SHORT = {"RTX 4060, official TE": "RTX 4060\nofficial", "H100, official TE": "H100\nofficial",
-         "mmaemu": "5070 Ti\n+ mmaemu", "native": "5070 Ti\nnative FP8", "bf16": "5070 Ti\nbf16"}
+         "mmaemu_h100": "5070 Ti\n+ mmaemu\nhopper-te", "mmaemu": "5070 Ti\n+ mmaemu\nada-te",
+         "native": "5070 Ti\nnative FP8", "bf16": "5070 Ti\nbf16"}
+# the upstream-test figure (the README's first image): short labels that name whose FP8 GEMM each mmaemu bar computes
+UPSTREAM_LABELS = {"H100, official TE": "H100 PCIe, official (TE FP8)",
+                   "RTX 4060, official TE": "RTX 4060, official (TE FP8)",
+                   "mmaemu_h100": "RTX 5070 Ti + mmaemu, hopper-te (H100 PCIe)",
+                   "mmaemu": "RTX 5070 Ti + mmaemu, ada-te (RTX 4060)",
+                   "bf16": "RTX 5070 Ti, bf16 projections (no FP8)",
+                   "native": "RTX 5070 Ti, native FP8"}
 
 
 def style():
@@ -57,28 +70,48 @@ def load(evo2_dir: Path, h100_dir: Path, ref_npz: Path):
     return res, h100, ref, win
 
 
-def fig_upstream_test(win, out: Path):
-    """The loss of the upstream test (evo2/test/test_evo2.py): next-token cross entropy on the prompts p0..p3, here
-    in fp32 from the bf16 logits (the mean of mean_next_logprob, as upstream_test.py of the H100 log computes it)."""
-    modes = ["RTX 4060, official TE", "H100, official TE", "mmaemu", "bf16", "native"]
-    nll = [-np.mean([win[(m, w)]["mean_next_logprob"] for w in PROMPTS]) for m in modes]
-    fig, ax = plt.subplots(figsize=(8.6, 3.6))
+def upstream_losses(win, h100p: Path):
+    """The loss of the upstream test (evo2/test/test_evo2.py) per platform, in fp32 from the bf16 logits: for the 1B
+    the mean over the prompts p0..p3 of -mean_next_logprob (as upstream_test.py of the H100 log computes it), for the
+    40B the logs' loss_fp32 (the same quantity)."""
+    one = {m: -np.mean([win[(m, w)]["mean_next_logprob"] for w in PROMPTS])
+           for m in ("H100, official TE", "RTX 4060, official TE", "mmaemu", "bf16", "native")}
+    rows = json.loads((h100p / "results" / "1b_test.json").read_text())["rows"]
+    one["mmaemu_h100"] = -np.mean([r["mean_next_logprob"] for r in rows if r["window"] in PROMPTS])
+    t40 = json.loads((B40 / "test_40b.json").read_text())["test_evo2_mean"]
+    forty = {m: t40[m]["loss_fp32"] for m in ("mmaemu", "native", "bf16")}
+    h40 = json.loads((H40 / "results" / "40b" / "test.json").read_text())["test_evo2_mean"]
+    p40 = json.loads((h100p / "results" / "40b_test.json").read_text())["test_evo2_mean"]["mmaemu_h100"]
+    forty["H100, official TE"], forty["mmaemu_h100"] = h40["loss_fp32"], p40["loss_fp32"]
+    return one, forty
+
+
+def fig_upstream_test(win, h100p: Path, out: Path):
+    """Evo 2 1B and 40B on the upstream test: the official path on the H100 PCIe (and, for the 1B, the RTX 4060), and
+    the RTX 5070 Ti with mmaemu (H100 PCIe profile, RTX 4060 profile), native FP8 and bf16 GEMMs."""
+    one, forty = upstream_losses(win, h100p)
+    modes = ["H100, official TE", "RTX 4060, official TE", "mmaemu_h100", "mmaemu", "bf16", "native"]
+    fig, axes = plt.subplots(1, 2, figsize=(12.2, 3.9), sharey=True)
     y = np.arange(len(modes))[::-1]
-    ax.barh(y, nll, color=[COLORS[m] for m in modes], height=0.62)
-    for yi, v in zip(y, nll):
-        ax.text(v + 0.015, yi, f"{v:.4f}", va="center", fontsize=9)
-    ax.axvline(0.502, color="#2a9d8f", ls="--", lw=1)
-    ax.text(0.502, len(modes) - 0.35, " expected by the upstream test: 0.502", color="#2a9d8f", fontsize=8.5)
-    for v in (1.248, 1.365):  # issue #157 (RTX 5070 Ti): TE FP8, FP8 disabled
-        ax.axvline(v, color="#999999", ls=":", lw=1)
-    ax.text(1.24, -0.85, "issue #157:\nTE FP8 1.248", ha="right", fontsize=7.5, color="#666666")
-    ax.text(1.375, -0.85, "FP8 off\n1.365", ha="left", fontsize=7.5, color="#666666")
-    ax.set_yticks(y, [LABELS[m] for m in modes], fontsize=8.5)
-    ax.set_ylim(-1.1, len(modes) - 0.2)
-    ax.set_xlim(0, 1.6)
-    ax.set_xlabel("next-token cross entropy on prompts p0–p3 (lower is better)")
-    ax.set_title("Evo 2 1B on the upstream test prompts", loc="left", fontsize=11)
-    ax.grid(axis="y", visible=False)
+    for ax, loss, expected, title in ((axes[0], one, 0.502, "Evo 2 1B"), (axes[1], forty, 0.2159, "Evo 2 40B")):
+        for yi, m in zip(y, modes):
+            if m not in loss:
+                ax.text(0.02, yi, "not run", va="center", fontsize=8, color="#888888")
+                continue
+            ax.barh(yi, loss[m], color=COLORS[m], height=0.62)
+            ax.text(loss[m] + 0.015, yi, f"{loss[m]:.4f}", va="center", fontsize=8.5)
+        ax.axvline(expected, color="#2a9d8f", ls="--", lw=1)
+        ax.text(expected, len(modes) - 0.35, f" expected: {expected}", color="#2a9d8f", fontsize=8.5)
+        ax.set_xlim(0, 1.6)
+        ax.set_xlabel("upstream-test loss, in fp32 (lower is better)")
+        ax.set_title(title, loc="left", fontsize=11)
+        ax.grid(axis="y", visible=False)
+    for v in (1.248, 1.365):  # issue #157 (RTX 5070 Ti, 1B): TE FP8, FP8 disabled
+        axes[0].axvline(v, color="#999999", ls=":", lw=1)
+    axes[0].text(1.24, -0.85, "issue #157:\nTE FP8 1.248", ha="right", fontsize=7.5, color="#666666")
+    axes[0].text(1.375, -0.85, "FP8 off\n1.365", ha="left", fontsize=7.5, color="#666666")
+    axes[0].set_yticks(y, [UPSTREAM_LABELS[m] for m in modes], fontsize=8.5)
+    axes[0].set_ylim(-1.1, len(modes) - 0.2)
     fig.tight_layout()
     fig.savefig(out)
     plt.close(fig)
@@ -146,7 +179,7 @@ def fig_brca1(res, evo2_dir: Path, h100_dir: Path, ref, out: Path):
         ax.plot([-lim, lim], [-lim, lim], color="#888888", lw=0.8)
         ax.set_xlabel("Δ score, RTX 4060 official TE")
         ax.set_ylabel(f"Δ score, {SHORT[m].replace(chr(10), ' ')}")
-        ax.set_title(f"{SHORT[m].replace(chr(10), ' ')} vs reference: Pearson {r:.3f}", loc="left", fontsize=10)
+        ax.set_title(f"{SHORT[m].replace(chr(10), ' ')} vs RTX 4060: Pearson {r:.3f}", loc="left", fontsize=10)
         if m == "mmaemu":
             ax.set_xlim(-lim, lim)
             ax.set_ylim(-lim, lim)
@@ -242,13 +275,14 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--evo2-dir", type=Path, default=LOGS / "2026-10-14" / "evo2-rtx-5070-ti")
     ap.add_argument("--h100-dir", type=Path, default=LOGS / "2026-10-14" / "evo2-h100-sm90")
+    ap.add_argument("--h100-profile-dir", type=Path, default=H100P)
     ap.add_argument("--reference", type=Path, default=ROOT / "examples" / "data" / "evo2_1b_ada_rtx4060_te.npz")
     ap.add_argument("--out", type=Path, default=ROOT / "docs" / "images")
     args = ap.parse_args(argv)
     style()
     args.out.mkdir(parents=True, exist_ok=True)
     res, h100, ref, win = load(args.evo2_dir, args.h100_dir, args.reference)
-    fig_upstream_test(win, args.out / "evo2_upstream_test.png")
+    fig_upstream_test(win, args.h100_profile_dir, args.out / "evo2_upstream_test.png")
     fig_windows(win, args.out / "evo2_windows.png")
     fig_brca1(res, args.evo2_dir, args.h100_dir, ref, args.out / "evo2_brca1.png")
     fig_throughput(args.out / "kernel_throughput.png")

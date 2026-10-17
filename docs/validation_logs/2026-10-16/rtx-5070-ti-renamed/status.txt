@@ -1,0 +1,67 @@
+commit 2648bbae0fd957f0474802455da77fbc770c4dc2 clean=0 audit=$MMAEMU_AUDIT_DIR
+be1270ed64432a1311ab5e2c98ccb69028f72e3424ad4c6148d4cd468fba6695  $MMAEMU_TRUTH_DIR/manifest.json
+2026-10-16 23:13:05 START t3
+2026-10-16 23:18:29 END   t3 rc=0 324s
+2026-10-16 23:18:29 START t4gpu
+2026-10-16 23:21:51 END   t4gpu rc=0 202s
+2026-10-16 23:21:51 START replay_probe_live_0
+2026-10-16 23:22:17 END   replay_probe_live_0 rc=0 26s
+2026-10-16 23:22:17 START replay_probe_live_250
+2026-10-16 23:23:14 END   replay_probe_live_250 rc=0 57s
+2026-10-16 23:23:14 START replay_probe_live_500
+2026-10-16 23:23:30 END   replay_probe_live_500 rc=0 16s
+2026-10-16 23:23:30 START replay_probe_live_750
+2026-10-16 23:23:46 END   replay_probe_live_750 rc=0 16s
+2026-10-16 23:23:46 START replay_probe_live_1000
+2026-10-16 23:23:58 END   replay_probe_live_1000 rc=0 12s
+2026-10-16 23:23:58 START replay_probe_live_1250
+2026-10-16 23:24:18 END   replay_probe_live_1250 rc=0 20s
+2026-10-16 23:24:18 START replay_probe_m2_0
+2026-10-16 23:24:24 END   replay_probe_m2_0 rc=0 6s
+2026-10-16 23:24:24 START replay_probe_m2_11
+2026-10-16 23:24:31 END   replay_probe_m2_11 rc=0 7s
+2026-10-16 23:24:31 START replay_probe_merge
+2026-10-16 23:24:31 END   replay_probe_merge rc=0 0s
+2026-10-16 23:24:31 START t2
+2026-10-17 01:24:21 END   t2 rc=0 7190s
+be1270ed64432a1311ab5e2c98ccb69028f72e3424ad4c6148d4cd468fba6695  $MMAEMU_TRUTH_DIR/manifest.json
+2026-10-17 01:24:21 START t4cpu
+2026-10-17 01:41:53 END   t4cpu rc=0 1052s
+2026-10-17 01:41:53 START pytest_full
+2026-10-17 01:56:54 END   pytest_full rc=0 901s
+2026-10-17 01:56:54 START replay_sweep_0
+2026-10-17 02:00:44 END   replay_sweep_0 rc=0 230s
+2026-10-17 02:00:44 START replay_sweep_500
+2026-10-17 02:03:47 END   replay_sweep_500 rc=0 183s
+2026-10-17 02:03:47 START replay_sweep_1000
+2026-10-17 02:05:38 END   replay_sweep_1000 rc=0 111s
+2026-10-17 02:05:38 START replay_sweep_1500
+2026-10-17 02:06:34 END   replay_sweep_1500 rc=0 56s
+2026-10-17 02:06:34 START replay_sweep_2000
+2026-10-17 02:07:58 END   replay_sweep_2000 rc=0 84s
+2026-10-17 02:07:58 START replay_sweep_2500
+2026-10-17 02:08:08 END   replay_sweep_2500 rc=0 11s
+2026-10-17 02:08:09 START replay_sweep_merge
+2026-10-17 02:08:09 END   replay_sweep_merge rc=0 0s
+2026-10-17 02:08:09 CHAIN DONE clean=0
+mmaemu <src>/mmaemu/__init__.py 0.1.0 evo2 <venv>/lib/python3.12/site-packages/evo2/__init__.py torch 2.7.1+cu128
+2026-10-17 02:08:11 START export_h100_check clean=0
+2026-10-17 02:08:18 END   export_h100_check rc=0 8s
+2026-10-17 02:08:18 START resolver_check clean=0
+2026-10-17 02:08:27 END   resolver_check rc=0 9s
+2026-10-17 02:08:27 START example_check clean=0
+2026-10-17 02:18:08 END   example_check rc=0 581s
+2026-10-17 02:18:08 START notebook clean=10
+2026-10-17 02:46:52 END   notebook rc=0 1724s
+2026-10-17 02:46:52 F2_LOCAL_DONE clean=11
+ M examples/evo2_blackwell.ipynb
+?? docs/validation_logs/2026-10-16/evo2-h100-profile-rtx-5070-ti/example_check/score_1b_ada-te.log
+?? docs/validation_logs/2026-10-16/evo2-h100-profile-rtx-5070-ti/example_check/score_1b_ada-te.tsv
+?? docs/validation_logs/2026-10-16/evo2-h100-profile-rtx-5070-ti/example_check/score_1b_hopper-te.log
+?? docs/validation_logs/2026-10-16/evo2-h100-profile-rtx-5070-ti/example_check/score_1b_hopper-te.tsv
+?? docs/validation_logs/2026-10-16/evo2-h100-profile-rtx-5070-ti/example_check/test_1b_ada-te.json
+?? docs/validation_logs/2026-10-16/evo2-h100-profile-rtx-5070-ti/example_check/test_1b_ada-te.log
+?? docs/validation_logs/2026-10-16/evo2-h100-profile-rtx-5070-ti/example_check/test_1b_hopper-te.json
+?? docs/validation_logs/2026-10-16/evo2-h100-profile-rtx-5070-ti/example_check/test_1b_hopper-te.log
+?? docs/validation_logs/2026-10-16/evo2-h100-profile-rtx-5070-ti/example_check/test_40b_hopper-te.json
+?? docs/validation_logs/2026-10-16/evo2-h100-profile-rtx-5070-ti/example_check/test_40b_hopper-te.log

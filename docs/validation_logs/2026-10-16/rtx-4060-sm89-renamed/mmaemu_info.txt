@@ -1,0 +1,46 @@
+mmaemu 0.1.0  (~/mmaemu-4060/src/mmaemu)
+python 3.12.2  Linux-6.12.111+deb13-amd64-x86_64-with-glibc2.41
+torch 2.7.1+cu128  (CUDA build 12.8)
+environment: MMAEMU_AUDIT_DIR=~/mmaemu-4060/audit, MMAEMU_TEST_FATBIN_DIR=~/mmaemu-4060/src/mmaemu/backends/cuda/bin, MMAEMU_TRUTH_DIR=~/mmaemu-4060/truth
+
+Device
+  NVIDIA GeForce RTX 4060  sm_89  24 SMs  7814 MiB
+  display driver 570.211.01  CUDA driver API 12080  cuBLASLt 12.8.3.14  NVRTC [12, 8]
+
+Profiles (default: hopper)
+  ada: preset ada, NVIDIA GeForce RTX 4060, 24 SMs, cuBLASLt 12.8.3.14, caller torch._scaled_mm, workspace 1048576, table heur_rtx4060_lt12.8.3.14; maturity validated, split-K validated; MATCHES this device
+  ada-te: preset ada, NVIDIA GeForce RTX 4060, 24 SMs, cuBLASLt 12.8.3.14, caller transformer_engine, workspace 4194304, table heur_rtx4060_lt12.8.3.14; maturity validated, split-K experimental; MATCHES this device
+  ada-ws0: preset ada, NVIDIA GeForce RTX 4060, 24 SMs, cuBLASLt 12.8.3.14, caller torch._scaled_mm, workspace 0, table heur_rtx4060_lt12.8.3.14; maturity validated, split-K validated; MATCHES this device
+  hopper: preset hopper, NVIDIA H100 PCIe, 114 SMs, cuBLASLt 12.8.3.14, caller torch._scaled_mm, workspace 1048576, table heur_h100pcie_lt12.8.3.14; maturity validated, split-K validated; does not match this device
+  hopper-te: preset hopper, NVIDIA H100 PCIe, 114 SMs, cuBLASLt 12.8.3.14, caller transformer_engine, workspace 33554432, table heur_h100pcie_lt12.8.3.14; maturity validated, split-K experimental; does not match this device
+  hopper-ws0: preset hopper, NVIDIA H100 PCIe, 114 SMs, cuBLASLt 12.8.3.14, caller torch._scaled_mm, workspace 0, table heur_h100pcie_lt12.8.3.14; maturity validated, split-K validated; does not match this device
+  hopper-experimental: preset hopper, None, None SMs, cuBLASLt None, caller torch._scaled_mm, workspace None, table None; maturity experimental, split-K none; does not match this device
+  b200-mma-sync-experimental: preset b200_mma_sync, None, None SMs, cuBLASLt None, caller torch._scaled_mm, workspace None, table None; maturity experimental, split-K none; does not match this device
+
+Presets
+  ada: validated - Ada (sm_89) FP8 mma.sync m16n8k32, validated bit for bit on an RTX 4060
+  b200_mma_sync (alias: blackwell): experimental - fits the toolbox B200 mma.sync (HMMA-rewrite) vectors; NOT a model of sm_120 / RTX 5070 Ti; NOT B200 cuBLAS
+  hopper: validated - cuBLAS FP8 GEMMs (sm_90 nvjet kernels) on an H100 PCIe (114 SMs), cuBLASLt 12.8.3.14, validated bit for bit; not a model of the sm_90 mma.sync instruction
+
+Backends
+  cuda:tc3 (preset ada): available via fatbin, validated here
+  cuda:v9 (preset ada): available via fatbin, validated here
+  cuda:v4 (preset ada): available via fatbin, validated here
+  cuda:h4 (preset hopper): available via fatbin, validated here
+  cuda:v1 (preset ada): available via fatbin, validated here
+  cuda:h1 (preset hopper): available via fatbin, validated here
+  reference: available via torch, validated here - float64 model on the tensors' device
+
+Fatbins (nvcc 12.8.61, flags -O3 --fmad=false)
+  h1: SASS [75, 80, 86, 89, 90, 100, 120] PTX 75 sha256 OK
+  h4: SASS [80, 86, 89, 90, 100, 120] PTX 80 sha256 OK
+  probes: SASS [80, 86, 89, 90, 100, 120] PTX None sha256 OK
+  tc3: SASS [80, 86, 89] PTX None sha256 OK
+  v1: SASS [75, 80, 86, 89, 90, 100, 120] PTX 75 sha256 OK
+  v4: SASS [80, 86, 89, 90, 100, 120] PTX 80 sha256 OK
+  v9: SASS [80, 86, 89, 90, 100, 120] PTX None sha256 OK
+
+Split-K tables
+  heur_h100pcie_lt12.8.3.14: heur_h100pcie_lt12.8.3.14.json (76561 B, sha256 ae6f103ba0f7), heur_h100pcie_lt12.8.3.14.npz (224792 B, sha256 17a191951c8d); rows 1767416
+  heur_rtx4060_lt12.8.3.14: heur_rtx4060_lt12.8.3.14.json (33291 B, sha256 657607b2a2e2), heur_rtx4060_lt12.8.3.14.npz (236342 B, sha256 304203efc0f1); rows 1228448
+  (other package data): verified_split_combos.json, verified_split_combos_h100pcie_lt12.8.3.14.json

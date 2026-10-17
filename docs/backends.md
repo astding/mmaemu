@@ -1,8 +1,9 @@
 # Backends: CUDA kernels, loader ladder, gates, cache
 
-mmaemu computes the same bits on every backend. A backend only supplies the *chain function*. That is the Ada
-block-FMA chain over a list of K indices, starting from +0. Everything around it (split-K plans, slow-accumulation
-chunks, non-finite inputs, epilogue) is shared torch code in `mmaemu.model`.
+mmaemu computes the same bits on every backend. A backend only supplies the *chain function*. That is the block-FMA
+chain of the request's preset (`ada`: 16-term blocks, `hopper`: 32-term blocks) over a list of K indices, starting from
++0. Everything around it (split-K plans, slow-accumulation chunks, non-finite inputs, epilogue) is shared torch code in
+`mmaemu.model`.
 
 | Backend | What runs | Where | Formats | Needs |
 |---|---|---|---|---|
@@ -10,13 +11,17 @@ chunks, non-finite inputs, epilogue) is shared torch code in `mmaemu.model`.
 | `cuda:v9` | bf16 tensor-core exponent pass + FFMA.RZ chain (gated, optional) | CUDA, SASS sm_80/86/89/90/100/120 only (no PTX) | E4M3 x E4M3 | gates `smoke` + `window` |
 | `cuda:v4` | IEEE-only CUDA-core kernel (p2 v4 cfg9) | CUDA sm_80+ | E4M3 x E4M3 | gate `smoke` |
 | `cuda:v1` | IEEE-only fp32-pipe kernel (tcemu v1 cfg4, DEC1 shared LUT) | CUDA sm_75+ | E4M3 x E4M3 | gate `smoke` |
+| `cuda:h4` | the `hopper` preset's fast kernel: v4's design with 32-term blocks | CUDA sm_80+ | E4M3 x E4M3 | gate `smoke` |
+| `cuda:h1` | the `hopper` preset's portable kernel: v1's design with 32-term blocks | CUDA sm_75+ | E4M3 x E4M3 | gate `smoke` |
 | `reference` | float64 model (`mmaemu.model.chain`) | the tensors' device (CPU or CUDA) | all | nothing |
 
-v1 and v4 use only IEEE-defined instructions: fp32 adds and multiplies with explicit rounding modes, `fma.rn.bf16x2`,
-and integer byte SIMD. Their result is therefore the same on every GPU they run on. A failure of their smoke gate is
-a bug, not a hardware property. v4's sm_80/86 builds and its compute_80 PTX decode E4M3 in software; they have been
-compiled but not run on hardware, and the smoke gate checks them on first use. v9 and tc3 depend on how a GPU's tensor cores round, so they are *gated*: they are
-auto-selected only on validated capabilities (today sm_89) and after their gates pass.
+Every kernel implements one preset (`KernelSpec.preset`): v1, v4, v9 and tc3 the `ada` preset, h1 and h4 the `hopper`
+preset. v1, v4, h1 and h4 use only IEEE-defined instructions: fp32 adds and multiplies with explicit rounding modes,
+`fma.rn.bf16x2`, and integer byte SIMD. Their result is therefore the same on every GPU they run on. A failure of their
+smoke gate is a bug, not a hardware property. v4's sm_80/86 builds and its compute_80 PTX decode E4M3 in software; they
+have been compiled but not run on hardware, and the smoke gate checks them on first use. h4 has run on sm_89 and sm_120 only. v9 and tc3 depend on how a
+GPU's tensor cores round, so they are *gated*: they are auto-selected only on validated capabilities (today sm_89) and
+after their gates pass.
 
 ## Selection (`mmaemu.backends.registry`)
 
@@ -31,12 +36,14 @@ overrides it. Accepted values are `"auto"`, `"reference"`, `"cuda"` and `"cuda:<
 
    In the last three cases an explicit `"cuda..."` request raises `BackendUnavailableError` instead. These paths
    never touch the CUDA driver.
-2. Otherwise the discovered kernels are tried in priority order: tc3 (40), v9 (30), v4 (20), v1 (10).
+2. Otherwise the discovered kernels are tried in priority order: tc3 (40), v9 (30), v4 (20), v1 (10) for the `ada`
+   preset, h4 (20) and h1 (10) for the `hopper` preset. A kernel serves only its own preset, so the two orders never
+   mix.
    `kernels.SPECS` is always discovered; `mmaemu.backends.cuda.fast.specs.SPECS` is added when it is importable.
 3. Some kernels are skipped **by design**. This is silent, and `status()` / `explain_selection()` give the reason.
    It happens when:
-   - the format pair or preset is unsupported (E5M2, mixed formats and non-`ada` presets always run on the
-     reference backend);
+   - the format pair or preset is unsupported: a kernel serves only its own preset, and E5M2, mixed formats and
+     the presets without a kernel (`b200_mma_sync`, custom presets) always run on the reference backend;
    - the compute capability is below `min_cc`;
    - the architecture is outside the kernel's supported SASS/PTX targets; NVRTC
      does not extend that support (tc3 therefore stays unavailable on sm_120);
@@ -55,15 +62,25 @@ overrides it. Accepted values are `"auto"`, `"reference"`, `"cuda"` and `"cuda:<
 in `validated_on`. `source` is `"fatbin"` or `"nvrtc"`. `reason` explains every unavailable kernel.
 
 v1 and v4 have also passed the [RTX 5070 Ti validation](validation_logs/2026-10-13-sm120/README.md)
-on sm_120 and report `validated_here=True` there. AUTO selects v4 on that device.
+on sm_120 and report `validated_here=True` there. For the `ada` preset AUTO selects v4 on that device.
+h1 and h4 report `validated_here=True` on sm_89 and sm_120, from their runs on the
+[RTX 4060](validation_logs/2026-10-16/rtx-4060-sm89/README.md) and the RTX 5070 Ti
+([h1](validation_logs/2026-10-16/h1-rtx-5070-ti/README.md),
+[h4](validation_logs/2026-10-16/h4-rtx-5070-ti/README.md)).
+On fa0fd90, T3 passed on the RTX 5070 Ti with v1, v4, h1 and h4
+([T3](validation_logs/2026-10-16/t3-rtx-5070-ti-sm120/README.md)), and the replay of the H100 probe through h4
+passed there and on the RTX 4060 ([replay](validation_logs/2026-10-16/rtx-5070-ti-replays/README.md)); both again
+after the profile rename ([RTX 5070 Ti](validation_logs/2026-10-16/rtx-5070-ti-renamed/README.md),
+[RTX 4060](validation_logs/2026-10-16/rtx-4060-sm89-renamed/README.md)).
+They are ungated, so `validated_on` decides only `validated_here` for them: selection and `selftest` do not read it.
 v9's sm_120 window measurements pass, while its default selection remains gated
 until that architecture is added to its validation scope.
 
 On an H100 PCIe (sm_90), v1 and v4 passed T3 with the release fatbins; NVRTC builds of the same kernels (5c15e8a,
 sources equal up to comments) matched the RTX 4060 on all 21 Evo 2 projection calls
 ([H100 report](validation_logs/2026-10-14/t3-h100-sm90/README.md)). The full device-independence
-suite did not run there, so sm_90 is not in their `validated_on`. AUTO still selects v4 on sm_90, but
-`validated_here` is False, and a consumer that requires it falls back to the reference backend.
+suite did not run there, so sm_90 is not in their `validated_on`. For the `ada` preset AUTO still selects v4 on
+sm_90, but `validated_here` is False, and a consumer that requires it falls back to the reference backend.
 
 ## Loader ladder (`mmaemu.backends.cuda.modules`)
 
@@ -100,7 +117,7 @@ extern "C" __global__ void mmaemu_<name>_e4m3e4m3(const uint8_t* A, const uint8_
 ```
 
 - A is `[M][K]` E4M3 codes and B is `[N][K]`, both row-major. C is `[M][N]` fp32.
-- `C[m][n]` is the Ada fast chain over k = 0..K-1 from +0.
+- `C[m][n]` is the fast chain of the kernel's preset (`KernelSpec.preset`) over k = 0..K-1 from +0.
 - Sources are device-only: no torch headers, no host code, no standard headers (NVRTC has none).
 - The kernel never faults, whatever the byte values.
 
@@ -111,21 +128,26 @@ extern "C" __global__ void mmaemu_<name>_e4m3e4m3(const uint8_t* A, const uint8_
 - raises `ValueError` for mixed devices;
 - makes the operands contiguous, and clones an operand whose address is not aligned to `align_bytes` (B12: a
   misaligned 32-bit load is a sticky error that kills the CUDA context);
-- checks `L % 16 == 0` and `L < k_max` (v4: 2^24, v1: 2^30);
+- raises `ValueError` for a request of another preset;
+- checks `L % 16 == 0` and `L < k_max` (v4 and h4: 2^24, v1 and h1: 2^30); h1 and h4 end a chain with L % 32 == 16
+  in a half block of zero codes, which the model excludes;
 - returns empty or +0 results for M, N or L = 0 without a launch;
 - launches in row chunks when `ceil(M / tile_m)` exceeds 65535.
 
 The chain is given finite codes only: `execute_plan` sanitises NaN codes and patches the IEEE result afterwards.
-The raw v1 kernel also propagates NaN codes to canonical NaN by itself (the prototype's v1 decoded them as 0).
+The raw v1 and h1 kernels also propagate NaN codes to canonical NaN by themselves (the prototype's v1 decoded them
+as 0).
 
 | Kernel | Tile | Threads | Dynamic smem | SASS | PTX | k_max |
 |---|---|---|---|---|---|---|
 | v1 | 64 x 64 | 256 | 0 (12 KiB static) | sm_75, 80, 86, 89, 90, 100, 120 | compute_75 | 2^30 |
 | v4 | 128 x 128 | 256 | 36,864 B | sm_80, 86, 89, 90, 100, 120 | compute_80 | 2^24 |
+| h1 | 64 x 64 | 256 | 0 (22 KiB static) | sm_75, 80, 86, 89, 90, 100, 120 | compute_75 | 2^30 |
+| h4 | 128 x 128 | 256 | 73,728 B | sm_80, 86, 89, 90, 100, 120 | compute_80 | 2^24 |
 
 Shared memory above 48 KiB is enabled per function up to the device's opt-in limit
-(`CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_BLOCK_OPTIN`). tc3 needs it (81,920 B): `modules.launch` opts in, and
-selection skips tc3 if the device's limit is lower.
+(`CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_BLOCK_OPTIN`). tc3 (81,920 B) and h4 (73,728 B) need it: `modules.launch`
+opts in, and selection skips a kernel if the device's limit is lower.
 
 ### v1 decode variants (compile-time switches in `v1.cu`)
 
@@ -197,8 +219,15 @@ python tools/build_fatbin.py --check [--out <dir>]         # hash-only staleness
     miscompiles;
   - ptxas reports spill bytes, unless `--allow-spills` is given;
   - the listing differs from the KernelSpecs.
-- Release fatbins are built and GPU-validated by the maintainer at the release-candidate freeze, then committed to
-  `mmaemu/backends/cuda/bin/`. Feature branches never commit fatbins.
+- Release fatbins are `--release` builds committed to `mmaemu/backends/cuda/bin/`. A branch that adds or changes a
+  kernel commits that module's build (`--release --modules <module>`; its entry is added to `bin/manifest.json`,
+  the other entries unchanged), with its build log under `docs/validation_logs/<date>/`, as h1
+  ([build](validation_logs/2026-10-15/h1-fatbin/README.md)) and h4
+  ([build](validation_logs/2026-10-16/h4-fatbin/README.md)) were. At the release-candidate freeze the maintainer
+  rebuilds every module with `--release`, compares it byte for byte with the committed fatbins and runs T3 on
+  them; the log goes under `docs/validation_logs/<date>/` ([release.md](release.md), section 2). What the 0.1.0
+  freeze found, and why the committed v1 and v4 bytes were kept, is in
+  [rc-fatbin](validation_logs/2026-10-16/rc-fatbin/README.md).
 
 ## Benchmarks (`tools/bench_kernels.py`, `tools/hostclock.py`)
 
@@ -215,8 +244,9 @@ Method:
   fatbins, or `--fatbin-dir`); `--allow-nvrtc` records NVRTC numbers instead, marked as such. The report records
   each kernel's image sha256.
 - **Exactness gate before timing:**
-  - v1 is compared with the CPU reference on its first min(M, 64) rows x 256 columns;
-  - every other kernel is compared with v1 on the full output;
+  - v1 and h1 are compared with the CPU reference of their own preset on the first min(M, 64) rows x 256 columns;
+  - every other kernel is compared with the IEEE kernel of its preset (v1 for `ada`, h1 for `hopper`) on the full
+    output;
   - any mismatch stops the run, which writes its report and exits 1.
 - **Warm-up and windows:** at least 1.5 s of warm-up per kernel, then interleaved windows of at least 1.0 s each.
   The reported value is the median TMAC/s over the windows.
@@ -235,8 +265,9 @@ Method:
   - v1 and v4 are validated on sm_89 (RTX 4060) and sm_120 (RTX 5070 Ti). On sm_90 (H100) they passed T3 but are
     not in `validated_on` (see above).
   - v9 and tc3 are validated on sm_89 only.
-  - On other capabilities the kernels are unvalidated: the smoke gate runs on first use, and v1/v4 are IEEE-exact
-    by construction.
+  - h1 and h4 are validated on sm_89 (RTX 4060) and sm_120 (RTX 5070 Ti); they have never run on an H100 (sm_90).
+  - On other capabilities the kernels are unvalidated: the smoke gate runs on first use, and v1/v4/h1/h4 are
+    IEEE-exact by construction.
 
 <a id="v1-variant-decision"></a>
 ## v1 variant decision

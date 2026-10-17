@@ -15,7 +15,7 @@ Sets (gpu marker):
     the audit's p2-int-mixed (v9; tc3 is run on them too; the 22 p2 cases need $MMAEMU_AUDIT_DIR);
   - K = 0 (wrapper and raw kernel launch) and all-0xFF (NaN-code) inputs: no fault, context still usable.
 truth marker (MMAEMU_TRUTH_DIR): the 21 Evo 2 1B projections of truth evo2.evo2_1b_w2k: full fp32 accumulator
-sha256 == recorded acc_full for 21/21, and the bf16 outputs through scaled_mm(profile "ada-rtx4060-te") equal the
+sha256 == recorded acc_full for 21/21, and the bf16 outputs through scaled_mm(profile "ada-te") equal the
 recorded y_native rows (and the full-output sha256 where only a hash is stored), for v9 and for tc3.
 
 Capability handling: a kernel without a binary for the device is skipped; on a capability outside
@@ -350,7 +350,7 @@ def _truth():
 
 
 def _scaled_mm_bf16(name, dev, a, b, acc, sa_bits, sb_bits):
-    """bf16 output through mmaemu.scaled_mm(profile "ada-rtx4060-te", backend "cuda:<name>"); if scaled_mm is a stub,
+    """bf16 output through mmaemu.scaled_mm(profile "ada-te", backend "cuda:<name>"); if scaled_mm is a stub,
     through the shared epilogue (mmaemu.model.epilogue.apply) on the kernel's accumulator."""
     sa = torch.tensor(np.uint32(sa_bits).view(np.float32).item(), dtype=torch.float32, device=dev)
     sb = torch.tensor(np.uint32(sb_bits).view(np.float32).item(), dtype=torch.float32, device=dev)
@@ -359,7 +359,7 @@ def _scaled_mm_bf16(name, dev, a, b, acc, sa_bits, sb_bits):
     if fn is not None:
         try:
             y = fn(a.view(E4M3), b.view(E4M3).t(), sa, sb, out_dtype=torch.bfloat16, use_fast_accum=True,
-                   profile="ada-rtx4060-te", backend=f"cuda:{name}")
+                   profile="ada-te", backend=f"cuda:{name}")
             return y, "scaled_mm"
         except NotImplementedError as e:          # mmaemu stub (module absent); any other error propagates
             if not str(e).startswith("mmaemu."):

@@ -28,7 +28,7 @@ if TYPE_CHECKING:
 
 __all__ = ["ChainRequest", "Backend", "BackendStatus", "select", "status", "selftest", "BACKEND_NAMES"]
 
-BACKEND_NAMES = ("auto", "reference", "cuda", "cuda:v1", "cuda:v4", "cuda:v9", "cuda:tc3")
+BACKEND_NAMES = ("auto", "reference", "cuda", "cuda:v1", "cuda:v4", "cuda:v9", "cuda:tc3", "cuda:h1", "cuda:h4")
 
 
 @dataclass(frozen=True)

@@ -220,7 +220,7 @@ FROZEN_FIELDS = {
     "mmaemu.model.plan.GemmPlan": ["K", "fast", "S", "scheme", "chunks", "identity"],
     "mmaemu.backends.cuda.spec.KernelSpec": ["name", "module", "source", "entry", "sass_archs", "ptx_arch", "min_cc",
                                              "gated", "validated_on", "gates", "priority", "tile_m", "tile_n",
-                                             "threads", "smem_bytes", "align_bytes", "k_max", "formats"],
+                                             "threads", "smem_bytes", "align_bytes", "k_max", "formats", "preset"],
     "mmaemu.backends.cuda.spec.GateResult": ["name", "passed", "reason", "details", "seconds", "cached"],
 }
 
@@ -343,6 +343,7 @@ def test_errors_exactly_as_spec():
         "BackendUnavailableError": (errors.MmaemuError, RuntimeError),
         "ExperimentalPresetWarning": (UserWarning,),
         "UnverifiedSplitWarning": (UserWarning,),
+        "UnvalidatedEnvelopeWarning": (errors.UnverifiedSplitWarning,),
         "BackendFallbackWarning": (RuntimeWarning,),
     }
     classes = {n for n, v in vars(errors).items() if isinstance(v, type) and v.__module__ == errors.__name__}
@@ -601,6 +602,16 @@ def test_kernel_spec_validation_and_launch_config():
                 dict(gates=["window"]), dict(k_max=16), dict(min_cc=(8,))):
         with pytest.raises(ValueError):
             _v1_like(**bad)
+
+
+def test_shipped_ieee_kernels_validated_on():
+    """validated_on of the IEEE-exact kernels is their hardware evidence (docs/backends.md): sm_89 (the RTX 4060) and
+    sm_120 (an RTX 5070 Ti); `info` reports "validated here" from it."""
+    from mmaemu.backends.cuda import kernels
+
+    assert {s.name: s.validated_on for s in kernels.SPECS} == dict.fromkeys(("v1", "v4", "h1", "h4"),
+                                                                            frozenset({(8, 9), (12, 0)}))
+    assert {s.name.upper() for s in kernels.SPECS} <= set(kernels.__all__)
 
 
 def test_register_gate(monkeypatch):

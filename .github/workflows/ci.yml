@@ -51,7 +51,7 @@ jobs:
             python tools/build_fatbin.py --check
             python tools/check_dist.py --verify-manifest
           else
-            echo "::notice::no committed fatbins yet (they are committed at the release-candidate freeze)"
+            echo "::notice::no committed fatbins (mmaemu/backends/cuda/bin/manifest.json is missing)"
           fi
       - name: banned patterns
         run: |

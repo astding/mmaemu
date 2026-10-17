@@ -1,0 +1,57 @@
+{
+ "part": "p4",
+ "profile": "ws0",
+ "ws": 0,
+ "align": 0,
+ "chunk": 0,
+ "chunks": 1,
+ "pairs": [
+  0,
+  50000
+ ],
+ "hardware": {
+  "gpu": "NVIDIA H100 PCIe",
+  "capability": [
+   9,
+   0
+  ],
+  "sm_count": 114,
+  "cublaslt": "12.8.3.14",
+  "cublaslt_lib": "<task-root>/venv/lib/python3.12/site-packages/nvidia/cublas/lib/libcublasLt.so.12",
+  "python": "3.12.15",
+  "os": "Linux 6.8.0-60-generic",
+  "date": "2026-10-16 19:44:32",
+  "driver": "570.148.08",
+  "torch": "2.7.1+cu128"
+ },
+ "seconds": 36.8,
+ "shapes_file": "shapes/p4.json",
+ "shapes_sha256": "51b8f0858296c92f41095b7c8111a7a8df2dd59ffef009ca7b384fe95857045b",
+ "format": "mmaemu-h100-sweep/1",
+ "columns": [
+  "M",
+  "N",
+  "K",
+  "fa",
+  "fb",
+  "out",
+  "fast",
+  "ws",
+  "align",
+  "dscale",
+  "lib",
+  "status",
+  "algo",
+  "tile",
+  "stages",
+  "splitK",
+  "reduction",
+  "swizzle",
+  "custom",
+  "workspace",
+  "waves_x1000"
+ ],
+ "rows": 50000,
+ "status_nonzero": 3346,
+ "npz_sha256": "c95cc465cea87426d9ec99c7f0f068ac811566d9180169218575c44822a9a5fa"
+}

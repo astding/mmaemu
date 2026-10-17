@@ -1,0 +1,2 @@
+NVIDIA H100 PCIe (114 SMs, cc [9, 0], cuBLASLt 12.8.3.14): 850320 queries in 78.6s, split rows 51270, status!=0 56688; Evo 2 split rows per ws: {"0": 0, "1048576": 0, "4194304": 0, "33554432": 0}; wrote <probe-root>/bundle/out/m6_heur/heur.npz
+1512 split combinations (0 Evo 2) in 564 groups -> 1000 jobs; ws [1048576, 4194304, 33554432]

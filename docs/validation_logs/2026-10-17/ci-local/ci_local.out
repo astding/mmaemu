@@ -1,0 +1,42 @@
+mmaemu CI (local) in <ci>; jobs: lint test nvrtc dist
+PASS     lint         ruff
+PASS     lint         actionlint
+PASS     lint         check_docs
+PASS     lint         build_fatbin --check
+PASS     lint         manifest sha256
+PASS     lint         no torch.equal call in tests/ and tools/
+PASS     lint         no perf_counter in tools/bench_kernels.py
+PASS     lint         workflow policy
+PASS     test         T0+T1 torch 2.6.0
+PASS     test         T0+T1 torch 2.7.1
+PASS     test         T0+T1 torch latest
+PASS     nvrtc        NVRTC compile test
+PASS     dist         build --sdist --wheel
+PASS     dist         twine check --strict
+PASS     dist         check_dist --require-fatbins
+PASS     dist         wheel from the sdist
+PASS     dist         check_dist --from-sdist
+PASS     dist         python -m mmaemu info (wheel)
+PASS     dist         T0+T1 against the wheel
+
+summary (<ci>):
+  PASS     lint   ruff
+  PASS     lint   actionlint
+  PASS     lint   check_docs
+  PASS     lint   build_fatbin --check
+  PASS     lint   manifest sha256
+  PASS     lint   no torch.equal call in tests/ and tools/
+  PASS     lint   no perf_counter in tools/bench_kernels.py
+  PASS     lint   workflow policy
+  PASS     test   T0+T1 torch 2.6.0
+  PASS     test   T0+T1 torch 2.7.1
+  PASS     test   T0+T1 torch latest
+  PASS     nvrtc  NVRTC compile test
+  PASS     dist   build --sdist --wheel
+  PASS     dist   twine check --strict
+  PASS     dist   check_dist --require-fatbins
+  PASS     dist   wheel from the sdist
+  PASS     dist   check_dist --from-sdist
+  PASS     dist   python -m mmaemu info (wheel)
+  PASS     dist   T0+T1 against the wheel
+ci_local: PASS

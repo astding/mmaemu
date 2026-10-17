@@ -1,0 +1,19 @@
+{
+ "model": "evo2_1b_base",
+ "variants": 500,
+ "lof": 111,
+ "windows": 935,
+ "device": "NVIDIA GeForce RTX 5070 Ti",
+ "mmaemu": "0.1.0",
+ "modes": {
+  "mmaemu_h100": {
+   "auroc": 0.735403784246972,
+   "minutes": 15.456114240487416,
+   "copy_s": 0.4206104278564453,
+   "compute_s": 882.6234650611877,
+   "delta_pearson_vs_rtx4060": 0.9868419766426086,
+   "delta_spearman_vs_rtx4060": 0.9204070686157536
+  }
+ },
+ "evo2_1b_rtx4060_official_te_auroc": 0.7377892030848329
+}

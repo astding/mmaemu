@@ -1,6 +1,6 @@
 """T3p: live torch._scaled_mm on the profile's reference GPU vs mmaemu.scaled_mm.
 
-Runs only where get_profile("ada-rtx4060-torch").matches_device() (RTX 4060, 24 SMs, cuBLASLt 12.8.3.14), with
+Runs only where get_profile("ada").matches_device() (RTX 4060, 24 SMs, cuBLASLt 12.8.3.14), with
 torch's default cuBLASLt workspace (CUBLASLT_WORKSPACE_SIZE unset); elsewhere it is skipped with "profile device
 unavailable". Run: $MMAEMU_GPU_LOCK timeout 600 python -m pytest -q tests/test_live_cublas.py
 
@@ -20,11 +20,18 @@ import os
 import pytest
 import torch
 
-from mmaemu.api import scaled_mm
+from mmaemu import api
 from mmaemu.errors import ReferenceRejectsError
 from mmaemu.testing import assert_bitwise_equal
 
 pytestmark = [pytest.mark.gpu, pytest.mark.profile_device]
+PROFILE = "ada"  # the live GPU's profile; every mmaemu call here runs under it
+
+
+def scaled_mm(*args, **kw):
+    return api.scaled_mm(*args, profile=PROFILE, **kw)
+
+
 E4, E5 = torch.float8_e4m3fn, torch.float8_e5m2
 OUTS = [torch.float32, torch.bfloat16, torch.float16, E4, E5]
 PAIRS = [(E4, E4), (E4, E5), (E5, E4)]
@@ -49,7 +56,7 @@ def _device_or_skip():
     if not torch.cuda.is_available():
         pytest.skip("profile device unavailable (no CUDA)")
     from mmaemu.platform.profiles import get_profile
-    if not get_profile("ada-rtx4060-torch").matches_device():
+    if not get_profile(PROFILE).matches_device():
         pytest.skip("profile device unavailable")
     if os.environ.get("CUBLASLT_WORKSPACE_SIZE"):
         pytest.skip("CUBLASLT_WORKSPACE_SIZE is set: not the profile's workspace")

@@ -1,7 +1,7 @@
 """Public API: scaled_mm, accumulate, explain.
 
 ``scaled_mm`` reproduces torch._scaled_mm with tensor-wise scales as the reference profile's GPU computes it
-(default profile ``ada-rtx4060-torch``: RTX 4060, 24 SMs, cuBLASLt 12.8.3.14, torch 2.7.1), bit for bit, on any
+(default profile ``hopper``: H100 PCIe, 114 SMs, cuBLASLt 12.8.3.14, torch 2.7.1), bit for bit, on any
 device. Scope: FP8 (E4M3 / E5M2) inputs, tensor-wise scales, no bias, inference only. Split-K decisions come from the
 profile (mmaemu.platform); calls the profile cannot decide raise instead of guessing.
 
@@ -15,7 +15,7 @@ Validation order (normative; parity tests check exception classes and raise/no-r
      dimensions % 16 (measured on the RTX 4060 with torch 2.7.1 and cuBLASLt 12.8.3.14; the R1 recordings of
      recordings/rtx4060_2026-10 are the authority). An out= that is neither row- nor column-major is returned
      unchanged with a UserWarning: torch computes into a contiguous copy of it and never copies the result back.
-  3. Profile rejects (e.g. e4m3 x e4m3 -> e5m2 on ada-rtx4060-*): ReferenceRejectsError.
+  3. Profile rejects (e.g. e4m3 x e4m3 -> e5m2 on the ada and hopper profiles): ReferenceRejectsError.
   4. Scope: bias, row-wise scales, inputs requiring grad under grad mode: UnsupportedFeatureError.
   5. Preset maturity warning (ExperimentalPresetWarning).
   6. Split-K resolution (mmaemu.platform.splitk_table.resolve_splitk; SplitKUnknownError if undecidable).
@@ -34,7 +34,7 @@ from mmaemu.errors import MmaemuError, ReferenceRejectsError, UnsupportedFeature
 from mmaemu.formats import fmt_of, is_fp8_dtype
 from mmaemu.model import epilogue
 from mmaemu.model.plan import execute_plan, make_plan
-from mmaemu.model.presets import get_preset, maturity_warning
+from mmaemu.model.presets import get_preset, maturity_warning, warn_once
 
 __all__ = ["scaled_mm", "accumulate", "explain", "CallPlan"]
 
@@ -116,6 +116,21 @@ def _profile_and_preset(profile, warn: bool):
     from mmaemu.platform.profiles import get_profile
     prof = get_profile(profile)
     return prof, get_preset(prof.preset, warn=warn)
+
+
+def _maturity_message(prof, preset) -> str | None:
+    """The maturity warning of the call: the preset's, else the profile's (hopper-experimental)."""
+    from mmaemu.platform.profiles import profile_maturity_warning
+    return maturity_warning(preset) or profile_maturity_warning(prof, preset.maturity == "validated")
+
+
+def _emit_maturity(prof, preset) -> None:
+    """Emit the ExperimentalPresetWarning of the preset (once per name) or of the profile (once per name)."""
+    get_preset(prof.preset)
+    from mmaemu.platform.profiles import profile_maturity_warning
+    msg = profile_maturity_warning(prof, preset.maturity == "validated")
+    if msg is not None:
+        warn_once("profile:" + prof.name, msg, stacklevel=4)
 
 
 def _select_backend(device: torch.device, fa: str, fb: str, preset_name: str, backend: str):
@@ -282,11 +297,11 @@ def _prepare(input, mat2, scale_a, scale_b, bias, scale_result, out_dtype, use_f
     P.fa, P.fb = fmt_of(input.dtype), fmt_of(mat2.dtype)
     _profile_rejects(P.prof, P.fa, P.fb, od)
     _scope_checks(scaling, bias, (input, mat2, scale_a, scale_b, scale_result, bias))
-    msg = maturity_warning(P.preset)
+    msg = _maturity_message(P.prof, P.preset)
     if msg is not None:
         P.warnings.append(msg)
     if not dry:
-        get_preset(P.prof.preset)                     # emits the ExperimentalPresetWarning (once per name)
+        _emit_maturity(P.prof, P.preset)              # emits the ExperimentalPresetWarning (once per name)
     # torch 2.7.1 keeps an out= of shape [M, N] (another shape is resized to a contiguous one); one that is neither
     # row- nor column-major is computed into a contiguous copy that is never copied back (RTX 4060: out unchanged).
     # Its result is discarded, so no split-K decision or backend is needed.
@@ -351,12 +366,15 @@ def scaled_mm(input, mat2, scale_a, scale_b, bias=None, scale_result=None, out_d
 
     Scope: tensor-wise scales, FP8 inputs and fp32 / bf16 / fp16 / e4m3 / e5m2 outputs, no bias (raises
     UnsupportedFeatureError), inference only. Bitwise equality with torch._scaled_mm is validated on the reference
-    profile's GPU (ada-rtx4060-torch: RTX 4060, 24 SMs, cuBLASLt 12.8.3.14, torch 2.7.1) for the split-K decisions
-    that profile resolves; elsewhere the profile is the claim. See the module docstring for the validation order.
+    profiles' GPUs (hopper, hopper-te, hopper-ws0, hopper the default: measured on an H100 PCIe, 114 SMs; ada,
+    ada-te, ada-ws0: measured on an RTX 4060, 24 SMs; both
+    cuBLASLt 12.8.3.14, torch 2.7.1) for the split-K decisions the profile resolves; elsewhere the profile is the
+    claim. See the module docstring for the validation order.
 
-    profile: Profile or name (default $MMAEMU_PROFILE or "ada-rtx4060-torch"). splitk: "auto" (from the profile;
-    SplitKUnknownError if it cannot decide), 1, SplitK or (S, "serial"|"pairwise"). backend: "auto" | "reference" |
-    "cuda" | "cuda:v1" | "cuda:v4" | "cuda:v9" | "cuda:tc3"."""
+    profile: Profile or name (default $MMAEMU_PROFILE or "hopper"). splitk: "auto" (from the profile;
+    SplitKUnknownError if it cannot decide), 1, SplitK or (S, scheme), scheme "serial"|"pairwise" on the ada
+    profiles and "contiguous" on the hopper ones. backend: "auto" | "reference" | "cuda" | "cuda:v1" | "cuda:v4" |
+    "cuda:v9" | "cuda:tc3" | "cuda:h1" | "cuda:h4" (each kernel serves one preset; docs/backends.md)."""
     return _scaled_mm_impl(input, mat2, scale_a, scale_b, bias, scale_result, out_dtype, use_fast_accum, out=out,
                            profile=profile, splitk=splitk, backend=backend)
 
@@ -388,7 +406,8 @@ def accumulate(a, b, *, use_fast_accum, profile=None, splitk="auto", backend="au
     from mmaemu.platform.profiles import get_profile
     from mmaemu.platform.splitk_table import resolve_splitk
     prof = get_profile(profile)
-    p = get_preset(prof.preset)
+    p = get_preset(prof.preset, warn=False)
+    _emit_maturity(prof, p)
     M, K, N = a.shape[0], a.shape[1], b.shape[0]
     if M == 0 or N == 0 or K == 0:
         return torch.zeros(M, N, dtype=torch.float32, device=a.device)
@@ -411,6 +430,8 @@ def explain(input, mat2, scale_a, scale_b, bias=None, scale_result=None, out_dty
             warnings.simplefilter("always")
             P = _prepare(input, mat2, scale_a, scale_b, bias, scale_result, out_dtype, use_fast_accum, out, profile,
                          splitk, backend, dry=True)
+            if not (P.early or P.out_unchanged):        # the planning checks of scaled_mm (scheme of the preset, ...)
+                make_plan(P.K, fast=bool(use_fast_accum), S=P.decision.S, scheme=P.decision.scheme, preset=P.preset)
         cp.warnings = list(P.warnings) + [str(x.message) for x in w]
         cp.profile, cp.preset, cp.preset_maturity = P.prof.name, P.preset.name, P.preset.maturity
         cp.split = P.decision

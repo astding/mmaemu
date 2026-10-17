@@ -38,7 +38,7 @@ def main(argv=None):
     # Nonunit, non-power-of-two scales exercise the bf16 epilogue.
     sa = torch.tensor(0.009513410739, device=dev)
     sb = torch.tensor(0.004164181649, device=dev)
-    profile = replace(get_profile("ada-rtx4060-torch"), name=f"bringup-{args.preset}", preset=args.preset)
+    profile = replace(get_profile("ada"), name=f"bringup-{args.preset}", preset=args.preset)
     report = {"env": hardware(), "preset": args.preset, "out_dtype": "bf16", "rows": []}
     for model in args.models.split(","):
         K, N = SHAPES[model]

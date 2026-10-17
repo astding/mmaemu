@@ -303,7 +303,8 @@ def collect_info(device_index: int = 0) -> dict[str, Any]:
     rep["kernels"] = {n: {"gated": getattr(s, "gated", None),
                           "validated_on": to_jsonable(getattr(s, "validated_on", None)),
                           "sass_archs": to_jsonable(getattr(s, "sass_archs", None)),
-                          "ptx_arch": getattr(s, "ptx_arch", None), "min_cc": to_jsonable(getattr(s, "min_cc", None))}
+                          "ptx_arch": getattr(s, "ptx_arch", None), "min_cc": to_jsonable(getattr(s, "min_cc", None)),
+                          "preset": getattr(s, "preset", None)}
                       for n, s in sorted(specs.items())}
     rep["kernel_discovery_notes"] = notes
     rep["fatbins"] = fatbin_info()
@@ -357,13 +358,15 @@ def format_info(rep: dict[str, Any]) -> str:
         L.append(f"  {p['name']}{al}: {p.get('maturity')} - {p.get('validated_scope')}")
     L.append("")
     L.append("Backends")
+    kern = rep.get("kernels") or {}
     for n, b in rep.get("backends", {}).items():
         if isinstance(b, dict):
             state = "available" if b.get("available") else "unavailable"
             val = ", validated here" if b.get("validated_here") else ""
             src = f" via {b.get('source')}" if b.get("source") else ""
             why = f" - {b.get('reason')}" if b.get("reason") else ""
-            L.append(f"  {n}: {state}{src}{val}{why}")
+            pre = (kern.get(n.split(":", 1)[-1]) or {}).get("preset") if n.startswith("cuda:") else None
+            L.append(f"  {n}" + (f" (preset {pre})" if pre else "") + f": {state}{src}{val}{why}")
         else:
             L.append(f"  {n}: {b}")
     if not rep.get("backends"):

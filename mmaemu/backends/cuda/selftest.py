@@ -4,7 +4,7 @@ Every CUDA kernel must pass the "smoke" gate on a device before it is used there
 their own gates (registered by mmaemu.backends.cuda.fast.gates through spec.register_gate).
 
 smoke: the kernel, through its standard-ABI ChainFn, is compared bit for bit (int32 views, +0 != -0) with the CPU
-float64 reference model (mmaemu.model.chain.chain_gemm) on
+float64 reference model (mmaemu.model.chain.chain_gemm) under the kernel's preset (KernelSpec.preset) on
   - 16 x 8 x 64 random codes (randn * 40, as E4M3);
   - 64 x 64 x 256 adversarial codes: subnormals and +-0, +-448 (largest products and sums), exact and near
     cancellation inside blocks, one exponent per (row, 16-block), every finite code, -0 sprinkled everywhere.
@@ -33,7 +33,7 @@ __all__ = ["run_gates", "smoke_gate", "verdict_key", "clear_memory_cache", "SMOK
 SMOKE_VERSION = 1
 _LOCK = threading.RLock()
 _MEMORY: dict[str, GateResult] = {}
-_SMOKE_CASES: list | None = None
+_SMOKE_CASES: dict[str, list] = {}
 
 
 # ----------------------------------------------------------------------------------------------------------------
@@ -81,20 +81,20 @@ def _adversarial(rows: int, K: int, g, side: int):
     return out
 
 
-def _smoke_cases():
-    """[(a_u8, b_u8, expected fp32 accumulator)] on CPU; the reference runs once per process."""
-    global _SMOKE_CASES
+def _smoke_cases(preset: str = "ada"):
+    """[(a_u8, b_u8, expected fp32 accumulator)] on CPU under `preset`; the reference runs once per process and
+    preset (the same codes for every preset)."""
     with _LOCK:
-        if _SMOKE_CASES is None:
+        if preset not in _SMOKE_CASES:
             import torch
             from mmaemu.model.chain import chain_gemm
 
             g = torch.Generator().manual_seed(20261012)
             cases = [(_gauss40((16, 64), g), _gauss40((8, 64), g)),
                      (_adversarial(64, 256, g, 0), _adversarial(64, 256, g, 1))]
-            _SMOKE_CASES = [(a, b, chain_gemm(a, b, fmt_a="e4m3", fmt_b="e4m3", preset="ada").float())
-                            for a, b in cases]
-        return _SMOKE_CASES
+            _SMOKE_CASES[preset] = [(a, b, chain_gemm(a, b, fmt_a="e4m3", fmt_b="e4m3", preset=preset).float())
+                                    for a, b in cases]
+        return _SMOKE_CASES[preset]
 
 
 def smoke_gate(spec: KernelSpec, device) -> GateResult:
@@ -105,10 +105,10 @@ def smoke_gate(spec: KernelSpec, device) -> GateResult:
 
     t0 = time.monotonic()
     fmt_a, fmt_b = tuple(spec.formats[0])
-    fn = chain_fn_for(spec, ChainRequest(device=torch.device(device), fmt_a=fmt_a, fmt_b=fmt_b, preset="ada"))
+    fn = chain_fn_for(spec, ChainRequest(device=torch.device(device), fmt_a=fmt_a, fmt_b=fmt_b, preset=spec.preset))
     outputs = mismatches = 0
     first = None
-    for a, b, want in _smoke_cases():
+    for a, b, want in _smoke_cases(spec.preset):
         got = fn(a.to(device), b.to(device)).cpu()
         bad = got.view(torch.int32) != want.view(torch.int32)
         n = int(bad.sum())

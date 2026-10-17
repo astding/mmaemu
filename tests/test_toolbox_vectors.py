@@ -55,7 +55,7 @@ def test_toolbox_set(s):
     a, b, c, d = _set(s)
     preset = PRESET[s["gpu"]]
     P._reset_warnings_for_tests()
-    if preset == "ada":
+    if preset in ("ada", "hopper"):
         with warnings.catch_warnings():
             warnings.simplefilter("error", ExperimentalPresetWarning)
             got = dot(a, b, c, preset=preset, fmt=s["fmt"])

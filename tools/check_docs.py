@@ -20,7 +20,8 @@ Checks
     truth inventory table equals the one computed from the truth manifest.
  4. docs/validation.md has a scope table (under a "Scope" heading) with a row for every row of the tcemu audit's
     scope table.
- 5. README.md marks hopper and b200_mma_sync (alias blackwell) experimental and states that sm_120 is not modelled.
+ 5. README.md scopes hopper to the H100 PCIe, marks b200_mma_sync (alias blackwell) experimental and states that
+    sm_120 is not modelled.
  6. Relative links and links to github.com/astding/mmaemu/{blob,tree}/master/<path> resolve.
 """
 from __future__ import annotations
@@ -46,7 +47,7 @@ GITHUB = "https://github.com/astding/mmaemu/"
 # ------------------------------------------------------------------------------------------------ forbidden wording
 # (rule id, regex, message). Patterns are case-insensitive. The literal phrases are spelled with character classes or
 # split strings so that this file never matches itself.
-SCOPE_TOKENS = re.compile(r"RTX\s*4060|ada-rtx4060|reference (GPU|platform|profile)|sm_89|profile", re.I)
+SCOPE_TOKENS = re.compile(r"RTX\s*4060|`(ada|hopper)(-te|-ws0)?`|reference (GPU|platform|profile)|sm_89|profile", re.I)
 BITID = r"(bit[- ]?(identical|exact|for[- ]bit)|bitwise[- ](identical|equal|exact)|identical bits)"
 SCALED_MM = r"torch\._scaled_mm"
 FORBIDDEN = [
@@ -67,7 +68,8 @@ FORBIDDEN = [
     ("350-million", r"\b3\.5\s*e8\b|\b350\s+million\b",
      "the 3.5e8 full-matrix figure covered only 1B and 40B; cite the recorded evidence instead (docs/limitations.md)"),
     ("supports-sm90", r"\bsupports?\s+sm_?90\b",
-     "sm_90 is not validated (docs/limitations.md)"),
+     "name what is validated on sm_90: cuBLAS on the H100 PCIe (preset hopper), not the CUDA kernels "
+     "(docs/limitations.md)"),
 ]
 FORBIDDEN_RE = [(rid, re.compile(rx, re.I), msg) for rid, rx, msg in FORBIDDEN]
 ALLOW_RE = re.compile(r"<!--\s*check_docs:\s*allow\s+([\w-]+)\s*:\s*[^>]*\S[^>]*-->")
@@ -519,8 +521,8 @@ def check_readme(res: Result) -> None:
         return
     text = README.read_text()
     paras = [" ".join(p.split()) for p in re.split(r"\n\s*\n|\n(?=\s*[-*|] )", text)]
-    if not any("`hopper`" in p and "experimental" in p for p in paras):
-        res.error("README.md", "must mark the `hopper` preset experimental (same paragraph/item)")
+    if not any("`hopper`" in p and "H100 PCIe" in p for p in paras):
+        res.error("README.md", "must scope the `hopper` preset to the H100 PCIe (same paragraph/item)")
     if not any("`b200_mma_sync`" in p and "`blackwell`" in p and "experimental" in p for p in paras):
         res.error("README.md", "must mark `b200_mma_sync` (alias `blackwell`) experimental (same paragraph/item)")
     if not any(re.search(r"sm_120[^.]*\bnot\s+(modell?ed|a\s+model)", p) for p in paras):

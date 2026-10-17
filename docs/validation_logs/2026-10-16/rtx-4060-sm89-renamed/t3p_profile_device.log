@@ -1,0 +1,48 @@
+live calls: 278, failures: 0
+.live calls: 112, failures: 0
+..
+500 rows re-queried live, 0 differ
+..
+11760 live queries above the inference bound, 0 not S = 1
+.
+=============================== warnings summary ===============================
+tests/test_live_cublas.py::test_live_out_and_operand_layouts
+  ~/mmaemu-4060/venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py:838: UserWarning: out= with strides (96, 2) is neither row- nor column-major: torch 2.7.1 computes into a contiguous copy and never copies it back, so out= is returned unchanged (mmaemu does the same)
+    return fn(*args, **kwargs)
+
+tests/test_live_cublas.py::test_live_out_and_operand_layouts
+  ~/mmaemu-4060/venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py:838: UserWarning: out= with strides (128, 2) is neither row- nor column-major: torch 2.7.1 computes into a contiguous copy and never copies it back, so out= is returned unchanged (mmaemu does the same)
+    return fn(*args, **kwargs)
+
+tests/test_live_cublas.py::test_live_out_and_operand_layouts
+  ~/mmaemu-4060/venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py:838: UserWarning: out= with strides (192, 2) is neither row- nor column-major: torch 2.7.1 computes into a contiguous copy and never copies it back, so out= is returned unchanged (mmaemu does the same)
+    return fn(*args, **kwargs)
+
+tests/test_live_cublas.py::test_live_out_and_operand_layouts
+  ~/mmaemu-4060/venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py:838: UserWarning: out= with strides (384, 2) is neither row- nor column-major: torch 2.7.1 computes into a contiguous copy and never copies it back, so out= is returned unchanged (mmaemu does the same)
+    return fn(*args, **kwargs)
+
+tests/test_live_cublas.py::test_live_out_and_operand_layouts
+  ~/mmaemu-4060/venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py:838: UserWarning: out= with strides (224, 2) is neither row- nor column-major: torch 2.7.1 computes into a contiguous copy and never copies it back, so out= is returned unchanged (mmaemu does the same)
+    return fn(*args, **kwargs)
+
+tests/test_live_cublas.py::test_live_out_and_operand_layouts
+  ~/mmaemu-4060/venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py:838: UserWarning: out= with strides (32, 2) is neither row- nor column-major: torch 2.7.1 computes into a contiguous copy and never copies it back, so out= is returned unchanged (mmaemu does the same)
+    return fn(*args, **kwargs)
+
+tests/test_live_cublas.py::test_live_out_and_operand_layouts
+  ~/mmaemu-4060/venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py:838: UserWarning: out= with strides (64, 2) is neither row- nor column-major: torch 2.7.1 computes into a contiguous copy and never copies it back, so out= is returned unchanged (mmaemu does the same)
+    return fn(*args, **kwargs)
+
+tests/test_live_cublas.py::test_live_out_and_operand_layouts
+  ~/mmaemu-4060/venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py:838: UserWarning: out= with strides (256, 2) is neither row- nor column-major: torch 2.7.1 computes into a contiguous copy and never copies it back, so out= is returned unchanged (mmaemu does the same)
+    return fn(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+6 passed, 4351 deselected, 8 warnings in 44.00s
+tests/test_live_cublas.py::test_live_parity
+tests/test_live_cublas.py::test_live_out_and_operand_layouts
+tests/test_profiles.py::test_matches_the_reference_gpu_live
+tests/test_splitk_table.py::test_live_requery_of_500_random_rows
+tests/test_splitk_table.py::test_live_query_step_resolves_unknown_shapes
+tests/test_splitk_table.py::test_live_heuristic_never_splits_where_the_envelope_infers_s1

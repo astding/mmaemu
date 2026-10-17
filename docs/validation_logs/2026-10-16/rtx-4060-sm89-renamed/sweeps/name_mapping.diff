@@ -1,0 +1,16 @@
+15c15
+< for prof_name in ("ada-rtx4060-torch", "ada-rtx4060-te"):
+---
+> for prof_name in ("ada", "ada-te"):
+3c3
+< For both table profiles (ada-rtx4060-torch, 1 MiB; ada-rtx4060-te, 4 MiB) and every setting (out dtype, fast, format
+---
+> For both table profiles (ada, 1 MiB; ada-te, 4 MiB) and every setting (out dtype, fast, format
+25c25
+< for prof_name in ("ada-rtx4060-torch", "ada-rtx4060-te"):
+---
+> for prof_name in ("ada", "ada-te"):
+23c23
+< for prof_name in ("ada-rtx4060-torch", "ada-rtx4060-te"):
+---
+> for prof_name in ("ada", "ada-te"):

@@ -1,0 +1,14 @@
+.s....                                                                   [100%]
+=============================== warnings summary ===============================
+tests/test_hw_mini.py::test_gpu_backend[reference]
+tests/test_hw_mini.py::test_gpu_backend[cuda:v1]
+tests/test_hw_mini.py::test_gpu_backend[cuda:v4]
+tests/test_hw_mini.py::test_gpu_backend[cuda:v9]
+tests/test_hw_mini.py::test_gpu_backend[cuda:tc3]
+  ~/mmaemu-4060/venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py:838: UserWarning: An output with one or more elements was resized since it had shape [16, 33], which does not match the required output shape [16, 32].
+    return fn(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_hw_mini.py:330: backend 'cuda' not reported by mmaemu.backends_status() on this device
+5 passed, 1 skipped, 2520 deselected, 5 warnings in 215.92s (0:03:35)

@@ -5,25 +5,37 @@
 
 Resolution order (docs/splitk_tables.md):
   1. explicit: splitk is 1, a SplitK or an (S, scheme) tuple. An int > 1 without a scheme raises ValueError.
-  2. profile.workspace_bytes == 0: S = 1 ("workspace0"; 0 split rows among 209,712 workspace-0 queries).
+  2. profile.workspace_bytes == 0: S = 1 ("workspace0"; 0 split rows among the 209,712 workspace-0 queries of the
+     RTX 4060 table and the 915,980 of the H100 PCIe: probe, split-K sweep and its sealed held-out part).
   3. layout_std and the key (M, N, K, fmt_a, fmt_b, out, fast, ws) is in the profile's table: the recorded
-     (numSplitsK, customOption); customOption 0 or 2 -> "serial", 1 -> "pairwise" ("table").
+     (numSplitsK, customOption), the scheme by the table's rule (json codes "custom -> scheme"; RTX 4060:
+     customOption 0 or 2 -> "serial", 1 -> "pairwise"; H100: every recorded customOption -> "contiguous") ("table").
   4. the current CUDA device is the profile's reference platform (profile.matches_device): live cuBLASLt heuristic
      query through mmaemu.platform.cublaslt with the profile's workspace and alignment ("live-query").
-  5. M*N above ENVELOPE_MARGIN (2) times the largest M*N that split in the setting (ws, out, fast, fmt pair), and
-     not strict: S = 1 ("envelope"; an inference, said in the note). K plays no part. A setting absent from the
-     table uses the union envelope of the same (ws, fast, fmt pair) over output dtypes.
+  5. envelope, not strict: S = 1 ("envelope"; an inference, said in the note) when M*N is above the setting's
+     (ws, out, fast, fmt pair) bound. Two kinds, by the table's json "envelope":
+       - RTX 4060 (no "kind"): ENVELOPE_MARGIN (2) times the largest M*N that split in the setting; K plays no part;
+         a setting absent from the table uses the union envelope of the same (ws, fast, fmt pair) over outputs;
+       - H100 ("kind": "k_grid"): the bound B(setting, K) of the 2026-10-16 split-K sweep at the smallest of its 33
+         grid K >= K, claimed for K_min <= K <= K_max only (1,024..4,194,304), M*N > B strictly; a setting or a
+         workspace without a bound (4 MiB) claims nothing. Each workspace carries the result of the sealed held-out
+         test: 1 MiB validated; 32 MiB (TE) unvalidated, so its inferences are verified=False and emit
+         UnvalidatedEnvelopeWarning once per setting (dry=True: every time).
+     Tables whose json has "envelope": {"inference": false} skip this step.
   6. otherwise SplitKUnknownError, naming the setting and the envelope, with three ways out.
 Zero-size GEMMs (M, N or K = 0) resolve to S = 1 before step 3 (nothing is accumulated; r6.zero_dims).
-Profiles without a table (hopper, b200) have no envelope: "auto" always raises.
+Profiles without a table (hopper-experimental, b200) have no envelope: "auto" always raises.
 UnverifiedSplitWarning is emitted once per combination when the (fast, S, scheme, out, fmt pair) combination was
-never replayed on hardware (verified_split_combos.json), or when S > 1 on a profile whose splitk_maturity is
-"experimental"; dry=True (mmaemu.explain) warns every time and does not use up the once. strict defaults to
-$MMAEMU_SPLITK_STRICT == "1".
+never replayed on hardware (the table's verified-combos file), when the split is outside what was recorded although
+the combination was ("contiguous" with an empty split, or with K % 128 != 0 unless the table's json says replayed
+live calls cover it, "split_layouts"; a customOption the table's rule does not list), or when S > 1 on a profile
+whose splitk_maturity is "experimental"; dry=True (mmaemu.explain) warns every time and does not use up the once.
+strict defaults to $MMAEMU_SPLITK_STRICT == "1".
 
 Package data (mmaemu/platform/data, written by tools/export_splitk_table.py): <table_id>.npz (columns M N K fa fb out
 fast ws splitK custom algo tile stages reduction swizzle; align dropped after asserting invariance), <table_id>.json
-(sources + sha256, per-setting envelopes; the npz sha256 is checked at load), verified_split_combos.json.
+(sources + sha256, per-setting envelopes; the npz sha256 is checked at load), the verified combinations
+(verified_split_combos.json for the RTX 4060 table; json key "verified_combos" names another file).
 """
 from __future__ import annotations
 
@@ -41,7 +53,7 @@ import numpy as np
 from .profiles import Profile, get_profile
 
 try:  # mmaemu's error hierarchy; stand-ins with the same bases when this module is used on its own
-    from mmaemu.errors import SplitKUnknownError, UnverifiedSplitWarning  # type: ignore
+    from mmaemu.errors import SplitKUnknownError, UnvalidatedEnvelopeWarning, UnverifiedSplitWarning  # type: ignore
 except Exception:  # noqa: BLE001
     class _MmaemuError(Exception):
         pass
@@ -52,11 +64,17 @@ except Exception:  # noqa: BLE001
     class UnverifiedSplitWarning(UserWarning):  # type: ignore[no-redef]
         pass
 
+    class UnvalidatedEnvelopeWarning(UnverifiedSplitWarning):  # type: ignore[no-redef]
+        pass
+
 __all__ = ["SplitK", "SplitDecision", "resolve_splitk", "load_table", "SplitTable", "SplitKUnknownError",
-           "UnverifiedSplitWarning", "lookup"]
+           "UnverifiedSplitWarning", "UnvalidatedEnvelopeWarning", "lookup"]
 
 DATA = Path(__file__).resolve().parent / "data"
-Scheme = Literal["none", "serial", "pairwise"]
+Scheme = Literal["none", "serial", "pairwise", "contiguous"]
+SPLIT_SCHEMES = ("serial", "pairwise", "contiguous")
+CONTIG_TILE_K = 128      # = mmaemu.model.plan.CONTIG_TILE_K
+_WS0_NOTE = "cuBLASLt never splits without a workspace (0 split rows among 209,712 queries)"
 FMTS = {"float8_e4m3fn": "e4m3", "float8_e5m2": "e5m2", "e4m3": "e4m3", "e5m2": "e5m2"}
 OUT_CODES = {"float32": 0, "bfloat16": 1, "float16": 2, "float8_e4m3fn": 3, "float8_e5m2": 4}
 FMT_CODES = {"e4m3": 0, "e5m2": 1}
@@ -69,7 +87,8 @@ ENVELOPE_MARGIN = 2
 
 @dataclass(frozen=True)
 class SplitK:
-    """An explicit split: S splits (64-wide k-tiles t mod S) combined with `scheme`. Also accepted as (S, scheme)."""
+    """An explicit split: S splits combined with `scheme` ('serial' / 'pairwise': 64-wide k-tiles t mod S, the RTX
+    4060's kernels; 'contiguous': runs of 128-wide k-tiles, the H100's). Also accepted as (S, scheme)."""
     S: int = 1
     scheme: Scheme = "none"
 
@@ -78,8 +97,8 @@ class SplitK:
             raise ValueError(f"SplitK.S must be an int >= 1, got {self.S!r}")
         if self.S == 1 and self.scheme != "none":
             raise ValueError(f"S = 1 has no reduction scheme (got {self.scheme!r}); use scheme='none'")
-        if self.S > 1 and self.scheme not in ("serial", "pairwise"):
-            raise ValueError(f"S = {self.S} requires scheme 'serial' or 'pairwise', got {self.scheme!r}")
+        if self.S > 1 and self.scheme not in SPLIT_SCHEMES:
+            raise ValueError(f"S = {self.S} requires scheme 'serial', 'pairwise' or 'contiguous', got {self.scheme!r}")
 
 
 @dataclass(frozen=True)
@@ -110,8 +129,28 @@ def _fmt(dt, what: str) -> str:
     return FMTS[s]
 
 
-def _scheme_of(custom: int) -> str:
-    return "pairwise" if int(custom) == 1 else "serial"
+def _scheme_hint(p: Profile, S="S") -> str:
+    """The explicit split form for the profile's preset, e.g. "(S, 'serial'|'pairwise')"."""
+    try:
+        from mmaemu.model.presets import SPLIT_SCHEMES as by_preset
+        schemes = by_preset.get(p.preset) or SPLIT_SCHEMES
+    except Exception:  # noqa: BLE001
+        schemes = SPLIT_SCHEMES
+    return f"({S}, " + "|".join(repr(x) for x in schemes) + ")"
+
+
+def _layout_caveat(K: int, S: int, scheme: str, table: SplitTable | None = None) -> str | None:
+    """Why a 'contiguous' split lies outside the replayed calls even when its combination was replayed: no replayed
+    H100 split call has a split without k-tiles, and a ragged last k-tile (K % 128 != 0) only counts as replayed when
+    the table's json says so (H100: 1,040 such live split calls of the 2026-10-16 sweep)."""
+    if scheme != "contiguous" or S <= 1:
+        return None
+    T = -(-K // CONTIG_TILE_K)
+    if K % CONTIG_TILE_K and not (table is not None and table.ragged_verified):
+        return f"K = {K} is not a multiple of {CONTIG_TILE_K} (no replayed split call has a ragged last k-tile)"
+    if (S - 1) * -(-T // S) >= T:
+        return f"S = {S} leaves a split without k-tiles (K = {K}, {T} k-tiles; never recorded)"
+    return None
 
 
 class SplitTable:
@@ -142,9 +181,41 @@ class SplitTable:
         for st in self.meta["settings"]:
             k = (int(st["ws"]), st["out"], bool(st["fast"]), st["fmt_a"], st["fmt_b"])
             self._settings[k] = st
-        vc = json.loads((data_dir / "verified_split_combos.json").read_text())
+        vc_name = self.meta.get("verified_combos", "verified_split_combos.json")
+        vc = json.loads((data_dir / vc_name).read_text())
+        if vc.get("table_id", table_id) != table_id:
+            raise RuntimeError(f"{vc_name} is for table {vc['table_id']!r}, not {table_id!r}")
         self.verified = {(bool(c["fast"]), int(c["S"]), c["scheme"], c["out"], c["fmt_pair"])
                          for c in vc["combos"] if c["verified"]}
+        self._scheme_rule = {str(k): v for k, v in self.meta["codes"]["custom -> scheme"].items()}
+        self._scheme_unlisted = self.meta["codes"].get("custom -> scheme, unlisted")
+        env = self.meta.get("envelope", {})
+        self.envelope_inference = bool(env.get("inference", True))
+        self.envelope_note = env.get("note", "")
+        self.envelope_kind = env.get("kind", "max_split_MN")
+        if self.envelope_kind == "k_grid":
+            self.k_grid = np.asarray(env["K_grid"], dtype=np.int64)
+            self.k_min, self.k_max = int(env["K_min"]), int(env["K_max"])
+            self.k_bounds = {(int(b["ws"]), b["out"], bool(b["fast"]), b["fmt_a"], b["fmt_b"]): b["B"]
+                             for b in env["bounds"]}
+            self.k_validation = {int(w): v for w, v in env["validation"].items()}
+            self.envelope_eval = env["eval"]
+        elif self.envelope_kind != "max_split_MN":
+            raise RuntimeError(f"{meta_p.name}: unknown envelope kind {self.envelope_kind!r}")
+        self.ragged_verified = bool(self.meta.get("split_layouts", {}).get("ragged_K", {}).get("verified", False))
+        self.workspace0_note = self.meta.get("workspace0_note", _WS0_NOTE)
+
+    def scheme_of(self, custom) -> tuple[str, str | None]:
+        """(scheme, caveat or None) of a split call's customOption under the table's rule. A customOption the rule
+        does not list gets the table's "custom -> scheme, unlisted" scheme with a caveat (H100), or, for a table
+        without that entry (RTX 4060), 'serial' as every customOption other than 1."""
+        c = str(int(custom))
+        if c in self._scheme_rule:
+            return self._scheme_rule[c], None
+        if self._scheme_unlisted is None:
+            return "serial", None
+        return self._scheme_unlisted, (f"customOption {c} was never recorded on a split call (recorded: "
+                                       f"{', '.join(sorted(self._scheme_rule))})")
 
     def lookup(self, M, N, K, fmt_a, fmt_b, out, fast, ws) -> dict | None:
         if ws not in self.ws_values or out not in OUT_CODES or max(M, N, K) >= _KEY_LIMIT or min(M, N, K) < 0:
@@ -163,6 +234,19 @@ class SplitTable:
 
     def setting(self, ws, out, fast, fmt_a, fmt_b) -> dict | None:
         return self._settings.get((int(ws), out, bool(fast), fmt_a, fmt_b))
+
+    def k_bound(self, K, ws, out, fast, fmt_a, fmt_b) -> tuple[int | None, str]:
+        """("k_grid" envelope) (B, how it was found) for a K, or (None, why there is no bound)."""
+        if not self.k_min <= K <= self.k_max:
+            return None, f"K = {K} is outside the envelope's K range {self.k_min:,}..{self.k_max:,}"
+        b = self.k_bounds.get((int(ws), out, bool(fast), fmt_a, fmt_b))
+        if b is None:
+            return None, f"the envelope has no bound at workspace {ws} B for this setting"
+        i = int(np.searchsorted(self.k_grid, K, side="left"))
+        Kg = int(self.k_grid[i])
+        if b[i] is None:
+            return None, f"the envelope infers nothing from grid K = {Kg:,} on"
+        return int(b[i]), f"bound {int(b[i]):,} at grid K = {Kg:,} (the smallest grid K >= {K})"
 
     def envelope(self, ws, out, fast, fmt_a, fmt_b) -> tuple[dict | None, str]:
         """(envelope dict with rows / split_rows / max_split_MN / min_split_K, how it was obtained) or (None, why)."""
@@ -211,18 +295,33 @@ def _current_device():
     return 0
 
 
-def _warn(p: Profile, fast, S, scheme, out, pair, verified, source, dry=False):
+def _warn(p: Profile, fast, S, scheme, out, pair, verified, source, dry=False, caveat=None):
     if verified and not (S > 1 and p.splitk_maturity == "experimental"):
         return
-    key = (p.name, bool(fast), S, scheme, out, pair)
+    key = (p.name, bool(fast), S, scheme, out, pair) + ((caveat,) if caveat else ())
     if not dry:
         if key in _WARNED:
             return
         _WARNED.add(key)
-    why = ("this (fast, S, scheme, out, format pair) combination was never replayed on hardware"
-           if not verified else f"split-K decisions of profile {p.name} are experimental")
+    why = (caveat if caveat else "this (fast, S, scheme, out, format pair) combination was never replayed on "
+           "hardware") if not verified else f"split-K decisions of profile {p.name} are experimental"
     warnings.warn(f"mmaemu split-K S={S} scheme={scheme} ({'fast' if fast else 'slow'} accumulation, out {out}, "
                   f"{pair}, source {source}, profile {p.name}): {why}", UnverifiedSplitWarning, stacklevel=3)
+
+
+def _warn_envelope(p: Profile, table: SplitTable, ws, out, fast, pair, val, dry=False):
+    key = (p.name, "envelope", ws, out, bool(fast), pair)
+    if not dry:
+        if key in _WARNED:
+            return
+        _WARNED.add(key)
+    why = ("this workspace's envelope has no held-out test" if val is None else
+           f"this workspace's envelope did not pass its held-out test ({val['split_above_bound']} of "
+           f"{val['tested']:,} held-out shapes above the bound split on the {p.gpu_name}; {table.envelope_eval})")
+    warnings.warn(f"mmaemu split-K S=1 inferred by the envelope of table {table.id} (workspace {ws} B, "
+                  f"{'fast' if fast else 'slow'} accumulation, out {out}, {pair}, profile {p.name}): {why}, so the "
+                  f"GPU may split this shape. Pass splitk explicitly, or set MMAEMU_SPLITK_STRICT=1 to refuse the "
+                  f"inference", UnvalidatedEnvelopeWarning, stacklevel=3)
 
 
 def _envelope(table: SplitTable, M, N, ws, out, fast, fa, fb) -> tuple[bool, dict | None, str]:
@@ -264,25 +363,26 @@ def resolve_splitk(M, N, K, *, a_dtype, b_dtype, out_dtype, use_fast_accum, prof
             sk = splitk
         elif isinstance(splitk, (int, np.integer)) and not isinstance(splitk, bool):
             if splitk > 1:
-                raise ValueError(f"splitk={splitk} needs a reduction scheme: pass splitk=({splitk}, 'serial') or "
-                                 f"({splitk}, 'pairwise')")
+                raise ValueError(f"splitk={splitk} needs a reduction scheme: pass splitk={_scheme_hint(p, splitk)}")
             sk = SplitK(int(splitk), "none")
         elif isinstance(splitk, tuple) and len(splitk) == 2:
             sk = SplitK(splitk[0], splitk[1])
         else:
             raise TypeError(f"splitk must be 'auto', 1, a SplitK or an (S, scheme) tuple, got {splitk!r}")
-        ver = sk.S == 1 or (fast, sk.S, sk.scheme, out, pair) in verified_set
-        _warn(p, fast, sk.S, sk.scheme, out, pair, ver, "explicit", dry)
-        return SplitDecision(sk.S, sk.scheme, "explicit", ver, None, "given by the caller")
+        cav = _layout_caveat(K, sk.S, sk.scheme, table)
+        ver = sk.S == 1 or ((fast, sk.S, sk.scheme, out, pair) in verified_set and cav is None)
+        _warn(p, fast, sk.S, sk.scheme, out, pair, ver, "explicit", dry, cav)
+        return SplitDecision(sk.S, sk.scheme, "explicit", ver, None,
+                             "given by the caller" + (f"; {cav}" if cav else ""))
     # 2. workspace 0
     if p.workspace_bytes == 0:
         return SplitDecision(1, "none", "workspace0", True, p.splitk_table,
-                             "cuBLASLt never splits without a workspace (0 split rows among 209,712 queries)")
+                             table.workspace0_note if table is not None else _WS0_NOTE)
     if p.workspace_bytes is None or table is None:
         raise SplitKUnknownError(
             f"profile {p.name!r} has no reference platform and no split-K table, so splitk='auto' cannot be "
             f"resolved for M={M} N={N} K={K}. Ways out: pass splitk=1 if the call is known to be unsplit, "
-            f"splitk=(S, 'serial'|'pairwise') if the split is known, or record the GPU's heuristics with "
+            f"splitk={_scheme_hint(p)} if the split is known, or record the GPU's heuristics with "
             f"tools/record_heuristics.py (docs/runbooks/sm120_bringup.md)")
     ws = p.workspace_bytes
     if min(M, N, K) == 0:
@@ -293,12 +393,13 @@ def resolve_splitk(M, N, K, *, a_dtype, b_dtype, out_dtype, use_fast_accum, prof
         row = table.lookup(M, N, K, fa, fb, out, fast, ws)
         if row is not None:
             S = int(row["splitK"])
-            scheme = "none" if S <= 1 else _scheme_of(row["custom"])
-            ver = S == 1 or (fast, S, scheme, out, pair) in verified_set
-            _warn(p, fast, S, scheme, out, pair, ver, "table", dry)
+            scheme, cav = ("none", None) if S <= 1 else table.scheme_of(row["custom"])
+            cav = cav or _layout_caveat(K, S, scheme, table)
+            ver = S == 1 or ((fast, S, scheme, out, pair) in verified_set and cav is None)
+            _warn(p, fast, S, scheme, out, pair, ver, "table", dry, cav)
             return SplitDecision(S, scheme, "table", ver, table.id,
                                  f"table row: algo {row['algo']}, tile {row['tile']}, numSplitsK {S}, customOption "
-                                 f"{row['custom']}")
+                                 f"{row['custom']}" + (f"; {cav}" if cav else ""))
     # 4. live query on the profile device
     if layout_std and p.matches_device(_current_device()):
         from . import cublaslt
@@ -306,13 +407,48 @@ def resolve_splitk(M, N, K, *, a_dtype, b_dtype, out_dtype, use_fast_accum, prof
                                align=p.align, device=_current_device())
         if r["status"] == 0:
             S = int(r["splitK"])
-            scheme = "none" if S <= 1 else _scheme_of(r["custom"])
-            ver = S == 1 or (fast, S, scheme, out, pair) in verified_set
-            _warn(p, fast, S, scheme, out, pair, ver, "live-query", dry)
+            scheme, cav = ("none", None) if S <= 1 else table.scheme_of(r["custom"])
+            cav = cav or _layout_caveat(K, S, scheme, table)
+            ver = S == 1 or ((fast, S, scheme, out, pair) in verified_set and cav is None)
+            _warn(p, fast, S, scheme, out, pair, ver, "live-query", dry, cav)
             return SplitDecision(S, scheme, "live-query", ver, None,
                                  f"live cuBLASLt heuristic on {p.gpu_name}: algo {r['algo']}, tile {r['tile']}, "
-                                 f"numSplitsK {S}, customOption {r['custom']}")
+                                 f"numSplitsK {S}, customOption {r['custom']}" + (f"; {cav}" if cav else ""))
     # 5. envelope
+    if not table.envelope_inference:
+        why = "the shape is not in the table" if layout_std else "the layout is not torch's standard one"
+        raise SplitKUnknownError(
+            f"split-K decision unknown for M={M} N={N} K={K} on profile {p.name!r}: {why}, the current device is not "
+            f"the profile's {p.gpu_name} ({p.sm_count} SMs, cuBLASLt {p.cublaslt_version}) for a live query, and table "
+            f"{table.id} infers nothing outside its rows ({table.envelope_note}). Ways out: pass splitk=1 if the call "
+            f"is known to be unsplit; splitk={_scheme_hint(p)} if the split is known; or run on the profile's GPU, or "
+            f"record the shape there with tools/record_heuristics.py")
+    if table.envelope_kind == "k_grid":
+        setting = f"(ws={ws} B, out={out}, {'fast' if fast else 'slow'} accumulation, {pair})"
+        B, how = table.k_bound(K, ws, out, fast, fa, fb)
+        val = table.k_validation.get(ws)
+        if B is not None and M * N > B and not strict:
+            ok = val is not None and val["status"] == "validated"
+            if not ok:
+                _warn_envelope(p, table, ws, out, fast, pair, val, dry)
+            state = ("unvalidated (no held-out test)" if val is None else
+                     f"{val['status']} on held-out shapes ({val['tested']:,} above the bound, "
+                     f"{val['split_above_bound']} split; {table.envelope_eval})")
+            return SplitDecision(1, "none", "envelope", ok, table.id,
+                                 f"inference: M*N = {M * N} is above the envelope {how} of setting {setting}; "
+                                 f"envelope {state}")
+        if B is None:
+            reason = f"the shape is not in the table and {how}"
+        elif M * N > B:
+            reason = "strict mode (MMAEMU_SPLITK_STRICT=1 or strict=True)"
+        else:
+            reason = (f"the shape is not in the table and M*N = {M * N} is not above the envelope {how} of setting "
+                      f"{setting}")
+        raise SplitKUnknownError(
+            f"split-K decision unknown for M={M} N={N} K={K} on profile {p.name!r}: {reason}. Ways out: pass "
+            f"splitk=1 if the call is known to be unsplit; splitk={_scheme_hint(p)} if the split is known; or run on "
+            f"the profile's {p.gpu_name} ({p.sm_count} SMs, cuBLASLt {p.cublaslt_version}), or record the shape there "
+            f"with tools/record_heuristics.py")
     outside, env, env_s = _envelope(table, M, N, ws, out, fast, fa, fb)
     if outside and not strict:
         return SplitDecision(1, "none", "envelope", True, table.id,
@@ -325,5 +461,5 @@ def resolve_splitk(M, N, K, *, a_dtype, b_dtype, out_dtype, use_fast_accum, prof
         reason = f"the shape is not in the table and M*N = {M * N} is not above the inference bound"
     raise SplitKUnknownError(
         f"split-K decision unknown for M={M} N={N} K={K} on profile {p.name!r}: {reason}; {env_s}. Ways out: pass "
-        f"splitk=1 if the call is known to be unsplit; splitk=(S, 'serial'|'pairwise') if the split is known; or "
+        f"splitk=1 if the call is known to be unsplit; splitk={_scheme_hint(p)} if the split is known; or "
         f"record the shape on the reference GPU with tools/record_heuristics.py")

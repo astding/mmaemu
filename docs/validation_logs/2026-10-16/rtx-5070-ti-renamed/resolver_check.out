@@ -1,0 +1,13 @@
+p1         te        rows   2439360  {'envelope': 945042, 'table': 12264, 'unknown': 1482054}  differ 0
+p1         torch     rows   2438899  {'envelope': 1568346, 'table': 12264, 'unknown': 858289}  differ 0
+p1         ws0       rows    609840  {'workspace0': 609840}  differ 0
+p2         te        rows    780080  {'envelope': 157780, 'table': 924, 'unknown': 621376}  differ 0
+p2         torch     rows    780080  {'envelope': 270676, 'table': 924, 'unknown': 508480}  differ 0
+p3         te        rows   1498784  {'table': 1498784}  differ 0
+p3         torch     rows   1498784  {'table': 1498784}  differ 0
+p4_sealed  te        rows    208846  {'envelope': 77485, 'table': 33, 'unknown': 131328}  differ 1
+p4_sealed  torch     rows    208756  {'envelope': 154159, 'table': 33, 'unknown': 54564}  differ 0
+p4_sealed  ws0       rows     46654  {'workspace0': 46654}  differ 0
+live       probe+p5  rows      4167  {'envelope': 28, 'table': 1761, 'unknown': 2334, 'workspace0': 44}  differ 0
+envelope vs eval_sealed: {'hopper-h100pcie-torch': {'eval_tested': 154191, 'resolver_envelope': 154159, 'resolver_table': 33}, 'hopper-h100pcie-te': {'eval_tested': 77518, 'resolver_envelope': 77485, 'resolver_table': 33}}
+passed True (differences = the sealed test's failures); wrote <out>/resolver_check.json

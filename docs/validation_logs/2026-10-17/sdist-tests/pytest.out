@@ -1,0 +1,82 @@
+........................................................................ [  2%]
+........................................................................ [  4%]
+........................................................................ [  6%]
+........................................................................ [  8%]
+........................................................................ [ 10%]
+........................................................................ [ 12%]
+........................................................................ [ 14%]
+........................................................................ [ 17%]
+........................................................................ [ 19%]
+........................................................................ [ 21%]
+........................................................................ [ 23%]
+........................................................................ [ 25%]
+........................................................................ [ 27%]
+........................................................................ [ 29%]
+........................................................................ [ 31%]
+........................................................................ [ 34%]
+........................................................................ [ 36%]
+........................................................................ [ 38%]
+........................................................................ [ 40%]
+........................................................................ [ 42%]
+........................................................................ [ 44%]
+........................................................................ [ 46%]
+........................................................................ [ 49%]
+........................................................................ [ 51%]
+........................................................................ [ 53%]
+........................................................................ [ 55%]
+........................................................................ [ 57%]
+........................................................................ [ 59%]
+........................................................................ [ 61%]
+........................................................................ [ 63%]
+........................................................................ [ 66%]
+........................................................................ [ 68%]
+........................................................................ [ 70%]
+........................................................................ [ 72%]
+........................................................................ [ 74%]
+........................................................................ [ 76%]
+........................................................................ [ 78%]
+........................................................................ [ 81%]
+........................................................................ [ 83%]
+........................................................................ [ 85%]
+........................................................................ [ 87%]
+........................................................................ [ 89%]
+........................................................................ [ 91%]
+....................ssssss...s..s...sss................................. [ 93%]
+........................................................................ [ 95%]
+.................................................................s...... [ 98%]
+..........................................s.......s..............        [100%]
+=============================== warnings summary ===============================
+tests/test_api.py::test_explain
+  <sdist>/mmaemu/api.py:322: UnverifiedSplitWarning: mmaemu split-K S=2 scheme=serial (fast accumulation, out float32, e4m3xe4m3, source explicit, profile hopper): this (fast, S, scheme, out, format pair) combination was never replayed on hardware
+    P.decision = resolve_splitk(*key[:3], a_dtype=key[3], b_dtype=key[4], out_dtype=od,
+
+tests/test_api.py::test_explain
+  <sdist>/mmaemu/api.py:322: UnverifiedSplitWarning: mmaemu split-K S=2 scheme=contiguous (fast accumulation, out float32, e4m3xe4m3, source explicit, profile ada): K = 64 is not a multiple of 128 (no replayed split call has a ragged last k-tile)
+    P.decision = resolve_splitk(*key[:3], a_dtype=key[3], b_dtype=key[4], out_dtype=od,
+
+tests/test_hw_mini.py::test_case[ws2:r1.api_parity_grid/out_wrong_shape_f32]
+tests/test_hw_mini.py::test_case[ws2:r1.api_parity_grid/out_wrong_shape_bf16]
+tests/test_hw_mini.py::test_case[ws2:r1.api_parity_grid/out_wrong_shape_f16]
+tests/test_hw_mini.py::test_case[ws2:r1.api_parity_grid/out_wrong_shape_e4m3]
+tests/test_hw_mini.py::test_case[ws2:r1.api_parity_grid/out_wrong_shape_e5m2]
+  <venv>/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py:838: UserWarning: An output with one or more elements was resized since it had shape [16, 33], which does not match the required output shape [16, 32].
+    return fn(*args, **kwargs)
+
+tests/test_splitk_table.py::test_dry_resolution_does_not_use_up_the_warning
+  <sdist>/tests/test_splitk_table.py:43: UnverifiedSplitWarning: mmaemu split-K S=8 scheme=pairwise (fast accumulation, out bfloat16, e4m3xe4m3, source table, profile ada-te): split-K decisions of profile ada-te are experimental
+    return resolve_splitk(M, N, K, a_dtype=fa, b_dtype=fb, out_dtype=out, use_fast_accum=fast, profile=profile, **kw)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_h100_mini.py:28: tools/ not in this tree (sdist)
+SKIPPED [5] tests/test_packaging.py:299: no .github/workflows in this tree (sdist)
+SKIPPED [1] tests/test_packaging.py:299: MMAEMU_EXPECT_INSTALLED not set
+SKIPPED [1] tests/test_packaging.py:299: no release fatbins in this tree (committed at the release-candidate freeze)
+SKIPPED [1] tests/test_packaging.py:299: mmaemu is not imported from an installed distribution
+SKIPPED [1] tests/test_packaging.py:299: not a git checkout
+SKIPPED [1] tests/test_packaging.py:299: tools/ not in this tree (sdist)
+SKIPPED [1] tests/test_packaging.py:299: tools/ or docs/ not in this tree
+SKIPPED [1] tests/test_scaffold.py:570: the registry decides when it is installed
+SKIPPED [1] tests/test_splitk_table.py:380: the sweep's validation log is not in this checkout
+SKIPPED [1] tests/test_splitk_table.py:552: results/analysis/resolver_check.json of the sweep is not in this checkout
+3363 passed, 15 skipped, 393 deselected, 8 warnings in 127.27s (0:02:07)

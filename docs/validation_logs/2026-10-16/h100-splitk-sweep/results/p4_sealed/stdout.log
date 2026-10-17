@@ -1,0 +1,11 @@
+p4 torch align 0 chunk 0: 77437/223940 queries, 1291/s
+p4 torch align 0 chunk 0: 154521/223940 queries, 1288/s
+p4 torch align 0 chunk 1/1: 223940 queries in 159.2s (1407/s), status!=0 15184
+p4 torch align 0: 223940 queries in 159.8s
+p4 te align 256 chunk 0: 54987/223940 queries, 916/s
+p4 te align 256 chunk 0: 112021/223940 queries, 933/s
+p4 te align 256 chunk 0: 168459/223940 queries, 936/s
+p4 te align 256 chunk 1/1: 223940 queries in 217.4s (1030/s), status!=0 15094
+p4 te align 256: 223940 queries in 218.1s
+p4 ws0 align 0 chunk 1/1: 50000 queries in 36.8s (1358/s), status!=0 3346
+p4 ws0 align 0: 50000 queries in 37.0s

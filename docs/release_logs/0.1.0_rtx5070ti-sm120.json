@@ -1,34 +1,59 @@
 {
  "format": "mmaemu-release-validation/1",
- "created_utc": "2026-10-15T23:09:28+00:00",
+ "created_utc": "2026-10-17T11:18:18+00:00",
  "host": {
   "platform": "Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.39",
   "python": "3.12.2",
   "machine": "x86_64"
  },
- "source_tree_commit": "85c780d283c76512c858a43cdd2e880e03f04dfe",
+ "source_tree_commit": "59b37e1214ac18355bd2778757faf25c38abca99",
  "checks": [
   {
    "name": "venv",
    "status": "PASS",
-   "summary": "uv, torch==2.7.1 (2.5 s)"
+   "summary": "uv, torch==2.7.1 (5.0 s)"
   },
   {
    "name": "environment",
    "status": "PASS",
    "reason": "",
-   "summary": "PATH=/tmp/mmaemu-t7-4mhzxd25/venv/bin:/usr/lib/wsl/lib; nvcc not found; CUDA_HOME unset; NVIDIA GeForce RTX 5070 Ti cc [12, 0] torch 2.7.1+cu128",
+   "summary": "PATH=/tmp/mmaemu-t7-x1oiwbw4/venv/bin:/usr/lib/wsl/lib; nvcc not found; CUDA_HOME unset; NVIDIA GeForce RTX 5070 Ti cc [12, 0] torch 2.7.1+cu128",
    "nvcc_on_path": null,
-   "path": "/tmp/mmaemu-t7-4mhzxd25/venv/bin:/usr/lib/wsl/lib",
-   "seconds": 1.89
+   "path": "/tmp/mmaemu-t7-x1oiwbw4/venv/bin:/usr/lib/wsl/lib",
+   "seconds": 2.17
   },
   {
    "name": "install",
    "status": "PASS",
-   "summary": "mmaemu 0.1.0 from /tmp/mmaemu-t7-4mhzxd25/venv/lib/python3.12/site-packages/mmaemu/__init__.py",
+   "summary": "mmaemu 0.1.0 from /tmp/mmaemu-t7-x1oiwbw4/venv/lib/python3.12/site-packages/mmaemu/__init__.py",
    "reason": "",
    "seconds": 0.01,
    "fatbins_in_wheel": {
+    "h1": {
+     "sass_archs": [
+      75,
+      80,
+      86,
+      89,
+      90,
+      100,
+      120
+     ],
+     "ptx_arch": 75,
+     "sha256": "261a760569d7672a815348d037129a1297b03b66b7d06a947d57479a7b0fc5a2"
+    },
+    "h4": {
+     "sass_archs": [
+      80,
+      86,
+      89,
+      90,
+      100,
+      120
+     ],
+     "ptx_arch": 80,
+     "sha256": "7e1f96c33d602f22251b378620741887ccdaad42d05c9c1e440cfaae4e534b39"
+    },
     "probes": {
      "sass_archs": [
       80,
@@ -92,44 +117,69 @@
   {
    "name": "info",
    "status": "PASS",
-   "seconds": 2.46,
+   "seconds": 2.32,
    "reason": "",
    "summary": "profiles matching: []"
   },
   {
    "name": "selftest",
    "status": "PASS",
-   "seconds": 2.19,
-   "summary": "verdict PASS; tc3=fail, v9=pass, v4=pass, v1=pass",
+   "seconds": 2.92,
+   "summary": "verdict PASS; tc3=fail, v9=pass, v4=pass, h4=pass, v1=pass, h1=pass",
    "reason": ""
   },
   {
    "name": "conformance",
    "status": "PASS",
-   "seconds": 6.87,
-   "summary": "kernels ['cuda:v1', 'cuda:v4', 'cuda:v9'] (skipped {'cuda:tc3': \"BackendUnavailableError: no usable CUDA kernel for 'cuda:tc3' on cuda:0: cuda:tc3: no binary for sm_120 (SASS (80, 86, 89), PTX None)\"}): 673 comparisons, 7493365 outputs, 0 mismatching",
+   "seconds": 10.35,
+   "summary": "kernels ['cuda:v1', 'cuda:v4', 'cuda:v9', 'cuda:h1', 'cuda:h4'] (skipped {'cuda:tc3': \"BackendUnavailableError: no usable CUDA kernel for 'cuda:tc3' on cuda:0: cuda:tc3: no binary for sm_120 (SASS (80, 86, 89), PTX None)\"}): 1122 comparisons, 12494403 outputs, 0 mismatching",
    "reason": ""
   },
   {
    "name": "loader",
    "status": "PASS",
-   "summary": "sources after use: {'cuda:tc3': None, 'cuda:v9': None, 'cuda:v4': 'fatbin', 'cuda:v1': 'fatbin', 'reference': 'torch'}; fatbin dir /tmp/mmaemu-t7-4mhzxd25/venv/lib/python3.12/site-packages/mmaemu/backends/cuda/bin",
+   "summary": "sources after use: {'cuda:tc3': None, 'cuda:v9': None, 'cuda:v4': 'fatbin', 'cuda:h4': 'fatbin', 'cuda:v1': 'fatbin', 'cuda:h1': 'fatbin', 'reference': 'torch'}; fatbin dir /tmp/mmaemu-t7-x1oiwbw4/venv/lib/python3.12/site-packages/mmaemu/backends/cuda/bin",
    "reason": ""
   },
   {
    "name": "evo2",
    "status": "PASS",
-   "seconds": 4.36,
-   "summary": "evo2.evo2_1b_w2k call00 [2048, 5760, 1920]: bf16 output == native True, accumulator sha256 == recorded True (backend cuda:v4, split SplitDecision(S=1, scheme='none', source='table', verified=True, table_id='heur_rtx4060_lt12.8.3.14', note='table row: algo 60, tile 18, numSplitsK 1, customOption 0'))",
+   "seconds": 5.55,
+   "summary": "evo2.evo2_1b_w2k call00 [2048, 5760, 1920]: ada bf16 output == native True, accumulator sha256 == recorded True (backend cuda:v4, split SplitDecision(S=1, scheme='none', source='table', verified=True, table_id='heur_rtx4060_lt12.8.3.14', note='table row: algo 60, tile 18, numSplitsK 1, customOption 0')); hopper: acc_fast == H100 (cuda:h4), y_fast == H100 (cuda:h4), acc_slow == H100 (cuda:h4), y_slow == H100 (cuda:h4)",
    "reason": ""
   }
  ],
  "wheel": {
   "file": "mmaemu-0.1.0-py3-none-any.whl",
-  "sha256": "a619cb8413681a5e6ffb86c5a2eafb416f372a4ec4dd1c6f0324b541582eb3ce",
-  "bytes": 890386,
+  "sha256": "f9725a7334901574debde819b9f285ca00443e2b6c7f6ccc9a7993ec0cf7e44f",
+  "bytes": 1360561,
   "version": "0.1.0",
   "fatbins": {
+   "h1": {
+    "sass_archs": [
+     75,
+     80,
+     86,
+     89,
+     90,
+     100,
+     120
+    ],
+    "ptx_arch": 75,
+    "sha256": "261a760569d7672a815348d037129a1297b03b66b7d06a947d57479a7b0fc5a2"
+   },
+   "h4": {
+    "sass_archs": [
+     80,
+     86,
+     89,
+     90,
+     100,
+     120
+    ],
+    "ptx_arch": 80,
+    "sha256": "7e1f96c33d602f22251b378620741887ccdaad42d05c9c1e440cfaae4e534b39"
+   },
    "probes": {
     "sass_archs": [
      80,
@@ -197,8 +247,8 @@
     "venv",
     "-q",
     "--python",
-    "/data/quant/mmaemu_work/venv-nb/bin/python",
-    "/tmp/mmaemu-t7-4mhzxd25/venv"
+    "/data/quant/stsc/research/round4/probe/.venv/bin/python",
+    "/tmp/mmaemu-t7-x1oiwbw4/venv"
    ],
    "returncode": 0,
    "stderr_tail": ""
@@ -210,7 +260,7 @@
     "install",
     "-q",
     "--python",
-    "/tmp/mmaemu-t7-4mhzxd25/venv/bin/python",
+    "/tmp/mmaemu-t7-x1oiwbw4/venv/bin/python",
     "torch==2.7.1",
     "--index-url",
     "https://download.pytorch.org/whl/cu128"
@@ -225,8 +275,8 @@
     "install",
     "-q",
     "--python",
-    "/tmp/mmaemu-t7-4mhzxd25/venv/bin/python",
-    "/data/quant/mmaemu_work/wt/audit-fix/dist/mmaemu-0.1.0-py3-none-any.whl",
+    "/tmp/mmaemu-t7-x1oiwbw4/venv/bin/python",
+    "/data/quant/mmaemu_work/wt/f3/dist/mmaemu-0.1.0-py3-none-any.whl",
     "numpy"
    ],
    "returncode": 0,
@@ -237,7 +287,7 @@
   "tool": "uv",
   "torch_requirement": "torch==2.7.1",
   "torch_index": "https://download.pytorch.org/whl/cu128",
-  "seconds": 2.5
+  "seconds": 5.0
  },
  "device": {
   "torch": "2.7.1+cu128",
@@ -249,22 +299,22 @@
    0
   ],
   "sm_count": 70,
-  "executable": "/tmp/mmaemu-t7-4mhzxd25/venv/bin/python"
+  "executable": "/tmp/mmaemu-t7-x1oiwbw4/venv/bin/python"
  },
  "info_before_selftest": {
   "format": "mmaemu-info/1",
   "problems": [],
   "mmaemu": {
    "version": "0.1.0",
-   "location": "/tmp/mmaemu-t7-4mhzxd25/venv/lib/python3.12/site-packages/mmaemu"
+   "location": "/tmp/mmaemu-t7-x1oiwbw4/venv/lib/python3.12/site-packages/mmaemu"
   },
   "python": {
    "version": "3.12.2",
-   "executable": "/tmp/mmaemu-t7-4mhzxd25/venv/bin/python",
+   "executable": "/tmp/mmaemu-t7-x1oiwbw4/venv/bin/python",
    "platform": "Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.39"
   },
   "env": {
-   "MMAEMU_CACHE_DIR": "/tmp/mmaemu-t7-4mhzxd25/mmaemu-cache"
+   "MMAEMU_CACHE_DIR": "/tmp/mmaemu-t7-x1oiwbw4/mmaemu-cache"
   },
   "device": {
    "torch": "2.7.1+cu128",
@@ -304,14 +354,14 @@
    },
    {
     "name": "hopper",
-    "maturity": "experimental",
-    "validated_scope": "instruction level only, toolbox H100/H200 vectors with c = 0; how c enters and all GEMM-level behaviour are not validated"
+    "maturity": "validated",
+    "validated_scope": "cuBLAS FP8 GEMMs (sm_90 nvjet kernels) on an H100 PCIe (114 SMs), cuBLASLt 12.8.3.14, validated bit for bit; not a model of the sm_90 mma.sync instruction"
    }
   ],
-  "default_profile": "ada-rtx4060-torch",
+  "default_profile": "hopper",
   "profiles": [
    {
-    "name": "ada-rtx4060-torch",
+    "name": "ada",
     "preset": "ada",
     "gpu_name": "NVIDIA GeForce RTX 4060",
     "capability": [
@@ -330,7 +380,7 @@
     "matches_device": false
    },
    {
-    "name": "ada-rtx4060-te",
+    "name": "ada-te",
     "preset": "ada",
     "gpu_name": "NVIDIA GeForce RTX 4060",
     "capability": [
@@ -349,7 +399,7 @@
     "matches_device": false
    },
    {
-    "name": "ada-rtx4060-ws0",
+    "name": "ada-ws0",
     "preset": "ada",
     "gpu_name": "NVIDIA GeForce RTX 4060",
     "capability": [
@@ -363,6 +413,63 @@
     "workspace_bytes": 0,
     "align": null,
     "splitk_table": "heur_rtx4060_lt12.8.3.14",
+    "maturity": "validated",
+    "splitk_maturity": "validated",
+    "matches_device": false
+   },
+   {
+    "name": "hopper",
+    "preset": "hopper",
+    "gpu_name": "NVIDIA H100 PCIe",
+    "capability": [
+     9,
+     0
+    ],
+    "sm_count": 114,
+    "cublaslt_version": "12.8.3.14",
+    "caller": "torch._scaled_mm",
+    "torch_version": "2.7.1+cu128",
+    "workspace_bytes": 1048576,
+    "align": null,
+    "splitk_table": "heur_h100pcie_lt12.8.3.14",
+    "maturity": "validated",
+    "splitk_maturity": "validated",
+    "matches_device": false
+   },
+   {
+    "name": "hopper-te",
+    "preset": "hopper",
+    "gpu_name": "NVIDIA H100 PCIe",
+    "capability": [
+     9,
+     0
+    ],
+    "sm_count": 114,
+    "cublaslt_version": "12.8.3.14",
+    "caller": "transformer_engine",
+    "torch_version": "2.7.1+cu128",
+    "workspace_bytes": 33554432,
+    "align": 256,
+    "splitk_table": "heur_h100pcie_lt12.8.3.14",
+    "maturity": "validated",
+    "splitk_maturity": "experimental",
+    "matches_device": false
+   },
+   {
+    "name": "hopper-ws0",
+    "preset": "hopper",
+    "gpu_name": "NVIDIA H100 PCIe",
+    "capability": [
+     9,
+     0
+    ],
+    "sm_count": 114,
+    "cublaslt_version": "12.8.3.14",
+    "caller": "torch._scaled_mm",
+    "torch_version": "2.7.1+cu128",
+    "workspace_bytes": 0,
+    "align": null,
+    "splitk_table": "heur_h100pcie_lt12.8.3.14",
     "maturity": "validated",
     "splitk_maturity": "validated",
     "matches_device": false
@@ -408,6 +515,22 @@
   ],
   "tables": [
    {
+    "name": "heur_h100pcie_lt12.8.3.14",
+    "files": [
+     {
+      "file": "heur_h100pcie_lt12.8.3.14.json",
+      "bytes": 76561,
+      "sha256": "ae6f103ba0f7e1a1d818eaaa882b7c2078dd0802911d1dca8e7e1021a44f4ec6"
+     },
+     {
+      "file": "heur_h100pcie_lt12.8.3.14.npz",
+      "bytes": 224792,
+      "sha256": "17a191951c8dc1868e0c697d0cf65aebb38e6962faea5a345c722a88348c20a1"
+     }
+    ],
+    "rows": 1767416
+   },
+   {
     "name": "heur_rtx4060_lt12.8.3.14",
     "files": [
      {
@@ -428,6 +551,9 @@
     "files": [
      {
       "file": "verified_split_combos.json"
+     },
+     {
+      "file": "verified_split_combos_h100pcie_lt12.8.3.14.json"
      }
     ]
    }
@@ -464,7 +590,28 @@
        "mismatches": 0,
        "first_mismatch": null
       },
-      "seconds": 0.020956907013896853,
+      "seconds": 0.020715747959911823,
+      "cached": false
+     }
+    ],
+    "reason": ""
+   },
+   "cuda:h4": {
+    "name": "cuda:h4",
+    "available": true,
+    "source": "fatbin",
+    "validated_here": true,
+    "gates": [
+     {
+      "name": "smoke",
+      "passed": true,
+      "reason": "",
+      "details": {
+       "outputs": 4224,
+       "mismatches": 0,
+       "first_mismatch": null
+      },
+      "seconds": 0.0035292989923618734,
       "cached": false
      }
     ],
@@ -485,7 +632,28 @@
        "mismatches": 0,
        "first_mismatch": null
       },
-      "seconds": 0.0006752100016456097,
+      "seconds": 0.0005336119793355465,
+      "cached": false
+     }
+    ],
+    "reason": ""
+   },
+   "cuda:h1": {
+    "name": "cuda:h1",
+    "available": true,
+    "source": "fatbin",
+    "validated_here": true,
+    "gates": [
+     {
+      "name": "smoke",
+      "passed": true,
+      "reason": "",
+      "details": {
+       "outputs": 4224,
+       "mismatches": 0,
+       "first_mismatch": null
+      },
+      "seconds": 0.0005269100074656308,
       "cached": false
      }
     ],
@@ -501,6 +669,61 @@
    }
   },
   "kernels": {
+   "h1": {
+    "gated": false,
+    "validated_on": [
+     [
+      12,
+      0
+     ],
+     [
+      8,
+      9
+     ]
+    ],
+    "sass_archs": [
+     75,
+     80,
+     86,
+     89,
+     90,
+     100,
+     120
+    ],
+    "ptx_arch": 75,
+    "min_cc": [
+     7,
+     5
+    ],
+    "preset": "hopper"
+   },
+   "h4": {
+    "gated": false,
+    "validated_on": [
+     [
+      12,
+      0
+     ],
+     [
+      8,
+      9
+     ]
+    ],
+    "sass_archs": [
+     80,
+     86,
+     89,
+     90,
+     100,
+     120
+    ],
+    "ptx_arch": 80,
+    "min_cc": [
+     8,
+     0
+    ],
+    "preset": "hopper"
+   },
    "tc3": {
     "gated": true,
     "validated_on": [
@@ -518,7 +741,8 @@
     "min_cc": [
      8,
      0
-    ]
+    ],
+    "preset": "ada"
    },
    "v1": {
     "gated": false,
@@ -545,7 +769,8 @@
     "min_cc": [
      7,
      5
-    ]
+    ],
+    "preset": "ada"
    },
    "v4": {
     "gated": false,
@@ -571,7 +796,8 @@
     "min_cc": [
      8,
      0
-    ]
+    ],
+    "preset": "ada"
    },
    "v9": {
     "gated": true,
@@ -593,7 +819,8 @@
     "min_cc": [
      8,
      0
-    ]
+    ],
+    "preset": "ada"
    }
   },
   "kernel_discovery_notes": [],
@@ -606,6 +833,33 @@
     "--fmad=false"
    ],
    "modules": {
+    "h1": {
+     "file": "h1.fatbin",
+     "sass_archs": [
+      75,
+      80,
+      86,
+      89,
+      90,
+      100,
+      120
+     ],
+     "ptx_arch": 75,
+     "sha256_ok": true
+    },
+    "h4": {
+     "file": "h4.fatbin",
+     "sass_archs": [
+      80,
+      86,
+      89,
+      90,
+      100,
+      120
+     ],
+     "ptx_arch": 80,
+     "sha256_ok": true
+    },
     "probes": {
      "file": "probes.fatbin",
      "sass_archs": [
@@ -730,7 +984,7 @@
        "mismatches": 0,
        "first_mismatch": null
       },
-      "seconds": 0.02247063600225374,
+      "seconds": 0.026431159989442676,
       "cached": false
      },
      {
@@ -759,7 +1013,7 @@
         "ratio_violations": 0,
         "offset_violations": 0,
         "mapping_violations": 0,
-        "seconds": 0.1499
+        "seconds": 0.1977
        },
        "gemm": {
         "bell_48x40x256": 0,
@@ -770,10 +1024,10 @@
         "tiny_17x9x80": 0,
         "bell_130x136x1936": 0,
         "mixed_130x136x1936": 0,
-        "seconds": 0.023
+        "seconds": 0.0293
        }
       },
-      "seconds": 0.17297926099854521,
+      "seconds": 0.22710092598572373,
       "cached": false
      }
     ]
@@ -792,7 +1046,26 @@
        "mismatches": 0,
        "first_mismatch": null
       },
-      "seconds": 0.0005476700025610626,
+      "seconds": 0.0006583490176126361,
+      "cached": false
+     }
+    ]
+   },
+   "h4": {
+    "required": true,
+    "why": "IEEE-exact kernel: must pass on every supported device",
+    "passed": true,
+    "gates": [
+     {
+      "name": "smoke",
+      "passed": true,
+      "reason": "",
+      "details": {
+       "outputs": 4224,
+       "mismatches": 0,
+       "first_mismatch": null
+      },
+      "seconds": 0.0037114190054126084,
       "cached": false
      }
     ]
@@ -811,7 +1084,26 @@
        "mismatches": 0,
        "first_mismatch": null
       },
-      "seconds": 0.0004310979857109487,
+      "seconds": 0.0006965200300328434,
+      "cached": false
+     }
+    ]
+   },
+   "h1": {
+    "required": true,
+    "why": "IEEE-exact kernel: must pass on every supported device",
+    "passed": true,
+    "gates": [
+     {
+      "name": "smoke",
+      "passed": true,
+      "reason": "",
+      "details": {
+       "outputs": 4224,
+       "mismatches": 0,
+       "first_mismatch": null
+      },
+      "seconds": 0.0006558120367117226,
       "cached": false
      }
     ]
@@ -824,13 +1116,15 @@
   "kernels": [
    "cuda:v1",
    "cuda:v4",
-   "cuda:v9"
+   "cuda:v9",
+   "cuda:h1",
+   "cuda:h4"
   ],
   "skipped": {
    "cuda:tc3": "BackendUnavailableError: no usable CUDA kernel for 'cuda:tc3' on cuda:0: cuda:tc3: no binary for sm_120 (SASS (80, 86, 89), PTX None)"
   },
-  "cases": 673,
-  "outputs": 7493365,
+  "cases": 1122,
+  "outputs": 12494403,
   "mismatches": [],
   "status_before": {
    "cuda:tc3": {
@@ -851,7 +1145,19 @@
     "validated_here": true,
     "reason": ""
    },
+   "cuda:h4": {
+    "source": "fatbin",
+    "available": true,
+    "validated_here": true,
+    "reason": ""
+   },
    "cuda:v1": {
+    "source": "fatbin",
+    "available": true,
+    "validated_here": true,
+    "reason": ""
+   },
+   "cuda:h1": {
     "source": "fatbin",
     "available": true,
     "validated_here": true,
@@ -864,7 +1170,19 @@
     "reason": "float64 model on the tensors' device"
    }
   },
-  "seconds": 2.529,
+  "presets": {
+   "cuda:v1": "ada",
+   "cuda:v4": "ada",
+   "cuda:v9": "ada",
+   "cuda:tc3": "ada",
+   "cuda:h1": "hopper",
+   "cuda:h4": "hopper"
+  },
+  "auto_backends": {
+   "ada": "cuda:v4",
+   "hopper": "cuda:h4"
+  },
+  "seconds": 5.037,
   "status_after": {
    "cuda:tc3": {
     "source": null,
@@ -884,7 +1202,19 @@
     "validated_here": true,
     "reason": ""
    },
+   "cuda:h4": {
+    "source": "fatbin",
+    "available": true,
+    "validated_here": true,
+    "reason": ""
+   },
    "cuda:v1": {
+    "source": "fatbin",
+    "available": true,
+    "validated_here": true,
+    "reason": ""
+   },
+   "cuda:h1": {
     "source": "fatbin",
     "available": true,
     "validated_here": true,
@@ -897,7 +1227,7 @@
     "reason": "float64 model on the tensors' device"
    }
   },
-  "fatbin_dir": "/tmp/mmaemu-t7-4mhzxd25/venv/lib/python3.12/site-packages/mmaemu/backends/cuda/bin",
+  "fatbin_dir": "/tmp/mmaemu-t7-x1oiwbw4/venv/lib/python3.12/site-packages/mmaemu/backends/cuda/bin",
   "modules": {
    "cuda:v1": {
     "source": "fatbin",
@@ -910,6 +1240,14 @@
    "cuda:v9": {
     "source": "fatbin",
     "sha256": "bca69d0a845013cf65f6d4c82300eac98101ebed4b0f45973a4b338dab09ffba"
+   },
+   "cuda:h1": {
+    "source": "fatbin",
+    "sha256": "261a760569d7672a815348d037129a1297b03b66b7d06a947d57479a7b0fc5a2"
+   },
+   "cuda:h4": {
+    "source": "fatbin",
+    "sha256": "7e1f96c33d602f22251b378620741887ccdaad42d05c9c1e440cfaae4e534b39"
    }
   }
  },
@@ -923,12 +1261,38 @@
   ],
   "backend": "cuda:v4",
   "split": "SplitDecision(S=1, scheme='none', source='table', verified=True, table_id='heur_rtx4060_lt12.8.3.14', note='table row: algo 60, tile 18, numSplitsK 1, customOption 0')",
-  "scaled_mm_seconds": 0.072,
+  "scaled_mm_seconds": 0.15,
   "y_native_equal": true,
   "acc_sha256": "e8f449f70cd2d660706840bd9290eb6de27adfd87bbb20ed6fb42e8b0f378177",
   "acc_full_sha256_recorded": "e8f449f70cd2d660706840bd9290eb6de27adfd87bbb20ed6fb42e8b0f378177",
-  "acc_equal": true
+  "acc_equal": true,
+  "h100": {
+   "log": "m2_torch.json",
+   "outputs": {
+    "call00.acc_fast": {
+     "equal": true,
+     "sha256": "59d5b027be60cb86da6ea1dac6e5ee4e634be51028da9e40ed9a6d2c40c00aed",
+     "backend": "cuda:h4"
+    },
+    "call00.y_fast": {
+     "equal": true,
+     "sha256": "31ccdb1ea483996ae6a144b664665939ee1e488ed048784b93a89fd4127f4d62",
+     "backend": "cuda:h4"
+    },
+    "call00.acc_slow": {
+     "equal": true,
+     "sha256": "90cd4b8ac91fa48b82f8d50e0ea18e4a473f4e917febf854699bf7bc3fef9055",
+     "backend": "cuda:h4"
+    },
+    "call00.y_slow": {
+     "equal": true,
+     "sha256": "3029e8bf41df6581b14d0de5b56db9f1b6fa4f3005e3112b8fc9341120ca4429",
+     "backend": "cuda:h4"
+    }
+   },
+   "all_equal": true
+  }
  },
  "verdict": "PASS",
- "seconds_total": 20.3
+ "seconds_total": 28.4
 }

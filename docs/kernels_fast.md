@@ -229,7 +229,10 @@ of `verify-p3-tensorcore-exact-1/scripts/sim_gate.py` `hmma_gen`.
   - The registry, verdict-cache and benchmark results below are therefore results against that stand-in. They
     were re-run on the integrated runtime on the RTX 4060 on 2026-10-14: T3
     ([log](validation_logs/2026-10-14/t3-rtx-4060-sm89/README.md)) and T6
-    ([log](validation_logs/2026-10-14/t6-rtx-4060-sm89/README.md)).
+    ([log](validation_logs/2026-10-14/t6-rtx-4060-sm89/README.md)). T3 ran again on fa0fd90
+    (fast kernels 182 passed, gates 4 passed, the full accumulators of v9 and tc3 equal to the hardware's;
+    [log](validation_logs/2026-10-16/rtx-4060-sm89/README.md)) and, with the same counts, after the profile rename
+    ([log](validation_logs/2026-10-16/rtx-4060-sm89-renamed/README.md)).
 - **ptxas:** 0 spill bytes for every kernel and arch.
   - Registers: v9 218 (sm_80/86), 220 (sm_89/90), 229 (sm_100/120); tc3 175; probes 20–32.
   - NVRTC (libnvrtc 12.8 from the torch wheel) compiles all three sources for every listed arch with no CUDA
@@ -290,7 +293,7 @@ Truth `evo2.evo2_1b_w2k`, 21 projections 2048×5760×1920:
 - **Full-output bf16 sha256:** equal for 18/18. The other 3 calls store their full rows, which were compared
   directly.
 - **Caveat:** in these runs, the bf16 path was the shared epilogue (`model.epilogue.apply`) on the kernel's
-  accumulator, not `scaled_mm(profile="ada-rtx4060-te")`. On the integrated tree, set `MMAEMU_REQUIRE_SCALED_MM=1`
+  accumulator, not `scaled_mm(profile="ada-te")`. On the integrated tree, set `MMAEMU_REQUIRE_SCALED_MM=1`
   to require the scaled_mm path.
 - No file under the truth directory changed (`find -newer` stamp: 0).
 
@@ -365,6 +368,6 @@ from the v0.1 interface contract.
    monkeypatches that function.
 7. **Cache files.** Verdict cache files are plain files under `MMAEMU_CACHE_DIR` other than `*.cubin`, `*.fatbin`
    and `*.ptx`. The corruption test overwrites all such files.
-8. **Truth test.** It calls `mmaemu.scaled_mm(..., profile="ada-rtx4060-te", backend="cuda:<kernel>")`. If
+8. **Truth test.** It calls `mmaemu.scaled_mm(..., profile="ada-te", backend="cuda:<kernel>")`. If
    `scaled_mm` is a stub, it uses `model.epilogue.apply`. Set `MMAEMU_REQUIRE_SCALED_MM=1` to require the
    scaled_mm path.

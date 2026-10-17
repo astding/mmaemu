@@ -1,0 +1,93 @@
+{
+ "m1_embedding_mismatches": {
+  "MM_cublas64.ada.K64": 0,
+  "MM_cublas64.ada.K1920": 0,
+  "MM_cublas64.ada.K4096": 0,
+  "MM_cublas64.ada.K8192": 0,
+  "MM_cublas64.hopper.K64": 0,
+  "MM_cublas64.hopper.K1920": 0,
+  "MM_cublas64.hopper.K4096": 0,
+  "MM_cublas64.hopper.K8192": 0,
+  "MM_cublas64.b200_mma_sync.K64": 0,
+  "MM_cublas64.b200_mma_sync.K1920": 0,
+  "MM_cublas64.b200_mma_sync.K4096": 0,
+  "MM_cublas64.b200_mma_sync.K8192": 0,
+  "MM_cublas64_sm120.ada.K64": 0,
+  "MM_cublas64_sm120.ada.K1920": 0,
+  "MM_cublas64_sm120.ada.K4096": 0,
+  "MM_cublas64_sm120.ada.K8192": 0,
+  "MM_cublas64_sm120.hopper.K64": 0,
+  "MM_cublas64_sm120.hopper.K1920": 0,
+  "MM_cublas64_sm120.hopper.K4096": 0,
+  "MM_cublas64_sm120.hopper.K8192": 0,
+  "MM_cublas64_sm120.b200_mma_sync.K64": 0,
+  "MM_cublas64_sm120.b200_mma_sync.K1920": 0,
+  "MM_cublas64_sm120.b200_mma_sync.K4096": 0,
+  "MM_cublas64_sm120.b200_mma_sync.K8192": 0
+ },
+ "m3": {
+  "pairs.g0.K1920": {
+   "rows": 3962,
+   "indistinguishable": []
+  },
+  "pairs.g1.K1920": {
+   "rows": 3962,
+   "indistinguishable": []
+  },
+  "triples.g2.K1920": {
+   "rows": 7082,
+   "indistinguishable": []
+  },
+  "tie_bf16.g0.K1920": {
+   "rows": 362,
+   "indistinguishable": []
+  },
+  "pairs.g0.K4096": {
+   "rows": 17154,
+   "indistinguishable": []
+  },
+  "pairs.g1.K4096": {
+   "rows": 17154,
+   "indistinguishable": []
+  },
+  "triples.g2.K4096": {
+   "rows": 3962,
+   "indistinguishable": []
+  },
+  "tie_bf16.g0.K4096": {
+   "rows": 770,
+   "indistinguishable": []
+  },
+  "pairs.g0.K8192": {
+   "rows": 3636,
+   "indistinguishable": []
+  },
+  "pairs.g1.K8192": {
+   "rows": 3636,
+   "indistinguishable": []
+  },
+  "triples.g2.K8192": {
+   "rows": 866,
+   "indistinguishable": []
+  },
+  "tie_bf16.g0.K8192": {
+   "rows": 308,
+   "indistinguishable": []
+  }
+ },
+ "epilogue_ties_acc_inexact": {
+  "ada.n0": 0,
+  "hopper.n0": 0,
+  "b200_mma_sync.n0": 0,
+  "ada.n1": 0,
+  "hopper.n1": 0,
+  "b200_mma_sync.n1": 0,
+  "ada.n2": 0,
+  "hopper.n2": 0,
+  "b200_mma_sync.n2": 0,
+  "ada.n3": 0,
+  "hopper.n3": 0,
+  "b200_mma_sync.n3": 0
+ }
+}
+RESULT {"m1": true, "m3": true, "epilogue": true}

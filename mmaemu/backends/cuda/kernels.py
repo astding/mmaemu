@@ -1,10 +1,12 @@
-"""The IEEE kernels v1 / v4 (KernelSpecs) and the standard-ABI ChainFn wrapper shared by every CUDA kernel.
+"""The IEEE kernels v1 / v4 (preset ada) and h1 / h4 (preset hopper), and the standard-ABI ChainFn wrapper shared by
+every CUDA kernel.
 
-v1 and v4 use only IEEE-defined instructions, so they are exact by construction on every GPU they run on; they need
-only the "smoke" gate (see spec.py). The gated fast kernels v9 / tc3 live in mmaemu.backends.cuda.fast and
-use the same ABI and wrapper.
+v1, v4, h1 and h4 use only IEEE-defined instructions, so they are exact by construction on every GPU they run on; they
+need only the "smoke" gate (see spec.py). h1 and h4 are v1's and v4's designs with the hopper preset's 32-term
+blocks. The gated fast kernels v9 / tc3 (preset ada) live in mmaemu.backends.cuda.fast and use the same ABI and
+wrapper.
 
-chain_fn_for(spec, req) returns ChainFn(a, b) -> fp32 [M, N]: the Ada chain over k = 0..L-1 starting from +0, for
+chain_fn_for(spec, req) returns ChainFn(a, b) -> fp32 [M, N]: the chain of spec.preset over k = 0..L-1 from +0, for
 a [M, L] and b [N, L] E4M3 codes (torch.uint8 or torch.float8_e4m3fn) that are finite (mmaemu.model.plan.execute_plan
 sanitises non-finite codes before calling it). The wrapper
   - accepts only uint8 codes or float8_e4m3fn (TypeError otherwise: e5m2, fnuz, bf16, ... never reach a kernel, B4);
@@ -19,7 +21,7 @@ import ctypes
 
 from mmaemu.backends.cuda.spec import KernelSpec
 
-__all__ = ["V1", "V4", "SPECS", "chain_fn_for"]
+__all__ = ["V1", "V4", "H1", "H4", "SPECS", "chain_fn_for"]
 
 MAX_GRID_Y = 65535
 
@@ -39,7 +41,25 @@ V4 = KernelSpec(
     k_max=1 << 24,  # block exponents <= 55 keep the byte encodings of the exponent pass valid
 )
 
-SPECS: tuple[KernelSpec, ...] = (V1, V4)
+H1 = KernelSpec(
+    name="h1", module="h1", source="h1.cu", entry="mmaemu_h1_e4m3e4m3",
+    sass_archs=(75, 80, 86, 89, 90, 100, 120), ptx_arch=75, min_cc=(7, 5),
+    gated=False, validated_on=frozenset({(8, 9), (12, 0)}), gates=(), priority=10,
+    tile_m=64, tile_n=64, threads=256, smem_bytes=0, align_bytes=4,
+    k_max=1 << 30,  # as v1
+    preset="hopper",
+)
+
+H4 = KernelSpec(
+    name="h4", module="h4", source="h4.cu", entry="mmaemu_h4_e4m3e4m3",
+    sass_archs=(80, 86, 89, 90, 100, 120), ptx_arch=80, min_cc=(8, 0),
+    gated=False, validated_on=frozenset({(8, 9), (12, 0)}), gates=(), priority=20,
+    tile_m=128, tile_n=128, threads=256, smem_bytes=73728, align_bytes=4,
+    k_max=1 << 24,  # as v4
+    preset="hopper",
+)
+
+SPECS: tuple[KernelSpec, ...] = (V1, V4, H1, H4)
 
 
 def _codes(t, name: str):
@@ -69,8 +89,8 @@ def chain_fn_for(spec: KernelSpec, req):
     fmts = (req.fmt_a, req.fmt_b)
     if fmts not in tuple(tuple(f) for f in spec.formats):
         raise ValueError(f"kernel {spec.name} supports {spec.formats}, not {fmts}")
-    if req.preset != "ada":
-        raise ValueError(f"kernel {spec.name} implements preset 'ada', not {req.preset!r}")
+    if req.preset != spec.preset:
+        raise ValueError(f"kernel {spec.name} implements preset {spec.preset!r}, not {req.preset!r}")
     device = torch.device(req.device)
     if device.type != "cuda":
         raise ValueError(f"kernel {spec.name} needs a CUDA device, got {device}")

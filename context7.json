@@ -1,7 +1,7 @@
 {
   "$schema": "https://context7.com/schema/context7.json",
   "projectTitle": "mmaemu",
-  "description": "Bit-accurate emulation of NVIDIA tensor-core FP8 GEMM numerics for PyTorch: the bits of torch._scaled_mm on a reference GPU (RTX 4060, cuBLASLt 12.8.3.14), computed on a CPU or another CUDA GPU.",
+  "description": "Bit-exact emulation of NVIDIA tensor-core FP8 GEMMs for PyTorch: the bits that torch._scaled_mm (torch 2.7.1) or Transformer Engine 2.3 return on a reference GPU, an H100 PCIe (the default) or an RTX 4060, each with cuBLASLt 12.8.3.14, computed on a CPU or another CUDA GPU.",
   "excludeFolders": [
     "docs/validation_logs",
     "docs/release_logs",
@@ -17,10 +17,13 @@
     "release.md"
   ],
   "rules": [
-    "mmaemu.scaled_mm takes the arguments of torch._scaled_mm (torch 2.7.1): input [M, K] FP8 row-major, mat2 [K, N] FP8 column-major (w.t() of a row-major [N, K] weight), and one-element fp32 scales.",
-    "Pass use_fast_accum as a Python bool; mmaemu.accumulate has no default for it.",
+    "mmaemu.scaled_mm takes the arguments of torch._scaled_mm (torch 2.7.1): input [M, K] FP8 row-major, mat2 [K, N] FP8 column-major (w.t() of a row-major [N, K] weight), and one-element fp32 scales. Defaults follow torch: use_fast_accum=False and out_dtype the input dtype; mmaemu.accumulate has no default for use_fast_accum, so pass it as a Python bool.",
+    "Pick the reference platform with profile= (or MMAEMU_PROFILE): hopper (the default) for torch._scaled_mm on the H100 PCIe, hopper-te for Transformer Engine on the H100 PCIe, ada and ada-te for the same on the RTX 4060, hopper-ws0 and ada-ws0 for cuBLAS with workspace 0. The names used until the rename on 16 October 2026 (hopper-h100pcie-torch, ada-rtx4060-te, ...) raise KeyError.",
+    "hopper and ada are both profile and preset names: profile hopper uses preset hopper (the tensor-core arithmetic). scaled_mm, accumulate and explain take profile=; only mmaemu.model.dot takes preset=. b200_mma_sync (alias blackwell) and the profiles hopper-experimental and b200-mma-sync-experimental are experimental and warn; they do not model B200 cuBLAS or RTX 50-series GPUs.",
     "Compare results bit for bit with mmaemu.testing.assert_bitwise_equal, not with torch.allclose or float equality.",
-    "SplitKUnknownError means the reference GPU's split-K decision for the shape is not known: pass splitk=1 or splitk=(S, 'serial' | 'pairwise') if it is, and use mmaemu.explain to see the split-K decision and backend of a call.",
-    "v0.1 reproduces one reference platform (RTX 4060, cuBLASLt 12.8.3.14); bias, row-wise scales and, under grad mode, inputs that require grad raise instead of being approximated."
+    "Off the reference GPU, with splitk='auto', a shape that neither the split-K table recorded on the profile's GPU nor the profile's envelope (a bound on M*N above which S = 1 is inferred) decides raises SplitKUnknownError (for example M, N, K = 16, 256, 128 under hopper on a CPU). Run mmaemu.explain first; pass splitk=1 only when the reference GPU did not split that call, or the known split: (S, 'contiguous') on the hopper profiles, (S, 'serial' | 'pairwise') on the ada profiles.",
+    "Not modelled in v0.1: the H100 SXM, the H200, B200 cuBLAS, RTX 50-series GPUs (sm_120), other cuBLASLt versions. Bias, row-wise scales and, under grad mode, inputs that require grad raise instead of being approximated. mmaemu reproduces the reference GPU, not the GPU it runs on.",
+    "Emulation is slow: on an RTX 4060 an emulated GEMM is about 10 (ada) to 22 (hopper) times slower than native FP8, and the float64 CPU reference is for tests and single projections, not whole models. Route only the FP8 GEMMs through mmaemu.",
+    "To compute Evo 2's FP8 projections as Transformer Engine does on an H100 PCIe, use profile hopper-te (TE's 32 MiB workspace); ada-te is the RTX 4060's (4 MiB; examples/evo2_blackwell.ipynb uses it). examples/evo2_offload.py takes either with --profile. Evo 2 1B and 40B pass their upstream test on an RTX 5070 Ti with either profile. Only the FP8 GEMMs are emulated and the rest of the model runs natively, so the outputs are close to the official ones, not equal to them. Every run used one sequence at a time, of up to 8,192 bp, where each FP8 projection shape of the 1B and the 40B is in both profiles' split-K tables. Longer sequences, or several sequences batched into one projection, were not run: there both profiles infer S = 1, mostly from their envelope, and hopper-te's envelope inferences warn (UnvalidatedEnvelopeWarning), because the H100 envelope failed its held-out test at TE's 32 MiB workspace."
   ]
 }

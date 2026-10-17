@@ -1,0 +1,561 @@
+{
+ "format": "mmaemu-h100-splitk-envelope-eval/1",
+ "date": "2026-10-16 13:58:10 PDT",
+ "provenance": {
+  "commit": "f4ea31e3f55f3edf788216f58586c8f499ce6233",
+  "rule_sha256": "cf3ffb7ffc2b7ac215ac0ab923ace1a065ab69bd3ff2f7f4dcbfa15ff41ee65b",
+  "scripts": {
+   "docs/validation_logs/2026-10-16/h100-splitk-sweep/scripts/analysis/fit_envelope.py": "b51903f2167394fea373ec53126e5d2649727cf5de70ab8ecf661841b40c25f9",
+   "docs/validation_logs/2026-10-16/h100-splitk-sweep/scripts/analysis/eval_sealed.py": "1f39fbada1961d35df3f45a5d194becf04408760ddd23be9a95b93519399d674"
+  }
+ },
+ "p4": {
+  "torch_a0_c00.npz": {
+   "sha256": "d58775569db947f02388b5986c85f381470a306059b4eac0d9d848d908cfb3ca",
+   "rows": 223940
+  },
+  "te_a256_c00.npz": {
+   "sha256": "b3471ea5fabedba5e857ef89a8ab4a22fed091d3591dcf9afdaf9c3373ca0c24",
+   "rows": 223940
+  },
+  "ws0_a0_c00.npz": {
+   "sha256": "c95cc465cea87426d9ec99c7f0f068ac811566d9180169218575c44822a9a5fa",
+   "rows": 50000
+  }
+ },
+ "python": "3.12.2",
+ "numpy": "2.5.4",
+ "hopper-h100pcie-torch": {
+  "rows": 223940,
+  "status_nonzero": 15184,
+  "tested": 154191,
+  "untested_status0": 54565,
+  "split_all": 20727,
+  "split_tested": 0,
+  "passed": true,
+  "closest_split": {
+   "M": 2047,
+   "N": 64,
+   "K": 946176,
+   "splitK": 2,
+   "custom": 3,
+   "reduction": 2,
+   "algo": 66,
+   "tile": 15,
+   "MN": 131008,
+   "out": "bfloat16",
+   "fast": true,
+   "fmt_a": "e5m2",
+   "fmt_b": "e4m3",
+   "B": 268004,
+   "MN_over_B": 0.4888
+  },
+  "failures": [],
+  "strata": [
+   {
+    "K_band": [
+     1024,
+     5120
+    ],
+    "K_multiple_of_128": true,
+    "source": "random",
+    "rows": 22019,
+    "status_nonzero": 1454,
+    "tested": 20565,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 0
+   },
+   {
+    "K_band": [
+     1024,
+     5120
+    ],
+    "K_multiple_of_128": true,
+    "source": "model",
+    "rows": 9360,
+    "status_nonzero": 624,
+    "tested": 8008,
+    "tested_MN_le_30720": 364,
+    "split_tested": 0,
+    "split_all": 0
+   },
+   {
+    "K_band": [
+     1024,
+     5120
+    ],
+    "K_multiple_of_128": false,
+    "source": "random",
+    "rows": 17045,
+    "status_nonzero": 1178,
+    "tested": 15867,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 0
+   },
+   {
+    "K_band": [
+     1024,
+     5120
+    ],
+    "K_multiple_of_128": false,
+    "source": "model",
+    "rows": 3840,
+    "status_nonzero": 256,
+    "tested": 3248,
+    "tested_MN_le_30720": 168,
+    "split_tested": 0,
+    "split_all": 0
+   },
+   {
+    "K_band": [
+     5121,
+     16384
+    ],
+    "K_multiple_of_128": true,
+    "source": "random",
+    "rows": 15531,
+    "status_nonzero": 1045,
+    "tested": 9568,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 1323
+   },
+   {
+    "K_band": [
+     5121,
+     16384
+    ],
+    "K_multiple_of_128": true,
+    "source": "model",
+    "rows": 8640,
+    "status_nonzero": 576,
+    "tested": 5712,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 516
+   },
+   {
+    "K_band": [
+     5121,
+     16384
+    ],
+    "K_multiple_of_128": false,
+    "source": "random",
+    "rows": 12299,
+    "status_nonzero": 831,
+    "tested": 7605,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 1077
+   },
+   {
+    "K_band": [
+     5121,
+     16384
+    ],
+    "K_multiple_of_128": false,
+    "source": "model",
+    "rows": 0,
+    "status_nonzero": 0,
+    "tested": 0,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 0
+   },
+   {
+    "K_band": [
+     16385,
+     65536
+    ],
+    "K_multiple_of_128": true,
+    "source": "random",
+    "rows": 18639,
+    "status_nonzero": 1267,
+    "tested": 11453,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 2379
+   },
+   {
+    "K_band": [
+     16385,
+     65536
+    ],
+    "K_multiple_of_128": true,
+    "source": "model",
+    "rows": 2100,
+    "status_nonzero": 140,
+    "tested": 1512,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 28
+   },
+   {
+    "K_band": [
+     16385,
+     65536
+    ],
+    "K_multiple_of_128": false,
+    "source": "random",
+    "rows": 14480,
+    "status_nonzero": 934,
+    "tested": 8903,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 1819
+   },
+   {
+    "K_band": [
+     16385,
+     65536
+    ],
+    "K_multiple_of_128": false,
+    "source": "model",
+    "rows": 0,
+    "status_nonzero": 0,
+    "tested": 0,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 0
+   },
+   {
+    "K_band": [
+     65537,
+     4194304
+    ],
+    "K_multiple_of_128": true,
+    "source": "random",
+    "rows": 56105,
+    "status_nonzero": 3907,
+    "tested": 34572,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 7650
+   },
+   {
+    "K_band": [
+     65537,
+     4194304
+    ],
+    "K_multiple_of_128": true,
+    "source": "model",
+    "rows": 0,
+    "status_nonzero": 0,
+    "tested": 0,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 0
+   },
+   {
+    "K_band": [
+     65537,
+     4194304
+    ],
+    "K_multiple_of_128": false,
+    "source": "random",
+    "rows": 43882,
+    "status_nonzero": 2972,
+    "tested": 27178,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 5935
+   },
+   {
+    "K_band": [
+     65537,
+     4194304
+    ],
+    "K_multiple_of_128": false,
+    "source": "model",
+    "rows": 0,
+    "status_nonzero": 0,
+    "tested": 0,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 0
+   }
+  ]
+ },
+ "hopper-h100pcie-te": {
+  "rows": 223940,
+  "status_nonzero": 15094,
+  "tested": 77518,
+  "untested_status0": 131328,
+  "split_all": 71029,
+  "split_tested": 1,
+  "passed": false,
+  "closest_split": {
+   "M": 69,
+   "N": 29456,
+   "K": 19872,
+   "splitK": 2,
+   "custom": 5,
+   "reduction": 2,
+   "algo": 66,
+   "tile": 456,
+   "MN": 2032464,
+   "out": "float32",
+   "fast": false,
+   "fmt_a": "e4m3",
+   "fmt_b": "e5m2",
+   "B": 1653270,
+   "MN_over_B": 1.2294
+  },
+  "failures": [
+   {
+    "M": 69,
+    "N": 29456,
+    "K": 19872,
+    "splitK": 2,
+    "custom": 5,
+    "reduction": 2,
+    "algo": 66,
+    "tile": 456,
+    "MN": 2032464,
+    "out": "float32",
+    "fast": false,
+    "fmt_a": "e4m3",
+    "fmt_b": "e5m2",
+    "B": 1653270
+   }
+  ],
+  "strata": [
+   {
+    "K_band": [
+     1024,
+     5120
+    ],
+    "K_multiple_of_128": true,
+    "source": "random",
+    "rows": 21993,
+    "status_nonzero": 1445,
+    "tested": 20548,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 0
+   },
+   {
+    "K_band": [
+     1024,
+     5120
+    ],
+    "K_multiple_of_128": true,
+    "source": "model",
+    "rows": 9360,
+    "status_nonzero": 624,
+    "tested": 8008,
+    "tested_MN_le_30720": 364,
+    "split_tested": 0,
+    "split_all": 0
+   },
+   {
+    "K_band": [
+     1024,
+     5120
+    ],
+    "K_multiple_of_128": false,
+    "source": "random",
+    "rows": 16748,
+    "status_nonzero": 1141,
+    "tested": 15607,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 0
+   },
+   {
+    "K_band": [
+     1024,
+     5120
+    ],
+    "K_multiple_of_128": false,
+    "source": "model",
+    "rows": 3840,
+    "status_nonzero": 256,
+    "tested": 3248,
+    "tested_MN_le_30720": 168,
+    "split_tested": 0,
+    "split_all": 0
+   },
+   {
+    "K_band": [
+     5121,
+     16384
+    ],
+    "K_multiple_of_128": true,
+    "source": "random",
+    "rows": 15604,
+    "status_nonzero": 1070,
+    "tested": 8136,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 1546
+   },
+   {
+    "K_band": [
+     5121,
+     16384
+    ],
+    "K_multiple_of_128": true,
+    "source": "model",
+    "rows": 8640,
+    "status_nonzero": 576,
+    "tested": 5193,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 580
+   },
+   {
+    "K_band": [
+     5121,
+     16384
+    ],
+    "K_multiple_of_128": false,
+    "source": "random",
+    "rows": 12181,
+    "status_nonzero": 816,
+    "tested": 6391,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 1268
+   },
+   {
+    "K_band": [
+     5121,
+     16384
+    ],
+    "K_multiple_of_128": false,
+    "source": "model",
+    "rows": 0,
+    "status_nonzero": 0,
+    "tested": 0,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 0
+   },
+   {
+    "K_band": [
+     16385,
+     65536
+    ],
+    "K_multiple_of_128": true,
+    "source": "random",
+    "rows": 18751,
+    "status_nonzero": 1233,
+    "tested": 2899,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 5747
+   },
+   {
+    "K_band": [
+     16385,
+     65536
+    ],
+    "K_multiple_of_128": true,
+    "source": "model",
+    "rows": 2100,
+    "status_nonzero": 140,
+    "tested": 920,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 52
+   },
+   {
+    "K_band": [
+     16385,
+     65536
+    ],
+    "K_multiple_of_128": false,
+    "source": "random",
+    "rows": 14632,
+    "status_nonzero": 932,
+    "tested": 2313,
+    "tested_MN_le_30720": 0,
+    "split_tested": 1,
+    "split_all": 4358
+   },
+   {
+    "K_band": [
+     16385,
+     65536
+    ],
+    "K_multiple_of_128": false,
+    "source": "model",
+    "rows": 0,
+    "status_nonzero": 0,
+    "tested": 0,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 0
+   },
+   {
+    "K_band": [
+     65537,
+     4194304
+    ],
+    "K_multiple_of_128": true,
+    "source": "random",
+    "rows": 56570,
+    "status_nonzero": 3910,
+    "tested": 2430,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 32650
+   },
+   {
+    "K_band": [
+     65537,
+     4194304
+    ],
+    "K_multiple_of_128": true,
+    "source": "model",
+    "rows": 0,
+    "status_nonzero": 0,
+    "tested": 0,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 0
+   },
+   {
+    "K_band": [
+     65537,
+     4194304
+    ],
+    "K_multiple_of_128": false,
+    "source": "random",
+    "rows": 43521,
+    "status_nonzero": 2951,
+    "tested": 1825,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 24828
+   },
+   {
+    "K_band": [
+     65537,
+     4194304
+    ],
+    "K_multiple_of_128": false,
+    "source": "model",
+    "rows": 0,
+    "status_nonzero": 0,
+    "tested": 0,
+    "tested_MN_le_30720": 0,
+    "split_tested": 0,
+    "split_all": 0
+   }
+  ]
+ },
+ "hopper-h100pcie-ws0": {
+  "rows": 50000,
+  "status_nonzero": 3346,
+  "status0": 46654,
+  "split": 0,
+  "passed": true,
+  "failures": []
+ },
+ "envelope_validated": false,
+ "ws0_validated": true
+}

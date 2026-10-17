@@ -266,7 +266,7 @@ def _combine_splits(P, scheme):
     S = len(P)
     if S == 1:
         return P[0]
-    if scheme == "serial":
+    if scheme in ("serial", "contiguous"):         # contiguous (hopper) combines serially, as reduce_partials does
         acc = P[0]
         for s in range(1, S):
             acc = acc + P[s]
@@ -299,6 +299,9 @@ def execute_override(orig_execute_plan, knobs):
         for chunks in plan.chunks:
             res = [chain_fn(a_s.contiguous(), b_s.contiguous()) if plan.identity else
                    chain_fn(_gather(a_s, idx), _gather(b_s, idx)) for idx in chunks]
+            if not res:                                 # a contiguous split without k-tiles: +0
+                parts.append(torch.zeros(M, N, dtype=torch.float32, device=a_u8.device))
+                continue
             parts.append(res[0] if plan.fast and k["chunk_sum"] == "fp32_seq"
                          else _combine_chunks(res, k["chunk_sum"]))
         acc = _combine_splits(parts, plan.scheme)
@@ -415,7 +418,8 @@ def api_override(orig_scaled_mm, knobs):
                 import mmaemu
                 from mmaemu.model import epilogue
                 acc = mmaemu.accumulate(input, mat2.t(), use_fast_accum=use_fast_accum,
-                                        splitk=kw.get("splitk", "auto"), backend=kw.get("backend", "auto"))
+                                        splitk=kw.get("splitk", "auto"), backend=kw.get("backend", "auto"),
+                                        profile=kw.get("profile"))
                 y = epilogue.apply(acc, scale_a, scale_b, out_dtype=e5, scale_result=scale_result)
                 if kw.get("out") is not None:
                     kw["out"].copy_(y)

@@ -1,0 +1,95 @@
+{
+ "live_jobs": 1450,
+ "live_verdicts": {
+  "equal": 1423,
+  "rejected_as_hardware": 27
+ },
+ "live_by": [
+  [
+   "m4",
+   "fast",
+   "split",
+   "equal",
+   21
+  ],
+  [
+   "m4",
+   "fast",
+   "unsplit",
+   "equal",
+   186
+  ],
+  [
+   "m4",
+   "fast",
+   "unsplit",
+   "rejected_as_hardware",
+   14
+  ],
+  [
+   "m4",
+   "slow",
+   "split",
+   "equal",
+   28
+  ],
+  [
+   "m4",
+   "slow",
+   "unsplit",
+   "equal",
+   188
+  ],
+  [
+   "m4",
+   "slow",
+   "unsplit",
+   "rejected_as_hardware",
+   13
+  ],
+  [
+   "m6_live",
+   "fast",
+   "split",
+   "equal",
+   496
+  ],
+  [
+   "m6_live",
+   "slow",
+   "split",
+   "equal",
+   504
+  ]
+ ],
+ "live_auto": {
+  "agrees": 1353,
+  "rejected": 27,
+  "unknown": 70
+ },
+ "live_auto_m6": {
+  "agrees": 1000
+ },
+ "live_passes_equal": {
+  "True": 1423,
+  "None": 27
+ },
+ "live_split_equal": 1049,
+ "live_unsplit_equal": 374,
+ "live_backends": {
+  "cuda:h4": 1043,
+  "reference": 380
+ },
+ "m2_outputs": 168,
+ "m2_verdicts": {
+  "equal": 168
+ },
+ "m2_auto": {
+  "S=1 table": 168
+ },
+ "m2_runs_equal": 168,
+ "m2_backends": {
+  "cuda:h4": 168
+ },
+ "PASS": true
+}

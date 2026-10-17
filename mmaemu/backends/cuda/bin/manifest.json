@@ -5,6 +5,41 @@
  ],
  "format": "mmaemu-fatbin/1",
  "modules": {
+  "h1": {
+   "entries": [
+    "mmaemu_h1_e4m3e4m3"
+   ],
+   "file": "h1.fatbin",
+   "ptx_arch": 75,
+   "sass_archs": [
+    75,
+    80,
+    86,
+    89,
+    90,
+    100,
+    120
+   ],
+   "sha256": "261a760569d7672a815348d037129a1297b03b66b7d06a947d57479a7b0fc5a2",
+   "source_sha256": "d5284a9f73b59c1a83f3f834e4978e75cc363f4b573775c9353a431f7921fa60"
+  },
+  "h4": {
+   "entries": [
+    "mmaemu_h4_e4m3e4m3"
+   ],
+   "file": "h4.fatbin",
+   "ptx_arch": 80,
+   "sass_archs": [
+    80,
+    86,
+    89,
+    90,
+    100,
+    120
+   ],
+   "sha256": "7e1f96c33d602f22251b378620741887ccdaad42d05c9c1e440cfaae4e534b39",
+   "source_sha256": "e01780c9dd49eff0f421b3d162fd1bf91e6d6852017cf5dfd1925d86cb17e9de"
+  },
   "probes": {
    "entries": [
     "mmaemu_probe_hmma_f16_k8",

@@ -16,6 +16,7 @@ import warnings
 
 import torch
 
+PROFILE = "ada"  # R.scaled_mm / R.gemm_cublas: the audit's reference, the RTX 4060's cuBLAS
 PRESET_PARAMS = {
     "ada": dict(nfma=16, frac=13, frac_out=13, min_exp=-132, late_c=False),
     "hopper": dict(nfma=32, frac=13, frac_out=13, min_exp=-132, late_c=False),
@@ -76,7 +77,8 @@ def scaled_mm(a, b, scale_a, scale_b, out_dtype=torch.float32, use_fast_accum=Tr
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         return api.mmaemu.scaled_mm(a, b, scale_a, scale_b, out_dtype=out_dtype,
-                                    use_fast_accum=use_fast_accum, splitk=1, backend="reference", **kw)
+                                    use_fast_accum=use_fast_accum, splitk=1, backend="reference",
+                                    **{"profile": PROFILE, **kw})
 
 
 def gemm_cublas(A, B, fmt="e4m3", fast_accum=True, **kw):
@@ -87,7 +89,8 @@ def gemm_cublas(A, B, fmt="e4m3", fast_accum=True, **kw):
     b8 = torch.as_tensor(B).to(FP8[fb])
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
-        return api.mmaemu.accumulate(a8, b8, use_fast_accum=bool(fast_accum), splitk=1, backend="reference").double()
+        return api.mmaemu.accumulate(a8, b8, use_fast_accum=bool(fast_accum), splitk=1, backend="reference",
+                                     profile=PROFILE).double()
 
 
 R = types.SimpleNamespace(PRESETS=PRESET_PARAMS, dot=dot, scaled_mm=scaled_mm, gemm_cublas=gemm_cublas,

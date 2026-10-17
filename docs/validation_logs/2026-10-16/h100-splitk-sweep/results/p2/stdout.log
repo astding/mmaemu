@@ -1,0 +1,11 @@
+p2 torch align 0 chunk 0: 173793/500000 queries, 2897/s
+p2 torch align 0 chunk 1/2: 500000 queries in 112.9s (4428/s), status!=0 0; split rows 125190, largest split M*N 122880, S [2, 3, 4, 5, 6, 7, 8]
+p2 torch align 0 chunk 2/2: 335800 queries in 52.9s (6348/s), status!=0 55720; split rows 70814, largest split M*N 122880, S [2, 3, 4, 5, 6, 7, 8]
+p2 torch align 0: 835800 queries in 167.1s
+p2 te align 256 chunk 0: 109717/500000 queries, 1829/s
+p2 te align 256 chunk 0: 299181/500000 queries, 2493/s
+p2 te align 256 chunk 0: 490335/500000 queries, 2724/s
+p2 te align 256 chunk 1/2: 500000 queries in 182.8s (2736/s), status!=0 0; split rows 190930, largest split M*N 311296, S [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 27, 28, 30, 32, 34, 35, 38, 45, 57, 65]
+p2 te align 256 chunk 1: 240959/335800 queries, 4016/s
+p2 te align 256 chunk 2/2: 335800 queries in 89.4s (3755/s), status!=0 55720; split rows 106994, largest split M*N 311296, S [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 27, 28, 30, 32, 34, 38, 45, 57, 65]
+p2 te align 256: 835800 queries in 273.4s

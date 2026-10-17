@@ -57,18 +57,29 @@ def _data(M, N, K, seed=3):
     return a, b
 
 
+KERNELS = ["v1", "v4", "h1", "h4"]
+PROFILE = {"ada": "ada", "hopper": "hopper"}
+
+
+def _preset(name):
+    from mmaemu.backends.cuda.kernels import SPECS
+
+    return {s.name: s for s in SPECS}[name].preset
+
+
 def _chain(name, dev):
     from mmaemu.backends import ChainRequest
     from mmaemu.backends.cuda.kernels import SPECS, chain_fn_for
 
     spec = {s.name: s for s in SPECS}[name]
-    return chain_fn_for(spec, ChainRequest(device=dev, fmt_a="e4m3", fmt_b="e4m3", preset="ada"))
+    return chain_fn_for(spec, ChainRequest(device=dev, fmt_a="e4m3", fmt_b="e4m3", preset=spec.preset))
 
 
-def _ref(a, b):
+def _ref(a, b, preset="ada"):
     from mmaemu.model.chain import chain_gemm
 
-    return chain_gemm(a.view(torch.uint8).cpu(), b.view(torch.uint8).cpu(), fmt_a="e4m3", fmt_b="e4m3").float()
+    return chain_gemm(a.view(torch.uint8).cpu(), b.view(torch.uint8).cpu(), fmt_a="e4m3", fmt_b="e4m3",
+                      preset=preset).float()
 
 
 def _sha(t: torch.Tensor) -> str:
@@ -77,7 +88,7 @@ def _sha(t: torch.Tensor) -> str:
 
 # ------------------------------------------------------------------------------------------------ in-process checks
 
-@pytest.mark.parametrize("kernel", ["v1", "v4"])
+@pytest.mark.parametrize("kernel", KERNELS)
 def test_storage_offsets(env, kernel):
     """Storage offsets 1..15 on either and both operands: no CUDA error (B12), results equal to the aligned ones,
     through the ChainFn and through accumulate()."""
@@ -88,7 +99,7 @@ def test_storage_offsets(env, kernel):
     a, b = _data(M, N, K)
     fn = _chain(kernel, env)
     want = fn(a.to(env), b.to(env)).cpu()
-    assert_bitwise_equal(want, _ref(a, b))
+    assert_bitwise_equal(want, _ref(a, b, _preset(kernel)))
     base_a = torch.zeros(M * K + 32, dtype=torch.uint8, device=env)
     base_b = torch.zeros(N * K + 32, dtype=torch.uint8, device=env)
     for oa, ob in [(o, 0) for o in range(1, 16)] + [(0, o) for o in range(1, 16)] + [(o, 16 - o) for o in range(1, 16)]:
@@ -99,13 +110,14 @@ def test_storage_offsets(env, kernel):
         if oa % 4:
             assert va.data_ptr() % 4
         got = fn(va, vb)
-        acc = api.accumulate(va.view(E4M3), vb.view(E4M3), use_fast_accum=True, splitk=1, backend=f"cuda:{kernel}")
+        acc = api.accumulate(va.view(E4M3), vb.view(E4M3), use_fast_accum=True, splitk=1,
+                             profile=PROFILE[_preset(kernel)], backend=f"cuda:{kernel}")
         torch.cuda.synchronize(env)
         assert_bitwise_equal(got, want, msg=f"offsets {oa}, {ob}")
         assert_bitwise_equal(acc, want, msg=f"accumulate offsets {oa}, {ob}")
 
 
-@pytest.mark.parametrize("kernel", ["v1", "v4"])
+@pytest.mark.parametrize("kernel", KERNELS)
 def test_non_default_stream(env, kernel):
     """Launches go to torch's current stream: while a sleep kernel holds stream s, our kernel queued on s has not
     run and the default stream is idle."""
@@ -124,10 +136,10 @@ def test_non_default_stream(env, kernel):
     default_idle = torch.cuda.default_stream(env).query()
     s.synchronize()
     assert busy and default_idle
-    assert_bitwise_equal(out.cpu(), _ref(a, b))
+    assert_bitwise_equal(out.cpu(), _ref(a, b, _preset(kernel)))
 
 
-@pytest.mark.parametrize("kernel", ["v1", "v4"])
+@pytest.mark.parametrize("kernel", KERNELS)
 def test_wrong_dtype_and_mixed_devices(env, kernel):
     a, b = _data(16, 16, 64)
     fn = _chain(kernel, env)
@@ -149,9 +161,12 @@ def test_wrong_dtype_and_mixed_devices(env, kernel):
 
     spec = {s.name: s for s in SPECS}[kernel]
     with pytest.raises(ValueError):
-        chain_fn_for(spec, ChainRequest(device=env, fmt_a="e5m2", fmt_b="e4m3", preset="ada"))
+        chain_fn_for(spec, ChainRequest(device=env, fmt_a="e5m2", fmt_b="e4m3", preset=spec.preset))
     with pytest.raises(ValueError):
-        chain_fn_for(spec, ChainRequest(device=torch.device("cpu"), fmt_a="e4m3", fmt_b="e4m3", preset="ada"))
+        chain_fn_for(spec, ChainRequest(device=torch.device("cpu"), fmt_a="e4m3", fmt_b="e4m3", preset=spec.preset))
+    other = "hopper" if spec.preset == "ada" else "ada"
+    with pytest.raises(ValueError, match=f"implements preset {spec.preset!r}"):
+        chain_fn_for(spec, ChainRequest(device=env, fmt_a="e4m3", fmt_b="e4m3", preset=other))
     # zero sizes never launch
     assert fn(A[:0], B).shape == (0, 16) and fn(A, B[:0]).shape == (16, 0)
     z = fn(A[:, :0].contiguous(), B[:, :0].contiguous())
@@ -207,8 +222,8 @@ ACCUMULATE_TWICE = """
         warnings.simplefilter("always")
         req = ChainRequest(device=dev, fmt_a="e4m3", fmt_b="e4m3", preset="ada")
         be = registry.select(req)
-        o1 = api.accumulate(a.to(dev), b.to(dev), use_fast_accum=True, splitk=1)
-        o2 = api.accumulate(a.to(dev), b.to(dev), use_fast_accum=False, splitk=1)
+        o1 = api.accumulate(a.to(dev), b.to(dev), use_fast_accum=True, splitk=1, profile="ada")
+        o2 = api.accumulate(a.to(dev), b.to(dev), use_fast_accum=False, splitk=1, profile="ada")
     w = [str(x.message) for x in rec if issubclass(x.category, BackendFallbackWarning)]
     src = getattr(be, "source", None)
     from mmaemu.backends.cuda import driver
@@ -222,8 +237,9 @@ def expected_shas():
     import mmaemu.api as api
 
     a, b = _data(96, 80, 320)
-    return dict(fast=_sha(api.accumulate(a, b, use_fast_accum=True, splitk=1, backend="reference")),
-                slow=_sha(api.accumulate(a, b, use_fast_accum=False, splitk=1, backend="reference")))
+    kw = dict(splitk=1, backend="reference", profile="ada")   # the preset the children select
+    return dict(fast=_sha(api.accumulate(a, b, use_fast_accum=True, **kw)),
+                slow=_sha(api.accumulate(a, b, use_fast_accum=False, **kw)))
 
 
 def _child_env(fatbins, cache, **kw):
@@ -363,14 +379,15 @@ def test_second_context(fatbins, tmp_path):
         from mmaemu.backends import ChainRequest
         from mmaemu.model.chain import chain_gemm
         a, b = data(64, 48, 128, seed=11)
-        ref = chain_gemm(a.view(torch.uint8), b.view(torch.uint8), fmt_a="e4m3", fmt_b="e4m3").float()
+        refs = {p: chain_gemm(a.view(torch.uint8), b.view(torch.uint8), fmt_a="e4m3", fmt_b="e4m3", preset=p).float()
+                for p in {s.preset for s in kernels.SPECS}}
         dev = torch.device("cuda", 0)
-        req = ChainRequest(device=dev, fmt_a="e4m3", fmt_b="e4m3", preset="ada")
+        req = lambda s: ChainRequest(device=dev, fmt_a="e4m3", fmt_b="e4m3", preset=s.preset)
         out = {}
-        def bits_ok(t):
-            return bool((t.view(torch.int32) == ref.view(torch.int32)).all())
+        def bits_ok(t, s):
+            return bool((t.view(torch.int32) == refs[s.preset].view(torch.int32)).all())
         for s in kernels.SPECS:
-            out[s.name + "_primary_first"] = bits_ok(kernels.chain_fn_for(s, req)(a.to(dev), b.to(dev)).cpu())
+            out[s.name + "_primary_first"] = bits_ok(kernels.chain_fn_for(s, req(s))(a.to(dev), b.to(dev)).cpu(), s)
         L = driver.libcuda()
         vp, sz = ctypes.c_void_p, ctypes.c_size_t
         L.cuCtxCreate_v2.argtypes = [ctypes.POINTER(vp), ctypes.c_uint, ctypes.c_int]
@@ -402,22 +419,22 @@ def test_second_context(fatbins, tmp_path):
             driver.check(L.cuMemcpyDtoH_v2(C.data_ptr(), pc.value, M * N * 4), "DtoH")   # synchronous
             out[s.name + "_ctx2_new_module"] = modules.stats()["module_loads"] == loads0 + 1
             out[s.name + "_ctx2_nonzero"] = int((C != 0).sum())
-            out[s.name + "_ctx2_bitwise"] = bits_ok(C)
+            out[s.name + "_ctx2_bitwise"] = bits_ok(C, s)
             for p in (pa, pb, pc):
                 L.cuMemFree_v2(p.value)
         popped = vp()
         driver.check(L.cuCtxPopCurrent_v2(ctypes.byref(popped)), "cuCtxPopCurrent")
         driver.check(L.cuCtxDestroy_v2(ctx2), "cuCtxDestroy")
         for s in kernels.SPECS:
-            out[s.name + "_primary_after"] = bits_ok(kernels.chain_fn_for(s, req)(a.to(dev), b.to(dev)).cpu())
-        out["ref_nonzero"] = int((ref != 0).sum()); out["n"] = ref.numel()
+            out[s.name + "_primary_after"] = bits_ok(kernels.chain_fn_for(s, req(s))(a.to(dev), b.to(dev)).cpu(), s)
+            out[s.name + "_ref_nonzero"] = int((refs[s.preset] != 0).sum())
         result(**out)
     """
     r = run_child(body, _child_env(fatbins, tmp_path / "c"))
     print(json.dumps(r))
-    for k in ("v1", "v4"):
+    for k in KERNELS:
         assert r[f"{k}_primary_first"] and r[f"{k}_ctx2_new_module"] and r[f"{k}_ctx2_bitwise"]
-        assert r[f"{k}_ctx2_nonzero"] == r["ref_nonzero"] > 0 and r[f"{k}_primary_after"]
+        assert r[f"{k}_ctx2_nonzero"] == r[f"{k}_ref_nonzero"] > 0 and r[f"{k}_primary_after"]
 
 
 def test_environment_failure_scenarios(fatbins, tmp_path, expected_shas):

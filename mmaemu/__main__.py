@@ -64,7 +64,7 @@ def parse_splitk(text: str):
         return int(text)
     except ValueError:
         raise argparse.ArgumentTypeError(f"invalid split-K {text!r}: use 'auto', '1', or 'S,serial' / "
-                                         f"'S,pairwise'") from None
+                                         f"'S,pairwise' / 'S,contiguous'") from None
 
 
 def _size(text: str) -> int:
@@ -175,8 +175,8 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--scale-b", type=float, default=1.0)
     p.add_argument("--scale-result", type=float, default=None)
     p.add_argument("--profile", default=None, help="platform profile (default: $MMAEMU_PROFILE or the default)")
-    p.add_argument("--splitk", type=parse_splitk, default="auto", help="'auto' (default), '1', or 'S,serial' / 'S,pairwise'")
-    p.add_argument("--backend", default="auto", help="auto | reference | cuda | cuda:v1 | cuda:v4 | cuda:v9 | cuda:tc3")
+    p.add_argument("--splitk", type=parse_splitk, default="auto", help="'auto' (default), '1', or 'S,serial' / 'S,pairwise' (ada) / 'S,contiguous' (hopper)")
+    p.add_argument("--backend", default="auto", help="auto | reference | cuda | cuda:v1 | cuda:v4 | cuda:v9 | cuda:tc3 (ada) | cuda:h1 | cuda:h4 (hopper)")
     p.add_argument("--device", default="auto", help="auto (CUDA if available) | cpu | cuda | cuda:N")
     p.add_argument("--json", metavar="PATH", help="also write the plan as JSON ('-' = JSON on stdout only)")
     p.set_defaults(fn=cmd_explain)

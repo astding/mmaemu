@@ -1,0 +1,624 @@
+{
+ "part": "p2",
+ "profile": "torch",
+ "ws": 1048576,
+ "align": 0,
+ "chunk": 0,
+ "chunks": 2,
+ "pairs": [
+  0,
+  500000
+ ],
+ "hardware": {
+  "gpu": "NVIDIA H100 PCIe",
+  "capability": [
+   9,
+   0
+  ],
+  "sm_count": 114,
+  "cublaslt": "12.8.3.14",
+  "cublaslt_lib": "<task-root>/venv/lib/python3.12/site-packages/nvidia/cublas/lib/libcublasLt.so.12",
+  "python": "3.12.15",
+  "os": "Linux 6.8.0-60-generic",
+  "date": "2026-10-16 19:45:11",
+  "driver": "570.148.08",
+  "torch": "2.7.1+cu128"
+ },
+ "seconds": 112.9,
+ "shapes_file": "shapes/p2.json",
+ "shapes_sha256": "00e6d4ad9741a68db209441f57c01aea7dcdd8514c0b30f8c70bccaa7297efe4",
+ "summary": {
+  "settings": [
+   {
+    "ws": 1048576,
+    "out": "float32",
+    "fast": 0,
+    "fa": 0,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 6857,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3422
+   },
+   {
+    "ws": 1048576,
+    "out": "float32",
+    "fast": 0,
+    "fa": 0,
+    "fb": 1,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 6966,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3454
+   },
+   {
+    "ws": 1048576,
+    "out": "float32",
+    "fast": 0,
+    "fa": 1,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 6935,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3440
+   },
+   {
+    "ws": 1048576,
+    "out": "float32",
+    "fast": 1,
+    "fa": 0,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 6857,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3422
+   },
+   {
+    "ws": 1048576,
+    "out": "float32",
+    "fast": 1,
+    "fa": 0,
+    "fb": 1,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 6966,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3454
+   },
+   {
+    "ws": 1048576,
+    "out": "float32",
+    "fast": 1,
+    "fa": 1,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 6935,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3440
+   },
+   {
+    "ws": 1048576,
+    "out": "bfloat16",
+    "fast": 0,
+    "fa": 0,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 7004,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3461
+   },
+   {
+    "ws": 1048576,
+    "out": "bfloat16",
+    "fast": 0,
+    "fa": 0,
+    "fb": 1,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 6961,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3465
+   },
+   {
+    "ws": 1048576,
+    "out": "bfloat16",
+    "fast": 0,
+    "fa": 1,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 6941,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3450
+   },
+   {
+    "ws": 1048576,
+    "out": "bfloat16",
+    "fast": 1,
+    "fa": 0,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 7004,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3461
+   },
+   {
+    "ws": 1048576,
+    "out": "bfloat16",
+    "fast": 1,
+    "fa": 0,
+    "fb": 1,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 6961,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3465
+   },
+   {
+    "ws": 1048576,
+    "out": "bfloat16",
+    "fast": 1,
+    "fa": 1,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 6941,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3450
+   },
+   {
+    "ws": 1048576,
+    "out": "float16",
+    "fast": 0,
+    "fa": 0,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 6958,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3447
+   },
+   {
+    "ws": 1048576,
+    "out": "float16",
+    "fast": 0,
+    "fa": 0,
+    "fb": 1,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 6982,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3482
+   },
+   {
+    "ws": 1048576,
+    "out": "float16",
+    "fast": 0,
+    "fa": 1,
+    "fb": 0,
+    "rows": 26380,
+    "status_nonzero": 0,
+    "split_rows": 6991,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3481
+   },
+   {
+    "ws": 1048576,
+    "out": "float16",
+    "fast": 1,
+    "fa": 0,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 6958,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3447
+   },
+   {
+    "ws": 1048576,
+    "out": "float16",
+    "fast": 1,
+    "fa": 0,
+    "fb": 1,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 6982,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3482
+   },
+   {
+    "ws": 1048576,
+    "out": "float16",
+    "fast": 1,
+    "fa": 1,
+    "fb": 0,
+    "rows": 27860,
+    "status_nonzero": 0,
+    "split_rows": 6991,
+    "max_split_MN": 122880,
+    "min_split_K": 5136,
+    "S": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "reduction": [
+     2
+    ],
+    "custom": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "split_K_not_128": 3481
+   }
+  ],
+  "split_rows": 125190,
+  "max_split_MN": 122880,
+  "S_values": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "format": "mmaemu-h100-sweep/1",
+ "columns": [
+  "M",
+  "N",
+  "K",
+  "fa",
+  "fb",
+  "out",
+  "fast",
+  "ws",
+  "align",
+  "dscale",
+  "lib",
+  "status",
+  "algo",
+  "tile",
+  "stages",
+  "splitK",
+  "reduction",
+  "swizzle",
+  "custom",
+  "workspace",
+  "waves_x1000"
+ ],
+ "rows": 500000,
+ "status_nonzero": 0,
+ "npz_sha256": "2cd99eba9fe15ccc33c9657225404b77528d1f1d1635d41cd26acfd2a5d677c9"
+}

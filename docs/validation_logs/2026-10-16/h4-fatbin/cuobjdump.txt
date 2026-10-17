@@ -1,0 +1,8 @@
+== h4.fatbin
+PTX file    1: h4.1.sm_80.ptx
+ELF file    1: h4.1.sm_80.cubin
+ELF file    2: h4.2.sm_86.cubin
+ELF file    3: h4.3.sm_89.cubin
+ELF file    4: h4.4.sm_90.cubin
+ELF file    5: h4.5.sm_100.cubin
+ELF file    6: h4.6.sm_120.cubin

@@ -1,0 +1,181 @@
+{
+ "live_jobs": 1450,
+ "live_verdicts": {
+  "equal": 1043,
+  "mmaemu_error BackendUnavailableError: no usable CUDA kernel for 'cuda:h1' on cuda:0: cuda:h1: format pair e5m2 x e4m3 not supported (kernels: (('e4m3', 'e4m3'),))": 106,
+  "mmaemu_error BackendUnavailableError: no usable CUDA kernel for 'cuda:h1' on cuda:0: cuda:h1: format pair e4m3 x e5m2 not supported (kernels: (('e4m3', 'e4m3'),))": 274,
+  "rejected_as_hardware": 27
+ },
+ "live_by": [
+  [
+   "m4",
+   "fast",
+   "split",
+   "equal",
+   17
+  ],
+  [
+   "m4",
+   "fast",
+   "split",
+   "mmaemu_error BackendUnavailableError: no usable CUDA kernel for 'cuda:h1' on cuda:0: cuda:h1: format pair e4m3 x e5m2 not supported (kernels: (('e4m3', 'e4m3'),))",
+   2
+  ],
+  [
+   "m4",
+   "fast",
+   "split",
+   "mmaemu_error BackendUnavailableError: no usable CUDA kernel for 'cuda:h1' on cuda:0: cuda:h1: format pair e5m2 x e4m3 not supported (kernels: (('e4m3', 'e4m3'),))",
+   2
+  ],
+  [
+   "m4",
+   "fast",
+   "unsplit",
+   "equal",
+   142
+  ],
+  [
+   "m4",
+   "fast",
+   "unsplit",
+   "mmaemu_error BackendUnavailableError: no usable CUDA kernel for 'cuda:h1' on cuda:0: cuda:h1: format pair e4m3 x e5m2 not supported (kernels: (('e4m3', 'e4m3'),))",
+   23
+  ],
+  [
+   "m4",
+   "fast",
+   "unsplit",
+   "mmaemu_error BackendUnavailableError: no usable CUDA kernel for 'cuda:h1' on cuda:0: cuda:h1: format pair e5m2 x e4m3 not supported (kernels: (('e4m3', 'e4m3'),))",
+   21
+  ],
+  [
+   "m4",
+   "fast",
+   "unsplit",
+   "rejected_as_hardware",
+   14
+  ],
+  [
+   "m4",
+   "slow",
+   "split",
+   "equal",
+   19
+  ],
+  [
+   "m4",
+   "slow",
+   "split",
+   "mmaemu_error BackendUnavailableError: no usable CUDA kernel for 'cuda:h1' on cuda:0: cuda:h1: format pair e4m3 x e5m2 not supported (kernels: (('e4m3', 'e4m3'),))",
+   4
+  ],
+  [
+   "m4",
+   "slow",
+   "split",
+   "mmaemu_error BackendUnavailableError: no usable CUDA kernel for 'cuda:h1' on cuda:0: cuda:h1: format pair e5m2 x e4m3 not supported (kernels: (('e4m3', 'e4m3'),))",
+   5
+  ],
+  [
+   "m4",
+   "slow",
+   "unsplit",
+   "equal",
+   155
+  ],
+  [
+   "m4",
+   "slow",
+   "unsplit",
+   "mmaemu_error BackendUnavailableError: no usable CUDA kernel for 'cuda:h1' on cuda:0: cuda:h1: format pair e4m3 x e5m2 not supported (kernels: (('e4m3', 'e4m3'),))",
+   19
+  ],
+  [
+   "m4",
+   "slow",
+   "unsplit",
+   "mmaemu_error BackendUnavailableError: no usable CUDA kernel for 'cuda:h1' on cuda:0: cuda:h1: format pair e5m2 x e4m3 not supported (kernels: (('e4m3', 'e4m3'),))",
+   14
+  ],
+  [
+   "m4",
+   "slow",
+   "unsplit",
+   "rejected_as_hardware",
+   13
+  ],
+  [
+   "m6_live",
+   "fast",
+   "split",
+   "equal",
+   352
+  ],
+  [
+   "m6_live",
+   "fast",
+   "split",
+   "mmaemu_error BackendUnavailableError: no usable CUDA kernel for 'cuda:h1' on cuda:0: cuda:h1: format pair e4m3 x e5m2 not supported (kernels: (('e4m3', 'e4m3'),))",
+   112
+  ],
+  [
+   "m6_live",
+   "fast",
+   "split",
+   "mmaemu_error BackendUnavailableError: no usable CUDA kernel for 'cuda:h1' on cuda:0: cuda:h1: format pair e5m2 x e4m3 not supported (kernels: (('e4m3', 'e4m3'),))",
+   32
+  ],
+  [
+   "m6_live",
+   "slow",
+   "split",
+   "equal",
+   358
+  ],
+  [
+   "m6_live",
+   "slow",
+   "split",
+   "mmaemu_error BackendUnavailableError: no usable CUDA kernel for 'cuda:h1' on cuda:0: cuda:h1: format pair e4m3 x e5m2 not supported (kernels: (('e4m3', 'e4m3'),))",
+   114
+  ],
+  [
+   "m6_live",
+   "slow",
+   "split",
+   "mmaemu_error BackendUnavailableError: no usable CUDA kernel for 'cuda:h1' on cuda:0: cuda:h1: format pair e5m2 x e4m3 not supported (kernels: (('e4m3', 'e4m3'),))",
+   32
+  ]
+ ],
+ "live_auto": {
+  "agrees": 973,
+  "unknown": 450,
+  "rejected": 27
+ },
+ "live_auto_m6": {
+  "unknown": 290,
+  "agrees": 710
+ },
+ "live_passes_equal": {
+  "True": 1423,
+  "None": 27
+ },
+ "live_split_equal": 746,
+ "live_unsplit_equal": 297,
+ "live_backends": {
+  "cuda:h1": 1043
+ },
+ "m2_outputs": 168,
+ "m2_verdicts": {
+  "equal": 168
+ },
+ "m2_auto": {
+  "S=1 table": 168
+ },
+ "m2_runs_equal": 168,
+ "m2_backends": {
+  "cuda:h1": 168
+ },
+ "PASS": false
+}

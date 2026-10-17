@@ -1,0 +1,52 @@
+{
+ "reference": {
+  "sha256": "4f349703def9b6f0d25cd6b41a622fcc86fad2a870d173c214d8fdea80be031d",
+  "hardware": {
+   "gpu": "NVIDIA H100 PCIe",
+   "capability": [
+    9,
+    0
+   ],
+   "sm_count": 114,
+   "cublaslt": "12.8.3.14",
+   "cublaslt_lib": "<task-root>/venv/lib/python3.12/site-packages/nvidia/cublas/lib/libcublasLt.so.12",
+   "python": "3.12.15",
+   "os": "Linux 6.8.0-60-generic",
+   "date": "2026-10-16 02:45:45",
+   "driver": "570.148.08",
+   "torch": "2.7.1+cu128"
+  }
+ },
+ "new": {
+  "path": "<sweep-root>/bundle/out/p0/heur.npz",
+  "sha256": "4f349703def9b6f0d25cd6b41a622fcc86fad2a870d173c214d8fdea80be031d",
+  "hardware": {
+   "gpu": "NVIDIA H100 PCIe",
+   "capability": [
+    9,
+    0
+   ],
+   "sm_count": 114,
+   "cublaslt": "12.8.3.14",
+   "cublaslt_lib": "<task-root>/venv/lib/python3.12/site-packages/nvidia/cublas/lib/libcublasLt.so.12",
+   "python": "3.12.15",
+   "os": "Linux 6.8.0-60-generic",
+   "date": "2026-10-16 19:06:55",
+   "driver": "570.148.08",
+   "torch": "2.7.1+cu128"
+  }
+ },
+ "hardware_mismatch": {},
+ "driver": {
+  "reference": "570.148.08",
+  "new": "570.148.08"
+ },
+ "rows": {
+  "reference": 850320,
+  "new": 850320
+ },
+ "rows_differing": 0,
+ "examples": [],
+ "column_diffs": {},
+ "verdict": "GO"
+}

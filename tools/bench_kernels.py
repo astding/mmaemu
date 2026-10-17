@@ -10,9 +10,10 @@ Method
     synchronised launches) exists for cross-checks and is refused when the host-clock gate fails.
   - Kernels are loaded as for users (fatbin from --fatbin-dir / the package, else NVRTC); performance acceptance
     requires a fatbin (--allow-nvrtc records NVRTC numbers instead, marked as such).
-  - Exactness gate before timing: v1 is compared bit for bit with the CPU reference on a row/column subset, and every
-    other kernel with v1 on the full output (v1 is checked even when it is not timed); a mismatch stops the run,
-    which writes its report and exits 1.
+  - Exactness gate before timing, per preset: its IEEE base kernel (v1 for ada, h1 for hopper) is compared bit for bit
+    with the CPU reference of the preset on a row/column subset, and every other kernel of the preset with the base
+    kernel on the full output (the base is checked even when it is not timed); a mismatch stops the run, which writes
+    its report and exits 1.
   - Warm-up >= 1.5 s per kernel, then rounds of windows >= 1.0 s each (kernels interleaved, order rotated per round);
     per window: CUDA events around n back-to-back launches. Reported: median over windows of TMAC/s, min/max.
   - nvidia-smi samples SM clock, power and throttle reasons every 200 ms during the windows; MAC/clk/SM uses the mean
@@ -193,7 +194,7 @@ def v1_variant_fn(defines: str, dev):
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--kernels", default="v1,v4", help="comma list of kernel names (v1, v4, v9, tc3) and of "
+    ap.add_argument("--kernels", default="v1,v4", help="comma list of kernel names (v1, v4, v9, tc3, h1) and of "
                     "--v1-variant names")
     ap.add_argument("--v1-variant", action="append", default=[], metavar="NAME=DEFINES",
                     help="bench-only v1 compile-time variant, e.g. dec0=MMAEMU_V1_DEC=0 or "
@@ -237,8 +238,12 @@ def main(argv=None) -> int:
     sms = props.multi_processor_count
     K, N = SHAPES[a.shape] if a.shape in SHAPES else tuple(int(x) for x in a.shape.split("x"))
     specs = {s.name: s for s in registry.discover()}
-    req = ChainRequest(device=dev, fmt_a="e4m3", fmt_b="e4m3", preset="ada")
+    def req(spec):
+        return ChainRequest(device=dev, fmt_a="e4m3", fmt_b="e4m3", preset=spec.preset)
+
+    base_of = {"ada": "v1", "hopper": "h1"}   # the IEEE kernel each preset's other kernels are checked against
     variants = dict(v.split("=", 1) for v in a.v1_variant)
+    preset_of = {nm: "ada" for nm in variants}
     names = [x.strip() for x in a.kernels.split(",") if x.strip()]
     fns, info = {}, {}
     for nm in names:
@@ -248,14 +253,16 @@ def main(argv=None) -> int:
             continue
         if nm not in specs:
             raise SystemExit(f"unknown kernel {nm!r}; discovered: {sorted(specs)}")
-        fn = chain_fn_for(specs[nm], req)
+        fn = chain_fn_for(specs[nm], req(specs[nm]))
+        preset_of[nm] = specs[nm].preset
         lm = modules.module_info(specs[nm].module, dev)
         if lm.source != "fatbin" and not a.allow_nvrtc:
             raise SystemExit(f"bench_kernels: {nm} was loaded via {lm.source} ({lm.fatbin_error}); performance "
                              "acceptance needs a fatbin (the package's release fatbins, or --fatbin-dir <dir>) or "
                              "pass --allow-nvrtc")
         fns[nm] = fn
-        info[nm] = dict(source=lm.source, image_sha256=lm.sha256, fatbin_dir=str(modules.fatbin_dir()))
+        info[nm] = dict(source=lm.source, image_sha256=lm.sha256, fatbin_dir=str(modules.fatbin_dir()),
+                        preset=specs[nm].preset)
     report = dict(device=props.name, cc=list(torch.cuda.get_device_capability(dev)), sms=sms,
                   torch=torch.__version__, shape=a.shape, K=K, N=N, data=a.data, timer=a.timer,
                   warmup_s=a.warmup, window_s=a.window, rounds=a.rounds, hostclock=hc, kernels=info, results=[])
@@ -280,20 +287,24 @@ def main(argv=None) -> int:
         A = make_data(a.data, M, K, 5, dev)
         B = make_data(a.data, N, K, 6, dev)
         macs = M * N * K
-        # exactness gate before timing
+        # exactness gate before timing: per preset, its IEEE base kernel (v1 / h1, checked even if not timed)
+        # against the CPU reference on a slice, every other kernel of the preset against the base's full output
         exact = {}
-        base = fns["v1"](A, B) if "v1" in fns else chain_fn_for(specs["v1"], req)(A, B)  # checked even if not timed
         rs, cs = slice(0, min(M, 64)), slice(0, min(N, 256))
-        want = chain_gemm(A[rs].view(torch.uint8).cpu(), B[cs].view(torch.uint8).cpu(), fmt_a="e4m3",
-                          fmt_b="e4m3", preset="ada").float()
-        bad = int((base[rs, cs].cpu().view(torch.int32) != want.view(torch.int32)).sum())
-        exact["v1"] = dict(vs="cpu reference", outputs=want.numel(), mismatches=bad)
-        for nm, f in fns.items():
-            if nm == "v1":
-                continue
-            out = f(A, B)
-            bad = int((out.view(torch.int32) != base.view(torch.int32)).sum())
-            exact[nm] = dict(vs="v1 (full output)", outputs=out.numel(), mismatches=bad)
+        for preset in sorted(set(preset_of.values())):
+            bn = base_of[preset]
+            base = fns[bn](A, B) if bn in fns else chain_fn_for(specs[bn], req(specs[bn]))(A, B)
+            want = chain_gemm(A[rs].view(torch.uint8).cpu(), B[cs].view(torch.uint8).cpu(), fmt_a="e4m3",
+                              fmt_b="e4m3", preset=preset).float()
+            bad = int((base[rs, cs].cpu().view(torch.int32) != want.view(torch.int32)).sum())
+            exact[bn] = dict(vs=f"cpu reference ({preset})", outputs=want.numel(), mismatches=bad)
+            for nm, f in fns.items():
+                if nm == bn or preset_of[nm] != preset:
+                    continue
+                out = f(A, B)
+                bad = int((out.view(torch.int32) != base.view(torch.int32)).sum())
+                exact[nm] = dict(vs=f"{bn} (full output)", outputs=out.numel(), mismatches=bad)
+            del base
         torch.cuda.synchronize(dev)
         print(json.dumps(dict(M=M, exactness=exact)), flush=True)
         if any(v["mismatches"] for v in exact.values()):

@@ -16,7 +16,7 @@
 |---|---|
 | [Semantics](semantics.md) | the numerics contract: the instruction, the accumulation plan, the epilogue, what raises |
 | [Presets and profiles](presets_profiles.md) | tensor-core models and reference platforms, their maturity, split-K resolution, environment variables |
-| [Split-K tables](splitk_tables.md) | the recorded cuBLASLt heuristic table, its coverage and how it is used |
+| [Split-K tables](splitk_tables.md) | the recorded cuBLASLt heuristic tables (RTX 4060 and H100 PCIe), their coverage and how they are used |
 
 ## Implementation
 
