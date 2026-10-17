@@ -36,9 +36,10 @@ E4M3 x E4M3 live jobs that ran and all 168 Evo 2 outputs; the 380 mixed-format j
 The method is the one in [docs/performance.md](../../../performance.md): CUDA events, a 1.5 s warm-up, then five
 1.0 s windows. The host clock check passed this time (perf_counter / CLOCK_MONOTONIC_RAW = 0.9996 to 1.00003); the
 timing uses CUDA events either way. Before timing, each kernel passed an exactness gate:
+
 - v1 and h1 were each bit for bit equal to the CPU reference of their own preset on a 16,384-output slice;
 - v4 was bit for bit equal to v1, and h4 to h1, over the full output (11,796,480, 25,165,824 and 50,331,648
-  outputs).
+    outputs).
 
 The SM clock stayed at 2,707 to 2,722 MHz with no throttle reasons.
 
@@ -52,7 +53,7 @@ h4 is 2.0 to 2.3 times as fast as h1 and 3 to 7% faster than v4. h1, v1 and v4 a
 [earlier run](../h1-rtx-5070-ti/README.md).
 
 - [bench-1b-gauss40.json](bench-1b-gauss40.json), [bench-7b-gauss40.json](bench-7b-gauss40.json),
-  [bench-40b-gauss40.json](bench-40b-gauss40.json): the reports (per-window times, launches, nvidia-smi samples,
-  the exactness gate).
+    [bench-40b-gauss40.json](bench-40b-gauss40.json): the reports (per-window times, launches, nvidia-smi samples,
+    the exactness gate).
 - [bench-1b-gauss40.log](bench-1b-gauss40.log), [bench-7b-gauss40.log](bench-7b-gauss40.log),
-  [bench-40b-gauss40.log](bench-40b-gauss40.log): the console output.
+    [bench-40b-gauss40.log](bench-40b-gauss40.log): the console output.

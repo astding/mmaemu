@@ -12,17 +12,17 @@ not involved in this run.
 
 - GPU: H100 PCIe (sm_90, 114 SMs), driver 570.148.08, rented for this run (Lambda).
 - Software, the same as the RTX 4060 run: torch 2.7.1+cu128, cuBLAS/cuBLASLt 12.8.3.14, Transformer Engine 2.3.0,
-  evo2 0.6.0, vtx 1.1.0, flash-attn 2.8.0.post2, `NVTE_DISABLE_NVRTC=1`.
-  - `libtransformer_engine.so` (PyPI `transformer_engine_cu12` 2.3.0) is byte-identical to the RTX 4060
-    environment's copy; `transformer_engine_torch` is that environment's own build, copied over (it needs
-    GLIBCXX_3.4.32, from the Ubuntu toolchain PPA).
-  - The checkpoint `evo2_1b_base.pt` is the same file (sha256 8ffba7d0…6f64).
+    evo2 0.6.0, vtx 1.1.0, flash-attn 2.8.0.post2, `NVTE_DISABLE_NVRTC=1`.
+    - `libtransformer_engine.so` (PyPI `transformer_engine_cu12` 2.3.0) is byte-identical to the RTX 4060
+        environment's copy; `transformer_engine_torch` is that environment's own build, copied over (it needs
+        GLIBCXX_3.4.32, from the Ubuntu toolchain PPA).
+    - The checkpoint `evo2_1b_base.pt` is the same file (sha256 8ffba7d0…6f64).
 - FP8 check: the script asserts that the model has FP8 TE projections (21 modules). The cuBLASLt log of the
-  window stage has 252 E4M3 GEMMs (21 projections x 6 windows x 2 runs), all algoId 66 with a 32 MiB workspace:
-  [cublaslt_fp8_calls.json](cublaslt_fp8_calls.json).
+    window stage has 252 E4M3 GEMMs (21 projections x 6 windows x 2 runs), all algoId 66 with a 32 MiB workspace:
+    [cublaslt_fp8_calls.json](cublaslt_fp8_calls.json).
 - Inputs: the six windows use the token ids of the RTX 4060 run; BRCA1 uses the same 500-variant subset (seed 0
-  sample of the Findlay et al. 2018 table, 435 unique reference windows of 8,192 bp) and upstream
-  `score_sequences` with its default arguments.
+    sample of the Findlay et al. 2018 table, 435 unique reference windows of 8,192 bp) and upstream
+    `score_sequences` with its default arguments.
 - Determinism: both stages ran twice; logits and scores were bit-identical between the runs.
 
 ## H100 vs RTX 4060, both official TE FP8
@@ -41,7 +41,7 @@ BRCA1 subset (500 variants, 111 loss of function):
 - AUROC 0.7332 on the H100, 0.7378 on the RTX 4060.
 - Sequence scores: 1 of 935 identical; Pearson 0.999999; max abs difference 4.2e-4.
 - Variant score differences (Δ): Pearson 0.987, Spearman 0.922, same sign for 84.2%; max abs difference 4.5e-4,
-  against a mean \|Δ\| of 6.1e-4 on the RTX 4060.
+    against a mean \|Δ\| of 6.1e-4 on the RTX 4060.
 
 The metric of the upstream test (`evo2/test/test_evo2.py`, prompts p0-p3; cross entropy computed in fp32 from
 the bf16 logits, see [upstream_test.py](upstream_test.py)):

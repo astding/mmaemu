@@ -27,6 +27,7 @@ sha256 `261a7605…`, `mmaemu/backends/cuda/bin/h1.fatbin`).
 The method is the one in [docs/performance.md](../../../performance.md): CUDA events, a 1.5 s warm-up, then five
 1.0 s windows. The host clock check fails on WSL2 (perf_counter / CLOCK_MONOTONIC_RAW = 1.058), so no host timer is
 used. Before timing, each kernel passed an exactness gate:
+
 - v1 and h1 were each bit for bit equal to the CPU reference of their own preset on a 16,384-output slice;
 - v4 was bit for bit equal to v1 over the full output.
 
@@ -43,7 +44,7 @@ There was no v4-style kernel for the hopper preset yet (h4 followed the same day
 same fatbin images) gave the same numbers to within 0.003 TMAC/s; it was replaced by this run.
 
 - [bench-1b-gauss40.json](bench-1b-gauss40.json), [bench-7b-gauss40.json](bench-7b-gauss40.json),
-  [bench-40b-gauss40.json](bench-40b-gauss40.json): the reports (per-window times, launches, nvidia-smi samples,
-  the exactness gate).
+    [bench-40b-gauss40.json](bench-40b-gauss40.json): the reports (per-window times, launches, nvidia-smi samples,
+    the exactness gate).
 - [bench-1b-gauss40.log](bench-1b-gauss40.log), [bench-7b-gauss40.log](bench-7b-gauss40.log),
-  [bench-40b-gauss40.log](bench-40b-gauss40.log): the console output.
+    [bench-40b-gauss40.log](bench-40b-gauss40.log): the console output.

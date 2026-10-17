@@ -11,17 +11,17 @@ marked as such.
 ## Setup
 
 - GPU: H100 PCIe (sm_90, 114 SMs, 80 GB), driver 570.148.08, one instance rented for this run (Lambda), 2026-10-15
-  19:08 to 20:04 PDT. The measurements took 14 minutes (`results/status.txt`, times in UTC).
+    19:08 to 20:04 PDT. The measurements took 14 minutes (`results/status.txt`, times in UTC).
 - Software: Python 3.12.15, torch 2.7.1+cu128, cuBLAS / cuBLASLt 12.8.3.14 (`libcublasLt.so.12` sha256 `4ef47ce6…`,
-  `results/env/env.json`), Transformer Engine 2.3.0 installed by `scripts/te_setup.sh` (as on 14 and 15 October).
+    `results/env/env.json`), Transformer Engine 2.3.0 installed by `scripts/te_setup.sh` (as on 14 and 15 October).
 - Code: the probe bundle (sha256 `fee1a8cc…`) built by `scripts/build_bundle.sh`: mmaemu at a79668a
-  (`git archive`), the c6 vector sets `MM_cublas64`, `MM_cublas64_sm120` and `MM_sm90mma`, the scripts in
-  `scripts/probe/` and `scripts/run_all.sh`. Every GPU step ran under a lock with a 10-minute limit, every call was
-  logged with its cuBLASLt configuration (`CUBLASLT_LOG_LEVEL=2`) and its kernel names, and every call ran twice;
-  the live recorder jobs ran twice in separate processes.
+    (`git archive`), the c6 vector sets `MM_cublas64`, `MM_cublas64_sm120` and `MM_sm90mma`, the scripts in
+    `scripts/probe/` and `scripts/run_all.sh`. Every GPU step ran under a lock with a 10-minute limit, every call was
+    logged with its cuBLASLt configuration (`CUBLASLT_LOG_LEVEL=2`) and its kernel names, and every call ran twice;
+    the live recorder jobs ran twice in separate processes.
 - Inputs: the 21 FP8 projection inputs of Evo 2 1B on the w2k window (the inputs of the RTX 4060 truth), 1,450 live
-  `torch._scaled_mm` jobs (`scripts/m4_jobs/` and the M6 jobs built on the GPU from its own heuristic table), the c6
-  vector sets embedded in the production shapes, and pattern probes for the slow-accumulation promotion.
+    `torch._scaled_mm` jobs (`scripts/m4_jobs/` and the M6 jobs built on the GPU from its own heuristic table), the c6
+    vector sets embedded in the production shapes, and pattern probes for the slow-accumulation promotion.
 
 Steps (`scripts/run_all.sh`):
 
@@ -57,14 +57,14 @@ other (56,688 queries, every shape). All GEMMs ran cuBLAS's `nvjet_*` kernels (a
 **M1, how c enters** (`results/m1_kit/kit.json`, `results/m1/`, `results/analysis/m1.json`).
 
 - `MM_cublas64`, E4M3, fast and slow, K = 64: the `hopper` preset 445 of 445 (`ada` 383, the B200 model 106). Eight
-  of the 133 variants fit: flat 32-product blocks, early chain, c entering the first block's alignment, 13 fraction
-  bits; they differ only in `zero_exp`, `min_exp` and `c_exp_sub`.
+    of the 133 variants fit: flat 32-product blocks, early chain, c entering the first block's alignment, 13 fraction
+    bits; they differ only in `zero_exp`, `min_exp` and `c_exp_sub`.
 - Every stored n × n block (40 calls; 198,025 or 695,556 values each): only `hopper` with c in the same chain matches
-  all values in fast mode and at K = 64; in slow mode at K ≥ 1920 only `hopper` with c in an earlier chain (the
-  128-element restart) does. TE: `use_split_accumulator=False` behaves as fast, `True` as slow.
+    all values in fast mode and at K = 64; in slow mode at K ≥ 1920 only `hopper` with c in an earlier chain (the
+    128-element restart) does. TE: `use_split_accumulator=False` behaves as fast, `True` as slow.
 - The instruction-level `mma.sync` on sm_90 is a different unit: `MM_sm90mma` fits 25 fraction bits, c added late
-  with RNE, interleaved pairs (16 models, 488 / 461 vectors) and the paper's `TBX_H100c0` vectors fit the 25-bit
-  B200 model. cuBLAS does not use `mma.sync`; mmaemu models the cuBLAS path.
+    with RNE, interleaved pairs (16 models, 488 / 461 vectors) and the paper's `TBX_H100c0` vectors fit the 25-bit
+    B200 model. cuBLAS does not use `mma.sync`; mmaemu models the cuBLAS path.
 
 **M2, the 21 Evo 2 projections** (`results/analysis/m2_hopper_*.json`): `hopper` with R = 128 reproduces every
 output bit for bit: fp32 accumulator and bf16 output, fast and slow, torch and TE, 168 of 168 full outputs (the
@@ -93,7 +93,7 @@ partitions of 64-, 128- or 256-wide k-tiles, four combination orders, alpha afte
 Exactly one fits every job (`results/analysis/splitk_search.*`):
 
 - K is cut into 128-wide k-tiles; split s owns the contiguous tiles [s·q, (s+1)·q) with q = ⌈T / S⌉ (T = number of
-  tiles);
+    tiles);
 - fast: one chain per split from +0; slow: every tile is its own chain, added serially in fp32 from +0;
 - the partials are added serially in fp32, ((p0 + p1) + p2) + …, and alpha is applied afterwards (the epilogue);
 - the customOption does not change the result.
@@ -111,14 +111,14 @@ itself (`mmaemu.scaled_mm` and `mmaemu.explain`, reference backend, profiles `ho
 commit and whether the replayed code was modified). It ran on an RTX 5070 Ti, not on the H100.
 
 - Live jobs with the logged split passed explicitly: all 1,450 reproduce the H100. 1,423 are equal (1,049 split,
-  374 unsplit). The 27 e4m3 × e4m3 → e5m2 jobs raise `ReferenceRejectsError`, just as cuBLASLt rejected them.
+    374 unsplit). The 27 e4m3 × e4m3 → e5m2 jobs raise `ReferenceRejectsError`, just as cuBLASLt rejected them.
 - Live jobs with `splitk="auto"`:
-  - on all 1,000 M6 jobs the table gives the logged decision;
-  - of the 423 M4 jobs that ran, 341 agree, and 82 are off the table's grid and raise `SplitKUnknownError` (the
-    H100 table infers nothing between its rows);
-  - none disagrees.
+    - on all 1,000 M6 jobs the table gives the logged decision;
+    - of the 423 M4 jobs that ran, 341 agree, and 82 are off the table's grid and raise `SplitKUnknownError` (the
+        H100 table infers nothing between its rows);
+    - none disagrees.
 - M2, the 21 Evo 2 projections run from the truth's inputs: 168 of 168 outputs are equal, and `splitk="auto"`
-  gives S = 1 from the table on all of them.
+    gives S = 1 from the table on all of them.
 
 A second replay ran on the same GPU through the hopper preset's CUDA kernel h1 (`--backend auto`, added the next
 day; `results/analysis/mmaemu_replay_cuda.json`). Every live job and Evo 2 output has the same verdict as above.
@@ -154,17 +154,17 @@ only one late-RNE member with this core.
 ## What this does not show
 
 - One H100 PCIe (114 SMs) on one instance, cuBLASLt 12.8.3.14, torch 2.7.1. The H100 SXM (132 SMs) needs its own
-  heuristic table; other cuBLASLt versions may choose other kernels.
+    heuristic table; other cuBLASLt versions may choose other kernels.
 - Split-K: the rule above is post hoc; ragged K and K > 16,384 are not covered.
 - TE: `general_gemm` with layout TN and a 32 MiB workspace, as Evo 2 uses it.
 - The raw bits (1.2 GB of npz) are kept by the maintainer, listed with their sha256 in `results/SHA256SUMS`;
-  `results/live_jobs.tar.gz` has every live job's record (cuBLASLt configuration, full-output sha256, input check).
-  Host names, addresses, the GPU serial and task directory names are redacted (`<host>`, `<task-root>`, …).
+    `results/live_jobs.tar.gz` has every live job's record (cuBLASLt configuration, full-output sha256, input check).
+    Host names, addresses, the GPU serial and task directory names are redacted (`<host>`, `<task-root>`, …).
 
 ## Files
 
 - `scripts/`: `build_bundle.sh`, `run_all.sh`, `te_setup.sh`, `probe/` (recorders: `m1_cvec.py`, `m2_evo2.py`,
-  `m3_patterns.py`, `m3_promo.py`, `m4_jobs.py`, `m4_run.py`, `m6_split_jobs.py`, `env_record.py`, `summarize.py`,
-  `pc.py`; checks and analysis: `cpu_checks.py`, `analyze.py`, `splitk_search.py`, `tie_check.py`,
-  `edge_variants.py`), `m4_jobs/` (the M4 job files).
+    `m3_patterns.py`, `m3_promo.py`, `m4_jobs.py`, `m4_run.py`, `m6_split_jobs.py`, `env_record.py`, `summarize.py`,
+    `pc.py`; checks and analysis: `cpu_checks.py`, `analyze.py`, `splitk_search.py`, `tie_check.py`,
+    `edge_variants.py`), `m4_jobs/` (the M4 job files).
 - `results/`: the recordings' metadata and logs by step, `analysis/` (the offline analysis reports), `dry_runs/`.

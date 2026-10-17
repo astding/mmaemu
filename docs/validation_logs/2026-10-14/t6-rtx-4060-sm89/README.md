@@ -6,27 +6,31 @@ against the CPU reference on its first min(M, 64) rows x 256 columns, the other 
 output): 0 mismatches.
 
 - Host and software: `../rtx4060-host/README.md` (preflight 18 of 18 PASS).
+
 - Code: the tree of da9edd4 with the frozen release fatbins, loaded as users get them: every report's `kernels`
-  entry has source `fatbin` and the image sha256 of `mmaemu/backends/cuda/bin/manifest.json`. Later commits change
-  no kernel source and no fatbin. `tools/bench_kernels.py` changed after this run: an exactness mismatch now
-  exits 1, and v1 is checked against the CPU reference even when it is not timed. Neither changes these runs, which
-  timed v1 and had no mismatch.
+    entry has source `fatbin` and the image sha256 of `mmaemu/backends/cuda/bin/manifest.json`. Later commits change
+    no kernel source and no fatbin. `tools/bench_kernels.py` changed after this run: an exactness mismatch now
+    exits 1, and v1 is checked against the CPU reference even when it is not timed. Neither changes these runs, which
+    timed v1 and had no mismatch.
+
 - Kernel command, under the GPU lock, for `d` in gauss40 and adversarial and `s` in 1b, 7b and 40b:
 
-      python tools/bench_kernels.py --kernels v1,v4,v9,tc3 --shape $s --M 16,64,256,1024,2048,8192 --data $d \
-          --out performance-$s-$d.json
+        python tools/bench_kernels.py --kernels v1,v4,v9,tc3 --shape $s --M 16,64,256,1024,2048,8192 --data $d \
+            --out performance-$s-$d.json
 
 - Native baseline: `native_fp8_bench.py` (this directory) times `torch._scaled_mm` (E4M3 x E4M3 to bf16, fast
-  accumulation, unit scales) on the same shapes and M with CUDA events, at least 1.5 s of warm-up (host timer) and
-  the median of five windows. Unlike `bench_kernels.py`, it sizes each window once from 10 launches and does not
-  extend it to 1.0 s: the windows in `native-fp8.json` are 0.62-1.09 s. It writes `native-fp8.json`.
+    accumulation, unit scales) on the same shapes and M with CUDA events, at least 1.5 s of warm-up (host timer) and
+    the median of five windows. Unlike `bench_kernels.py`, it sizes each window once from 10 launches and does not
+    extend it to 1.0 s: the windows in `native-fp8.json` are 0.62-1.09 s. It writes `native-fp8.json`.
+
 - Host clock: perf_counter / CLOCK_MONOTONIC_RAW was 0.99995-1.00001 in every report (tolerance 0.2%; this native
-  Linux host does not show the WSL2 drift). All timings are CUDA events.
+    Linux host does not show the WSL2 drift). All timings are CUDA events.
+
 - Clock and power: on this host `nvidia-smi --query-gpu=power.draw` reads `[N/A]`, so the per-window
-  `power_w_mean` is null. Each report's `power_samples` holds the driver's power summary (`nvidia-smi -q -d POWER`)
-  read after each M: averages of 109-115 W at the 115 W limit. The clock-event reason 0x4 (SW power cap) appears in
-  every measurement, and the mean SM clock at M >= 256 was 2.36-2.58 GHz. MAC/clk/SM divides the clock out.
-  `native-fp8.json` records clocks but no power.
+    `power_w_mean` is null. Each report's `power_samples` holds the driver's power summary (`nvidia-smi -q -d POWER`)
+    read after each M: averages of 109-115 W at the 115 W limit. The clock-event reason 0x4 (SW power cap) appears in
+    every measurement, and the mean SM clock at M >= 256 was 2.36-2.58 GHz. MAC/clk/SM divides the clock out.
+    `native-fp8.json` records clocks but no power.
 
 ## Results
 
@@ -60,7 +64,7 @@ was higher in those windows.
 ## Files
 
 - `performance-<shape>-<data>.json` and `.log`: the reports of `tools/bench_kernels.py`, one row per (kernel, M),
-  with the windows, launches, `nvidia-smi` samples, MAC/clk/SM and the exactness check.
+    with the windows, launches, `nvidia-smi` samples, MAC/clk/SM and the exactness check.
 - `native_fp8_bench.py`, `native-fp8.json`, `native-fp8.log`: the native baseline.
 - `first-pass-m2048/`: an earlier run of the same command at M = 2048 only (gauss40), on the same code. It ran on a
-  cooler GPU and is 0.3-0.8% faster than the sweep at M = 2048.
+    cooler GPU and is 0.3-0.8% faster than the sweep at M = 2048.

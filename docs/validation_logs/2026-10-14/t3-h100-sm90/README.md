@@ -5,11 +5,11 @@ not include the device-independence check.
 
 - Hardware: NVIDIA H100 PCIe (sm_90, 114 SMs), rented; torch 2.7.1+cu128, CUDA 12.8 (`fixed-fp8.json`, `fixed-fp8.log`).
 - Software: this run did not record the driver, Python or cuBLASLt; the Evo 2 baseline on the rented H100 the same
-  day recorded driver 570.148.08, Python 3.12.15 and cuBLASLt 12.8.3.14 (`../evo2-h100-sm90/windows.json`).
+    day recorded driver 570.148.08, Python 3.12.15 and cuBLASLt 12.8.3.14 (`../evo2-h100-sm90/windows.json`).
 - Code under test: the tree of 69cd231 (`git archive`), with the frozen release fatbins (rc1/v0.1.0, which include
-  sm_90 SASS).
+    sm_90 SASS).
 - Command: `PYTHON=<venv>/bin/python tools/run_gpu_tests.sh --out <dir>`. `MMAEMU_TRUTH_DIR` and `MMAEMU_AUDIT_DIR`
-  were not set, because the ground truth and the audit data were not copied to the rented host.
+    were not set, because the ground truth and the audit data were not copied to the rented host.
 
 | File | Result | Skips |
 |---|---|---|
@@ -25,12 +25,13 @@ not include the device-independence check.
 ## Evo 2 fixed inputs (`fixed-fp8.json`)
 
 The same host ran the test bundle's `fixed_fp8.py` before T3.
+
 - Code: mmaemu 5c15e8a, with v1 and v4 compiled by NVRTC (the bundle had no fatbins). Their sources differ from
-  69cd231 only in comments. T3's `test_nvrtc_equals_fatbin` passed on this GPU (see test_kernels_ieee above).
+    69cd231 only in comments. T3's `test_nvrtc_equals_fatbin` passed on this GPU (see test_kernels_ieee above).
 - Inputs: the recorded FP8 operands of the 21 input-projection GEMMs of one Evo 2 1B 2 kb window
-  (`evo2.evo2_1b_w2k`).
+    (`evo2.evo2_1b_w2k`).
 - v1 and v4: all 21 unit-scale fp32 accumulators and all 21 real-scale bf16 outputs are bitwise equal to the
-  RTX 4060 recording (42 of 42 rows PASS).
+    RTX 4060 recording (42 of 42 rows PASS).
 - Native `torch._scaled_mm` on this GPU differs from the RTX 4060 output on all 21 calls (`native_observations`).
 
 ## Why sm_90 is not in `validated_on`
