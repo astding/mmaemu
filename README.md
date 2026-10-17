@@ -1,6 +1,7 @@
 # mmaemu
 
-[![PyPI](https://img.shields.io/pypi/v/mmaemu.svg)](https://pypi.org/project/mmaemu/)
+[![PyPI](https://img.shields.io/pypi/v/mmaemu?label=PyPI)](https://pypi.org/project/mmaemu/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23440102.svg)](https://doi.org/10.5281/zenodo.23440102)
 [![Licence: Apache-2.0](https://img.shields.io/badge/licence-Apache--2.0-blue.svg)](https://github.com/astding/mmaemu/blob/master/LICENSE)
 
 **Bit-exact NVIDIA FP8 tensor-core GEMMs in software.** `mmaemu.scaled_mm` takes the arguments of
@@ -557,7 +558,10 @@ describes the probes.
 
 ## Citation
 
-If you use mmaemu, please cite it ([CITATION.cff](https://github.com/astding/mmaemu/blob/master/CITATION.cff)):
+If you use mmaemu, please cite it ([CITATION.cff](https://github.com/astding/mmaemu/blob/master/CITATION.cff)).
+Zenodo archives every release: [10.5281/zenodo.23440102](https://doi.org/10.5281/zenodo.23440102) cites all
+versions and resolves to the latest; version 0.1.0 is
+[10.5281/zenodo.23440103](https://doi.org/10.5281/zenodo.23440103).
 
 ```bibtex
 @software{mmaemu,
@@ -565,6 +569,7 @@ If you use mmaemu, please cite it ([CITATION.cff](https://github.com/astding/mma
   title   = {mmaemu: bit-accurate emulation of {NVIDIA} tensor-core {FP8} {GEMM} numerics},
   version = {0.1.0},
   year    = {2026},
+  doi     = {10.5281/zenodo.23440102},
   url     = {https://github.com/astding/mmaemu}
 }
 ```

@@ -24,14 +24,14 @@ The Ada FP8 `mma.sync` instruction (m16n8k32 in SASS: QMMA.16832) computes, for 
 The hardware does not round each product or each addition. Instead, per block:
 
 1. Each input x has the exponent e(x) = max(floor(log2|x|), emin), with emin = -6 for E4M3 and -14 for E5M2. A
-   subnormal input therefore uses emin, with its denormalised significand.
+    subnormal input therefore uses emin, with its denormalised significand.
 2. Each nonzero product a_i * b_i is given the exponent e(a_i) + e(b_i). The product of the significands (in
-   [0, 4)) is not renormalised, so this can differ from the product's own exponent: one below it when the
-   significands multiply to 2 or more, above it when an input is subnormal. The block exponent E is the largest of
-   these and the exponent of c, floored at -132. Products that are exactly zero do not take part.
+    [0, 4)) is not renormalised, so this can differ from the product's own exponent: one below it when the
+    significands multiply to 2 or more, above it when an input is subnormal. The block exponent E is the largest of
+    these and the exponent of c, floored at -132. Products that are exactly zero do not take part.
 3. Every product and c are aligned to 2^E and truncated toward zero to 13 fraction bits below 2^E.
 4. The aligned terms are summed exactly. The sum is truncated toward zero to 13 fraction bits relative to its
-   own leading bit, and becomes the new accumulator (fp32).
+    own leading bit, and becomes the new accumulator (fp32).
 5. A block result that is exactly zero, or that truncates to zero, is +0 (hardware rule c2-M1 of the RTX 4060).
 6. NaN results are the canonical fp32 NaN 0x7FFFFFFF.
 
@@ -60,27 +60,27 @@ and the GPU, and cannot be derived from the shape alone. When S > 1 on the RTX 4
 `"pairwise"`):
 
 - K is cut into 64-wide k-tiles t (a ragged last tile is zero-padded). Split s owns the tiles with
-  t mod S = s, in increasing t. Adjacent tiles therefore always belong to different splits.
+    t mod S = s, in increasing t. Adjacent tiles therefore always belong to different splits.
 - Fast accumulation: one chain per split over its tiles. Slow accumulation: within a split, a new chain starts
-  at every 2nd tile *of that split*, and the chunk results are added serially from +0 in fp32.
+    at every 2nd tile *of that split*, and the chunk results are added serially from +0 in fp32.
 - The S partial results p_0 .. p_(S-1) are combined in fp32 round-to-nearest-even:
-  - **serial** (cuBLASLt customOption 0 or 2): `((p0 + p1) + p2) + ...`;
-  - **pairwise** (customOption 1): h = ceil(S/2); slot_i = p_i + p_(i+h) if i+h < S-1, else p_i; the result is
-    `(((p_(S-1) + slot_0) + slot_1) + ...) + slot_(h-1)`. For S = 3 this is `(p2 + p0) + p1`.
+    - **serial** (cuBLASLt customOption 0 or 2): `((p0 + p1) + p2) + ...`;
+    - **pairwise** (customOption 1): h = ceil(S/2); slot_i = p_i + p_(i+h) if i+h < S-1, else p_i; the result is
+        `(((p_(S-1) + slot_0) + slot_1) + ...) + slot_(h-1)`. For S = 3 this is `(p2 + p0) + p1`.
 - The scale (alpha, below) is applied after the combination.
 
 On the H100 PCIe (scheme `"contiguous"`, every customOption):
 
 - K is cut into 128-wide k-tiles (the k-stage of the sm_90 kernels); with T tiles and q = ceil(T / S), split s owns
-  the contiguous tiles s*q .. (s+1)*q - 1.
+    the contiguous tiles s*q .. (s+1)*q - 1.
 - Fast accumulation: one chain per split over its tiles. Slow accumulation: every tile is its own chain, and the
-  tile results are added serially from +0 in fp32 (the unsplit 128-element restart, within the split).
+    tile results are added serially from +0 in fp32 (the unsplit 128-element restart, within the split).
 - The partials are combined serially, `((p0 + p1) + p2) + ...`, and the scale is applied after the combination.
 - This rule was found by fitting 1,049 live split calls (S = 2 to 6, customOption 0 to 3, K from 5,760 to 16,384,
-  all multiples of 128) after the data came in; mmaemu reproduces all of them. The split-K sweep's 2,416 live split
-  calls, run after the rule was fixed (S = 2 to 24, K up to 262,144, 1,040 of them with K not a multiple of 128, the
-  last k-tile zero padded), replay equal too. A split without tiles was never recorded and emits
-  `UnverifiedSplitWarning`.
+    all multiples of 128) after the data came in; mmaemu reproduces all of them. The split-K sweep's 2,416 live split
+    calls, run after the rule was fixed (S = 2 to 24, K up to 262,144, 1,040 of them with K not a multiple of 128, the
+    last k-tile zero padded), replay equal too. A split without tiles was never recorded and emits
+    `UnverifiedSplitWarning`.
 
 How mmaemu decides S and the scheme (`splitk="auto"`) is described in
 [presets_profiles.md](presets_profiles.md#split-k-resolution). You can always pass it explicitly:
@@ -104,21 +104,21 @@ use_fast_accum=False, *, out=None, profile=None, splitk="auto", backend="auto")`
 
 1. alpha = RN32(scale_a * scale_b).
 2. y = RN32(acc * alpha + (+0)): a fused multiply-add with a +0 addend, computed exactly in float64 and rounded
-   once to fp32. Consequences: a zero product with a negative sign gives +0, never -0 (acc = 0 with alpha < 0,
-   alpha = +-0, or alpha underflowing to 0), and Inf * 0 gives NaN.
+    once to fp32. Consequences: a zero product with a negative sign gives +0, never -0 (acc = 0 with alpha < 0,
+    alpha = +-0, or alpha underflowing to 0), and Inf * 0 gives NaN.
 3. Output dtype:
-   - `torch.float32`: y.
-   - `torch.bfloat16` / `torch.float16`: y rounded to nearest even. This is a *double* rounding (fp32 first),
-     and it differs from rounding the exact product once on constructed ties.
-   - `torch.float8_e4m3fn` / `torch.float8_e5m2`: if `scale_result` is given, y = RN32(y * scale_result) (a second
-     fp32 multiply); then saturation to +-448 (E4M3) or +-57344 (E5M2), Inf included, NaN passing through; then
-     round-to-nearest-even. `scale_result` is ignored for the other output dtypes.
+    - `torch.float32`: y.
+    - `torch.bfloat16` / `torch.float16`: y rounded to nearest even. This is a *double* rounding (fp32 first),
+        and it differs from rounding the exact product once on constructed ties.
+    - `torch.float8_e4m3fn` / `torch.float8_e5m2`: if `scale_result` is given, y = RN32(y * scale_result) (a second
+        fp32 multiply); then saturation to +-448 (E4M3) or +-57344 (E5M2), Inf included, NaN passing through; then
+        round-to-nearest-even. `scale_result` is ignored for the other output dtypes.
 4. NaN is canonical: fp32 0x7FFFFFFF, bf16/fp16 0x7FFF, fp8 0x7F.
 5. `out=`: an out of another shape is resized first (with torch's UserWarning). A column-major out= (strides
-   (1, ld), ld >= M) is computed as mat1 x mat2, as torch 2.7.1 does, so cuBLASLt chooses the split of the problem
-   (N, M, K) with the formats swapped, and mmaemu resolves that key (RTX 4060: 406 of 406 such calls). An out=
-   that is neither row- nor column-major is returned unchanged, with a UserWarning: torch computes into a
-   contiguous copy and never copies it back. Otherwise the result never depends on the previous contents of out=.
+    (1, ld), ld >= M) is computed as mat1 x mat2, as torch 2.7.1 does, so cuBLASLt chooses the split of the problem
+    (N, M, K) with the formats swapped, and mmaemu resolves that key (RTX 4060: 406 of 406 such calls). An out=
+    that is neither row- nor column-major is returned unchanged, with a UserWarning: torch computes into a
+    contiguous copy and never copies it back. Otherwise the result never depends on the previous contents of out=.
 
 The default `out_dtype` is the input dtype and the default `use_fast_accum` is False, as in torch. Evo 2 calls
 `use_fast_accum=True` with bf16 output.

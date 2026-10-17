@@ -84,7 +84,8 @@ freeze then rebuilds such a module with all the others.
 
 ## 3. Version, changelog, distributions
 
-1. Set the version in `mmaemu/_version.py` (`0.1.0`), `CITATION.cff` (`version:`) and the `CHANGELOG.md` heading;
+1. Set the version in `mmaemu/_version.py` (`0.1.0`), `CITATION.cff` (`version:` and `date-released:`) and the
+    `CHANGELOG.md` heading;
     entries listed under "Unreleased" go into the version's section. Validate `CITATION.cff` with
     `cffconvert --validate -i CITATION.cff` (cffconvert 2.0.0, in a scratch venv): Zenodo reads it at the release
     tag (section 4, step 8). The changelog lists the scope (for 0.1.0 both reference platforms, the H100 PCIe and
@@ -248,7 +249,9 @@ so they are set up after the switch to public (step 2) and before the tag push (
         again).
 
     - A DOI cannot be reserved before the release. Add the concept DOI (the record's all-versions DOI) to
-        `CITATION.cff` (`doi:`) and to the README in the next snapshot.
+        `CITATION.cff` (`doi:`) and to the README in the next snapshot. For 0.1.0 it is
+        [10.5281/zenodo.23440102](https://doi.org/10.5281/zenodo.23440102); a later release keeps it and adds its
+        own version DOI under `identifiers` in `CITATION.cff` and to the README citation once Zenodo has archived it.
 
 `workflow_dispatch` runs the build job only (a dry run of the release); it never publishes.
 

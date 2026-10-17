@@ -29,33 +29,37 @@ after their gates pass.
 overrides it. Accepted values are `"auto"`, `"reference"`, `"cuda"` and `"cuda:<kernel>"`.
 
 1. The reference backend is used in these cases:
-   - `"reference"` was requested;
-   - the tensors are on the CPU;
-   - `MMAEMU_DISABLE_CUDA=1` is set;
-   - no CUDA device is visible.
+    - `"reference"` was requested;
+    - the tensors are on the CPU;
+    - `MMAEMU_DISABLE_CUDA=1` is set;
+    - no CUDA device is visible.
 
-   In the last three cases an explicit `"cuda..."` request raises `BackendUnavailableError` instead. These paths
-   never touch the CUDA driver.
+    In the last three cases an explicit `"cuda..."` request raises `BackendUnavailableError` instead. These paths
+    never touch the CUDA driver.
+
 2. Otherwise the discovered kernels are tried in priority order: tc3 (40), v9 (30), v4 (20), v1 (10) for the `ada`
-   preset, h4 (20) and h1 (10) for the `hopper` preset. A kernel serves only its own preset, so the two orders never
-   mix.
-   `kernels.SPECS` is always discovered; `mmaemu.backends.cuda.fast.specs.SPECS` is added when it is importable.
+    preset, h4 (20) and h1 (10) for the `hopper` preset. A kernel serves only its own preset, so the two orders never
+    mix.
+    `kernels.SPECS` is always discovered; `mmaemu.backends.cuda.fast.specs.SPECS` is added when it is importable.
+
 3. Some kernels are skipped **by design**. This is silent, and `status()` / `explain_selection()` give the reason.
-   It happens when:
-   - the format pair or preset is unsupported: a kernel serves only its own preset, and E5M2, mixed formats and
-     the presets without a kernel (`b200_mma_sync`, custom presets) always run on the reference backend;
-   - the compute capability is below `min_cc`;
-   - the architecture is outside the kernel's supported SASS/PTX targets; NVRTC
-     does not extend that support (tc3 therefore stays unavailable on sm_120);
-   - the device's opt-in shared memory is too small;
-   - the kernel is gated and the capability is not in `validated_on`. `MMAEMU_ALLOW_GATED_KERNELS=1` lifts this
-     check, and so does an explicit `"cuda:<kernel>"`; the kernel's gates still run in both cases.
+    It happens when:
+    - the format pair or preset is unsupported: a kernel serves only its own preset, and E5M2, mixed formats and
+        the presets without a kernel (`b200_mma_sync`, custom presets) always run on the reference backend;
+    - the compute capability is below `min_cc`;
+    - the architecture is outside the kernel's supported SASS/PTX targets; NVRTC
+        does not extend that support (tc3 therefore stays unavailable on sm_120);
+    - the device's opt-in shared memory is too small;
+    - the kernel is gated and the capability is not in `validated_on`. `MMAEMU_ALLOW_GATED_KERNELS=1` lifts this
+        check, and so does an explicit `"cuda:<kernel>"`; the kernel's gates still run in both cases.
+
 4. Other skips count as **failures**: the module cannot be loaded (fatbin and NVRTC both failed), or a gate failed.
-   The next kernel is tried. If none is left, `"auto"` uses the reference backend and `"cuda"` raises.
+    The next kernel is tried. If none is left, `"auto"` uses the reference backend and `"cuda"` raises.
+
 5. One `BackendFallbackWarning` is emitted per (device, reason) and process. It is emitted when a kernel failed, or
-   when the selected kernel was compiled with NVRTC because its fatbin was unusable. By-design skips never warn.
-   The failures of one selection form one reason: a single warning names every kernel that failed and the backend
-   that is used instead.
+    when the selected kernel was compiled with NVRTC because its fatbin was unusable. By-design skips never warn.
+    The failures of one selection form one reason: a single warning names every kernel that failed and the backend
+    that is used instead.
 
 `status(device=None)` returns `{name: BackendStatus}` for every discovered kernel and `reference`. A kernel is
 `available` only after it was loaded *and* passed its gates on that device. `validated_here` means the capability is
@@ -89,22 +93,24 @@ compile-time `__constant__` decode tables belong to the context that loaded it. 
 therefore loads its own copy (the prototype's kernels gave zeros there).
 
 1. **Fatbin.** Release fatbins live in the package's `mmaemu/backends/cuda/bin/` together with `manifest.json`
-   (format `mmaemu-fatbin/1`). The loader uses a module's fatbin only if all of these hold:
-   - the file's sha256 equals the manifest;
-   - the manifest's `source_sha256` equals the hash of the kernel sources shipped next to it (otherwise the fatbin is
-     stale);
-   - the device can run one of its SASS architectures, or its PTX can be JIT-compiled for the device.
+    (format `mmaemu-fatbin/1`). The loader uses a module's fatbin only if all of these hold:
+    - the file's sha256 equals the manifest;
+    - the manifest's `source_sha256` equals the hash of the kernel sources shipped next to it (otherwise the fatbin is
+        stale);
+    - the device can run one of its SASS architectures, or its PTX can be JIT-compiled for the device.
 
-   Loading a module takes about 2 ms (audit); `tests/test_cuda_runtime.py::test_fatbin_load_time_fresh_process`
-   checks that it stays at or below 20 ms.
+    Loading a module takes about 2 ms (audit); `tests/test_cuda_runtime.py::test_fatbin_load_time_fresh_process`
+    checks that it stays at or below 20 ms.
+
 2. **NVRTC.** The shipped `.cu` source is compiled for the device's `sm_XY`. The compile options are fixed:
-   `--fmad=false -default-device --std=c++17`; callers can add options but cannot change these.
-   - libnvrtc comes from torch's `nvidia-cuda-nvrtc-cu12` wheel, so neither nvcc nor `CUDA_HOME` is needed.
-   - The cubin is cached atomically in `$MMAEMU_CACHE_DIR/nvrtc/<sha256>.cubin`. The key covers the source, the
-     headers, the options, the architecture and the NVRTC version.
-   - If the cache directory cannot be written, the cubin is kept in memory.
-   - NVRTC builds are bitwise equal to the fatbin builds (tested). An internal review of the prototype measured them 4-6% slower;
-     unpaired runs here put v9 and tc3 within 1.5% of the fatbin builds ([kernels_fast.md](kernels_fast.md)).
+    `--fmad=false -default-device --std=c++17`; callers can add options but cannot change these.
+    - libnvrtc comes from torch's `nvidia-cuda-nvrtc-cu12` wheel, so neither nvcc nor `CUDA_HOME` is needed.
+    - The cubin is cached atomically in `$MMAEMU_CACHE_DIR/nvrtc/<sha256>.cubin`. The key covers the source, the
+        headers, the options, the architecture and the NVRTC version.
+    - If the cache directory cannot be written, the cubin is kept in memory.
+    - NVRTC builds are bitwise equal to the fatbin builds (tested). An internal review of the prototype measured them 4-6% slower;
+        unpaired runs here put v9 and tc3 within 1.5% of the fatbin builds ([kernels_fast.md](kernels_fast.md)).
+
 3. Otherwise `BackendUnavailableError`, which names both reasons. The registry then moves to the next backend.
 
 Launches run under `torch.cuda.device(device)` on `torch.cuda.current_stream(device)`. CUDA graph capture is not
@@ -124,13 +130,13 @@ extern "C" __global__ void mmaemu_<name>_e4m3e4m3(const uint8_t* A, const uint8_
 `chain_fn_for(spec, req)` returns the ChainFn that the plan executor calls. It:
 
 - accepts only `torch.uint8` codes or `torch.float8_e4m3fn` and raises `TypeError` otherwise (B4: e5m2, fnuz and
-  bf16 never reach a kernel);
+    bf16 never reach a kernel);
 - raises `ValueError` for mixed devices;
 - makes the operands contiguous, and clones an operand whose address is not aligned to `align_bytes` (B12: a
-  misaligned 32-bit load is a sticky error that kills the CUDA context);
+    misaligned 32-bit load is a sticky error that kills the CUDA context);
 - raises `ValueError` for a request of another preset;
 - checks `L % 16 == 0` and `L < k_max` (v4 and h4: 2^24, v1 and h1: 2^30); h1 and h4 end a chain with L % 32 == 16
-  in a half block of zero codes, which the model excludes;
+    in a half block of zero codes, which the model excludes;
 - returns empty or +0 results for M, N or L = 0 without a launch;
 - launches in row chunks when `ceil(M / tile_m)` exceeds 65535.
 
@@ -162,21 +168,21 @@ The measured decision and its numbers are recorded in [the v1 decision section](
 ## Gates and the verdict cache (`mmaemu.backends.cuda.selftest`)
 
 - **smoke** (every kernel) compares the kernel's ChainFn bit for bit with the CPU float64 reference on two cases:
-  - 16x8x64 random codes;
-  - 64x64x256 adversarial codes: subnormals and ±0, ±448, cancellation inside blocks, one exponent per 16-block,
-    every finite code, and -0 everywhere.
+    - 16x8x64 random codes;
+    - 64x64x256 adversarial codes: subnormals and ±0, ±448, cancellation inside blocks, one exponent per 16-block,
+        every finite code, and -0 everywhere.
 - **window** (v9) and **design_a** (tc3) are registered by `mmaemu.backends.cuda.fast.gates` through
-  `spec.register_gate`. A gate function may carry an integer `version` attribute.
+    `spec.register_gate`. A gate function may carry an integer `version` attribute.
 - `run_gates(spec, device, force=False)` runs `smoke` and then `spec.gates`, and stops at the first failure.
 - Verdicts are cached in memory and in `$MMAEMU_CACHE_DIR/verdicts/<sha256>.json`. The cache key is:
-  - GPU UUID, compute capability and driver version;
-  - mmaemu version;
-  - sha256 of the loaded module image;
-  - gate name and gate version.
+    - GPU UUID, compute capability and driver version;
+    - mmaemu version;
+    - sha256 of the loaded module image;
+    - gate name and gate version.
 - A corrupt cache file is ignored and the gate runs again. A gate that raises is reported as failed and is not
-  cached. The v9 and tc3 gates catch errors inside their stages and return a failed `<gate>.error: ...` verdict,
-  which is cached like any other: after a transient error (for example out of memory), run
-  `python -m mmaemu selftest --force`.
+    cached. The v9 and tc3 gates catch errors inside their stages and return a failed `<gate>.error: ...` verdict,
+    which is cached like any other: after a transient error (for example out of memory), run
+    `python -m mmaemu selftest --force`.
 
 ## Environment variables (read at call time)
 
@@ -206,28 +212,28 @@ python tools/build_fatbin.py --check [--out <dir>]         # hash-only staleness
 ```
 
 - The tool refuses nvcc older than 12.8, which is needed for sm_100 and sm_120. It takes nvcc from `--nvcc`,
-  `$NVCC`, `$CUDA_HOME/bin` or `PATH`; release fatbins are built with nvcc 12.8.61. A distribution's nvcc 12.0 is
-  refused.
+    `$NVCC`, `$CUDA_HOME/bin` or `PATH`; release fatbins are built with nvcc 12.8.61. A distribution's nvcc 12.0 is
+    refused.
 - Architectures come from the KernelSpecs. Probe modules (`PROBE_MODULES`) get SASS sm_80..sm_120 and no PTX.
 - Besides the fatbins and `manifest.json`, the tool writes:
-  - `cuobjdump.txt`: the `--list-elf --list-ptx` listing, which must equal the requested architectures. It uses a
-    cuobjdump of at least 12.8 (a distribution's cuobjdump may be 12.0), so the tool also looks next to nvcc and
-    in triton's wheel.
-  - `build_report.json`: ptxas registers and spills, compiler warnings, and the forbidden-PTX grep.
+    - `cuobjdump.txt`: the `--list-elf --list-ptx` listing, which must equal the requested architectures. It uses a
+        cuobjdump of at least 12.8 (a distribution's cuobjdump may be 12.0), so the tool also looks next to nvcc and
+        in triton's wheel.
+    - `build_report.json`: ptxas registers and spills, compiler warnings, and the forbidden-PTX grep.
 - It fails when any of these hold:
-  - a module's PTX for any of its architectures contains `fma.rz.bf16` or `fma.rz.bf16x2`, which ptxas 12.0-13.3
-    miscompiles;
-  - ptxas reports spill bytes, unless `--allow-spills` is given;
-  - the listing differs from the KernelSpecs.
+    - a module's PTX for any of its architectures contains `fma.rz.bf16` or `fma.rz.bf16x2`, which ptxas 12.0-13.3
+        miscompiles;
+    - ptxas reports spill bytes, unless `--allow-spills` is given;
+    - the listing differs from the KernelSpecs.
 - Release fatbins are `--release` builds committed to `mmaemu/backends/cuda/bin/`. A branch that adds or changes a
-  kernel commits that module's build (`--release --modules <module>`; its entry is added to `bin/manifest.json`,
-  the other entries unchanged), with its build log under `docs/validation_logs/<date>/`, as h1
-  ([build](validation_logs/2026-10-15/h1-fatbin/README.md)) and h4
-  ([build](validation_logs/2026-10-16/h4-fatbin/README.md)) were. At the release-candidate freeze the maintainer
-  rebuilds every module with `--release`, compares it byte for byte with the committed fatbins and runs T3 on
-  them; the log goes under `docs/validation_logs/<date>/` ([release.md](release.md), section 2). What the 0.1.0
-  freeze found, and why the committed v1 and v4 bytes were kept, is in
-  [rc-fatbin](validation_logs/2026-10-16/rc-fatbin/README.md).
+    kernel commits that module's build (`--release --modules <module>`; its entry is added to `bin/manifest.json`,
+    the other entries unchanged), with its build log under `docs/validation_logs/<date>/`, as h1
+    ([build](validation_logs/2026-10-15/h1-fatbin/README.md)) and h4
+    ([build](validation_logs/2026-10-16/h4-fatbin/README.md)) were. At the release-candidate freeze the maintainer
+    rebuilds every module with `--release`, compares it byte for byte with the committed fatbins and runs T3 on
+    them; the log goes under `docs/validation_logs/<date>/` ([release.md](release.md), section 2). What the 0.1.0
+    freeze found, and why the committed v1 and v4 bytes were kept, is in
+    [rc-fatbin](validation_logs/2026-10-16/rc-fatbin/README.md).
 
 ## Benchmarks (`tools/bench_kernels.py`, `tools/hostclock.py`)
 
@@ -239,35 +245,35 @@ $GPU timeout 600 python tools/bench_kernels.py --kernels v1,v4 --shape 1b --M 20
 Method:
 
 - **Timing:** CUDA events only. The host-clock gate runs first and the
-  `perf_counter / CLOCK_MONOTONIC_RAW` ratio is recorded; on this WSL2 host perf_counter runs 6-10% fast.
+    `perf_counter / CLOCK_MONOTONIC_RAW` ratio is recorded; on this WSL2 host perf_counter runs 6-10% fast.
 - **Load source:** kernels are loaded as users get them. Performance acceptance needs a fatbin (the package's release
-  fatbins, or `--fatbin-dir`); `--allow-nvrtc` records NVRTC numbers instead, marked as such. The report records
-  each kernel's image sha256.
+    fatbins, or `--fatbin-dir`); `--allow-nvrtc` records NVRTC numbers instead, marked as such. The report records
+    each kernel's image sha256.
 - **Exactness gate before timing:**
-  - v1 and h1 are compared with the CPU reference of their own preset on the first min(M, 64) rows x 256 columns;
-  - every other kernel is compared with the IEEE kernel of its preset (v1 for `ada`, h1 for `hopper`) on the full
-    output;
-  - any mismatch stops the run, which writes its report and exits 1.
+    - v1 and h1 are compared with the CPU reference of their own preset on the first min(M, 64) rows x 256 columns;
+    - every other kernel is compared with the IEEE kernel of its preset (v1 for `ada`, h1 for `hopper`) on the full
+        output;
+    - any mismatch stops the run, which writes its report and exits 1.
 - **Warm-up and windows:** at least 1.5 s of warm-up per kernel, then interleaved windows of at least 1.0 s each.
-  The reported value is the median TMAC/s over the windows.
+    The reported value is the median TMAC/s over the windows.
 - **Clocks:** `nvidia-smi` (`/usr/lib/wsl/lib/nvidia-smi` on WSL) samples the SM clock, power and throttle reasons
-  every 200 ms. MAC/clk/SM = TMAC/s / (mean SM clock × SM count).
+    every 200 ms. MAC/clk/SM = TMAC/s / (mean SM clock × SM count).
 - `--timer host-raw` (CLOCK_MONOTONIC_RAW around synchronised launches) exists for cross-checks. It is refused when
-  the host-clock gate fails.
+    the host-clock gate fails.
 
 ## Platforms
 
 - The CUDA kernels are tested on Linux x86_64 only (WSL2 included). mmaemu does not check the platform: they load
-  wherever `libcuda.so.1` is found (Linux aarch64 is untested and self-test gated like any untested device). On
-  native Windows that library is not found, so mmaemu warns once and uses the reference backend.
+    wherever `libcuda.so.1` is found (Linux aarch64 is untested and self-test gated like any untested device). On
+    native Windows that library is not found, so mmaemu warns once and uses the reference backend.
 - Multi-GPU is untested. The per-(device, context) cache is exercised with a second context on one GPU.
 - Validation status:
-  - v1 and v4 are validated on sm_89 (RTX 4060) and sm_120 (RTX 5070 Ti). On sm_90 (H100) they passed T3 but are
-    not in `validated_on` (see above).
-  - v9 and tc3 are validated on sm_89 only.
-  - h1 and h4 are validated on sm_89 (RTX 4060) and sm_120 (RTX 5070 Ti); they have never run on an H100 (sm_90).
-  - On other capabilities the kernels are unvalidated: the smoke gate runs on first use, and v1/v4/h1/h4 are
-    IEEE-exact by construction.
+    - v1 and v4 are validated on sm_89 (RTX 4060) and sm_120 (RTX 5070 Ti). On sm_90 (H100) they passed T3 but are
+        not in `validated_on` (see above).
+    - v9 and tc3 are validated on sm_89 only.
+    - h1 and h4 are validated on sm_89 (RTX 4060) and sm_120 (RTX 5070 Ti); they have never run on an H100 (sm_90).
+    - On other capabilities the kernels are unvalidated: the smoke gate runs on first use, and v1/v4/h1/h4 are
+        IEEE-exact by construction.
 
 <a id="v1-variant-decision"></a>
 ## v1 variant decision
@@ -293,9 +299,9 @@ The decision applies the rule to each change relative to what is already adopted
 
 1. DEC1 is shipped (`MMAEMU_V1_DEC=1`): bitwise equal and 1.235x faster than the base.
 2. exp1b on top of DEC1 adds only 1.138x, below the 1.2x bar, so it is **not** shipped (`MMAEMU_V1_EXP=0`).
-   It stays a compile-time switch, which keeps the measurement reproducible:
-   `--v1-variant dec1exp1=MMAEMU_V1_DEC=1:MMAEMU_V1_EXP=1`.
-   Adopting it is a maintainer decision: 0.725 vs 0.636 TMAC/s.
+    It stays a compile-time switch, which keeps the measurement reproducible:
+    `--v1-variant dec1exp1=MMAEMU_V1_DEC=1:MMAEMU_V1_EXP=1`.
+    Adopting it is a maintainer decision: 0.725 vs 0.636 TMAC/s.
 
 The shipped v1 SASS is instruction-for-instruction identical to the audit's DEC1 build of
 `verify-p0-profile-0/src/variants.cu` (cfg4, DEC 1): 2784 instructions, 0 differing lines after normalising.
@@ -318,6 +324,6 @@ Conditions during the run:
 
 - Throttle reason 0x4: the software power cap.
 - `nvidia-smi -q -d POWER` samples averaged 110 W against the 115 W limit. WSL reports no instantaneous
-  `power.draw`.
+    `power.draw`.
 - The host-clock ratio `perf_counter / CLOCK_MONOTONIC_RAW` was 1.031. This is recorded only; all timing used CUDA
-  events.
+    events.

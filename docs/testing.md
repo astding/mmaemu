@@ -57,29 +57,33 @@ Registered by `tests/conftest.py`:
 - `slow`: T1s.
 - `truth`: needs `$MMAEMU_TRUTH_DIR`. Skipped without it.
 - `profile_device("<profile>")`: runs only on the reference device of that profile. Elsewhere it is skipped with
-  "profile device unavailable". The tests in this repository use the bare marker and check the profile device
-  themselves.
+    "profile device unavailable". The tests in this repository use the bare marker and check the profile device
+    themselves.
 
 `tests/conftest.py` also blocks `import tcemu` (the audited prototype), and fails the session if `tcemu` was imported.
 
 ## Bitwise policy
 
 - Every bit claim goes through `mmaemu.testing.assert_bitwise_equal(actual, expected, nan="bits")`. It compares
-  integer views, so +0 differs from -0 and NaN payloads must match.
+    integer views, so +0 differs from -0 and NaN payloads must match.
+
 - Float `torch.equal` and `==` are banned for bit claims; bit claims compare integer views, normally through
-  `assert_bitwise_equal`. CI greps `tests/` and `tools/` for `torch.equal(`.
+    `assert_bitwise_equal`. CI greps `tests/` and `tools/` for `torch.equal(`.
+
 - `nan="mask"` (NaN positions must match, payload ignored) is allowed only against a reference that does not
-  canonicalise NaN. Each use carries an inline `# nan=mask: <reason>` comment.
-  - mmaemu canonicalises NaN on every backend (fp32 0x7FFFFFFF, bf16/fp16 0x7FFF, fp8 0x7F), and so does the RTX 4060.
-  - The hardware tests in this file therefore never use `nan="mask"`.
+    canonicalise NaN. Each use carries an inline `# nan=mask: <reason>` comment.
+    - mmaemu canonicalises NaN on every backend (fp32 0x7FFFFFFF, bf16/fp16 0x7FFF, fp8 0x7F), and so does the RTX 4060.
+    - The hardware tests in this file therefore never use `nan="mask"`.
+
 - Uses of `nan="mask"` in the repository (find them with `grep -rn 'nan="mask"' tests tools`), as of this commit:
 
-  | File | Reason |
-  |---|---|
-  | tests/test_scaffold.py (`test_comparator_nan_payload`) | tests the mask mode of the comparator itself |
+    | File | Reason |
+    |---|---|
+    | tests/test_scaffold.py (`test_comparator_nan_payload`) | tests the mask mode of the comparator itself |
 
 - The old-kernel emulator recordings (truth `emulator.*`) are not compared with `nan="mask"`. Their 6,120 NaN-decode
-  outputs are compared with the canonical NaN instead (see T2 and the device-independence test).
+    outputs are compared with the canonical NaN instead (see T2 and the device-independence test).
+
 - A strict xfail always carries `raises=`.
 
 ## T1: hw_mini (`tests/data/hw_mini/`, format `mmaemu-hwmini/1`)
@@ -92,26 +96,26 @@ included, the n/a reasons, and the 239 split/accumulation combinations. The expo
 
 - at least one output of every non-table truth recording that mmaemu v0.1 can evaluate;
 - every hw_error output that the audit's FixedModel reproduces (113 outputs, including the 14 torch bias-check
-  rejections);
+    rejections);
 - for every hardware-replayed `(fast, S, scheme, out_dtype, fmt_a, fmt_b)` combination (239, of which 211 are split
-  combinations), the smallest recorded case;
-  - It keeps one output position per combination: among the first 2 rows x 8 spread columns, the one that the most
-    rival plans (`tools/mutants/discriminate.py`, a subset of the catalogue's plan mutants) get wrong. The split-K
-    partition depends on K only, so any row/column subset of a recorded output is reproduced by the GEMM of the
-    subset operands.
+    combinations), the smallest recorded case;
+    - It keeps one output position per combination: among the first 2 rows x 8 spread columns, the one that the most
+        rival plans (`tools/mutants/discriminate.py`, a subset of the catalogue's plan mutants) get wrong. The split-K
+        partition depends on K only, so any row/column subset of a recorded output is reproduced by the GEMM of the
+        subset operands.
 - the c2 `T_*` and `S16_*` instruction families: the first recorded output of each case, at most 4,096 outputs
-  per family (`c2.T_overflow`: 1,024 of its 2,048), and all of `S16_zeros`;
+    per family (`c2.T_overflow`: 1,024 of its 2,048), and all of `S16_zeros`;
 - every `epilogue.*` case whose stored output has M*N <= 65,536;
-  - When the operands exceed 48 KiB, it keeps the 4 rows and 16 columns richest in special outputs (+-0, NaN, Inf,
-    subnormal, fp8 saturation).
+    - When the operands exceed 48 KiB, it keeps the 4 rows and 16 columns richest in special outputs (+-0, NaN, Inf,
+        subnormal, fp8 saturation).
 - all 16 outputs of `misc.tcemu_tests_recorded_hw`, 8 rows x 16 spread columns each (it replaces the old
-  `tests/data/hw/*.pt`);
+    `tests/data/hw/*.pt`);
 - rows 0..31 of the Evo 2 1B projections `evo2.evo2_1b_w2k` calls 0, 10 and 20 (unit-scale fp32 accumulator, real-scale
-  bf16, TE bf16), on 128 columns (a full 1B weight is 11 MB);
+    bf16, TE bf16), on 128 columns (a full 1B weight is 11 MB);
 - the special-value table `c3.gemm_table` (scale set s00);
 - one scope-boundary call per recording that has bias or row-wise outputs;
 - from the pre-swap recordings (`recordings/rtx4060_2026-10`, when present): R1 in full, at least one case per R4
-  combination, and at least one output of every other recording.
+    combination, and at least one output of every other recording.
 
 The exporter fails if the directory would exceed the budget (`--budget-mb`, default 19.5 MiB).
 
@@ -151,30 +155,34 @@ dict with these keys:
 **gemm params:**
 
 - the normalised call: `fmt_a`, `fmt_b`, `out_dtype`, `fast`, `scale_a_bits`, `scale_b_bits`, `scale_result_bits`
-  (fp32 bit patterns or null), and `splitk` `{S, scheme}` (the recorded configuration; always passed explicitly);
-- `api`:
-  - `scaled_mm`: the stored operands form a valid torch call;
-  - `accumulate`: `mmaemu.accumulate` followed by `mmaemu.model.epilogue.apply`. Used for subsets whose N or K is
-    not a multiple of 16, for cuBLASLt-, TE- and emulator-level outputs, and for `out_select: "diagonal"`;
-- `call`: how the hardware call passed its arguments. Omitted keys take the defaults:
-  - `out_dtype` and `use_fast_accum` passed as keywords;
-  - `scale_result` passed iff `scale_result_bits` is not null;
-  - no bias; no `out=`.
+    (fp32 bit patterns or null), and `splitk` `{S, scheme}` (the recorded configuration; always passed explicitly);
 
-  Non-defaults are:
-  - `out_dtype: false` / `use_fast_accum: false` (the torch default was used);
-  - `bias: "positional"`;
-  - `out_fill: <float | "nan" | "inf">` (`out=` buffer prefilled);
-  - `requires_grad: [operand names]`;
+- `api`:
+    - `scaled_mm`: the stored operands form a valid torch call;
+    - `accumulate`: `mmaemu.accumulate` followed by `mmaemu.model.epilogue.apply`. Used for subsets whose N or K is
+        not a multiple of 16, for cuBLASLt-, TE- and emulator-level outputs, and for `out_select: "diagonal"`;
+
+- `call`: how the hardware call passed its arguments. Omitted keys take the defaults:
+    - `out_dtype` and `use_fast_accum` passed as keywords;
+    - `scale_result` passed iff `scale_result_bits` is not null;
+    - no bias; no `out=`.
+
+    Non-defaults are:
+
+    - `out_dtype: false` / `use_fast_accum: false` (the torch default was used);
+    - `bias: "positional"`;
+    - `out_fill: <float | "nan" | "inf">` (`out=` buffer prefilled);
+    - `requires_grad: [operand names]`;
+
 - `zero_operands` + `call_shape` [M, N, K]: validation cases (expected errors). The operands are zeros of the
-  hardware call's shape and dtypes. Bias, when present, is zeros [N] of `bias_dtype`.
+    hardware call's shape and dtypes. Bias, when present, is zeros [N] of `bias_dtype`.
 
 **Expected error classes (matched exactly):**
 
 - `ReferenceRejectsError`: torch or cuBLAS rejected the hardware call, and the FixedModel reproduces it (e5m2 x e5m2;
-  e4m3 x e4m3 -> e5m2; the torch bias checks).
+    e4m3 x e4m3 -> e5m2; the torch bias checks).
 - `UnsupportedFeatureError`: the hardware ran the call, but mmaemu v0.1 does not model it (bias, row-wise scales,
-  requires_grad under grad mode).
+    requires_grad under grad mode).
 
 ### Tests
 
@@ -183,9 +191,9 @@ dict with these keys:
 - `test_index`: format, shard sha256, size <= 20 MiB, no in-scope recording missing, pinned truth manifest;
 - `test_case[<id>]`: every case on the CPU reference backend;
 - `test_gpu_backend[<backend>]` (marker gpu): every case on cuda:0, for each backend that
-  `mmaemu.backends_status()` reports available.
-  - A case whose formats the backend does not support (BackendUnavailableError) is counted as not supported.
-  - Every available backend must run at least one case.
+    `mmaemu.backends_status()` reports available.
+    - A case whose formats the backend does not support (BackendUnavailableError) is counted as not supported.
+    - Every available backend must run at least one case.
 
 ## T2: full truth replay
 
@@ -209,19 +217,19 @@ The adapter (`tools/truth_adapter.py`, `MmaemuTruthModel`) works as follows:
 
 - **mma:** `mmaemu.model.dot`.
 - **gemm validation:** `mmaemu.explain()` on the hardware call's shape and dtypes. It maps outcomes by exact class:
-  - `ReferenceRejectsError` -> `ModelRejects`, for torch-level outputs;
-  - `UnsupportedFeatureError` -> `NotApplicable`;
-  - everything else propagates. It never uses `except RuntimeError`.
+    - `ReferenceRejectsError` -> `ModelRejects`, for torch-level outputs;
+    - `UnsupportedFeatureError` -> `NotApplicable`;
+    - everything else propagates. It never uses `except RuntimeError`.
 - **gemm compute:** the recorded split-K is always passed explicitly. GEMMs of at most 3e7 MAC run on the CPU
-  reference.
+    reference.
 - **Large GEMMs:** they run mmaemu's own plan, epilogue and specials with a ChainFn on the truth's AVX-512 oracle
-  `fastacc.chain_acc`, or mmaemu's CUDA backend with `--device cuda` under the GPU lock. Each such case is
-  cross-checked against the mmaemu reference on 2 rows x 32 columns.
+    `fastacc.chain_acc`, or mmaemu's CUDA backend with `--device cuda` under the GPU lock. Each such case is
+    cross-checked against the mmaemu reference on 2 rows x 32 columns.
 - **fastacc library:** the adapter never calls `GemmCtx.acc`, `fastacc.lib()` or `fastacc.available()`. It ctypes-loads
-  the shipped `libfastref3.so` only if it is at least as new as its source; otherwise it builds a private copy in
-  `$MMAEMU_CACHE_DIR/truth_fastref3/`.
+    the shipped `libfastref3.so` only if it is at least as new as its source; otherwise it builds a private copy in
+    `$MMAEMU_CACHE_DIR/truth_fastref3/`.
 - **n/a set:** the same as the FixedModel's: HMMA, fp16-accumulator mma, workspace dumps, the torch row-wise stride bug,
-  and split-K "unknown".
+    and split-K "unknown".
 
 The verdict is PASS iff all of the following hold:
 
@@ -231,7 +239,7 @@ The verdict is PASS iff all of the following hold:
 - all 113 FixedModel-reproduced hw_error outputs are reproduced;
 - new n/a outputs are only bias, row-wise or fused-bias, each listed by id;
 - the emulator group differs from its recording only at the 6,120 NaN-decode outputs, and there it gives the canonical
-  NaN;
+    NaN;
 - the fastacc cross-check has 0 mismatches;
 - `tcemu` is not in `sys.modules`;
 - the truth listing and mtimes are unchanged.
@@ -253,14 +261,14 @@ failure, so that untested kernels never pass as tested.
 `tests/test_device_independence.py` (markers gpu + truth; runbook gate G3) has three parts:
 
 1. `test_evo2_acc_rows[<backend>]`: rows 0..255 of all 21 Evo 2 1B accumulators equal the stored hardware rows, on
-   every available backend. The `reference` backend on the GPU checks 4 rows.
+    every available backend. The `reference` backend on the GPU checks 4 rows.
 2. `test_evo2_acc_sha256[<backend>-callNN]`: the sha256 of the full [2048, 5760] accumulator equals the hardware's.
-   - By default this runs only for the backend that `backend="auto"` selects.
-   - `MMAEMU_DI_FULL=all` (or a backend name) extends it. `tools/run_gpu_tests.sh --di-full` runs every backend in
-     chunks of 7 calls per locked run.
+    - By default this runs only for the backend that `backend="auto"` selects.
+    - `MMAEMU_DI_FULL=all` (or a backend name) extends it. `tools/run_gpu_tests.sh --di-full` runs every backend in
+        chunks of 7 calls per locked run.
 3. `test_emulator_group[<backend>]`: the fixed inputs of truth `emulator.tcemu_kernels_fixed_inputs` give the recorded
-   old-kernel bits on every backend, except at the NaN-decode outputs, where the result is the canonical NaN. The CPU
-   reference gives the same bits.
+    old-kernel bits on every backend, except at the NaN-decode outputs, where the result is the canonical NaN. The CPU
+    reference gives the same bits.
 
 ## T4: mutation matrix (`tools/mutants/`)
 
@@ -283,11 +291,11 @@ and are not read at run time.
 
 1. It copies the repository to a temporary directory; large data is symlinked.
 2. It appends an override to the module that defines the frozen function. The override comes from
-   `tools/mutants/impl.py`, a self-contained re-implementation with one modelling decision changed. Kernel mutants
-   are exact text edits of the kernel sources; the committed fatbins are removed, so NVRTC compiles the mutated
-   source.
+    `tools/mutants/impl.py`, a self-contained re-implementation with one modelling decision changed. Kernel mutants
+    are exact text edits of the kernel sources; the committed fatbins are removed, so NVRTC compiles the mutated
+    source.
 3. It runs the tier's tests. A mutant counts as killed when pytest exits with 1, and the first failing test is
-   recorded.
+    recorded.
 
 `identity_*` mutants inject the overrides with no change. They must survive: this shows that the injection is sound.
 `control_sign_flip` must be killed. Mutants that the audit showed to be unobservable are reported as `equivalent`,

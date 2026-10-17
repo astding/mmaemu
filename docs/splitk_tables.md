@@ -22,13 +22,14 @@ they cover, and how to record a table for another GPU.
 | package data | `mmaemu/platform/data/heur_rtx4060_lt12.8.3.14.npz` (236,342 B, sha256 `304203ef...`), `.json` (sources, envelopes), `verified_split_combos.json`; 402,581 B in total |
 
 Sources (each sha256 is in the `.json` sidecar):
+
 - the truth table `heur.lt_heuristic_12_8_3_14` (906,600 queries, sha256 `992aa95c...`, equal to the truth
-  manifest entry): c5 grid, the c4 shape sets, the Evo 2 grid; 48 e4m3 x e4m3 settings; mixed formats at
-  (1 MiB, no alignment) and (4 MiB, 256 B);
+    manifest entry): c5 grid, the c4 shape sets, the Evo 2 grid; 48 e4m3 x e4m3 settings; mixed formats at
+    (1 MiB, no alignment) and (4 MiB, 256 B);
 - R2 (`r2.lt_heur_fp8out_12_8_3_14`, 1,711,680 queries): fp8 outputs at every workspace, alignment, D-scale
-  pointer and format pair;
+    pointer and format pair;
 - R2x (`r2.lt_heur_mixed_allsettings_12_8_3_14`, `r2.lt_heur_smallk_12_8_3_14`): mixed formats with
-  fp32/bf16/fp16 outputs at every workspace and alignment; a small-K shape set;
+    fp32/bf16/fp16 outputs at every workspace and alignment; a small-K shape set;
 - R3 (`r3.lt_heur_evo2_small_m_12_8_3_14`): the three Evo 2 (K, N) at every M = 1..256 at all 72 truth settings.
 
 R2, R2x and R3 are pre-swap recordings in `recordings/rtx4060_2026-10` (see its README.txt).
@@ -36,17 +37,18 @@ R2, R2x and R3 are pre-swap recordings in `recordings/rtx4060_2026-10` (see its 
 ### How the table is built
 
 `python tools/export_splitk_table.py` (CPU; reads the truth table read-only):
+
 1. checks the truth table's sha256 against the truth manifest;
 2. asserts **alignment invariance**: every (no alignment preference, 256 B) row pair with the same key has identical
-   (status, algo, tile, stages, splitK, reduction, swizzle, custom). Result: 0 of 1,422,624 pairs differ (truth
-   table: 0 of 419,424; R2 0 of 427,920; R2x 0 of 427,920 + 0 of 128,928; R3 0 of 18,432). The key therefore omits
-   the alignment, and the Transformer Engine profile (256 B) uses the same rows;
+    (status, algo, tile, stages, splitK, reduction, swizzle, custom). Result: 0 of 1,422,624 pairs differ (truth
+    table: 0 of 419,424; R2 0 of 427,920; R2x 0 of 427,920 + 0 of 128,928; R3 0 of 18,432). The key therefore omits
+    the alignment, and the Transformer Engine profile (256 B) uses the same rows;
 3. asserts that rows queried in several sources agree (331,896 duplicate keys, 0 conflicts) and that the D scale
-   pointer does not change any fp8-output decision (0 of 855,840 pairs);
+    pointer does not change any fp8-output decision (0 of 855,840 pairs);
 4. drops the 71,320 rows with a nonzero status: all of them are e4m3 x e4m3 -> e5m2, which cuBLASLt 12.8.3 rejects
-   on sm_89 (CUBLAS_STATUS_NOT_SUPPORTED);
+    on sm_89 (CUBLAS_STATUS_NOT_SUPPORTED);
 5. writes a byte-deterministic npz (fixed zip member order, timestamps and compression), the JSON sidecar with the
-   per-setting envelopes, and `verified_split_combos.json`.
+    per-setting envelopes, and `verified_split_combos.json`.
 
 Running it twice gives identical files (`sha256sum` before/after; `--check` compares with the committed files).
 
@@ -79,13 +81,13 @@ unsplit row is therefore not a function of the key alone; mmaemu does not use it
 The json differs from the RTX 4060 table's in these entries, which `resolve_splitk` reads:
 
 - `codes."custom -> scheme"`: every customOption seen on a replayed live split call (0 to 3) means `"contiguous"`;
-  any other customOption (4 and 5 occur on split rows of p3) also gives `"contiguous"`, with a caveat that makes the
-  decision unverified (`"custom -> scheme, unlisted"`);
+    any other customOption (4 and 5 occur on split rows of p3) also gives `"contiguous"`, with a caveat that makes the
+    decision unverified (`"custom -> scheme, unlisted"`);
 - `split_layouts`: which layouts of the contiguous rule replayed live calls cover. A ragged last k-tile
-  (K % 128 != 0) is covered (1,040 live split calls of the sweep), a split without k-tiles is not (0 calls);
+    (K % 128 != 0) is covered (1,040 live split calls of the sweep), a split without k-tiles is not (0 calls);
 - `envelope`: `"kind": "k_grid"`, the sweep's bounds and their held-out result (below);
 - `workspace0_note`: 0 split rows among 915,980 workspace-0 queries (probe 212,580, sweep p1 653,400, sealed p4
-  50,000);
+    50,000);
 - `verified_combos`: the file of the replayed combinations.
 
 ### The H100 envelope
@@ -96,26 +98,29 @@ setting (workspace, output, fast/slow, format pair) and K on its training parts 
 held-out part (p4):
 
 - **the rule**: at each of 33 grid K (1,024 to 4,194,304), the next p1 level (M*N = 2^(i/16) x 122,880) above the
-  largest split M*N, raised by the split rows of the other training parts, times 2, and never smaller at a larger K;
-  at least 15,360. A shape of the setting is claimed unsplit when 1,024 <= K <= 4,194,304 and M*N > B(K), with B
-  at the smallest grid K >= K. The rule and its assumptions are in `results/analysis/envelope_rule.json`; the
-  table carries its bounds unchanged (the export asserts the rule's sha256 is the one tested);
+    largest split M*N, raised by the split rows of the other training parts, times 2, and never smaller at a larger K;
+    at least 15,360. A shape of the setting is claimed unsplit when 1,024 <= K <= 4,194,304 and M*N > B(K), with B
+    at the smallest grid K >= K. The rule and its assumptions are in `results/analysis/envelope_rule.json`; the
+    table carries its bounds unchanged (the export asserts the rule's sha256 is the one tested);
+
 - **the held-out test** (`results/analysis/eval_sealed.json`, run once):
 
-  | workspace (profile) | held-out shapes above the bound | split | result |
-  |---|---:|---:|---|
-  | 1 MiB (`hopper`) | 154,191 | 0 | validated; the closest split is at 0.49 x its bound |
-  | 32 MiB (`hopper-te`) | 77,518 | 1 | unvalidated: M 69, N 29456, K 19872, e4m3 x e5m2 -> fp32 slow split in 2 at 1.23 x the bound |
-  | 0 (`hopper-ws0`) | 46,654 (every status-0 row) | 0 | S = 1 holds |
+    | workspace (profile) | held-out shapes above the bound | split | result |
+    |---|---:|---:|---|
+    | 1 MiB (`hopper`) | 154,191 | 0 | validated; the closest split is at 0.49 x its bound |
+    | 32 MiB (`hopper-te`) | 77,518 | 1 | unvalidated: M 69, N 29456, K 19872, e4m3 x e5m2 -> fp32 slow split in 2 at 1.23 x the bound |
+    | 0 (`hopper-ws0`) | 46,654 (every status-0 row) | 0 | S = 1 holds |
 
-  At 32 MiB above K = 65,536 the bound is near the top of the tested M*N range, so few held-out shapes test it
-  there (about 4,300). Between 15,360 and 30,720 only model rows test the rule (532 per profile).
+    At 32 MiB above K = 65,536 the bound is near the top of the tested M*N range, so few held-out shapes test it
+    there (about 4,300). Between 15,360 and 30,720 only model rows test the rule (532 per profile).
+
 - **in mmaemu**: an inference of the 1 MiB envelope is `verified=True`. An inference of the 32 MiB envelope (any
-  profile at that workspace) is `verified=False` and emits `UnvalidatedEnvelopeWarning` (a subclass of
-  `UnverifiedSplitWarning`) once per setting. A workspace without bounds (4 MiB has table rows) claims nothing.
+    profile at that workspace) is `verified=False` and emits `UnvalidatedEnvelopeWarning` (a subclass of
+    `UnverifiedSplitWarning`) once per setting. A workspace without bounds (4 MiB has table rows) claims nothing.
+
 - **the resolver against every H100 decision** (`tools/check_splitk_resolution_h100.py`,
-  `results/analysis/resolver_check.json`): every status-0 row of p1-p4 and every live call of the probe and the
-  sweep through `resolve_splitk`: no decision differs from the H100's except that one p4 row.
+    `results/analysis/resolver_check.json`): every status-0 row of p1-p4 and every live call of the probe and the
+    sweep through `resolve_splitk`: no decision differs from the H100's except that one p4 row.
 
 The split rule (scheme `"contiguous"`) and how it was found are in
 [semantics.md](semantics.md#2-a-gemm-accumulation-plan-on-the-reference-profile) and in the probe's log; the
@@ -132,20 +137,20 @@ table_id, note)`. The order is:
 
 1. **explicit**: `splitk=1`, `SplitK(S, scheme)` or `(S, scheme)`; an int > 1 without a scheme raises ValueError;
 2. **workspace0**: the profile's workspace is 0 -> S = 1 (0 split rows among 209,712 workspace-0 queries on the
-   RTX 4060, 915,980 on the H100);
+    RTX 4060, 915,980 on the H100);
 3. **table**: the key is in the table -> the recorded (numSplitsK, customOption), the scheme by the table's rule:
-   on the RTX 4060 customOption 0 and 2 mean "serial", 1 means "pairwise"; on the H100 every customOption means
-   "contiguous";
+    on the RTX 4060 customOption 0 and 2 mean "serial", 1 means "pairwise"; on the H100 every customOption means
+    "contiguous";
 4. **live-query**: the current GPU is the profile's reference platform (`Profile.matches_device`: GPU name, SM
-   count and cuBLASLt version) -> `mmaemu.platform.cublaslt.heuristic` is queried with the profile's workspace and
-   alignment;
+    count and cuBLASLt version) -> `mmaemu.platform.cublaslt.heuristic` is queried with the profile's workspace and
+    alignment;
 5. **envelope**, not strict -> S = 1. This is an inference; the note says so. On the RTX 4060: M*N above twice
-   the largest M*N that split in the setting (`ENVELOPE_MARGIN = 2`), K plays no part; the margin and the absence
-   of a K rule come from live sweeps on the RTX 4060 (below). On the H100: M*N above the setting's bound at the
-   next grid K, 1,024 <= K <= 4,194,304 ([The H100 envelope](#the-h100-envelope)); at 32 MiB the decision is
-   unverified and warns (`UnvalidatedEnvelopeWarning`);
+    the largest M*N that split in the setting (`ENVELOPE_MARGIN = 2`), K plays no part; the margin and the absence
+    of a K rule come from live sweeps on the RTX 4060 (below). On the H100: M*N above the setting's bound at the
+    next grid K, 1,024 <= K <= 4,194,304 ([The H100 envelope](#the-h100-envelope)); at 32 MiB the decision is
+    unverified and warns (`UnvalidatedEnvelopeWarning`);
 6. otherwise `SplitKUnknownError`, which names the setting and its envelope and gives three ways out: `splitk=1`,
-   `splitk=(S, scheme)`, or recording the shape with `tools/record_heuristics.py` on the reference GPU.
+    `splitk=(S, scheme)`, or recording the shape with `tools/record_heuristics.py` on the reference GPU.
 
 Zero-size GEMMs (M, N or K = 0) resolve to S = 1: torch never calls cuBLASLt for them (`r6.zero_dims`). Profiles
 without a table (`hopper-experimental`, `b200-mma-sync-experimental`) have no envelope: `splitk="auto"` always
@@ -179,14 +184,14 @@ A (fast, S, scheme, out dtype, format pair) combination is *verified* when a har
 captured split config exists and the audit FixedModel replays it bitwise.
 
 - Truth recordings: 211 combinations (S = 2-16, 20, 24, 32). The 3 + 46 outputs whose split was filled from the
-  table by the truth's `apply_ltconfig.py` are excluded.
+    table by the truth's `apply_ltconfig.py` are excluded.
 - Of the truth table's 316 combinations, 156 (12,434 rows) had no hardware replay, among them the 3 with S = 29
-  (recomputed by `tools/record/coverage.py`; list in `recordings/rtx4060_2026-10/r4_unverified_combos.json`).
+    (recomputed by `tools/record/coverage.py`; list in `recordings/rtx4060_2026-10/r4_unverified_combos.json`).
 - R4 (in `recordings/rtx4060_2026-10`) recorded the smallest torch-reachable row of each of them (and of the 153
-  combinations that only the R2/R2x rows add) on randn*40 and split-structured adversarial data. The logged config
-  equalled the table row in 465 of 465 calls; FixedModel replayed 3,576 of 3,576 stored values. In 281 of the 309
-  combinations every alternative plan (other scheme, S-1, S+1, contiguous tile ownership, unsplit, slow chunks of
-  length 64) changes a stored bit.
+    combinations that only the R2/R2x rows add) on randn*40 and split-structured adversarial data. The logged config
+    equalled the table row in 465 of 465 calls; FixedModel replayed 3,576 of 3,576 stored values. In 281 of the 309
+    combinations every alternative plan (other scheme, S-1, S+1, contiguous tile ownership, unsplit, slow chunks of
+    length 64) changes a stored bit.
 - Result: all 486 combinations of the shipped table are verified (`verified_split_combos.json`).
 
 ### Live checks against the table
@@ -204,14 +209,14 @@ captured split config exists and the audit FixedModel replays it bitwise.
 ### Evo 2
 
 - (K, N) = (1920, 5760), (4096, 12288), (8192, 24576): no split for M = 16..8192 (step 16) at any workspace, and
-  no split for M = 1..256 at 0, 1 and 4 MiB.
+    no split for M = 1..256 at 0, 1 and 4 MiB.
 - R3 finding: (8192, 24576) splits (S = 14, customOption 2) at M = 65..74 with fast accumulation at **32 MiB**,
-  for **fp16 and fp8 (e4m3 / e5m2) outputs** and every allowed format pair: 80 rows of the shipped table (R3: fp16
-  out, e4m3 x e4m3, both alignments = 20 of its 55,296 rows; R2 / R2x: the fp8 outputs and the mixed formats). It
-  does not split with fp32 or bf16 output, nor at 0, 1 or 4 MiB. Evo 2 uses bf16 output at 1 MiB (torch) or 4 MiB
-  (TE), where every M resolves to S = 1.
+    for **fp16 and fp8 (e4m3 / e5m2) outputs** and every allowed format pair: 80 rows of the shipped table (R3: fp16
+    out, e4m3 x e4m3, both alignments = 20 of its 55,296 rows; R2 / R2x: the fp8 outputs and the mixed formats). It
+    does not split with fp32 or bf16 output, nor at 0, 1 or 4 MiB. Evo 2 uses bf16 output at 1 MiB (torch) or 4 MiB
+    (TE), where every M resolves to S = 1.
 - On `hopper` and `hopper-te`, `resolve_splitk` gives S = 1 for every Evo 2 shape with M = 1..256 and
-  M = 16..16384 (step 16), from the table up to M = 8192 and from the envelope above it, and never raises.
+    M = 16..16384 (step 16), from the table up to M = 8192 and from the envelope above it, and never raises.
 
 ### Split envelopes
 
@@ -228,9 +233,9 @@ again on fa0fd90 and after the profile rename with every row equal,
 [log](validation_logs/2026-10-16/rtx-4060-sm89-renamed/README.md)) found:
 
 - shapes absent from the table split at up to 1.27 times the largest split M*N of their setting (8,292 of 663,936
-  queries with M*N between 1 and 4 times it; 52 of the 56 settings; K from 3,072 to 4,194,304);
+    queries with M*N between 1 and 4 times it; 52 of the 56 settings; K from 3,072 to 4,194,304);
 - 18,504 of 125,419 queries with K below the smallest split K of the table (and M*N inside the envelope) split, at
-  K down to 1,760: the table's K grid has gaps (for example none between 2,064 and 3,072);
+    K down to 1,760: the table's K grid has gaps (for example none between 2,064 and 3,072);
 - no split above 1.271 times the largest split M*N in 1,512,000 queries up to 17 times it.
 
 Before this was measured, mmaemu inferred S = 1 for every shape above the largest split M*N or below the smallest
@@ -322,6 +327,7 @@ split K, which gives wrong bits for such shapes off the reference GPU.
 | 32 MiB | e5m2xe4m3 | float8_e4m3fn | slow | 8915 | 1825 | 6291456 | 16 | 2,3,4,5,6,8,9,10,12,14 |
 | 32 MiB | e5m2xe4m3 | float8_e5m2 | fast | 8915 | 1733 | 6291456 | 16 | 2,3,4,5,6,8,9,10,12,14 |
 | 32 MiB | e5m2xe4m3 | float8_e5m2 | slow | 8915 | 1825 | 6291456 | 16 | 2,3,4,5,6,8,9,10,12,14 |
+
 ## Recording a table for another GPU
 
 ```
