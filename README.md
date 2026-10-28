@@ -147,8 +147,8 @@ H100 PCIe (`hopper-te`) or on an RTX 4060 (`ada-te`); the rest of the model runs
 [Evo 2 README](https://github.com/ArcInstitute/evo2) lists FP8 through Transformer Engine on a Hopper GPU as a
 requirement for the 1B, 20B and 40B checkpoints; mmaemu's default reference platform is one Hopper GPU, the H100
 PCIe. Measured on an RTX 5070 Ti (16 GB) with evo2 0.6.0 and torch 2.7.1+cu128, without Transformer Engine. Not
-run: the RTX 5090 (issue #157 reports the same failure on it) and the other RTX 50-series GPUs, and Evo 2 7B and
-20B.
+run: the RTX 5090 (issue #157 reports the same failure on it) and the other RTX 50-series GPUs, and Evo 2 20B. Evo 2
+7B passes natively ([measured after 0.1.0](#measured-after-010), with an RTX PRO 6000).
 
 The examples are not in the wheel; clone the repository:
 
@@ -235,41 +235,81 @@ official 40B on the H100 ran the upstream blocks with Transformer Engine one at 
   `hopper-te`, 0.0295 and 0.0288 with `ada-te`; the official RTX 4060 is 0.0300 and 0.0292 from the H100, native FP8
   3.97 and 4.07. The most likely base agrees with the H100's at 100.0% and 99.98% of the positions with `hopper-te`,
   100.0% and 99.93% with `ada-te`, and 99.90% on both windows for the official RTX 4060.
-- **Not measured:** whether an FP8 GEMM of the same E4M3 operands accumulated in IEEE fp32, without the tensor
-  cores' block alignment and truncation, would also restore Evo 2, and how far an FP8 GEMM may deviate from the
-  reference GPUs' before Evo 2 fails. What is known: a particular GPU's exact bits are not required, since the H100
-  PCIe's and the RTX 4060's FP8 GEMMs differ on every projection and both give the expected results.
+- **Not exactness, not accuracy.** A particular GPU's exact bits are not required, since the H100 PCIe's and the
+  RTX 4060's FP8 GEMMs differ on every projection and both give the expected results. Nor does more accuracy help:
+  the same E4M3 operands accumulated in IEEE fp32, without the tensor cores' block alignment and truncation, fail as
+  the native GEMMs do ([measured after 0.1.0](#measured-after-010)). How far an FP8 GEMM may deviate from the
+  reference GPUs' before Evo 2 fails was sampled only at the 1B's first projection (same section).
 
 ### Zero-shot BRCA1 variant effect prediction
 
 The task of the upstream [BRCA1 notebook](https://github.com/ArcInstitute/evo2/tree/main/notebooks/brca1): score
 8,192-bp windows around the single-nucleotide variants measured by Findlay et al. (2018), and separate the
 loss-of-function variants by the score change Δ. The same random 500 variants (111 loss of function) on every
-platform for the 1B; their first 100 (20 loss of function) for the 40B.
+platform, for both models. At 0.1.0 the 40B on the RTX 5070 Ti had run on the first 100; it ran on all 500 after the
+release ([dataset](https://doi.org/10.5281/zenodo.23740390), part D14), and its scores of the first 100 equal the earlier runs' bit for
+bit. The H100's 40B scores are the earlier official run.
 
 | Platform | 1B AUROC | 1B Δ Pearson with the H100's | 40B AUROC | 40B Δ Pearson with the H100's |
 |---|---:|---:|---:|---:|
-| H100 PCIe, official TE FP8 | 0.733 | 1 | 0.855 | 1 |
+| H100 PCIe, official TE FP8 | 0.733 | 1 | 0.868 | 1 |
 | RTX 4060, official TE FP8 | 0.738 | 0.987 | – | – |
-| **RTX 5070 Ti + mmaemu, `hopper-te`** | **0.735** | **0.988** | **0.857** | **0.9986** |
-| RTX 5070 Ti + mmaemu, `ada-te` | 0.732 | 0.986 | 0.855 | 0.9981 |
-| RTX 5070 Ti, native FP8 | 0.559 | 0.06 † | 0.503 | 0.17 |
-| RTX 5070 Ti, bf16 GEMMs | 0.484 | 0.07 † | 0.590 | 0.19 |
+| **RTX 5070 Ti + mmaemu, `hopper-te`** | **0.735** | **0.988** | **0.871** | **0.998** |
+| RTX 5070 Ti + mmaemu, `ada-te` | 0.732 | 0.986 | 0.871 | 0.998 |
+| RTX 5070 Ti, native FP8 | 0.559 | 0.06 † | 0.434 | −0.03 |
+| RTX 5070 Ti, bf16 GEMMs | 0.484 | 0.07 † | 0.429 | −0.01 |
 
-† against the official RTX 4060; the 1B's native runs were not compared with the H100's.
+– : not run (the 40B does not fit the RTX 4060's 8 GB). † computed after the release from the archived scores
+([dataset](https://doi.org/10.5281/zenodo.23740390), part D16: Pearson 0.058 and 0.065); against the official RTX 4060 they are also 0.06
+and 0.07.
 
-The 95% bootstrap intervals of the AUROCs are about ±0.06 for the 1B and ±0.1 for the 40B (0.675-0.793 and
-0.749-0.940 for `hopper-te`), so the official and mmaemu AUROCs cannot be told apart, and no ranking among them
+The 95% bootstrap intervals of the AUROCs are about ±0.06 for the 1B and ±0.04 for the 40B (0.675-0.793 and
+0.833-0.905 for `hopper-te`), so the official and mmaemu AUROCs cannot be told apart, and no ranking among them
 should be read. The per-variant score changes carry the comparison: with `hopper-te` they follow the official H100's
-with Pearson 0.988 on the 1B, as closely as the two official GPUs follow each other (0.987), and 0.9986 on the 40B.
-Natively, with FP8 or bf16 GEMMs, the AUROC falls to or near chance (0.48 to 0.59) and the score changes are
-essentially unrelated to the official ones. On all 500 variants the official 40B on the H100 gives 0.868; mmaemu's
-40B ran on the first 100.
+with Pearson 0.988 on the 1B, as closely as the two official GPUs follow each other (0.987), and 0.998 on the 40B.
+Natively, with FP8 or bf16 GEMMs, the AUROC falls to 0.43-0.56 and the score changes are essentially unrelated to
+the official ones. The 40B's native 0.434 lies below 0.5 (95% interval 0.373-0.497); its direction is not
+interpreted.
 
 An alternative that needs no emulation: NVIDIA BioNeMo publishes Evo 2 checkpoints fine-tuned for GPUs other than
 Hopper, among them a 1B for bf16, `evo2/1b-8k-bf16:1.0`
 ([BioNeMo Evo 2 documentation](https://docs.nvidia.com/bionemo-framework/latest/main/developer-guide/bionemo-evo2/bionemo-evo2-Overview/)).
 They run at native speed, with other weights than the original checkpoints, which are the ones mmaemu runs.
+
+### Measured after 0.1.0
+
+These runs used mmaemu 0.1.0 after its release. They are not in this repository's validation logs; their data,
+scripts and plans are in the [dataset](https://doi.org/10.5281/zenodo.23740390) (parts D9, D10, D13 and D14).
+
+- **The native GEMM is the more accurate one.** On the 1B's first FP8 projection (the 2,048-bp window above), the
+  RTX 5070 Ti's native outputs are the correctly rounded bf16 values for 99.996% of the outputs, the H100 PCIe's and
+  the RTX 4060's for about 30%. The same E4M3 operands and scales, accumulated in IEEE fp32 (TF32 off) or in float64
+  rounded once to fp32 and then passed through mmaemu's epilogue, give the native losses: 1.2480 for the 1B, and
+  1.4023 for the 40B (fp32 only). BioNeMo's Evo 2 documentation notes the same for the 40B on Hopper, where
+  Transformer Engine's more accurate split accumulator breaks it. The sm_120 tensor cores still truncate: on the
+  tested first-projection calls, a truncating chain that keeps 25 fraction bits (the H100 PCIe and the RTX 4060
+  keep 13) matched the native outputs bit for bit. That is not a model of sm_120, which mmaemu does not model.
+- **A slight shrinkage passes, exactness fails.** At the 1B's first projection, the exact sums multiplied by the
+  H100's least-squares gain there (0.9859, a 1.4% shrinkage towards zero) pass the upstream test (0.5027). Of nine
+  gains sampled, only that one and 0.993 passed; shrinkages of 2.1-4.2%, the exact sum itself and three enlargements
+  failed. The truncating chain passes at 13 fraction bits (0.5027) and fails at 25 (1.2480). The gain was fitted
+  in-sample, to the GEMM's outputs on known inputs: a diagnostic, not a correction.
+- **The first projection carries most of the dependence.** On the RTX 5070 Ti, with only block 0's FP8 projection
+  computed by `hopper-te` and the other 20 native, the 1B passes the upstream test (0.5027); with block 0 native and
+  the other 20 emulated, it fails (1.2500). Block 0's projection sees one token's embedding, so its outputs fit a
+  table of the 512 token ids, which matched live emulation on every call. With that table and every other FP8
+  projection native, the 40B gives 0.2170, 0.0011 from the expected value and outside the test's 0.001 tolerance;
+  with block 0 native and the other 41 emulated, it fails (1.4277). On the 500 BRCA1 variants the table alone gives
+  AUROC 0.735 for the 1B and 0.869 for the 40B (Δ Pearson with the H100's 0.986 and 0.997). The tables and the
+  harness that substitutes them are in the dataset; mmaemu 0.1.0 has no such option.
+- **RTX PRO 6000.** An RTX PRO 6000 Blackwell Server Edition (sm_120, 96 GB; torch 2.14.1+cu130, cuBLASLt 13.1.1,
+  Transformer Engine 2.20.2) running the unmodified upstream path fails in the same way: 1.248 for the 1B and 1.402
+  for the 40B on the upstream test. On the same 500 variants, block 0's `hopper-te` table raises the AUROC from 0.556
+  to 0.721 for the 1B and from 0.481 to 0.867 for the 40B; the upstream test was not run with the table on this
+  GPU. Under the same CUDA 13 stack, the RTX 5070 Ti returned the RTX PRO 6000's bits on every tested operator call
+  (10 GEMMs and 84 projection configurations, through torch and Transformer Engine); this covers those calls only.
+- **Evo 2 7B passes natively.** The 7B, whose input projections also use FP8, passes the upstream test without
+  emulation on the RTX 5070 Ti (0.3477) and on the RTX PRO 6000 (0.347).
 
 ## Is mmaemu for you?
 

@@ -18,7 +18,8 @@ H100's value in bf16, and 0.5027 with the RTX 4060 profile `ada-te` (in fp32: 0.
 with `ada-te`, 0.5026 on the H100). The FP8 GEMMs return the bits of the profile's reference GPU; the rest of the
 model runs natively, so the logits are not bit-identical to the H100's or the RTX 4060's ([evo2.md](evo2.md),
 [log](validation_logs/2026-10-16/evo2-h100-profile-rtx-5070-ti/README.md)). mmaemu was not run on an RTX 5090, nor
-on the 7B or 20B models.
+on the 20B model; the 7B needs no emulation, since it passes natively
+([measured after 0.1.0](https://github.com/astding/mmaemu/blob/master/README.md#measured-after-010)).
 NVIDIA BioNeMo also offers a 1B checkpoint fine-tuned for bf16 (`evo2/1b-8k-bf16:1.0`), with other weights than the
 original checkpoint.
 

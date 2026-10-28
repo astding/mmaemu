@@ -262,7 +262,8 @@ other, well inside the 95% interval of each, and `ada-te`'s (0.7323) is nearer t
   `ada-te` (Pearson 0.986, Spearman 0.912, same sign 84.0%, largest score-change difference 4.8e-4); native FP8 and
   bf16 GEMMs fall far outside it. The AUROCs of the two official runs and of mmaemu with either profile lie within
   0.0055 of each other and do not separate them.
-- **Not covered:** the 7B and 20B models were not run (the 7B's projection shape, (K, N) = (4096, 12288), splits
+- **Not covered:** the 20B model was not run, nor, at 0.1.0, the 7B, which passes the upstream test natively
+  ([measured after 0.1.0](https://github.com/astding/mmaemu/blob/master/README.md#measured-after-010)) (its projection shape, (K, N) = (4096, 12288), splits
   neither in the H100 PCIe's table nor on the RTX 4060 with the bf16 output Evo 2 uses, so `splitk="auto"` resolves
   it); the 40B and the runs with `hopper-te` ran outside the notebook ([below](#evo-2-40b),
   [above](#with-the-h100-pcie-profile)); GPUs other than the RTX 5070 Ti were not run with the notebook; training and
@@ -338,8 +339,11 @@ from each other (for the 1B, against the RTX 4060: 0.0407 with `hopper-te`, 0.04
 
 The 1B with the official path on the RTX 4060 gives 0.719 on these variants. With 20 loss-of-function variants the
 AUROCs are rough and do not separate the profiles (`ada-te` gives the H100's 0.855, `hopper-te` 0.857), but per
-variant the score changes of both follow the official 40B's closely, those of `hopper-te` slightly more so. On all
-500 variants the official 40B on the H100 gives 0.868 (the 1B on the RTX 4060: 0.738).
+variant the score changes of both follow the official 40B's closely, those of `hopper-te` slightly more so. After
+0.1.0 the RTX 5070 Ti runs were extended to all 500 variants (111 loss-of-function), with the first 100 scores
+unchanged bit for bit: AUROC 0.871 with either profile (Δ Pearson 0.998 against the H100), 0.434 natively and 0.429
+with bf16 GEMMs, where the official 40B on the H100 gives 0.868 (the 1B on the RTX 4060: 0.738)
+([README](https://github.com/astding/mmaemu/blob/master/README.md#zero-shot-brca1-variant-effect-prediction)).
 
 ### Running Evo 2 40B
 
