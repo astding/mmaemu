@@ -11,7 +11,7 @@ readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE", "LICENSES/*"]
 requires-python = ">=3.10"
-authors = [{ name = "Xun Ding", email = "dxun1@alumni.jh.edu" }]
+authors = [{ name = "Xun Ding", email = "dxun1@alumni.jh.edu" }, { name = "Ziyuan Qin" }]
 keywords = [
     "fp8", "tensor core", "tensor-cores", "gemm", "matmul", "emulation", "emulator", "cublas", "cublaslt", "scaled_mm",
     "torch._scaled_mm", "pytorch", "bit-exact", "deterministic", "reproducibility", "numerics", "floating-point",

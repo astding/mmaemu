@@ -19,6 +19,9 @@ authors:
     email: dxun1@alumni.jh.edu
     alias: astding
     orcid: "https://orcid.org/0000-0001-7719-7268"
+  - given-names: Ziyuan
+    family-names: Qin
+    affiliation: "Emory University"
 version: 0.1.0
 date-released: 2026-10-17
 doi: "10.5281/zenodo.23440102"

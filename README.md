@@ -605,7 +605,7 @@ versions and resolves to the latest; version 0.1.0 is
 
 ```bibtex
 @software{mmaemu,
-  author  = {Ding, Xun},
+  author  = {Ding, Xun and Qin, Ziyuan},
   title   = {mmaemu: bit-accurate emulation of {NVIDIA} tensor-core {FP8} {GEMM} numerics},
   version = {0.1.0},
   year    = {2026},
@@ -698,9 +698,10 @@ the BSD 2-Clause License; see [NOTICE](https://github.com/astding/mmaemu/blob/ma
 
 ## Affiliation
 
-mmaemu is an independent project by Xun Ding, developed on personal time with personal equipment and resources. It is
-not affiliated with, funded by or endorsed by the author's employer. It is also not affiliated with NVIDIA or the Arc
-Institute; NVIDIA, GeForce, RTX, CUDA and other NVIDIA product names are trademarks of NVIDIA Corporation, and
-Evo 2 is developed by the Arc Institute and its collaborators.
+mmaemu is an independent project by Xun Ding and Ziyuan Qin. Xun Ding developed it on personal time with personal
+equipment and resources; Ziyuan Qin contributed in a personal capacity. It is not affiliated with, funded by or
+endorsed by Xun Ding's employer or Emory University. It is also not affiliated with NVIDIA or the Arc Institute;
+NVIDIA, GeForce, RTX, CUDA and other NVIDIA product names are trademarks of NVIDIA Corporation, and Evo 2 is developed
+by the Arc Institute and its collaborators.
 
 Contact: Xun Ding, dxun1@alumni.jh.edu.
