@@ -4,6 +4,10 @@ This page explains why Evo 2 gives wrong results on some GPUs, how mmaemu restor
 measured. The runnable version is
 [examples/evo2_blackwell.ipynb](https://github.com/astding/mmaemu/blob/master/examples/evo2_blackwell.ipynb).
 
+Paper: Xun Ding and Ziyuan Qin,
+[Accuracy is not compatibility: two Evo 2 checkpoints hinge on one FP8 matrix multiplication](https://arxiv.org/abs/2610.39415).
+arXiv:2610.39415 (2026). [PDF](https://arxiv.org/pdf/2610.39415) · [BibTeX](index.md#paper).
+
 ## The problem
 
 [Evo 2](https://github.com/ArcInstitute/evo2) 1B (`evo2_1b_base`) has 25 blocks. In 21 of them (the Hyena blocks
