@@ -1,5 +1,23 @@
 # mmaemu documentation
 
+## Paper
+
+Xun Ding and Ziyuan Qin. [Accuracy is not compatibility: two Evo 2 checkpoints hinge on one FP8 matrix multiplication](https://arxiv.org/abs/2610.39415).
+arXiv:2610.39415 (2026). [PDF](https://arxiv.org/pdf/2610.39415) · [DOI](https://doi.org/10.48550/arXiv.2610.39415).
+
+```bibtex
+@misc{ding2026accuracy,
+  author        = {Ding, Xun and Qin, Ziyuan},
+  title         = {Accuracy is not compatibility: two {Evo} 2 checkpoints hinge on one {FP8} matrix multiplication},
+  year          = {2026},
+  eprint        = {2610.39415},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  doi           = {10.48550/arXiv.2610.39415},
+  url           = {https://arxiv.org/abs/2610.39415}
+}
+```
+
 ## Using mmaemu
 
 | Page | What it covers |

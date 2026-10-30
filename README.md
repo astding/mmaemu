@@ -2,6 +2,7 @@
 
 [![PyPI](https://img.shields.io/pypi/v/mmaemu?label=PyPI)](https://pypi.org/project/mmaemu/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23440102.svg)](https://doi.org/10.5281/zenodo.23440102)
+[![arXiv](https://img.shields.io/badge/arXiv-2610.39415-b31b1b.svg)](https://arxiv.org/abs/2610.39415)
 [![Licence: Apache-2.0](https://img.shields.io/badge/licence-Apache--2.0-blue.svg)](https://github.com/astding/mmaemu/blob/master/LICENSE)
 
 **Bit-exact NVIDIA FP8 tensor-core GEMMs in software.** `mmaemu.scaled_mm` takes the arguments of
@@ -57,7 +58,7 @@ them and computes the H100 PCIe's or the RTX 4060's FP8 GEMMs there.
 
 [Quickstart](#quickstart) · [Evo 2](#evo-2-on-rtx-50-series-gpus) ·
 [Notebook](https://github.com/astding/mmaemu/blob/master/examples/evo2_blackwell.ipynb) ·
-[Documentation](https://astding.github.io/mmaemu/) · [Citation](#citation)
+[Documentation](https://astding.github.io/mmaemu/) · [Paper](https://arxiv.org/abs/2610.39415) · [Citation](#citation)
 
 ![Upstream-test loss of Evo 2 1B and 40B, in fp32. 1B: official H100 PCIe 0.5026, official RTX 4060 0.5024, RTX 5070 Ti with mmaemu 0.5024 (hopper-te) and 0.5025 (ada-te), RTX 5070 Ti with bf16 projections 1.3642, with native FP8 1.2488; expected 0.502 (bf16). 40B: official H100 PCIe 0.2160, RTX 5070 Ti with mmaemu 0.2158 with either profile, bf16 1.4057, native FP8 1.4048; expected 0.2159 (bf16).](https://github.com/astding/mmaemu/blob/master/docs/images/evo2_upstream_test.png?raw=true)
 
@@ -597,6 +598,24 @@ recordings; the [sm_120 bring-up runbook](https://github.com/astding/mmaemu/blob
 describes the probes.
 
 ## Citation
+
+For the Evo 2 study, please cite the preprint:
+
+Xun Ding and Ziyuan Qin. [Accuracy is not compatibility: two Evo 2 checkpoints hinge on one FP8 matrix multiplication](https://arxiv.org/abs/2610.39415).
+arXiv:2610.39415 (2026). [PDF](https://arxiv.org/pdf/2610.39415) · [DOI](https://doi.org/10.48550/arXiv.2610.39415).
+
+```bibtex
+@misc{ding2026accuracy,
+  author        = {Ding, Xun and Qin, Ziyuan},
+  title         = {Accuracy is not compatibility: two {Evo} 2 checkpoints hinge on one {FP8} matrix multiplication},
+  year          = {2026},
+  eprint        = {2610.39415},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  doi           = {10.48550/arXiv.2610.39415},
+  url           = {https://arxiv.org/abs/2610.39415}
+}
+```
 
 If you use mmaemu, please cite it ([CITATION.cff](https://github.com/astding/mmaemu/blob/master/CITATION.cff)).
 Zenodo archives every release: [10.5281/zenodo.23440102](https://doi.org/10.5281/zenodo.23440102) cites all
